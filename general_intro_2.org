@@ -2,12 +2,12 @@
 #+author: Falk Mielke
 
 * Locomotion is Controlled Chaos
-** Simple Chaos
-A double pendulum can be a rather simple experimental arrangement.
+** Simply Chaos
+A double pendulum can seem like a rather simple experimental arrangement.
 Think of two metal bars, connected with a loose screw, and fixed to a holder (Fig. \ref{fig:pendulum}).
 More generally, a double pendulum consists of two rigid bodies, which are coupled by a passive joint; the connection typically has between one and three rotational degrees of freedom.
 The inertial properties (shape, mass distribution) are normally constant.
-The pendulum would hang still, unless given an initial portion of kinetic or potential energy.
+The pendulum would hang still, unless initialized with kinetic or potential energy.
 
 TODO: figure - image of a simple double pendulum/stick figure movement/chaos plot
 #+LABEL: fig:pendulum
@@ -19,42 +19,49 @@ Kinematics: box definition
 
 
 Despite its simplicity, even the most basic double pendulum can produce chaotic movement (Fig. \ref{fig:pendulum}).
-"Chaotic" describes the fact that the trajectory of the components are non-repetitive, i.e. that we can extract no regular pattern when analyzing the kinematics (box \ref{def:kinematics}) of the system.
-Although strictly speaking a physical pendulum is deterministic (i.e. observation should be identical with exactly identical conditions), in practice one will not observe the same trajectories repeatedly.
-Chaos complicates efficient analysis of the system.
-Single observations can be described or visualized, and when combining many different starting conditions, overview visualizations such as phase diagrams might show more or less stable attractors @@comment: TODO cite chaos literature@@.
-However, unless analytical solutions of pendulum systems exist, it is usually complicated to establish causal relationship between (starting) conditions and observed movement.
-Statistical comparisons of variations in the setup would be non-trivial.
+"Chaotic" describes the fact that the trajectory of the components is non-repetitive, i.e. that we can extract no regular pattern when analyzing the kinematics (box \ref{def:kinematics}) of the system.
+Although, strictly speaking, a physical pendulum is deterministic (i.e. observation should be identical with exactly identical conditions), repeatedly observing the same trajectory is unlikely because even infinitesimal perturbations can invoke measurable effects.
+These micro-perturbations are impossible to control, which is why the movement seems chaotic.
+
+Chaos complicates efficient analysis of the system, although it doesn't render us completely helpless.
+Single observations can be described or visualized, and when scanning many different starting conditions, overview visualizations such as phase diagrams might show more or less stable attractors @@comment: TODO cite chaos literature@@.
+However, it will be hard to establish causal relationship between (starting) conditions and observed movement, except if analytical solutions of pendulum systems can be found.
+Statistical comparisons of variations in a chaotic setting would be non-trivial.
 
 TODO: figure - phase diagram or Lyapunov space of a pendulum attractor
 #+LABEL: fig:chaos
 
-To re-iterate: chaos emerges on a system as simple as a two-segment physical pendulum.
+To re-iterate: chaos emerges on a system as simple as a two-segment physical pendulum, which in consequence is hard to capture in quantitative analysis.
 
 ** The Biological Pendulum
-A physical pendulum is not all too different from a limb - a limb being, per definition, an appendage of an animal which might have various functions.
-The most relevant functions for this work are body support and locomotion.
+A physical pendulum is not all too different from a limb - a limb being, per definition, a non-axial appendage of an animal which might have a variety of functions.
+The most relevant functions for the present work are body support and locomotion.
 Specifically, this thesis will be concerned with the movement of quadruped vertebrates @@comment: TODO: cite general anatomy@@.
-In vertebrate limbs, segments are naturally defined by relatively rigid bony elements and their connective attachments (muscles, tendrons, etc.).
-These are coupled by joints which have more or less degrees of freedom @@comment: TODO cite Armita@@.
-Of course, the difference to a passive physical pendulum is that the muscles and joints act as motors and actuators @@comment: TODO what is an actuator?@@.
+In vertebrate limbs, segments are naturally defined by relatively rigid bony elements and their connective attachments (muscles, tendrons, etc.) @@comment: TODO spelling tendon@@.
+These are coupled by joints which have a restricted number of degrees of freedom, and a specific range of motion @@comment: TODO cite Armita, Marielle@@.
+The crucial difference to a passive, physical pendulum is that the muscles and joints act as motors and actuators @@comment: TODO what is an actuator?@@.
 These motors are enabling and coordinating the aforementioned functions of the limb, support and locomotion.
-To complicate things, these connective tissues violate the assumption of constant inertial properties and invoke more or less regular variation in shape and mass distribution (which is usually neglected).
-But despite this, the familiar arrangement remains: a limb, as first approximation, can be described as a series of coupled rigid segments and joints.
+To complicate things, these connective tissues violate the assumption of constant inertial properties and invoke temporal variation in shape and mass distribution of the segment (which is usually neglected in modeling approaches).
+Finally, limbs often comprise more than two segments.
+But despite all this, the potentially chaotic arrangement remains: limbs, as first approximation, can be described as a series of coupled rigid segments and joints.
 
-Limbs can be considered as a "biological pendulum".
+A limb can thus be considered a "biological pendulum".
 
 
 The constraining elements are joint degrees of freedom and connective attachments.
 These critically influence the observed movements by restricting the configuration space (i.e. all possible spatial arrangements of segments).
-In consequence, joint control and configuration space restriction "tame the chaos" and enable elegant analysis methods.
+If not restricting configuration space, they bias it by making some configurations more likely than chance to be observed in certain situations.
+One could say that joint control and configuration space restriction "tame the chaos".
+As a sidenote, they so enable more potent analysis methods.
 
 
-** Conventional Kinematic Analysis
-Researchers have long recognized the regularity in locomotion and found clever ways of applying quantitative analysis.
+** A Brief History of Kinematic Analysis
+Researchers have long recognized both chaos and regularity in locomotion and found clever ways of applying quantitative analysis.
+The emergence of videography gave this discipline a head start, producing a series of iconic recordings of about the quality of modern-day "gif" memes.
 - Muybridge: videos
 - Bernstein: kinematograph
 
-It quickly became apparent that the regularity is not perfectly regular: though periodic limb movement is far from being chaotic, considerable variation remains @@comment: TODO cite:Bernstein@@.
+It quickly became clear that the apparent regularity is not perfectly regular: though periodic limb movement is far from being chaotic, considerable variation remains @@comment: TODO cite:Bernstein@@.
 
-Locomotor control seems to reduce the system-inherent chaos to manageable variation.
+We can conclude that locomotor control seems to reduce the system-inherent chaos to manageable variation.
+cite:Mielke2022
