@@ -1,0 +1,115 @@
+#+title: General Introduction
+#+author: Falk Mielke
+
+* Different Struggles For Different Existences
+Animals locomote.
+This fact is so trivial that we usually do not give it too much thought.
+They move through the world, actively changing their position in space to access points beyond their static reach.
+But to learn about the nature of locomotion, let me briefly consider life forms which lack this skill.
+
+
+Plants are usually immobile.
+However, they are /not/ less remarkable than animals: they cannot run away (also trivial).
+We can conclude that, unless they are extinct, their evolution must have provided remarkable mechanisms to withstand a changing physical environment, vegetarian predators, or pathogens (and think about the complication of sexual reproduction over a distance).
+They withstand right where the saplings' life starts.
+Mobile living beings always have the chance to avoid misfortune.
+But that can be "chance", indeed, because not all movement is active or directed.
+The fate of passively moving microorganisms (algae, bacteria, etc.) might depend on a favorable ocean current or temporary access to sunlight; evolution has provided them with fantastic tricks to temporally endure unfavorable conditions, which they will encounter sooner or later.
+And so they proliferate.
+
+
+Actively moving organisms do not have /these/ problems.
+They can simply decide whether to forage, perform a complex mating dance, run away, or otherwise chill out in the sun.
+Or, can they?
+The "struggle for existence" (/sensu/ Darwin) [TODO: cite] has many aspects, and has been solved via different strategies.
+The route which we and other animals are on is the "energy highway".
+Animals usually have a high metabolic rate, a high energy demand (both histologically and organismically) and thus they need to move, to get a high enough intake, to be able to move, /etc/.
+Because movement requires energy.
+(Why) does this pay off?
+
+
+[TODO: Table! Times|Energy spent per activity]
+Locomotion requires about [TODO ref needed] \(XX\%\) of the regular energy balance (compared to XX, YY and ZZ).
+But that overall budget includes periods of rest.
+The number should better be corrected to time-normalized averages [TODO cite?].
+During active locomotion, other processes are regulated down, and the capacity to constantly fuel muscles can be life-saving.
+Animals who are more efficient in energy use (through metabolism, morphology, or behavior) consequentially have a competitive advantage, and proliferate.
+
+* Locomotor Behavior is Often Periodic (Mathematics)
+The ways in which evolution can alter animal behavior has another subtle consequence: evolution towards lower energy expenditure is particularly effective if a behavior is highly repetitive.
+And because energy expenditure is a highly relevant driver of locomotion, we observe many repetitive, periodic behaviors.
+
+
+To illustrate this, imagine a rare, one-time behavior.
+Some animals can perform life-saving jumps if they encounter a predator by surprise [ref to desert rats].
+Evolution certainly selected good jumpers in conditions where sneaky predators are abundant.
+In this case the evolutionary drive are the fatal consequences of not immediately jumping, and energy balance is secondary.
+We can guess that such jumps are relatively costly, and hence not efficient for everyday locomotion (unless the organism is specialized jumper, i.e. adapted to jumping [ref galago PA]).
+
+Other behaviors are highly repetitive.
+Repetitive means that the behavior can be split into highly self-resemblant temporal units.
+A classic example is ungulate locomotion, e.g. galloping horses.
+One stride, counted e.g. from one left hindlimb touchdown to the next, would be the temporal unit [ref: horse footfall scheme].
+Why does the horse decide to gallop, and not walk or trot?
+Assuming that aesthetics do not matter to the animal in most circumstances, it has been shown that energetic considerations dominate the decision ([ref horse energy figure]).
+
+Suppose that an animal produces offspring with a morphology which is altered to make a gallop stride \(1\%\) less energy costly at any given (unchanged) speed.
+Assume this to refer to net energy expenditure - storing and recovering energy in a different form, e.g. elastic musculoskeletal elements, would add another layer of complexity.
+Most biological systems are dissipative, thus energy should not only be considered as a percent fraction, but the saving on every stride cycle adds up.
+
+One could conclude that, the more repetitive a behavior is, the more general relevance will come to evolution towards saving energy.
+
+
+This can be taken one step further: ideally, the temporal unit if a /repetitive/ behavior is also /periodic/.
+Periodic simply means that the first and last data point in a time series are the same; in the case of locomotor biomechanics, we can even safely assume that the descriptive parameters of the periodic phenomenon show relatively smooth, oscillating curves.
+Descriptive parameters are a wide category: think about center-of-mass-energy alternating from one form to another (e.g. potential-kinetic); muscle antagonist ensembles activated in coordinated patterns, leading to alternating patterns of flexion-extension; neural circuits and metabolic cycles controlling these processes.
+We observe periodic phenomena on every organizational level of biological organisms.
+What is the reason for periodicity, in the case of locomotor biomechanics?
+The fundamental study units of biomechanics are segments: virtual parts of the animal which are relatively rigid and act as a unit, which are coupled to other segments by joints.
+Such rigid segments have a mass, and as they move, an impulse.
+It is costly to apply abrupt changes of impulse to such elements, and one would rather want to change their trajectory smoothly ([TODO Impulsteiler]).
+At any rate, we see periodicity all over the place in locomotor biomechanics.
+
+
+Periodicity is relevant for scientific analysis.
+In fact, it is quite cumbersome to statistically analyze noisy, variable signals of different temporal sampling [TODO figure: temporal sampling and frequency space].
+Nevertheless, biologists have managed to do so for a hundred years.
+They went around the issue, using arbitrary references (e.g. stride cycles conventionally start at "left hindlimb footfall") and standardizations (e.g. re-sampling all strides to 100 time points).
+And they have largely ignored the hundred-and-fifty year old findings of mathematicians and physicists \ref{Fourier1822}.
+I'm exaggerating here, not all have [TODO: ref Bernstein, etc.].
+But it is fair to say that Fourier's findings never became "biological mainstream".
+
+
+What does Fourier Analysis do?
+If a phenomenon, signal, or measurement is periodic, then it becomes accessible by a neat set of mathematical tools, which simplifies the data significantly.
+Periodic signals can be transformed to the frequency domain by treating them as a guitar string (ends fixed, i.e. start and end point are the same) and quantifying the harmonic oscillations of which any such signal can be constructed (i.e. its "frequency spectrum").
+Being primed with angular functions (sine's and cosines) at school we usually think of those first, and they are easy to visualize; complex exponentials will do just fine.
+
+[TODO: Eqn Fourier]
+
+This formula is called the "Fourier Series" decomposition.
+It transforms an input signal from the time domain to the frequency domain ("spectrum") and back. and it is conceptually related to "Fourier Transform" (the latter is a generalization, because it can be applied to any signal, using shifting time windows and other tricks).
+Fourier Series can be applied to any periodic signal, and it is easy to put in computer code.
+[TODO: Fourier Series]
+
+Quoting Brad Osgood [TODO], I want to re-iterate
+\quotation{...one of the major secrets of the univers}
+
+I will cover the application of Fourier Series to kinematic measurements in some detail in Chapter \ref{cpt:fcas} and make heavy use of it in the other chapters of this thesis.
+It is immensely useful for the present purpose for two reasons:
++ Frequency domain representation is completely indifferent to the temporal sampling issues mentioned above.
++ Some relevant properties of kinematic measurements and signals in general are directly accessible in the frequency domain (mean, amplitude and phase).
+
+
+I acknowledge that Fourier Series might seem too "mathematical", i.e. "scary", to some readers (but wait for the part on statistics).
+In plain terms, just accept it as a fancy, easy-to-apply method which transforms a lot of numbers (time series of kinematic measurements) into fewer numbers (spectrum), giving us some useful quantities for free (mean, amplitude, phase).
+Because it is a "mathematical", deterministic operation, it preserves all information present in the input signal, and can be reversed.
+The only prerequisite is that the input signal is periodic, i.e. it starts where it ends, and it is of advantage if the signal is "smooth".
+
+[TODO: Box - Fourier Series]
+
+
+* Locomotor Behavior is Never Perfectly Periodic (Statistics)
+
+
+* Piglets
