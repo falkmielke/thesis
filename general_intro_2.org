@@ -37,9 +37,9 @@ To re-iterate: chaos emerges on a system as simple as a two-segment physical pen
 A physical pendulum is not all too different from a limb - a limb being, per definition, a non-axial appendage of an animal which might have a variety of functions.
 The most relevant functions for the present work are body support and locomotion.
 Specifically, this thesis will be concerned with the movement of quadruped vertebrates @@comment: TODO: cite general anatomy@@.
-In vertebrate limbs, segments are naturally defined by relatively rigid bony elements and their connective attachments (muscles, tendrons, etc.) @@comment: TODO spelling tendon@@.
+In vertebrate limbs, segments are naturally defined by relatively rigid bony elements and their connective attachments (muscles, tendons).
 These are coupled by joints which have a restricted number of degrees of freedom, and a specific range of motion @@comment: TODO cite Armita, Marielle@@.
-The crucial difference to a passive, physical pendulum is that the muscles and joints act as motors and actuators @@comment: TODO what is an actuator?@@.
+The crucial difference to a passive, physical pendulum is that the muscles and joints act as "motors" (or better: actuators).
 These motors are enabling and coordinating the aforementioned functions of the limb, support and locomotion.
 To complicate things, these connective tissues violate the assumption of constant inertial properties and invoke temporal variation in shape and mass distribution of the segment (which is usually neglected in modeling approaches).
 Finally, limbs often comprise more than two segments.
@@ -48,13 +48,48 @@ But despite all this, the potentially chaotic arrangement remains: limbs, as fir
 A limb can thus be considered a "biological pendulum".
 
 
-The constraining elements are joint degrees of freedom and connective attachments.
+How does this biological pendulum differ from the physical pendulum?
+The constraining elements are joint degrees of freedom and connective attachments (muscles, tendons).
 These critically influence the observed movements by restricting the configuration space (i.e. all possible spatial arrangements of segments).
 If not restricting configuration space, they bias it by making some configurations more likely than chance to be observed in certain situations.
-One could say that joint control and configuration space restriction "tame the chaos".
-As a sidenote, they so enable more potent analysis methods.
+Control of the "motorization" via muscles is neuronal.
+
+Muscles are the actuators which steer the limb segments to a desired position: they accelerate or decelerate the segments' relative rotational movements by applying force across a joint.
+However, because of the ways muscles are constructed microscopically (sarkomers and fibres, innervation, metabolism) and macroscopically (lever arms, tendons), this process is imperfect (but orders of magnitude better than the "chaos" of a physical pendulum).
+In consequence, movements are always variable to a certain extent, though that variability will usually reduce by practice.
+Control, in practice, does not eradicate the chaos, instead it converts it to a manageable variability.
+
+Part of (especially peripheral @@TODO: reference@@) neuronal control is well suited to generate cyclical activation patterns, and so we also observe many behaviors which are relatively cyclical (Box \ref{box:cyclicity}).
+Cyclicity is a fundamental feature of the oscillating movement of a simple pendulum, replaced by chaos in the double pendulum.
+Rather than describing a simple oscillation, the trajectories of a biological pendulum before it returns to a previous configuration can be complex.
+Cyclicity could be considered an artificial category: one might as well argue that it is actually a single behavioral module, observed repeatedly (recurrence).
+Either way, a repetition of motor actions has advantages in (energetic) optimization: if something happens time and time again, energy savings from "doing it a bit better" will add up.
+Most organisms are capable of such tuning.
+Side note: as an evolutionary biologist, I consider locomotor learning partly analogous to evolution: a variable process, some variation can be correlated to success, which migh lead to an adaptation.
+Nevertheless, cyclic/recurrent movement is not ubiquitous: a competing evolutionary demand is flexibility and the ability to react to perturbations.
+This might be a major reason why a longer chain of segments is a more useful limb than a single strut; and it might add to the systemic variability.
+
+#+LABEL: def:cyclicity
+#+BEGIN_BOX
+Cyclicity: box definition
+temporal or spatial
+relative to the body position
+also: repeated action
+#+END_BOX
 
 
+
+To summarize, one could characterize the biological pendulum (vertebrate limb locomotion) as "tamed chaos":
++ movements are often cyclical or recurrent (like a pendulum)
++ joint control restricts configuration space of the biological pendulum
++ a certain degree of variability remains
+
+
+Because locomotion is controlled and not chaotic, a variety of potent analysis methods can be applied.
+
+
+
+* The Analysis of Chaos
 ** A Brief History of Kinematic Analysis
 Researchers have long recognized both chaos and regularity in locomotion and found clever ways of applying quantitative analysis.
 The emergence of videography gave this discipline a head start, producing a series of iconic recordings of about the quality of modern-day "gif" memes.
