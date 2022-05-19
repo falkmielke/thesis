@@ -5,8 +5,9 @@
 ** Simply Chaos
 A double pendulum can seem like a rather simple experimental arrangement.
 Think of two metal bars, connected with a loose screw, and fixed to a holder (Fig. \ref{fig:pendulum}).
-More generally, a double pendulum consists of two rigid bodies, which are coupled by a passive joint; the connection typically has between one and three rotational degrees of freedom.
-The inertial properties (shape, mass distribution) are normally constant.
+More generally, a physical pendulum consists of two or more rigid bodies (segments), which are coupled by passive joints; the connections typically have between one and three rotational degrees of freedom.
+Because joints are passive, gravity is the force which drives the movement.
+The inertial properties (shape, mass distribution, center of mass) of the individual segments are normally constant, whereas inertials of the compound system depend on the configuration (i.e. relative spatial positioning) of its elements.
 The pendulum would hang still, unless initialized with kinetic or potential energy.
 
 TODO: figure - image of a simple double pendulum/stick figure movement/chaos plot
@@ -18,14 +19,18 @@ Kinematics: box definition
 #+END_BOX
 
 
-Despite its simplicity, even the most basic double pendulum can produce chaotic movement (Fig. \ref{fig:pendulum}).
+Despite its simplicity, even the most basic double pendulum can excert *chaotic* movement (Fig. \ref{fig:pendulum}).
 "Chaotic" describes the fact that the trajectory of the components is non-repetitive, i.e. that we can extract no regular pattern when analyzing the kinematics (box \ref{def:kinematics}) of the system.
-Although, strictly speaking, a physical pendulum is deterministic (i.e. observation should be identical with exactly identical conditions), repeatedly observing the same trajectory is unlikely because even infinitesimal perturbations can invoke measurable effects.
-These micro-perturbations are impossible to control, which is why we see chaos.
+Although, strictly speaking, a physical pendulum is deterministic (i.e. observation should be identical with exactly identical conditions), repeatedly observing the same trajectory is unlikely.
+Firstly, movement depends on the current position, velocity, and acceleration of each segment; mechanical energy is free to shift between segments and degrees of freedom.
+Though there is a small chance that a single segment occasionally returns to a previous position with exactly the same energetic state as before, the chance that this would happen simultaneously for all segments is miniscule.
+Secondly, even infinitesimal perturbations can invoke measurable effects.
+These micro-perturbations are impossible to control in real experiments, which is why we observe apparent chaos.
 
 
 Chaos complicates efficient analysis of the system, although it doesn't render us completely helpless.
-Single observations can be described or visualized, and when scanning many different starting conditions, overview visualizations such as phase diagrams might show more or less stable attractors @@comment: TODO cite chaos literature@@.
+Single observations can be described or visualized.
+When scanning many different starting conditions, overview visualizations such as phase diagrams might show stable or unstable attractors (think of the configuration with all segments hanging still, or the opposite, instable configuration with sements pointing straight up; @@comment: TODO cite chaos literature@@).
 However, it will be hard to establish causal relationship between (starting) conditions and observed movement, except if analytical solutions of pendulum systems can be found.
 Statistical comparisons of variations in a chaotic setting would be non-trivial.
 
@@ -40,10 +45,10 @@ A physical pendulum is not all too different from a limb (cite:Weber1836) - a li
 The most relevant functions for the present work are body support and locomotion.
 Specifically, this thesis will be concerned with the locomotion of quadruped vertebrates @@comment: TODO: cite general anatomy@@.
 In vertebrate limbs, segments are naturally defined by relatively rigid bony elements, embedded in connective attachments (muscles, tendons) which link to adjacent segments.
-Limb segments are coupled by joints which have a restricted number of degrees of freedom, and a specific range of motion @@comment: TODO cite Armita, Marielle@@.
+Limb segments are coupled by biological joints which have a restricted number of degrees of freedom, and a specific range of motion @@comment: TODO cite Armita, Marielle@@.
 The crucial difference to a passive, physical pendulum is that the muscles and joints act as "motors" (or better: actuators).
 These actuators are enabling and coordinating the aforementioned functions of the limb, support and locomotion.
-To complicate things, these connective tissues violate the assumption of constant inertial properties and invoke temporal variation in shape and mass distribution of the segment (which is usually neglected in quantitative approaches).
+To complicate things, connective tissues violate the assumption of constant inertial properties and invoke temporal variation in shape and mass distribution of the segment (which is usually neglected in quantitative approaches).
 Finally, limbs often comprise more than two segments.
 But despite all this, the potentially chaotic arrangement remains: limbs, as first approximation, can be described as a series of coupled rigid segments and joints.
 
@@ -58,21 +63,24 @@ Control of the "motorization" via muscles is neuronal, and can be summarized by 
 
 
 Muscles are the actuators which steer the limb segments to a desired position: they accelerate or decelerate the segments' relative rotational movements by applying force across a joint.
+In fact, they work antagonistically, which means that normally two or more opposing muscles balance to determine motion.
 However, because of the ways muscles are constructed microscopically (sarkomers and fibres, innervation, metabolism) and macroscopically (lever arms, tendons), this process is imperfect (but orders of magnitude better than the "chaos" of a physical pendulum).
-In consequence, movements are always variable to a certain extent, though that variability will usually reduce by practice.
-Control, in effect, does not eradicate the chaos; instead it converts it to a manageable variability.
+In consequence, movements are always variable to a certain extent, though that variability will usually reduce if a subject gets practice in a given motor task.
+Control, in effect, does not eradicate the chaos; instead it reduces it to a manageable variability.
 
 
 Part of (especially peripheral @@TODO: reference@@) neuronal control is well suited to generate cyclical activation patterns, and so we also observe many behaviors which are relatively cyclical or "rhythmic" (Box \ref{box:cyclicity}).
 Cyclicity is a fundamental feature of the oscillating movement of a simple pendulum, replaced by chaos in the double pendulum.
 Rather than describing a simple, harmonic oscillation, the trajectories of a biological pendulum before it returns to a previous configuration can be complex.
+This kind of cyclicity is not passive (as in a pendulum), but actively controlled.
 Cyclicity could be considered an artificial category: depending on perspective, one might as well argue that it is actually a single behavioral module, observed repeatedly (recurrence).
 Either way, a repetition of motor actions has advantages, the main one being susceptible to (energetic) optimization.
 If something happens time and time again, energy savings from "doing it a bit better" will add up.
 Most organisms are capable of such tuning.
 (Side/foot note) As an evolutionary biologist, I consider locomotor learning partly analogous to evolution: a variable process, some variation can be correlated to success, which migh lead to an adaptation within a couple of iterations.
-Nevertheless, cyclic/recurrent movement is not ubiquitous: a competing evolutionary demand is flexibility and the ability to react to perturbations.
-This might be a major reason why a longer chain of segments is a more useful limb than a single strut; and it might add to the systemic variability by increasing the number of elements to be controlled and coordinated.
+Variability is not to be seen as a problem (inaccuracy), but as a prerequisite for optimization (adaptability).
+Not all cyclic/recurrent movement is optimized to perfection: a competing evolutionary demand is flexibility and the ability to react to perturbations.
+This might be a major reason why a longer chain of segments is a more useful limb than a single strut; which in turn might add to the systemic variability by increasing the number of elements to be controlled and coordinated.
 
 #+LABEL: def:cyclicity
 #+BEGIN_BOX
@@ -85,7 +93,7 @@ also: repeated action
 
 
 To summarize, one could characterize the biological pendulum (vertebrate limb locomotion) as "tamed chaos":
-+ movements are often cyclical or recurrent (like a pendulum)
++ movements are often cyclical or recurrent (like a pendulum, but actively controlled)
 + joint control restricts configuration space of the biological pendulum
 + a certain degree of variability remains
 Thus, locomotor control seems to reduce the system-inherent chaos to manageable variation.
@@ -98,8 +106,8 @@ Because locomotion is controlled and not chaotic, a variety of potent analysis m
 ** A Brief History of Kinematic Analysis
 #+BEGIN_DISCLAIMER
 Summaries of research history can be dull or even unnecessary as a chapter of a concise and focused thesis.
-However, in the case of this work, some of the early innovations and concepts have major implications for the later chapters, sice researchers anticipated problems early on and sketched solutions.
-I will focus on the research which I find has relevant links to the methodological part of my project work.
+However, in the case of this work, some of the early innovations and concepts have major implications for the later chapters, sice researchers anticipated problems early on and sketched solutions, which for some reason did not get fixed in the researcher population.
+I will focus on the research in which I find relevant links to the methodological part of my project work.
 And for the sake of reading flow, I will keep it briefer than the referenced author's extraordinary work would deserve.
 #+END_DISCLAIMER
 
@@ -107,19 +115,23 @@ Researchers have long recognized both chaos and regularity in locomotion and fou
 For example, early research by the Weber brothers (cite:Weber1836) drew quantitative conclusions by analogy to the limb as a pendulum; their measurements became avalable by the innovative use of equipment.
 Likewise, Marey has to be credited for his innovations towards "myography" and "odography" @@TODO: short summary@@.
 Then, in an American-French cooperation with the early photographer Muybridge, Marey invented chronophotography (cite:Marey1888)
-Although this technique produced iconic recordings of about the quality of modern-day "gif" memes, it is still in essence the same principle by which we acquire data in modern videography (arguably our cameras look less like firearms).
-Around 1900, Braune and Fischer (cite:Braune1895)added mechanics to the kinematic research by supplementing segmental inertial properties from cadaver studies.
+This technique produced iconic recordings of about the quality of modern-day "gif" memes; it also pioneered cinematography, and it is still in essence the same principle by which we acquire data in modern videography (arguably our cameras look less like firearms).
+Around 1900, Braune and Fischer (cite:Braune1895) added mechanics to the kinematic research by supplementing segmental inertial properties from cadaver studies.
 They concluded that pendulum mechanics are insufficient to predict human walking, acknowledging that higher measurement precision might falsify that conclusion.
 
 
+TODO: figure - The Kymocyclograph; and an example measurement
+#+LABEL: fig:kymocyclograph
+
+
 Nikolai A. Bernstein was one who, during the early stage of his carreer (cite:Bongaart1999), set out to improve measurement precision.
-Chronophotography was already handling high frame rates, yet Bernstein developed the kymocyclograph (and with it, cyclograms).
+Chronophotography was already handling high frame rates, yet Bernstein developed the kymocyclograph (and with it, cyclograms; Fig. \ref{fig:kymocyclograph}).
 The kymocyclograph is an аппарат that could acquire continuous, temporally and spatially calibrated measurements of locomotion (cite:Bernstein1927b).
-He also suggested several mathematical transformations to handle the continuous data, namely Taylor Expansion and Fourier Series (cite:Bernstein1927a).
+Bernstein and colleagues also suggested several mathematical transformations to handle the continuous data, namely Taylor Expansion and Fourier Series (cite:Bernstein1927a).
 His observations enabled some remarkable conclusions (cite:Bernstein1935, cite:Bongaart1999).
 + He found that movement cannot be predicted by the state of the system alone (position, velocity, acceleration); instead the motor system is "non-autonomous" (a system theory term describing that the future state of the system is time-dependent).
 + He also hypothesized that coordination and motor control must be hierarchical in order to be able to control the many degrees of freedom.
-+ He struggled with the variablility in the measurements, which was opposing contemporary political views, and introduced the concepts of "topologically similar movements" and "motor fields" to classify recurrent motor patterns.
++ He struggled with the variablility in the measurements, which was opposing contemporary political views, and introduced the concepts of "topologically similar movements" and "motor fields" to classify approximately recurrent motor patterns.
 
 Bernstein's main interest was neurophysiology, and after considerable political complications (cf. cite:Bongaart1999), Bernstein's focus turned away from kinematic methodology.
 
