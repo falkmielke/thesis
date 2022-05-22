@@ -137,4 +137,28 @@ Bernstein's main interest was neurophysiology, and after considerable political 
 
 
 Trigonometric transformation and the handling of variability are at the heart of this thesis, and one could say the path had been paved by Bernstein.
-Others have taken up the principles he suggested.
+Interestingly, Bernstein's research has not found much resonance in kinematic analyses.
+
+
+Instead, people found use in plotting bivariate diagrams of all sorts, which are called "cyclograms" (cite:Grieve1968, cite:Goswami2003, Wheat2006, cite:Viteckova2010).
+In cyclograms, one variable is on the "x-axis", one on the "y-axis", and because a phenomenon is cyclical, a closed loop with a given shape will emerge.
+That shape can be compared qualitatively, and depending on what parameters are plotted (raw coordinates, joint angles, segment angles) and whether derivatives are used (e.g. angle against angular velocity), the emerging shapes are more or less meaningful.
+@@TODO: usually makes sense to use angles, not relative coordinates@@
+The problem is that this strategy does not reduce the complexity of the problem at all.
+In fact, it increases complexity by depicting simultaneous changes of two variables.
+Cyclograms are just a visualization strategy.
+Certainly, they are visually appealing; they might even have had benefits for statistical analysis in times when that involved printing curves with needle printers, cutting the enclosed area and weighing the paper (an actual method reported to me by a colleague).
+Cyclograms are visual shapes, so it comes natural that methods of shape analysis have been applied (cite:Decker2007 @@todo: efd on cyclograms?@@).
+
+This line of research culminated in the discovery of the "Law of Intersegmental Covariation" (@@todo: cite:Catavitello,Ivanenko,Lacquaniti@@).
+In essence, this law describes the fact that if one takes two measures which are highly correlated by definition (segment angles: the distal ones depend on the proximal one), measure them in highly stereotyped situations (gait cycles), and then apply a mathematical transformation which is designed to find axes of maximal covariation (Principal Component Analysis, PCA) - in other words, maximum input correlation - then one will retrieve correlation in the derived values.
+A perfect tautology.
+
+
+Thus, looking for studies which focused on a single angular parameter, preferably joint angles, might reveal basic analysis strategies for kinematic data.
+@@TODO: has Bernstein shown cyclograms? Did WebbSparrow cite Bernstein?@@
+Yet Fourier theory, being of relevance in many adjacent scientific fields, was re-introduced to kinematics several times.
+Most notably, citet:Webb2007 suggested its use for kinematic analysis.
+Their work provides a great summary of what Fourier-based transformations are about, and what the advantages are for the purpose of analyzing kinematics.
+Unfortunately, they confuse the (more generally applicable) Fourier Transform with the (simpler) Fourier Series.
+Consequently, they miss some crucial properties of the transformation to the frequency domain via Fourier Series (namely the easy extraction of phase and amplitude, in addition to mean angle).
