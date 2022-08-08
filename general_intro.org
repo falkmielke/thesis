@@ -1,0 +1,46 @@
+#+title: General Introduction
+#+author: Falk Mielke
+
+* Locomotor Aesthetics
+Locomotion can be extremely aesthetic.
+Watch a cheetah[fn:1], a cow[fn:2], guinea pigs[fn:3], or even a warthog[fn:4].
+All of those animals look beautiful moving in slow motion, which is not generally the case for motor behavior (take mastication[fn:5], for example).
+
+Aesthetics are in the eye of the beholder - but not entirely.
+There are common concepts to it, namely constancy and abstraction cite:Zeki2001.
+Both are related: constancy is finding essential attributes of a phenomenon from a variable set of particular observations; abstraction is being able to transfer these essentials into a novel context.
+Throughout this thesis, I will attempt to apply this to quadruped locomotion, but in a quantitative, rather than an artistic way.
+My goal is to measure constancy, by quantitative description of a large number of observations (which includes capturing variability in the behavior).
+Then, I will attempt to abstract the measured quantities to a novel context, by probabilistic modeling.
+
+
+I would like to start this journey by pointing out a main reason for the perceived aesthetic.
+An element of constancy is that locomotor behavior is relatively smooth and repetitive.
+There are physics and abstraction to this.
+The impulse required to change the momentum of the rigid body segments which constitute an animal (in particular its limbs) are spread over time in rotatory movements, thereby reducing the instantaneous force required to apply the impulse.
+TODO: source (Tipler?)
+In other words, abrupt changes of momentum are more costly than gradual changes.
+First reader participation experiment: try for a minute whether it is more exhausting to repetitively move your hand straight up and and down between its limits of reach than to rotate the entire arm around your shoulder.
+
+
+As I will argue below, the smooth and repetitive nature of many instances of locomotor behavior is core to the analytic methods I introduce.
+
+TODO: Leonardo figure
+
+
+* Locomotor Diagnostics
+Locomotion is not only aesthetic, but also diagnostically relevant.
++ peasant seeing his cows walk
++ quantitative diagnostics
++ low and normal birth weight piglets
+
+
+* Footnotes
+
+TODO: add youtube video titles, users, and dates.
+
+[fn:5] https://www.youtube.com/watch?v=AxypoMVZUAM, https://www.youtube.com/watch?v=CZIjbkhWd8s
+[fn:4] https://www.youtube.com/watch?v=aiSVmYdh8r4
+[fn:3] https://www.youtube.com/watch?v=030apWNibFU
+[fn:2] https://www.youtube.com/watch?v=x2cKRzFNM9E
+[fn:1] https://www.youtube.com/watch?v=THA_5cqAfCQ
