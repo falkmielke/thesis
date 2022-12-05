@@ -114,7 +114,7 @@ And for the sake of reading flow, I will keep it briefer than the referenced aut
 #+END_DISCLAIMER
 
 Researchers have long recognized both chaos and regularity in locomotion and found clever ways of applying quantitative analysis.
-For example, early research by the Weber brothers (cite:Weber1836) drew quantitative conclusions by analogy to the limb as a pendulum; their measurements became avalable by the innovative use of equipment.
+For example, early research by the Weber brothers (cite:Weber1836) drew quantitative conclusions by analogy to the limb as a pendulum; their measurements were enabled by the innovative use of equipment.
 Likewise, Marey has to be credited for his innovations towards "myography" and "odography" @@TODO: short summary@@.
 Then, in an American-French cooperation with the early photographer Muybridge, Marey invented chronophotography (cite:Marey1888).
 This technique produced iconic recordings of about the quality of modern-day "gif" memes; it also pioneered cinematography, and it is still in essence the same principle by which we acquire data in modern videography (arguably our cameras look less like firearms).
