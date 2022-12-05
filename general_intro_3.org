@@ -11,9 +11,9 @@ But to learn about the nature of locomotion, let me briefly consider life forms 
 Plants are usually immobile.
 However, they are /not/ less remarkable than animals: they cannot run away (also trivial).
 We can conclude that, unless they are extinct, their evolution must have provided remarkable mechanisms to withstand a changing physical environment, vegetarian predators, or pathogens (and think about the complication of sexual reproduction over a distance).
-They withstand right where the saplings' life starts.
-Mobile living beings always have the chance to avoid misfortune.
-But that can be "chance", indeed, because not all movement is active or directed.
+They (with)stand right where the saplings' life starts.
+Mobile life comes with the danger of running into misfortune, but also the chance to avoid it.
+At first approximation, life trajectory involves "chance" and uncertainty, if movement is passive and not directed.
 The fate of passively moving microorganisms (algae, bacteria, etc.) might depend on a favorable ocean current or temporary access to sunlight; evolution has provided them with fantastic tricks to temporally endure unfavorable conditions, which they will encounter sooner or later.
 And so they proliferate.
 
@@ -34,6 +34,7 @@ But that overall budget includes periods of rest.
 The number should better be corrected to time-normalized averages [TODO cite?].
 During active locomotion, other processes are regulated down, and the capacity to constantly fuel muscles can be life-saving.
 Animals who are more efficient in energy use (through metabolism, morphology, or behavior) consequentially have a competitive advantage, and proliferate.
+[TODO: firecrest paper]
 
 * Locomotor Behavior is Often Periodic (Mathematics)
 The ways in which evolution can alter animal behavior has another subtle consequence: evolution towards lower energy expenditure is particularly effective if a behavior is highly repetitive.
