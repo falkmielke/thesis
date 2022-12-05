@@ -1,7 +1,7 @@
 #+title: General Introduction
 #+author: Falk Mielke
 
-* Different Struggles For Different Existences
+* Every Existence Its Struggle
 Animals locomote.
 This fact is so trivial that we usually do not give it too much thought.
 They move through the world, actively changing their position in space to access points beyond their static reach.
@@ -21,23 +21,16 @@ And so they proliferate.
 Actively moving organisms do not have /these/ problems.
 They can simply decide whether to forage, perform a complex mating dance, run away, or otherwise chill out in the sun.
 Or, can they?
-The "struggle for existence" (/sensu/ Darwin) [TODO: cite] has many aspects, and has been solved via different strategies.
+The "struggle for existence" @@latex:\citep[\textit{sensu}][]{darwin1859cpt3}@@ has many aspects, and has been solved via different strategies.
 The route which we and other animals are on is the "energy highway".
 Animals usually have a high metabolic rate, a high energy demand (both histologically and organismically) and thus they need to move, to get a high enough intake, to be able to move, /etc/.
-Because movement requires energy.
-(Why) does this pay off?
+Because movement requires energy citep:Black1996,Taylor1982,Alexander2003Energy,Biewener2018Energy.
+How much precisely is hard to measure: it depents on many factors, maybe not least physical activity level citep:Westerterp2004,Westerterp2008,Rubenson2007.
+Of course, organisms evolved to behave energy-efficiently @@latex:\citep[e.g.][]{Nornberg2021}@@.
 
-
-[TODO: Table! Times|Energy spent per activity]
-Locomotion requires about [TODO ref needed] \(XX\%\) of the regular energy balance (compared to XX, YY and ZZ).
-But that overall budget includes periods of rest.
-The number should better be corrected to time-normalized averages [TODO cite?].
-During active locomotion, other processes are regulated down, and the capacity to constantly fuel muscles can be life-saving.
-Animals who are more efficient in energy use (through metabolism, morphology, or behavior) consequentially have a competitive advantage, and proliferate.
-[TODO: firecrest paper]
 
 * Locomotor Behavior is Often Periodic (Mathematics)
-The ways in which evolution can alter animal behavior has another subtle consequence: evolution towards lower energy expenditure is particularly effective if a behavior is highly repetitive.
+The ways in which evolution can alter animal behavior has another subtle consequence: evolution towards lower energy expenditure is particularly effective if a behavior is highly repetitive citep:Alexander2003Energy.
 And because energy expenditure is a highly relevant driver of locomotion, we observe many repetitive, periodic behaviors.
 
 
