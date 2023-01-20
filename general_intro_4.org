@@ -59,8 +59,8 @@ Yet whether or not domestic piglets are a good model species, specifically for h
 
 
 * What Tools Do We Have?
-One would think that our toolbox to study locomotion is well-developed and sophisticated.
-After all, locomotion has been intriguing people for hundreds, if not thousands, of years.
+One would think that our toolbox to study terrestrial locomotion is well-developed and sophisticated.
+After all, locomotion has been intriguing people for hundreds, thousands, maybe millions of years.
 Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it first for pornography, and second for locomotion (Fig. \ref{fig:muybridge}).
 
 #+CAPTION: "The Horse in Motion", by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
@@ -68,13 +68,41 @@ Whenever humans develop a new imaging technique, from cave drawings to digital c
 #+LABEL: fig:muybridge
 [[./figures/muybridge.jpg]]
 
-In consequence, the technology for studying locomotion is available, and sophisticated.
-Cameras have a high temporal and spatial resolution, and can be calibrated to measure 3D space.
-Compare modern day cameras to, for example, contemporary x-ray techniques for studying the inside of things: the latter are a relatively recent, resolution is usually inferior, price difference is defeating, though we do not even have color x-ray (although it is just another form of electromagnetic radiation).
+In consequence, the /technology/ for studying locomotion is available, and sophisticated.
+Consumer grade cameras have a high temporal and spatial resolution, and can be calibrated to measure 3D space.
+Compare modern day smartphone cams to, for example, contemporary x-ray techniques for studying the inside of things: both are equally recent, resolution of the latter is usually inferior, price difference is defeating, yet we do not even have color on x-ray (although it is just another form of electromagnetic radiation).
 
 #+CAPTION: "The Piglet in Motion", by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion. #TODO: image series of the jumping piglet
 #+ATTR_LATEX: :width 16cm
 #+LABEL: fig:muybridge
 [[./figures/piglet_motion.jpg]]
 
-We have far better equipment in this field than we would need, which is probably why my supervisors sent me out to a farm in 2017 with an inferior JVC camcorder (though a 4-cam 300fps Norpix system was available), and it nevertheless turned out to be the most relevant data for my entire PhD (#TODO \ref{}).
+We should have far better camera equipment than would be required for our research questions - which is probably why my supervisors decided to send me out to a pig farm in 2017 with an inferior JVC camcorder (although a synced 4-cam 300fps Norpix system, and a set of high res GoPro's, were available at the time).
+It nevertheless turned out to be the most relevant data for my entire PhD (#TODO \ref{}).
+
+
+Acquiring videos is just the first step: as always in science, we need to get to numbers and statistics to get reliable results.
+Where are we at the analysis side?
+You might be underwhelmed.
+We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns #TODO citep:Hildebrand1985, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles.
+#TODO recent citations
+
+
+"Planar Covariation" theory came out of one attempt to develop a technique which captures the essence of terrestrial locomotion.
+I think it is flawed, in a sense that it biases the data for high correlation just to find out that it is highly correlated.
+Throughout the manuscripts which comprise this thesis, you will find subtle and polite rants about the planar covariation technique, so I will not go into detail here - and I want to mention that I would be happy to discuss this at the defence ;)
+
+Another attempt to go beyond footfall science is ... #TODO but I don't remember
+
+
+Curiously, there is a strain of science which deviates from the Western mainstream.
+It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to it (Ch. #TODO \ref{}).
+His group excelled in at least two ways. #TODO citations
+They used clever engineering to get continuous measures of joint positions, long before videography was able to capture sufficiently high frame rates.
+And they applied angular transformations (i.e. Fourier Series) to analyze the data.
+These early works are remarkable, and the day I first read through it and realized what they were up to was maybe one of the happiest days of my PhD.
+Essentially, what I did in the work summarized herein, is transferring Bernstein's ideas to a computer framework, and extending them with moderen statistical models.
+I acknowledge that I am not the first one to take this route (#TODO); however, given the usefulness of the transformation, there are astonishingly few groups to date who have applied Fourier Analysis to locomotor data.
+
+* Thesis Summary
+(#TODO: check all the other intro attempts again; check notes Peter/Chris meeting)
