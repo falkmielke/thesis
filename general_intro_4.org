@@ -1,0 +1,80 @@
+#+title: The Honest Attepmt.
+
+
+* Why Piglets?
+We are studying piglets, and you may validly ask, "why"?
+
+
+The first is the trivial reason: *because we can*.
+Our institute at the University of Antwerp has phenomenal equipment.
+We have incubator-like rearing containers in the "Ark" (a teaching stable in our Veterinary Science department), which can be a cozy warm home to newborn piglets.
+We have the \(3D^2YMOX\) (3-Dimensional DYnamic MOrphology using X-rays) facility, which measuring animals from hoof to head in light and x-ray vision, more about it in the appendix.
+We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab, and bioligists at FunMorph (Functional Morphology).
+The settings could not have been better, and I cannot overstate my praise of all the fantastic people who helped with this study (see \ref{Acknowledgements}), and all those who previously managed to acquire funding for what enabled my work.
+Thank you!
+So we can. And we did.
+
+
+There is another trivial reason: *curiosity*.
+We are scientists, and like to study.
+Piglets are interesting, as I will discuss herein.
+But the general workings of locomotion, which I will get to, below, are exciting to us.
+Just observing the outcome of the fine interplay of muscles, tendons, joints, bones - to us scientists, observing this commonplace behavior in high resolution and slow motion is the equivalent of an audiophile listening to a Dvořák symphony.
+We could have done this on any animal; if fact, some of us might have preferred flamingos or boxfish.
+This is why, at this point and below, I will have to apply a common human stategy: /ex post/ rationalization.
+Walking piglets are graceful in their simplicity.
+And "graceful", just like in (human) sports or in playing musical instruments, often describes something which is complex and complicated but performed to look simple.
+The interesting thing is that, sports and music requires training, and the most adept athletes or musicians seem to us as if they have never done anything else in their lives.
+But in contrast to hominid trained specialists, the piglets we study indeed have never done anything else in their lives!
+They are born, and they walk gracefully within 96 hours, as my colleague Charlotte concluded from her exemplary PhD work citep:VandenHole #TODO .
+How much trouble it would save us, and how much different trouble it would cause, if our own toddlers could pull that trick!
+
+
+#+CAPTION: "Leihmutter Jolante", by Ernst Kahl (date unknown).
+#+ATTR_LATEX: :placement [b!] :width 8cm
+#+LABEL: fig:jolante
+[[./figures/jolante.jpg]]
+
+Which brings us to the third reason: *piglets are, to a certain degree, analogous to humans*.
+In other words, we have the working hypothesis that piglets are a good model species for some aspects of human ontogeny.
+Emphasis on "/to a certain degree/" - are they, really (Fig. \ref{fig:jolante})?
+Domestic pigs are maybe the only species in the world that is more degenerate than our own (or maybe not).
+They are sedetary, comparatively hairless, highly social, omnivorous (which means they can live of the crap other humans feed them), have probably gone through a couple of founder situations in their evolution, yet are far more proliferous than is good for themselves and the planet.
+That is already quite a lot to have in common.
+And indeed, many researchers rightfully argue that we can draw conclusions about humans from studying piglets - for some aspects of our being.
+Maybe the most enthusiast opponent of this theory is our colleague Per Sanglid #TODO: cite Sanglid et al.
+He argued in his Francqui honorary lecture here at the University of Antwerp (April 26, 2022) that having kids during a PhD is detrimental for progress of the project; which tempts me to acquire contradicting evidence.
+#TODO
+But does that apply to locomotion as well?
+
+
+An obvious "show stopper" might be that piglets are precocial, whereas humans are about as altricial as can be.
+On the other hand, suids are the more altricial of the ungulates: feral /Sus scrofa/ females build nests and keep their young in shelter for a couple of weeks.
+#TODO
+Unfortunately, domestication involved restraining sows, and the way we keep them might have favored more mobile young who have reduced mortality from crushing #TODO .
+
+
+To summarize, there are some genuine reasons as well as grant-acquiring rationalizations for studying suid ontogeny.
+Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
+
+
+* What Tools Do We Have?
+One would think that our toolbox to study locomotion is well-developed and sophisticated.
+After all, locomotion has been intriguing people for hundreds, if not thousands, of years.
+Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it first for pornography, and second for locomotion (Fig. \ref{fig:muybridge}).
+
+#+CAPTION: "The Horse in Motion", by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
+#+ATTR_LATEX: :width 16cm
+#+LABEL: fig:muybridge
+[[./figures/muybridge.jpg]]
+
+In consequence, the technology for studying locomotion is available, and sophisticated.
+Cameras have a high temporal and spatial resolution, and can be calibrated to measure 3D space.
+Compare modern day cameras to, for example, contemporary x-ray techniques for studying the inside of things: the latter are a relatively recent, resolution is usually inferior, price difference is defeating, though we do not even have color x-ray (although it is just another form of electromagnetic radiation).
+
+#+CAPTION: "The Piglet in Motion", by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion. #TODO: image series of the jumping piglet
+#+ATTR_LATEX: :width 16cm
+#+LABEL: fig:muybridge
+[[./figures/piglet_motion.jpg]]
+
+We have far better equipment in this field than we would need, which is probably why my supervisors sent me out to a farm in 2017 with an inferior JVC camcorder (though a 4-cam 300fps Norpix system was available), and it nevertheless turned out to be the most relevant data for my entire PhD (#TODO \ref{}).
