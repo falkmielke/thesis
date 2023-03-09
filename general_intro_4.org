@@ -1,5 +1,7 @@
 #+title: Methodological Advances in Studying Piglet Postnatal Locomotor Development
 
+#+SETUPFILE: latex_header.org
+
 #+BIBLIOGRAPHY: literature.bib apalike
 #+BEGIN_SRC elisp :results none :exports none :tangle no
 (setq bibtex-completion-bibliography
@@ -16,7 +18,7 @@ The first is the trivial reason: *because we can*.
 Our institute at the University of Antwerp has phenomenal equipment.
 We have incubator-like rearing containers in the "Ark" (a teaching stable in our Veterinary Science department), which can be a cozy warm home to newborn piglets.
 We have the \(3D^2YMOX\) (3-Dimensional DYnamic MOrphology using X-rays) facility, which measuring animals from hoof to head in light and x-ray vision, more about it in the appendix.
-We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab, and not least bioligists at FunMorph (Functional Morphology).
+We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab and Biomedical Physics (Bimef), and not least bioligists at FunMorph (Functional Morphology).
 The settings could not have been better, and I cannot overstate my praise of all the fantastic people who helped with this study (see \ref{Acknowledgements}), and all those who previously managed to acquire funding for what enabled my work.
 Thank you!
 So we can. And we did.
@@ -24,19 +26,21 @@ So we can. And we did.
 
 There is another trivial reason: *curiosity*.
 We are scientists, and like to study.
-Piglets are interesting, as I will discuss herein.
-But the general workings of locomotion, which I will get to, below, are exciting to us.
+Piglets are interesting, as I hope this thesis will leave no doubt.
+Furthermore, the general workings of locomotion, which I will get to, below, are exciting to us.
 Just observing the outcome of the fine interplay of muscles, tendons, joints, bones - to us scientists, observing this commonplace behavior in high resolution and slow motion is the equivalent of an audiophile listening to a Dvořák symphony.
-Or to a physicist seeing a rainbow citep:Lewin2012. Have you actually /seen/ one?
+Or to a physicist seeing a rainbow citep:Lewin2012.
+Have you actually /seen/ one?
 
 
-We could have done this on any animal; if fact, some of us might have preferred flamingos or boxfish.
+Yet, back to our cute, pink subject animals.
+We could have studied any animal; if fact, some of us might have certainly preferred flamingos or boxfish.
 This is why, at this point and below, I will have to apply a common human stategy: /ex post/ rationalization.
 Walking piglets are graceful in their simplicity.
 And "graceful", just like in (human) sports or in playing musical instruments, often describes something which is complex and complicated but performed to look simple.
-The interesting thing is that, sports and music requires training, and the most adept athletes or musicians seem to us as if they have never done anything else in their lives.
+Well, sports and music requires training, and the most adept athletes or musicians seem to us as if they have never done anything else in their lives.
 But in contrast to hominid trained specialists, the piglets we study indeed have never done anything else in their lives!
-They are born, and they walk gracefully within 96 hours, as my colleague Charlotte concluded from her exemplary PhD work citep:VandenHole #TODO .
+They are born, and they walk gracefully within 96 hours, as my colleague Charlotte concluded from her exemplary PhD work citep:VandenHole2019.
 How much trouble it would save us, and how much different trouble it would cause, if our own toddlers could pull that trick!
 
 
@@ -53,33 +57,35 @@ Domestic pigs are maybe the only species in the world that is more degenerate th
 They are sedetary, comparatively hairless, highly social, omnivorous (which means they can live of the crap other humans feed them), have probably gone through a couple of founder situations in their evolution, yet are far more proliferous than is good for themselves and the planet.
 That is already quite a lot to have in common.
 And indeed, many researchers rightfully argue that we can draw conclusions about humans from studying piglets - for some aspects of our humble existence.
-Maybe the most enthusiast opponent of this theory is our colleague Per Sanglid #TODO: cite Sanglid et al.
-He argued in his Francqui honorary lecture here at the University of Antwerp (April 26, 2022) that having kids during a PhD is detrimental for progress of the project; which tempts me to acquire contradicting evidence (this thesis).
+For example, highly relevant research about infant gut function was achieved by the group of Prof. Per Sangild citep:Muk2023,Che2010,Cilieborg2011,Sangild2006.
+He argued in his Francqui honorary lecture here at the University of Antwerp (April 26, 2022) that having kids during a PhD is detrimental for progress of the project; which teases me to acquire contradicting evidence (this thesis).
 
-But the question remains: *can piglet serve as a model species for the study of human locomotion?*
+But the question remains: *can piglet serve as a model species for the study of human /locomotion/?*
 
 
-An obvious "show stopper" might be that piglets are precocial, whereas humans are about as altricial as can be.
-On the other hand, suids are the more altricial of the ungulates: feral /Sus scrofa/ females build nests and keep their young in shelter for a couple of weeks.
-#TODO citations
-Unfortunately, domestication involved restraining sows, and the way we keep them might have favored more mobile young who have reduced mortality from crushing #TODO .
+An obvious "show stopper" might be that, as mentioned above, piglets are precocial, whereas humans are about as altricial as can be.
+On the other hand, suids are the more altricial of the ungulates: feral /Sus scrofa/ females build nests and keep their young in shelter for a couple of weeks citep:Wischner2009.
+Unfortunately, domestication involved restraining sows, and the way we keep them might have favored more mobile young who have reduced mortality from crushing citep:Grandinson2002.
 # TODO: more to discuss
+The picture is complex, and certainly the analogy of piglets and humans should not be taken for granted citep:VandenHole2017.
+
 
 A second "show stopper" for this thesis would be if it turns out that newborn piglets of low and normal birth weight actually do not differ in a measurable way.
 Or is that a show stopper?
-To set the frontier right from the start, I will insist that we apply good scientific methods here citep:Chamberlin1890,Platt1964,Popper2002.
-If we /search for/ differences in piglet locomotion, we will find them.
+To set the frontier right from the start, I will insist to apply good scientific methods citep:Chamberlin1890,Platt1964,Popper2002.
+If we /searched for/ differences in piglet locomotion, just search hard enough, we would surely find them.
 Instead, our attempts must be to *falsify the hypothesis that there are differences in piglet locomotion*.
 As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
 Firstly, some methods loose information in processing.
 For example, measure dynamically similar speed of two animals.
-If we do not see differences in that measure, we cannot exclude that the subjects differ in other aspects.
+If we do not see differences in that measure, we cannot exclude that the subjects differ in other aspects, despite indiscernible speed.
 Secondly, methods might have trouble handling variation.
 One subject animal was observed to be slower in one trial, but does that mean it /cannot/ go faster as well?
 So, on the one hand, failing to incorporate (or even summarizing) repeated measurements might be neglecting variation.
-On the other hand, methods can amplify variation.
+What does it mean if there is a significant difference in standard error of the mean?
+On the other hand, methods can amplify variation, by not including all measures (which brings us to the next point).
 Thirdly, the matter is complex: just for kinematics, there are subject characteristics (age, sex, ...), spatiotemporal gait variables (speed, duty factor, clearance, ...), dynamic posture and effective range of motion, and finally coordination.
-Stay tuned.
+Stay tuned for more on this.
 We better have a potent modeling framework to incorporate all that data: if we do not incorporate all measures, differences might be due to sampling biases and "hidden" variables.
 The falsification approach is a unifying aspect of all the chapters herein.
 
@@ -115,12 +121,12 @@ It nevertheless turned out to be the most relevant data for my entire PhD citep:
 Acquiring videos is just the first step: as always in science, we need to get to numbers and statistics to get reliable results.
 Where are we at the analysis side?
 You might be underwhelmed.
-We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns #TODO citep:Hildebrand1985, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles.
+We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns citep:Hildebrand1985, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles.
 #TODO recent citations
 
 
 People have certainly /tried/ to do better.
-"Planar Covariation" theory came out of one attempt to develop a technique which captures the essence of terrestrial locomotion #TODO citep:Lacquaniti.
+"Planar Covariation" theory came out of one attempt to develop a technique which captures the essence of terrestrial locomotion citep:Borghese1996,Ivanenko2008.
 I think it is flawed, in a sense that it biases the data for high correlation just to find out that it is highly correlated.
 Throughout the chapters of this thesis, you will find subtle and polite rants about the planar covariation technique, so I will not go into detail here - and I want to mention that I would be happy to discuss this at the defence ;)
 
@@ -143,3 +149,8 @@ I acknowledge that I am not the first one to take this route citet:Pike2002,Webb
 
 And this is where my PhD project found its place.
 We study piglet locomotion, attempting to falsify a difference that is due to birth weight category.
+
+
+# References
+\bibliographystyle{apalike}
+\bibliography{literature.bib}
