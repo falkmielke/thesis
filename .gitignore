@@ -1,0 +1,6 @@
+/.auctex-auto/
+/build/
+/figures/
+/general_intro_main.bbl
+*.pdf
+/general_intro_main.tex
