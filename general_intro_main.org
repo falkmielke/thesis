@@ -110,14 +110,14 @@ After all, locomotion has been intriguing people for hundreds, thousands, maybe 
 Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it (first for pornography, and second) for locomotion (Fig. \ref{fig:muybridge},\ref{fig:jumpiglet}).
 
 #+CAPTION: "The Horse in Motion", by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
-#+ATTR_LATEX: :width 16cm
+#+ATTR_LATEX: :width 16cm :placement [t!]
 #+LABEL: fig:muybridge
 [[./figures/muybridge.jpg]]
 
-#+CAPTION: "The Piglet in Motion", by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion. #TODO: image series of the jumping piglet
-#+ATTR_LATEX: :width 16cm
+#+CAPTION: "The Piglet in Motion", by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion.
+#+ATTR_LATEX: :width 16cm :placement [b!]
 #+LABEL: fig:jumpiglet
-[[./figures/piglet_motion.jpg]]
+[[./figures/piglet_in_motion.png]]
 
 
 In consequence, the /technology/ for studying locomotion is available, and sophisticated.
@@ -147,10 +147,10 @@ Another attempt to go beyond footfall science is ... #TODO but I don't remember
 
 
 And then there is one strain of locomotor science which deviates from the Western mainstream.
-It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to it (Ch. #TODO \ref{}).
-His group excelled in at least two ways. #TODO citations
-They used clever engineering to get continuous measures of joint positions, long before videography was able to capture sufficiently high frame rates.
-And they applied angular transformations (i.e. Fourier Series) to analyze the data.
+It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to it (Ch. \ref{TODO}).
+His group excelled in at least two ways citep:Bongaardt2000,Bernstein1935.
+They used clever engineering to get continuous measures of joint positions, long before videography was able to capture sufficiently high frame rates citep:Bernstein1927b.
+And they applied angular transformations (i.e. Fourier Series) to analyze the data citep:Bernstein1927a.
 These early works are remarkable, and the day I first read through it and realized what they were up to was maybe one of the happiest days of my PhD.
 Essentially, what I did in the work summarized herein, is transferring Bernstein's ideas to a computer framework, and extending them with moderen statistical models.
 I acknowledge that I am not the first one to take this route citep:Pike2002,Webb2007; however, given the usefulness of the transformation, there are astonishingly few groups to date who have applied Fourier Analysis to locomotor data.
@@ -163,13 +163,30 @@ Some are frequently used, but the ones I find most relevant did not get the reco
 This thesis is also an attempt to rectify that.
 
 
-* Thesis Outline
-(#TODO: check all the other intro attempts again; check notes Peter/Chris meeting)
+\pagebreak
+* Thesis Outline\label{TODO}
 
 And this is where my PhD project found its place.
 We study piglet locomotion, attempting to falsify a difference that is due to birth weight category.
 
+This requires a methodological foundation on topics unfamiliar to most Biologists (Fourier Analysis, probabilistic models), which I introduce in dedicated chapters.
 
+_Part I: Fourier Analysis_
++ I will introduce Fourier Methods with a practical guide and review its occurrence specifically in the field of locomotor biomechanics (Ch. \ref{TODO}) \(\rightarrow\) /unpublished, baboon data/.
++ The power of Fourier tools is then unleashed onto a large cross-species study that covers most of the ungulate clade (Ch. \ref{TODO}) \(\rightarrow\) /FCAS paper/ citep:Mielke2019.
+
+_Part II: Probabilistic Modeling_
++ Building on that, I will introduce the basics of probabilistic modeling (Ch. \ref{TODO}) \(\rightarrow\) "tiny textbook of statistics"
++ ... before turning around the conventional modeling strategy and applying it to piglets (Ch. \ref{TODO}) \(\rightarrow\) /Modelling paper/ citep:Mielke2023.
+
+_Part III: Dynamics_
++ Finally, I will touch on further methodological challenges on the way to quantify forces and moments which arise in the locomotor apparatus during locomotion (Ch. \ref{TODO}) \(\rightarrow\) /unpublished; Wrench-Quaternion and CT work/.
+
+The thesis closes with a general discussion to wrap up and project the presented work to potential future applications.
+
+\pagebreak
 # References
 \bibliographystyle{apalike}
 \bibliography{literature.bib}
+
+# TODO: check all the other intro attempts again; check notes Peter/Chris meeting
