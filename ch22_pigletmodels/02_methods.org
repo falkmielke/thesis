@@ -1,0 +1,260 @@
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC emacs-lisp :exports none :results silent :tangle no
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+#+BEGIN_COMMENT
+
+#+END_COMMENT
+
+* Data Acquisition
+
+#+BEGIN_SRC python :results output :session size_pca :exports none :tangle yes
+
+import sys as SYS           # system control
+import numpy as NP
+SYS.path.append('toolboxes') # makes the folder where the toolbox files are located accessible to python
+import EigenToolbox as ET    # coordination PCA
+
+filename = 'data/morphometrics.pca'
+mpca = ET.PrincipalComponentAnalysis.Load(filename)
+print (mpca.weights[0])
+
+#+END_SRC
+
+#+RESULTS:
+: 0.9291535954421666
+
+
+Recordings were done at a local farm in Belgium during several trips in October and November 2017.
+Farrowing was monitored to select Topigs x PIC piglets for another experiment citep:Ayuso2021.
+Piglets from selected litters were weighed at birth and numbered with non-toxic skin markers.
+Low birth weight (LBW) was classified by birth weight quantile (lowest \(10 \%\) of each litter) and by a maximum mass of \(800\)g citep:Litten2003,VanTichelen2021,Wang2016,DInca2011; all other piglets are assigned the NBW category.
+At variable time points afterwards (ages \(1 - 10\) hours), piglets were briefly taken from their pen and brought to a separate room for video recording (see below).
+Animals were recorded in pairs @@latex:\citep[as in][]{Mielke2018}@@, which drastically reduced anxiety and increased their motivation to cooperate.
+A few animals were recorded repeatedly, usually with a changing partner.
+Animals were ear-tagged and followed up: recording was repeated at approximately 4 and 10 days of age.
+That data was part of the digitization procedure (i.e. "deeplabcut" network training), but excluded from further analysis (i.e. probabilistic modeling, see below).
+The subject characteristics documented for analysis are birth weight (continuous, and categories "LBW"/"NBW"), mass at recording, age at recording (i.e. hours since farrowing), sex, and size.
+The size of the animal was approximated by a Principal Component Analysis (PCA) of digitization landmark distances along all segments ("size PCA", only first PC used,
+src_python[:session size_pca]{f"{mpca.weights[0]*100:.0f} \%"} {{{results(\(93 \%\))}}}
+of variability).
+Size and mass are expected to correlate, yet deviations would indicate animals of particularly slender or rotund habitus.
+All procedures followed ethical regulations and guidelines, and were approved by the Ethical Committee for Animal Testing of the University of Antwerp, Belgium (ECD 2015-26).
+
+
+
+The recording room contained an elevated runway (\(150 \times 50\)cm), covered with a rubber mat to increase friction, and visible through a transparent frontal shield.
+Color videos were recorded (camera model: GC-PX100BE, JVC, Japan) at a temporal sampling rate of \(50\) frames per second and a spatial resolution of \(1920 \times 1080\) pixels (later cropped to \(500\) px height), from a distance at which the field of view would exactly capture the entire runway.
+A chess board at the back wall enabled spatial calibration.
+Video surveillance was permanent during the presence of the animals and stopped only in between recording sessions.
+Animals were able to move freely on the enclosed platform.
+To stimulate locomotion, the two animals were repeatedly placed on opposite ends of the runway.
+Gentle tickling on the back and grunting vocalization of the researcher were other successful strategies to induce targeted locomotion in the direction perpendicular to the camera axis.
+After recording sessions the piglets were returned to their litter and remained with the sow.
+The workflow herein involved handling of the animals as a consequence of the research setting.
+However, note that the procedure could easily be automated for continuous data collection by a suitable pen arrangement citep:Meijer2014,Stavrakakis2014,Netukova2021.
+
+
+
+* Digitization
+We used the software DeepLabCut @@latex:\citep[DLC,][]{Mathis2018}@@ for digitization of all video material.
+In addition, a custom made point tracking software citep:MMielke2020 was used to generate a training set.
+In total, our dataset contained \(180\) videos (more than \(11\) hours, \(169\) animals) of video.
+Our goal was to prepare a general DLC network which is capable of automatically tracking piglets at multiple ages, and which can be shared and re-used for subsequent research questions.
+This is why the full data set was used for digitization and for the calculation of some derived measures (size PCA).
+However, the analysis focus of this study (see below) was only a subset of the data (i.e. the 58 animals of the youngest age class).
+The video processing workflow, applied to the full data set, was as follows.
+To get a balanced training set, one stride of each of the animals was selected, and the video was cut, cropped to runway height, and optionally mirrored horizontally so that movement would always be rightwards.
+All videos were concatenated and submitted to the DLC training set generation.
+DLC was set to select 2552 frames from these videos, which were tracked in an external software and re-imported for training (\(80 \%\) training fraction).
+Seventeen landmarks (i.e. points of interest or "key-points"; usually joint centers, fig. \ref{fig:landmarks}) were digitized, representing all body parts visible on the lateral perspective (head: snout, eye, ear; back line: withers, croup, tail base; forelimb: scapula, shoulder, elbow, carpal/wrist, fetlock, forehoof; hindlimb: hip, stifle/knee, tarsal/ankle, hind fetlock, hindhoof).
+We selected a "resnet 152" network architecture and trained for \(540,672\) iterations (\(16\) days of computer workload).
+The network was then applied to digitize the continuous, full video recordings twice: once in default direction and once horizontally mirrored, because training set was always rightward movement.
+
+#+CAPTION: Video digitization and joint angle definitions. White circles mark points of interest ("landmarks"). Movement was always rightwards. Labels show joint angles, defined as shown in the inset: straight joint (parallel segments) corresponds to zero; counter-clockwise angles are positive. Forelimb angle was used as a reference for temporal alignment, but did not enter the analysis.
+#+ATTR_LATEX: :placement [t]
+#+LABEL: fig:landmarks
+[[./figures/fig1_landmarks.png]]
+
+
+
+The next step is to find the relevant temporal sequences of walking in the continuous videos.
+Naturally, the trained network would only extract potentially useful landmark traces for episodes which resembled the training set, i.e. in episodes with a piglet moving perpendicular to the image axis, in lateral aspect and rightward direction.
+We automatically extracted \(2597\) of such sequences by filtering for high digitization "likelihood" provided by DLC, low noise (i.e. steady landmark movement) and consistent, plausible landmark distances.
+We further applied an automatic algorithm to find footfalls and label stride cycles in the candidate episodes (\(4730\) cycles).
+This procedure involved a start-end-matching optimization (using Procrustes superimposition) to ensure that strides were indeed cyclical.
+To further assess digitization quality, gait variables were automatically extracted.
+Definition of these variables was chosen to simplify the automatic procedure, as follows.
+Stride distance, frequency, and speed are trivial measures of the animal movement.
+Duty factor is available for fore- and hindlimb, and measures the fraction of stride time in which the respective hoof is in ground contact.
+Clearance is approximated by quantifying the ratio of flexion of each limb (one minus the quotient of minimum and maximum absolute hip-toe-distance during the stride).
+Head and torso angle are the stride-average angles of the snout-ear or withers-croup lines with respect to the coordinate system.
+Hindlimb phase measures the time between hind- and forehoof touchdown, divided by the stride cycle duration.
+Where applicable, gait variables were prepared for analysis (see below) by converting them to dimensionless values citep:Hof1996,Alexander1983 using the cumulated distance of landmarks along the snout-to-tailbase line of the animal as reference, extracted as stride average from the digitized landmarks.
+Only strides with plausible values (i.e. those which lie within the theoretical distribution of each parameter; \(1862\) cycles) where processed.
+Manual inspection further boiled down the data set to 897 stride cycles (the others excluded for digitization errors, multi-animal confusion, non-walking gait, intermittent or sidewards locomotion, or incompleteness).
+# Note that this manual step would be obsolete if it was possible to generate a better digitization network, which we unfortunately failed to achieve.
+Finally, \(368\) of the remaining strides from \(58\) animals were in the youngest age category (\(<10\ h\)) and thus selected for the present analysis, the data table is available online (see below).
+
+
+* Data Processing
+
+#+BEGIN_SRC python :results output :session coordination_pca :exports none :tangle yes
+
+import numpy as NP
+import CodeM01_CoordinationPCA as cPCA
+
+coordination_pca = cPCA.LoadCoordinationPCA()
+n_features = len(coordination_pca._features)
+print (n_features/8/2) # 8=fourier-order
+# print (coordination_pca._features)
+# print ([pc for pc in range(1,13)])
+n_pcs = 12
+weightsum = NP.sum(coordination_pca.weights[:n_pcs])
+print (weightsum)
+
+#+END_SRC
+
+#+RESULTS:
+: 6.0
+: 0.8023993920523508
+
+
+The landmark data provided by DLC was further processed for analysis.
+Python code for the whole procedure is available (@@latex:\nolinkurl{https://git.sr.ht/~falk/piglet_fcas}@@, Python version 3.10.8 at time of model calculation, \nolinkurl{https://www.python.org}).
+First, joint angle profiles (i.e. joint angle values over time) were extracted for all relevant joints and for the total forelimb angle (croup-withers-hoof).
+Shoulder, elbow, carpal, hip, stifle, and tarsal were the six joints sufficiently well digitized and therefore considered relevant for analysis.
+We then applied Fourier Series decomposition in the framework we previously termed Fourier Coefficient Affine Superimposition @@latex:\citep[FCAS,][]{Mielke2019}@@, a flexible procedure which subsumes the following steps.
+Joint angle profiles are cyclic, i.e. periodical, and can therefore be transformed to the frequency domain with a Fourier Series decomposition (8 harmonics were deemed sufficient by visual comparison of raw and transformed/retransformed profiles).
+In the frequency domain, the affine components (mean, amplitude, phase) of a joint angle profile are easily accessible @@latex:\citep[\textit{cf.}][]{Mielke2019}@@.
+The forelimb angle served as reference to temporally align all cycles in the data set (removal of phase differences between different cycles; forelimb angle was not used further).
+Then, mean and amplitude of the joint oscillations were isolated for all joint angles and are categorized as "dynamic posture" parameters.
+Mean joint angle is the temporal average, whereas amplitude is related to effective range of motion (eROM).
+The residual, i.e. differences captured by non-affine Fourier coefficients, can be categorized as "coordination" /sensu stricto/ (it measures the precise temporal succession of joint configurations).
+In our case, there were
+src_python[:session coordination_pca]{f"{n_features:.0f}"} {{{results(\(96\))}}}
+variables of coordination (6 angles, 8 harmonics, real and imaginary) which were submitted to a PCA.
+Only the first
+src_python[:session coordination_pca]{f"{n_pcs:.0f}"} {{{results(\(12\))}}}
+coordination components (\(CC\)) were used for statistical analysis, capturing
+src_python[:session coordination_pca]{f"{weightsum*100:.1f} \%"} {{{results(\(80.2 \%\))}}}
+of the variability in coordination.
+# The number of components was chosen as a trade-off between information retention and limiting model complexity.
+To summarize, FSD and FCAS served three purposes: (i) temporal alignment of the cyclic traces, (ii) separation of meaningful parameter categories (dynamic posture and coordination), and (iii) preparation for multivariate analysis via PCA.
+Basic script code (Python, Matlab and R) to perform FCAS can be found on a dedicated git repository ([[https://git.sr.ht/~falk/fcas_code]]).
+
+
+@@latex:\bigskip@@
+Information retention is generally a strength of this method.
+FCAS and PCA are mathematical transformations, which means that the information content after transformation is theoretically identical to that prior to transformation (theoretically, because only a finite number of harmonics can be used, yet this is of little concern for continuous, smooth joint angle profiles).
+The neglected PCs and the residual not captured by 8 harmonics were the only information from kinematics of the given joints to be lost in this procedure, and by definition these contain the least information.
+Apart from that, all information present in the raw joint angle profiles enters the analysis.
+Though we used a 2D dataset herein, the procedure could be applied equally well to angles measured from 3D coordinate data citep:Scott2022.
+
+
+Furthermore, all transformations are reversible, hence any analysis outcome can be translated back to kinematics with high accuracy.
+Reversibility bares a lot of herein unused potential, for example for interpolating unobserved subject states or for inferring kinematics of fossile species by phylogenetic and morphometric bracketing.
+Reversibility can also be of use when presenting raw joint angle profiles and their averages, as follows.
+One crucial aspect of the FCAS procedure is temporal alignment of the joint angle profiles in the frequency domain.
+In conventional temporal alignment, a single characteristic point in the stride cycle is chosen as a reference, wherein this is only "characteristic" for a certain part of one limb (e.g. left hindlimb hoof touchdown).
+Temporal alignment to the hindhoof touchdown might cause distinct peaks in the forelimb angle joint profiles to occur at different relative points in the stride cycle (e.g. tarsal joint profiles in Fig. \ref{fig:raw_data} below, lower half, green traces).
+If profiles show such variable peak positions, then their average will have a wider, less pronounced (i.e. lower amplitude), and potentially unnatural peak.
+For illustration, this is analogous to averaging two sine-waves of identical amplitude, but phase shifted: in the worst case, they cancel each other out (as in "destructive interference").
+The problem is not restricted to pronounced peaks, but generally occurs if the temporal intra-limb coordination varies within a data set.
+Using FCAS, it is possible to get a more representative average of the raw traces which has its amplitude conserved, but phase and mean angle averaged.
+This is enabled by transformation to the frequency domain, separation of affine components, removal of phase differences by shifting to average phase, profile averaging, followed by inverse transformation back to the time domain.
+Because a set of profiles and phases may be calculated for each angle individually, and because phase relations can differ between joints, there are the options to align based on one reference angle (e.g. the whole forelimb, as done herein) or minimize all phase differences across all joints.
+Chosing the first option herein has implications: when plotting hindlimb joints aligned by a forelimb reference (as in Fig. \ref{fig:raw_data}, lower half), phases still differ, and the "destructive interference" problem might hamper averaging.
+In such cases it is possible to apply an extra, joint-wise FCAS alignment for the sole purpose of generating meaningful averages.
+
+
+
+* Statistical Modeling
+To summarize, four categories of variables were used for analysis:
+- subject characteristics: age, sex, mass, birth weight category, size
+- spatiotemporal gait variables: distance, frequency, speed, clearance (fore-/hindlimb), duty factor (fore-/hindlimb), head angle, hindlimb phase
+- dynamic posture: mean joint angles and eROM for six joints
+- coordination: the residual after extraction of dynamic posture (see above)
+
+Our guiding question for model design is whether a probabilistic, linear model is able to infer subject characteristics (specifically: age, mass, and size) from raw kinematics (expressed as dynamic posture and coordination) and gait variables (collective variables).
+Given the common conception that kinematics are a complex output of an individual motor system, this might be considered an "inverse" modeling approach.
+The present analysis focused on three outcome variables (Fig. \ref{fig:observations}): mass (\(kg\)), size (/arb. units/, from a PCA of marker distances), and age (\(h\)).
+Though these outcome variables were specific per individual and recording session, we analyzed them "per stride" (i.e. there were multiple strides with identical subject measures on the outcome side).
+
+
+The model formula is:
+\begin{equation} \theta \sim v_{1}\cdot\alpha + v_{s}\cdot\beta_{s} + \sum\limits_{G} v_{g}\cdot\beta_{g} + \sum\limits_{P}  v_{p}\cdot\beta_{p} +  \sum\limits_{C} v_{c}\cdot\beta_{c} + v_{1}\cdot\epsilon \label{eq:model} \end{equation}
+Herein, \(\theta\) is either of the outcome subject characteristics, \(\beta\) are slopes associated with the model parameters (\(s\) sex, \(G\) gait variables, \(P\) dynamic posture, \(C\) coordination), \(v\) are data vectors (e.g. \(v_{1}\) is a vector of ones for the intercept \(\alpha\) and model residual \(\epsilon\), and \(v_{s}\) is a boolean vector coding for subjects of `sex == male`).
+@@latex:\change{The models have a total number of 36 degrees of freedom.}@@
+Priors (i.e. /a priori/ assigned distributions) for all slopes were Normal distributions with mean and standard deviation corresponding to the mean and two times standard deviation of all observed values of each parameter; logarithmic transform was applied where necessary.
+The observable ("likelihood") prior for \(\theta\) was a Student's T distribution (allows for wider-than-normal tails and robust regression) with a Gamma distributed \(\nu\) (degrees of freedom); \(\epsilon\) was modeled to be a Half Cauchy distribution.
+The model was implemented using the Python library "PyMC" @@latex:\citep[version 4.2.2,][]{Salvatier2016}@@.
+
+
+To re-emphasize, dynamic posture and coordination together effectively capture all the kinematic information of the stride.
+Hence, we train the predictor model with all kinematics, gait variables, and sex.
+Birth weight category (LBW, NBW) is a filter parameter: we split our data set into LBW strides and two NBW subsets (training and validation).
+Training is performed by MCMC sampling (`sample` function in PyMC), and a No U-Turn sampler was set to sample with \(32\) chains, each \(2^{14}\) tuning and equally many sampling steps.
+All post-hoc model checks confirmed convergence (inspection of traces, \(bfmi>0.94\) for all chains, Gelman-Rubin statistics \(\approx 1\) for all parameters, sufficient effective sample size).
+Model comparison was performed, iteratively leaving out model parameters or replacing some by meaningful combinations (e.g. duty factor combined for fore- and hindlimb).
+However, because we follow an "all in" strategy, the results have little instructive value for model construction: we might thus have retained parameters which are numerically unimportant for the NBW-only models.
+
+
+
+#+BEGIN_SRC python :results output :session observations :exports none :tangle yes
+# update the figure
+import os as OS
+import numpy as NP
+import matplotlib.pyplot as PLT
+
+import Code01_Observations as OBS
+
+data = OBS.LoadYoungData()
+n_lbw = NP.nansum(data['is_lbw'].values)
+n_val = NP.nansum(data['is_validation'].values)
+n_nbw = data.shape[0] - NP.sum([n_lbw, n_val])
+
+fig = OBS.PlotObservations(data, [col for col in ['weight', 'morpho1', 'age']])
+
+# print (fig)
+# PLT.show()
+
+# print ('tic')
+# fig.savefig(f'figures{OS.sep}histograms_observed.png', dpi = 300, transparent = False)
+PLT.close()
+
+# print ('toc')
+# assert OS.path.exists('figures/histograms_observed.png')
+# print (n_nbw, n_val, n_lbw)
+#+END_SRC
+
+#+RESULTS:
+
+
+#+CAPTION: Histogram of observations. Trivially, the LBW group measured the lowest body masses in the data set. This correlated with a lower body size, whereas age is rather uniformly sampled for all study groups. Recordings happened opportunistically within the first ten life hours of the animals, repeated measurements were possible. Number of strides per class are indicated in brackets on the legend. Bar heights are scaled by sample size to show relative value distributions.
+#+ATTR_LATEX: :placement [t]
+#+LABEL: fig:observations
+[[./figures/histograms_observed.pdf]]
+
+
+The data set of
+src_python[:session observations]{f"N = {data.shape[0]}"} {{{results(\(N = 368\))}}} strides was split into three categories:
+(i) the NBW training set as reference with
+src_python[:session observations]{f"N = {n_nbw} "} {{{results(\(N = 294 \))}}} strides,
+(ii) the NBW validation set (
+src_python[:session observations]{f"N = {n_val} "} {{{results(\(N = 35 \))}}} strides), which is a random subset of NBW strides, approximately equal in size to
+(iii) the LBW test set with
+src_python[:session observations]{f"N = {n_lbw} "} {{{results(\(N = 39 \))}}} strides.
+
+The model was thus trained with a set of \(294\) NBW training strides (i).
+Inferences (model "predictions") were then done per stride, for all observed strides (NBW training, NBW validation, and LBW test), iteratively using the @@latex:`pymc.sample\_posterior\_predictive`@@ function in PyMC after setting all the data arrays to the actual observed values for one given stride (using @@latex:`pymc.set\_data`@@).
+The number of predictions usually matches the number of training samples, which means that all posterior information is used to construct the prediction distributions.
+We would thus retrieve mass, size, and age predictions (i.e. probabilistic inference) for each stride in the data set, which were then compared to the known, actual mass, size, and age.
+
+
+All procedures, code, data, and this manuscript are available online (https://git.sr.ht/~falk/piglet_fcas).

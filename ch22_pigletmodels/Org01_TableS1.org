@@ -1,0 +1,12 @@
+#+TITLE: Table S1
+#+SUBTITLE: Probabilistic Modeling Confirms Delayed, But Non-Deficient Locomotor Development in Low Birth Weight Piglets
+#+AUTHOR: Falk Mielke, Chris Van Ginneken and Peter Aerts
+#+DATE: {{{time(%Y-%m-%d)}}}
+
+
+#+CAPTION: Detailed Modeling Results. Asterisk (*) indicates slopes for which the credible interval did not include zero. FL: forelimb, HL: hindlimb, diml.: dimensionless, d.s.: dimensionless stride, eROM: effective range of motion.
+#+LABEL: supptab:modelresults
+#+ATTR_LATEX: :placement [hb]
+#+ATTR_LATEX: :align |l|c|c|c|c|
+#+INCLUDE: "./results/age_predictors.org"
+

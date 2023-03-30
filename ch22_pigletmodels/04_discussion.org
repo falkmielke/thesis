@@ -1,0 +1,272 @@
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(setq org-babel-inline-result-wrap "\\(%s\\)")
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+Quadruped terrestrial locomotion is the collective output of an ensemble of organismal subsystems, which is both reason and challenge for its usefulness in veterinary diagnostics.
+On one side, the kinematics can be quantified in multidimensional data sets, capturing the many degrees of freedom of the limb joints.
+On the other side, kinematic quantities are context dependent and affected by numerous subject characteristics (age, weight, pathologies, ...) which also cross-influence each other.
+The challenge emerges to find the right trace of a given (or unknown) condition in the multidimensional observation on the background of kinematic variability.
+Deep Learning methods for video digitization have become available, and probabilistic computational models offer a flexible framework to mirror complex parameter relations.
+Once trained to a given question, these computer tools can achieve comparative diagnostic classification with minimal human interaction, e.g. for continuous screening in a farm setting.
+Multivariate systems have been a challenge to integrated management and precision farming, and the presented locomotor analysis workflow highlights a possible way to succeed in that challenge.
+
+
+@@latex:\bigskip@@
+In this study, we have demonstrated a test case for generating a probabilistic model of piglet locomotion which incorporates all kinematic information.
+# Data acquisition is automated by the use of readily available use of "deep learning" tools.
+# These tools, like the probabilistic model we applied, require prior efforts in training and regression, but can then be applied to novel observations with little extra effort.
+Our example model was trained on a high number of observations which are considered "normal", and applied to classify untrained observations in terms of deviation from normal behavior.
+The data stems from laterally filmed videos of normal (NBW) and low birth weight (LBW) piglet locomotor behavior from unrestricted walking gait (an inexpensive, high-throughput arrangement, and a common behavior).
+Low birth weight is often associated with low vitality citep:Baxter2008,Hales2013,Muns2013, and this supposedly correlates with deficient locomotion.
+Hence, the obvious first research question is whether birth weight has an influence on the locomotor behavior.
+Top-down, direct, visual assessment could justify the hypothesis that LBW walking kinematics are somehow different from "normal" citep:DEath2012.
+Yet that is (i) hard to assess due to high behavioral variability and (ii) trivially expected given the adaptation to different physical properties of their body: gravitational force is a predominant constraint of locomotion, and it simply scales with animal weight.
+Our results showed that the eight LBW individuals we submitted to the weight-kinematics model were all over-estimated in terms of their weight, by the amount that matched LBW-NBW weight difference (Fig. \ref{fig:predictions}).
+The same is true for the size model.
+This indicates that LBW, at least all those in our data set, are capable of walking as if they were of normal birth weight and size.
+This is the first example of a diagnostic model application: the model confirms quantitatively normal locomotor behavior despite occurrence of a given non-normal co-variate (weight).
+# Or in other words: models can be robust to such effects
+
+@@latex:\bigskip@@
+A second diagnostic application is the identification of individuals (or even strides) which systematically deviate from an expectation or norm.
+Probabilistic models do not only classify "normal" or "not": they yield a distribution of plausible values, and thereby a likelihood that a given observation is indicative of a problem.
+The same model architecture as above, but configured to infer age from a kinematic measurement, estimated some (but not all) individuals to be of lower than actual age (Tab. \ref{tab:prediction}).
+Those were specifically the older of the LBW individuals, whereas the youngest ones (\(<4h\)) walked as expected for neonates.
+Though we cannot fully rule out chance with our limited sample size, this provides evidence that the quick postnatal development was halted in those individuals.
+Our interpretation is that, at birth, LBW individuals putatively had the same capabilities as their NBW siblings, yet at least some "fell behind" regular development in the first hours.
+We can think of two possible reasons for this: (1) the birth process as a trauma might mask the actual capabilities of all neonates alike, concealing actual, pre-existing differences citep:Litten2003; (2) development is impeded by depleted energy reserves and a failure in (kin) competition and the perinatal struggle for teats and warmth citep:LeDividich2017.
+We found little support for the first possible reason: top-down locomotor development is quick for both groups citep:VandenHole2017,VandenHole2018, and muscular architecture shows no differences citep:VandenHole2018b.
+On the other hand, there is evidence for quick depletion of energy levels in the low birth weight individuals, which rectifies within a period of ten hours citep:VandenHole2019.
+This finding is consistent with the present study and supports the perinatal struggle hypothesis.
+Delayed development does not necessarily corroborate the hypothesis of locomotor deficiency in LBW.
+We would expect truly deficient strides to be substantially different from the data trained to the model, thus be either excluded or misclassified.
+Exclusion means that the used Deep Learning implementation could not capture deficient strides, or only in a way which led to exclusion in subsequent (automatic) quality checks (see below).
+We acknowledge that there currently still is room for refinement in the Deep Learning digitization procedure.
+Yet in the likely case that some deficient strides passed quality checks and were subjected to the model, we would expect them to be more "unpredictable" (i.e. higher variance of posterior samples).
+Instead, in our data set, inferences were consistent for repeated measures of an individual, without notable increase in variance across inferences per stride.
+For the affected subjects, we can even quantify a plausible delay of less than five hours, which could nevertheless be critical given the rapid maturation of locomotor behavior in this species citep:VandenHole2017 and the importance of postnatal competition.
+Such detailed information is valuable when evaluating the success of different mitigation strategies @@latex:\citep[e.g. supplementing energy to piglets,][]{Schmitt2019}@@.
+It must be emphasized that, just like other computational diagnostic tools, the method outlined herein is not intended for standalone use.
+Instead, it is complementary to or can facilitate the in-depth inspection.
+Nevertheless, the specificity of the presented gait analysis supersedes mere activity analysis: to our knowledge, being able to automatically retrieve an individual, probabilistic measure for developmental delay in swine has not been achieved before.
+Information retention is a feature of the presented workflow which we think can enable researchers and veterinaries to differentiate a multitude of potential influences on locomotor behavior, given sufficient reference data and an appropriate model design.
+These observations are specific to the present test case, and the question remains whether the method is generally suited to diagnose animal pathologies.
+In the proposed workflow, data transformations (e.g. Fourier Series, PCA) are preparing the kinematic data for diagnostics.
+Diagnistics are the classification of ``non-normal'' observation, herein achieved by comparison of the probabilistic predictive samples and the actual observation (Fig. \ref{fig:predictions} and Tab. \ref{tab:prediction}).
+In the present example, there is no pathology, which was surprising to us: when observing NBW and LBW piglets (human classifier), one tends to see differences in how they walk.
+However, there are confounding factors: first and foremost, their weight and body proportions, age (locomotor maturation), sex, \textit{et cetera}.
+In other words: they walk differently, but this is expected, given the biomechanical and physical constraints of the phenomenon.
+These are general complications in diagnostics.
+Our models provide evidence that, when accounting for potentially confounding factors (e.g., by working on “dynamically similar” joint angle profiles), no difference remains.
+Given the high level of detail that could be extracted for the present case, we would expect it to be as accurate as a human classifier in cases where pathologies can be visually identified.
+Whether the workflow could even outperform human diagnosis in other cases, for example because confounding factors are accounted for, remains to be evaluated.
+
+
+
+#+BEGIN_SRC python :results output :session observations :exports none :tangle yes
+import os as OS
+import numpy as NP
+
+import Code01_Observations as OBS
+
+data = OBS.LoadYoungData()
+n_lbw = NP.nansum(data['is_lbw'].values)
+n_val = NP.nansum(data['is_validation'].values)
+n_nbw = data.shape[0] - NP.sum([n_lbw, n_val])
+
+#+END_SRC
+
+#+RESULTS:
+
+
+@@latex:\bigskip@@
+There are other limits imposed by the present test case.
+Our data set is limited and potentially biased in terms of LBW observations.
+There are much fewer valid LBW strides in our data set, in absolute numbers: only
+src_python[:session observations]{n_lbw} {{{results(\(39\))}}}
+of
+src_python[:session observations]{data.shape[0]} {{{results(\(368\))}}}
+observations are LBW.
+This could be interpreted as evidence for a lower capacity (despite equal potential) of LBW to produce normal locomotion.
+Yet there are proximal, trivial explanations: for this study, the \(10 \%\) lower quantile of birth weights in a litter is considered LBW, and there is a hard cap of \(800\)g.
+The resulting share is equal in our training set for video digitization, and in the final data set, because of pseudo-random, opportunistic sampling on-site (i.e. recording work was permanent, yet determined by farrowing and feeding of the subjects).
+The minority of LBW training videos might lead to an under-learning of those animals in the digitization network, which could lead to reduced digitization quality and therefore an exclusion bias for "non-normal" individuals.
+Though it seems unlikely, we cannot rule out reduced locomotor capacity in LBWs: the present data set is unsuited to count the occurrence of locomotor behavior due to its automatic generation.
+On the other hand, the strict stride filtering criteria for "good" kinematics may have involuntarily filtered out deficient individuals.
+Our conclusion that low birth weight individuals are non-deficient is strictly tied to the definition of the low birth weight category, which is herein based on weight criteria and did not regard phenotypical indicators of intra-uterine growth restriction @@latex:\citep[which we did not record, \textit{cf.}][]{Amdi2013}@@.
+
+
+#+BEGIN_SRC python :results output :session ages :exports none :tangle yes
+# update the figure
+import os as OS
+import numpy as NP
+import pandas as PD
+import matplotlib.pyplot as PLT
+
+print (OS.getcwd(), OS.path.exists('Code03_Predictions.py'))
+import Code03_Predictions as PRED
+
+data = PRED.LoadYoungData()
+avg_ages = data.loc[:, ['is_lbw', 'age']].groupby('is_lbw').agg(NP.mean)['age'].to_dict()
+
+#+END_SRC
+
+#+RESULTS:
+: /data/01_kinematics/16_piglet_fcas/ms1_agemodel True
+
+@@latex:\bigskip@@
+@@latex:\pagebreak@@
+A corollary question is which patterns in the kinematic variables cause the different age inferences.
+We report high magnitude (but also highly variable, i.e. "non-significant") slopes inferred from the age model (supplementary material \ref{supp:modelresults}).
+Note that these slopes solely reflect effects within the NBW data subset.
+We also observed slight differences in the average hindlimb dynamic posture (Fig. \ref{fig:raw_data}).
+In fact, a more flexed hindlimb is typical for the youngest animals of both birth weight categories.
+We emphasized potential differences in group composition to explain that (e.g. sex effect in the "size" model), and different age per group might be a proximal explanation for the non-normal age inference in LBW.
+However, the average age of LBW animals (
+src_python[:session ages]{f"{avg_ages[True]:.1f}"} {{{results(\(5.3\))}}} h) in our data set is nominally above that of NBW (
+src_python[:session ages]{f"{avg_ages[False]:.1f}"} {{{results(\(3.8\))}}}
+h), which is a discrepancy with the age underestimation.
+Yet if we assume that the hypothesis of delayed locomotor development is correct, the nominal age would be misleading, and LBW effectively behave similar to younger animals.
+This can explain the apparent discrepancy in age group composition and age inferences from kinematics.
+It also suggests that dynamic posture might be the major proxy for perinatal maturation, though many other parameters also entered the probabilistic model and influenced the model outcome.
+
+
+@@latex:\bigskip@@
+To summarize, we herein assembled state-of-the-art computer techniques for the purpose of individual diagnostics in quadruped locomotion, which we think constitute a valuable workflow for livestock screening and management.
+All components require some manual and computational efforts for initialization (network training, model regression).
+However, once that is done, the workflow is as follows:
+- generate more video recordings (e.g. in an instrumented runway)
+- apply the trained Deep Learning network for automated digitization
+- identify stride cycles (automatic with framewise Procrustes comparison)
++ stride cycle quality filtering by automatic criteria (end-start difference, constant speed, ...)
++ Fourier Series Decomposition, temporal alignment, and parameter transfromation (PCA)
++ probabilistic classification (i.e. posterior predictive sampling) with an inverted model structure
++ validation of above-threshold classifications
+
+Except for the last (crucial) step, all of this can be fully automated, and the whole workflow is readily available for precision livestock farming.
+Modules of the workflow can be altered: for example, Probabilistic Deep Learning models could be applied instead of the currently implemented classification.
+Monitoring can happen automatically @@latex:\citep[as in][]{Litten2003,Netukova2021}@@, which reduces delay in identifying individuals in need of intervention.
+Multiple models can be tested in parallel: in the present test case, the "weight" and "size" models found LBW locomotion indistinguishable from the "normal" reference group, whereas the "age" model specifically identified those animals which likely experience a delay in locomotor development.
+Likewise, tests for specific diseases could be set up.
+A more extensive (longitudinal) data set and more specific models are required to bring this tool into "clinical" or economical/commercial use, and one purpose of the present study was also to give sufficient explanations and references for readers unfamiliar with the mentioned methods.
+Nevertheless, we demonstrated that the modeling workflow is able to provide a high precision method for domestic pig locomotor diagnostics.
+# , high throughput
+
+
+
+
+# ################################################################################
+# #### ARCHIVE ####
+# ################################################################################
+
+#+begin_comment
+
+
+@@latex:\bigskip@@
+# modeling framework
+The findings discussed above are enabled by inverse-modeling subject characteristics as a function of kinematic parameters, using probabilistic models.
+The models do reveal various parameter associations, yet the top down (repeated) testing with the chosen model structure complicates drawing definite conclusions @@latex:\citep[e.g. we observed a sex effect on size, but opposite of what other studies have reported,][we conclude males in our study were just smaller by chance]{Baxter2012}@@.
+Instead, the demonstrated strategy leverages the potential of probabilistic models to perform out-of-sample inference (via separation of the LBW test group).
+Non-probabilistic modeling could equally serve to infer values, but it cannot generate parameter distributions (as in the non-normal age inferences, Fig. \ref{fig:predictions}).
+Our probabilistic models implicitly regard "non-significant" parameter slopes, which are usually neglected in standard hypothesis testing (such as the high magnitude, highly variable dynamic ROM quantities, which might nevertheless have relevance for age inference in case they are correlated and add up, which is likely the case).
+The data transformations and predictive modeling strategy we applied herein hold further potential for inferring kinematics, for example by morphometric bracketing of extinct taxa.
+For that purpose, one would train a model to infer dynamic posture and coordination from a given range of morphometrics, generate predictive samples for specific morphometrics in that range, and convert the samples back to (3D) joint angle profiles which could be animated.
+# Yes, I am thinking of you, dino researchers and Lucy fans!
+
+
+
+# inverse modeling strategy
+There is a conceptual hierarchy, but no clear causality, when modeling parameter dependencies in quantitative studies of locomotion.
+For example, animals might increase the hip angle (posture) and the temporal pattern in the joint angle profiles (coordination) to reach higher speeds (spatiotemporal gait variables), but the speed they reach might depend on age (subject parameter).
+But age might also influence the speed without changing dynamic posture or coordination, simply because the animal grows and increases strength. @@comment:%\citep[though herein we use dimensionless speed,][]{Hof1996}.@@
+Age might also affect dynamic posture and coordination directly, for example if dimensionless speed stays constant but clearance changes with age.
+Reducing clearance can increase speed (less unnecessary hoof lifting) or reduce it (higher duty factor), which can be distinguished by the other parameters.
+This complex interrelation of spatiotemporal quantities complicates the intuitive modeling strategy, which involves using subject characteristics as a factor to infer a multivariate block of gait variables and kinematics.
+In our experience, model residuals in such models are high, multiple testing can yield putatively coincidental significances, cross-dependencies within the multivariate data set might be underestimated, and sample size requirements are high.
+And even under ideal circumstances: chances are that such models would yield /some/ age effect, even with random data.
+
+
+
+# conclusion
+@@latex:\bigskip@@
+In contrast, the strategy applied herein is related to the question: "given the complete kinematic output of a behavior, can we infer subject characteristics of the animal producing it?"
+We used probabilistic models, which are able to capture intrinsic variability of the process, and addressed specific categorical questions (NBW/LBW differences) by out-of-sample infer.
+ence.
+We demonstrated that, in the first ten hours of piglet life, (1) kinematics seem to be indifferent to low body mass and size, and (2) locomotion of some LBW individuals could be explained by a delay in locomotor maturation which is initiated /post partum/.
+
+
+
+# the question
+Birth weight variability in piglets is considerable.
+The average birth weight of a new born piglet in our data set is just above a kilo, yet the span within a litter is typically above \(800\ g\).
+Size ranges are accordingly high.
+Intuitively, one would expect a pronounced difference in how these newborn animals move their more or less heavy bodies.
+The overarching question is whether low or critically low birth weight can be associated with a deficit in locomotion.
+
+
+# no difference...
+One might therefore anticipate differences in coordination, which is the immediate outcome of motor control.
+
+
+@@latex:\bigskip@@
+# diagnostic potential
+The diagnostic potential of the toolchain we exemplified herein is considerable, and it can outperform visual data assessment.
+We observe little qualitative difference in LBW and NBW kinematics (Fig. \ref{fig:raw_data}), and generally, variation in the process exceeds the expectable effect sizes on individual parameters.
+Within the range of kinematic variability, we observe LBW animals perfectly /capable/ of normal posture, coordination, and overall stride results (collective variables).
+Note that this does not rule out problems of balance, stability, or endurance.
+However, the age model trained on the ensemble of variables can distinguish very fine individual differences in development (Tab. \ref{tab:prediction}).
+On the other hand, the other models were unable to correctly retro-infer either mass or size from blindly provided kinematic parameters including coordination.
+Strides from LBW animals were estimated to come from an animal with a "normal" mass and size (Fig. \ref{fig:predictions}).
+This confirms that low body mass or small size can not be causal for altered 2D kinematics, and it raises doubts whether there are any deficits in coordination and control for the subset of individual we classified as LBW.
+Inference is consistent per individual, although no subject characteristics except sex entered the model ("blind" inference).
+This supports the hypothesis that locomotor development is sometimes delayed in LBWs, and the factors contributing to this delay remain to be identified.
+Delayed development does not necessarily corroborate the hypothesis of locomotor deficiency in LBW: we would expect truly deficient strides to be substantially different from the data trained to the model, making it "unpredictable" (i.e. higher variance of posterior samples).
+Instead, inference is consistent for repeated measures of an individual, without notable increase in variance.
+For the affected subjects, we can even quantify a delay of less than five hours, which could nevertheless be critical given the rapid maturation of locomotor behavior in this species citep:VandenHole2017 and the importance of postnatal competition citep:Litten2003.
+
+
+
+
+
+# ... yet still differences
+We do see differences for LBW compared to NBW recordings, nonetheless.
+First, a difference in sample size.
+There are much fewer valid LBW strides in our data set: only
+src_python[:session observations]{n_lbw} {{{results(\(39\))}}}
+of
+src_python[:session observations]{data.shape[0]} {{{results(\(368\))}}}
+observations are LBW.
+This could be interpreted as evidence for a lower capacity (despite equal potential) of LBW to produce normal locomotion.
+Yet there are proximal, trivial explanations: based on conventions, the \(10 \%\) lower quantile of birth weights in a litter is considered LBW, and there is a hard cap of \(800\ g\).
+The resulting share is equal in our training set for video digitization, and in the final data set, because of pseudo-random, opportunistic sampling on-site (i.e. recording work was permanent, yet determined by farrowing and feeding of the subjects).
+The minority of LBW training videos might lead to an under-learning of those animals, reduced digitization quality and therefore an exclusion bias for "non-normal" individuals.
+Though it seems unlikely, we cannot rule out reduced locomotor capacity in LBWs, because the present data set is unsuited to count the occurrence of locomotor behavior.
+On the other hand, the strict stride filtering criteria for "good" kinematics may have involuntarily filtered out deficient individuals.
+Our conclusion that low birth weight individuals are non-deficient is strictly tied to the definition of the low birth weight category, which is herein based on weight criteria and did not regard phenotypical indicators of intra-uterine growth restriction @@latex:\citep[which we did not record, \textit{cf.}][]{Amdi2013}@@.
+
+
+# age underestimation
+A second difference of LBW locomotion is that the age is underestimated for strides of some, but not all individuals.
+
+
+Note however that the causality might be inverse.
+We measured age underestimation only in the case of the individuals which were recorded late within our sampling time frame (age \(> 5\ h\), Tab. \ref{tab:prediction}).
+This is consistent with prior evidence that energy reserves are depleted after birth (normal locomotion) but not replenished after four hours in the case of LBW citep:LeDividich2017,VandenHole2019.
+Assuming that this is the case, i.e. energy reserves are depleted, we would expect two effects: (i) the animal might succeed in the locomotor task less frequently (not quantified, see above), and (ii) the kinematics might be altered, which we observed.
+The present model was trained from NBW data and thereby tuned to kinematic development from animals with normal energy levels (therefore it can infer age from kinematics in NBW).
+That same model quantifies the potentially energy-deficient animals as younger.
+It might be that energy deficiency coincidentally causes effects which are exactly opposite to the changes that piglet kinematics undergo in normal development.
+However, the more likely explanation is an actual delay or a temporary halt in development.
+Failure of the LBW to compete in the first hours are sufficient to explain reduced intake citep:Amdi2013, the absolute size and mass difference alone might be crucial, and an immediate question which we cannot address with the present data set is whether and how (fast, likely) animals would recover from the delay.
+Alternatively, there might be a technical artifact in probabilistic sampling @@latex:\citep["shrinkage", \textit{cf.}][]{Gelman2013}@@ which caused the underestimation of "above average age" individuals.
+Yet this is an unlikely explanation, given that shrinkage would apply equally to NBWs, and inversely to the opposite, younger subjects.
+Finally, with only eight LBW individuals, we cannot exclude coincidence in which indivuduals are affected.
+
+Neither of these technical explanations puts doubt on the clarity of the initial finding: a subset of the low birth weight individuals produced locomotor behavior which is quantitatively similar to that of younger individuals.
+
+#+end_comment

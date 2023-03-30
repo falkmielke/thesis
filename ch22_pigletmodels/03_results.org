@@ -1,0 +1,203 @@
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(setq org-babel-inline-result-wrap "\\(%s\\)")
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+#+begin_comment
+TODO: set "reloading" in the code block below!
+TODO: uncomment Code04-05 execution below to re-load predictions! Make sure to remove pre-stored data upon changes!
+#+end_comment
+
+
+#+RESULTS:
+
+# * Data Set
+The present analysis is centered around a linear model which is designed to infer mass, size, and age (subject characteristics) from an extensive set of kinematic parameters from 2D videos.
+The numbers provided by the model sampling are equally extensive, and will only be reported in brief.
+The key purpose of the model is posterior predictive sampling of the LBW strides which were left out of the model, and which are analyzed in detail below.
+
+
+@@latex:\bigskip@@
+# * Differences in LBW and NBW kinematics are minimal
+
+#+BEGIN_SRC sh :results none :exports none :tangle no
+# python Code05_RawDataPlot.py
+#+END_SRC
+
+
+#+CAPTION: Joint angle profiles per joint, grouped by birth weight category. An angle of zero would be a fully extended (i.e. straight) joint. Thick lines represent the average profiles, dashed lines indicate the average of the opposite birth weight group for comparison. Colored, shaded lines show all raw profiles available for the present analysis. Temporal alignment was done based on total forelimb angle (see methods), yet for the shown hindlimb averages (but not for the raw profiles), a separate alignment of the hindlimb was performed.
+#+ATTR_LATEX: :placement [b!]
+#+LABEL: fig:raw_data
+[[./figures/raw_profile_comparison.pdf]]
+
+To assess whether there are qualitative differences between the birth weight categories, one can compare the joint angle profiles (i.e. raw, angular kinematics) on which the present analysis was performed (Fig. \ref{fig:raw_data}).
+The intra-group variablility clearly exceeds the differences between groups, although it must be emphasized that groups are inhomogeneous (with regard to age, speed, etc.), which might lead to a bias if composition of LBW and NBW data differs.
+LBW walk with a more flexed hindlimb posture, as indicated by the parallelly offset average hip, stifle, and tarsal profiles.
+Additionally, NBW individuals on average seem to set the shoulder at a more extended angle.
+No differences in coordination are apparent (which would manifest in altered temporal structure of the profiles).
+These findings indicate that LBW kinematics are hardly distinguishable from NBW kinematics by qualitative, visual assessment, which is at least in part be due to high variability.
+
+
+
+@@latex:\bigskip@@
+# * Model Results
+A quantitative comparison of variable kinematic measurements can be achieved with probabilistic linear models.
+For the purpose of predictive sampling (see below), we train models to describe the interrelations of kinematic parameters and subject characteristics in NBW piglets.
+The outcome of MCMC sampling of a linear model are value distributions for slopes, which in our case indicated how certain kinematic parameters are associated with a change in mass, size, and age (supplementary material \ref{supp:modelresults}).
+Of the gait- or coordination parameters, only hindlimb clearance was correlated with differences in animal mass.
+Mass was also associated with changes in the dynamic posture of the hip and tarsal.
+For size, the model inferred associations with head angle, hindlimb duty factor and clearance, and one coordination component (CC3), as well as changes in the fore- and hindlimb posture and an effect of sex.
+Finally, age was associated with an increase in forelimb clearance, potential changes at the stifle and carpal, and several coordination components (CC9, CC11).
+Some eROM slope distributions for age were high in average magnitude, but variable (the "credible interval" contained zero).
+These model results provide detailed insight into parameter interrelations in the present data set and indicate which of the parameters are the relevent ones to infer a given subject attribute in predictive sampling.
+
+
+
+@@latex:\bigskip@@
+# * Age Predictions are Bimodal
+
+Performing in-sample and out-of-sample predictive inference with the models trained on NBW strides elucidated if and how left-out strides differed from NBW model expectation (Fig. \ref{fig:predictions}).
+Note that, to capture variance (i.e. uncertainty in the prediction), each stride was sampled repeatedly.
+
+#+BEGIN_SRC python :results output :session predictions :exports none :tangle yes
+# update the figure
+import os as OS
+import numpy as NP
+import pandas as PD
+import matplotlib.pyplot as PLT
+
+print (OS.getcwd(), OS.path.exists('Code03_Predictions.py'))
+
+force_reloading = False
+model_label = 'reference'
+prefix = 'age'
+n_samples = 16384 # 1024 # 16384
+
+import Code03_Predictions as PRED
+
+data = PRED.LoadYoungData()
+all_diffs = PRED.StoreOrReload(data, force_reloading, prefix, n_samples)
+
+fig, _ = PRED.PlotPredictions(data, all_diffs)
+
+fig.savefig(f'figures{OS.sep}histograms_prediction_comparison.png', dpi = 300, transparent = False)
+fig.savefig(f'figures{OS.sep}histograms_prediction_comparison.pdf', dpi = 300, transparent = False)
+PLT.close()
+
+# info for the text
+mean_diffs = PD.DataFrame.from_dict({ \
+               param: {grp: all_diffs[param][grp].mean() for grp in range(3)}
+               for param in all_diffs.keys() \
+              }).T
+
+print (mean_diffs)
+# print ('tic')
+# print ('toc')
+#+END_SRC
+
+#+RESULTS:
+: /data/01_kinematics/16_piglet_fcas/ms1_agemodel True
+: loading pre-stored prediction diffs....
+: ['weight', 'morpho1', 'age']
+: [0, 1, 2]
+: [ 3.    3.44  1.4  ... -8.22 -3.12 -6.3 ]
+:             0     1     2
+: weight  -0.00  0.02  0.44
+: morpho1  0.00  0.02  1.71
+: age     -0.03 -0.09 -1.23
+
+
+
+#+CAPTION: Model inference. For all included subject characteristics, models which were trained on NBW strides correctly inferred the training data (gray) and values from the validation set (blue). In contrast, the same models wrongly inferred the characteristics of LBW subjects (orange). The \(x\)-axes show the difference (\(\Delta\)) between actual and predicted values per prediction. To facilitate comparison, histogram heights are again normalized per category.
+#+ATTR_LATEX: :placement [t!]
+#+LABEL: fig:predictions
+[[./figures/histograms_prediction_comparison.pdf]]
+
+
+Out-of-sample inferences for the /NBW validation set/ matched those of in-sample NBW inference in terms of average values and standard deviation for all modeled outcome variables, which confirms that inference of subject characteristics from kinematics is possible.
+In contrast, inferences for /LBW strides/ did not match those of the NBW training set.
+Low birth weight animals were inferred to be on average
+src_python[:session predictions]{f"{mean_diffs.loc['weight', 2].round(2)}"} {{{results(\(0.44\))}}}
+kg heavier than actual, and their size was overestimated (+
+src_python[:session predictions]{mean_diffs.loc['morpho1', 2].round(2)} {{{results(\(1.71\))}}}
+units).
+Both faults matched the actual differences in magnitude (/cf./ methods, Fig. \ref{fig:observations}).
+In contrast, the age inference for the low birth weight subjects were not normally distributed: most ages were correctly inferred from stride-wise kinematics, but ages for some strides were underestimated.
+The underestimation of those strides quantified to just below five hours.
+
+In summary, the NBW-trained model "guesses" the size and mass of the animals producing LBW strides to be "normal" (although they are not), which indicates that these defining features of LBW do not reflect in altered kinematics.
+However, age inference is non-normal, i.e. some strides are classified as typical for animals of younger than actual age.
+
+
+
+
+@@latex:\bigskip@@
+# * Inference Bimodality is Related to Individuals
+
+
+#+BEGIN_SRC sh :results none :exports none :tangle no
+# python Code04_FindIndividuals.py
+#+END_SRC
+
+#+BEGIN_SRC python :results output :session individuals :exports none :tangle yes
+import numpy as NP
+import pandas as PD
+lbw_data = PD.read_csv('./results/lbw_strides.csv', sep = ';')
+
+# per stride, calculate the share of predictions above actual age
+strides = lbw_data.groupby(['piglet', 'age_actual', 'session_idx', 'recording_idx', 'cycle_idx']).agg({'age_diff': lambda arr: NP.sum(arr > 0.)/len(arr)})
+# print (strides)
+
+piglets = strides.groupby(['piglet']).agg({'age_diff': NP.mean})
+print (piglets)
+piglets['under'] = piglets['age_diff'].values < 0.2 # 80% strides consistent
+
+over_rate = piglets.loc[NP.logical_not(piglets['under'].values), 'age_diff'].mean()
+print (over_rate)
+
+over_strides = strides.loc[piglets.loc[NP.logical_not(piglets['under'].values), :].index.values, :].values < 0.5
+print (over_strides.sum())
+
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+        age_diff
+piglet
+1794_5  0.104532
+b15     0.633101
+b19v2   0.001348
+b23     0.709336
+b56     0.012975
+b58     0.088475
+b74     0.602111
+b76     0.611527
+0.6390187161309379
+1
+#+end_example
+
+#+CAPTION: Age inference per LBW animal (compared to NBW average, last row). \(\Delta\): "inferred - actual" difference. Underestimation is defined as \(\Delta < 0\), "count": per stride, "rate": per predictive sample. \(h\): hours, \(std\): standard deviation.
+#+LABEL: tab:prediction
+#+ATTR_LATEX: :placement [b!]
+#+ATTR_LATEX: :align |l|c|c|c|c|c|c|
+#+INCLUDE: "./results/prediction_lbw.org"
+
+
+To find out whether the offset age inference was related to certain individuals, or certain strides from different individuals, we grouped the inferences per stride or subject and calculated the chance of over- or underestimating age.
+Of the
+src_python[:session individuals]{piglets.shape[0]} {{{results(\(8\))}}}
+low birth weight subjects who contributed
+src_python[:session individuals]{strides.shape[0]} {{{results(\(39\))}}}
+strides,
+src_python[:session individuals]{piglets.loc[piglets['under'].values, :].shape[0]} {{{results(\(4\))}}}
+individuals were consistently underestimated (Tab. \ref{tab:prediction}).
+Consistently means that more than \(75 \%\) of all predictive samples were below actual age, and that the ages for a majority of strides were on average underestimated.
+The magnitude of underestimation was between two and five hours.
+Curiously, those were the individuals recorded at a slightly higher age (\( > 5\) hours).
+Overestimation in the other four LBW individuals was also consistent, but less so (less extreme underestimation rate, mean \(\Delta < 2\ h\)).
+Standard deviation of the estimates did not vary across individuals or birth weight categories.
+
+We conclude that underestimation of age is consistent over multiple strides of the same individual, and thus individual-specific.

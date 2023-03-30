@@ -1,0 +1,22 @@
+* Supplements: Detailed Modeling Results
+:PROPERTIES:
+:CUSTOM_ID: supp:modelresults
+:END:
+
+
+#+BEGIN_SRC sh :results none :exports none :tangle no
+python Code02_AgeModelResults.py
+# https://orgmode.org/manual/Tables-in-LaTeX-export.html
+#+END_SRC
+
+
+@@latex:\footnotesize \setlength\extrarowheight{0pt} @@
+Asterisk (*) indicates slopes for which the credible interval did not include zero. FL: forelimb, HL: hindlimb, dyn.p.: dynamic posture, coord.: coordination, diml.: dimensionless, d.s.: dimensionless stride, eROM: effective range of motion
+@@latex:\begin{footnotesize}@@
+#+CAPTION: Detailed Modeling Results. Asterisk (*) indicates slopes for which the credible interval did not include zero. FL: forelimb, HL: hindlimb, dyn.p.: dynamic posture, coord.: coordination, diml.: dimensionless, d.s.: dimensionless stride, eROM: effective range of motion.
+#+LABEL: supptab:modelresults
+#+ATTR_LATEX: :placement [hb]
+#+ATTR_LATEX: :align |l|c|c|c|c|
+#+INCLUDE: "./results/age_predictors.org"
+
+@@latex:\end{footnotesize}@@

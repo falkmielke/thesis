@@ -1,0 +1,10 @@
+Locomotor kinematics have been challenging inputs for automated diagnostic screening of livestock.
+Locomotion is a highly variable behavior, and influenced by subject characteristics (e.g. body mass, size, age, disease).
+We assemble a set of methods from different scientific disciplines, composing an automatic, high through-put workflow which can disentangle behavioral complexity and generate precise individual indicators of non-normal behavior for application in diagnostics and research.
+For this study, piglets (/Sus domesticus/) were filmed from lateral perspective during their first ten hours of life, an age at which maturation is quick and body mass and size have major consequences for survival.
+We then apply deep learning methods for point digitization, calculate joint angle profiles, and apply information-preserving transformations to retrieve a multivariate kinematic data set.
+We train probabilistic models to infer subject characteristics from kinematics.
+Model accuracy was validated for strides from piglets of normal birth weight (i.e. the category it was trained on), but the models infer the body mass and size of low birth weight piglets (which were left out of training, out-of-sample inference) to be "normal".
+The age of some (but not all) low birth weight individuals was underestimated, indicating developmental delay.
+Such individuals could be identified automatically, inspected, and treated accordingly.
+This workflow has potential for automatic, precise screening in livestock management.

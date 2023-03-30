@@ -1,0 +1,136 @@
+#+BIBLIOGRAPHY: literature.bib
+
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+# a different approach
+Veterinary diagnostics have struggled with a methodological trade-off between high precision and high through-put.
+In the era of genomics, proteomics, and the like, the strive for accurate diagnostics of livestock diseases has directed considerable attention to the development of modern laboratory tests citep:Howson2017,Lamy2012.
+Conventional imaging techniques also play a role, but usually require special equipment and measurement techniques @@latex:\citep[e.g. radiography, microscopy, ultrasound, \textit{cf.}][]{Yitbarek2022}@@.
+These methods are high precision tools, but low through-put or expensive, some potentially invasive, and therefore not generally suitable for broad monitoring of farm animals.
+On the other hand, computational techniques are increasingly available to mine extensive data sets collected with sensors or cameras for diagnostically relevant signals citep:Neethirajan2020,Wurtz2019,Pineiro2019,Gomez2021,Netukova2021.
+"Precision Lifestock Farming", an application of integrated management systems, might be the desired economic model.
+These techniques complement the high precision tools by enabling broad screening and early detection of abnormalities, often preceding manual, veterinary intervention.
+Precision Lifestock Farming is promising in terms of its impact on animal welfare and economic success, but pitfalls remain citep:Wathes2008,Azarpajouh2020.
+The term "precision" might be misleading.
+In an animal management context, it refers to the availability of individual animal data, and the reduction of inefficient and thereby non-sustainable management.
+However, in practice, the use of sensors and cameras often still is restricted to superficial measures such as the overall activity or the mere occurrence or frequency of certain behaviors of individuals.
+For example, in swine farming, conventional video cameras can be used to monitor activity, and reduction can be associated with disease citep:FernandezCarrion2017,Benjamin2019,Vranken2017; specificity and precision of these methods deserve further validation.
+
+
+# a complex phenomenon
+One class of behaviors that is typically monitored with such cameras is locomotion.
+Locomotion involves multiple subsystems, and one of the major challenges is to understand how exactly locomotor patterns are altered by conditions of the animal or by external circumstances.
+The involved subsystems are the musculoskeletal apparatus, energy supply, metabolism, and multiple levels of neuro-motor control.
+The kinematic and dynamic measurements obtainable by cameras and measurement equipment represent the collective output of interacting variables of the ensemble of subsystems citep:Nishikawa2007.
+In normal function, all of them are potentially affected in different, non-trivial ways by characteristics of the animal citep:Young2018, e.g. age (due to individual development), weight (due to body segment inertia), and size and morphology (due to allometrics in general and specific muscle lever relations in particular).
+In non-normal conditions or disease, another dimension of complexity is added.
+In consequence, studying alterations in specific locomotor patterns holds more diagnostic potential than activity measurement alone.
+Kinematic measurements have enabled the inference of many aspects of the locomotion of domestic animals @@latex:\citep[e.g.][]{SchlageterTello2014,SerraBraganca2018,Qiao2021,Netukova2021}@@; even individual recognition is possible in well-studied domestic species @@latex:\citep[e.g.][]{Figueiredo2018,Patua2021}@@.
+However, the cross-influence of the more or less correlated systems and co-variates mentioned above, and thus the superimposed effects of multiple factors, complicate data analysis and diagnostics.
+Most studies have relied on derived measures, such as speed or duty factor, as performance indicators, which neglects most of the individual movements of the joints and their temporal orchestration.
+For precision diagnostics, it would be desirable to have an automated system which tracks the locomotion of an individual, extracts and quantifies kinematics in all available detail, takes into account possible co-factors (such as age, size, and external physical conditions), and compares these observations to a reference for the species.
+Implicitly, this is what "a medieval husbandman", i.e. a human classifier, would do with "his house cow or sow" citep:Wathes2008.
+
+
+At the technical core of diagnostics is thus a classification problem: finding a diseased subset in a population of observations.
+Correct classification is complicated when there are multiple influence factors, but even more when the observation is subject to substantial intrinsic variability @@latex:\footnote{Whether "intrinsic" just describes variability for which no influence factor has yet been determined is a valid, but philosophical question beyond the scope of this study.}@@.
+Variability is a central feature of motor behavior: even for identical external conditions and in a single individual, it can be noted that "successive movements [...] never exactly repeat themselves" citep:Bernstein1935.
+Could a putatively abnormal or pathological behavior actually fall "within the bell curve" of normal variability?
+How likely is that?
+Which of the many "input factors" is responsible, and how, for a given (temporary) alteration in the collective output?
+These analysis questions are common in research on bipeds @@latex: \citep[e.g.][]{Ganley2005,StifflerJoachim2020,Bruton2013}@@ and quadrupeds @@latex: \citep[e.g.][]{Irschick1999,Pike2002,Stavrakakis2014}@@, and the solution is not novel.
+Multivariate models are capable of handling complex situations, given sufficient data.
+Multivariate /probabilistic/ models (see below) are suited to also capture intra-individual variability and yield effect likelihoods.
+However, the high dimensionality of kinematic data sets, the multi-parameter, multi-level (hierarchical) covariate situations, and the high digitization workload have often been a limiting factor for the generation of quantitative models of vertebrate locomotion citep:Seethapathi2019,Michelini2020,Jackson2016.
+
+
+@@latex:\bigskip@@
+# the force awakens
+Several recent technological advances have enabled researchers to tackle scientific questions on locomotion in a more efficient way.
+Firstly, the past few years have brought huge leaps in terms of computer vision, deep learning, and thereby semi-automatic video digitization methods citep:Karashchuk2021,Mathis2020,Jackson2016,Corcoran2021,MMielke2020.
+These tools typically require a manually digitized subset of the data as the "training set" for a neural network, which is then able to digitize further videos in high through-put, hopefully with reasonable accuracy.
+A second field of technological advance are the aforementioned probabilistic models, which build on an elegant computational implementation of Bayesian theory @@latex:\citep[Markov Chain Monte Carlo / MCMC sampling, \textit{cf.}][]{McElreath2018,Gelman2013,vandeSchoot2021}@@.
+Such models can naturally incorporate hierarchical parameter interrelations and intrinsic variability.
+The main reason for this is that probabilistic models work on data distributions, and their outcome are distributions and "effect likelihoods", rather than point estimates.
+This can be informative on an intrinsically varying process such as locomotion citep:Mielke2018.
+Machine Learning methods for video digitization are validly advancing to be the standard in kinematic analysis, whereas probabilistic models still lack recognition in the field, despite their potential.
+To summarize, the mentioned advances in computer vision and statistical modeling enable us to (1) acquire a lot of quantitative data with minimal to no workload, and (2) model them in a suitable way.
+It would be desirable to adapt those technological advances for veterinary use, generating a classifier which could identify systematic alterations in the locomotion of domestic animals, and thereby enabling the computer-supported diagnostic screening for deficiencies, pathological states, and diseases.
+
+
+@@latex:\bigskip@@
+# a model organism
+Domestic pigs are a well-studied model system in which scientific interest joins the economic interest of commercial breeding.
+These animals have been subject to a variety of locomotor studies, including paradigms to test the effects of breed citep:Mirkiani2021, birth weight citep:VandenHole2017,VandenHole2018,VandenHole2021, surface friction citep:VanWachenfelt2008, welfare citep:Guesgen2017, various pathologies citep:Abell2014,LaVallee2020,Benasson2020, and more @@latex:\citep[\textit{cf.}][]{Netukova2021}@@.
+Of particular interest has been the occurrence of a subset of individuals which are born with lower weight (LBW, low birth weight) than their "normal" (NBW) littermates.
+There are multiple standards to classify these birth weight categories, using absolute mass, litter quantile criteria, or asymmetry of body proportions citep:Quiniou2002,VanTichelen2021,Wang2016,DInca2011,Feldpausch2019,Roehe2000,Amdi2013.
+A possible cause of low birth weight is intra-uterine growth restriction, and LBW phenotype seems often, but not always, to correlate with low vitality and a reduced chance of survival citep:Baxter2008,Hales2013,Muns2013,VanGinneken2022.
+Locomotor maturation after birth is quick citep:Andersen2016,VandenHole2017, yet crushing by the sow constitutes one of the major causes of piglet mortality citep:Marchant2000,Edwards2015.
+The likelihood of being crushed is directly reduced by more agile locomotion.
+Thus, locomotor capabilities are crucial for piglet survival, and delayed development might be fatal.
+
+Previous studies from our group citep:VandenHole2017,VandenHole2021 raised the hypothesis that the apparent difference in LBW and NBW individuals can be attributed to delayed development.
+They measured spatiotemporal gait variables (e.g. stride frequency and distance, speed, duty factor), which are collective variables of the actual kinematics @@latex:\citep[\textit{cf.}][]{Newell2021,Nishikawa2007,Aerts2000}@@.
+This strategy has the advantage that it requires only five landmarks (four limbs, one reference) to be digitized, which used to be a crucial trade-off to handle large data sets.
+However, the the collective variables cannot capture full information on intra-limb coordination (i.e. the relative timing of segmental movements within a limb; as opposed to inter-limb coordination, i.e. the relative timing of the cyling of the different limbs).
+This complicates disentangling effects such as those of size, age, (birth) weight, and disease.
+It is expected that animals adapt their gait to the physical constraints of motor behavior, which are depending on the weight and other characteristics of the subject.
+However, the changes to kinematics might be more subtle, and collective variables might not be altered in a distinct way.
+For example, an animal might learn to move its joint angles in a more efficient way by adapting clearance to substrate conditions citep:VanWachenfelt2008, which could in principle be achieved without changing the speed of voluntary locomotion on those substrates.
+Hence, targeting authomated gait analysis and diagnostic classification of swine, it would be desirable to include full kinematic information.
+
+
+# transformation needed
+Using the semi-automatic, machine-learning digitization techniques mentioned above, one can extend the analysis of gait variables to quantities of intra-limb coordination with manageable workload.
+However, using the whole set of raw point coordinates of joint points of interest raises the issue of dimensionality (two to three coordinates per reference point, simply too many data variables).
+Statistical modeling requires a minimum number of observations for being able to infer effects of the different variables citep:Frick1996,Maxwell2017,Riley2020,Austin2015.
+The common solution is to reduce the dimensionality with an appropriate transformation.
+To choose a transformation, it can be exploited that common analysis procedures in locomotor biomechanics require steady state locomotion.
+"Steady state" implies that the behavior consists of repetitive blocks of kinematics, i.e. stride cycles.
+And one of the most common sets of techniques in physics and engineering to handle cyclic data is Fourier Analysis, or more specifically Fourier Series Decomposition @@latex:\citep[FSD;][]{Mielke2019,Webb2007,Fourier1822,Bracewell2000,Gray1995,Pike2002}@@.
+With FSD, joint angle profiles are transformend into their representation in the frequency domain, i.e. an array of harmonics.
+Some of the characteristics of the profiles (namely mean angle, amplitude, and phase) are more readily captured by those harmonics and can optionally be removed.
+This is most intuitive in the case of phase: removing phase differences enables a mathematically optimal temporal alignment of the profiles.
+By isolating the other characteristics, mean and amplitude, the joint angle profiles can be transformed to meaningful quantities such as dynamic posture (mean joint angle and effective range of motion), and coordination /sensu stricto/ @@latex:\citep[relative phase/joint timing and residual kinematics, \textit{cf.}][]{Mielke2019}@@.
+Harmonics are independent of temporal sampling and duration: the coefficient array is of fixed size, which is useful for subsequent multivariate analysis methods, such as Principal Component Analysis (PCA).
+Another advantage of this transformation procedure is that it is reversible because all mathematical information is retained in the process (which is not the case when using collective variables alone).
+This means that joint angle profiles can be reconstructed for any observed or hypothetical point in parameter space, which enables in-sample and out-of-sample predictive sampling.
+
+To summarize, the Fourier Series decomposition provides a mathematically convenient and biomechanically meaningful representation of the kinematic data, which opens up new options for data analysis and modeling.
+
+
+@@latex:\bigskip@@
+@@latex:\pagebreak@@
+# an inverted problem
+In this study, we establish a workflow which can be automated and used to identify individual animals locomoting differently from the "normal" reference, based on video recordings, deep learning digitization, mathematical transformations, and probabilistic modeling.
+A conventional, 2D kinematics data set is extracted with the aid of deep learning tools from lateral videos of walking piglets.
+By applying multivariate analysis and FSD, we separate spatiotemporal gait variables, dynamic posture, and coordination, and model their relation to subject characteristics (mass, size, age, and birth weight category).
+Crucially, this constitutes the complete information captured by locomotor kinematics, and all parameters are submitted to an inclusive, probabilistic model.
+As a test case, we tackle the question of whether low birth weight in domestic piglets is an indication of delayed development, and attempt to quantify the delay with an inverse modeling strategy as follows.
+Intuitively, and conventionally, joint kinematics are considered the output of the locomotor system.
+Therefore, conventional statistical models might consider them on the "outcome" side; on the "input" side, the effects of birth weight, age, speed, or other parameters are quantified.
+Herein, we use a different approach, and invert the model.
+We construct a probabilistic computer model which describes "age" and other subject characteristics as a function of all available kinematic parameters.
+The rationale is similar to that in subject recognition tasks: given a certain kinematic profile, can we infer (characteristics of) the subject?
+We split our data set into birth weight classes (LBW, NBW), and train the model on only the strides from NBW observations.
+This NBW model is our "kinematic reference" model, quantitatively capturing the expectation of what would be "normal" by inferring the plausible age range for a given kinematic observation.
+We then use that trained model to compute out-of-sample inference of individual LBW observations.
+
+Our hypothesis is that, if LBW were at the same stage of postnatal locomotor development as their NBW siblings, then the model should accurately infer the age of the LBW animals.
+Conversely, if the LBW piglets are delayed in development, the model would underestimate their age.
+Thus, by applying this inverse modeling strategy and comparing the computer-inferred age to the actual age of the LBW piglets, we can quantify and potentially falsify a hypothesized delay in locomotor development.
+
+
+The components of this classification workflow are not novel, and commonly used in physics and engineering.
+We use available machine learning tools to digitize videos, apply a series of well-known transformations, and train a probabilistic model classifier.
+We demonstrate that a set of individual locomotor events can be used to distinguish individuals which develop slower than expected, in a temporal accuracy of four to eight hours (which is a considerable timespan for neonate animals).
+These are precise diagnostic measurements, generated at high through-put, with the overall aim of improving animal welfare, all of which is in line with the prototypical ideal of Precision Livestock Farming.
+
+
+#+BEGIN_COMMENT
+
+#+END_COMMENT

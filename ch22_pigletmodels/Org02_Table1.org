@@ -1,0 +1,11 @@
+#+TITLE: Table 1
+#+SUBTITLE: Probabilistic Modeling Confirms Delayed, But Non-Deficient Locomotor Development in Low Birth Weight Piglets
+#+AUTHOR: Falk Mielke, Chris Van Ginneken and Peter Aerts
+#+DATE: {{{time(%Y-%m-%d)}}}
+
+
+#+CAPTION: Age predictions per LBW animal (compared to NBW average). \(\Delta\): "prediction - actual" difference. Underestimation is defined as \(\Delta < 0\), "count": per stride, "rate": per prediction. \(h\): hours, \(std\): standard deviation.
+#+LABEL: tab:prediction
+#+ATTR_LATEX: :placement [pb]
+#+ATTR_LATEX: :align |l|c|c|c|c|c|c|
+#+INCLUDE: "./results/prediction_lbw.org"

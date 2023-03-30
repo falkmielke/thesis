@@ -1,0 +1,182 @@
+#+TITLE: A Workflow for Automatic, High Precision Livestock Diagnostic Screening of Locomotor Kinematics
+# TITLE: Locomotor Development Diagnostics in Postnatal Piglets Using Probabilistic Predictive Modeling
+# TITLE: Probabilistic Modeling Confirms Delayed, But Non-Deficient Locomotor Development in Low Birth Weight Piglets
+#+SUBTITLE: /keywords: locomotion, kinematics, probabilistic modeling, Fourier Series, Precision Livestock Farming, diagnostics, piglets, low birth weight/
+#+AUTHOR: Falk Mielke, Chris Van Ginneken and Peter Aerts
+#+DATE: {{{time(%Y-%m-%d)}}}
+#+OPTIONS: toc:nil
+
+#+SETUPFILE: latex_header.org
+
+#+BIBLIOGRAPHY: literature.bib
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+#+TOC: headlines 1
+
+#+STARTUP: noinlineimges showeverything entitiespretty
+@@latex:\clearpage@@
+#+ODT: <text:p text:style-name="PageBreak"/>
+
+
+# MACRO: chng @@latex:{\color{blue!80!black}{$1}}@@
+# MACRO: chngp @@latex:{\color{red!80!black}{$1}}@@
+#+MACRO: chng $1
+#+MACRO: chngp $1
+#+BEGIN_COMMENT
+{{{chng(an example\, with comma!)}}}
+#+END_COMMENT
+
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+#+END_SRC
+
+* Abstract
+:PROPERTIES:
+:CUSTOM_ID: abstract
+:END:
+#+INCLUDE: "00_abstract.org" :minlevel 2
+/(221 words)/
+
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Introduction
+:PROPERTIES:
+:CUSTOM_ID: intro
+:END:
+/(2341 words)\\/
+#+INCLUDE: "01_introduction.org" :minlevel 2
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Materials And Methods
+:PROPERTIES:
+:CUSTOM_ID: methods
+:END:
+/(2778 words)\\/
+#+INCLUDE: "02_methods.org" :minlevel 2
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Results
+:PROPERTIES:
+:CUSTOM_ID: results
+:END:
+/(1007 words)\\/
+#+INCLUDE: "03_results.org" :minlevel 2
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Discussion
+:PROPERTIES:
+:CUSTOM_ID: discussion
+:END:
+/(1769 words)\\/
+#+INCLUDE: "04_discussion.org" :minlevel 2
+
+
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Acknowledgements
+#+INCLUDE: "08_acknowledgements.org" :minlevel 2
+
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+@@latex:\beginsupplement@@
+* Supplements
+:PROPERTIES:
+:CUSTOM_ID: supplements
+:END:
+#+INCLUDE: "09_supplements.org" :minlevel 2
+
+
+
+# References
+\bibliographystyle{apalike}
+\bibliography{literature.bib}
+
+
+#+BEGIN_COMMENT
+
+TODO: funding info, contributions
+TODO: re-check model comparison (better on the supercomputer)
+TODO: upload data upon publication
+
+
+remember:
+- ctrl+cvb each file to get good inline results formatting
+- org export "body only": [spc][m][e][l][ctrl+b][l]
+- there is a hardcoded number in fig2:predicitons caption, and some in the methods
+- size PCA was done on a bigger data set
+- because we record in the first ten hours, birth weight and momentary mass are practically identical.
+- "dynamic" posture (i.e. mean joint angles and range of motion)
++ write "inference" instead of "prediction"
+- no hyphens in "overestimate/underestimate"
+- +stride+ gait +parameters+ variables
+- +weight+ mass
+
+
+
+
+
+GOOD TO HAVE:
+
+ * Chapter
+:PROPERTIES:
+:CUSTOM_ID: chapter
+:END:
+
+
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+#+END_SRC
+
+
+#+BEGIN_SRC python :results output :session analysisdata :exports none :tangle yes
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+
+#+END_SRC
+
+src_python[:session analysisdata]{stride_data.shape[0]}
+
+
+#+CAPTION: Subject parameters: raw data and model predictions.
+#+LABEL: fig:bodyproportions
+[[../figures/bodyproportions_predictions.pdf]]
+
+
+#+CAPTION: *Statistics: An Overview.* Probabilistic models are the focus of this memorandum.
+#+LABEL: tab:statistics
+|---+--------------+----------------------------+-----------------------|
+|   |              | *Frequentist*              | *Probabilistic*       |
+| / | <>           | <>                         | <>                    |
+|---+--------------+----------------------------+-----------------------|
+|---+--------------+----------------------------+-----------------------|
+
+#+CAPTION: Stride Parameter PCA: variance covered (%) and eigenvector loadings.
+#+LABEL: tab:stridepca
+#+ATTR_LATEX: :placement [Hb]
+#+INCLUDE: "../results/stride_pca.org"
+
+
+
+
+#+END_COMMENT
