@@ -1,7 +1,10 @@
 /.auctex-auto/
 /build/
 /figures/
-/general_intro_main.bbl
+ch*/figures/
+*/general_intro_main.bbl
 *.pdf
-/general_intro_main.tex
-/video/
+*.xcf
+*.tif
+*/general_intro_main.tex
+*/video/

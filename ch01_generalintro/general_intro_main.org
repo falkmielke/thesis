@@ -112,12 +112,12 @@ Whenever humans develop a new imaging technique, from cave drawings to digital c
 #+CAPTION: "The Horse in Motion", by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
 #+ATTR_LATEX: :width 16cm :placement [t!]
 #+LABEL: fig:muybridge
-[[./figures/muybridge.jpg]]
+[[./figures/muybridge_lq.jpg]]
 
 #+CAPTION: "The Piglet in Motion", by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion.
 #+ATTR_LATEX: :width 16cm :placement [b!]
 #+LABEL: fig:jumpiglet
-[[./figures/piglet_in_motion.png]]
+[[./figures/piglet_in_motion.jpg]]
 
 
 In consequence, the /technology/ for studying locomotion is available, and sophisticated.
