@@ -1,0 +1,170 @@
+\documentclass[9pt,twoside,lineno]{pnas-new}
+% Use the lineno option to display guide line numbers if required.
+
+\templatetype{pnassupportinginfo} % TODO register @ overleaf
+%\readytosubmit %% Uncomment this line before submitting, so that the instruction page is removed.
+
+\title{Quantifying Intralimb Coordination of Terrestrial Ungulates with Fourier Coefficient Affine Superimposition}
+\author{Falk Mielke, Chris Van Ginneken, Peter Aerts}
+\correspondingauthor{Falk Mielke\\E-Mail: falkmielke.biology\@mailbox.org}
+
+% inserted by the authors: external references to supplementary material
+% https://tex.stackexchange.com/questions/14364/cross-referencing-between-different-files 
+\usepackage{xr}
+\externaldocument{Mielke_etal_FCAS}
+
+\begin{document}
+
+%% Comment/remove this line before generating final copy for submission
+% \instructionspage  
+
+\maketitle
+
+%% Adds the main heading for the SI text. Comment out this line if you do not have any supporting information text.
+\SItext
+
+
+
+\subsection{Extraction of Joint Angle Profiles}\label{apdx:digitization}
+For quality check, the digitized points of the first and last frame were superimposed on the frame images, which were blended into each other. 
+Stride cycles that were not approximately cyclical (i.e. relative joint positions at start and end differed) were discarded. 
+Joint angle profiles were then calculated, defined as the angle difference from a fully extended limb, with negative angles occurring when the joint is flexed towards the direction of movement. 
+The angular profiles were inspected \textit{ex post} for tracking irregularities, and in such cases corrected or discarded. 
+An example video that shows how joint angles are derived from a video can be found in the supporting material (supplementary movie \ref{supp:movie1}).
+\\Segments were initially cut to be a bit longer than the stride cycle. 
+A start-end-matching procedure then found the part of the episode that was as close as possible to precise periodicity. 
+It was visually confirmed that profiles were approximately cyclic afterwards, but to enable precise Fourier analysis, the residual difference of the last and first frame was equally distributed over the whole stride for subtraction. 
+\\Two additional points on the back line (withers, croup) and a reference on the ground close to the forelimbs were digitized for speed calculation. 
+To minimize workload, this was only done for ten frames of the video, equally spaced through the stride. 
+
+
+
+\subsection{Fourier Series Decomposition}\label{apdx:fourier}
+Methods based on the Fourier theorem are diverse \cite{Fourier1822,Gray1995,Bracewell2000}. 
+We herein use the exponential notation of the Fourier Series. 
+Because angles $\alpha =f(t)$ are always real (recorded with finite sampling rate), we can simplify the Fourier Series to $N$ positive coefficients $c_{n}$ by combining complex conjugate coefficients $\Re(c_n + c_{-n}) = \Re(c_n + \overline{c_n}) = 2\Re(c_{n})$:
+	\begin{equation}\label{eqn:fourier_series}
+	f(t) = \sum\limits_{n=-N}^{N} c^{*}_{n}\cdot e^{2\pi i n \frac{t}{T}} = \sum\limits_{n=0}^{N} (2\cdot c_{n})\cdot e^{2\pi i n \frac{t}{T}}
+	\end{equation}
+The coefficients ($n>0$) therein are defined as follows:
+	\begin{equation}\label{eqn:fourier_coefficients}
+	c_{n} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{-2\pi i n \frac{t}{T}} \cdot f(t)  \quad\quad \forall n>0
+	\end{equation}
+	The zero'th coefficient is the temporal average of the angle and has no imaginary component: 
+	\begin{equation}\label{eqn:affines_mean}
+	c_{0} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{0} f(t) = \left\langle f(t)  \right\rangle
+	\end{equation}
+
+The number of Fourier coefficients $N$ is capped by finite temporal sampling \cite[Nyquist–Shannon sampling theorem,][]{Nyquist1928,Shannon1949}; higher frequency noise is not captured. 
+The quickest stride in the present data set ($\approx 0.6\ s$ at $25\ fps$, $14$ samples, by a tragulid) thus limits the number of coefficients extracted for all our data to $7$, which we also consider sufficient for the rest of the data (given that we observe little remaining amplitude for higher coefficients). 
+Fourier coefficients $c_{n}$ are complex numbers; the real part $\Re(c_{n})$ would correspond to a cosine wave component, and the imaginary part $\Im(c_{n})$ to a sine. 
+\bigskip\\The zero'th coefficient (\eqref{eqn:affines_mean}) is also the \textbf{mean} of the signal. 
+For a standardized signal, its value is zero. 
+Non-zero values indicate that the whole signal is shifted in $y$-direction. 
+The signal oscillates around that mean. 
+The strength of the excursion is quantified as the \textbf{amplitude}; the temporal delay compared to standard cosine/sine is the signal \textbf{phase}. 
+Every Fourier coefficient has its own amplitude and phase component. 
+$$A_{n} = \sqrt{\Re(c_{n})^{2}+\Im(c_{n})^{2}}$$
+$$\phi_{n} = \frac{1}{2\pi}\cdot arctan2\left( -\Im(c_{n}),\Re(c_{n})\right)$$
+$$A_{n} \ge 0,\ 0 \le \phi_{n} < 1 \quad \forall n$$
+The total amplitude of the signal is the sum of the amplitudes of coefficients, which is one for standardized signals. 
+	\begin{equation}\label{eqn:affines_amplitude}
+	A = \sum\limits_{n > 0} A_{n}
+	\end{equation}
+
+
+The phase is divided by $2\pi$ and ''wrapped'' to the positive interval, because signals in the present case all start at $t=0$, and can be phase-shifted between zero and one period. 
+\\According to the delay theorem \cite[also shift theorem,][p. 111]{Bracewell2000}, a signal in the frequency domain can be shifted in time by multiplying it with an complex exponential that contains the shift value $\Delta t$, the coefficient number $n$, and the period $T$. 
+\begin{equation}\label{eqn:delay}
+  c_{n}\left( f(t+\Delta t)\right) = c_{n}\left( f(t)\right)\cdot e^{2\pi i n \frac{\Delta t}{T}}
+\end{equation}
+Geometrically, this means that a phase shift corresponds to a rotation of the coefficients around the origin of frequency space, whereby the angular ''velocity'' of each coefficient is its coefficient number. 
+Assume that a signal $f_{A}$ which has the main phase $\Phi_{A} = 0$ has all coefficient phases approximately at zero. 
+Such signals are also maximally symmetric around $t=0$. 
+Interestingly, it follows from the delay theorem that a phase shifted signal $f_{B}$ has phases that are at a slope of $\Delta \Phi = \Phi_{B}$. 
+We therefore determine the main phase of the signal relative to $\Phi=0$ as the amplitude-weighted average of the coefficient phase differences. 
+	\begin{equation}\label{eqn:affines_phase}
+	\Phi = \frac{\sum_{n>0}^{N} (\phi_{n}-\phi_{n-1})\cdot \frac{A_{n}}{n}}{\sum_{n>0} \frac{A_{n}}{n}}
+	\end{equation}
+A signal can be de-phased (i.e. time-shifted so that $\Phi=0$) with \eqref{eqn:delay} by using $\Delta t = -\Phi \frac{T}{2\pi}$. 
+\\Note that, in the time domain, a time shift of the signal can only be achieved by rolling the sampled values around the sample time points, hence maximal resolution for a phase shift is the sampling rate (interpolation is possible, but inaccurate). 
+This limitation is absent in the frequency domain: \eqref{eqn:affines_phase} is independent of sampling. 
+In fact, the entire frequency domain representation of a signal is indifferent to sampling time points, except that the order $N$ is limited by the aforementioned sampling theorem. 
+\\To summarize, we are able to calculate three affine components of a signal in the frequency domain: the mean $c_{0}$ (\eqref{eqn:affines_mean}), the amplitude $A$ (\eqref{eqn:affines_amplitude}) and the phase $\Phi$ (\eqref{eqn:affines_phase}). 
+\bigskip\\For computation, it is critical that the FSD is a transformation, i.e. deterministic. 
+Coefficients should not be extracted by an optimization procedure, because it is not generally ensured that the optimization finds the global best fit \cite{Hubel2015,Basu2019}. 
+Problems become apparent when reconstructing and plotting the coefficients and comparing the reconstruction to the original signal, which should always be part of the quality check procedure. 
+\\ As an example implementation of the presented procedure, we supplement an extensively commented tutorial (supplementary data \ref*{supp:tutorial}). 
+
+
+\subsection{Quantification of Phylogenetic Signal}\label{apdx:phylosig}
+Phylogenetic dependence within our data might affect the PCA results. 
+The coordination of recently separated genera could be more similar than that of distant relatives. 
+Because our data was multivariate and interdependent (shape), Adams' $K$ is applied to quantify phylogenetic signal \cite{Adams2014}. 
+\\For the data at hand, the test for a phylogenetic signal in the PCA result was significant (Adams' $K=0.16$, $p < 0.001$ from randomization). 
+This indicates significantly higher $K$ than for PC values that are randomized on the (pruned) ungulate phylogenetic tree. 
+However, the value for $K$ itself is much lower than that expected for random evolution. 
+This indicates that the lineages are closer than would be expected given their separation times (non-random evolution), but that phylogenetic clusters are still distinguishable (which is consistent with Fig. \ref{fig:pca}). 
+Because speciation and lineage diagnostics are interwoven with habitat, morphology, and locomotion, this is an expected result for broad phylogenies with sufficient time for convergences. 
+Removing all phylogenetic signal via pPCA \cite{Revell2009} yielded no plausible results in our case (not shown). 
+A reason, besides the complex interrelation of influence factors, might be the technical analogy between superimposed angular trace shapes and shape data in geometric morphometrics \cite[\textit{cf.}][]{Polly2013}. 
+Comparing sample genera along the PC axes (Fig. \ref*{fig:examples}) indicated that the overall patterns persist within closely related taxa, making a confounding effect of phylogenetic relation unlikely. 
+
+
+
+%%% Each figure should be on its own page
+\newpage
+\section{Supplementary Figures}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 16cm]{figS1_phylogeny.pdf}
+\caption{Informal phylogeny of terrestrial ungulates. Taxa grouped on genus level, with non-monophyletic genera split. Colors and group labels serve rough orientation. Cetaceans are excluded from our study. 
+Based on Zurano et al. (2019), and complemented from various other sources \cite{Zurano2019, ParisiDutra2017,Frantz2015,Ryder2011,Price2009,Gongora2011,Funk2007,Hassanin2012}.
+ }
+\label{fig:phylogeny}
+\end{figure}
+
+\pagebreak
+\begin{figure}[pt]
+\centering
+\includegraphics[width = 16cm]{figS2_pc_axes.pdf}
+\caption[Representative Examples]{\textbf{Representative joint angle profile examples.} 
+Taxa were selected based on their position in the PCA (Fig. \ref*{fig:pca}) and to inspect cases of geometric or phylogenetic uniformity. 
+Display of time domain angle profiles (left), mean angle (middle) and frequency domain (right) as before (see Figs. \ref*{fig:workflow}, \ref*{fig:superimposition}). 
+\textbf{A} Two genera (\textit{Taurotragus}, \textit{Alces}) that are approximately geometrically similar (size, body mass), but distributed along PC1. % confirm the trend that was shown by the angle profile reconstructions.
+\textbf{B} Closely related taxa (Cervidae) along PC1. 
+\textbf{C, D} Two pairs of closely related taxa (Tylopoda; Rhinoceroidae) that are spread along PC2.  
+ }
+\label{fig:examples}
+\end{figure}
+
+\pagebreak
+\begin{figure}[pt]
+\centering
+\includegraphics[width = 16cm]{figS3_more_pca.pdf}
+\caption[Further PC Axes]{\textbf{Principal Component Analysis, further axes.} Data as before (Fig. \ref*{fig:pca}), but with additional principal components (lower biplot) and labeling of all taxa.
+ }
+\label{fig:more_pca}
+\end{figure}
+
+
+
+%%% Add this line AFTER all your figures and tables
+\FloatBarrier
+
+%
+\movie{An example recording from a walking lama, obtained by the authors with permission by the owner. Tracked landmarks (shoulder, elbow, carpus, fetlock) are superimposed; joint angle profiles for four consecutive steps are shown below. The video is available in high quality here: \nolinkurl{https://www.youtube.com/watch?v=J1fhg33ZDvI}. }\label{supp:movie1}
+
+\dataset{supplementary_tutorial.zip}{A step-by-step tutorial (formats: HTML and jupyter notebook) that illustrates the implementation and application of the methods presented in this manuscript.}\label{supp:tutorial}
+
+\dataset{supplementary_data1.xls}{A list of and link to the videos from which data was acquired, including timestamps of the stride cycle episodes that entered the analysis. }\label{supp:data1}
+
+\dataset{supplementary_data2.zip}{All tracking data generated from the videos. Note that many stride cycles did not pass quality criteria for the final data set (see supplementary data \ref{supp:data1}). }\label{supp:data2}
+
+
+
+
+\bibliography{Mielke_etal_FCAS_literature.bib}
+
+\end{document}

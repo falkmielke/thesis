@@ -3,6 +3,7 @@
 /figures/
 ch*/figures/
 ch*/data/
+ch*/*.bbl
 */general_intro_main.bbl
 *.pdf
 *.xcf
