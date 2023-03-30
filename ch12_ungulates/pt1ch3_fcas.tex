@@ -1,0 +1,527 @@
+
+
+
+\pagebreak
+\section{Abstract}
+Many phenomena related to motor behaviour in animals are spatially and temporally periodic, making them accessible for transformation to the frequency domain via Fourier Series.
+Although this has been applied previously, it had not been noticed that the characteristic arrangement of Fourier coefficients in their complex-valued representation resembles landmarks in geometric morphometrics.
+We define a superimposition procedure in the frequency domain which removes affine differences (mean, amplitude, phase) to reveal and compare the shape of periodic kinematic measures.
+This procedure is conceptually linked to dynamic similarity, which can thereby be assessed on the level of individual limb elements.
+We demonstrate how to make intralimb coordination accessible for large scale, quantitative analyses.
+By applying this to a data set from terrestrial ungulates, dominant patterns in forelimb coordination during walking are identified.
+This analysis shows that typical strides of these animals differ mostly in how much the limbs are lifted in the presence or absence of obstructive substrate features.
+This is shown to be independent of morphological features.
+Besides revealing fundamental characteristics of ungulate locomotion, we argue that the suggested method is generally suitable for the large scale quantitative assessment of coordination and dynamics in periodic locomotor phenomena.
+
+
+%________________________________________________________________________________________
+%	Intro
+%________________________________________________________________________________________
+\pagebreak
+\section{Introduction}
+A prevalent feature of motor behaviour of animals is temporal and spatial periodicity.
+Rhythmic or cyclical recurrent patterns can occur on all scales, from large (e.g. seasonal migration) to small (e.g. neural pattern generators, actin-myosin binding).
+Locomotion is one behavioural class which is highly relevant for the organism, and which often shows a considerable degree of recurrence, most prominently during steady-state locomotion.
+In consequence, locomotion was one of the first subjects of motor behaviour to be formally studied \citep{Marey1878,Muybridge1893,Braune1904,Bernstein1927a,Bernstein1927b}.
+In the study of terrestrial locomotion, limb kinematics (e.g. joint angles) and dynamics (e.g. joint moments, ground reaction forces) represent relevant periodic profiles accessible to comparative analyses.
+Groups for comparison can be defined by differences in various attributes, such as for example phylogeny, age and development, physiological background, or pathological status.
+Locomotion holds diagnostic potential in all of these: the periodic profiles are ultimately linked to the ecology, ontogeny, and morphology through evolutionary processes, and proximately modified by immediate external and internal constraints \cite[e.g.][]{Barrett2008,McGibbon2003,Mohling2014,Nyakatura2012,Nyakatura2019,Vanhooydonck2014,VandenHole2018}.
+\\The analysis of locomotor patterns can be insightful and has been exerted in numerous cases, targeting different levels of detail.
+A common tool to quantitatively compare kinematics are spatio-temporal gait parameters, which are summary statistics over limbs, stride cycles, or both \cite[see e.g.][]{Christiansen2002,Biancardi2012}.
+The limitation of gait parameters is that they do not resolve differences in intralimb coordination.
+Intralimb coordination is a complex phenomenon, which has been difficult to capture in quantitative methods.
+In some hallmark studies, the comparative analysis of intralimb coordination has been performed by relatively sparse sampling from large groups, with nevertheless respectable workload \citep{Stoessel2012,Fischer2002,Isler2005}.
+Gatesy and Pollard \cite[2011, ][]{Gatesy2011} have attributed the limited quantitative accessibility of coordination to limitations in transferability of kinematic profiles.
+According to their theoretical considerations, the temporal change of a joint angle within a limb can hardly be disentangled from morphology, posture, and the interaction with adjacent joints, which makes it hard to transfer observations between groups.
+These authors call for novel methods to resolve these dependencies.
+We herein present such a method, and exemplify it on a broad sample of terrestrial ungulates.
+The backbone of our approach is Fourier Series decomposition (FSD).
+Its novelty lies in an attempt to superimpose temporal profiles in a manner analogous to geometric morphometric techniques, i.e. using FSD to extract the ''shape'' of cyclic curves.
+\\To extract shapes from such temporal profiles (or any periodic signal in general), one requires data that resembles landmarks, as well as a procedure to superimpose observations.
+Profile landmarks can be found by applying Fourier Series.
+Fourier Series is a classical method in the study of kinematics \citep{Bernstein1927a,Bernstein1935}, although there are few recent studies exploring it further \citep{vanWeeren1992,Grasso2000,Webb2007}.
+Note that Fourier Series is related to, but different from other techniques previously applied in the context of locomotion (namely Fourier Transform and Elliptical Fourier Descriptors, see discussion).
+By applying FSD, the signal is decomposed into its harmonics, which describe it in what is called the frequency domain.
+The outcome of FSD is usually reported as sine- and cosine coefficients, which through Euler's formula are equivalent to complex exponentials.
+As will be illustrated further, this latter representation has some advantages for our purpose.
+When plotted in the complex plane, Fourier coefficients have characteristic arrangements, which we find are to an extent analogous to landmarks in geometric morphometrics \citep{Bookstein1991,Kendall1989}.
+Furthermore, the \textit{affine} components of a signals become mathematically accessible in the complex plane representation.
+Affine components are those that can be scaled linearly without altering the shape of the signal.
+In the case of complex Fourier coefficients, those are (i) the mean profile value (i.e. ''y-value'') over time, captured as the zeroth Fourier coefficient, (ii) the amplitude of the harmonics, visible as the distance from the origin of the complex plane, and (iii) the phase, which is related to a (non-trivial) rotation in the complex plane (\textit{cf.} methods, Fig. \ref{fig:workflow}).
+These terms are analogous to the parameters of a harmonic oscillation of frequency $f$ over time $t$ of the form ''$y = c_0 + A\cdot sin(2\pi f\cdot t + \phi)$''.
+Such an oscillation has the mean $c_0$, amplitude $A$, and the phase $\phi$.
+Assume there is a mathematical operation that removes the affine differences between two such oscillations by shifting (i.e. changing $c_0$), scaling (changing $A$), and rotating (changing $\phi$) the complex coefficients in the frequency domain to a standardized arrangement.
+This would be a Procrustes procedure which results in a mathematically optimal superimposition (two harmonic oscillations of the same frequency would become identical).
+We explore such a superimposition in this study, terming it Fourier Coefficient Affine Superimposition (FCAS, see below).
+\\The motivation behind this is the search for a quantitative, comparative measure of coordination of joints along a limb.
+For such measurements to be comparable, one should normalize the measures according the the dynamic similarity principle.
+Dynamic similarity, in general and in its biological application \cite[\textit{cf.}][]{Alexander1983,Vaughan2005}, is also concerned with the isolation of affine components.
+In general, dynamic similarity applies when all spatial dimensions of two mobile systems scale with the same factor (i.e. geometric similarity), the temporal aspects of all involved movements scale with another, again uniform factor (i.e. similar coordination), and therefore all forces are similar except for a uniform third factor.
+Scaling the system by such factors represents an affine transformation.
+In the specific case of terrestrial locomotion, dynamic similarity allows predictions about kinematics and kinetics of different animals \cite[i.e. about leg phasing, relative stride length, duty factors, forces and power output;][]{Alexander1983}.
+In practical application, a common purpose of the dynamic similarity principle is to compare animal locomotion at equal Froude numbers \cite[e.g.][]{SteudelNumbers2006,Holmes2006}.
+Perfect dynamic similarity is rarely observed and not expected, but finding the reason for deviations from it can be instructive \cite[e.g.][]{SteudelNumbers2006,Raichlen2013,Kramer2013}.
+Such studies are usually concerned with spatio-temporal gait variables.
+We attempt to apply the dynamic similarity principle on the level of joint angles, i.e. to measure intralimb coordination, using FCAS as a method to separate affine and non-affine differences in time profiles of joint angles.
+\\A classical illustration of the concept of dynamic similarity is the case of terrestrial ungulates \citep{Alexander1983}.
+These are a group of mammals that successfully populated an impressive variety of habitats, such as cluttered rain forests, swamps, rugged mountainsides, plain grasslands, and even deserts.
+Ungulates have achieved this without fundamental adjustments in the topology of the locomotor apparatus \citep{McMahon1975,Alexander1984}, albeit variation in their limb geometry.
+The musculoskeletal layout and posture of ungulates favour movement that is characterized by parasagittal limb excursions \cite[][]{Jenkins1971,Stein1997}.
+Therefore, their locomotor characteristics can be adequately approximated by time profiles of two-dimensional joint angles.
+Despite this simplification, their enormous diversity makes ungulates a challenging subject for conventional analyses of intralimb coordination.
+During steady state locomotion, joint angle profiles are approximately periodic, thus FSD and FCAS can be applied.
+We herein use ungulate kinematics as a case study for FCAS.
+\\FCAS does not reveal intralimb coordination \textit{per se}.
+However, the fact that superimposition operators (and with them affine differences between groups) are transferable to adjacent joints can be exploited \cite[analogous to][]{Mielke2018}.
+More specifically, in this study, we will perform superimposition of elbow joint angle profiles with respect to the carpus joint.
+This example application of FCAS yields \textit{relative} angle profiles, which are quantitative measures of intralimb coordination because they contain the combined variance from two joints.
+Using the frequency domain representation, the relative profiles become accessible for multivariate analysis.
+These ingredients allow us to investigate intralimb coordination in a quantitative comparison of unprecedented phylogenetic scope, overcoming previous limitations \citep{Gatesy2011}.
+\\In this study, we focus on the practical application of FCAS and the insights it extracts about ungulate locomotion and evolution.
+We supplement a detailed mathematical description (appendices \ref*{apdx:digitization}, \ref*{apdx:fourier}), an extensively commented, open computer code tutorial (supplementary data \ref*{supp:tutorial}), and all data that was generated (supplementary data \ref*{supp:data1}, \ref*{supp:data2}).
+We present data of walking gait, densely sampled across terrestrial ungulates (87 of 117 genera).
+For this purpose, we digitized freely available video material from online video platforms, as others did before \citep{Biancardi2012,Lees2016}.
+Rather than fixing an \textit{a priori} hypothesis, we are interested in extracting major patterns of variation in intralimb coordination in the proximal forelimb of ungulates.
+We discuss evidence for deviations from dynamic similarity, and possible reasons.
+This provides hypotheses for future, more controlled experimental tests that can likewise benefit from the herein proposed analytical methodology.
+
+
+
+\FloatBarrier\pagebreak
+%________________________________________________________________________________________
+%	Methods
+%________________________________________________________________________________________
+\section{Materials and Methods}
+\subsubsection{Data Acquisition}
+The data for this study was acquired from an online video sharing platform (\nolinkurl{youtube.com}).
+Genera were searched in Latin, English, or various local languages and search results were scanned for episodes of walking in approximately lateral perspective that did not show signs of \textit{post hoc} manipulation (cutting, etc.).
+Slow motion recordings were included if the frame rate was available in the video description.
+To exclude confounding variability due to the non-standardized recording circumstances, i.e. to get controlled reference measurements that ensure the validity of the online data, we supplemented high quality recordings of some genera available at our institute or local zoological gardens (34 stride cycles from 11 videos; \textit{Bos}, \textit{Equus}, \textit{Lama}, \textit{Tapirus}).
+In total, 388 videos contained candidate episodes and were annotated and cut (i.e. full stride cycles) in ELAN software \cite[Max Planck Institute for Psycholinguistics, Nijmegen;][]{Brugman2004}.
+Episodes were selected to have sufficient temporal and spatial quality and correct perspective (movement perpendicular to the view axis).
+Videos of juvenile individuals were rarely included, i.e. only in cases where few recordings were available for a genus.
+Video cutting was performed in the free video manipulation software ''FFmpeg'' (\nolinkurl{http://ffmpeg.org}).
+\\Digitization of the animal movement (Fig. \ref{fig:workflow}A) was done in a custom-written tool using the Open Source Computer Vision Library (''OpenCV'', \nolinkurl{https://opencv.org}) interface for the Python programming language (Python Software Foundation, \nolinkurl{https://www.python.org}).
+We manually tracked joint center pixel positions over time, digitizing four joints along the forelimb which was ipsilateral to the camera.
+From this data, angles were calculated, various quality checks applied, and it was ensured that the angle profiles (i.e. joint angles over time) were cyclical (for a detailed procedure, see appendix \ref*{apdx:digitization}).
+The videos with episodes that passed quality criteria were reviewed to register species, sex, speed, duty factor, and degree of obstruction (see below).
+The final material covers 87 of 117 genera (109 of 251 species) of terrestrial ungulates.
+556 stride cycles passed strict quality checks, stemming from 217 of the videos (supplementary data table \ref*{supp:data1}).
+
+
+\subsubsection{Fourier Series Decomposition (FSD) Exposes Affine Signal Components}
+We herein study periodic joint angle profiles, but with methods that generally apply to periodic signals.
+There are two fundamental ways in which two or multiple signal observations can differ.
+One type of differences are those which can be removed by a linear operation (i.e. addition or multiplication of scalars).
+Those are the mean, amplitude, and phase, which can be removed by ''y-shifting'', scaling around the mean, and phase-shifting, respectively.
+These differences are termed affine differences.
+Other affine operations exist (reflection, shear, planar rotation), but they do not apply to time profiles because they disrupt the spatio-temporal integrity of the signal.
+Differences that cannot be removed by affine transformations are subsumed as non-affine.
+\\In the time domain (plot of the signal value over time, Fig. \ref{fig:workflow}A), the affine differences are intuitively visible, but hard to capture mathematically due to temporal periodicity.
+Hence, Fourier Series decomposition (FSD, as defined in appendix \ref*{apdx:fourier}) is applied to the signals we study herein.
+This transformation decomposes a signal into a finite sum of its harmonics.
+These harmonics are wave functions for which the product of their signal period $T$ (i.e. full cycle recording duration) and frequency $f$ is an integer (e.g. $T = 2.1\ s$, $f = 3/2.1\ Hz$, which is the $n=3^{rd}$ harmonic).
+The harmonics are the Fourier coefficients, but instead of the commonly used sine- and cosine representation ($a_{n}$, $b_{n}$), we extract complex exponentials ($c_{n}$; both representations are related through Euler's formula).
+Hence, the coefficients herein are complex numbers which, with their real and imaginary part, constitute the frequency domain representation of the signal (Fig. \ref{fig:workflow}B).
+\\Complex Fourier coefficients facilitate the extraction of information about affine components of the signal (see appendix \ref*{apdx:fourier}) because rotational operations are conveniently applied with complex exponential factors.
+Affine differences translate to the coordinate positions of the coefficients in the complex plane: the zeroth coefficient $c_{0}$ reflects the temporal mean, whereas polar coordinates of the other coefficients  (distance from origin, rotation relative to positive real coordinate axis) map the amplitude and phase of the signal (Fig. \ref{fig:workflow}B).
+The transformation has an interesting effect on the temporal sampling.
+Take, for example, a signal composed of 20 measurement samples over the cycle.
+To phase shift, one could ''roll'' the vector of samples, e.g. appending the first sample at the end.
+Intermediate phase-shifts are inaccurate because they require interpolation.
+In the frequency domain, the signal becomes independent of temporal samples (\textit{cf.} appendix \ref*{apdx:fourier}), except that sampling gives an upper limit to the number of harmonics that can be extracted.
+In consequence, phase information becomes continuous, phase shifting is not restricted to the temporal raster defined by sampling, but no interpolation is required.
+Conversely, series decomposition with a finite number of harmonics leads to low pass filtering, hence FSD removes high frequency components from the original signal.
+\\An overview of how affine changes affect the signal in time and frequency domain can be found in the online supplements, together with an implementation of FSD (supplementary data \ref*{supp:tutorial}).
+It is important to note that all of FSD and the procedures described below are deterministic.
+Hence, none of these require a fitting- or optimization algorithm.
+In previous studies, it has been quite common to determine Fourier coefficients by approximation \cite[e.g.][]{Alexander1980} or an iterative algorithm \cite[regression, e.g.][]{Hubel2015}.
+A deterministic implementation is more efficient and less error prone and should thus be strictly preferred (the space that an optimizer has to traverse is complex due to angular ambiguity; there are inherent phase relationships of coefficients that common samplers ignore).
+We also recommend to reconstruct test signals from coefficient values for visual comparison with the original signal to confirm that the decomposition was accurate.
+
+
+
+\subsubsection{Fourier Coefficient Affine Superimposition (FCAS) Reveals Signal Shape}
+Taking all coefficients derived from the FSD of a signal together is data that is structurally analogous to two-dimensional landmarks.
+Hence, methods of geometric morphometrics can be applied \citep{Bookstein1991,Kendall1989,Gower1975,Dryden2016}, in particular Procrustes superimposition, which is a method that removes affine components of the form of an object to reveal its shape.
+For the complex Fourier coefficients, it is possible to define standard values for the affine components (i.e. mean of zero, amplitude of one, phase zero) and operators that shift or scale the signal to achieve standardization.
+Similarly, it is possible to find, extract, and apply operators that superimpose two signals by removing affine differences (Fig. \ref{fig:workflow}C), which we term FCAS.
+In contrast to geometric morphometrics, the rotation is not uniform, but depends on the harmonic number.
+Also, the translational component is restricted to $c_{0}$, and all higher coefficients are only affected by rotation and scaling.
+These modifications do not hinder the general procedure.
+Analogous to the process of Generalized Procrustes Analysis in geometric morphometrics, the superimposition can be applied to find improved averages of signals.
+The (non-affine) residual after removal of affine differences is, in analogy to geometric morphometrics, the ''shape'' of the signal, and it is possible to define distance metrics to quantify shape differences (though not relevant for the present study).
+\\In case kinematic measures, such as joint angle profiles, are the signals of interest, both affine and non-affine differences can have consequences for the kinetics.
+However, only non-affine differences imply different coordination, whereas affine components are merely a change in temporal or spatial scale of the same patterns.
+Coordination should be evaluated in context of the limb.
+Hence, when regarding multiple joints along the limb, it is crucial to retain the coupling of the limb joints.
+For example, when phase aligning carpus joint profiles (reference joint, for reasons discussed below), the same time shift should be applied to other joints of the limb (focal joints, herein the elbow, Fig. \ref{fig:workflow}D).
+Similarly, a normalization of the mean and amplitude of the reference joint can be applied to focal joints, which then express relative mean and amplitude.
+When applying operators from a carpus joint superimposition to the elbow joint profiles, we term this ''carpal superimposition of the elbow'', and retrieve ''relative elbow profiles''.
+This transfer shifts the affine variance from the carpus to the elbow joint.
+For example, if in species A the carpus phase is lagging $+0.05$ stride cycles relative to species B, but the elbow phase difference of the two species is $-0.1$ (A before B), then the phase of the relative elbow profile of species A will be $-0.05$ with respect to that of B.
+Hence, relative profiles capture intralimb coordination.
+They are also represented in the frequency domain, but temporal profiles can be reconstructed at any point for visualization  (margins of Fig. \ref{fig:workflow}C and D).
+The Fourier coefficients of relative elbow profiles are subjected to further analysis.
+Because we are interested in dynamic temporal changes relative to the mean angles, we remove differences in $c_0$ by subtracting it from the profiles, despite acknowledging that posture or average angle might affect the dynamics.
+
+\subsubsection{Multivariate Analysis}
+A variety of multivariate methods exist that could be explored with relative elbow profile Fourier coefficients.
+Because our study is introducing a previously unexplored method (FCAS), we restricted post processing to plain Principal Component Analysis (PCA, Fig. \ref{fig:workflow}E).
+PCA was applied to the real and imaginary parts of relative elbow FSD coefficients.
+By an eigenanalysis of the covariance matrix of the coefficient table, PCA finds orthonormal axes which orient the data in a way that shows the major variation \cite[\textit{cf.}][]{MacLeod2007}.
+This was manually implemented in Python, using singular value decomposition (\textsf{numpy.cov}, \textsf{scipy.linalg.eig}).
+We apply it to genus averages \citep{Mitteroecker2011} of FSD coefficients of relative elbow profile (i.e. after FCAS with regard to carpus).
+\\The component axes are not \textit{per se} biologically meaningful, but can be associated with covariates.
+Covariate choice is arbitrary, but depends on the question of interest.
+In our case, four classes of covariates which potentially have a relevant connection to intralimb coordination were collected.
+In addition to that, we quantified the affine composition of the relative profiles.
+The covariate classes are morphology, gait parameters, ecology and phylogeny.
+\\First, characteristics of general and musculoskeletal morphology determine locomotor function.
+Species- and sex-specific average measures of body length, shoulder height, and body mass were taken from online data repositories \citep{UltimateUngulate,AnimalDiversityWeb}.
+For measures on the video, segment lengths were taken from pixel distances of the tracked points, but normalized as indicated below to remove differences in video resolution.
+To evaluate lever relations at the critical joints, zeugopodial length (elbow-wrist, normalized to withers-croup distance) and the meta- to zeugopodial length ratio were included.
+Under ideal circumstances, segments should measure equal length in every frame.
+However, there is uncertainty in the digitization procedure.
+In addition, in cases where the fetlock joint was covered by vegetation during ground contact (but not during the swing phase), tracking points were shifted proximally along the limb segment to still be able to capture the (carpus) angle over time.
+The framewise $90\%$ quantile value turned out to be robust to episodes when joints were hidden during stance, while being sufficiently close to the true mean segment length (i.e. robust to inadvertent tracking outliers).
+\\Second, intralimb coordination potentially covaries with spatio-temporal gait parameters (kinematics).
+From the video data, duty factor (ratio of stance- and stride time) and approximate speed (body lengths per second, from back line to reference landmark movement) could be measured.
+The exact Froude number was unavailable, since the spatial scale of the videos was unknown.
+Furthermore, a proxy for clearance \cite[\textit{cf.}][]{Austin1999} was calculated, i.e. how much the hoof is lifted above the ground during a limb swing.
+This required the effective limb extension ($\xi$), defined as follows, from segment ($i$) lengths ($l_{i}$) and their proximal joint angles ($\alpha_{i}$, Fig. \ref{fig:workflow}):
+
+\begin{equation*}
+\xi = \sum\limits_{i} l_{i} \cdot \cos{\alpha_{i}}
+\end{equation*}
+
+We define clearance as the quotient of the $5\%$ and $95\%$ quantiles of $\xi$ over time (which quantifies limb flexion ratio), subtracted from one.
+
+\begin{equation*}
+\text{clearance} := 1 - \frac{\xi_{5\%}}{\xi_{95\%}}
+\end{equation*}
+
+Again, quantile values were used because the extremal values would be at the far tail of the Gaussian noise associated with point tracking.
+\\The third group of covariates are ecological parameters.
+In particular, we were interested in the species habitat and the momentary environment at video recording.
+We followed the method of Stankowich and Caro (2009) to quantify habitat openness \citep{Caro2004,Stankowich2009}.
+Web resources indicated multiple habitat preferences for most species, in which case an uninformed average of the openness values was taken.
+The momentary openness, or its inverse (''degree of obstruction''), was determined by noting how far substrate clutter reached up the supporting limbs of the animal in each video.
+Values ranged from $0$ (hoof visible) to $0.9$ (limb visible to just below the carpus joint, see supplementary data table \ref*{supp:data1}).
+\\The fourth covariate was phylogeny \cite[see appendix \ref{apdx:phylosig} and Fig. \ref*{fig:phylogeny};][]{Zurano2019,Adams2014}.
+\smallskip\\Except for phylogeny (which is directly estimated), associations of covariate genus averages and principal component scores of genus means \citep{Mitteroecker2011} were assessed by calculating Pearson correlation (Python: \textsf{scipy.stats.pearsonr}).
+Within-group variability was high and observation count heterogeneous across groups, and we applied many correlation tests.
+Hence, we only deemed associations with $p<10^{-2}$ relevant.
+\\It can be instructive to quantify how much each of the affine differences contributes to the overall relative elbow trace difference.
+Therefore, the affine operations that would align the genera averages with their global average were computed.
+We report the correlation of these affine differences to the PC axes, as well as the residual shape difference that would remain after their removal.
+
+
+
+\FloatBarrier\pagebreak
+%________________________________________________________________________________________
+%	Results
+%________________________________________________________________________________________
+\section{Results}
+\subsection{Superimposition of Joint Angle Profiles Improves Profile Averaging}
+
+To demonstrate the effect of FCAS, we applied the method to our most extensively sampled genera (\textit{Equus}, \textit{Lama}, and \textit{Giraffa}; Fig. \ref{fig:superimposition}).
+Raw data (''video aligned'') was manually aligned for the video frame of limb touch down for comparison with the computational alignment.
+Although this was done at maximum possible accuracy ($\pm 1\ frame$), averages revealed no clear similarities or differences between the three genera.
+Standard deviation ranges were comparatively high and averages could potentially suffer from incorrect phase relations (analogous to destructive interference) or artificial amplitude weight (because at a fixed time point, particularly high absolute values might attract the average).
+FCAS was subsequently performed with regard to carpus joint profiles (Fig. \ref{fig:superimposition}, ''superimposed'', ''[c]'' for carpus joint).
+Afterwards, carpus profiles were practically identical for the three example genera.
+Elbow joint profiles (''[e]'' in Fig. \ref{fig:superimposition}) were kept in synchronization and amplitude relation with the carpus profiles and were therefore processed with the same operators, resulting in relative profiles (see methods).
+Note that no additional superimposition or alignment was performed, except for centering the profiles around their mean.
+Relative elbow profiles revealed a precise similarity of lamas and giraffes with regard to coordination of the two joints, which was not obvious from the ''video aligned'' traces.
+In contrast, equid intralimb coordination indicated a higher amplitude and a slight phase delay at the elbow (triangle marker, Fig. \ref{fig:superimposition}), relative to carpus joint.
+Thus, equids turn out to be more distinct from the other groups than was visible prior to FCAS.
+\\This example indicates the increased accuracy of joint profile averaging after FCAS, even in the presence of noise.
+
+\subsection{Patterns of Variation of Ungulate Intralimb Coordination}
+
+We aim to extract the most prevalent patterns of variation in ungulate intralimb coordination.
+Therefore, we used the same superimposition procedure as above to generate genus averages for the full data set.
+Average angle profiles of all joints and genera (\textit{cf.} Fig. \ref*{fig:phylogeny} for overview of phylogeny) were  then superimposed with reference to the global mean carpus (carpal superimposition).
+Thereafter, a PCA was performed on the Fourier coefficients of genus average relative elbow profiles (Fig. \ref{fig:pca}).
+The first component axis captured $37\%$ of the variance, and the next three principal components further $49\%$ (PC2: $27\%$, PC3: $12\%$, PC4: $10\%$).
+Together, they span the ungulate elbow ''coordination space''.
+In that space, bovids and cervids, which contributed the majority of genera, dominate the central region.
+On PC1, we observed a spread of bovids from {Bovinae} to {Caprinae}.
+For cervids, who spanned almost the same range on that axis, there was no clear grouping.
+Tragulids were found on higher values of PC1.
+A useful aspect of PCA is the possibility to reconstruct hypothetical joint angle profiles at arbitrary points of coordination space (black line plots at the lower figure margin, Fig. \ref{fig:pca}, no. 1-4).
+From these, it can be seen that the major difference is how much the relative angle changes during ground contact.
+Ground contact (stance phase) begins with limb touch down (left end of the line plot), continues for approximately the first half of the line, and is followed by a shorter swing phase.
+At low values of PC1, the relative elbow profiles (no. 1) are ''sawtooth-like'' curves with steeply sloped, increasing stance phase angles.
+These profiles are characterized by two periods of relatively constant slope, one rising (elbow extension, during stance) and one falling (flexion, during swing).
+The slope of these curves changes in between these periods, which approximately coincides with hoof touch down and lift off.
+Extension of the elbow joint happens during ground contact, hence we call this type of profile ''grounded elbow extension''.
+In contrast to that, elbow angles that cluster on high PC1 values (no. 2) only change during the swing phase (brief period of consecutive down- and upward slope), whereas they are close to zero during stance, indicating a straightened joint.
+Elbow extension is almost absent during stance (approximately horizontal curve), and after swing-related flexion, an extension follows immediately while still in the swing phase (''swinging extension'' type profile).
+\\PC2 separated a cluster of Rhinocerotidae and Suina (upper left) from the rest.
+Their relative elbow swings (represented by no. 4) were of lower relative amplitude and slightly phase delayed than those of groups on the opposite end of PC2 (reconstruction no. 3).
+\\Standard deviations within groups were high (not shown; approx. $\pm 0.02$ for \textit{Giraffa} on PC1) and sample size was low for many groups.
+However, overall group and observation counts were sufficient to describe population effects.
+In addition to the shape reconstruction, the direct comparison of geometrically or phylogenetically related genera along the major axes could confirm the mentioned trends (i.e. stance phase slope, relative peak timing and amplitude; Fig. \ref*{fig:examples}).
+This further supported the observations from PCA reconstruction.
+\\In summary, the PCA, profile reconstruction, and taxa comparison allow the identification and visualization of major differences in intralimb coordination among the studied groups.
+
+
+\subsection{Covariates of Intralimb Coordination}
+
+
+To evaluate possible explanations for the variation along principal component axes, we computed Pearson correlation of the components with various morphological, kinematic, and ecological factors, considering effects with $p<0.01$ to be relevant (Tab. \ref{tab:correlations}).
+We also split the joint profile shape after superimposition into (non-)affine components, and quantified which of these affine changes were associated with the PCs or whether the shape (''residual'') was affected (Tab. \ref{tab:correlations}, ''[A]'' category).
+These values quantitatively characterized the profile reconstructions from the PCA (Fig. \ref{fig:pca}) and were consistent with the findings reported above.
+\\Of the first four component axes, PC1 showed the strongest correlation with clearance ($r = 0.49,\ p < 10^{-5}$) and degree of obstruction ($r = 0.33,\ p < 10^{-2}$).
+Comparatively smaller taxa (i.e. lower body mass) tended to appear on higher PC1 values ($r = -0.34,\ p < 10^{-2}$).
+PC2 was associated with limb morphology, particularly lever relations (ratio of meta- to zeugopodial length, $r = -0.51,\ p < 10^{-6}$; normalized elbow-wrist segment length, $r = -0.46,\ p < 10^{-4}$), and with duty factor ($r = 0.4,\ p < 10^{-3}$).
+PC3 scales with habitat and multiple aspects of size, whereas PC4 captured non-affine shape differences (visible in that it correlated to ''residual'').
+\\Hence, by the use of simple correlation, it is possible to associate the variational components identified by PCA with meaningful extrinsic (e.g. ecology) and intrinsic (e.g. morphology) covariates.
+
+
+
+\FloatBarrier\pagebreak
+%________________________________________________________________________________________
+%	Discussion
+%________________________________________________________________________________________
+\section{Discussion}
+In this study, we demonstrated how an application of Fourier theory can be used to extract non-affine differences in joint angle profiles, thereby enabling their mathematically accurate superimposition (FCAS).
+The new method has to be classified with relation to existing tools.
+As an example of FCAS, we analyze intralimb coordination on a large scale, involving the majority of terrestrial ungulate genera, which has not been possible previously.
+The kinematic data from the proximal forelimb of ungulates reveals systematic patterns of variation in intralimb coordination.
+These can be linked to extrinsic and intrinsic covariates, thereby proposing hypotheses for specific tests of dynamic similarity at the joint level.
+
+
+\subsection{Quantifying Intralimb Coordination with FCAS}
+Conventional kinematic analysis of intralimb coordination involves visual inspection of angle plots in space and time \citep{Irschick1999,Fischer2002,Stoessel2012,Schmidt2008,Day2007,Polk2002,Nyakatura2010}.
+Angle values for statistical evaluation are extracted at fixed ''timemarks'' in the stride cycle.
+Taken together, these sampled angles allow for coarse assessment of intralimb coordination, but they potentially sacrifice information.
+Timemarks are reference points of putative biological meaning, and it is possible to use them for temporal alignment \cite[e.g.][]{HsiaoWecksler2010}.
+However, the number and choice of timemarks involves some critical design decisions.
+When for example superimposing only based on limb touch down, the alignment is insensitive to differences in hoof placement trajectories before and after that time point.
+The hoof can reach the ground at a flat angle with smooth horizontal deceleration.
+But the impact can also be vertical, following a more or less brief period where the hoof hovers above the substrate before being placed.
+The end of hoof forwards movement might provide a more homologous timemark, but it might still be that the two cases differ fundamentally in the underlying dynamics at that particular episode of the stride cycle.
+FCAS represents a mathematically optimal superimposition that equally incorporates all the information contained in the profiles.
+The advantage of this strategy is its independence from selected points, and instead the sensitivity to the joint angle trajectory over the whole stride cycle.
+Working in the frequency domain also has the advantage of providing a manageable feature vector for multivariate analysis or classification via machine learning.
+Fourier Series requires periodic signals to work upon.
+As we argued initially, this requirement is often met in the study of locomotion, in which case a transformation to the frequency domain opens up new ways of analyzing the data.
+\\The direct application of Fourier Series \citep{Fourier1822,Gray1995,Bracewell2000} is not novel in the context of kinematics \cite[e.g.][]{Bernstein1935,Webb2007,Wheat2006}.
+Note that Fourier Series is related to Fourier Transform \cite[cf.][]{Bracewell2000,Robertson2018}: it is also a transformation, but considers only the reduced frequency domain constituted by harmonic frequencies.
+Because the interrelation of segments is of interest, Fourier methods have previously been applied to cyclogram curves.
+Cyclograms, or phase portraits, are a direct, two- or three-dimensional visualization of segmental coupling \citep{Bernstein1934,Goswami1998,DAout2002}.
+Several quantitative descriptors of cyclograms exists.
+Elliptic Fourier Descriptors \citep{Kuhl1982,Wheat2006} are an application of Fourier Series to two-dimensional phase portraits.
+This technique is abundant in the study of intralimb coordination \cite[e.g.][]{Polk2008,HsiaoWecksler2010,Rosengren2009}, but influenced by variance in reference point determination.
+Although affine-invariant outline descriptors exist \cite[e.g.][]{Arbter1990}, we are not aware of an attempt to apply those to kinematic data.
+Planar covariation \citep{Borghese1996,Hallemans2009,Ogihara2014} originated in the pursuit of unifying, general features of gaits, and finds high covariation values by design \cite[choice of segment angles, common temporal swing/stance structure for these, use of PCA;][]{Hicheur2006,Ivanenko2008}.
+In contrast, we seek a method to highlight differences across taxa.
+Another method that has found application in the analysis of human locomotion is continuous relative phase \cite[CRP, \textit{cf.}][]{Lamb2014}.
+This method calculates the difference in instantaneous phases of two signals (using phase portrait plots or the Hilbert transform).
+CRP requires removal (normalization) of differences in mean angle and amplitude, whereas our method retains the other affine components.
+By intentionally phase-shifting random test signals (not shown), we found that both the relative phase from CRP (averaged over a stride cycle) and the FCAS phase difference as introduced herein (appendix \ref*{apdx:fourier}, Eq. \ref*{eqn:affines_phase}) accurately recover the shift.
+However, the methods do not yield identical results when other aspects of the signal are manipulated (which in general complicates the definition of a signal phase).
+It is thus possible that Hilbert transform and CRP offer alternatives for phase determination.
+Because ungulate joint angle profiles are sufficiently homogeneous, we expect general agreement between the methods for the test case presented herein.
+\\All the mentioned related methods have originally been applied to phase plots and cyclograms.
+Our approach initially goes one step back, to the transformation of individual time profiles of joint angles.
+FSD preserves their shape information, and no \textit{a priori} definition of temporal reference points is required (we herein performed the conventional limb touch down alignment, prior to FCAS, only for comparison).
+To generate measures of coordination, one has to combine variance from multiple mobile elements (joints or segments) by aligning with regard to one of them while keeping the intralimb coupling intact.
+We exploit the empirically observed uniformity of carpus joint profiles, and use this joint as reference, which is motivated by mathematical convenience.
+Although superimposition based on the elbow joint might be biologically more meaningful (for example with regard to a proximo-distal sequence of neural control), it would be a less suitable reference because profiles might be topologically heterogeneous (see below).
+Transferring the affine components from references to adjacent, focal joints results in relative angle profiles, which are optimally synchronized (phase) and depict the relative amplitude (scale) and differential mean angle.
+If mean angles are not of interest, profiles can optionally be centered.
+We argue that this way of superimposition results in measures that overcome the theoretical limitations in transferability of angular parameters \citep{Gatesy2011}: (i) posture can be removed by centering relative profiles; (ii) adjacent angles are combined; (iii) morphology, i.e. segment lengths, can be correlated \textit{ex post} as shown, or could even be multiplied in (effective segment length $l\cdot cos\left(\alpha\right)$; not explored).
+\\FCAS crucially depends on reference and focal joints, but is not limited in the choice (or number) of these.
+Also, it is not limited to a single limb or to phylogenetic comparisons (for example, pseudo-cyclic episodes during gait transition could be compared) and it could be generalized to three-dimensional measurements.
+FCAS results in a mathematically optimal alignment, and is robust against low video frame rate due to the filtering properties of the Fourier Series with a finite number of coefficients.
+The capacity of a one-dimensional FSD to remove affine components in the frequency domain has not been emphasized in previous work.
+The delay theorem, from which we derive a formula that defines a zero phase (see appendix \ref*{apdx:fourier}, Eq. \ref*{eqn:affines_phase}), is of particular interest.
+FCAS is not limited to kinematics, and could potentially be applied to a broad variety of other periodic measurements, such as ground reaction force profiles.
+
+
+\subsection{Dynamic Dissimilarities in Terrestrial Ungulate Intralimb Coordination}
+The purpose of the PCA step in the present analysis is to orient the multivariate data so that maximum variation is revealed.
+Variation in this case means dissimilarity.
+It is herein applied to relative elbow profiles.
+These combine information from carpus and elbow, but the carpus only contributes affine changes (Tab. \ref{tab:correlations}, category [A], ''amplitude'' and ''phase'').
+Non-affine variation (Tab. \ref{tab:correlations}, category [A], ''residual'') will stem exclusively from the elbow.
+Hence, relative elbow profiles in our case show elbow profiles that are centered, normalized and time-aligned relative to the carpus profiles.
+The change of one joint angle relative to another is the most basic measure of intralimb coordination.
+From these measures, PCA extracts the ''coordination space'' of the relative elbow joint profiles (Fig. \ref{fig:pca}).
+The method also allows to reconstruct hypothetical profiles at arbitrary points in that space.
+Overall, the group differences might seem subtle at visual inspection, attributing to the fact that ''bauplan'' and movement mode are homogeneous in the data set.
+However, even subtle changes in the coordination of the proximal limb have a considerable lever towards the ground contact point.
+Also, the reconstructed profiles are derived quantitatively, incorporating a lot of information.
+Hence, they are a sharp image of the most pronounced statistical differences that remain after the removal of affine parts of background variance.
+Likewise, dynamic similarity (as usually applied to spatio-temporal gait parameters) refers to similarity in non-affine dynamic measures.
+This conceptual link indicates that FCAS enables the direct comparison of dynamic differences in the coordination of large data sets of animals.
+For the present measurements of walking ungulates, PCA of FSD coefficients of relative elbow joint angle profiles revealed variation associated with several factors.
+One of them could be phylogenetic signal, which we found to be less relevant (appendix \ref*{apdx:phylosig}).
+\smallskip\\The most prominent effect revealed by the PCA (PC1, $37\%$ of variance) was related to clearance.
+Clearance quantifies how much the animal lifts the foot from the ground during swing phase \citep{Austin1999,MacLellan2010,Perrot2011}.
+The component axis was also correlated with animal body mass and momentary degree of obstruction (i.e. how free the path of the animal is), but independent of morphology.
+Classical gait characteristics (duty factor, symmetry, i.e. inter-limb coordination) doubtlessly classify all included strides as ''walk'' \citep{Hildebrand1989}, but do not consider intralimb coordination or clearance.
+Because all observations are ''walk'', and because no change in duty factor was detected (Tab. \ref{tab:correlations}), the timing of stride- and stance phase is uniform along PC1.
+However, the temporal pattern of the net joint moments at a limb joint (i.e. the net result of the moments generated by muscles crossing the joint) will likely differ among the profile types as the movements patterns throughout the cycle differ.
+For example, the ungulate elbow in the swinging extension type of relative joint profiles (Fig. \ref{fig:pca}, no. 2) is commonly held stiff during the period of ground contact (constant joint angle value), but quickly flexed and extended during forwards swing.
+It thereby resembles the common pattern of the ungulate carpus joint (see Fig. \ref{fig:superimposition}).
+In contrast, the elbow joint oscillation of grounded extension type profiles is distributed across the whole stride cycle.
+This suggests either that the elbow can be a pivot point of limb movement, in which case more proximal elements could be fixed passively (see below), or that the elbow contributes to limb compliance during stance to minimize vertical oscillation of the center of mass \cite[\textit{cf.}][]{Geyer2006}.
+Animals commonly use the grounded extension profiles on obstruction-free substrate, whereas the swinging extension could be interpreted as an alternative mode of walking that animals use on cluttered terrain.
+\\The elbow profile modes have different implications for the energetic demands of the locomotor behaviour.
+Energetics are affected by the substrate that an animal frequently encounters.
+Grounded elbow extension implies non-zero angular velocity at the elbow during all of the stride cycle.
+If, as discussed above, more proximal elements are mostly fixed, this would lead to an effective shortening of the part of the limb which is mobile.
+This is consistent with evidence of stabilizing modification of the shoulder of equids \cite[][]{Hermanson1992}.
+Conversely, muscle arrangement in tapirs, which usually exert higher clearance than horses, shows adjustments that favour shoulder motion \citep{MacLaren2016}.
+The effective limb shortening, together with the passive pendulum dynamics of the distal elements on unobstructed ground, would reduce energy expenditure.
+In contrast, the brief flexion-extension period in swinging flexion appears to require more energy per stride (quicker angular acceleration in opposing directions, longer effective limb, higher clearance).
+At the same time, because collision with substrate features is avoided, this behaviour reduces collisional energy loss \cite[i.e. loss from collision with superficial vegetation or rubble, which has to be distinguished from the collisional models in][]{Ruina2005}.
+Negotiation of a substrate with inflexible obstruction might even be impossible without lifting the feet (which is not the general case we observed).
+Hence, both profile types can be energetically favourable, depending on the circumstances.
+\\This suggests questions of whether and how animals adjust their coordination.
+At least some species seem to be able to use elbow profiles with both the grounded- and swinging extension.
+This would mean that animals retain full capacity to immediately alter their locomotor mode according to momentary features of the substrate (hypothesis $h0$), though we cannot resolve whether modes are used bimodally or whether intermediate patterns are frequent.
+In contradiction with $h0$, we observe distinct groups (e.g. \textit{Alces}, some \textit{Tapirus} species) that seem to walk with exaggerated clearance even on free, solid and featureless substrate.
+The apparent continuum along PC1 might therefore be an artifact of averaging strides across genera.
+This would imply a certain degree of plasticity, i.e. reduced behavioural flexibility, in consequence of adaptation to their preferred habitat ($h1$).
+If $h1$ turns out to be more plausible, it could be tested whether morphology coevolved to reduce hoof-lift energy consumption in genera which show a bias towards compliant limb movement.
+If experiments confirm plasticity in locomotor behaviour, it might act at different time scales (ontogenetic: $h1a$, or evolutionary: $h1b$).
+Our crude averaging quantification of habitat openness has limited decisive value in this case, also because the original classification focuses on canopy level characteristics \citep{Stankowich2009}.
+Uncontrolled variation and sample size within the present data set prohibits an in-depth analysis.
+Previous studies found contradicting evidence on whether and how locomotion is influenced by habitat \cite[][]{Stoessel2012,Fuller2011,Arnold1983,Schulte2004,Druelle2019}.
+These studies did not superimpose profiles for averaging, except for the conventional alignment to limb touch down.
+Measurements under more controlled experimental circumstances are required to settle the case between ''walking mode flexibility'' or ''(adaptive) plasticity''.
+\smallskip\\The second-largest share of variation in the present data set (PC2, $27\%$ of variance, Fig. \ref{fig:pca}) shows strong association with morphological indicators.
+Both the length of the zeugopodial (elbow-wrist, normalized for shoulder-pelvic length; Tab. \ref{tab:correlations}) and the lever relations at the carpus (metapodial/zeugopodial length ratio) decrease with increasing PC2 values.
+In accordance with this, the component spans a morphological range from marsh deer (\textit{Blastocerus}) and pronghorn (\textit{Antilocapra}) to peccaries (Tayassuidae) and rhinos (Rhinocerotidae; see also Fig. \ref*{fig:more_pca}).
+The geometric dissimilarity along the axis is a case of dynamic dissimilarity, but in addition to that our analysis provides insight on how the elbow-carpus interaction is affected.
+Genera at low PC2 values have long limbs and comparatively long distal segments.
+This correlates with a higher relative amplitude at the elbow and conversely less angular movement at the carpus, as well as a comparatively shorter stance phase (without notable overall increase in clearance).
+In contrast, groups at high PC2 are stout and have comparatively shorter metacarpals, which correlates with slightly earlier and quicker swing.
+This lays out a path for future research to evaluate how the angular excursions and the morphological disparity together can be captured by different spring-pendulum models, how they translate to ground reaction force, and what effect this would have on joint moments.
+
+
+
+
+
+\FloatBarrier\pagebreak
+%________________________________________________________________________________________
+%	Conclusion
+%________________________________________________________________________________________
+\section{Conclusion}
+Locomotion is costly, responsible for at least $20\%$ (but usually much more) of the energy expenditure of animals \citep{Rezende2009,Girard2001}.
+It has long been appreciated that this behavioural class and associated traits must be optimized with regard to the capacities and condition of the animal \citep{Hoyt1981,Reilly2007}.
+One reason that optimization is so efficient in locomotion is its high degree of recurrence, which amplifies the effect of ontogenetic and evolutionary adjustments.
+Many of the processes involved in locomotion are periodic, and Fourier methods become applicable.
+This opens up a variety of analysis paths and can even link kinematics and geometric morphometrics, as we explored in this study.
+Our findings on terrestrial ungulates reiterate the requirement to consider habitat structure and substrate as confounding factors \cite[\textit{cf.}][]{Johnson2002,Lejeune1998,Shepard2013}, although it remains to be explored to what degree animals adapt or react to it.
+The data presented herein confirms that habitat features and morphology are the dominant determinants of elbow-carpus coordination in terrestrial ungulates.
+The moderate magnitude of this variation emphasizes how strongly conserved and optimized ungulate coordination actually is at the joints we investigated, despite the enormous variety of habitats and substrates that these animals encounter.
+Our findings from a broad overview of the clade form the basis for hypotheses that can stimulate future research.
+It might seem a trivial finding that animals lift their feet more when the path is obstructed.
+However, to our knowledge, FCAS is the first method that can confirm this on a large scale because it yields quantitative measures of dynamic similarity on the level of intralimb coordination.
+
+
+\FloatBarrier\pagebreak
+%________________________________________________________________________________________
+%	Figures
+%________________________________________________________________________________________
+\section{Figures And Tables}
+\begin{figure}[!ht]
+\begin{center}
+%\includegraphics[width = 16cm]{fig1_flowchart.pdf}
+\end{center}
+\caption{\textbf{Analysis work flow, schematic. }
+\textbf{A} Video material of walking ungulates is digitized by tracking trace marks (shoulder, elbow, carpus and fetlock joints; see supplementary movie \ref*{supp:movie1}) over a stride cycle, and joint angle profiles are computed (angle defined zero at fully extended limb, positive direction indicated by arrows). Thin black lines are the original measurement, whereas blue lines show the same profile, filtered by FSD with $7$ components.
+\textbf{B} Fourier Series decomposition and synthesis allows transformation of temporally periodic angle profiles back and forth between time domain and frequency domain. The zeroth Fourier coefficient ($c_{0}$, lower bar plot) corresponds to the temporal average of the angle profile (i.e. mean angle). The higher coefficients ($c_{n>0}$) can be plotted in the complex plane ($\Re, \Im$); line connections are only for visualization. Coefficients $i$ of joints $j$ have phases ($\phi_{ji}$) and amplitudes ($A_{ji}$), as indicated in gray for $c_{1}$ of the elbow. Average phase and amplitude of the angle profile can be derived (for example $\phi_{c}$, $A_{c}$ for carpus). Mean angle, amplitude, and phase are the affine components of the signal.
+\textbf{C} Multiple groups are compared, in this case ungulate genera (\textit{Lama}, \textit{Giraffa}, and \textit{Equus}; coloured in blue, yellow, and brown respectively). By quantifying how they differ in affine components, operators can be extracted ($d\phi$, $dA$, $dc_{0}$). This is facilitated by the transformation to the frequency domain, but a synthesis of time domain traces (line plots on the left and right margin) is always possible.
+ \textbf{D} Affine operators are applied to superimpose the joint angle profiles. Superimposition operations from the carpus (reference joint) are applied to the carpus itself, but also transferred to the elbow (focal joint).
+\textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
+  }
+\label{fig:workflow}
+\end{figure}
+
+
+\begin{figure}[!ht]%[tbhp]
+\centering
+%\includegraphics[width=.8\linewidth]{fig2_alignment.pdf}
+\caption{\textbf{Superimposition can improve joint angle profile averaging.}
+Mean joint angle profiles of different forelimb joints ($[e]$: elbow, $[c]$: carpus joint) for the genera \textit{Equus} (brown, $\triangledown$), \textit{Lama} (blue, $\square$), and \textit{Giraffa} (yellow, $\circ$). These examples were chosen for their high sample size (more examples in Fig. \ref*{fig:examples}). See methods and supplementary tutorial \ref*{supp:tutorial} for nomenclature and definition of FCAS.
+\textbf{Upper row}: input data (''video aligned''). \textbf{Lower row}: after carpal superimposition using FCAS.
+\textbf{A} Forelimb joint angle profiles ($\alpha$) over time ($t$, stride cycle period $T$), centered around their temporal averages (gray horizontal axes) to emphasize temporal differences. Thick lines are genus averages for elbow (solid line) and carpus (dashed line) angles. Thin dotted lines indicate $\pm$standard deviation range of individual observations. Scale bar $22.5^{\circ}$, time axis $T$.
+\textbf{B} Mean (bars) and standard deviation (whiskers) of the joint angle temporal averages ($c_0$) per genus. This indicates the actual $y$-offset that was removed for visualization in (A) and (C). Angle values are to scale with (A).
+\textbf{C} The same angle profiles as in (A), but converted to the frequency domain via FSD. Whiskers indicate standard deviation. }
+\label{fig:superimposition}
+\end{figure}
+
+
+
+\begin{figure}[!hb]
+%\includegraphics[width = 16cm]{fig3_pca.pdf}
+\caption{\textbf{Bivariate plot of the Principal Component Analysis of elbow-carpus coordination visualizes a slice of the ungulate ''coordination space''. }
+The PCA is based on the genus average Fourier coefficients of relative elbow profiles after carpal superimposition.
+Gray grid lines on the biplot indicate the ($0.1$, $0.9$) quantiles of all observations; reconstructions were done on their intersections.
+Outset line plots on the margins represent these reconstructed angular profiles (black) at the quantile values for each component axis, relative to the reconstructed mean (gray).
+Their labels (circled numbers no. 1-4) are for reference in the text.
+Annotations on the plot mark the examples used in Figures \ref{fig:superimposition} and \ref*{fig:examples}.
+See Fig. \ref*{fig:more_pca} for further components and complete labeling of taxa.
+ }
+\label{fig:pca}
+\end{figure}
+
+
+
+\begin{table}[!ht]%[tbhp]
+\centering
+\caption{ \textbf{Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates} (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the angle profiles. }
+\begin{tabular}{l @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc}
+\toprule
+{} & \multicolumn{2}{c}{\underline{\textbf{PC1}}} & \multicolumn{2}{c}{\underline{\textbf{PC2}}} & \multicolumn{2}{c}{\underline{\textbf{PC3}}} & \multicolumn{2}{c}{\underline{\textbf{PC4}}} \\
+{\textbf{covariate}} &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ \\
+\midrule
+\textbf{[M] body length      } &                    -0.24 &  $10^{-1}$ &                    -0.17 &   $10^{0}$ &                    -0.31 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
+\textbf{[M] shoulder height  } &                    -0.19 &  $10^{-1}$ &                    -0.22 &  $10^{-1}$ &                    -0.33 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
+\textbf{[M] log(body mass)   } &                    -0.34 &      $\mathbf{10^{-2}}$ &                    -0.19 &  $10^{-1}$ &                    -0.28 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
+\textbf{[M] elbow-wrist      } &                     0.05 &   $10^{0}$ &                    -0.46 &      $\mathbf{10^{-4}}$ &                    -0.24 &  $10^{-1}$ &                     0.05 &   $10^{0}$ \\
+\textbf{[M] meta-/zeugopodial} &                     0.08 &   $10^{0}$ &                    -0.51 &      $\mathbf{10^{-6}}$ &                     0.01 &   $10^{0}$ &                     0.16 &   $10^{0}$ \\
+\midrule\textbf{[K] approx. speed    } &                     0.06 &   $10^{0}$ &                     0.11 &   $10^{0}$ &                     0.12 &   $10^{0}$ &                     0.15 &   $10^{0}$ \\
+\textbf{[K] duty factor      } &                     0.16 &   $10^{0}$ &                     0.40 &      $\mathbf{10^{-3}}$ &                     0.19 &  $10^{-1}$ &                    -0.16 &   $10^{0}$ \\
+\textbf{[K] clearance        } &                     0.49 &      $\mathbf{10^{-5}}$ &                    -0.02 &   $10^{0}$ &                     0.14 &   $10^{0}$ &                    -0.27 &  $10^{-1}$ \\
+\midrule\textbf{[E] habitat          } &                    -0.09 &   $10^{0}$ &                    -0.15 &   $10^{0}$ &                    -0.29 &      $\mathbf{10^{-2}}$ &                    -0.06 &   $10^{0}$ \\
+\textbf{[E] d.o.obstruction  } &                     0.33 &      $\mathbf{10^{-2}}$ &                    -0.20 &  $10^{-1}$ &                     0.10 &   $10^{0}$ &                    -0.06 &   $10^{0}$ \\
+\midrule\textbf{[A] amplitude        } &                     0.12 &   $10^{0}$ &                     0.47 &      $\mathbf{10^{-5}}$ &                    -0.70 &     $\mathbf{10^{-12}}$ &                    -0.08 &   $10^{0}$ \\
+\textbf{[A] phase            } &                     0.47 &      $\mathbf{10^{-5}}$ &                    -0.51 &      $\mathbf{10^{-6}}$ &                    -0.36 &      $\mathbf{10^{-3}}$ &                     0.13 &   $10^{0}$ \\
+\textbf{[A] residual         } &                     0.67 &     $\mathbf{10^{-11}}$ &                     0.17 &   $10^{0}$ &                     0.15 &   $10^{0}$ &                     0.36 &      $\mathbf{10^{-3}}$ \\
+\bottomrule
+\end{tabular}\bigskip
+\begin{flushleft}
+$r_{xy}$: Pearson correlation coefficient, \nolinebreak{''$p < \cdot$'':} p-value, order of magnitude. Bold numbers are below significance threshold ($p < 0.01$).
+\end{flushleft}
+\label{tab:correlations}
+\end{table}
+
+
+
+
+
+\FloatBarrier\pagebreak
+
+\subsection{Acknowledgements}
+The authors would like to thank all involved video providers for sharing material for this study on "youtube". 
+We also thank Jamie MacLaren for providing a Tapir video, and the owners (Jo Leroy, Kathleen Vercauteren) and caretakers of the Lamas and horse from which direct video material was obtained. 
+Jana Goyens, Jamie MacLaren, Maja Mielke and Sam Van Wassenbergh gave valuable feedback on the manuscript.
+\bigskip\\
+The authors declare that they have no conflict of interest.
+
+
+%________________________________________________________________________________________
+%	References
+%________________________________________________________________________________________
+
+\bibliographystyle{apalike}
+\bibliography{stripped.bib}

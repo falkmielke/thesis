@@ -1,0 +1,148 @@
+#+TITLE: The "Flying Femur"
+#+SUBTITLE: Computed Tomography and the Potential Facilitation of Inverse Dynamic Calculations
+#+AUTHOR: Falk Mielke
+#+DATE: <2023-03-07 Thu>
+
+#+SETUPFILE: org/latex_header.org
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+#+OPTIONS: toc:t
+
+#+STARTUP: noinlineimges showeverything entitiespretty
+@@latex:\clearpage@@
+#+ODT: <text:p text:style-name="PageBreak"/>
+
+
+* Abstract
+Here, I am going to write a summary of this extraordinary manuscript.
+
+@@latex:\clearpage@@
+
+* Introduction
+Until this point, this thesis has been busy with methodological development in terms of measuring kinematics.
+With Fourier-based methods and probabilistic models in place, one can
+  (i) quantify measured kinematics
+  (ii) simulate locomotion by predictive sampling of trained models.
+This is a full grasp at *how animal segments move*.
+Segments could be axial or peripheral parts of the animal which move as a unit (rigid- or pseudo-rigid bodies).
+
+
+Another aspect of locomotion is *why segments move*.
+This opens up the rabbit hole of elementary physics:
+#+begin_quote
+A rigid body will change its linear or angular momentum if there are external forces or external torques applied to it.
+#+end_quote
+This is also called the Conservation of Momentum.
+And the study of the conservation of momentum is also called "Dynamics", which is the broad topic of this chapter.
+Again, this will contain methodological considerations, backed up with actual measurements of at least a part of a piglet.
+
+In a nutshell:
++ Wrenches and quaternions are a useful computational tools for calculating rigid body dynamic models.
++ Balance Equations are the mathematical manifestation of conservation of momentum.
++ Reference frame considerations can simplify calculations; however, only static frame calculations result in correct joint moments.
++ Fictitious Forces are unbalanced change of momentum. If one intends to calculate balances in an accelerating frame, include four fictitious forces: D’Alambert, Euler, Coriolis, and the Centrifugal force.
++ Computed Tomography might be a shortcut to retrieve material constants which are crucial for the calculation of dynamics.
+
+
+Again, a lot of the herein summarized work is physics textbook knowledge, re-formulated to be more readily applied to animal locomotion.
+Again, the premise is "falsification": instead of assuming that CT scan data is useful to easily extract inertial properties of body segments, I will attempt to find flaws in that procedure.
+
+
+** Dynamics: Theory
+- forward and inverse dynamics
+
+** Screw Theory and Wrenches
+Dumas 2004, Lynch and Park 2017
+# http://mielke-bio.info/falk/posts/10.id_lmx0a_wrenches
+
+** Quaternions
+
+** Balance of Forces and Moments
+ conservation of linear and angular momentum
+ + FJ=mx¨+∂m∂xx˙x˙=mx¨
+ + MJ=Iω¨+ω˙×Iω˙
+
+** Mass
+resistance to linear acceleration
+
+** Mass Moment of Inertia
+resistance to angular acceleration
+Vector formula
+Generalized Steiner
+*** Conventional Methods
+*** Using CT scans
+citep:DuPlessis2013,Durston2022 https://doi.org/10.1242/jeb.242280
+
+** Reference Frames and Ficticious Forces
+ Take home message: Make sure, in this and all that follows, in what reference frame parameters are defined and whether they were transformed.
+ # http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces/
+
+ D’Alambert Force, Euler force, Centrifugal force, Coriolis force
+
+ # http://mielke-bio.info/falk/posts/15.id_lmx4_arm/
+ After all, this is how physicists formalize fictitious forces: I read that when Léon Foucault observed precession of his pendulum, no responsible external force could be found, but angular momentum of the pendulum changed. Coriolis Force rectified this discrepancy, and because Coriolis force comes with a rotating frame, this was evidence for the rotation of the earth.
+
+ Back to our question. Are there more than the four fictitious forces? Probably no. Remember the “five accelerations” derivation linked in the prequel notebook of this series. That derivation captures all the possible forms of momentum for which we have evidence.
+
+
+ I have encountered several types of definitions of fictitious forces during my initial attempts.
+
+ The first type is a practical one, which goes along the lines of “fictitious forces arise because an observer who is captured in the rotating frame is blind to the movement of the frame”. Yes, that is a valid description, but a disappointing definition: What else might the observer be blind to? How can we calculate something we are blind for? And why can’t I not always switch perspective in cases where I’m in charge of the data?
+
+ The second type of definition is a technical one: “fictitious forces need to be introduced to make balance equations work in the rotating reference frame”. That is also a valid point, yet it leaves similar questions as above: Which ones do I have to include when? Where do the formulas come from?
+
+ I have hinted at these aspects above. They certainly help to develop an intuition about fictitious forces, but for me they were not satisfactory. You can find these two categories scattered all over the Wikipedia articles about fictitious forces. Despite my rants herein, I’m not disappointed about Wikipedia, it is just sad that this confirmed my prior on that “Encyclopedia”. But I also see myself as a source of the problem: whereas for trained physicists it is often obvious which and how vectors add up, my humble, untrained mind needs some more explicit guidance. [update 2020/09/12] And although I’m using myself in a tautologous way here, those of you who read my first version of the notebook are witness that I could confidently ignore the D’Alambert force without noticing.
+
+ I found a third definition most convincing, yet it is more like a prescription than a definition. It is the one which I found in the workbooks by Frank Owen (five-term acceleration, see references).
+
+     Conceive a position vector to a point on a rigid body as a superimposition of the position vector of the reference frame attachment point (in static frame), and the movement of the point of interest relative to the attachment (in body frame).
+     Calculate component-wise time derivatives of that superimposed vector; use product rule, and make sure to incorporate time changes of reference frame basis vectors.
+     In the outcome, two acceleration components are intuitive cartesian superimpositions; the others depend on cross products of angular and linear motion parameters. Four of them are irritatingly labelled “fictitious”.
+     A corollary rule of thumb for those three: angular motion parameters (ω
+
+ and derivatives) stem from the static frame, whereas linear motion parameters (x
+
+     and derivatives) are best seen in the body frame.
+
+ [update 2020/09/12] Finally, after having finished my work on this series of notebooks, I would like to attempt another definition, which I think captures the inverse dynamics standpoint: Instead of being forces, Fictitious Forces represent a change of the momentum which is not captured by kinematics in the observer’s frame of reference. Instead of writing them on the side of the external forces (of which I think as the cause of a momentum change), I tend to put them on the “effect” side and would rather call them “unbalanced change of momentum” (“unbalanced” as in “not part of the balance”).
+
+ I had to write a couple of notebooks to come to that conclusion, and would be glad if you like to follow through. The fourth one will explain this fourth definition in more detail.
+
+ This preparational notebook has solved some puzzles which I encountered when starting to learn about fictitious forces. Make sure to keep track of your reference frames and reference points. Good (i.e. explicit, structured, well commented) programming style can facilitate this. And remember that, even if you think it is obvious which parameters you took in which transformation, make sure that others can reproduce your line of thought.
+
+ With these tools at our hands, we can advance to elementary examples. I’ll start by isolating Euler, i.e. with an example that should show the Euler force in isolation, in the next notebook. If you don’t mind the explanations, feel free to skip ahead to the code from the application to a general (n-link) limb.
+
+
+** Application: The N-Segment Piglet Limb
+# http://mielke-bio.info/falk/posts/16.id_lmx5_nlink
+
+* Results
+** Issue 1: Beam Hardening
+** Issue 2: Chemical Composition
++ water streaks on the scan
+** Issue 3: Marker Artifacts
++ helical scanning
+
+* Discussion
+** Which Inertia Component is Relevant?
+
+
+* References
+
+
+    Dumas, R., Aissaoui, R., & de Guise, J. A. (2004). A 3D generic inverse dynamic method using wrench notation and quaternion algebra. Computer methods in biomechanics and biomedical engineering, 7(3), 159-166. https://doi.org/10.1080/10255840410001727805
+
+    Dumas, R. (2019). 3D Kinematics and Inverse Dynamics , MATLAB Central File Exchange. Accessed July 1, 2020.
+
+    Lynch, K. M., & Park, F. C. (2017). Modern Robotics. Cambridge University Press. ISBN 9781107156302. http://www.modernrobotics.org
+
+    Meurer A., Smith C.P., Paprocki M., Čertík O., Kirpichev S.B., Rocklin M., Kumar A., Ivanov S., Moore J.K., Singh S., Rathnayake T., Vig S., Granger B.E., Muller R.P., Bonazzi F., Gupta H., Vats S., Johansson F., Pedregosa F., Curry M.J., Terrel A.R., Roučka Š., Saboo A., Fernando I., Kulal S., Cimrman R., Scopatz A. (2017). SymPy: symbolic computing in Python. PeerJ Computer Science 3:e103 https://doi.org/10.7717/peerj-cs.103
+
+    Moore, J., McMurry, R., Milam, B. (2016). Simulating Robot, Vehicle, Spacecraft, and Animal Motion. SciPy 2016 Tutorial. https://www.youtube.com/watch?v=r4piIKV4sDw. Accessed July 1, 2020.
+
+    Owen, F. (undated). Rotating reference frame and the five-term acceleration equation. Alpha Omega Engineering, Inc. web document. Accessed July 1, 2020.

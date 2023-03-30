@@ -1,91 +1,11 @@
-% Created 2023-03-30 Thu 13:49
-% Intended LaTeX compiler: pdflatex
-\documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{rotating}
-\usepackage[normalem]{ulem}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{capt-of}
-\usepackage{hyperref}
-\usepackage[english, american]{babel} % document language
-\usepackage[sort]{natbib} % citations
-\usepackage{apalike} % citations
-\usepackage{graphicx} % images
-\usepackage[hang,labelfont=bf,up,textfont=it,up]{caption}	% figure and table captions
-\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, columnsep=0.5cm]{geometry} % Document margins % hmarginratio=1:1
-\usepackage{amsmath}		% basic maths stuff
-\usepackage{amssymb}		% maths symbols
-\usepackage{amsfonts}		% maths fonts
-\usepackage{cancel} 		% mathematical canceling
-\usepackage{upgreek}		% non-italic greek letters
-\usepackage{enumerate}
-\usepackage{wasysym} % lightning and other symbols
-\usepackage{placeins}  	% for float barrier
-%\usepackage[margin={1cm,1cm}]{geometry} 		% page margins
-\usepackage{color}			% colors
-\usepackage{hyperref}		% automatic linkt for any references
-\usepackage{caption}
-\DeclareCaptionLabelFormat{adja-page}{\hrulefill\\#1 #2 \emph{(prev. page)}}
-\DeclareCaptionLabelFormat{continue-page}{\hrulefill\\#1 #2 \emph{(cont.)}}
-\DeclareCaptionLabelFormat{supplementary}{\\#1 #2 }
-\usepackage{pdflscape}		% landscape pages for big tables or figures, rotated in pdf export
-\usepackage[left]{lineno} 		% line numbers
-\usepackage{listings} % code blocks
-\usepackage{color}
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
-\tolerance=1
-\emergencystretch=\maxdimen
-\hyphenpenalty=10000
-\hbadness=10000
-\hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
-\captionsetup{margin=0.2cm, font=normal, labelfont=bf, textfont=sl} %
-\linespread{2} % Line spacing - Palatino needs more space between lines
-\setlength{\parindent}{0pt}
-\usepackage{fancyhdr} % Headers and footers
-\pagestyle{fancy} % All pages have headers and footers
-%\fancyhead{\vspace*{-3cm}} % Blank out the default header
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\rhead{\text{ }}
-\chead{\text{ }}
-% \footnotesize{\thepage / \pageref{LastPage}} \vspace{0.5cm}\\
-% }
-\lhead{\text{ }}
-\rfoot{\text{ }}
-\cfoot{\text{ \thepage }}
-\lfoot{\text{ }}
-\input{org/latex_definitions.tex}
-\author{Falk Mielke \href{mailto:falkmielke.biology@mailbox.org}{(falkmielke.biology@mailbox.org)}}
-\date{2023-03-30}
-\title{Memorandum: Probabilistic Modeling of Baboon Kinematics\\\medskip
-\large -- a tiny textbook about a fraction of statistical methodology --}
-\hypersetup{
- pdfauthor={Falk Mielke \href{mailto:falkmielke.biology@mailbox.org}{(falkmielke.biology@mailbox.org)}},
- pdftitle={Memorandum: Probabilistic Modeling of Baboon Kinematics},
- pdfkeywords={},
- pdfsubject={},
- pdfcreator={Emacs 28.2 (Org mode 9.6.1)}, 
- pdflang={English}}
-\begin{document}
-
-\maketitle
-\tableofcontents
-
 \clearpage
 
 
 \section{Preface}
-\label{sec:org5333ee6}
+\label{sec:orgcfa10a1}
 The purpose of this document is documentation and knowledge transfer.
 This is part of the process of preparing a manuscript on the 2D kinematics of olive baboons, yet the real manuscript will differ in structure and focus.
-The data set has been analyzed before \citep[currently under review, ][]{Druelle2021prep}, and the purpose of another upcoming manuscript is to extend the analysis to questions of \emph{posture} and \emph{coordination}.
+The data set has been analyzed before \citep[currently under review, ][]{Druelle2021}, and the purpose of another upcoming manuscript is to extend the analysis to questions of \emph{posture} and \emph{coordination}.
 To get a grasp on these additional research questions, a sophisticated statistical modeling procedure is required.
 In preparation, we realized that a significant amount of knowledge transfer is required to get all co-authors and interested readers up to level with the technical details and design decisions encountered on the way.
 
@@ -108,9 +28,9 @@ Enjoy reading!
 \FloatBarrier
 \clearpage
 \section{Introduction: Probabilistic Modeling}
-\label{sec:org8134ed1}
+\label{sec:org2074548}
 \subsection{Probabilistic Modeling and Other Statistics}
-\label{sec:org70dba4b}
+\label{sec:org0cc6a35}
 To approach probabilistic modeling, it is important to understand its relation to other areas of statistics, such as hypothesis testing.
 Many researchers have been primed on statistical hypothesis testing early during their education.
 Its goal is usually to make an informed choice of whether a hypothesis about the data is true or not.
@@ -196,7 +116,7 @@ In fact, they are often repeated iteratively.
 
 
 \subsubsection{Data Simulation}
-\label{sec:orgeb162fa}
+\label{sec:org2c774e4}
 Before going to the actual data, I prepare a simulated data set which roughly incorporates parameters and parameter relations.
 These realations are comparable to those I intend to model later.
 For example, imagine I hope to find an age-dependent bodymass slope, i.e. I expect that one of my variables (``\texttt{obs1}'') depends on bodymass (\texttt{bm}), but the strength of this dependence is different for each ageclass.
@@ -235,7 +155,7 @@ Yet even if the data happens to be on your hard drive already, better simulate l
 
 
 \subsubsection{Data Inspection}
-\label{sec:org9f431e7}
+\label{sec:orga128476}
 Before throwing complex models at the data, one might want to get a feeling of the parameters recorded with the data set.
 \begin{itemize}
 \item How many data points are there in different groups?
@@ -425,7 +345,7 @@ This feature can serve two relevant purposes, which are technically almost ident
 
 \begin{enumerate}
 \item \textbf{In Sample Predicition.}
-\label{sec:orgf469374}
+\label{sec:org369b808}
 Or: \textbf{Did my model shot hit the data?}
 After two weeks of exhaustive sampling (not uncommon in probabilistic statistics), one might get a ``trace'' of sampling values for a particular model.
 And ideally, one has stored them to disk (see \hyperref[workflow:deserialization]{deserialization}).
@@ -463,7 +383,7 @@ Even more: by sampling a high number of values, one can infer the \emph{distribu
 
 
 \item \textbf{Out Of Sample Prediction.}
-\label{sec:org6fd6381}
+\label{sec:org7e10c89}
 Take this one step further: what if the settings I choose are not part of the original data set?
 \textbf{Can the model make predictions beyond the data I fed it?}
 (Percussive playing skills in the guitar analogy\ldots{} or maybe time to admit that analogies can hardly be extrapolated beyond their scope.)
@@ -502,12 +422,12 @@ I omit presentation of the diagnostics in this memorandum, but you would probabl
 \FloatBarrier
 \clearpage
 \section{Application: Baboon Kinematics}
-\label{sec:orgc231682}
+\label{sec:orge39e02f}
 After this long, conceptual introduction, let us finally get to ``the meat'' and apply the procedure to a real data set with Python and \texttt{PyMC}.
 This requires me to gradually present the data which was acquired by François and colleagues, and what I made of it.
 
 \subsection{Data Preparation}
-\label{sec:orgf79659b}
+\label{sec:orgeaaa58c}
 \subsubsection{Data Overview}
 \label{intro:dataprep}
 Raw data is available upon request, and will be supplemented to future published manuscripts.
@@ -572,7 +492,7 @@ This has to regard their implicit hierarchical structure (\emph{subject} \(\righ
 
 
 \subsubsection{Segment- and Joint Angles}
-\label{sec:org9cd9253}
+\label{sec:orgd5b5698}
 In the parameter overview table, several angles are listed.
 Firstly, there is the trunk angle, which is a \textbf{segment angle}.
 A segment is a more or less rigid subunit of a body which lies between two joints, normally it is associated with a bone or skeletal unit.
@@ -657,7 +577,7 @@ PC3 (\(0.2 \%\)) & -0.32 & -0.62 & +0.72\\[0pt]
 
 \clearpage
 \subsection{Subject Parameters}
-\label{sec:org1d58cc7}
+\label{sec:orgb7153d3}
 The first order model parameters are the subject parameters, because they are characteristic and more or less constant for each of the animal subjects under research.
 The purpose of this chapter is to find out how they interrelate.
 
@@ -692,7 +612,7 @@ It is a rather simple one, modeling bodymass as a function of ageclass and sex.
 I will use it to settle some fundamentals about how I apply the modeling procedure herein.
 
 \subsubsection{The Bodymass Model}
-\label{sec:orgf1a8771}
+\label{sec:orge4d1e9b}
 Take the following linear model for bodymass, with bodymass \(\theta\), intercept \(\alpha\), data vectors \(v\), slopes \(\beta\) and residuals \(\epsilon\):
 
 \begin{equation} \theta \sim v_{1}\cdot\alpha + v_{male}\cdot\beta_{male} + v_{adol}\cdot\beta_{adol} + v_{inft}\cdot\beta_{inft} + \epsilon \label{eq:proportions} \end{equation}
@@ -711,7 +631,7 @@ I will explain all components in detail in the following paragraphs.
 
 \begin{enumerate}
 \item \textbf{Intercept \(\alpha\):}
-\label{sec:org8dc6f42}
+\label{sec:org034f04c}
 Each model ``starts'' with an intercept (though it wouldn't need to, or the intercept could be implicit).
 For continuous variables, the intercept is intuitive to understand: it is the observable value when the predictor is zero.
 With categorical variables, the intercept value is the value observed for a given ``reference'' set/selection of parameter values.
@@ -719,7 +639,7 @@ For example, in the bodymass model below, the intercept is approximately corresp
 The choice of reference is done by the statistician and arbitrary, and sometimes only visible by the category changes associated with slopes.
 
 \item \textbf{Slopes \(\beta\):}
-\label{sec:orgf435320}
+\label{sec:org2c291e4}
 Slopes quantify the change in the value of the modeled observable (e.g. bodymass) when changing along a parameter axis (e.g. sex from female to male).
 Some mathematical explanation:
 \begin{itemize}
@@ -729,14 +649,14 @@ Some mathematical explanation:
 \end{itemize}
 
 \item \textbf{Residual \(\epsilon\):}
-\label{sec:org1780f9d}
+\label{sec:orgbf53734}
 Even with all measured parameters, some unexplained variation remains in model of partly random processes.
 This can be measurement ``noise'', or simply unexplained variation.
 Its order of magnitude is estimated in the sampling procedure as the ``residual''.
 The terms ``residual'', ``epsilon'', and ``standard deviation'' (in model context) can be considered approximately synonymous (\emph{statistician-smiley}).
 
 \item \textbf{Prior Choice and Sampling:}
-\label{sec:org8a56bd5}
+\label{sec:orgf31f4ce}
 Because I use a probabilistic modeling framework (the python library \texttt{pymc3}), the actual values of the model parameters are determined in MCMC sampling (see ch. \ref{workflow:sampling}).
 This procedure requires start values (``priors''), for which I usually take the mean and standard deviation of the observed values (because the sampled model values should certainly fall in that range).
 Also, there is a whole lot of voodoo about setting the correct distribution type for a given parameter.
@@ -746,7 +666,7 @@ Finally, the MCMC sampling itself asks for some choices by the researcher.
 I chose something close to industry standard (No U-Turn Sampler ``NUTS''; sufficient tuning and sampling steps; twenty chains; Student's T distribution for the posterior) and verified \emph{ex post} that sampling went well (``hygiene'').
 
 \item \textbf{Model Comparison:}
-\label{sec:orgc2cd428}
+\label{sec:orgd46c837}
 I skip this here for clarity.
 Usually, one would have to argue why the chosen model is the most appropriate one (though of course limited by availability of parameters).
 More on it when we get to stride parameters.
@@ -754,12 +674,12 @@ For bodymass, the model choice is rather trivial, there is not many options but 
 I do not use leg length and BMI as predictors for bodymass, because they share a hierarchy level, are correlated (as shown below), and thus the idea of one predicting the other might falsely imply causality.
 
 \item \textbf{Data:}
-\label{sec:org204bc98}
+\label{sec:org71ae22a}
 Because there is usually only one bodymass per subject animal in our data set, the data set onto which I apply the bodymass model is reduced (\(17\) observations).
 For one animal which was measured at two bodymasses, the average value was used.
 
 \item \textbf{Transformations:}
-\label{sec:org68ea9fd}
+\label{sec:org1dc49e0}
 As an additional technical complication, bodymass (and the other body proportions) have to be transformed.
 For most body measures, negative values are implausible, e.g. a negative bodymass does not exist.
 Also, one can usually observe that the Normality assumption, or in our case a Normal prior distribution, is better met when log-transforming the values.
@@ -816,7 +736,7 @@ Usually, model comparison favors the use of a Normal posterior in such cases.
 
 
 \subsubsection{Multi-Level Modeling}
-\label{sec:org56153ae}
+\label{sec:org25b6e1a}
 For all following models, there is the option to include the bodymass parameter as a hierarchical (better: multi-level) parameter.
 This means that, when we have a model which includes a slope for (centered) bodymass, we actually make it three slopes (one for each ageclass). I will note this as \(\beta_{bm\mid age}\).
 
@@ -840,7 +760,7 @@ These will be handled below.
 
 
 \subsubsection{Multivariate Posterior Structures: Mor(e)phometrics}
-\label{sec:org2f46147}
+\label{sec:orgf2c37c2}
 Together with bodymass, I modeled leg length (ankle-knee-hip distance) and body mass index (BMI, bodymass divided by ankle-knee-hip-head distance).
 The model formula from above remains unchanged, except for the left side.
 But that, namely ``multiple parameters on the left side'', is a concept on its own.
@@ -930,7 +850,7 @@ On the other hand, I demonstrated that bodymass and leg length are slightly diff
 Hence, the question whether or not to include either, both, or none of these two parameters in the more complex models to come remains to be evaluated.
 
 \subsubsection{Posterior Predictive Sampling}
-\label{sec:orgee45309}
+\label{sec:org805e0cf}
 Because the body proportion problem involves still relatively few parameters, a rather complete visualization is possible (Fig. \ref{fig:bodyproportions}).
 Some observations:
 \begin{itemize}
@@ -951,7 +871,7 @@ For subsequent models, such plots are equally valuable, yet the occurrence of co
 
 
 \subsubsection{Summary: Subject Parameters}
-\label{sec:org60fa2b1}
+\label{sec:orge0c65f9}
 The example of a bodymass model has already taken us deep into the modeling world.
 We explored simple relations (bodymass as a function of ageclass and sex, and the body proportion cross correlations).
 This involved a linear model with rather few components.
@@ -963,7 +883,7 @@ All this was more a playground to rehearse and apply some basic modeling concept
 
 \clearpage
 \subsection{Spatiotemporal Stride Parameters}
-\label{sec:orga5c234d}
+\label{sec:org69bec74}
 With this knowledge about the subject parameteres, I will proceed to the next parameter category: the stride cycle parameters, also called spatiotemporal parameters. Those are:
 \begin{itemize}
 \item dutyfactor
@@ -980,12 +900,12 @@ The ``diml.'' indication above refers to ``dimensionless'', which means that the
 
 
 \subsubsection{Model Design}
-\label{sec:orgb39cce2}
+\label{sec:org554cfcf}
 As before, some design decisions should be justified.
 
 \begin{enumerate}
 \item \textbf{Parameter Correlation:}
-\label{sec:orgd635cb3}
+\label{sec:orgccc0e5d}
 The stride parameters are intrinsically correlated.
 This can have trivial reasons, such as their definition (e.g. speed is the product of distance and frequency).
 In other cases, it is at least physically and physiologically plausible (e.g. lower dutyfactor at higher speeds).
@@ -1015,7 +935,7 @@ trunk angle & \(+0.38\) * & \(-0.12\) & \(-0.27\) & \(+0.12\) & \(+0.07\) & \(1\
 
 
 \item \textbf{Reference Model:}
-\label{sec:org246fc19}
+\label{sec:orge7f3220}
 I will model the stride parameters as a function of sex, age and bodymass, i.e. all the relevant subject parameters.
 The goal is to find out how strides of a given subject are characterized, e.g. whether certain aspects of the subject lead to difference in their gait characteristics.
 
@@ -1047,7 +967,7 @@ Groupwise centering affects the data vector, however the bodymass slope is not a
 
 
 \item \textbf{Prior Choice:}
-\label{sec:orgd10c001}
+\label{sec:orgffbfe48}
 A Normal distribution was used for all the slopes, a multivariate Student's T for the observables.
 Informative priors (global mean and standard deviation) are used, which is a good heuristic to improve sampling without biasing the sampler.
 The multivariate block of observables is initialized with the empirical correlation (yet all three options of multivariate posterior were applied and compared, see below).
@@ -1055,7 +975,7 @@ The multivariate block of observables is initialized with the empirical correlat
 
 
 \subsubsection{Subject Parameters Affect Stride Characteristics}
-\label{sec:org5dac718}
+\label{sec:orge85b957}
 The stride parameter model quantifies how stride (or gait) characteristics in bipedal baboon walking are affected by subject parameters (Tab. \ref{tab:strideresults}).
 
 Clearance is highest in adult males of low bodymass.
@@ -1088,7 +1008,7 @@ trunk angle & \(+0.67\) & \(+0.14\) * & \(-0.12\) & \(-0.20\) * & \(+0.10\) & \(
 
 
 \subsubsection{Stride Parameter Two Step Predicton}
-\label{sec:org307cf75}
+\label{sec:org3879560}
 The posterior prediction of stride parameters holds an additional complication: as shown in the body proportion model, we now have interdependent predictors (i.e. bodymass might depend on age and sex, though note that it is groupwise centered).
 Therefore, two consecutive steps of posterior prediction are necessary: first predict a number (e.g. \texttt{n = 1000}) of bodymasses, then based on those samples predict stride parameters.
 For a given setting for sex and ageclass, the workflow is as follows.
@@ -1123,7 +1043,7 @@ The data and predictions are overall consistent with the effects identified by t
 
 
 \subsubsection{Stride Parameter PCA in Posterior Prediction}
-\label{sec:org8de0b98}
+\label{sec:org82b0840}
 Due to the intrinsic correlation of stride distance, stride frequency, and speed, it is an option to submit them to a PCA for optional dimensionality reduction.
 In posterior predictive sampling, the same PCA must be used to transform the samples to PCA space.
 
@@ -1192,7 +1112,7 @@ Combined with the long duration of MCMC sampling, this can be prohibitive, but p
 
 
 \subsubsection{Hierarchical Components (``Random'' Effects)}
-\label{sec:orgd4bc8c9}
+\label{sec:org86c8327}
 Above, I have touched on the concept of a hierarchical parameter (\(bm\mid ageclass\)), and in fact it might be chosen here over the current reference.
 Other hierarchical structures are possible and should be included if that is indicated by model comparison.
 
@@ -1209,14 +1129,14 @@ Note that this sampling problem would not become apparent in least squares model
 
 
 \subsubsection{Summary: Stride Parameters}
-\label{sec:orge3b6141}
+\label{sec:org0d94e4f}
 The presented findings on stride parameters are substantial insights into the way in which spatiotemporal characteristics of gait in \emph{Papio anubis} are affected by sex, ageclass and bodymass.
-These findings are interesting by themselves and were part of the prior research on the data set \citep[][]{Druelle2021prep}.
+These findings are interesting by themselves and were part of the prior research on the data set \citep[][]{Druelle2021}.
 They are re-iterated here with a different modeling framework and serve to exemplify important statistical concepts, most importantly (two-step) posterior predictive sampling and model comparison.
 
 \clearpage
 \subsection{Joint Angle Profiles}
-\label{sec:org3f9d5f7}
+\label{sec:orgc82aa48}
 The remaining classes of model parameters (Tab. \ref{tab:parameters}, ch. \ref{intro:dataprep}) are posture and coordination.
 In this chapter, I will briefly describe how they are acquired, before even briefer presenting the results of probabilistic models which quantify their dependence on subject and stride parameters.
 
@@ -1226,7 +1146,7 @@ Its purpose is to round off the baboon story and provide the basis for discussio
 
 
 \subsubsection{Quantifying Posture and Coordination}
-\label{sec:org7539cdc}
+\label{sec:orgb18a99b}
 Among the most relevant outcomes of digitized videos and kinematics are joint angles.
 Their temporal profiles, i.e. the angle over time, and how they change for different settings or subjects, can yield insights on coordination and motor control.
 In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[cf.][]{Mielke2019}.
@@ -1268,7 +1188,7 @@ To summarize: by neat mathematical tricks, we are able to extract direct quantit
 
 
 \subsubsection{Model Design}
-\label{sec:orged30808}
+\label{sec:orga2e576d}
 Posture and coordination are technically similar for the model procedure.
 However, they depend differently on the available predictors.
 Furthermore, they differ in posterior design: because coordination observables were derived from a PCA (which is an orthogonal transformation), these parameters are non-correlated per definition - no multivariate posterior necessary.
@@ -1367,7 +1287,7 @@ Interesting results are anticipated by the comparison: for example, the trunk an
 
 \clearpage
 \subsubsection{Lots of Figures}
-\label{sec:org82fbe17}
+\label{sec:org00d6433}
 The ``statistics'' part of this journey ends here, where the biological discussion begins.
 Following below is a series of figures and tables which I will leave uncommented, to open a discussion, if you like.
 
@@ -1455,7 +1375,7 @@ PC8 & \(-0.01\) & \(+0.03\) & \(+0.01\) & \(+0.01\) & \(-0.06\) & \(+0.01\) & \(
 
 \clearpage
 \subsubsection{Lots of Questions}
-\label{sec:orgdff6592}
+\label{sec:orgc1e641b}
 The results of in-sample prediction of joint angle profiles in the presented form (Fig. \ref{fig:japprediction}) mainly serve to confirm whether a model was correctly tuned to the data or not.
 But this capability also opens up a whole set of questions for which the original data set might have been too fragmented or complex.
 Here is one example.
@@ -1496,7 +1416,7 @@ As shown above, the prerequisite is a well-fit probabilistic model of the phenom
 \FloatBarrier
 \clearpage
 \section{Summary}
-\label{sec:orgf23bb1a}
+\label{sec:org527d8db}
 With this ``tiny textbook'', I attempted to plant the seed which will grow into your love for the beauty of probabilistic modeling.
 Alternative (and less ambitious) claim: you could call this my illustrative/colloquial/desperate attempt to explain what I think when I hear or talk ``statistics''.
 
@@ -1515,4 +1435,3 @@ I am more than happy to consider all of them.
 
 \bibliographystyle{org/apalike}
 \bibliography{org/library.bib}
-\end{document}

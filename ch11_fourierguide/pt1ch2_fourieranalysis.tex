@@ -1,85 +1,6 @@
-% Created 2023-03-30 Thu 12:50
-% Intended LaTeX compiler: pdflatex
-\documentclass[10pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{rotating}
-\usepackage[normalem]{ulem}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{capt-of}
-\usepackage{hyperref}
-\usepackage[american]{babel} % document language
-\usepackage[sort]{natbib} % citations
-\usepackage{apalike} % citations
-\usepackage{graphicx} % images
-\usepackage[hang,labelfont=bf,up,textfont=it,up]{caption}	% figure and table captions
-\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, columnsep=0.5cm]{geometry} % Document margins % hmarginratio=1:1
-\usepackage{amsmath}		% basic maths stuff
-\usepackage{amssymb}		% maths symbols
-\usepackage{amsfonts}		% maths fonts
-\usepackage{cancel} 		% mathematical canceling
-\usepackage{upgreek}		% non-italic greek letters
-\usepackage{enumerate}
-\usepackage{wasysym} % lightning and other symbols
-\usepackage{placeins}  	% for float barrier
-%\usepackage[margin={1cm,1cm}]{geometry} 		% page margins
-\usepackage{color}			% colors
-\usepackage{hyperref}		% automatic linkt for any references
-\usepackage{caption}
-\DeclareCaptionLabelFormat{adja-page}{\hrulefill\\#1 #2 \emph{(prev. page)}}
-\DeclareCaptionLabelFormat{continue-page}{\hrulefill\\#1 #2 \emph{(cont.)}}
-\DeclareCaptionLabelFormat{supplementary}{\\#1 #2 }
-\usepackage{minted}		% code syntax highlighting, I think
-\usepackage{pdflscape}		% landscape pages for big tables or figures, rotated in pdf export
-\usepackage{lineno} 		% line numbers
-\usepackage{listings} % code blocks
-\usepackage{color}
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
-\tolerance=1
-\emergencystretch=\maxdimen
-\hyphenpenalty=10000
-\hbadness=10000
-\hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
-\captionsetup{margin=0.2cm, font=normal, labelfont=bf, textfont=sl} %
-\linespread{2} % Line spacing - Palatino needs more space between lines
-\setlength{\parindent}{0pt}
-\usepackage{fancyhdr} % Headers and footers
-\pagestyle{fancy} % All pages have headers and footers
-%\fancyhead{\vspace*{-3cm}} % Blank out the default header
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\rhead{\text{ }}
-\chead{\text{ }}
-% \footnotesize{\thepage / \pageref{LastPage}} \vspace{0.5cm}\\
-% }
-\lhead{\text{ }}
-\rfoot{\text{ }}
-\cfoot{\text{ \thepage }}
-\lfoot{\text{ }}
-\input{org/latex_definitions.tex}
-\author{Falk Mielke \href{mailto:falkmielke.biology@mailbox.org}{(falkmielke.biology@mailbox.org)}}
-\date{2023-03-30}
-\title{Fourier Methods in the Quantitative Analysis\linebreak of Locomotor Kinematics and Coordination\\\medskip
-\large -- a review, and a case study --}
-\hypersetup{
- pdfauthor={Falk Mielke \href{mailto:falkmielke.biology@mailbox.org}{(falkmielke.biology@mailbox.org)}},
- pdftitle={Fourier Methods in the Quantitative Analysis\linebreak of Locomotor Kinematics and Coordination},
- pdfkeywords={},
- pdfsubject={},
- pdfcreator={Emacs 28.2 (Org mode 9.6.1)}, 
- pdflang={English}}
-\begin{document}
-
-\maketitle
 
 \section{Abstract}
-\label{sec:orgdd19678}
+\label{sec:org3ea498f}
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
 They would be particularly useful in the analysis of locomotor kinematics, where movements can usually be broken down into repetitive cycles.
 We herein repeat the basics of Fourier analysis and transformation to the frequency domain by reviewing previous studies which applied it in some form in the field of locomotor biomechanics.
@@ -90,14 +11,11 @@ The results are complementary to the prior analysis, and we find the capability 
 
 
 \FloatBarrier\clearpage
-\tableofcontents
-
-\FloatBarrier\clearpage
 \section{Introduction}
 \label{intro}
 
 \subsection{Recurring Solutions}
-\label{sec:orgb106f07}
+\label{sec:org10ede19}
 In 1822, a French mathematician initiated the remarkable discovery that any continuous signal, no matter how complex, can be represented by a sum of relatively simple trigonometric functions \citep{Fourier1822}.
 Despite some initial limitations which were mended by scientists to follow, Fourier's work opened the door to the frequency domain.
 Fourier analysis has become a widely-used tool in physics and engineering, whereas biologists have only occasionally made the transformation.
@@ -117,7 +35,7 @@ The rich spectrum of Fourier-based methods comprises versatile techniques which 
 
 
 \subsection{Fourier Series}
-\label{sec:org461d27e}
+\label{sec:org276a6b8}
 
 \begin{figure}[pt]
 \centering
@@ -176,14 +94,14 @@ The capital sigma tells mathematicians that this is a series, and thus the equat
 
 At first, the analytical formula might seem quite complex for everyday application, and computer code might be more usable.
 In appendix \ref{appendix:code} and in the supplements, we provide code for Python, R and Matlab which can just be copied and used\footnote{The "order" parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
-\begin{minted}{python}
+\begin{lstlisting}{python}
 coefficients = FourierSeriesDecomposition(time, signal, order)
-\end{minted}
+\end{lstlisting}
 
 It can be inverted (just as the analytical formula, see below):
-\begin{minted}{python}
+\begin{lstlisting}{python}
 signal = FourierSeriesRecomposition(coefficients, time)
-\end{minted}
+\end{lstlisting}
 
 Knowing the assumptions and limitations (see below) and paying attention to the data types and formats, these functions can be simply applied to transform between the time- and frequency domain.
 
@@ -265,7 +183,7 @@ Not all of the reported properties of Fourier methods are directly linked to lit
 
 
 \subsection{Not a Regression}
-\label{sec:orgd864c52}
+\label{sec:orged49846}
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
 A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters with clever adjustment rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are adjusted so that the formula best describes the observed data relation of `y` and `x`.
@@ -303,7 +221,7 @@ Though both procedures could be applied to stride cycle kinematics, \textbf{FSD 
 
 
 \subsection{Time Scale Independence}
-\label{sec:org281734d}
+\label{sec:org18025b1}
 Another favorable property follows from the cyclicity: \textbf{Fourier coefficients are independent of temporal scale or sampling}.
 Due to the normalization mentioned above, the FSD of the signal does not contain any information about the original duration of the signal (e.g. stride duration), nor does it matter much where the cycle started.
 On the inverse FSD, a new time frame and temporal sampling must be chosen.
@@ -375,7 +293,7 @@ The bottom line is that, in steady state locomotion, the \textbf{periodicity ass
 
 
 \subsection{Reversibility}
-\label{sec:orgcaed495}
+\label{sec:orgfb5d796}
 Some data operations can be undone (math.: invertible, i.e. reversible), others not.
 For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
 Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
@@ -419,7 +337,7 @@ When implementing a version of the equations above in computer code, a good chec
 And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often \textbf{efficient to store} kinematic data in the form of FSD coefficients.
 
 \subsection{Choice of Order}
-\label{sec:org1d647e2}
+\label{sec:orgff5edd5}
 How to decide how many coefficients should be retained?
 That number is the ``order'' of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
@@ -437,7 +355,7 @@ The stride cycle is the defining time interval, and normally all elements move i
 
 
 \subsection{Affine Components}
-\label{sec:orgde9a0a3}
+\label{sec:org05eb5a7}
 Some attributes of a signal are emphasized by Fourier methods.
 Those can be summarized intuitively as those attributes of the signal which can be changed without altering the ``perceived shape'' of the signal.
 
@@ -468,7 +386,7 @@ What remains after standardization, i.e. after isolation of the affine component
 In the case of joint angle profiles, this remainder can be considered coordination \emph{sensu strictu} \citep{Mielke2019,Mielke2022}.
 
 \subsection{Multivariate Analysis}
-\label{sec:orgfb5510c}
+\label{sec:org8b03db5}
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
 Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
 Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
@@ -562,7 +480,7 @@ The transformation should be inverted, and original and re-transformed joint ang
 \end{figure}
 
 \subsection{Multivariate analysis}
-\label{sec:org42a6375}
+\label{sec:org10a29bf}
 Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
 The conventional next step is to analyze their relation to each other.
 
@@ -591,7 +509,7 @@ Thus, the PCA outcome essentially contains the whole of what was captured by the
 
 
 \subsection{Statistics and Modeling}
-\label{sec:orgda844fc}
+\label{sec:org4c012ba}
 Despite the direct link to the raw data, the data table resulting from PCA might seem abstract.
 Nevertheless, those values are useful, because they are much more compact than the original two-dimensional time series.
 And this compactness is crucial for statistical testing and modeling, for which computational complexity can be restrictive.
@@ -691,7 +609,7 @@ This is an example how the Fourier Series can be implemented in the Python progr
 Similar implementations for R and Matlab are provided ``ready-to-use'' in the Supplementary Material.
 
 \footnotesize
-\begin{minted}[]{python}
+\begin{lstlisting}
 def FourierSeriesDecomposition(time, signal, order):
     # calculate the Fourier Series decomposition of a signal,
     # given the sample time array ("time")
@@ -715,9 +633,9 @@ def FourierSeriesDecomposition(time, signal, order):
 
     return fsd
 
-\end{minted}
+\end{lstlisting}
 
-\begin{minted}[]{python}
+\begin{lstlisting}
 def FourierSeriesRecomposition(coefficients, output_time):
     # reconstruct a signal from its frequency space representation
     # i.e. take coefficients list and return the signal at given output_time points
@@ -739,10 +657,8 @@ def FourierSeriesRecomposition(coefficients, output_time):
                                  ]))
     return numpy.real(signal)
 
-\end{minted}
+\end{lstlisting}
 
-\footnotesize
 
-\bibliographystyle{org/apalike}
+\bibliographystyle{apalike}
 \bibliography{literature.bib}
-\end{document}
