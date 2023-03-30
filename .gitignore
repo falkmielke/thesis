@@ -2,6 +2,7 @@
 /build/
 /figures/
 ch*/figures/
+ch*/data/
 */general_intro_main.bbl
 *.pdf
 *.xcf

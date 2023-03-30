@@ -1,0 +1,53 @@
+#+BIBLIOGRAPHY: literature.bib
+
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+The analogy of limbs and a pendulum was established early on citep:Weber1836,Braune1895, and maybe that is why Fourier Series was immediately among the relevant considerations for analysis.
+To our knowledge, the first formal application of it was by Nikolas A. Bernstein citep:Bernstein1927a,Bernstein1935, who in the early years of his work was concerned with methodological advances in measuring motor actions citep:Bongaardt2000.
+Bernstein suggested and applied a trigonometrical sum, which consisted only of sines and bares some resemblance in form to a Taylor approximation.
+
+In his later work, Bernstein advocated a hierarchical organization of motor control @@latex:\citep[\textit{cf.}][]{Bongaardt2000}@@.
+This topic was taken up by studies in the field of motor learning, which would find evidence of higher order harmonics being affected by locomotor learning citep:Gallistel1982,Marteniuk1983.
+Their methodology is overeall similar to that of Bernstein, yet improved by heuristics and standardization citep:Jackson1979,Porges1980.
+The use of Fourier methods for asserting gait symmetry and variability were recognized citep:Soudan1982.
+
+
+Van Weeren /et al./ applied Fourier Series to measure skin marker displacement, not joint angles citep:vanWeeren1992, yet extracted the coefficients with a regression instead of direct transformation (see below).
+Schendel and colleagues quantified inter-vertebral angles with a sine-cosine Fourier Series citep:Schendel1995, again with a computational regression.
+It was found that relatively few harmonics can be sufficient to detect symmetry and lameness in horses citep:Audigie1999,Peham1996.
+Others have applied a Fourier Series to the segment angles of limb segments citep:Grasso2000, for example to infer amplitude and phase relations.
+Fourier Series has recently been applied to the specific analysis of human running citep:Skejo2021.
+
+
+Two studies stand out from the previously mentioned, conventional uses of Fourier Series.
+citet:Pike2002 have made use of the data transformation to perform multivariate, quantitative comparison of kinematics across a broad range of taxa.
+Their focus lies not on the method itself and the generated coefficients, but rather on downstream data processing methods.
+Another hallmark study in terms of advocating Fourier Series in locomotor research is that of citet:Webb2007.
+The authors provide a comprehensive introduction to the method, list its advantages and fields of application as well as future perspectives.
+Thereby, the article has outstanding educational value for those attempting to find a start with the method.
+
+
+With the rise of computational approaches, inverse dynamic modelling of human gait was facilitated by transforming to the frequency domain citep:Ren2007; pattern recognition and classification methods were applied @@latex:\citep[e.g.][]{Mostayed2008}@@.
+Along these lines, Fourier Series was used to get a frequency spectrum and compute development- and pathology related change in overall locomotor frequency @@latex:\citep[e.g.][]{Kurz2011}@@.
+Multi-Dimensional variants of Fourier analysis for two angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D angles using Quaternions citep:Kenwright2015 point at promising future directions.
+
+
+Finally, recent work by the authors has expanded on the aspect of multi-variate analysis and favorable data properties in the frequency domain citep:Mielke2019,Mielke2023.
+
+
+Overall, although some references exist, the studies using Fourier Analysis are sparse among locomotion literature.
+Authors who apply the technique tend to emphasize its usefulness, but often seem to be unaware of previous implementations.
+Few studies have explored downstream analysis of the Fourier coefficients.
+Confusions about mathematical terminology (e.g. "series" or "transform", "transformation" or "regression) complicate the situation.
+To summarize, variability in the use of Fourier Series arises from the following questions:
++ Which signals to use? (joint/segment angles)
++ How to apply the transformation? (no regression required, see below)
++ Which form and implementation to use? ("Series" vs. "transform", "trigonometric" versus "complex exponential" form)
++ If and how to process data in the frequency domain? (multivariate analysis, modeling)
++ How many coefficients to retain? (order)
++ The possibility of inverting FSD has been neglected, maybe in consequence of the above.
+
+All these questions are the purpose of this review, and will be adressed below.

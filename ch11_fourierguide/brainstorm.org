@@ -1,0 +1,51 @@
+#+title: Brainstorm: Fourier Series in Terrestrial Locomotion
+#+author: Falk Mielke
+#+date: 20220608
+
+* Properties
+** [✓] time scale independence, but timing preserved: standardized form
+** [✓] filtering, but retaining variance
+** [✓] compression/storage
+** [✓] reversibility
+** [✓] affine components
+** [✓] there might be physical reasons why it works (oscillating rigid bodies)
+
+* Misconceptions
+** [✓] Not A Regression: it is precise
+** [✓] Not FFT | DFT?
+** [x] trigonometric and complex representation
+** [✓] Complement Collective Variables
+** [✓] Not the only technique (e.g. HHT)
+
+* Applications
+** Joint Kinematics
+** other signals: Forces, EMG, phase plots (2D)
+** Forward Dynamics / Robotics
+** Variability (Martin, Martin, Tsang)
+
+* Purpose
+** pattern recognition and classification ("abnormal", gait, species comparison)
+** multivariate analysis
+** kinematic prediction: interpolation and extrapolation
+
+* Pitfalls/Design Decisions
+** [✓] FFT and FSD
+** [✓] making signal cyclical
+** [ ] joint vs segment angles
+** [ ] order
+** [ ] temporal alignment/phase
+** [ ] three-dimensional angles
+** [?] Continuity in the frq dom: can a slowly changing td signal jump in the fd? singularities?
+
+
+* TODO list [1/1]
++ [X] check "running in circles"
+
+
+Martin, A.E., Gregg, R.D., 2016. Incorporating Human-Like Walking Variability in an
+HZD-Based Bipedal Model. IEEE Trans. Rob. 32 (4), 943–948. https://doi.org/10.1109/TRO.2016.2572687.
+Martin, A.E., Villarreal, D.J., Gregg, R.D., 2016. Characterizing and modeling the
+joint-level variability in human walking. J. Biomech. 49 (14), 3298–3305.
+https://doi.org/10.1016/j.jbiomech.2016.08.015.
+Tsang, D.J., Lukac, M., Martin, A.E., 2019. Characterization of statistical persistence
+in joint angle variation during walking. Hum. Mov. Sci. 68, (October). https://doi.org/10.1016/j.humov.2019.102528 102528.

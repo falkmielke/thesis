@@ -1,0 +1,239 @@
+#+BIBLIOGRAPHY: literature.bib
+
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+A lot of the text below is written from the applied perspective of a biologist, who used the transformation and its inverse to actual data.
+Not all of the reported properties of Fourier methods are directly linked to literature references, but most general courses and textbooks cover these concepts @@latex:\citep[e.g.][]{Bracewell2000,Osgood2007,Osgood2019}@@.
+
+
+* Not a Regression
+As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
+A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters with clever adjustment rules.
+An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are adjusted so that the formula best describes the observed data relation of `y` and `x`.
+Typical optimization algorithms are the Nelder-Mead simplex citep:Nelder1965 or variants of the BFGS algorithm citep:Broyden1970,Fletcher1970,Goldfrab1970,Shanno1970,Zhu1997.
+Though it is immensely useful, regression has several technical disadvantages: convergence is not guaranteed, start values are required and might affect the result, the algorithm might get stuck in local optima, accuracy is finite, the iterative procedure is computationally expensive, and reversibility requires the inverse function and another regression.
+Some of these disadvantages are emphasized when working with trigonometric functions.
+
+
+*Fourier Series Decomposition is not a regression.*
+Determining the "parameters", i.e. Fourier coefficients, works by eqn. \eqref{eqn:fourier_coefficients}, which can be directly translated to computer code (see above and appendix \ref{appendix:code}).
+The procedure is deterministic, exact, and reversible; no start values are required.
+The trigonometric formulas provided in many publications resemble regression models, but applying a regression procedure is not necessary.
+We will demonstrate the overall procedure below and provide code for some relevant scientific scripting languages as proof of concept.
+
+
+* Relation to Fourier Transform
+:PROPERTIES:
+:CUSTOM_ID: properties:transform
+:END:
+As discussed above, Fourier Series Decomposition (FSD) requires a signal of finite length which starts and ends at the same value (periodicity).
+It computes a discrete spectrum of the whole function, i.e. the amplitudes for each harmonic.
+A generalization of FSD is the Fourier Transform, which does not assume periodicity, and which can be applied to signals of indefinite length by shifting a computation window along the signal.
+Fourier Transform yields continuous spectra, measuring frequency content in units related to absolute time.
+When applied in a sliding window, Fourier Transform provides a spectrogram of the signal, i.e. the changing contribution of different frequency components to the signal over time.
+The minimum frequency is limited by the window width, the maximum frequency is determined by the sampling rate of the signal citep:Shannon1949.
+Fast Fourier Transform (FFT) is the most common algorithm for computation @@latex:\citep[\textit{cf.}][]{Heideman1984}@@, and FFT is readily available in most programming environments.
+Note that there are many other such transforms which circumvent some limitations of FFT or might be otherwise useful in research, such as the S-Transform citep:Stockwell1996,Brown2010 or Empirical Mode Decomposition with the Hilbert-Huang Transform citep:Huang1998.
+
+
+The result of FFT on a single window is a quasi-continuous frequency spectrum, and the frequencies are related to absolute time.
+Because of this, joint angle profiles which look exactly identical, but differ in stride duration, would have different frequency spectra.
+In contrast, FSD only considers harmonics, which are the integer multiples of the signal period.
+Therefore, the outcome of FSD is usually a much shorter array of numbers (Fourier coefficients).
+The FSD formula involves a normalization for the signal period (i.e. stride cycle duration), and thus strides of different duration can be directly compared (but see below).
+FSD also avoids problems of FFT which are due to windowing.
+Though both procedures could be applied to stride cycle kinematics, *FSD is favorable if the periodicity/cyclicity assumption holds*.
+
+
+* Time Scale Independence
+Another favorable property follows from the cyclicity: *Fourier coefficients are independent of temporal scale or sampling*.
+Due to the normalization mentioned above, the FSD of the signal does not contain any information about the original duration of the signal (e.g. stride duration), nor does it matter much where the cycle started.
+On the inverse FSD, a new time frame and temporal sampling must be chosen.
+It is thus possible to re-sample the time line of a measurement by transforming it to the frequency domain, and then back with a different timeline.
+
+
+In consequence, FSD is useful for homogenizing and comparing signals of variable duration.
+This can be advantageous, if groups or paradigms of variable stride durations are to be compared.
+If discarding that information is unintended, "duration" can simply be retained as a separate variable.
+The same holds for speed and other collective variables which are related to the temporal structure of the signal.
+
+It follows that *Fourier coefficients do not replace collective variables (e.g. duration, speed), but complement them*.
+In case of joint angle profiles, Fourier coefficients capture the kinematics, while collective variables quantify the system outcome as a whole.
+Both are related by morphology (i.e. limb segment dimensions), which is another relevant class of variables that can and should be associated with kinematics in modeling approaches.
+
+
+* Approximate Periodicity
+:PROPERTIES:
+:CUSTOM_ID: properties:endstart
+:END:
+How "flexible" is the periodicity assumption?
+Motor behavior underlies variability citep:Bernstein1935, thus one might never measure a perfect end-start match.
+Fourier Series Decomposition works on noisy signals, yet it should be assured (as a technical requirement) that the end-start-difference is smaller than the white noise.
+There are a few common strategies to accomplish this if it is not given, and it has to be discussed how these strategies affect the outcome.
+
+
+
+Firstly, one could ignore a start-end-difference, and bluntly apply FSD.
+The algorithm assumes periodicity, but the formula has no means to check this assumption, and will hence "connect" the last and first sample.
+This would lead to an abrupt change, which demands high order harmonics, which will show in the spectrum.
+However, abrubt changes from discontinuities are not physiological, so those values can be considered an artifact.
+
+
+As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and concatenate it to the end of the original signal.
+This could be visualized as a rotation of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes cumulating to zero, and the signal ending where it started.
+This method is common in the Fourier analysis of ground reaction force measurements citep:Schneider1983,Alexander1980, where data usually starts and ends at zero.
+It nihilates the signal mean (zero'th component) and shifts all consecutive harmonics up by one due to period doubling.
+The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant infromation of the signal.
+
+
+A third method to mend end-start differences is to simply spread them over the whole period of the signal citep:Mielke2019.
+This can be achieved in a computationally efficient way by subtracting an array of numbers from the signal which is linearly increasing from zero to the end-start difference, and which has the same number of samples as the signal (pseudo-algorithm: ~signal -= linspace(0, end-start, number_of_samples)~).
+For this to be valid, it must be ensured that the end-start-difference is negligible in magnitude, non-physiological, and non-systematic.
+If those are givens, spreading the difference over the cycle is least invasive with regard to the outcome coefficients.
+As with the previous method, this smoothes the signal and reduces higher order components, yet without the caveat of altering the relation of relevant harmonics.
+
+
+
+#+CAPTION: *Stride cycle end-start matching.* A stride cycle can be defined as the time interval between two frames which have the highest similarity in joint configuration and enclose exactly one swing and stance phase. (A) Putative start and end frame configurations, superimposed onto the original video frames. Several frames are candidates for cycle end, indicated by the series of cross markers. (B) Superimposition of end frame candidates onto the reference start frame, using Procrustes Superimposition. Only the axial line points (head to toe) are used for superimposition. (C) Configuration difference (measured as Procrustes distance \(pd\), shifted by the arbitrary formula \(log\left(pd*10^3+2\right)\) for visualization) over the whole stride cycle for different candidate start frames. (D) A heatmap of configuration difference can identify mathematically optimal stride cycle intervals. Dashed black crosshair: cycle start and end, conventionally determined by limb touch down. Blue crosshair: start and end frame with maximal configuration similarity, i.e. minimal Procrusted distance of the configurations at candidate frames.
+#+ATTR_LATEX: :placement [pt]
+#+LABEL: fig:endstart
+[[file:./figures/f3_endstart_Procrustes.pdf]]
+
+If used with caution, the third method is the favorable one for applications on locomotor kinematics.
+However, with that sort of data, there is another relevant method to minimize end-start-differences.
+The *choice of where the start and end of a cycle lie* is conventionally made by finding the (left hind-limb) touchdown.
+This time point is more or less distinctly visible on videos, and might be a requirement for data comparison.
+Yet, mathematically, that is just an arbitrary point in the cycle, and biomechanically, the configuration of the limb can be different on two touch downs (two strides might instead have higher cross-resemblance just before touchdown, or at mid-stance; Fig. \ref{fig:endstart}).
+The term configuration herein describes the relative spatial arrangement of a set of points of interest or markers.
+Thus, if emphasis of the analysis lies more on the cyclic character of the stride, and if researchers find it valid to choose a different point for start and end of the cycle, then optimal points could be found automatically by cross-comparing the configurations of the whole limb in a sufficient frame range around the limb touch downs @@latex:\citep[as applied in][]{Mielke2019,Mielke2022}@@.
+This can be achieved by taking all relevant points digitized in the videos (treating them in each frame as a geometric shape; Fig. \ref{fig:endstart}B) and calculating the Procrustes Distance between those frames or shapes citep:Rohlf1990.
+That Procrustes Distance is a direct measure for the configuration difference between frames (Fig. \ref{fig:endstart}C).
+In a cross-comparison, the two frames which have least Procrustes Distance are candidates for start and end of the cycle (Fig. \ref{fig:endstart}D), and should be verified by visually superimposing the video frames.
+Conversely, whether or not there are two such frames with a sub-threshold Procrustes Distance, and at what time in the cycle they appear, can be a useful proxy to confirm steady-state locomotion.
+
+
+All these are technical tricks which usually improve the data set quality and consistency.
+The bottom line is that, in steady state locomotion, the *periodicity assumption is usually met*, and there exist minimally invasive adjustments to ensure that the data strictly meets the mathematical requirements of FSD.
+
+
+
+* Reversibility
+Some data operations can be undone (math.: invertible, i.e. reversible), others not.
+For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
+Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
+Information is lost in the transfromation from a three-dimensional vector to a single number representing its length.
+
+Other operations are invertible: consider again a series of velocity vectors of a physical object moving in space.
+One can freely change the reference coordinate system.
+Moving from an earth-bound reference frame to the coordinates defined by the object and back is possible without loss of information.
+Another common, invertible coordinate transformation is the Principal Component Analysis, which transforms data into the space spanned by the orthogonal eigenvectors of a data covariance matrix.
+Because these transformations retain all information, and because an inverse mathematical operation exists, one can move the given data forth and back between the different spaces or domains.
+Even more, one can transform or untransform unrelated, new data between spaces, although that data was not involved in calculating those spaces.
+This feature is useful and common for averages and extrapolations.
+
+
+Fourier Series Decomposition is invertible.
+As described above, it translates the data from a "time-dependent array" form to a time-independent, complex-valued frequency space.
+Any set of values, be they observed or synthetic, can also be translated back via an inverse operation.
+In contrast to PCA, this does not even require the eigenvectors of the original data (there is only one frequency domain).
+Some operations, such as averaging of multiple signals, are equivalent in the time- and frequency domain.
+
+The formula for the inverse Fourier Series is the following:
+\begin{equation}\label{eqn:fourier_inversion}
+	f(t) = \sum\limits_{n=0}^{N} (2\cdot c_{n})\cdot e^{2\pi i n \frac{t}{T}}
+\end{equation}
+# c_{n} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{-2\pi i n \frac{t}{T}} \cdot f(t)  \quad\quad \forall n>0
+Notation herein as in \eqref{eqn:fourier_coefficients}, with \(N\) being the order (number of coefficients).
+Computer code for application in R, Matlab and Python can be found in appendix \ref{appendix:code} and the supplements.
+
+The existence of this inverse formula means that just as exchanging a coordinate basis for linear coordinates, *one can convert freely between time- and frequency domain*.
+
+
+However, one limiting factor is the order of the Fourier Series.
+Some signals (i.e. those with sharp turns or quick changes) require a high number of harmonics to be accurately represented in frequency space.
+Conversely, when operating with a finite order, some signals might be filtered on the first transformation to the (pruned) frequency domain.
+Real measurements are usually subject to Gaussian noise, such noise involves changes as quick as measurement sampling, and thus it is lost in FSD.
+This *filtering property of FSD* can represent a loss of information (if the noise is considered informative, but note that in that case the residual after re-transformation might be even more informative).
+
+However, in cases where this filtering effect is negligible or even favorable, FSD and its inversion can be applied.
+Repeated back- and forward transformation does not discard further information.
+When implementing a version of the equations above in computer code, a good check is whether values are unchanged after applying FSD and its inversion in series.
+And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often *efficient to store* kinematic data in the form of FSD coefficients.
+
+* Choice of Order
+How to decide how many coefficients should be retained?
+That number is the "order" of the Fourier Series.
+It can be easily determined by exploiting the reversibility of a method.
+Each data point (i.e. each measured joint angle profile) should be converted to the frequency domain with a given order, and then converted back to the time domain.
+The (root-mean-square) difference of the original signal and the re-transformed one should be small in magnitude and normally distributed around zero.
+Additionally, original and re-transformed signals should be plotted on top of each other for visual inspection.
+
+
+This strategy is of general use, and we will demonstrate it on the test case below (ch. \ref{casestudy:dataprep}).
+In the particular case of joint angle kinematics, it has often been concluded that relatively few coefficients are sufficient to capture the essence of the phenomenon.
+This is physically plausible, because the elements of limbs are rigid bodies with a certain inertia.
+Such elements cannot perform too abrupt accelerations, and in consequence, the profiles are smooth.
+Furthermore, in the case of steady-state locomotion, the ensemble of rigid body elements produces the behavior, and it is unlikely that any single element can oscillate an order of magnitude quicker than the whole limb.
+The stride cycle is the defining time interval, and normally all elements move in relative unison, which limits amplitude in the higher order coefficients.
+
+
+* Affine Components
+Some attributes of a signal are emphasized by Fourier methods.
+Those can be summarized intuitively as those attributes of the signal which can be changed without altering the "perceived shape" of the signal.
+
+The most obvious one is the average of the signal over time, i.e. its *mean value*.
+When changing the mean of a signal in the time domain by adding the same scalar value to every sample, the signal shifts "up and down", but retains its temporal structure.
+The mean is completely captured by the zero'th coefficient, which therefore is always a real number.
+Apart from that, changing the mean of a signal leaves its frequency domain representation unchanged.
+
+Another attribute of the signal is the *amplitude*, or how much values change around the mean.
+In the time domain, amplitude is altered by centering the signal and multiplying it with a scalar, followed by un-centering.
+In the frequency domain, amplitude is visible as the distance of coefficients from the origin of the complex plane (i.e. the cumulative magnitude of the complex numbers, or the norm of the complex coefficient vector).
+
+The third special signal aspect is *phase*, and it has to do with the periodicity of the signal.
+Phase is quantized in the time domain by sampling, and it can be changed by taking a number of samples from the end of the signal and appending it to the start ("rolling" the signal around, or changing the start point of the cycle).
+In the frequency domain, changing the phase rotates the coefficients in the complex plane (but note that higher order coefficients rotate exactly \(n\) times quicker).
+Because the frequency domain is independent of sampling, phase can be changed by any scalar number here, and is not limited to the sample raster.
+This allows efficient temporal resampling, as wel as an optimal alignment of multiple signals @@latex:\citep[\textit{cf.} supplementary information of][]{Mielke2019}@@.
+Phase is an angle, best used in the range of zero and \(2\pi\).
+It is changed in the frequency domain, just as any rotation in a complex plane, by multiplication of a complex exponential @@latex:\citep["delay/shift theorem", \textit{cf.}][]{Bracewell2000}@@.
+
+The fact that amplitude is the distance and phase the angle of Fourier coefficients in the complex valued frequency space illustrates the relation of the exponential and amplitude-phase form of the Fourier formula: the latter are just the corresponding polar coordinates.
+
+
+Mean, amplitude and phase are called *affine components* of a signal, which describes the fact that they can be adjusted by scalar operations without altering the "signal shape".
+They can even be standardized (mean: zero, amplitude: one, phase: zero).
+They can be associated with biological meaning: the mean quantifies dynamic posture, the amplitude is related to effective range of motion, the phase quantifies relative timing of joint movements.
+What remains after standardization, i.e. after isolation of the affine components, is in a way the essence of a signal, its "shape", which is defined by the temporal (or frequential) structure of the behavior.
+In the case of joint angle profiles, this remainder can be considered coordination /sensu strictu/ citep:Mielke2019,Mielke2022.
+
+* Multivariate Analysis
+The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
+Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
+Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
+
+This raises the question of the effect of multivariate analysis methods, such as Principal Component Analysis (PCA).
+PCA is a coordinate transformation which finds orthogonal coordinate axes in the data set that are oriented towards the largest variability within the data.
+A common purpose of PCA is dimensionality reduction, and it is particularly effective if there are strong co-variations within the data.
+It seems clear that Fourier coefficients of a single joint angle profile are intrinsically linked, for example through the phase rotation in the complex plane (exponential form).
+However, it is not obvious whether that holds any advantages for PCA, because the phase rotation does not cause linear correlation.
+On the other hand, higher coefficients are usually of lower amplitude than the main coefficients, and thus their putatively relevant variability might be lost in a PCA-based dimensionality reduction.
+Thus, PCA does not generally hold benefits for the analysis of single joint FSD in its complex exponential formulation.
+It might be different in the apmlitude-phase formulation, which should be explored in future research.
+
+
+If more than one joint is of interest, coefficient number is multiplied, but the situation for multivariate analysis changes.
+Different joints are often interrelated through adjacency along their linking segments.
+Biarticular muscles and tendons can cause correlated movements, which makes top-down sense, because a typical vertebrate limb during swing phase tends to be extended and flexed altogether.
+This situation is favorable for PCA, in a sense that dimensionality reduction can often be achived with relatively little information loss.
+Note, however, that PCA must be adjusted in a way that accounts for the FSD properties as follows.
+It is common practice and often advisible to standardize input variables prior to PCA, so that their value ranges are comparable (usually done by subtraction of the mean and division of a variability measure).
+Such a standardization would disrupt the temporal structure of the signal, and emphasize nuisance variability in higher order coefficients.
+A better strategy for multi-joint analyses is the standardization by removal of affine FSD components.
+As mentioned above, mean joint angle and joint amplitude can be standardized, and phase differences of all observations can be minimized by temporal alignment.
+With such preprocessing, the outcome of a PCA will equally represent each joint of interest, without disrupting the temporal structure of the joint angle profiles, and benefitting from intrinsic correlations of movements of the limb elements.
+PCA is invertible, and any downstream modeling outcomes can be related back to the original joint angle profiles.

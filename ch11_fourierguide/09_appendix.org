@@ -1,0 +1,62 @@
+* Computer Code to Apply Fourier Series
+:PROPERTIES:
+:CUSTOM_ID: appendix:code
+:END:
+
+
+This is an example how the Fourier Series can be implemented in the Python programming language (\nolinkurl{https://python.org}).
+
+Similar implementations for R and Matlab are provided "ready-to-use" in the Supplementary Material.
+
+\footnotesize
+#+BEGIN_SRC python :results none :tangle no :export code
+def FourierSeriesDecomposition(time, signal, order):
+    # calculate the Fourier Series decomposition of a signal,
+    # given the sample time array ("time")
+    # and a chosen "order" (i.e. highest coefficient returned)
+    # returns complex coefficients
+
+    # the period of the signal
+    period = numpy.max(time)-numpy.min(time)
+
+    # number of samples taken
+    n_samples = len(time)
+
+    # the exponential formula for each coefficient
+    SingleCoefficient = lambda t, T, n: numpy.exp(-1j*2*numpy.pi*n*t/T) / (2 if n == 0 else 1)
+
+    # calculate the Fourier Series as a list of coefficients
+    fsd = (2/period) * numpy.array([ \
+                     numpy.sum(signal*SingleCoefficient(time, period, n)) / n_samples \
+                     for n in range(order+1) \
+                    ])
+
+    return fsd
+
+#+END_SRC
+
+#+BEGIN_SRC python :results none :tangle no :export code
+def FourierSeriesRecomposition(coefficients, output_time):
+    # reconstruct a signal from its frequency space representation
+    # i.e. take coefficients list and return the signal at given output_time points
+
+    # the exponential used in this formula
+    FourierSummand = lambda t, T, cn, n: cn*numpy.exp(1j*2*numpy.pi*n*t/T)
+
+    # the fourier function at a single time point
+    FourierFunctionT = lambda t, T, coefficients: numpy.sum(numpy.array([ FourierSummand(t, T, cn, n) \
+                                                               for n,cn in enumerate(coefficients) \
+                                                              ]))
+
+    # the period "T" of the signal
+    period = numpy.max(output_time)-numpy.min(output_time)
+
+    # for every point in time, sum up the coefficients
+    signal =  period * numpy.array( [FourierFunctionT(t, period, coefficients) \
+                                 for t in output_time \
+                                 ]))
+    return numpy.real(signal)
+
+#+END_SRC
+
+\footnotesize

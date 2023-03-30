@@ -1,0 +1,111 @@
+#+BIBLIOGRAPHY: literature.bib
+
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+* Recurring Solutions
+In 1822, a French mathematician initiated the remarkable discovery that any continuous signal, no matter how complex, can be represented by a sum of relatively simple trigonometric functions citep:Fourier1822.
+Despite some initial limitations which were mended by scientists to follow, Fourier's work opened the door to the frequency domain.
+Fourier analysis has become a widely-used tool in physics and engineering, whereas biologists have only occasionally made the transformation.
+In particular, although it has been argued that the study of highly repetitive locomotor kinematics would benefit from applying Fourier methods citep:Schneider1983,Pike2002,Skejo2021,Webb2007,Mielke2019, it seems that few researchers have applied this simple method to date.
+One reason for the hesitant adoption of the method are certainly terminological complexities in Fourier Theory.
+These become apparent when assembling an overview of past attempts to apply related methods to locomotor kinematics.
+
+
+In this study, we review the history of the application of Fourier Series in terrestrial vertebrate locomotion.
+
+Some properties and practical misunderstandings are highlighted, before applying the method to a previously analyzed data set on bipedal locomotion in baboons citep:Druelle2021 to once more demonnstrate the enormous potential of Fourier analysis.
+
+This article is not targeted at a mathematically rigorous audience, who will certainly find shortcomings in the simplified explanations we provide.
+Instead, we aim at facilitating the entry to the topic for applied biologists, especially in biomechanics.
+Fourier Theory is well studied and widely applied, and numerous textbooks exist for all levels and fields @@latex:\citep[\textit{cf.}][]{Bracewell2000,Osgood2019}@@.
+The rich spectrum of Fourier-based methods comprises versatile techniques which would certainly facilitate the work on many relevant research questions in biomechanics.
+
+
+* Fourier Series
+
+#+CAPTION: *Kinematic data generation workflow.* (A) Videos of animals are taken, here a baboon walking bipedally from left to right. The frames captured at touch-down, mid-stance, lift-off, mid-swing, and consecutive touch-down are shown. (B) Points of interests, e.g. joints, are digitized, which yields their pixel position over time. In this case the knee \(x\) and \(y\) positions are shown relative to their first value. Vertical bars indicate timing of the frames from the upper panel. (C) Joint angles are calculated from groups of three of those points of interest. Their change over time is a joint angle profile. We herein define joint angles to be zero at a fully extended (straight) joint, and positive for joint flexion. Per definition of "steady state locomotion", joint angles in steady state movement will return to approximately their start value over a cycle (indicated by the horizontal line, discussed below). Mathematically, this is called "periodicity", the joint angle profiles in steady state locomotion are thus "cyclic".
+#+ATTR_LATEX: :placement [pt]
+#+LABEL: fig:jointangle
+[[./figures/f1_jointangle.pdf]]
+
+Typical kinematic measurements are joint angles, such as a hip angle, over time (but note that the following will equally apply to any continuous, periodic signal).
+One recurrent unit of terrestrial locomotor behavior is a "stride", and it can go as follows (Fig. \ref{fig:jointangle} A).
+If an animal walks, the distal part of its limb would touch the ground at a position ahead of the center of the limb.
+Our example joint of interest, the hip, would then usually be highly flexed.
+During stance phase, i.e. while the limb is in contact with the ground, the hip gradually extends, maybe reaching the lowest angle around the initiation of the swing phase.
+While the limb swings forward to reach another touchdown, the hip joint flexes again.
+Because the limb is a system of rigid bodies with a given mass, accelerations would never be abrupt, and the hip angle plotted over time might be described as a "smooth sawtooth curve", or even resemble a sine wave (Fig. \ref{fig:jointangle} C).
+The change of a joint angle over time is called a "joint angle profile".
+
+
+#+CAPTION: *The Frequency Domain.* Hip joint angle profile of bipedal locomotion in baboons. A visual representation (upper panels) contains exactly the same information as a numeric representation (tables / lower panels). Similarly, the information contained in frequency domain representation (right panels) is identical to that in the time domain (left panels). With the methods described below, one can transform from the time- to the frequency domain representation or back without loss of information. The frequency domain, which is accessible through Fourier Analysis formulas, is just a different representation of the data, and the transformation procedure is analogous to "plotting" (i.e. deterministic, reversible, favorable in some circumstances).
+#+ATTR_LATEX: :placement [pb]
+#+LABEL: fig:domains
+[[./figures/f2_domains.pdf]]
+
+
+One could quantitatively capture joint angle profiles in different ways (Fig. \ref{fig:domains}).
+The most intuitive, and by far most prevalent way is the time domain representation (Fig. \ref{fig:domains}, left column).
+It stems directly from the technical method by which kinematic data is usually extracted: videos of the walking animals are digitized frame-by-frame @@latex:\citep[\textit{cf.}][]{MMielke2020}@@.
+The outcome are two columns of numbers: a "time", capturing the seconds at which a frame was captured, and then the "angle" measurement itself, usually assessed from three landmark positions (Fig. \ref{fig:domains}, lower left)
+The more temporal sampling points, the better the temporal resolution, but the higher the digitization workload and storage requirement.
+
+
+One assumption above is that the stride was recurrent, or cyclical, i.e. periodic.
+This means that an almost (but not perfectly) identical stride will precede and follow the one of interest.
+This is also called the "steady state assumption", i.e. the requirement that the observed behavior is regular (and thereby comparable to other observations).
+Iff that assumption is met, the joint angle profile will start and end at approximately the same value, i.e. the hip angle at each limb touchdown will be almost the same.
+Plotting this as angle against time will show a line with ends fixed on the left and right y-axes.
+This is metaphorically the same situation as in a guitar string, which is fixed at both ends and performs some excursions from the zero line at positions in between.
+To further stress this analogy, the hip joint angle profile can be described as the combination of a "base tone" and a number of "harmonics" (or "overtones").
+Knowing the base and the relative contribution of the harmonics is sufficient to reproduce the "sound", or in other words to fully know the exact position of each element of the string or signal.
+This is called the *"frequency domain"*, i.e. the representation of a cyclical signal by the relative contribution of its harmonics (Fig. \ref{fig:domains}, right column).
+Any periodic, continuous signal, and thus also any cyclical joint angle profile, can be described like this, just as any tone the guitar string makes can be described as a sum of harmonics.
+It might theoretically take infinitely many harmonics to exactly represent the signal (e.g. in case of non-smooth signals).
+However, in practice, the effects which would cause this are usually considered to be measurement noise.
+Physiological, "real" signals normally require few harmonics to be appropriately captured (discussed below).
+
+
+
+How can Fourier Series be applied?
+The method is based on the following formula citep:Fourier1822,Gray1995,Bracewell2000,Mielke2019, which is presented here for completeness and should not worry the reader.
+\begin{equation}\label{eqn:fourier_coefficients}
+c_{n} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{-2\pi i n \frac{t}{T}} \cdot f(t)  \quad\quad \forall n>0
+\end{equation}
+Where \(c_{n}\) is a complex Fourier coefficient, \(T\) is the period of the signal or in our case the stride cycle duration, \(t\) is the time (i.e. "x" of the signal), \(f(t)\) is the signal (i.e. "y" of the signal), \(e\) is the Euler number, \(i\) is the square root of minus one.
+The capital sigma tells mathematicians that this is a series, and thus the equation defines the *Fourier Series*.
+
+
+At first, the analytical formula might seem quite complex for everyday application, and computer code might be more usable.
+In appendix \ref{appendix:code} and in the supplements, we provide code for Python, R and Matlab which can just be copied and used\footnote{The "order" parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
+#+BEGIN_SRC python :eval no :results none :tangle no :export code
+coefficients = FourierSeriesDecomposition(time, signal, order)
+#+END_SRC
+
+It can be inverted (just as the analytical formula, see below):
+#+BEGIN_SRC python :eval no :results none :tangle no :export code
+signal = FourierSeriesRecomposition(coefficients, time)
+#+END_SRC
+
+Knowing the assumptions and limitations (see below) and paying attention to the data types and formats, these functions can be simply applied to transform between the time- and frequency domain.
+
+
+\bigskip
+There are numerous morphotypes of the Fourier theorem, which justifies a brief overview.
+Equation \eqref{eqn:fourier_coefficients} is the exponential form of the Fourier Series.
+The formula exists in other variants (which are equivalent by Euler's formula): the rare but useful "amplitude-phase" form, and maybe most notably the more abundant "sine-cosine" representation.
+Historically, trigonometric functions are more convenient to handle, whereas modern computer implementations easily capture complex numbers, whereas humans have most intuition for amplitude and phase.
+The Fourier Series is related to, but slightly different from, Fourier Transform, a relation which will be discussed in detail below (Ch. \ref{properties:transform}).
+Applying the Fourier Series is a decomposition of a signal into its harmonic components, hence we will use the term *Fourier Series Decomposition (FSD)* herein.
+"Discrete Fourier Transform" (DFT) can be considered synonymous to "Fourier Transform", emphasizing the "discrete" nature of sampled data; "Fast Fourier Transform" (FFT) is an efficient algorithm to implement Fourier Transform.
+DFT/FFT work on any signal and typically involve windowing, whereas FSD demands a periodic input signal.
+FSD returns a single row of numbers (*"spectrum"*, i.e. harmonic contributions) for that signal, and that spectrum is discrete.
+FFT natively also returns a spectrum citep:Welch1967, but a continuous one.
+However, in practice, Fourier Transform is often applied in shifted windows and returns a "spectrogram" (i.e. frequency content over time).
+Finally, a Fourier Series can be applied to a single angle ("1D"), or to multiple signals at the same time (e.g. on phase plots).
+All of these (and other) variants of the method have been applied in the research of locomotor kinematics.
+
+It is therefore worthwile to review the historic use of related methods in studies on locomotor kinematics, and look for some common patterns and strategies.

@@ -1,0 +1,149 @@
+#+BIBLIOGRAPHY: literature.bib
+
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+
+Above, we re-iterated some fundamental properties and best practices related to Fourier Analysis, and Fourier Series Decomposition in particular.
+We will now outline the typical workflow of the analysis of kinematics with that method, focusing only on the steps which are affected by the Fourier method.
+There is a lot of flexibility in the procedure (see Fig. \ref{fig:procedure} for a coarse guideline), and researchers should feel encouraged to adapt the steps to their needs.
+For illustration, we apply the steps outlined below to a previously analyzed data set of bipedal walking in olive baboons, /Papio anubis/ citep:Druelle2021.
+
+#+CAPTION: *Analysis and Modeling Procedure.* Workflow overview of the preparation, transformation and analysis steps involved in the data analysis on baboon bipedal walking as described in the text, from raw observation (top) to statistical inference and multivariate analysis (bottom). At each point of the procedure, transformation between the domains is possible and quality checks should be performed.
+#+ATTR_LATEX: :placement [pt]
+#+LABEL: fig:procedure
+[[file:./figures/f8_flowchart.pdf]]
+
+* Data Preparation
+:PROPERTIES:
+:CUSTOM_ID: casestudy:dataprep
+:END:
+
+After data acquisition is complete and hard drives are filled with videos, the individual stride episodes which were captured on video must be annotated and extracted.
+As a good approximation, one can use the conventional touch down timepoints (though lift off or mid stance would work equally well, and the choice may vary within the dataset).
+
+#+CAPTION: *Raw Data Inspection.* (A) Plotting a series of stride cycles in the camera reference frame can aid the identification of data discontinuities (visible here in the distal limb markers). The animal is moving from left to right. A stick figure displayed for the last frame facilitates landmark attribution (torso, tail, hind- and forelimb are shown, similar to Fig. \ref{fig:endstart}). (B) Plotting one stride in the moving reference frame of the subject (zoomed in on the limbs) can confirm cyclic/steady state movement.
+#+ATTR_LATEX: :placement [pt]
+#+LABEL: fig:raw_inspection
+[[file:./figures/f4_raw_inspection.pdf]]
+
+
+A prerequisite for any meaningful analysis is consistent, complete data.
+Data in this case are points of interest, tracked on videos.
+There are many tools for video digitization, which are more or less automatic and accurate citep:MMielke2020,Knoerlein2016,Hedrick2008,Crall2015,Mathis2018,Karashchuk2021,Dunn2021.
+It should be assured that no frames have been involuntarily skipped in the process of tracking, and that there are no discontinuities in the series of point positions.
+This can be easily achieved by plotting the time series of digitized points, either in the global reference frame, or in a moving reference associated with the subject (Fig. \ref{fig:raw_inspection}).
+After digitization, the aforementioned calculation of Procrustes distances between putative start and end frames (ch. \ref{properties:endstart}) can be used to refine the stride interval and minimize end-start-differences.
+
+With strides identified and data quality assured, collective variables such as duration, speed, clearance, or gait asymmetry can be stored for each stride observed in the dataset.
+
+
+Next, joint angles can be calculated in a variety of ways.
+Their precise definition and direction is arbitrary, yet should be consistent and clearly documented.
+Care should be taken that joint angles do not show jumps at any time point of the movement, for example by crossing the \(2\pi\) angular interval border.
+Such jumps would lead to a wrong FSD, because that procedure does not natively consider angular value ranges or interval wrapping and thus treats the jump as if it were an actual discontinuity.
+The joint angle definition chosen herein, with fully extended limb corresponding to a joint angle of zero, and angles ranging from \(-\pi\) to \(+\pi\), usually avoids such discontinuities.
+
+In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an `arctan` formula.
+When working in three dimensions, the question is whether sufficient anatomical reference points can be digitized to calculate actual anatomical joint angles.
+If not, it must be sufficient to calculate a single angle between the segment vectors, though that does not necessarily correspond to anatomical degrees of freedom.
+If instead there are sufficient reference points, multiple rotation axes and angles per joint can be used and integrated just as in a multi-joint analysis (see below).
+Note that there have been attempts to directly calculate Fourier coefficients from 3D joint angles, using quaternions citep:Kenwright2015, which would be the most elegant solution for this purpose.
+
+
+After removing end-start-differences as described above (ch. \ref{properties:endstart}), joint angle profiles are plugged into the Fourier equation \eqref{eqn:fourier_coefficients}, e.g. by using the corresponding programming functions supplemented to this manuscript.
+Thereby, joint angle profiles are transformed to the frequency domain.
+Though we above emphasized the complex values of the coefficients, they can as well be represented by a one-dimensional array of alternating real- and imaginary parts of the coefficients.
+The transformation should be inverted, and original and re-transformed joint angle profiles plotted together, to exclude coding errors and confirm that order was chosen high enough (Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
+
+#+CAPTION: *Reversibility.* A single joint angle profile, processed forth and back with Fourier Series Decomposition (green, using 9 coefficients) and Principal Component Analysis (orange, using first 5 principal components, after FSD). The residual \(\epsilon\) is the mean of Euclidean distances of all angle measurements over time from their corresponding re-transformation in the time domain. See also Fig. \ref{fig:residuals}.
+#+ATTR_LATEX: :placement [pt]
+#+LABEL: fig:reversibility
+[[file:./figures/f5_reversibility.pdf]]
+
+#+CAPTION: *Retransformation Residuals,* (A) after performing FSD only with a given order (i.e. number of coefficients, x-axis), (B) after FSD (9 coefficients) and PCA with a given number of retained components. Residuals \(\epsilon\) (y-axis) as defined above. Joint angle profiles of all observed baboon strides are included, the distribution of residuals is indicated by grey "violins". Relatively low numbers of coefficients and components are sufficient to get close to the asymptotic accuracy. The absolute residual is joint-dependent (compare hip and knee, for example), an effect which is primarily determined by digitization accuracy and measurement noise. The data point for "full" PCA dimension is the reference value with just the FSD.
+#+ATTR_LATEX: :placement [pt]
+#+LABEL: fig:residuals
+[[file:./figures/f6_residuals.pdf]]
+
+* Multivariate analysis
+Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
+The conventional next step is to analyze their relation to each other.
+
+For example, it might be apparent that two or more data points are phase shifted relative to each other: all the characteristic maxima and minima of the joint angle profile would appear later or earlier in the time domain plot.
+If we assumed that strides are cyclic, we must conclude that these phase shifts are due to our arbitrary choice of the start point within the cycle.
+Phase differences should therefore be minimized.
+However, different joints, when analyzed together, might theoretically give contradicting information on the relative phase shift of different strides.
+Obvious solutions are to either choose a reference angle for phase alignment (this might be an angle not otherwise used for analysis: in the baboon test case, we chose the "total limb", i.e. the head-hip-toe angle), or to use an amplitude-weighted average phase shift as calculated from all joint angles of interest together.
+
+And just as with phase, there are design choices about whether to keep the other affine components (mean, amplitude) implicit in the multivariate data set, or extract and isolate them for subsequent analysis.
+
+
+Independent of these choices, the result of the previous steps is a data table consisting of multiple observations (strides, in rows) and variables (Fourier coefficients, in columns).
+The observations can be related to their corresponding master data (i.e. subject characteristics, morphology, collective variables, isolated affine components) by a simple stride index.
+
+Such a data structure is eligible for multidimensional analysis methods, and one of the simplest such method is Principal Component Analysis (PCA).
+Often, PCA justifies a significant reduction of data dimensionality (i.e. number of data columns), depending on how much variance is concentrated on the first components.
+Apart from the residual variance not covered by the retained principal components, PCA is again information preserving and reversible (which should be confirmed, Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
+Often, PCA is just used to open the data for subsequent multivariate methods (e.g. factor analysis).
+
+
+To summarize: in the procedure drafted above, we have extracted and quality checked kinematic measurements from digitizing videos.
+Joint angles were calculated and submitted to two transformation procedures: FSD and PCA.
+All procedures to this point can be performed without loss of information: any of the resultant data rows could be converted back to an animation of moving points.
+Thus, the PCA outcome essentially contains the whole of what was captured by the original kinematic data: the spatiotemporal coordination of the moving body appendages of interest.
+
+
+* Statistics and Modeling
+Despite the direct link to the raw data, the data table resulting from PCA might seem abstract.
+Nevertheless, those values are useful, because they are much more compact than the original two-dimensional time series.
+And this compactness is crucial for statistical testing and modeling, for which computational complexity can be restrictive.
+
+
+As a proof of concept, we herein briefly present the outcome of one type of analysis approach: probabilistic modeling.
+The two major advantages are that (1) probabilistic models capture the variability of the intrinsically variable process of locomotion, (2) such models can be used for extrapolation (out-of-sample prediction).
+
+
+The usual modeling steps are:
++ data simulation (prior to acquisition; can provide valuable information on required sample size, feasibility, and model structure)
++ model construction
++ (MCMC) sampling
++ model comparison and refinement
++ posterior checks (model "hygiene")
++ predictive sampling
+
+
+We applied all these to the baboon data set.
+In total, \(40\) stride cycles from \(17\) subject individuals entered the analysis.
+We applied a stepwise modeling approach, modeling the PCA-transformed Fourier coefficients (\(\theta\)) generated from a set of joint angles (hip, knee, and ankle) as a function of sex (`male`), age class (`adol`, `inft`), body mass (`cbm`/centered), limb length (`ll`), clearance (`clr`), duty factor (`df`), trunk angle (`trnk`) and speed-related parameters (`str`, from a PCA of stride duration, length, speed and frequency).
+\begin{equation}
+\begin{split}
+ \theta_{i}  \sim &\quad v_{1,i}\cdot\alpha_{i} +
+\\ & + v_{male}\cdot\beta_{male,i} + v_{adol}\cdot\beta_{adol,i} + v_{inft}\cdot\beta_{inft,i} + v_{cbm}\cdot\beta_{cbm,i}+ v_{ll}\cdot\beta_{ll,i} +
+\\ & + v_{clr}\cdot\beta_{clr,i} + v_{df}\cdot\beta_{df,i} + v_{trnk}\cdot\beta_{trnk,i} + v_{str1}\cdot\beta_{str1,i} + v_{str2}\cdot\beta_{str2,i} +
+\\ & + \epsilon_{i}
+\end{split}
+ \label{eq:jap} \end{equation}
+
+
+In the case of the baboon data set, we were able to successfully train this complex model despite limited sample size.
+We then confirmed model convergence and ensured that the model is favorable over alternative models with more or less parameters.
+The implementaiton in PyMC (https://www.pymc.io) has the capability of posterior predictive sampling: the trained model can be used to generate an arbitrarily high number of virtual data points, which underly the same variability as the original data.
+Most notably, this includes predicting "out-of-sample", i.e. parameter combinations which were not directly observed (in this case, male adult baboons were not included in the data, but could be predicted; Fig. \ref{fig:modelprediction}).
+Though the model infers abstract PCA values, the much emphasized reversibility of the method enables the computation of joint angle profiles from the predicted values.
+For interested readers, all data and documented code for all the steps described above are available online (https://git.sr.ht/~falk/papio_fcas).
+
+
+#+CAPTION: *Posterior Predictive Sampling.* A probabilistic model which is trained on the kinematic data (dark grey lines) is capable of predicting joint angle profiles (colored, thin lines; 1000 predictions per category). This can be extrapolated, for example to unobserved category combinations (here: adult males, which were not part of the dataset). Model design and training are enabled by transformation of the data to a PCA-space of the frequency domain. Joint angle profiles are centered around their mean for visualization; black bar in the lower left plot indicates angular units.
+#+ATTR_LATEX: :placement [pt]
+#+LABEL: fig:modelprediction
+[[file:./figures/f7_trace_predictions.png]]
+
+
+This modeling and prediction is complementary to and consistent with the analysis of citet:Druelle2021.
+A targeted model design could for example serve to infer effects of ageclass, speed, or their interaction, as was done in the original treatment of this data set.
+Such research questions can be addressed without transformation to the frequency domain.
+However, the point highlighted here is that the frequency domain data retains almost the full kinematic information, and thereby enables assessing a broader range of quantitative analysis questions, and predictive modeling of joint angle profiles and coordination.
