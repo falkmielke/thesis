@@ -1,0 +1,17 @@
+|   *rank* |   *loo* |   *delta* |   *std err* | *description*                    |
+|----------+---------+-----------+-------------+----------------------------------|
+|        0 |   235.0 |       0.0 |        14.4 | age class slopes excluded        |
+|        1 |   231.8 |       3.3 |        13.8 | no sex slope modeled             |
+|        2 |   231.3 |       3.8 |        14.0 | additional predictor- leg length |
+|        3 |   229.9 |       5.1 |        14.8 | *reference model*                |
+|        4 |   229.9 |       5.1 |        14.4 | Normal distribution in posterior |
+|        5 |   229.4 |       5.6 |        13.3 | bodymass excluded entirely       |
+|        6 |   229.3 |       5.7 |        14.8 | bodymass/ageclass level          |
+|        7 |   229.1 |       5.9 |        14.9 | additional predictor- BMI        |
+|        8 |   228.2 |       6.8 |        15.0 | duty factor slope excluded       |
+|        9 |   226.7 |       8.3 |        14.8 | non-centered bodymass            |
+|       10 |   224.8 |      10.2 |        14.3 | stride PC1 slope excluded        |
+|       11 |   222.7 |      12.3 |        15.2 | clearance slope excluded         |
+|       12 |   212.5 |      22.5 |        15.1 | stride PC2 slope excluded        |
+|       13 |   196.3 |      38.8 |         8.6 | fixed observable covariance      |
+|       14 |   187.8 |      47.2 |        14.9 | trunk angle slope excluded       |

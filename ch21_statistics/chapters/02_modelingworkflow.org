@@ -1,0 +1,309 @@
+* Modeling Workflow
+:PROPERTIES:
+:CUSTOM_ID: intro:workflow
+:END:
+When cooking my soup of statistics, I tend to pragmatically stick to the "ingredients" outlined in the paragraphs below.
+A prerequisite material is "well-cleaned" data, usually stored in database format (as "csv" for compatibility), containing as much information about the experiments as possible.
+"Pragmatically" here does not imply that these steps must be executed in sequential order for practical work.
+In fact, they are often repeated iteratively.
+
+
+** Data Simulation
+Before going to the actual data, I prepare a simulated data set which roughly incorporates parameters and parameter relations.
+These realations are comparable to those I intend to model later.
+For example, imagine I hope to find an age-dependent bodymass slope, i.e. I expect that one of my variables ("=obs1=") depends on bodymass (=bm=), but the strength of this dependence is different for each ageclass.
+Then I will generate a fake data set which follows exactly this desired relation: starting with a white noise data column for =obs1=, I add a known =intercept=.
+I randomly assign an age group to each of the data rows.
+Then, for each of the entries, I add =bm*slope(age)=, i.e. an age-group dependent component which represents the =obs1= / =bm= relation.
+I tend to use values which are approximately in the range I would expect for the actual data, or I even work with averages from the data.
+
+With that simulated data in place, I run a model which resembles the actual one applied later.
+For example, one could use:
+\begin{equation} obs_{1} \sim intercept + slope_{bm\mid age} \cdot bm_{centered} \label{eq:exampleformula} \end{equation}
+
+This is our first model equation, and we will encounter and explain more below.
+Model equations are an abstract formulation of the model, which helps communicating the content and keeping track of model alterations.
+Centering the bodymass could happen per group, i.e. for each subset of the data which has a certain age group, I would substract the group mean bodymass from the actual bodymass values.
+Or one could center for the whole data set.
+I can "simulate" all of these structures by simple numeric calculation: a slope based on absolute bodymass, one based on centered bodymass, and finally one based on groupwise centered data.
+And then I cross compare and see how the wrong model captures the simulated data and whether I can distinguish.
+With the shere amount of parameter combinations, this can be time consuming.
+Is simulation worth it? Or, in another word:
+
+*Why?!* You might feel the urge to ask: why this extra step of using fake data to apply a fake model?
+The reason is simply that, by this tautologous simulation procedure, I ensure that the model structure I apply is in fact /capable of/ finding the effects I suspect in the real data.
+I thereby make sure that my model roughly works as I intend.
+This is first and foremost important for setting up and getting used to a modeling framework (see below).
+But I can also apply simplified models and observe how they fail, which helps to explore the limitations of a given model design.
+This might seem trivial for simple, linear models.
+However, when going to multi-level, multivariate models\footnote{If you are unfamiliar with the terms "multi-level" or "multivariate", I would like to ask some patience: they will get clearer below, and in fact you might already have encountered them under alternative names.}, things get complex, and model structures are neither straight forward, nor intuitive.
+Recovering the artificial parameters which I put into the data gives me some confidence that the model structure is as intended (which is not to say that the model is a good one for my real data set).
+Critically, some models are inherently ambiguous (e.g. think of a toy model as the one above which instead has age as an explicit parameter /and/ as a level for bodymass).
+By playing around with the parameters which generate the simulated data set, and then checking how the model changes, one can learn which effects end up where and how unique, and how sensitive, the model components are.
+Likewise, it is possible to simulate varying sample- and effect sizes, to see how much data is needed to reliably recover a given effect.
+
+Ideally, this informative procedure should happen in the process of experimental design, prior to a grant application or ethics proposal.
+Yet even if the data happens to be on your hard drive already, better simulate late than never.
+
+
+** Data Inspection
+Before throwing complex models at the data, one might want to get a feeling of the parameters recorded with the data set.
++ How many data points are there in different groups?
++ Which categorical, which continuous parameters were recorded?
++ What are the empirical distributions of outcome values, and which theoretical distributions could potentially resemble them?
++ Is the distribution similar in different groups?
++ Are there notable correlations between parameters, on the predictor or outcome side?
+
+This step is a rather flexible and personal one, and usually not documented (except for some high quality, polished figures in publication).
+Data can be explored by looking at spreadsheets, using pivot tables and pivot charts, or better: by writing scripts in a scientific scripting language (Python, R, Matlab).
+
+This is the "data playground".
+Just learn what might be going on in the data, and *build hypotheses* for the subsequent analysis.
+
+
+** Technical Framework
+:PROPERTIES:
+:CUSTOM_ID: workflow:framework
+:END:
+Although I happen to be an advocate of probabilistic modeling frameworks, I tend to test some basic models with "conventional", frequentist statistics toolboxes.
+These are, for example, =statsmodels= in Python or =lmer= in R.
+The most general models are easily formulated in formula notation (see below).
+Per default, such frameworks are (i) Frequentist and have (ii) "high-level" APIs (Application Programming Interface).
+
+The "Frequentist" aspect was mentioned above, compared to "probabilistic".
+Probabilistic sampling usually takes more time than a least squares procedure.
+Ideally, models from both worlds should match.
+A "quick and (more or less) dirty" model generation can facilitate *hypothesis refinement or model structure sharpening*.
+
+In principle, there is nothing wrong about publishing these "quick" model outcomes directly (but there are some advantages to probabilistic procedures, which are covered herein).
+However, the "high-level" aspect comes with some limitations.
+By "high-level", I mean that the syntax is close to human intuition, and less demanting in terms of programming skills.
+"Low-level", in contrast, refers to high control and detailed initialization, closer to "machine language", which can be challenging for inexperienced users.
+This should not be confused with unnecessary complexity and cumbersome syntax, which is abundant in both approaches (maybe more often found in high level APIs).
+In my experience, the model construction procedure on high level modeling toolboxes tends to be intransparent and limited.
+In consequence, my personal skill with them stayed limited over the years.
+In my idealistic strive for reproducibility, I prefer to publish models of which I controlled and can explain every single design aspect on demand.
+
+One example to illustrate the "high/low-level" dichotomy is formula notation.
+Many available model programming libraries strive to give an "easy to use" interface for novice statisticians to produce models.
+These users want to enter things like =speed ~ 1 + sex + age + (bm*age)= and get the result in convenient table format.
+This notation is called "formula notation" (e.g. the Python library =patsy= is used for it).
+Convenient as this may be, I tended to encounter problems with this approach: most real models are not "easy to use".
++ Formula notation is limited: the explorative steps mentioned earlier ideally yielded many creative hypotheses that the eager statistician desires to forge into a model.
++ Model internals are intransparent: parameter interactions, "random and fixed" effects (i.e. multi-level parameters), multivariate parameter blocks... abstracting these abundant model components to formula notation might obfuscate the actual inner working of the model (because formulas introduce an extra level of abstraction).
++ Formula syntax: although not being an expert, I experienced that formula notation is not universal; or if so, it involves syntactical details which I am unable to remember or intuitively disentangle (e.g., what is the difference between =bm*age= and =bm|age=?).
+The alternative is a low-level toolbox in which one has to initialize intercept, slopes and outcome separately, and use operators to produce the formula in code.
+
+Which to choose has a lot to do with prior experience, and I acknowledge that the major reason for my preference for low level interfaces lies at least partly in my personal inexperience with formula notation and the like, and in my attraction to tinkering business.
+
+
+Here is my approach: object-oriented programming.
+This is not strictly an alternative to formula notation and "high level" toolboxes, but an addition.
+You can wrap formula generators in an object as well as "low level" component generators.
+My strategy is to define a "model" object in code, which can be initialized with certain settings, and then assembles a model.
+The advantage is that I get many convenience functions which I can easily *adjust to the specific requirements of my project* (for example, saving and loading, see [[#workflow:deserialization][ch. \ref{workflow:deserialization}]], or model hygiene, see [[#workflow:hygiene][ch. \ref{workflow:hygiene}]]).
+At the same time, I retain precise control of the mathematical model internals.
+This strategy could be labelled *"building a high level API from low level ground"*.
+Of course, the "low level ground" requires some tensor juggling and programming insights, which is certainly a show stopper for inexperienced programmers.
+
+But for me, the benefits of "full control" over the models outweigh the disadvantage of short term convenience.
+Furthermore, the system really "flies" with the highly iterative quest of finding the right model for a data set (see below).
+
+
+** Modeling Design Choices
+:PROPERTIES:
+:CUSTOM_ID: workflow:design:philosophy
+:END:
+When it comes to the actual components of a model, there are always multiple options of how to include a parameter.
+This refers to questions of inclusion/exclusion, mathematical choices, and the hierarchical and covariable structure of individual model components (i.e. how parameters are interrelated):
++ "inclusiveness": whether or not to include nuisance parameters (e.g. the effect of moon phase on animal locomotion)
++ whether to include it explicitly, or in a random intercept (e.g. "sex" male/female can be a model component, or shedded by a subject-level intercept)
++ the hierarchical structure of components (e.g. whether bodymass slope is universal, or different for each ageclass; most familiar are "random slope" and "random intercept")
++ whether/how to include the covariance of outcome variables (e.g. speed, stride frequency and stride length are interrelated)
++ whether/how to include the covariance of slopes
++ mathematical detail which can affect the sampling (e.g. the so-called "parametrization": multi-level components can be modeled by "sampling" from a hyper-prior or as "offset" from a population slope)
+
+More on all this below.
+Generally, the possibilities tend to be more numerous than one would like.
+
+*How to choose?* Two things guide model design choices: (i) logical arguments and (ii) Model comparison.
+Model comparison is covered in detail [[#workflow:comparison][below]].
+It is a "hard", numerical guide to which model succeeds best in representing the data.
+Models are compared /ex post/, i.e. sampling (model fitting) is a prerequisite.
+Logical arguments, on the other hand, are soft criteria which exclude some implausible/unfeasible model structures /ex ante/.
+There is no general advice on those, yet oftentimes, the inability to MCMC-sample a particular probabilistic model can hint at overlooked logical errors.
+An advantage is that logical exclusion criteria restrict the model search space /a priori/ and save us from sampling all too many design choice combinations.
+
+
+** MCMC Sampling
+:PROPERTIES:
+:CUSTOM_ID: workflow:sampling
+:END:
+The fundamental magic which enables probabilistic models is a set of algorithms called "MCMC Sampling" ("Markov Chain Monte Carlo").
+There are excellent explanations about this on the web, and I'll restrict the explanation here to what I think is the necessary essence.
+
+MCMC sampling is the procedure which adjusts model parameters to match the data.
+It is notoriously time-consuming.
+
+Sampling in probabilistics is analogous to the least squares regression in Frequentist models.
+However, in probabilistics, this step is a random exploration of the model parameter space.
+This exploration is initiated at a random "point" (read: distribution), and the hope is that after a certain "tuning" period, this "non-random walk" will get stuck in a local optimum.
+To make sure the optimum is stable, the repetitive exploration step is run for a sufficiently large number of iterations.
+Also, such an optimum should be characterized by the best match of the model values ("posterior distribution") and the data.
+There are technical tricks to increase the chance that the most attractive local optimum is the global one (e.g. run several independent "chains" with random starting points; using an adaptive algorithm).
+There are many different update rules and algorithms ("Metropolis", "NUTS", "Hamiltonian Monte Carlo", ...) all well explained on Wikipedia.
+
+A defining difference to conventional regression is that the matter and outcome of parameter optimization are distributions of model parameter values (as opposed to point estimates).
+I tend to think of the sampling as a procedure that attempts to "deform" the shape of the initially set distribution (e.g. a Normal \(\mathcal{{N}}\left(\mu = 0.0,\ \sigma = 1.0\right)\)) to reach optimal agreement with the data distribution (e.g. a slightly narrower, shifted Normal \(\mathcal{{N}}\left(0.6,\ 0.1\right)\) for an imaginary set of dutyfactors) by adjusting the model parameters.
+A bit like pressing a blob of pudding into an animal-shaped form.
+Note that what I write above (except maybe the pudding metaphor) is not an exact description, e.g. a starting point should more exactly be called an initial distribution shape, called "prior".
+
+The purpose of sampling is clear: explore the parameter space and find model parameters which lead to a best resemblance of model and data.
+
+
+** Deserialization and Data Flow
+:PROPERTIES:
+:CUSTOM_ID: workflow:deserialization
+:END:
+While "coming of age" with statistics, one usually goes through several phases of data organization skills.
+Note that I am not judging on beginners here for their work on data, but rather attempt to analyze and generalize my own experience.
+
+Many people (including me) are primed on Excel-like spreadsheet programs, which I in retrospective would call a non-scientific data processing tool.
+Non-scientific because it is not easy, maybe even impossible, to establish reproducible work flows in spreadsheets.
+Formula links are hidden and prone to break, data types are a mess, cell references are limited, variable definition is impractical, and version control is hindered by the proprietary file format.
+However, when taught well, spreadsheets can prime people on good database structure (for example, it is good practice to use the functions =vlookup=, =offset=, =match= and =indirect= + =address= frequently).
+And, acknowledged, well-made spreadsheet files are often designed to accomplish one given task a time (e.g. they can make a handy "dashboard" when connected to external data sources).
+Let's call this one-task-one-spreadsheet strategy /"task-boxing"/ ("boxing" as in "unboxing"), because steps of a larger procedure are solved by individual black box spreadsheets.
+
+When advancing to scripting languages like Python, Matlab, or R, one learns to process spreadsheets and other database-like data sources in programming.
+Noteworthy in this regard are "data frames" (/cf./ R: =dplyr=, Python: =pandas=, Matlab: =table=), as the programming analogon to a single spreadsheet.
+For experienced readers: the multidimensional variant of those are worth exploring (e.g. Python =xarray=).
+Scripting can handle many data tables at once, easily.
+But then, one might be tempted to write long scripts which perform the whole analysis procedure in one go, in a /serial/ fashion.
+This temptation is fostered by notebook-like programming interfaces, such as RStudio/RMarkdown, Jupyter, or the Matlab interface.
+I call this extreme strategy /"serialization"/.
+The problem is that complex scripts are hard to generalize and maintain.
+Complexity should be avoided; good documentation is indispensible.
+
+*Is there an intermediate way?*
+In my experience, one has to find a middle ground between the antagonist strategies outlined above.
+Functional programming can help to split tasks, whereas object-oriented programming can help to define working units and how they are processed.
+A good framework must be available for version control (git/mercurial/subversion).
+General definitions should be separated from project-specific tasks.
+And all steps should be well documented.
+The outcome is neither a series of black boxes, nor an unmaintainable monster script: it is a /deserialized sequence of monofunctional building blocks/.
+The ultimate goal is to produce fully reproducible and transparent data processing pipelines.
+
+
+One particularly relevant aspect of deserialization is the storage of intermediate results or whole models.
+"Whole models" refers to the input data, the model structure and the model sampling outcome ("trace", i.e. the model outcome after fitting it to the data).
+The process of MCMC sampling can take a long time (and it usually does).
+Model comparison requires many models to be sampled.
+Hence, one must be able to write models to hard disk and recall them when necessary.
+This may seem trivial, but it is a critical skill.
+In particular, when it comes to [[#workflow:prediction][Prediction (ch. \ref{workflow:prediction})]], it must be ensured that model input data can be dynamically altered after storing and re-loading of the model.
+
+I found all my personal requirements met in the library =pymc= for Pyhton.
+In fact, I started it shortly after I began learning to program in Python.
+Compatible choices exist in the =R= programming language, or language-independent (=STAN=).
+I would love to learn those latter ones, but never found the time and urge, which is why I got stuck on Python.
+
+
+** Model Comparison/Selection
+:PROPERTIES:
+:CUSTOM_ID: workflow:comparison
+:END:
+*"Which Model is the best for my data?"*
+As mentioned above, the best of all the logically plausible model designs should not be determined by pure personal preference, but rather by hard, quantitative measures.
+This is why this comparison step is also labeled "model selection".
+The topic is exceptionally well covered in my favorite statistical literature \citep[][ch. 11]{McElreath2018}, which I will briefly summarize.
+
+The framework of information theory provides tools for quantitative assessment, namely Information Criteria (e.g. WAIC, LOO).
+The comparison problem has two balancing effects:
++ complex models tend to fit a model better
++ ... but too complex models will be prone to "overfitting".
+
+To illustrate this, try to mentally fit a fifth-order polynomial to a short segment of a quadratic curve: the match might be perfect in the observed area.
+However, there are far too many degrees of freedom in the equation which might end up at values that produce weird wiggly curves outside of the data range.
+To get around this, modern information criteria are designed to find the best tradeoff between model fit and complexity by quantifying and penalizing overfitting tendencies appropriately.
+
+Model comparison is one of the most powerful aspects of the modeling procedure, because it enables statisticians to make an informed choice about what is going on in the data.
+If, in direct comparison, a model including a certain parameter receives significantly less "support" than the model lacking it, then it is valid to accept the null hypothesis that the parameter in question is of no relevance for the data.
+
+
+** Posterior Prediction
+:PROPERTIES:
+:CUSTOM_ID: workflow:prediction
+:END:
+The other extraordinarily powerful tool in the modeling workflow is "prediction".
+This feature can serve two relevant purposes, which are technically almost identical.
+
+*** *In Sample Predicition.*
+Or: *Did my model shot hit the data?*
+After two weeks of exhaustive sampling (not uncommon in probabilistic statistics), one might get a "trace" of sampling values for a particular model.
+And ideally, one has stored them to disk (see [[#workflow:deserialization][deserialization]]).
+Then, the best of many such models is identified in model comparison.
+But how well does this model fit the data?
+
+The common toolboxes for probabilistic inference all come with a feature of "posterior predictive sampling".
+Quick vocabulary:
++ "posterior" means that this happens after the model is tuned to the data.
++ "predictive" means that the data vectors fed to the model shall differ from the experimental values
++ "sampling" refers to the fact that not only a single mean output is generated, but rather a data distribution (i.e. hundreds, thousands or millions of posterior samples, if you like).
+
+This is to be distinguished from the data sampling step (MCMC sampling), and from another trick called prior sampling.
+All are called "sampling" because of the underlying technical procedure, and they actually mean that we work on data distributions.
+However, the purpose of these sampling procedures is different.
+MCMC sampling is the process of regression, i.e. of fitting the model parameters to the data.
+Prior sampling is used to see if the model structure and the prior settings are plausible.
+In contrast, posterior sampling yields values from an already fit model.
+
+You could say that MCMC sampling is like tuning a guitar, prior sampling is analogous to playing on an untuned guitar, and posterior sampling is like playing proper chords and thereby new or old songs.
+
+
+Why is posterior sampling useful?
+I tend to explore the parameter space of my data set (e.g. Fig. \ref{fig:bodyproportions}).
+For example, I choose one category of observations (e.g. "infant female animals of the lower body weight quartile") and set the probe data to according values.
+Then, I can tell the model to generate a number of samples for this setting.
+I compare the distribution of these posterior samples to the original data, filtered by the settings specified.
+Repeat this for all categories.
+
+Ideally, the predictive samples will match the observed data values.
+If so, it is confirmed that the model converged to be a plausible representation (or: "simplification") of the real phenomenon that generated the data.
+Even more: by sampling a high number of values, one can infer the /distribution/ of values of interest for a specific setting, which might otherwise be obscured by a limited sample size.
+
+
+*** *Out Of Sample Prediction.*
+Take this one step further: what if the settings I choose are not part of the original data set?
+*Can the model make predictions beyond the data I fed it?*
+(Percussive playing skills in the guitar analogy... or maybe time to admit that analogies can hardly be extrapolated beyond their scope.)
+Prediction is the ultimate test to every model: when probing an unobserved or intentionally filtered category of observations, can the model produce outcoms that later stand the test of reality?
+With this capability, the model is able to generate informed hypotheses which stimulate future research.
+Even if a subsequent observation is impossible (thinking of inferring palaeontological data), the model can yield a distribution of values for a given phenomenon which is most plausible with the actual data.
+Another use case is to test evolutionary hypotheses, for example by relating hypothetical traits (e.g. extreme morphology) to limited physical or ecological parameter spaces (e.g. contact forces).
+
+I conclude that "out of sample prediction" is where the fun starts.
+As I put it above, this feature is one of the biggest advantages of probabilistic models.
+
+
+** Model Hygiene
+:PROPERTIES:
+:CUSTOM_ID: workflow:hygiene
+:END:
+Having gone through the tideous procedures of acquiring a data set, designing a model, and getting a sampler to run, one might easily be tempted to jump for joy when finally retrieving the first MCMC trace (i.e. a fit model).
+However, sampling does not always succeed.
+It can fail bluntly (with an explicit error message), but with a trace you are already past that hurdle.
+Worse, it can also fail in numerous non-obvious regards, and it is crucial to diagnose whether this happened.
+
+Several diagnostic quantities are available:
++ =divergent samples=: occur if the sampler occasionally leaves the local optimum, even after tuning
++ =energy=: quantifies whether the parameter space was well explored
++ =effective sample size=: check whether is enough sample coverage in the optimal region
++ =r hat=: (Gelman-Rubin statistic) measures if multiple, independent sampling "chains" converged, i.e. end up in the same local optimum
++ =auto correlation=: make sure the sampler did not get stuck in cyclical patterns
+
+More such "hygiene quantities" exist.
+I call them "hygiene" because they are like body hygiene: you might live without for a certain period, but rather sooner than later people around you will smell it.
+Luckily, many diagnostics are readily delivered with the actual results by the modeling toolbox, so the hurdle to check them is minimal.
+Model diagnostics make a great, long supplementary table.
+I omit presentation of the diagnostics in this memorandum, but you would probably smell if they were not calculated and positive for the main selected models.

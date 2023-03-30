@@ -1,0 +1,198 @@
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+#+END_SRC
+
+After this long, conceptual introduction, let us finally get to "the meat" and apply the procedure to a real data set with Python and =PyMC=.
+This requires me to gradually present the data which was acquired by François and colleagues, and what I made of it.
+
+#+BEGIN_SRC python :results output :session analysisdata :exports none
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+import numpy as NP
+import pandas as PD
+
+n_iterations = 16384
+fi = f'models/proportions/bodyproportions_{n_iterations}_data.csv'
+# import os as OS
+# print (OS.system('pwd'))
+# print (OS.path.exists(fi))
+
+subject_data = PD.read_csv(fi, sep = ';').set_index('Unnamed: 0', inplace = False)
+subject_data.index.name = 'idx'
+# print (subject_data.head(3).T)
+
+stride_data = PD.read_csv('data/analysis_all.csv', sep = ';')
+stride_data.index.name = 'idx'
+# print (stride_data.head(3).T)
+
+#+END_SRC
+
+#+RESULTS:
+
+* Data Preparation
+** Data Overview
+:PROPERTIES:
+:CUSTOM_ID: intro:dataprep
+:END:
+Raw data is available upon request, and will be supplemented to future published manuscripts.
+Data was processed via a sequence of python scripts which can already be found here: \begin{center}[[https://git.sr.ht/~falk/papio_fcas][\nolinkurl{https://git.sr.ht/~falk/papio_fcas}]]\end{center}
+These scripts complete the following tasks:
++ import data per stride cycle to python
++ store master data (*subject info* e.g. age, *stride parameters* e.g. relative speed)
++ calculate joint angle temporal profiles
++ remove end-start difference (make "cyclical")
++ transformation to the frequency domain via Fourier Series
++ temporal alignment to remove phase differences in whole-limb movement
++ *posture:* extraction of affine components (mean angle, amplitude = effective range of motion)
++ *coordination:* Principal Component Analysis of non-affine remainder
++ perform statistical analysis
+
+
+Highlighted above are the different categories of data (see Tab. \ref{tab:parameters} for a detailed overview).
+
+
+#+CAPTION: Overview of data parameters.
+#+LABEL: tab:parameters
+|--------------+-------------------+-----------------------------+---------------------------------------------|
+| *category*   | *parameter*       | *units*                     | *description*                               |
+|--------------+-------------------+-----------------------------+---------------------------------------------|
+|--------------+-------------------+-----------------------------+---------------------------------------------|
+| subject      | subject           | -                           | names of the subjects                       |
+| (subject)    | age               | years                       | time since birth                            |
+| subject      | ageclass          | {infant, adolescent, adult} | three disjunct ageclasses                   |
+| subject      | sex               | {female, male}              | sex of the animal                           |
+| (subject)    | bodymass          | kg                          | weight at recording                         |
+| (subject)    | leg length        | m                           | leg length                                  |
+| (subject)    | bmi               | kg/m                        | bodymass divided by body length             |
+|--------------+-------------------+-----------------------------+---------------------------------------------|
+| stride       | dutyfactor        | 1.                          | fraction of stride in ground contact        |
+| stride       | distance          | relative                    | distance covered by stride (m),             |
+|              |                   |                             | normalized by reference segment length (m)  |
+| stride       | frequency         | \(Hz = s^{-1}\)             | reciprocal stride duration                  |
+| stride       | speed             | rel. (\(s^{-1}\))           | (rel.) stride distance divided by duration  |
+| stride       | clearance         | 1.                          | how much \((\%)\) the limb is               |
+|              |                   |                             | shortened during the stride                 |
+| stride       | trunk angle       | radians                     | mean trunk segment angle (rel. to upright)  |
+| stride       | stride \(PC_{i}\) | arb. units                  | PCA of distance, frequency, speed           |
+|--------------+-------------------+-----------------------------+---------------------------------------------|
+| posture      | mean angle        | \(\pi\)                     | zero'th Fourier Coefficient of joint angles |
+| posture      | amplitude         | \(\pi\)                     | Fourier Amplitude (related to               |
+|              |                   |                             | effective joint range of motion)            |
+|--------------+-------------------+-----------------------------+---------------------------------------------|
+| coordination | \(PC_{i}\)        | 1.                          | PCA of non-affine components of             |
+|              |                   |                             | the Fourier coefficients of all joints      |
+|--------------+-------------------+-----------------------------+---------------------------------------------|
+
+
+In total, src_python[:session analysisdata]{stride_data.shape[0]} {{{results(\(40\))}}} stride cycles from src_python[:session analysisdata]{subject_data.shape[0]} {{{results(\(17\))}}} subject individuals entered the analysis.
+The goal of the analysis below is to quantify the interrelation within and between these categories of parameters.
+This has to regard their implicit hierarchical structure (/subject/ \(\rightarrow\) /stride/ \(\rightarrow\) \(\lbrace\) /posture/, /coordination/ \(\rbrace\) ).
+
+
+** Segment- and Joint Angles
+In the parameter overview table, several angles are listed.
+Firstly, there is the trunk angle, which is a *segment angle*.
+A segment is a more or less rigid subunit of a body which lies between two joints, normally it is associated with a bone or skeletal unit.
+Segment angles (here: in two spatial dimensions) are calculated as the angle of a segment relative to the global reference frame.
+For example, the trunk angle is herein defined as the angle between the head-hip vector and the vector parallel, but opposite in direction to the gravitational acceleration vector (i.e. pointing upwards; approximated from the video y-direction).
+By this definition, if you sit straight on a chair right now, your trunk angle would be zero; if you lean back, it becomes negative, and if you lean forward to tie your lace it gets positive.
+
+Segment angles of coupled series of segments ("limbs") are highly correlated, which can be problematic for statistical analysis.
+To illustrate this, imagine a limb in which the knee joint is fixed, i.e. held at a constant angle throughout the stride cycle.
+The thigh and the shank segments will both have temporally varying segment angle profiles, but the correlation of these profiles is perfect.
+Further, imagine that there is an effect changing the hip angle (a joint angle, see below) temporal profile under certain circumstances; that effect will be visible in the shank as well, although the knee does not move.
+The reason is the "fixed knee" constraint.
+
+*Joint angles* measure the difference of two segment angles, which is equal to the angle between two segments.
+Joint angles are also interdependent through musculoskeletal coupling and the influence of gravity.
+Imagine an animal holds its trunk always perfectly vertical for some reason.
+As in the scenario above, a change of the hip angle profile will be visible as compensation in the more distal joints and segments.
+The reason is the "fixed trunk" constraint, and that the limb as a whole has to compensate for the change.
+
+I want to submit either of these sets of angles to the FCAS procedure \citep{Mielke2019}, to achieve temporal alignment and the separation of posture and coordination measures.
+However, which angles of those mentioned above are more appropriate?
+In other words: which of the constraint scenarios is more realistic?
+Joints are always mobile, as are segments, and neither of the extreme constrains above are realistic for freely moving animals.
+Nevertheless, some observations tip the balance towards using joint angles, in my opinion.
+Muscles (the "motors" in animal locomotion) are usually changing joint angles.
+According to my observations, there is a tendency to reduce joint angle change, or limit it to short temporal intervals (probably due to energetic optimization).
+In contrast, the change of segment angles is of larger magnitude, and probably optimized to exploit gravity in pendulum-like mechanics.
+Another observation comes from /in silico/ tests.
+When using a simulated two-segment system with realistic segment lengths, computing random joint angle profiles in a reasonable range of motion, I observe that correlation is high (\(O(0.8)\)) despite the random input values.
+I conclude that the underlying mechanism of movement and the spatial arrangement of the segments increase the correlation issue with segment angles.
+I think of joint angles as being a kind of spatial differential/derivative of segment angles, which is why they are insensitive to issues of the absolute position.
+This can be advantageous for tackling kinematic research questions, but disadvantageous for kinetic research (in which the direction of gravity matters).
+
+
+For the present analysis, I chose joint angle profiles as the measures which enter the FCAS procedure.
+The trunk angle, which appears to be variable among different strides in the data set (and might hold predictive value), is included in some of the calculations below as a stride parameter.
+
+
+** Dimensionless Stride Parameters
+:PROPERTIES:
+:CUSTOM_ID: prep:dimensionless
+:END:
+
+Except for the trunk angle (in units of \(\pi\), where \(\pi\equiv 3\)), all spatiotemporal stride parameters are normalized, i.e. made dimensionless \citep[according to][]{Hof1996}.
+The reference \(l_0\) for spatial parameters is the leg length (hip-knee-ankle).
+Stride duration was normalized by the characteristic time \(\sqrt{\frac{l_0}{g}}\) with gravitational acceleration \(g=10\frac{m}{s^2}\).
+Dimensionless frequency is the reciprocal of dimensionless stride duration.
+Speed was divided by \(\sqrt{l_0 g}\) to get dimensionless speed.
+
+The rationale behind using dimensionless parameters is the intention to compare the animals performance at points where their locomotion is equally costly (in terms of energy).
+This is intuitive in the case of stride length: a stride of a given distance (\(1\ m\)) might be a small step for an adult animal, but a huge leap for an infant.
+When normalized with a meaningful morphological reference, comparison of the observations is at least a bit more fair (with regard to the animals energy investment).
+
+Note that there is no pressing reason to perform this normalization, and it is by no means clear whether models improve with it.
+The dimensionless parameters are most likely correlated to their unnormalized counterparts.
+And repeating the actual calculation with the raw spatiotemporal parameters showed that the outcomes are not all too different from those presented below.
+On the other hand, interpretation of the outcome is facilitated by the normalization, because all effects due to morphological differences are supposedly summarized on the body proportion predictor(s).
+
+
+** Stride Parameter PCA
+:PROPERTIES:
+:CUSTOM_ID: prep:stridepca
+:END:
+It turned out that some of the models (namely the more complex ones involving posture and coordination) did not sample well when all the stride parameters listed above were included as predictors.
+However, a strong correlation between some of them is expected and confirmed by calculation.
+Therefore, a useful trick to enable sampling for the complex models is a dimensionality reduction via principal component analysis (PCA).
+
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+#+END_SRC
+
+#+BEGIN_SRC python :results output :session stridepca :exports none :tangle yes
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+import sys as SYS
+import numpy as NP
+
+SYS.path.append('../toolboxes')
+import EigenToolbox as ET
+
+stride_pca = ET.PrincipalComponentAnalysis.Load('data/stride_parameters.pca')
+
+cum_weight = NP.cumsum(stride_pca.weights).round(3)*100
+print (cum_weight)
+
+#+END_SRC
+
+#+RESULTS:
+: [ 69.1  99.8 100. ]
+
+
+A PCA of stride distance, stride frequency, and speed (all dimensionless) was performed (Tab. \ref{tab:stridepca}).
+The three input parameters were standardized so that they equally contribute to the components.
+The first two principal components capture src_python[:session stridepca]{f'{cum_weight[1]:.1f} \%'} {{{results(\(99.8 \%\))}}} of the variance, justifying an optional reduction to two parameters via PCA transformation.
+PCA space is orthogonal, i.e. there is no correlation between the principal components (thus we do not have to model a multivariate predictor block).
+This means that PCA can be favorable for sampling even if dimensionality is retained.
+The inverse transformation allows to convert predicted PC values back to the original parameters.
+\bigskip
+
+#+CAPTION: Stride Parameter PCA: variance covered (%) and eigenvector loadings.
+#+LABEL: tab:stridepca
+#+INCLUDE: "../results/stride_pca.org"
+
+#+BEGIN_COMMENT
+#+ATTR_LATEX: :placement [Hb]
+#+END_COMMENT

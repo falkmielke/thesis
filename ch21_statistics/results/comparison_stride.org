@@ -1,0 +1,13 @@
+|   *rank* |   *loo* |   *delta* |   *std err* | *description*                    |
+|----------+---------+-----------+-------------+----------------------------------|
+|        0 |   286.5 |       0.0 |         9.7 | additional predictor- leg length |
+|        1 |   286.4 |       0.0 |         9.8 | additional predictor- BMI        |
+|        2 |   285.9 |       0.6 |        10.1 | Normal distribution in posterior |
+|        3 |   285.7 |       0.7 |         9.6 | bodymass/ageclass level          |
+|        4 |   285.6 |       0.9 |        10.1 | *reference model*                |
+|        5 |   284.9 |       1.5 |         9.8 | non-centered bodymass            |
+|        6 |   284.6 |       1.9 |         9.8 | no sex slope modeled             |
+|        7 |   280.3 |       6.2 |        10.1 | bodymass excluded entirely       |
+|        8 |   280.1 |       6.4 |        10.4 | age class slopes excluded        |
+|        9 |   276.9 |       9.6 |        16.8 | sampled observable covariance    |
+|       10 |   208.4 |      78.1 |        11.8 | spatiotemporals in SI units      |

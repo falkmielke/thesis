@@ -1,0 +1,207 @@
+
+* Joint Angle Profiles
+The remaining classes of model parameters (Tab. \ref{tab:parameters}, ch. \ref{intro:dataprep}) are posture and coordination.
+In this chapter, I will briefly describe how they are acquired, before even briefer presenting the results of probabilistic models which quantify their dependence on subject and stride parameters.
+
+
+This chapter does not introduce any new concepts of statistics, but instead has some nice graphs and figures.
+Its purpose is to round off the baboon story and provide the basis for discussion with co-authors.
+
+
+** Quantifying Posture and Coordination
+Among the most relevant outcomes of digitized videos and kinematics are joint angles.
+Their temporal profiles, i.e. the angle over time, and how they change for different settings or subjects, can yield insights on coordination and motor control.
+In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[cf.][]{Mielke2019}.
+This operation is simply a reversible transformation, and no information is lost in the process.
+Temporal profiles can thereby be investigated in the frequency domain, which involves a complex (math.) quantification of a given number of harmonics (this is often called the "spectrum" of a signal).
+Fun fact: this is perfectly analogous to harmonics on a guitar string, and because one can tune models of Fourier Coefficients with MCMC sampling (see above), guitars are now oficially my favorite metaphor in explaining statistics.
+
+Some characteristics are particularly prominent in the frequency domain/spectrum:
++ The temporal /mean/ value of a joint angle appears as the zero'th Fourier coefficient (i.e. where the string is "hung up").
++ The magnitude of the coefficient values corresponds to the /amplitude/ (i.e. loudness, per coefficient or cumulated).
++ Fourier coefficients rotate in the complex plane depending on their /phase/ (rarely perceived in music, except in directional hearing).
+
+
+Mean, amplitude and phase are familiar from general theories and descriptions of oscillations.
+They can be classified as *affine* components of a signal, which simply means that they can be altered by multiplication with a scalar.
+(Maybe not) coincidentally, they also have a biological meaning.
+The mean of all joint angles defines posture (/sensu stricto/, it /is/ posture).
+Think of school children walking in a duck walk (or try it yourself, best immediately, but with vocalization): their limbs will be far from straightened, and their joints set at high angles.
+Amplitude corresponds to range of motion: when you try to walk over ice with some care to not slip, it will most likely decrease.
+Herein, I chose to subsume mean and amplitude as "posture" (/sensu lato/).
+Phase quantifies the relative timing of oscillating parts with respect to each other, which is, if you like, a "regular" part of coordination.
+Lastly, if mean, amplitude, and phase are subtracted or normalized, the (non-affine) remainder of the signal can be described as an "irregular" part of coordination.
+
+This removal of affine signal components is achieved by the method of Fourier Coefficient Affine Superimposition \citep[FCAS,][]{Mielke2019}.
+More precisely, the purpose of FCAS is to separate mean, amplitude, phase and the non-affine remainder, and use them in reasonable ways.
+In the present analysis, I used it to disassemble hip, knee, and ankle joint angle profiles and extract *posture* (mean joint angle and range of motion) and *coordination* (the remainder, including phase differences).
+Phase was not isolated for the different joints; however, a "global phase alignment" was performed by temporally aligning all angle profiles so that the phase difference of the /whole limb/ (head-hip-toe angle) is zero.
+I find this mathematically more convenient than the conventional alignment to toe touch down, which in my opinion over-emphasizes a single time point and has problems with all-too-variable dutyfactors.
+
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+#+END_SRC
+
+#+BEGIN_SRC python :results output :exports none :session coordinationpca :tangle yes
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+
+import sys as SYS
+import numpy as NP
+import pandas as PD
+
+SYS.path.append('../toolboxes')
+import EigenToolbox as ET
+
+pca = ET.PrincipalComponentAnalysis.Load('data/coordination.pca')
+
+CumWeights = lambda dim: NP.sum(pca.weights[:dim])
+# print (CumWeights(7))
+#+END_SRC
+
+#+RESULTS:
+
+
+A minor practical complication is that there are immensely many parameters in the "coordination" category (number of harmonics retained times number of joints times two for real and imaginary part).
+The often misused bread-and-butter method for dimensionality reduction is PCA.
+Hence, I submit the coordination parameters to a PCA for modeling.
+The first \(8\) components capture src_python[:session coordinationpca]{f"{100*CumWeights(8):.1f} \%"} {{{results(\(91.0 \%\))}}} of the variance and were submitted to the modeling procedure.
+
+
+To summarize: by neat mathematical tricks, we are able to extract direct quantitative representations of posture and coordination for each stride.
+
+
+** Model Design
+Posture and coordination are technically similar for the model procedure.
+However, they depend differently on the available predictors.
+Furthermore, they differ in posterior design: because coordination observables were derived from a PCA (which is an orthogonal transformation), these parameters are non-correlated per definition - no multivariate posterior necessary.
+In contrast, the posture parameters correlate in a characteristic way (Tab. \ref{tab:posturecorrelation}), and the model with a sampled covariance structure was favored by model selection.
+Therefore, posture and coordination were handled by two separate models with similar general structure.
+
+#+CAPTION: *Sampled Cross Correlation of Posture Parameters.* Significant correlations (as per HDI) are marked by asterisks. "Angle" refers to the temporal mean of the joint angle profile, whereas "amplitude" is related to range of motion at that joint.
+#+LABEL: tab:posturecorrelation
+#+INCLUDE: "../results/posture_correlation.org"
+
+
+In addition to the predictors used to infer stride parameters, the models now include the stride parameters themselves on the right handside.
+Since the number of observations has not changed, but the number of predictors increases, modeling gets challenging.
+As it turns out, a multivariate block of stride parameters was too complex to be included, and consequently sampling was unsuccessful.
+At the same time, interdependency of speed-related parameters should not be disregarded.
+I solved both problems by using another PCA, in this case for the stride parameters (see ch. \ref{prep:stridepca}).
+Although this reduces the number of predictors by just one, it enables successful sampling.
+
+The reference model for posture and coordination is as follows:
+\begin{equation}
+\begin{split}
+ \theta_{i}  \sim &\quad v_{1,i}\cdot\alpha_{i} +
+\\ & + v_{male}\cdot\beta_{male,i} + v_{adol}\cdot\beta_{adol,i} + v_{inft}\cdot\beta_{inft,i} + v_{cbm}\cdot\beta_{cbm,i} +
+\\ & + v_{clr}\cdot\beta_{clr,i} + v_{df}\cdot\beta_{df,i} + v_{trnk}\cdot\beta_{trnk,i} + v_{str1}\cdot\beta_{str1,i} + v_{str2}\cdot\beta_{str2,i} +
+\\ & + \epsilon_{i}
+\end{split}
+ \label{eq:jap} \end{equation}
+
+In equation \eqref{eq:jap}, the lines correspond to the four predictor parts (intercept, subject parameters, stride parameters, residual).
+Abbreviations are as above, plus =clr=: clearance, =df=: dutyfactor, =trnk=: trunk angle, =str1= / =str2=: stride PCs.
+
+
+
+Implications from model comparison are overall similar to those in the stride parameters.
+Some exceptions are better-ranked models with left-out predictors, which however were not used because I prefer to keep parameter selection and basic structure consistent throughout the chain of models.
+Interesting results are anticipated by the comparison: for example, the trunk angle, which per definition contributes "half" of the hip joint angle profiles (adjacent segment), is an integral part of the posture model but not relevant for coordination.
+
+#+CAPTION: Model Comparison of Posture models.
+#+LABEL: tab:posturemodelcomparison
+#+INCLUDE: "../results/comparison_posture.org"
+
+#+CAPTION: Model Comparison of Coordination models.
+#+LABEL: tab:coordinationmodelcomparison
+#+INCLUDE: "../results/comparison_coordination.org"
+
+
+@@latex:\clearpage@@
+** Lots of Figures
+The "statistics" part of this journey ends here, where the biological discussion begins.
+Following below is a series of figures and tables which I will leave uncommented, to open a discussion, if you like.
+
+Whereas posture parameters have an intuitive meaning (mean joint angles and ROM), it seems futile to interpret the outcome of the coordination model (Tab. \ref{tab:coordinationresults}, Figs. \ref{fig:coordination1} and \ref{fig:coordination2}) directly, since the observables are principal components of Fourier coefficient nonaffine residuals -- even Fourier himself could not make sense of such numbers.
+However, it should be pointed out that PCs are ordered by the variance they cover, hence the first ones capture the larger effects.
+
+The role of dutyfactor deserves special attention to illustrate what level of detail is contained in these figures.
+Although non significant (probably I should have log transformed it, or given it a Beta distribution), some dutyfactor slopes are higher than others (Tab. \ref{tab:postureresults}).
+We can learn from this that hip and knee angle are affected (hip: more flexed, knee: more extended on average) and that the knee range of motion increases with dutyfactor.
+Dutyfactor also has the biggest effect on coordination, being the highest slope value on PC1 (Tab. \ref{tab:coordinationresults}).
+
+
+In combination, posture and coordination values can be translated back into joint angle profiles.
+This is especially interesting for prediction (e.g. Figs. \ref{fig:posture1} - \ref{fig:coordination2}).
+The final cherry on this cake (Fig. \ref{fig:japprediction}) is thus a promising attempt to predict joint angular profiles for the given classes.
+
+#+LATEX: \begin{landscape}
+#+CAPTION: *Results of the Posture Model.* Significant values are indicated by an asterisk.
+#+LABEL: tab:postureresults
+#+ATTR_LATEX: :font \scriptsize
+#+INCLUDE: "../results/posture_predictors.org"
+
+#+CAPTION: *Results of the Coordination Model.* Significant values are indicated by an asterisk.
+#+LABEL: tab:coordinationresults
+#+ATTR_LATEX: :font \scriptsize
+#+INCLUDE: "../results/coordination_predictors.org"
+#+LATEX: \end{landscape}
+
+
+#+CAPTION: Posture model predictions. Part 1: mean angles.
+#+LABEL: fig:posture1
+[[../figures/posture_means_predictions.pdf]]
+
+#+CAPTION: Posture model predictions. Part 2: amplitudes (range of motion).
+#+LABEL: fig:posture2
+[[../figures/posture_amps_predictions.pdf]]
+
+#+CAPTION: Coordination model predictions, part 1.
+#+LABEL: fig:coordination1
+[[../figures/coordination_pt1_predictions.pdf]]
+
+#+CAPTION: Coordination model predictions, part 2.
+#+LABEL: fig:coordination2
+[[../figures/coordination_pt2_predictions.pdf]]
+
+
+#+CAPTION: Joint Angle Profile predictions from combined results of coordination and posture models. Thick lines are actual observations; thin lines in the background are posterior predictive samples.
+#+LABEL: fig:japprediction
+[[../figures/trace_predictions.png]]
+
+
+@@latex:\clearpage@@
+** Lots of Questions
+The results of in-sample prediction of joint angle profiles in the presented form (Fig. \ref{fig:japprediction}) mainly serve to confirm whether a model was correctly tuned to the data or not.
+But this capability also opens up a whole set of questions for which the original data set might have been too fragmented or complex.
+Here is one example.
+
+
+I touched above on the influence of dutyfactor.
+One might want to ask:
+*How do joint angle profiles in bipedally walking baboons change with dutyfactor?*
+This parameter changes with ageclass and potentially also with sex (Tab. \ref{tab:strideresults}).
+Hence, plotting all joint angle profiles of low dutyfactor strides (LDS) and comparing them to high dutyfactor strides (HDS) will probably be confounded with a comparison of juveniles and adults and unbalanced sex ratios in these groups.
+Sample sizes are low due to data fragmentation, thus filtering for adult females (8 strides) does not retain enough data to derive statistically relevant conclusions.
+In fact, to answer the dutyfactor question above, one would like to use information from within-ageclass comparisons and from both sexes, because each of these classes contribute their own bit to our knowledge of dutyfactor-related changes in kinematics.
+This is what the probabilistic model did: it separated effects of the subject and stride parameters.
+Ideally, the model has learned the concerted influence of these parameters on the outcome parameters.
+
+
+#+CAPTION: Joint angle profile predictions for dutyfactor quantiles, for adult females. Thick lines: averages; thin lines: individual predictive samples. Caution: to emphasize differences, the range of y-values varies on the three panels.
+#+LABEL: fig:dutyquantileprediction
+[[../figures/trace_quantiles_dutyfactor_0.png]]
+
+So let us ask the model what the effect of dutyfactor is, specifically for adult females!
+The prediction (Fig. \ref{fig:dutyquantileprediction}) depicts the exact temporal coordination of joint angles within the specified group.
+Changing from LDS to HDS, the hip mean angle increases (more flexed), which indicates that a prerequisite for quicker strides is a somewhat extended posture.
+The knee is affected in terms of amplitude.
+Curiously, the ankle joint profile is hardly altered during the swing phase (phases not indicated in figure, but it is the latter part of the cycle progress and can be guessed from the ankle) except that obviously the "second trough" in the trace starts later; the stance phase again is altered in terms of mean angle.
+As a bonus, we can see the variance in the strides (as shaded traces in the background).
+Remember that dutyfactor cross-influences other stride parameters (Tab. \ref{tab:stridecorrelation}).
+Luckily, it is easily possible and might be worth comparing the speed etc. of the selected, predicted strides.
+
+
+The capacity to fix some parameters and "playing" with others is immensely useful for all kinds of research questions, beyond the context of kinematic analysis.
+As shown above, the prerequisite is a well-fit probabilistic model of the phenomenon you want to analyze.

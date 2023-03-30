@@ -1,0 +1,218 @@
+* Spatiotemporal Stride Parameters
+With this knowledge about the subject parameteres, I will proceed to the next parameter category: the stride cycle parameters, also called spatiotemporal parameters. Those are:
++ dutyfactor
++ diml. stride distance (relative to lower leg length)
++ diml. stride frequency
++ diml. speed
++ clearance
++ trunk angle
+
+Just as bodymass and its relation to the other subject parameters was the focus of the previous chapter, we now move stride parameters to the "left handside" of the equation, i.e. they are observables, and we guess that they will be in part predicted by subject parameters.
+
+The "diml." indication above refers to "dimensionless", which means that the parameter was subject to spatiotemporal normalization (see ch. \ref{prep:dimensionless}).
+
+
+** Model Design
+As before, some design decisions should be justified.
+
+*** *Parameter Correlation:*
+The stride parameters are intrinsically correlated.
+This can have trivial reasons, such as their definition (e.g. speed is the product of distance and frequency).
+In other cases, it is at least physically and physiologically plausible (e.g. lower dutyfactor at higher speeds).
+These correlations must be quantified, which can be part of the sampling procedure.
+As with moving from bodymass to a set of body proportions, we will have a connected set of observables.
+This can also be incorporated in the mathematical descriptions (see below).
+
+The favored model in this case was one which got programmed on the /empirical/ correlation of stride parameters (Tab. \ref{tab:stridecorrelation}).
+The speed parameter correlation can elucidate how animals reach higher speeds: they walk at increased stride frequency and cover a larger distance, whereby the dutyfactor tends to reduce.
+This, however, implies no consistent change in clearance, nor does it depend on mean trunk angle.
+
+#+CAPTION: *Empirical Cross Correlation of Stride Cycle Parameters.* Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. /d.s./: "dimensionless stride" parameter.
+#+LABEL: tab:stridecorrelation
+#+INCLUDE: "../results/stride_correlation.org"
+
+
+
+*** *Reference Model:*
+I will model the stride parameters as a function of sex, age and bodymass, i.e. all the relevant subject parameters.
+The goal is to find out how strides of a given subject are characterized, e.g. whether certain aspects of the subject lead to difference in their gait characteristics.
+
+There are two basic strategies to identify the final model.
+As mentioned before, there are logical reasons for a model choice, and quantitative comparison.
+Choosing an inclusive strategy (i), one might start off with an "all in" model.
+From there, one can iteratively leave out parameters, perform model comparison, and see whether models with fewer parameters are favored by information criteria.
+Alternatively, starting from a minimal model (ii), one can gradually increase complexity and find the point when adding parameters does not indicate improvement.
+Either way, the procedure is iterative: sample all plausible, possible models, and perform model comparison (ch. \ref{strides:comparison}).
+Ideally, both strategies will converge on "the best model".
+This model is simply the one which, of a broad range of models, had favorable model scores.
+It is labeled /ex post/ as the reference model.
+
+
+In the case of stride parameters, the reference looks as follows.
+The equations below extend the \(\theta\) from \eqref{eq:proportions} to be a multivariate data "block" (i.e. matrix).
+It has the number of observations in rows, and the number of observables in columns.
+Similarly, data vectors \(v\), intercept \(\alpha\), slopes \(\beta\) and residual \(\epsilon\) receive an extra dimension and become matrices (which means incredibly fuzzy work for model programming, but can be considered bean counting given that we may turn to the actual outcome one variable at a time).
+
+Here is thus the formula for one stride parameter:
+\begin{equation} \theta_{i} \sim v_{1}\cdot\alpha_{i} + v_{male}\cdot\beta_{male,i} + v_{adol}\cdot\beta_{adol,i} + v_{inft}\cdot\beta_{inft,i} + v_{cbm}\cdot\beta_{cbm,i} + \epsilon_{i} \label{eq:stride} \end{equation}
+# \begin{equation} \theta_{i} \sim v_{1,i}\cdot\alpha_{i} + v_{male}\cdot\beta_{male,i} + v_{adol}\cdot\beta_{adol,i} + v_{inft}\cdot\beta_{inft,i} + v_{cbm}\cdot\beta_{cbm \mid ageclass, i} + \epsilon_{i} \label{eq:stride} \end{equation}
+
+Therein, \(i\) is one of the stride parameters, which are all sampled in a multivariate model.
+The intercept vector \(v_{1}\) is simply a column vector of ones.
+The boolean \(v_{male}\) holds values one for every stride for a male subject, and zero for females.
+The same is true for \(v_{adol}\) and \(v_{inft}\), which is why they are mutually exclusive.
+In contrast, \(v_{cbm}\) for centered log bodymass contains continuous values; the centering was done per ageclass, and after log transformation.
+Groupwise centering affects the data vector, however the bodymass slope is not affected by ageclass (a model with \(\beta_{bm\mid ageclass}\) was also included in model comparison).
+
+
+*** *Prior Choice:*
+A Normal distribution was used for all the slopes, a multivariate Student's T for the observables.
+Informative priors (global mean and standard deviation) are used, which is a good heuristic to improve sampling without biasing the sampler.
+The multivariate block of observables is initialized with the empirical correlation (yet all three options of multivariate posterior were applied and compared, see below).
+# a Lewandowski-Kurowicka-Joe prior \citep{LKJ2009}, which is a standard procedure for multivariate normal parameters.
+
+
+** Subject Parameters Affect Stride Characteristics
+The stride parameter model quantifies how stride (or gait) characteristics in bipedal baboon walking are affected by subject parameters (Tab. \ref{tab:strideresults}).
+
+Clearance is highest in adult males of low bodymass.
+Females and subadults lift their feet less during the swing, as do animals of comparatively higher bodymass.
+Dutyfactor is higher in infants: they are in ground contact for a longer portion of the stride.
+All of the three speed-related parameters (i.e. distance, frequency, speed; all dimensionless) are affected by bodymass, though the effect is only "significant" for frequency.
+Animals of higher bodymass tend to take shorter steps of higher frequency, which seems to overcompensate in terms of speed.
+Infants cover lower relative distance at lower frequency, which adds up in terms of relative speed.
+The results on trunk angle show that males hold their upper body less upright than females (i.e. at a higher trunk angle; though as with any sex effect this might be due to few, influential observations).
+Although this inference can only stem from the subadult classes, it is separate from (and in opposing direction of) an age effect: adults seem to walk more crouched than infants (i.e. infants walk with a lower trunk angle, more upright).
+
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+#+END_SRC
+
+
+#+BEGIN_SRC python :results output :exports none :session strideresults :tangle yes
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+
+import numpy as NP
+import pandas as PD
+
+n_iterations = 16384 # 32768
+
+results = PD.read_csv(f'models/stride/reference_{n_iterations}.csv', sep = ';') \
+            .set_index('effect', inplace = False) # ['observable', 'effect', 'predictor']
+# print (results)
+print (results.loc['dof', 'mean'])
+#+END_SRC
+
+#+RESULTS:
+: 54.157
+
+A value which is sampled, but not shown, is the \(\nu\) parameter (or degrees of freedom, see ch. \ref{bodymass:results}) of the Student's T posterior.
+It is high (src_python[:session strideresults]{f"\\nu = {results.loc['dof', 'mean']:.1f}"} {{{results(\(\nu = 54.2\))}}}), indicating that the posterior distribution has little more "weight in the tails" than a Normal distribution would.
+
+
+#+CAPTION: *Effects of Subject Characteristics on Stride Cycle Parameters.* Significant values (i.e. values with zero not in HDI) are indicated by an asterisk.
+#+LABEL: tab:strideresults
+#+INCLUDE: "../results/stride_predictors.org"
+
+
+** Stride Parameter Two Step Predicton
+The posterior prediction of stride parameters holds an additional complication: as shown in the body proportion model, we now have interdependent predictors (i.e. bodymass might depend on age and sex, though note that it is groupwise centered).
+Therefore, two consecutive steps of posterior prediction are necessary: first predict a number (e.g. =n = 1000=) of bodymasses, then based on those samples predict stride parameters.
+For a given setting for sex and ageclass, the workflow is as follows.
+    1. draw posterior predictive samples from the body proportion model, to get =n= bodymass samples
+    2. convert these samples (i.e. log transform, ageclass-wise centering with the means from actual data)
+    3. replace the data in the stride parameter model with these samples
+    4. then draw (i.e. predict) =n= stride parameter samples.
+
+Step 3 in this workflow might seem odd, but it is exactly the same procedure we get when choosing a setting for age and sex.
+The only difference is that we do not set =n= boolean values, but =n= values which are drawn from a continuous distribution.
+Although one should in theory sample multiple stride parameter values for each sample of bodymass, it is sufficient (and technically convenient) to keep the =n= constant throughout the procedure and compansate by a large number of samples.
+
+
+As with the subject parameters, we can compare the observed values with the predictions of the model (Figs. \ref{fig:stride1} and \ref{fig:stride2}).
+The data and predictions are overall consistent with the effects identified by the model (Tab. \ref{tab:strideresults}), and it is good sport to reason how the prediction for male adults came about.
+
+
+#+CAPTION: Stride parameters: raw data and model predictions. Part 1.
+#+LABEL: fig:stride1
+[[../figures/stride_pt1_predictions.pdf]]
+
+#+CAPTION: Stride parameters: raw data and model predictions. Part 2.
+#+LABEL: fig:stride2
+[[../figures/stride_pt2_predictions.pdf]]
+
+
+
+** Stride Parameter PCA in Posterior Prediction
+Due to the intrinsic correlation of stride distance, stride frequency, and speed, it is an option to submit them to a PCA for optional dimensionality reduction.
+In posterior predictive sampling, the same PCA must be used to transform the samples to PCA space.
+
+#+CAPTION: Stride parameters: raw data and model predictions. PCA conversion.
+#+LABEL: fig:stridepca
+[[../figures/stride_pca_predictions.pdf]]
+
+
+
+** Model Comparison
+:PROPERTIES:
+:CUSTOM_ID: strides:comparison
+:END:
+One of the great features of quantitative models is the ability to perform model comparison.
+An arsenal of "information criteria" is available to compare models and choose which one succeeds best in capturing the effects present in the data, without being over-complex.
+
+In addition to the reference model above, many other models where sampled for comparison.
+Those are similar to the reference, but individual parameters are removed in turn, or their hierarchical structure is altered (in the case of bodymass).
+In other test models, parameters were added (e.g. leg length).
+The centering of bodymass was optionally omitted.
+Additionally, the correlation structure of the observables ("empirical" per default) can be changed to "inferred".
+
+#+CAPTION: Model Comparison. LOO is the model goodness indicator. For convenience, delta (LOO difference from highest ranking model) and standard error (range of the LOO estimate) are displayed.
+#+LABEL: tab:stridemodelcomparison
+#+INCLUDE: "../results/comparison_stride.org"
+
+
+The outcome of this particular comparison method (Tab. \ref{tab:stridemodelcomparison}) are "LOO" values ("Leave One Out") as a quantification for the model performance/complexity tradeoff.
+As mentioned, there are alternative quantifiers (e.g. WAIC), but experience shows that rankings from different information criteria are highly correlated.
+Given relatively little difference and wide standard error ranges in the LOO estimate, we can conclude that almost all of the tested models yield some plausible descriptions of the data (in other words: most models do not perform significantly better or worse than the reference).
+In fact, the reference model is not the highest on the list: for example, choosing a Normal distribution instead of a Student's T for the observables would be better, which is consistent with the inferred high value for \(\nu\).
+This switch in this case would be little more than cosmetics, since that extra parameter does not affect the results presented above.
+
+Among the models ranking lower than the reference are models leaving out either of the current predictors.
+Most of them are still within the range of the reference LOO, so it would be justifiable by logical arguments to choose either of them as reference.
+The only outlier is the model with "spatiotemporals in SI units", i.e. where distance, frequency, and speed are measured in absolute values.
+Those values are less well explained by a linear model with the given priors and structure.
+This does not mean that model is wrong: most likely, they are just less normally distributed.
+Yet for the sake of constructing a cascade of models (from subject-, via stride-, to coordination parameters; see below), it seems better to choose the dimensionless parameter set.
+
+
+On the other hand, comparison would favor an ageclass dependend (hierarchical) bodymass, or the inclusion of another body proportion proxy (leg length or BMI).
+However, this ranking appeared only after I made a final, last-minute (and presumably minor) adjustment to the data.
+Any extra data could tip the balance back towards the current structure - or not.
+This exemplifies the finite sharpness of model comparison.
+It guides model design, and some designs can be clearly excluded (falsification!).
+Yet it should by no means be interpreted as carved in stone ultimate wisdom.
+A problematic corollary of this is the need to re-sample a high number of models after even the tinyest change in the data.
+Combined with the long duration of MCMC sampling, this can be prohibitive, but partially alleviated with an efficient sampling toolbox (see ch. \ref{workflow:framework}).
+
+
+** Hierarchical Components ("Random" Effects)
+Above, I have touched on the concept of a hierarchical parameter (\(bm\mid ageclass\)), and in fact it might be chosen here over the current reference.
+Other hierarchical structures are possible and should be included if that is indicated by model comparison.
+
+A particularly popular one is a "random intercept", where "random" means that each subject has its own, specific value for and intercept.
+In the case of stride parameters, such a construct would be possible if we had longitudinal sampling (e.g. individuals recorded at different ages, or different body weights).
+However, given that the set of subjects is partitioned (e.g. into male and female), a model structure with a subject-level intercept might shift variance to that "random" intercept which would otherwise be captured on the sex slope.
+Such ambiguities in effect distribution sometimes manifest in sampling failure (because the sampler can freely move values between the overlapping categories, and thereby fails to converge).
+Other times ambiguous models get disfavored in model comparison due to the extra complexity.
+And yet on other examples in-sample prediction produces weird results (e.g. unlikely parameter combinations).
+
+In conclusion, due to the data structure, I would argue that a subject level intercept is not useful in the case of stride parameter model.
+An attempt to include such a model for model comparison failed accordingly during MCMC sampling, which is why it is not even in the model comparison list.
+Note that this sampling problem would not become apparent in least squares modeling.
+
+
+** Summary: Stride Parameters
+The presented findings on stride parameters are substantial insights into the way in which spatiotemporal characteristics of gait in /Papio anubis/ are affected by sex, ageclass and bodymass.
+These findings are interesting by themselves and were part of the prior research on the data set \citep[][]{Druelle2021prep}.
+They are re-iterated here with a different modeling framework and serve to exemplify important statistical concepts, most importantly (two-step) posterior predictive sampling and model comparison.

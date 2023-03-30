@@ -3,6 +3,7 @@
 /figures/
 ch*/figures/
 ch*/data/
+ch*/predictions/
 ch*/*.bbl
 */general_intro_main.bbl
 *.pdf

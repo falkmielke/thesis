@@ -1,0 +1,72 @@
+* Probabilistic Modeling and Other Statistics
+To approach probabilistic modeling, it is important to understand its relation to other areas of statistics, such as hypothesis testing.
+Many researchers have been primed on statistical hypothesis testing early during their education.
+Its goal is usually to make an informed choice of whether a hypothesis about the data is true or not.
+For example, one might ask: "does the speed at which an animal moves change with age?"
+The expected answer is usually a simple "yes/no".
+But the example question is not well formulated for statistics.
+It defines a quantitative measure (speed), which is good.
+However, it should rigorously be wrapped in: "does our data set provide evidence that a rejection of the hypothesis ...".
+Furthermore, it should refer to testable subsets of the sample: "... that movement speed of young animals is different from that of adults."
+Finally, one must set an /a priori/ threshold above which the rejection of the null hypothesis would most likely be false (called "p-value").
+There we have a proper hypothesis to test.
+
+Yet there is a caveat: the metrics generated from conventional hypothesis testing do not yield a quantitative assessment of effect size.
+In other words: a low /p-value/ does not indicate a large speed change with age, it just indicates that the change (i.e. rejection of the null hypothesis "speed does not depend on ageclass") is more likely to be true.
+Also, there must be an assumption of /how/ speed changes with age: is it increasing linearly or is it low for young, high for middle, and low again for high-aged individuals?
+The reason is that all tests explicitly require a set of mathematical assumptions to be met (e.g. "Normal distribution" of the data, one- or two-sided comparison).
+And because of this, there exists a whole zoo of different test for different assumption situations, the choice of which is a science by itself.
+Familiar examples are the "T-Test" or "ANOVA" in all their variants.
+To summarize, this branch of statistics is called *hypothesis testing*; it is a complex field and valuable when it comes to falsifying hypotheses.
+
+The term "hypothesis testing" might be understood to be synonymous with "Frequentist statistics", or "non-Bayesian statistics".
+This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called "Bayes factor" but are not discussed herein \citep[/cf./][]{Shikano2019}.
+Hence, we need to disentangle two categories of distinction.
+
+You might have noticed that the amount of rigor in the brief explanation above exceeds what you usually find in the applied literature.
+One of the reasons is that not all researchers are after hypotheses.
+What we usually desire in obtaining experimental data is a quantitative assessment of different effects which exist in the data and influence the outcome of a quantitative measurement.
+There are two main frameworks to tackle these questions, both of which are captured by the term *modeling*: "Frequentist" models (usually least squares optimization), and "Bayesian" / probabilistic models (enabled by a technical trick called /MCMC/ = "Markov Chain Monte Carlo" sampling).
+Hence, we should distinguish the type of question (hypothesis / quantitative estimate) and the methodological school (Frequentist of Bayesian, see Tab. \ref{tab:statistics}).
+
+#+CAPTION: *Statistics: An Overview.* Probabilistic models are the focus of this memorandum.
+#+LABEL: tab:statistics
+|---+--------------+----------------------------+-----------------------|
+|   |              | *Frequentist*              | *Probabilistic*       |
+| / | <>           | <>                         | <>                    |
+|---+--------------+----------------------------+-----------------------|
+|   | *Hypotheses* | decision trees             | "Bayesian" hyp. tests |
+|---+--------------+----------------------------+-----------------------|
+|   | *Modeling*   | (least squares) regression | MCMC Sampling         |
+|---+--------------+----------------------------+-----------------------|
+
+
+
+All these "schools" of statistics have historically developed different terminologies, sometimes even different meaning to the same terminologies, which can be confusing and even misleading (e.g. try to find out about the term "likelihood").
+In particular, there is a lot of confusion and ongoing discussion about the distinction and proper presentation of /confidence intervals/ and /credible intervals/.
+Please excuse that for the purpose of this tiny textbook, I calculated, but will not always report, credible intervals\footnote{I herein take the $\left[3\ \%,97\ \%\right]\ HDI$, i.e. Highest Density Interval, which is the smallest value range that covers $94\ \%$ of the posterior probability distribution.}.
+I will occasionally explain conventions on the way, but leave it up to the interested reader to dig deeper or ask back.
+You might notice that my way of tackling statistics with inclusive models were heavily primed by the book [[https://xcelab.net/rm/statistical-rethinking/]["Statistical Rethinking" by Richard McElreath]] \citep{McElreath2018}.
+
+
+The approach presented in this document is *probabilistic modeling*.
+For simplicity, models will all be /linear models/, which means that all outcome variables are modeled as a combination of linear predictors (i.e. just linear slopes / no multiplications, exponents etc.).
+This subclass of models is often summarized as "Generalized Linear (Mixed) Models", or GLMs.
+It is a special subset of thinkable models, nevertheless the most frequently used one.
+Despite this practical restriction, most concepts introduced below should equally apply to non-linear models.
+In fact, good modeling frameworks are sufficiently flexible to enable any model design, not only linear equations.
+\bigskip
+
+
+Hypothesis testing and modeling are non-exclusive, as one can ask both questions of effect significance and effect magnitude at the same time.
+If a given data model turns out to match the data well, this affects the hypotheses which can be hypothesized (e.g. see the examples on "assumptions" above).
+On the other hand, because most models also contain a residual variance, it is tempting (but not always legitimate for rigorous reviewers) to use the credible intervals and residual variance to reject hypotheses without additional test.
+I would like to emphasize: all four major segments of statistics are intimately related, best executed in parallel, and should ideally yield consistent results.
+
+Hence, you might validly ask why I focus on probabilistic modeling.
+Firstly, most people are already familiar with the Frequentist side, since academic education on statistics is heavily biased towards these methods.
+You probably know these methods already, and chances are you are more of an expert than I am.
+Secondly, one perspective of the particular data set at hand is prediction, which is challenging for processes which are intrinsically variable (such as locomotion).
+Probabilistic models are ideal for this purpose, as will become clear below.
+
+But before getting to the actual data, I attempt to give an abstract overview of the involved methodological steps.

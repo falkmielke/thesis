@@ -1,0 +1,98 @@
+#+TITLE: Memorandum: Probabilistic Modeling of Baboon Kinematics
+#+SUBTITLE: -- a tiny textbook about a fraction of statistical methodology --
+#+AUTHOR: Falk Mielke [[mailto:falkmielke.biology@mailbox.org][(falkmielke.biology@mailbox.org)]]
+#+DATE: {{{time(%Y-%m-%d)}}}
+
+#+SETUPFILE: org/latex_header.org
+
+#+BIBLIOGRAPHY: org/library.bib apalike
+
+#+OPTIONS: toc:t
+
+#+STARTUP: noinlineimges showeverything entitiespretty
+@@latex:\clearpage@@
+#+ODT: <text:p text:style-name="PageBreak"/>
+
+
+* Preface
+The purpose of this document is documentation and knowledge transfer.
+This is part of the process of preparing a manuscript on the 2D kinematics of olive baboons, yet the real manuscript will differ in structure and focus.
+The data set has been analyzed before \citep[currently under review, ][]{Druelle2021prep}, and the purpose of another upcoming manuscript is to extend the analysis to questions of /posture/ and /coordination/.
+To get a grasp on these additional research questions, a sophisticated statistical modeling procedure is required.
+In preparation, we realized that a significant amount of knowledge transfer is required to get all co-authors and interested readers up to level with the technical details and design decisions encountered on the way.
+
+
+Here a quick overview of what this analysis is about:
++ I analyze bipedal locomotion in olive baboons, /Papio anubis/.
++ Kinematics are processed with a previously established technique \citep["Fourier Coefficient Affine Superimposition", cf.][]{Mielke2019}.
++ Probabilistic Models are used to infer major interrelations of subject-, spatiotemporal- and kinematic parameters.
++ Model design is validated by model comparison.
++ One purpose of these models is in-sample- and out-of-sample prediction.
++ For reference, all analysis code, including the =org mode= document compiling this text are available here: [[https://git.sr.ht/~falk/papio_fcas]].
+
+
+
+Enjoy reading!
+
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Introduction: Probabilistic Modeling
+#+INCLUDE: "chapters/01_modelingintro.org" :minlevel 2
+
+@@latex:\clearpage@@
+#+INCLUDE: "chapters/02_modelingworkflow.org" :minlevel 2
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Application: Baboon Kinematics
+#+INCLUDE: "chapters/03_datapreparation.org" :minlevel 2
+
+@@latex:\clearpage@@
+#+INCLUDE: "chapters/04_subject.org" :minlevel 2
+
+@@latex:\clearpage@@
+#+INCLUDE: "chapters/05_stride.org" :minlevel 2
+
+@@latex:\clearpage@@
+#+INCLUDE: "chapters/06_fcas.org" :minlevel 2
+
+
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+* Summary
+With this "tiny textbook", I attempted to plant the seed which will grow into your love for the beauty of probabilistic modeling.
+Alternative (and less ambitious) claim: you could call this my illustrative/colloquial/desperate attempt to explain what I think when I hear or talk "statistics".
+
+Still, I hope I kindled some good ideas.
+\medskip
+
+Thank you for reading along and thinking about questions and discussion points.
+I am more than happy to consider all of them.
+
+
+
+#+begin_export latex
+  \FloatBarrier
+#+end_export
+@@latex:\clearpage@@
+
+\nocite{Gelman2013}
+
+\bibliographystyle{org/apalike}
+\bibliography{org/library.bib}
+
+
+#+BEGIN_COMMENT
+
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+
+#+END_COMMENT

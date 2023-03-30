@@ -1,0 +1,386 @@
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+  (setq org-babel-inline-result-wrap "\\(%s\\)")
+#+END_SRC
+
+
+#+BEGIN_SRC python :results output :session subjectdata :exports none :tangle yes
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+import numpy as NP
+import pandas as PD
+
+n_iterations = 16384 # 32768
+
+parameters = {'bodymass': 'kg', 'leg_m': 'm', 'bmi': 'kg/m'}
+
+subject_data = PD.read_csv(f'models/proportions/bodyproportions_{n_iterations}_data.csv', sep = ';').set_index('Unnamed: 0', inplace = False)
+
+# re-transform logged parameters
+for col in parameters.keys():
+    if col not in subject_data.columns:
+        subject_data.loc[:, col] = NP.exp(subject_data[f'l{col}'].values)
+
+# print (subject_data.head(3).T)
+subject_data.index.name = 'idx'
+ageclass_averages = subject_data.groupby('ageclass').agg({param: NP.nanmean for param in parameters.keys()})
+
+sex_counts = subject_data.groupby(['sex', 'ageclass']).size().unstack('ageclass').fillna(0).astype(int)
+
+ageclasses = ['infant', 'adolescent', 'adult']
+GetBMData = lambda ac, bm: ageclass_averages.loc[ac, bm]
+GetAgewiseBM = lambda param, fmtstr = "{:0.1f}": '/'.join( \
+                                                           [fmtstr.format(GetBMData(ac, param)) \
+                                                            for ac in ageclasses] \
+                                                          ) \
+                                                + '\ ' + parameters[param]
+# print(GetAgewiseBM('bmi'))
+GetFilteredCount = lambda cat, val: subject_data.loc[subject_data[cat] == val, :].shape[0]
+#+END_SRC
+
+#+RESULTS:
+
+
+
+* Subject Parameters
+The first order model parameters are the subject parameters, because they are characteristic and more or less constant for each of the animal subjects under research.
+The purpose of this chapter is to find out how they interrelate.
+
+Within this group of parameters, /sex/ stays constant for a given subject.
+Of the src_python[:session subjectdata]{subject_data.shape[0]} {{{results(\(17\))}}} subjects included, src_python[:session subjectdata]{GetFilteredCount('sex', 'male')} {{{results(\(5\))}}} were male.
+By study design, /ageclass/ was also constant over recordings for all subjects in the data set (subjects might be measured at slightly different ages, however recording periods were narrow, and no subjects of transitional ages were considered).
+A total of
+src_python[:session subjectdata]{GetFilteredCount('ageclass', 'adult')} {{{results(\(4\))}}} adults (src_python[:session subjectdata]{'/'.join([f"{sex_counts.loc[sex, 'adult']}" for sex in ['female', 'male']])} {{{results(\(4/0\))}}} females and males, respectively),
+src_python[:session subjectdata]{GetFilteredCount('ageclass', 'adolescent')} {{{results(\(6\))}}} (src_python[:session subjectdata]{'/'.join([f"{sex_counts.loc[sex, 'adolescent']}" for sex in ['female', 'male']])} {{{results(\(4/2\))}}}) adolescent
+and src_python[:session subjectdata]{GetFilteredCount('ageclass', 'infant')} {{{results(\(7\))}}} (src_python[:session subjectdata]{'/'.join([f"{sex_counts.loc[sex, 'infant']}" for sex in ['female', 'male']])} {{{results(\(4/3\))}}}) infant
+/Papio anubis/ entered the final data set.
+Subjects were intentionally selected so that the ages of the classes do not overlap, i.e. to have disjunct ageclasses.
+Note that, in principle, ageclass and sex can be interrelated, e.g. if there is a bias in the experimentally selected sex ratios per age group.
+This is indeed the case in our data set: in the "adult" class, only females were measured.
+However, this bias is neither coincidental nor intentional, but owes to the group structure and social habits of baboons.
+It forces us to assume that locomotion of adult /Papio anubis/ is indifferent to sex, or that the sex difference in adults can be inferred from the observed difference in subadults.
+More on this case below.
+
+
+The /bodymass/ of the animals was determined for each recording (averages for infant/adolescent/adult individuals: src_python[:session subjectdata]{GetAgewiseBM('bodymass', "{:0.1f}")} {{{results(\(3.0/10.2/13.1\ kg\))}}}).
+This means that different strides of the same subject would associate with slightly different bodymasses if bodymass changed within the narrow time period of recording.
+Furthermore, bodymass can be associated with the other subject parameters (e.g. trivially with age, because individuals grow).
+For the subsequent analyses, this interrelation of subject characteristics needs to be taken into account.
+
+The two leg long bone segments (hip-knee-ankle) were chosen as a size reference for normalization of distance values. They measured src_python[:session subjectdata]{GetAgewiseBM('leg_m', "{:0.2f}")} {{{results(\(0.27/0.41/0.43\ m\))}}} (inft./adol./adult) per ageclass on average.
+Adding the length of the torso segment (head-hip), we retrieved a total body length proxy, which was used to calculate a "body mass index" (BMI, averages src_python[:session subjectdata]{GetAgewiseBM('bmi', "{:0.1f}")} {{{results(\(5.0/11.4/14.1\ kg/m\))}}} for the respective ageclasses).
+This is no proper scientific BMI, but one solely for demonstration purposes in this document.
+\medskip
+
+To prepare the decision on how to include bodymass, leg length and BMI in the subsequent models, behold the first *probabilistic model*.
+It is a rather simple one, modeling bodymass as a function of ageclass and sex.
+I will use it to settle some fundamentals about how I apply the modeling procedure herein.
+
+** The Bodymass Model
+Take the following linear model for bodymass, with bodymass \(\theta\), intercept \(\alpha\), data vectors \(v\), slopes \(\beta\) and residuals \(\epsilon\):
+
+\begin{equation} \theta \sim v_{1}\cdot\alpha + v_{male}\cdot\beta_{male} + v_{adol}\cdot\beta_{adol} + v_{inft}\cdot\beta_{inft} + \epsilon \label{eq:proportions} \end{equation}
+
+Note that all vectors \(v\) in eqn. \eqref{eq:proportions} are boolean column vectors, containing ones for data rows of a given category and zeros on all other rows (\(v_{1}\) is an all-true boolean specially used for the intercept).
+This way, the decisive slopes are only added to the data rows which match a given category: for example, only the entries where \(v_{male}\) is =True= get the value of \(\beta_{male}\) added.
+
+A brief recap to homogenize vocabulary:
++ The "left handside", "independent", or "outcome" variables (often called \(\theta_{i}\)) are usually termed /observables/ in this text. Sure, all parameters are "observed" (or "dependent", or "outcome"...), but observables are the ones in focus of a given chapter.
++ The "right handside", "dependent", or "input" variables are usually described as /predictors/. Again, this label is my arbitrarily changing choice.
++ Model components which do not stem from the data table are called /(model) parameters/; in the case of linear models these are intercepts, slopes and the residual.
+
+I will explain all components in detail in the following paragraphs.
+
+*** *Intercept \(\alpha\):*
+Each model "starts" with an intercept (though it wouldn't need to, or the intercept could be implicit).
+For continuous variables, the intercept is intuitive to understand: it is the observable value when the predictor is zero.
+With categorical variables, the intercept value is the value observed for a given "reference" set/selection of parameter values.
+For example, in the bodymass model below, the intercept is approximately corresponding to the average bodymass of adult, female animals.
+The choice of reference is done by the statistician and arbitrary, and sometimes only visible by the category changes associated with slopes.
+
+*** *Slopes \(\beta\):*
+Slopes quantify the change in the value of the modeled observable (e.g. bodymass) when changing along a parameter axis (e.g. sex from female to male).
+Some mathematical explanation:
++ For binary categorical values, such as sex, this is simple: set the corresponding value for "female" to \(0.0\) and that for male to \(1.0\) and the slope ("female \(\rightarrow\) male", or just "male") will be their modeled difference in bodymass.
++ For multi-categorical values (e.g. ageclass, three possible categories), one reference category is chosen (e.g. adults), and separate slopes are modeled for each of the other groups (i.e. "adlt \(\rightarrow\) adol" and "adlt \(\rightarrow\) inft"). Because for each slope, only the target category is associated with \(1.\) and all others with \(0.\), the slopes determine the pairwise distance of the target categories and the reference (the category associated with the intercept). No animal is infant and adolescent for a single observation (categories are mutually exclusive), hence no observation will get associated with both slopes.
++ For continuous values (e.g. age), the slope is related to the numerical values in that parameter. Parameter ranges must be considered when evaluating effect size. It usually makes sense to center or even normalize the parameter to make slopes comparable.
+
+*** *Residual \(\epsilon\):*
+Even with all measured parameters, some unexplained variation remains in model of partly random processes.
+This can be measurement "noise", or simply unexplained variation.
+Its order of magnitude is estimated in the sampling procedure as the "residual".
+The terms "residual", "epsilon", and "standard deviation" (in model context) can be considered approximately synonymous (/statistician-smiley/).
+
+*** *Prior Choice and Sampling:*
+Because I use a probabilistic modeling framework (the python library =pymc3=), the actual values of the model parameters are determined in MCMC sampling (see ch. \ref{workflow:sampling}).
+This procedure requires start values ("priors"), for which I usually take the mean and standard deviation of the observed values (because the sampled model values should certainly fall in that range).
+Also, there is a whole lot of voodoo about setting the correct distribution type for a given parameter.
+Usually (with the sample size encountered in this data set), it is hard to falsify the assumption that model values, logarithmized in obvious cases, are approximately normally distributed.
+
+Finally, the MCMC sampling itself asks for some choices by the researcher.
+I chose something close to industry standard (No U-Turn Sampler "NUTS"; sufficient tuning and sampling steps; twenty chains; Student's T distribution for the posterior) and verified /ex post/ that sampling went well ("hygiene").
+
+*** *Model Comparison:*
+I skip this here for clarity.
+Usually, one would have to argue why the chosen model is the most appropriate one (though of course limited by availability of parameters).
+More on it when we get to stride parameters.
+For bodymass, the model choice is rather trivial, there is not many options but to use the other subject parameters as predictors.
+I do not use leg length and BMI as predictors for bodymass, because they share a hierarchy level, are correlated (as shown below), and thus the idea of one predicting the other might falsely imply causality.
+
+*** *Data:*
+Because there is usually only one bodymass per subject animal in our data set, the data set onto which I apply the bodymass model is reduced (src_python[:session subjectdata]{subject_data.shape[0]} {{{results(\(17\))}}} observations).
+For one animal which was measured at two bodymasses, the average value was used.
+
+*** *Transformations:*
+As an additional technical complication, bodymass (and the other body proportions) have to be transformed.
+For most body measures, negative values are implausible, e.g. a negative bodymass does not exist.
+Also, one can usually observe that the Normality assumption, or in our case a Normal prior distribution, is better met when log-transforming the values.
+In consequence, predictions become more accurate for models of logarithmized measures.
+This was also the case for the current data set.
+Therefore, the body parameters presented here were transformed with the natural logarithm for modeling, and all values untransformed with the Euler exponential for presentation.
+
+
+** Bodymass is Age-Dependant (Surprise!)
+:PROPERTIES:
+:CUSTOM_ID: bodymass:results
+:END:
+
+#+BEGIN_SRC python :results output :exports none :session bmresults :tangle yes
+import os as OS
+OS.chdir(OS.read(OS.open('homedir.txt', OS.O_RDONLY), 1000).strip())
+import numpy as NP
+import pandas as PD
+
+n_iterations = 16384
+
+results_all = PD.read_csv(f'models/proportions/bodyproportions_{n_iterations}.csv', sep = ';') \
+            .set_index(['effect'], inplace = False) \
+            .loc[:, ['mean', 'hdi_3%', 'hdi_97%']]
+
+results = results_all.loc[[\
+                       idx for idx in results_all.index.values \
+                       if (idx == 'dof') \
+                          or (idx == 'packed_cholesky_stds[0]') \
+                          or ('[0,0]' in idx) \
+            ], :]
+results.index = [idx.replace('[0,0]', '').replace('[0]', '') \
+                 for idx in results.index.values]
+
+results_retrafo = PD.DataFrame(index = results.index, columns = results.columns)
+ref_value = results.loc['intercept', 'mean']
+ReTraFo = lambda val: NP.exp(val + ref_value) - NP.exp(ref_value)
+for idx, row in results.iterrows():
+    if idx == 'intercept':
+        results_retrafo.loc[idx, :] = NP.exp(row.values)
+        continue
+    elif idx in ['dof', 'packed_cholesky_corr']:
+        results_retrafo.loc[idx, :] = row.values
+        continue
+
+    results_retrafo.loc[idx, :] = ReTraFo(row.values)
+
+# results_retrafo.loc[:, :] = NP.round(results_retrafo.loc[:,:].values, 2)
+
+# work on transformed results
+results = results_retrafo
+
+translator = { \
+                 'intercept': '\(\\alpha\)' \
+               , 'sex_is_male': '\(\\beta_{male}\)' \
+               , 'ageclass_is_adolescent': '\(\\beta_{adol}\)' \
+               , 'ageclass_is_infant': '\(\\beta_{inft}\)' \
+               , 'packed_cholesky_stds': '\(\\epsilon\)' \
+               , 'dof': '\(\\nu\)' \
+             }
+
+parameters = [k for k in translator.keys()]
+results = results.loc[parameters, :]
+# print (results)
+
+GetMean = lambda param: '\({:+0.1f}\)'.format(results.loc[param, 'mean'])
+GetHDI = lambda param: '\(\\left({:+0.1f}, {:+0.1f}\\right)\)'.format(*results.loc[param, ['hdi_3%', 'hdi_97%']])
+GetSig = lambda param: '*' if 'beta' in translator[param] and ((results.loc[param, 'hdi_3%'] * results.loc[param, 'hdi_97%']) > 0) else ' '
+
+results_table = { \
+                  '': ['' for param in parameters] \
+                 , '*parameter*': [translator[param] for param in parameters] \
+                 , '*value*': [GetMean(param) for param in parameters] \
+                 , '*interval*': [GetHDI(param) for param in parameters] \
+                 , '*sig.*': [GetSig(param) for param in parameters] \
+                }
+
+table_list = PD.DataFrame.from_dict(results_table) \
+                      .to_markdown(index = False) \
+                      .replace(':', '-') \
+                      .replace('-|-', '-+-') \
+                      .split('\n')
+out_table = \
+          '\n'.join( [ '|--+--+--+--+--|' \
+                        , table_list[0] \
+                        , '|   | <l> | <r> | <c> | <c> |'\
+                        , '| / | <> | <> | <> | <> |'\
+                     ]  \
+                     + table_list[1:] \
+                     + [ '|--+--+--+--+--|' \
+                     ]
+                      )
+
+with open('figures/bm_results_detail.org', 'w') as fi:
+    print (out_table, file = fi)
+
+print (PD.DataFrame.from_dict(results_table).iloc[:, 1:] \
+                      .to_markdown(index = False))
+#+END_SRC
+
+#+RESULTS:
+: | *parameter*      | *value*   | *interval*                    | *sig.*   |
+: |:-----------------|:----------|:------------------------------|:---------|
+: | \(\alpha\)       | \(+12.3\) | \(\left(+10.2, +14.8\right)\) |          |
+: | \(\beta_{male}\) | \(+0.6\)  | \(\left(-1.9, +3.7\right)\)   |          |
+: | \(\beta_{adol}\) | \(-2.4\)  | \(\left(-4.6, +0.4\right)\)   |          |
+: | \(\beta_{inft}\) | \(-9.4\)  | \(\left(-10.1, -8.6\right)\)  | *        |
+: | \(\epsilon\)     | \(+2.6\)  | \(\left(+1.7, +3.8\right)\)   |          |
+: | \(\nu\)          | \(+52.1\) | \(\left(+15.1, +94.0\right)\) |          |
+
+
+#+CAPTION: Results of the Bodymass Model.
+#+LABEL: tab:bodyproportions
+#+INCLUDE: "../figures/bm_results_detail.org"
+
+
+As expected, bodymass and ageclass are associated (Tab. \ref{tab:bodyproportions}).
+On average, adolescents are src_python[:session bmresults]{f"{-results.loc['ageclass_is_adolescent', 'mean']:.1f}\ kg"} {{{results(\(2.4\ kg\))}}} and infants are src_python[:session bmresults]{f"{-results.loc['ageclass_is_infant', 'mean']:.1f}\ kg"} {{{results(\(9.4\ kg\))}}} lighter than adult individuals.
+The effect of an animal being infant is deemed relevant because the credible interval does not include zero.
+The credible interval is the smallest possible value range to contain \(94\ \%\) of the values, i.e. from \(3\ \%\) to \(97\ \%\) quantile of the samples; termed "highest (probability) density interval" or HDI.
+That interval is comparable to the "standard error of the mean" of a given slope, and has to be seen in relation to the intercept and model residual to judge if an effect is large or small, i.e. relevant or not.
+The difference for the adolescent group exemplifies this: it is in the order of the \(\epsilon\), and the HDI contains zero.
+Although we know that adolescents weigh less than adults, the data set is insufficient and effect size too low to give waterproof statistics.
+
+In contrast to age, sex seems to have no effect on bodymass (keeping in mind that there are generally few and no adult males in the sample; slope: src_python[:session bmresults]{f"{results.loc['sex_is_male', 'mean']:+.1f}\ [{results.loc['sex_is_male', 'hdi_3%']:+.1f}, {results.loc['sex_is_male', 'hdi_97%']:+.1f}]\ kg"} {{{results(\(+0.6\ [-1.9\, +3.7]\ kg\))}}} ).
+
+Finally, the parameter \(\nu\) ("nu") deserves some explanation, to demonstrate another neat modeling trick.
+An often disputed, but indispensible assumption in conventional statistics is the Normality Assumption (i.e. that values of a variable are normally distributed).
+Likewise, in probabilistic modeling, one can choose the distribution /type/ (e.g. Normal) of a model parameter, which together with the distribution /properties/ (e.g. \(\mu = 0\), \(\sigma = 1\)) is the *prior* for that parameter.
+Distribution properties are adjusted in MCMC sampling, and the prior only influences the result when sample size is very small.
+In contrast, the distribution type stays fixed and has major influence on the outcome.
+Hence, choosing a Normal here might need some justification.
+Part of that justification comes from model comparison (see ch. \ref{workflow:comparison}).
+But in case of the Normal distribution, we can use a more general distribution (Student's T) to actually measure how "Normal" our data is.
+Student's T has an extra parameter, which is \(\nu\) or the "degree of freedom".
+The larger \(\nu\), the higher the resemblance to a Normal distribution.
+In contrast, on lower \(\nu\) values, Student's T has more "weight in the tails", accounting for "outliers" which are unnormally far from the mean.
+For our bodymass model, the sampler converged at src_python[:session bmresults]{f"\\nu = {results.loc['dof', 'mean']:.1f}"} {{{results(\(\nu = 52.1\))}}}.
+This is a relatively high value, confirming that bodymass is approximately normally distributed.
+Usually, model comparison favors the use of a Normal posterior in such cases.
+
+
+** Multi-Level Modeling
+For all following models, there is the option to include the bodymass parameter as a hierarchical (better: multi-level) parameter.
+This means that, when we have a model which includes a slope for (centered) bodymass, we actually make it three slopes (one for each ageclass). I will note this as \(\beta_{bm\mid age}\).
+
+As mentioned above, groupwise centering bodymass (\(cbm_a = bm_a - mean(bm_a)\quad \forall a = {ageclasses}\)) can be useful to facilitate interpretation of the model outcome.
+If data values are centered, the slopes are relative to a mean, and the intercept will give a value at the average of all continuous parameters (in this case: at average body weight).
+And because age has such a high impact on body weight, it makes sense to center the groups individually, to get relatively lighter or heavier individuals per ageclass separated.
+
+The complexity of this matter is not to be underestimated.
+Just to review our options to model bodymass:
++ inclusion or exclusion
++ log-transform or not
++ not centering or centering to population mean or to ageclass mean
++ multi-level: one slope for the whole population or slope for each of the ageclasses
+
+All of these choices in combination affect the model, and need to be compared.
+Even worse: they affect how to best model other parameters (see below; if =bm|age= is used, =leglength|age= might be a worse choice than =leglength= alone, but if =bm= is a population slope, =leglength|age= might become the model of choice).
+Multi-level modeling gives a lot of options for model comparison.
+These will be handled below.
+
+
+** Multivariate Posterior Structures: Mor(e)phometrics
+Together with bodymass, I modeled leg length (ankle-knee-hip distance) and body mass index (BMI, bodymass divided by ankle-knee-hip-head distance).
+The model formula from above remains unchanged, except for the left side.
+But that, namely "multiple parameters on the left side", is a concept on its own.
+The solution is a *Multivariate Posterior*.
+I imagine this as multiple models, sampled in parallel, but cross-connected through the data and the correlations (like a ladder with steps of chewing gum, floating in free space... yes, I'm running out of metaphors).
+In unconnected model, the MCMC sampler would explore the parameter space randomly, and might be "at different ends" for two variables at a given time.
+In contrast, when they are connected by a multivariate posterior, the sampler path is also connected, and therefore a positive correlation of two parameters reflects in the values the sampler sees simultaneously.
+The connection can be either fixed (empirical correlation, based on the data) or inferred.
+The correlation is crucial for predictive sampling to avoid unplausible parameter combinations.
+
+
+Let us rehearse this concept on the body proportions, where it is rather intuitive.
+Body proportions (including bodymass) are highly correlated.
+For BMI, this is trivial: it is defined as the quotient of two other measures.
+
+We can simply calculate the correlation of the three present observables from the raw data.
+This would be the /empirical/ correlation.
+However, according to our statistical theory, the data we acquied is just a sample from the true, underlying distributions of the observables.
+So the correlation might be incomplete or inexact.
+Probabilistic statistics is the attempt to infer that true underlying distribution, and when it is known, one can calculate a potentially more exact correlation (/inferred/ correlation).
+The inferred correlation is not /per se/ more exact; imagine a situation where correaltion is close to \(\pm 1\) and the sampler might have problem with parameter bounds.
+It depends on the data which one works best (yay, more model comparison!).
+
+
+In my toolbox of choice =pymc3=, a multivariate posterior can be initialized with either (i) the empirical or (ii) the inferred correlation structure; a third choice is to use (iii) no correlation.
+For cases (i) and (ii), I introduce the observables as a multivariate Student's T distribution.
+The empirical correlation (i) enters the model in form of the Cholesky matrix calculated from the data\footnote{Subtle technical complication: this variant does not allow the inclusion of an explicit model residual; in such cases I report the standard deviation of the observables as model residuals.}.
+To get inferred correlation (ii), I instead initialize the =MvStudentT= with a so-called LKJ Prior \citep{LKJ2009}, which allows me to quantify the posterior correlation.
+Finally, uncorrelated posterior (iii) do not need an =MvStudentT=, but go with just a =StudentT=, which can also sample multiple observables at once.
+
+Note that multivariate blocks will also be relevant on the predictor side (see below).
+The only difference between observables and predictors in modeling is the somewhat arbitrary choice of which variables we define as "dependent", and which as "independent".
+After all, they are all just distributions, as probabilistic modeling is about juggling distributions.
+Tricky detail: a multivariate predictor block must be initialized with inferred correlation (LKJ), because this block contains inferred slopes and no observed data, and thus the correlation is that of the slopes, and not of the data.
+
+
+#+CAPTION: Body proportions: empirical cross correlation. Asterisk indicates parameter pairs in which the Pearson Correlation \(p\)-value is less than \(0.05\).
+#+LABEL: tab:proportions_empiricalcorrelation
+#+INCLUDE: "../results/bodyproportions_empiricalcorrelation.org"
+
+#+CAPTION: Body proportions: inferred cross correlation. Asterisk indicates values for which the HDI does not include zero.
+#+LABEL: tab:proportions_correlation
+#+INCLUDE: "../results/bodyproportions_correlation.org"
+
+#+CAPTION: Body proportions: model results. Note that these values refer to log-transformed body proportions. Adlt: adult; adol: adolescent; inft: infant.
+#+LABEL: tab:proportions_predictors
+#+INCLUDE: "../results/bodyproportions_predictors.org"
+
+
+In the case of our group of body proportions, the empirical correlation is close to unity (Tab. \ref{tab:proportions_empiricalcorrelation}).
+It is less strong with the inferred posterior correlation (Tab. \ref{tab:proportions_correlation}): bodymass is highly correlated with both leg length and BMI, but the latter are not correlated to each other.
+
+
+The multivariate model also infers the relation to the primary subject parameters (sex and ageclass, /cf./ Tab. \ref{tab:proportions_predictors}).
+The values for bodymass are identical to those reported above (Tab. \ref{tab:bodyproportions}), but here the outcome is shown for the log-transformed observables.
+The results for the additional quantities are consistent with those from bodymass, except that we see that leg length of adolescents is almost identical to that of adults (whereas in bodymass, the difference is more pronounced).
+
+And there are many more body size measures (broad category: morphometrics) which could be measured and included.
+(There is /always/ another parameter which one could include in the model.)
+BMI was intentionally introduced as a redundant parameter and will not be included in subsequent models.
+Bodymass and leg length are highly correlated, and if both are part of another model (e.g. a model on coordination), it might be hard to distinguish which of them is causally responsible for an observed effect.
+On the other hand, I demonstrated that bodymass and leg length are slightly different with regard to the adolescent individuals.
+Hence, the question whether or not to include either, both, or none of these two parameters in the more complex models to come remains to be evaluated.
+
+** Posterior Predictive Sampling
+Because the body proportion problem involves still relatively few parameters, a rather complete visualization is possible (Fig. \ref{fig:bodyproportions}).
+Some observations:
++ Comparing the raw data to the predicted values confirms plausibility of the predictions.
++ The effect of modeling in log space is visible in the narrower distribution of groups with lower values.
++ Groups with fewer observations (e.g. adults) tend to be wider, reflecting the influence of relatively wide priors and a high uncertainty in these classes.
++ Out-of-sample prediction is possible: adult males were not observed, but their model values get tuned by the observations of partly similar subsets of data (i.e. other sex/age combinations).
+
+The visual comparison captures all relevant info in this simple example case.
+For subsequent models, such plots are equally valuable, yet the occurrence of continuous predictors and the increase in complexity require a lot more filtering and adjustment.
+
+#+CAPTION: Subject parameters: raw data and model predictions.
+#+LABEL: fig:bodyproportions
+[[../figures/bodyproportions_predictions.pdf]]
+
+
+** Summary: Subject Parameters
+The example of a bodymass model has already taken us deep into the modeling world.
+We explored simple relations (bodymass as a function of ageclass and sex, and the body proportion cross correlations).
+This involved a linear model with rather few components.
+It is a trivial finding that bodymass depends on the ageclass of our subject, and we will see how that can be incorporated in subsequent models.
+With regard to the interrelations of our body proportion quantities, we encountered multivariate posteriors and saw how they can serve to infer correlations among the observables.
+Visual comparison of raw data and model predictions confirmed that the model converged to plausible results.
+
+All this was more a playground to rehearse and apply some basic modeling concepts, establish vocabulary and visuals, and to prepare some upcoming design decisions when moving on to other quantities of relevance.
