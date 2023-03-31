@@ -1,7 +1,6 @@
 
 
-
-\pagebreak
+\clearpage
 \section{Abstract}
 Many phenomena related to motor behaviour in animals are spatially and temporally periodic, making them accessible for transformation to the frequency domain via Fourier Series.
 Although this has been applied previously, it had not been noticed that the characteristic arrangement of Fourier coefficients in their complex-valued representation resembles landmarks in geometric morphometrics.
@@ -53,7 +52,32 @@ Such an oscillation has the mean $c_0$, amplitude $A$, and the phase $\phi$.
 Assume there is a mathematical operation that removes the affine differences between two such oscillations by shifting (i.e. changing $c_0$), scaling (changing $A$), and rotating (changing $\phi$) the complex coefficients in the frequency domain to a standardized arrangement.
 This would be a Procrustes procedure which results in a mathematically optimal superimposition (two harmonic oscillations of the same frequency would become identical).
 We explore such a superimposition in this study, terming it Fourier Coefficient Affine Superimposition (FCAS, see below).
-\\The motivation behind this is the search for a quantitative, comparative measure of coordination of joints along a limb.
+
+\begin{figure}[p]
+\begin{center}
+\includegraphics[width = 16cm]{figures/fig1_flowchart.pdf}
+\end{center}
+\caption{\textbf{Analysis work flow, schematic. }
+\textbf{A} Video material of walking ungulates is digitized by tracking trace marks (shoulder, elbow, carpus and fetlock joints; see supplementary movie \ref*{supp:movie1}) over a stride cycle, and joint angle profiles are computed (angle defined zero at fully extended limb, positive direction indicated by arrows). Thin black lines are the original measurement, whereas blue lines show the same profile, filtered by FSD with $7$ components.
+\textbf{B} Fourier Series decomposition and synthesis allows transformation of temporally periodic angle profiles back and forth between time domain and frequency domain. The zeroth Fourier coefficient ($c_{0}$, lower bar plot) corresponds to the temporal average of the angle profile (i.e. mean angle). The higher coefficients ($c_{n>0}$) can be plotted in the complex plane ($\Re, \Im$); line connections are only for visualization. Coefficients $i$ of joints $j$ have phases ($\phi_{ji}$) and amplitudes ($A_{ji}$), as indicated in gray for $c_{1}$ of the elbow. Average phase and amplitude of the angle profile can be derived (for example $\phi_{c}$, $A_{c}$ for carpus). Mean angle, amplitude, and phase are the affine components of the signal.
+\textit{(continues next page)}
+  }
+\label{fig:workflow}
+\end{figure}
+
+\addtocounter{figure}{-1}
+\begin{figure} [t!]
+  \caption{
+\textit{(contd.)}
+\textbf{C} Multiple groups are compared, in this case ungulate genera (\textit{Lama}, \textit{Giraffa}, and \textit{Equus}; coloured in blue, yellow, and brown respectively). By quantifying how they differ in affine components, operators can be extracted ($d\phi$, $dA$, $dc_{0}$). This is facilitated by the transformation to the frequency domain, but a synthesis of time domain traces (line plots on the left and right margin) is always possible.
+ \textbf{D} Affine operators are applied to superimpose the joint angle profiles. Superimposition operations from the carpus (reference joint) are applied to the carpus itself, but also transferred to the elbow (focal joint).
+\textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
+  }
+\end{figure}
+
+
+
+The motivation behind this is the search for a quantitative, comparative measure of coordination of joints along a limb.
 For such measurements to be comparable, one should normalize the measures according the the dynamic similarity principle.
 Dynamic similarity, in general and in its biological application \cite[\textit{cf.}][]{Alexander1983,Vaughan2005}, is also concerned with the isolation of affine components.
 In general, dynamic similarity applies when all spatial dimensions of two mobile systems scale with the same factor (i.e. geometric similarity), the temporal aspects of all involved movements scale with another, again uniform factor (i.e. similar coordination), and therefore all forces are similar except for a uniform third factor.
@@ -225,6 +249,19 @@ We report the correlation of these affine differences to the PC axes, as well as
 \section{Results}
 \subsection{Superimposition of Joint Angle Profiles Improves Profile Averaging}
 
+\begin{figure}[p]%[tbhp]
+\centering
+\includegraphics[width=.8\linewidth]{figures/fig2_alignment.pdf}
+\caption{\textbf{Superimposition can improve joint angle profile averaging.}
+Mean joint angle profiles of different forelimb joints ($[e]$: elbow, $[c]$: carpus joint) for the genera \textit{Equus} (brown, $\triangledown$), \textit{Lama} (blue, $\square$), and \textit{Giraffa} (yellow, $\circ$). These examples were chosen for their high sample size (more examples in Fig. \ref*{fig:examples}). See methods and supplementary tutorial \ref*{supp:tutorial} for nomenclature and definition of FCAS.
+\textbf{Upper row}: input data (''video aligned''). \textbf{Lower row}: after carpal superimposition using FCAS.
+\textbf{A} Forelimb joint angle profiles ($\alpha$) over time ($t$, stride cycle period $T$), centered around their temporal averages (gray horizontal axes) to emphasize temporal differences. Thick lines are genus averages for elbow (solid line) and carpus (dashed line) angles. Thin dotted lines indicate $\pm$standard deviation range of individual observations. Scale bar $22.5^{\circ}$, time axis $T$.
+\textbf{B} Mean (bars) and standard deviation (whiskers) of the joint angle temporal averages ($c_0$) per genus. This indicates the actual $y$-offset that was removed for visualization in (A) and (C). Angle values are to scale with (A).
+\textbf{C} The same angle profiles as in (A), but converted to the frequency domain via FSD. Whiskers indicate standard deviation. }
+\label{fig:superimposition}
+\end{figure}
+
+
 To demonstrate the effect of FCAS, we applied the method to our most extensively sampled genera (\textit{Equus}, \textit{Lama}, and \textit{Giraffa}; Fig. \ref{fig:superimposition}).
 Raw data (''video aligned'') was manually aligned for the video frame of limb touch down for comparison with the computational alignment.
 Although this was done at maximum possible accuracy ($\pm 1\ frame$), averages revealed no clear similarities or differences between the three genera.
@@ -239,6 +276,20 @@ Thus, equids turn out to be more distinct from the other groups than was visible
 \\This example indicates the increased accuracy of joint profile averaging after FCAS, even in the presence of noise.
 
 \subsection{Patterns of Variation of Ungulate Intralimb Coordination}
+
+\begin{figure}[p]
+\includegraphics[width = 16cm]{figures/fig3_pca.pdf}
+\caption{\textbf{Bivariate plot of the Principal Component Analysis of elbow-carpus coordination visualizes a slice of the ungulate ''coordination space''. }
+The PCA is based on the genus average Fourier coefficients of relative elbow profiles after carpal superimposition.
+Gray grid lines on the biplot indicate the ($0.1$, $0.9$) quantiles of all observations; reconstructions were done on their intersections.
+Outset line plots on the margins represent these reconstructed angular profiles (black) at the quantile values for each component axis, relative to the reconstructed mean (gray).
+Their labels (circled numbers no. 1-4) are for reference in the text.
+Annotations on the plot mark the examples used in Figures \ref{fig:superimposition} and \ref*{fig:examples}.
+See Fig. \ref*{fig:more_pca} for further components and complete labeling of taxa.
+ }
+\label{fig:pca}
+\end{figure}
+
 
 We aim to extract the most prevalent patterns of variation in ungulate intralimb coordination.
 Therefore, we used the same superimposition procedure as above to generate genus averages for the full data set.
@@ -269,6 +320,36 @@ This further supported the observations from PCA reconstruction.
 
 
 \subsection{Covariates of Intralimb Coordination}
+
+\begin{table}[p]%[tbhp]
+\centering
+\caption{ \textbf{Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates} (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the angle profiles. }
+\begin{tabular}{l @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc}
+\toprule
+{} & \multicolumn{2}{c}{\underline{\textbf{PC1}}} & \multicolumn{2}{c}{\underline{\textbf{PC2}}} & \multicolumn{2}{c}{\underline{\textbf{PC3}}} & \multicolumn{2}{c}{\underline{\textbf{PC4}}} \\
+{\textbf{covariate}} &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ \\
+\midrule
+\textbf{[M] body length      } &                    -0.24 &  $10^{-1}$ &                    -0.17 &   $10^{0}$ &                    -0.31 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
+\textbf{[M] shoulder height  } &                    -0.19 &  $10^{-1}$ &                    -0.22 &  $10^{-1}$ &                    -0.33 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
+\textbf{[M] log(body mass)   } &                    -0.34 &      $\mathbf{10^{-2}}$ &                    -0.19 &  $10^{-1}$ &                    -0.28 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
+\textbf{[M] elbow-wrist      } &                     0.05 &   $10^{0}$ &                    -0.46 &      $\mathbf{10^{-4}}$ &                    -0.24 &  $10^{-1}$ &                     0.05 &   $10^{0}$ \\
+\textbf{[M] meta-/zeugopodial} &                     0.08 &   $10^{0}$ &                    -0.51 &      $\mathbf{10^{-6}}$ &                     0.01 &   $10^{0}$ &                     0.16 &   $10^{0}$ \\
+\midrule\textbf{[K] approx. speed    } &                     0.06 &   $10^{0}$ &                     0.11 &   $10^{0}$ &                     0.12 &   $10^{0}$ &                     0.15 &   $10^{0}$ \\
+\textbf{[K] duty factor      } &                     0.16 &   $10^{0}$ &                     0.40 &      $\mathbf{10^{-3}}$ &                     0.19 &  $10^{-1}$ &                    -0.16 &   $10^{0}$ \\
+\textbf{[K] clearance        } &                     0.49 &      $\mathbf{10^{-5}}$ &                    -0.02 &   $10^{0}$ &                     0.14 &   $10^{0}$ &                    -0.27 &  $10^{-1}$ \\
+\midrule\textbf{[E] habitat          } &                    -0.09 &   $10^{0}$ &                    -0.15 &   $10^{0}$ &                    -0.29 &      $\mathbf{10^{-2}}$ &                    -0.06 &   $10^{0}$ \\
+\textbf{[E] d.o.obstruction  } &                     0.33 &      $\mathbf{10^{-2}}$ &                    -0.20 &  $10^{-1}$ &                     0.10 &   $10^{0}$ &                    -0.06 &   $10^{0}$ \\
+\midrule\textbf{[A] amplitude        } &                     0.12 &   $10^{0}$ &                     0.47 &      $\mathbf{10^{-5}}$ &                    -0.70 &     $\mathbf{10^{-12}}$ &                    -0.08 &   $10^{0}$ \\
+\textbf{[A] phase            } &                     0.47 &      $\mathbf{10^{-5}}$ &                    -0.51 &      $\mathbf{10^{-6}}$ &                    -0.36 &      $\mathbf{10^{-3}}$ &                     0.13 &   $10^{0}$ \\
+\textbf{[A] residual         } &                     0.67 &     $\mathbf{10^{-11}}$ &                     0.17 &   $10^{0}$ &                     0.15 &   $10^{0}$ &                     0.36 &      $\mathbf{10^{-3}}$ \\
+\bottomrule
+\end{tabular}\bigskip
+\begin{flushleft}
+$r_{xy}$: Pearson correlation coefficient, \nolinebreak{''$p < \cdot$'':} p-value, order of magnitude. Bold numbers are below significance threshold ($p < 0.01$).
+\end{flushleft}
+\label{tab:correlations}
+\end{table}
+
 
 
 To evaluate possible explanations for the variation along principal component axes, we computed Pearson correlation of the components with various morphological, kinematic, and ecological factors, considering effects with $p<0.01$ to be relevant (Tab. \ref{tab:correlations}).
@@ -429,83 +510,161 @@ However, to our knowledge, FCAS is the first method that can confirm this on a l
 
 \FloatBarrier\pagebreak
 %________________________________________________________________________________________
-%	Figures
+%	Supplements
 %________________________________________________________________________________________
-\section{Figures And Tables}
-\begin{figure}[!ht]
-\begin{center}
-%\includegraphics[width = 16cm]{fig1_flowchart.pdf}
-\end{center}
-\caption{\textbf{Analysis work flow, schematic. }
-\textbf{A} Video material of walking ungulates is digitized by tracking trace marks (shoulder, elbow, carpus and fetlock joints; see supplementary movie \ref*{supp:movie1}) over a stride cycle, and joint angle profiles are computed (angle defined zero at fully extended limb, positive direction indicated by arrows). Thin black lines are the original measurement, whereas blue lines show the same profile, filtered by FSD with $7$ components.
-\textbf{B} Fourier Series decomposition and synthesis allows transformation of temporally periodic angle profiles back and forth between time domain and frequency domain. The zeroth Fourier coefficient ($c_{0}$, lower bar plot) corresponds to the temporal average of the angle profile (i.e. mean angle). The higher coefficients ($c_{n>0}$) can be plotted in the complex plane ($\Re, \Im$); line connections are only for visualization. Coefficients $i$ of joints $j$ have phases ($\phi_{ji}$) and amplitudes ($A_{ji}$), as indicated in gray for $c_{1}$ of the elbow. Average phase and amplitude of the angle profile can be derived (for example $\phi_{c}$, $A_{c}$ for carpus). Mean angle, amplitude, and phase are the affine components of the signal.
-\textbf{C} Multiple groups are compared, in this case ungulate genera (\textit{Lama}, \textit{Giraffa}, and \textit{Equus}; coloured in blue, yellow, and brown respectively). By quantifying how they differ in affine components, operators can be extracted ($d\phi$, $dA$, $dc_{0}$). This is facilitated by the transformation to the frequency domain, but a synthesis of time domain traces (line plots on the left and right margin) is always possible.
- \textbf{D} Affine operators are applied to superimpose the joint angle profiles. Superimposition operations from the carpus (reference joint) are applied to the carpus itself, but also transferred to the elbow (focal joint).
-\textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
-  }
-\label{fig:workflow}
-\end{figure}
+
+\section{Appendix}
+\subsection{Extraction of Joint Angle Profiles}\label{apdx:digitization}
+For quality check, the digitized points of the first and last frame were superimposed on the frame images, which were blended into each other.
+Stride cycles that were not approximately cyclical (i.e. relative joint positions at start and end differed) were discarded.
+Joint angle profiles were then calculated, defined as the angle difference from a fully extended limb, with negative angles occurring when the joint is flexed towards the direction of movement.
+The angular profiles were inspected \textit{ex post} for tracking irregularities, and in such cases corrected or discarded.
+An example video that shows how joint angles are derived from a video can be found in the supporting material (supplementary movie \ref{supp:movie1}).
+\\Segments were initially cut to be a bit longer than the stride cycle.
+A start-end-matching procedure then found the part of the episode that was as close as possible to precise periodicity.
+It was visually confirmed that profiles were approximately cyclic afterwards, but to enable precise Fourier analysis, the residual difference of the last and first frame was equally distributed over the whole stride for subtraction.
+\\Two additional points on the back line (withers, croup) and a reference on the ground close to the forelimbs were digitized for speed calculation.
+To minimize workload, this was only done for ten frames of the video, equally spaced through the stride.
 
 
-\begin{figure}[!ht]%[tbhp]
+
+\subsection{Fourier Series Decomposition}\label{apdx:fourier}
+Methods based on the Fourier theorem are diverse \cite{Fourier1822,Gray1995,Bracewell2000}.
+We herein use the exponential notation of the Fourier Series.
+Because angles $\alpha =f(t)$ are always real (recorded with finite sampling rate), we can simplify the Fourier Series to $N$ positive coefficients $c_{n}$ by combining complex conjugate coefficients $\Re(c_n + c_{-n}) = \Re(c_n + \overline{c_n}) = 2\Re(c_{n})$:
+	\begin{equation}\label{eqn:fourier_series}
+	f(t) = \sum\limits_{n=-N}^{N} c^{*}_{n}\cdot e^{2\pi i n \frac{t}{T}} = \sum\limits_{n=0}^{N} (2\cdot c_{n})\cdot e^{2\pi i n \frac{t}{T}}
+	\end{equation}
+The coefficients ($n>0$) therein are defined as follows:
+	\begin{equation}\label{eqn:fourier_coefficients}
+	c_{n} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{-2\pi i n \frac{t}{T}} \cdot f(t)  \quad\quad \forall n>0
+	\end{equation}
+	The zero'th coefficient is the temporal average of the angle and has no imaginary component:
+	\begin{equation}\label{eqn:affines_mean}
+	c_{0} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{0} f(t) = \left\langle f(t)  \right\rangle
+	\end{equation}
+
+The number of Fourier coefficients $N$ is capped by finite temporal sampling \cite[Nyquist–Shannon sampling theorem,][]{Nyquist1928,Shannon1949}; higher frequency noise is not captured.
+The quickest stride in the present data set ($\approx 0.6\ s$ at $25\ fps$, $14$ samples, by a tragulid) thus limits the number of coefficients extracted for all our data to $7$, which we also consider sufficient for the rest of the data (given that we observe little remaining amplitude for higher coefficients).
+Fourier coefficients $c_{n}$ are complex numbers; the real part $\Re(c_{n})$ would correspond to a cosine wave component, and the imaginary part $\Im(c_{n})$ to a sine.
+\bigskip\\The zero'th coefficient (\eqref{eqn:affines_mean}) is also the \textbf{mean} of the signal.
+For a standardized signal, its value is zero.
+Non-zero values indicate that the whole signal is shifted in $y$-direction.
+The signal oscillates around that mean.
+The strength of the excursion is quantified as the \textbf{amplitude}; the temporal delay compared to standard cosine/sine is the signal \textbf{phase}.
+Every Fourier coefficient has its own amplitude and phase component.
+$$A_{n} = \sqrt{\Re(c_{n})^{2}+\Im(c_{n})^{2}}$$
+$$\phi_{n} = \frac{1}{2\pi}\cdot arctan2\left( -\Im(c_{n}),\Re(c_{n})\right)$$
+$$A_{n} \ge 0,\ 0 \le \phi_{n} < 1 \quad \forall n$$
+The total amplitude of the signal is the sum of the amplitudes of coefficients, which is one for standardized signals.
+	\begin{equation}\label{eqn:affines_amplitude}
+	A = \sum\limits_{n > 0} A_{n}
+	\end{equation}
+
+
+The phase is divided by $2\pi$ and ''wrapped'' to the positive interval, because signals in the present case all start at $t=0$, and can be phase-shifted between zero and one period.
+\\According to the delay theorem \cite[also shift theorem,][p. 111]{Bracewell2000}, a signal in the frequency domain can be shifted in time by multiplying it with an complex exponential that contains the shift value $\Delta t$, the coefficient number $n$, and the period $T$.
+\begin{equation}\label{eqn:delay}
+  c_{n}\left( f(t+\Delta t)\right) = c_{n}\left( f(t)\right)\cdot e^{2\pi i n \frac{\Delta t}{T}}
+\end{equation}
+Geometrically, this means that a phase shift corresponds to a rotation of the coefficients around the origin of frequency space, whereby the angular ''velocity'' of each coefficient is its coefficient number.
+Assume that a signal $f_{A}$ which has the main phase $\Phi_{A} = 0$ has all coefficient phases approximately at zero.
+Such signals are also maximally symmetric around $t=0$.
+Interestingly, it follows from the delay theorem that a phase shifted signal $f_{B}$ has phases that are at a slope of $\Delta \Phi = \Phi_{B}$.
+We therefore determine the main phase of the signal relative to $\Phi=0$ as the amplitude-weighted average of the coefficient phase differences.
+	\begin{equation}\label{eqn:affines_phase}
+	\Phi = \frac{\sum_{n>0}^{N} (\phi_{n}-\phi_{n-1})\cdot \frac{A_{n}}{n}}{\sum_{n>0} \frac{A_{n}}{n}}
+	\end{equation}
+A signal can be de-phased (i.e. time-shifted so that $\Phi=0$) with \eqref{eqn:delay} by using $\Delta t = -\Phi \frac{T}{2\pi}$.
+\\Note that, in the time domain, a time shift of the signal can only be achieved by rolling the sampled values around the sample time points, hence maximal resolution for a phase shift is the sampling rate (interpolation is possible, but inaccurate).
+This limitation is absent in the frequency domain: \eqref{eqn:affines_phase} is independent of sampling.
+In fact, the entire frequency domain representation of a signal is indifferent to sampling time points, except that the order $N$ is limited by the aforementioned sampling theorem.
+\\To summarize, we are able to calculate three affine components of a signal in the frequency domain: the mean $c_{0}$ (\eqref{eqn:affines_mean}), the amplitude $A$ (\eqref{eqn:affines_amplitude}) and the phase $\Phi$ (\eqref{eqn:affines_phase}).
+\bigskip\\For computation, it is critical that the FSD is a transformation, i.e. deterministic.
+Coefficients should not be extracted by an optimization procedure, because it is not generally ensured that the optimization finds the global best fit \cite{Hubel2015,Basu2019}.
+Problems become apparent when reconstructing and plotting the coefficients and comparing the reconstruction to the original signal, which should always be part of the quality check procedure.
+\\ As an example implementation of the presented procedure, we supplement an extensively commented tutorial (supplementary data \ref*{supp:tutorial}).
+
+
+\subsection{Quantification of Phylogenetic Signal}\label{apdx:phylosig}
+Phylogenetic dependence within our data might affect the PCA results.
+The coordination of recently separated genera could be more similar than that of distant relatives.
+Because our data was multivariate and interdependent (shape), Adams' $K$ is applied to quantify phylogenetic signal \cite{Adams2014}.
+\\For the data at hand, the test for a phylogenetic signal in the PCA result was significant (Adams' $K=0.16$, $p < 0.001$ from randomization).
+This indicates significantly higher $K$ than for PC values that are randomized on the (pruned) ungulate phylogenetic tree.
+However, the value for $K$ itself is much lower than that expected for random evolution.
+This indicates that the lineages are closer than would be expected given their separation times (non-random evolution), but that phylogenetic clusters are still distinguishable (which is consistent with Fig. \ref{fig:pca}).
+Because speciation and lineage diagnostics are interwoven with habitat, morphology, and locomotion, this is an expected result for broad phylogenies with sufficient time for convergences.
+Removing all phylogenetic signal via pPCA \cite{Revell2009} yielded no plausible results in our case (not shown).
+A reason, besides the complex interrelation of influence factors, might be the technical analogy between superimposed angular trace shapes and shape data in geometric morphometrics \cite[\textit{cf.}][]{Polly2013}.
+Comparing sample genera along the PC axes (Fig. \ref*{fig:examples}) indicated that the overall patterns persist within closely related taxa, making a confounding effect of phylogenetic relation unlikely.
+
+
+
+%%% Each figure should be on its own page
+\newpage
+\section{Supplementary Figures}
+
+\begin{figure}[h!]
 \centering
-%\includegraphics[width=.8\linewidth]{fig2_alignment.pdf}
-\caption{\textbf{Superimposition can improve joint angle profile averaging.}
-Mean joint angle profiles of different forelimb joints ($[e]$: elbow, $[c]$: carpus joint) for the genera \textit{Equus} (brown, $\triangledown$), \textit{Lama} (blue, $\square$), and \textit{Giraffa} (yellow, $\circ$). These examples were chosen for their high sample size (more examples in Fig. \ref*{fig:examples}). See methods and supplementary tutorial \ref*{supp:tutorial} for nomenclature and definition of FCAS.
-\textbf{Upper row}: input data (''video aligned''). \textbf{Lower row}: after carpal superimposition using FCAS.
-\textbf{A} Forelimb joint angle profiles ($\alpha$) over time ($t$, stride cycle period $T$), centered around their temporal averages (gray horizontal axes) to emphasize temporal differences. Thick lines are genus averages for elbow (solid line) and carpus (dashed line) angles. Thin dotted lines indicate $\pm$standard deviation range of individual observations. Scale bar $22.5^{\circ}$, time axis $T$.
-\textbf{B} Mean (bars) and standard deviation (whiskers) of the joint angle temporal averages ($c_0$) per genus. This indicates the actual $y$-offset that was removed for visualization in (A) and (C). Angle values are to scale with (A).
-\textbf{C} The same angle profiles as in (A), but converted to the frequency domain via FSD. Whiskers indicate standard deviation. }
-\label{fig:superimposition}
-\end{figure}
-
-
-
-\begin{figure}[!hb]
-%\includegraphics[width = 16cm]{fig3_pca.pdf}
-\caption{\textbf{Bivariate plot of the Principal Component Analysis of elbow-carpus coordination visualizes a slice of the ungulate ''coordination space''. }
-The PCA is based on the genus average Fourier coefficients of relative elbow profiles after carpal superimposition.
-Gray grid lines on the biplot indicate the ($0.1$, $0.9$) quantiles of all observations; reconstructions were done on their intersections.
-Outset line plots on the margins represent these reconstructed angular profiles (black) at the quantile values for each component axis, relative to the reconstructed mean (gray).
-Their labels (circled numbers no. 1-4) are for reference in the text.
-Annotations on the plot mark the examples used in Figures \ref{fig:superimposition} and \ref*{fig:examples}.
-See Fig. \ref*{fig:more_pca} for further components and complete labeling of taxa.
+\includegraphics[width = 16cm]{figures/figS1_phylogeny.pdf}
+\caption{Informal phylogeny of terrestrial ungulates. Taxa grouped on genus level, with non-monophyletic genera split. Colors and group labels serve rough orientation. Cetaceans are excluded from our study.
+Based on Zurano et al. (2019), and complemented from various other sources \citep{Zurano2019,ParisiDutra2017,Frantz2015,Ryder2011,Price2009,Gongora2011,Funk2007,Hassanin2012}.
  }
-\label{fig:pca}
+\label{fig:phylogeny}
+\end{figure}
+
+
+\begin{figure} [b!]
+  \caption{
+\textit{(next page.)}
+\textbf{Representative joint angle profile examples.}
+Taxa were selected based on their position in the PCA (Fig. \ref*{fig:pca}) and to inspect cases of geometric or phylogenetic uniformity.
+Display of time domain angle profiles (left), mean angle (middle) and frequency domain (right) as before (see Figs. \ref*{fig:workflow}, \ref*{fig:superimposition}).
+\textbf{A} Two genera (\textit{Taurotragus}, \textit{Alces}) that are approximately geometrically similar (size, body mass), but distributed along PC1. % confirm the trend that was shown by the angle profile reconstructions.textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
+  }
+\end{figure}
+\addtocounter{figure}{-1}
+
+\pagebreak
+\begin{figure}[pt]
+\centering
+\includegraphics[width = 16cm]{figures/figS2_pc_axes.pdf}
+\caption[Representative Examples]{
+\textit{(contd.)}
+\textbf{Representative joint angle profile examples.}
+\textbf{B} Closely related taxa (Cervidae) along PC1.
+\textbf{C, D} Two pairs of closely related taxa (Tylopoda; Rhinoceroidae) that are spread along PC2.
+ }
+\label{fig:examples}
+\end{figure}
+
+\pagebreak
+\begin{figure}[pt]
+\centering
+\includegraphics[width = 16cm]{figures/figS3_more_pca.pdf}
+\caption[Further PC Axes]{\textbf{Principal Component Analysis, further axes.} Data as before (Fig. \ref*{fig:pca}), but with additional principal components (lower biplot) and labeling of all taxa.
+ }
+\label{fig:more_pca}
 \end{figure}
 
 
 
-\begin{table}[!ht]%[tbhp]
-\centering
-\caption{ \textbf{Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates} (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the angle profiles. }
-\begin{tabular}{l @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc}
-\toprule
-{} & \multicolumn{2}{c}{\underline{\textbf{PC1}}} & \multicolumn{2}{c}{\underline{\textbf{PC2}}} & \multicolumn{2}{c}{\underline{\textbf{PC3}}} & \multicolumn{2}{c}{\underline{\textbf{PC4}}} \\
-{\textbf{covariate}} &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ &                 $r_{xy}$ &              $p <\cdot$ \\
-\midrule
-\textbf{[M] body length      } &                    -0.24 &  $10^{-1}$ &                    -0.17 &   $10^{0}$ &                    -0.31 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
-\textbf{[M] shoulder height  } &                    -0.19 &  $10^{-1}$ &                    -0.22 &  $10^{-1}$ &                    -0.33 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
-\textbf{[M] log(body mass)   } &                    -0.34 &      $\mathbf{10^{-2}}$ &                    -0.19 &  $10^{-1}$ &                    -0.28 &      $\mathbf{10^{-2}}$ &                    -0.11 &   $10^{0}$ \\
-\textbf{[M] elbow-wrist      } &                     0.05 &   $10^{0}$ &                    -0.46 &      $\mathbf{10^{-4}}$ &                    -0.24 &  $10^{-1}$ &                     0.05 &   $10^{0}$ \\
-\textbf{[M] meta-/zeugopodial} &                     0.08 &   $10^{0}$ &                    -0.51 &      $\mathbf{10^{-6}}$ &                     0.01 &   $10^{0}$ &                     0.16 &   $10^{0}$ \\
-\midrule\textbf{[K] approx. speed    } &                     0.06 &   $10^{0}$ &                     0.11 &   $10^{0}$ &                     0.12 &   $10^{0}$ &                     0.15 &   $10^{0}$ \\
-\textbf{[K] duty factor      } &                     0.16 &   $10^{0}$ &                     0.40 &      $\mathbf{10^{-3}}$ &                     0.19 &  $10^{-1}$ &                    -0.16 &   $10^{0}$ \\
-\textbf{[K] clearance        } &                     0.49 &      $\mathbf{10^{-5}}$ &                    -0.02 &   $10^{0}$ &                     0.14 &   $10^{0}$ &                    -0.27 &  $10^{-1}$ \\
-\midrule\textbf{[E] habitat          } &                    -0.09 &   $10^{0}$ &                    -0.15 &   $10^{0}$ &                    -0.29 &      $\mathbf{10^{-2}}$ &                    -0.06 &   $10^{0}$ \\
-\textbf{[E] d.o.obstruction  } &                     0.33 &      $\mathbf{10^{-2}}$ &                    -0.20 &  $10^{-1}$ &                     0.10 &   $10^{0}$ &                    -0.06 &   $10^{0}$ \\
-\midrule\textbf{[A] amplitude        } &                     0.12 &   $10^{0}$ &                     0.47 &      $\mathbf{10^{-5}}$ &                    -0.70 &     $\mathbf{10^{-12}}$ &                    -0.08 &   $10^{0}$ \\
-\textbf{[A] phase            } &                     0.47 &      $\mathbf{10^{-5}}$ &                    -0.51 &      $\mathbf{10^{-6}}$ &                    -0.36 &      $\mathbf{10^{-3}}$ &                     0.13 &   $10^{0}$ \\
-\textbf{[A] residual         } &                     0.67 &     $\mathbf{10^{-11}}$ &                     0.17 &   $10^{0}$ &                     0.15 &   $10^{0}$ &                     0.36 &      $\mathbf{10^{-3}}$ \\
-\bottomrule
-\end{tabular}\bigskip
-\begin{flushleft}
-$r_{xy}$: Pearson correlation coefficient, \nolinebreak{''$p < \cdot$'':} p-value, order of magnitude. Bold numbers are below significance threshold ($p < 0.01$).
-\end{flushleft}
-\label{tab:correlations}
-\end{table}
+%%% Add this line AFTER all your figures and tables
+\FloatBarrier
+
+%
+Movie: {An example recording from a walking lama, obtained by the authors with permission by the owner. Tracked landmarks (shoulder, elbow, carpus, fetlock) are superimposed; joint angle profiles for four consecutive steps are shown below. The video is available in high quality here: \nolinkurl{https://www.youtube.com/watch?v=J1fhg33ZDvI}. }\label{supp:movie1}
+
+dataset: {supplementary\_tutorial.zip}{A step-by-step tutorial (formats: HTML and jupyter notebook) that illustrates the implementation and application of the methods presented in this manuscript.}\label{supp:tutorial}
+
+dataset: {supplementary\_data1.xls}{A list of and link to the videos from which data was acquired, including timestamps of the stride cycle episodes that entered the analysis. }\label{supp:data1}
+
+dataset: {supplementary\_data2.zip}{All tracking data generated from the videos. Note that many stride cycles did not pass quality criteria for the final data set (see supplementary data \ref{supp:data1}). }\label{supp:data2}
 
 
+
+TODO Link published article
 
 
 

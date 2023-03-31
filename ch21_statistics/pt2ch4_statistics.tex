@@ -1,5 +1,5 @@
-\clearpage
 
+\clearpage
 
 \section{Preface}
 \label{sec:orgcfa10a1}
@@ -1304,8 +1304,8 @@ In combination, posture and coordination values can be translated back into join
 This is especially interesting for prediction (e.g. Figs. \ref{fig:posture1} - \ref{fig:coordination2}).
 The final cherry on this cake (Fig. \ref{fig:japprediction}) is thus a promising attempt to predict joint angular profiles for the given classes.
 
-\begin{landscape}
-\begin{table}[htbp]
+\begin{landscape}\clearpage
+\begin{table}[t!]
 \caption{\label{tab:postureresults}\textbf{Results of the Posture Model.} Significant values are indicated by an asterisk.}
 \centering
 \scriptsize
@@ -1321,7 +1321,7 @@ ankle amplitude & \(+0.68\) & \(-0.07\) & \(-0.04\) & \(+0.05\) & \(+0.10\) & \(
 \end{tabular}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[b!]
 \caption{\label{tab:coordinationresults}\textbf{Results of the Coordination Model.} Significant values are indicated by an asterisk.}
 \centering
 \scriptsize
@@ -1339,34 +1339,34 @@ PC8 & \(-0.01\) & \(+0.03\) & \(+0.01\) & \(+0.01\) & \(-0.06\) & \(+0.01\) & \(
 \end{tabular}
 \end{table}
 \end{landscape}
+\clearpage
 
-
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/posture_means_predictions.pdf}
 \caption{\label{fig:posture1}Posture model predictions. Part 1: mean angles.}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/posture_amps_predictions.pdf}
 \caption{\label{fig:posture2}Posture model predictions. Part 2: amplitudes (range of motion).}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/coordination_pt1_predictions.pdf}
 \caption{\label{fig:coordination1}Coordination model predictions, part 1.}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/coordination_pt2_predictions.pdf}
 \caption{\label{fig:coordination2}Coordination model predictions, part 2.}
 \end{figure}
 
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/trace_predictions.png}
 \caption{\label{fig:japprediction}Joint Angle Profile predictions from combined results of coordination and posture models. Thick lines are actual observations; thin lines in the background are posterior predictive samples.}

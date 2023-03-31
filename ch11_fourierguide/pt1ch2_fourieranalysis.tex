@@ -1,4 +1,4 @@
-
+\clearpage
 \section{Abstract}
 \label{sec:org3ea498f}
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
@@ -94,12 +94,12 @@ The capital sigma tells mathematicians that this is a series, and thus the equat
 
 At first, the analytical formula might seem quite complex for everyday application, and computer code might be more usable.
 In appendix \ref{appendix:code} and in the supplements, we provide code for Python, R and Matlab which can just be copied and used\footnote{The "order" parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
-\begin{lstlisting}{python}
+\begin{lstlisting}
 coefficients = FourierSeriesDecomposition(time, signal, order)
 \end{lstlisting}
 
 It can be inverted (just as the analytical formula, see below):
-\begin{lstlisting}{python}
+\begin{lstlisting}
 signal = FourierSeriesRecomposition(coefficients, time)
 \end{lstlisting}
 
@@ -659,6 +659,7 @@ def FourierSeriesRecomposition(coefficients, output_time):
 
 \end{lstlisting}
 
+\normalsize
 
 % \bibliographystyle{apalike}
 % \bibliography{literature.bib}
