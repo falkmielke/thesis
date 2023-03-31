@@ -31,7 +31,7 @@
 % #+LATEX_HEADER:  \usepackage{longtable} 	% tables over multiple pages/columns
 % #+LATEX_HEADER:  \usepackage{booktabs} % Horizontal rules in tables
 % #+LATEX_HEADER:  \usepackage{lscape} 		% landscape pages for big tables or figures
-% #+LATEX_HEADER:  \usepackage{pdflscape}		% landscape pages for big tables or figures
+#+LATEX_HEADER:  \usepackage{pdflscape}		% landscape pages for big tables or figures, rotated in pdf export
 % #+LATEX_HEADER:  \usepackage{subfigure} 	% for multiple images in one figure
 % #+LATEX_HEADER:  %\usepackage{enumitem}
 % #+LATEX_HEADER:  \usepackage{verbatim}		% code snippets via \verbatiminput
@@ -59,9 +59,9 @@
 % caption style
 #+LATEX_HEADER: \captionsetup{margin=0.2cm, font=normal, labelfont=bf, textfont=sl} %
 
-% line spacing
+% line spacing and indentation
 #+LATEX_HEADER: \linespread{2} % Line spacing - Palatino needs more space between lines
-
+#+LATEX_HEADER: \setlength{\parindent}{0pt}
 
 #+LATEX_HEADER: \usepackage{fancyhdr} % Headers and footers
 #+LATEX_HEADER: \pagestyle{fancy} % All pages have headers and footers

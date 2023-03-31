@@ -2,13 +2,13 @@
 
 
 \section{Abstract}
-\label{sec:orga888e93}
+\label{sec:org46d1be2}
 Here, I am going to write a summary of this extraordinary manuscript.
 
 \clearpage
 
 \section{Introduction}
-\label{sec:org65b88fd}
+\label{sec:orgd1de252}
 Until this point, this thesis has been busy with methodological development in terms of measuring kinematics.
 With Fourier-based methods and probabilistic models in place, one can
   (i) quantify measured kinematics
@@ -41,43 +41,43 @@ Again, the premise is ``falsification'': instead of assuming that CT scan data i
 
 
 \subsection{Dynamics: Theory}
-\label{sec:org8f46eaf}
+\label{sec:org6d0e666}
 \begin{itemize}
 \item forward and inverse dynamics
 \end{itemize}
 
 \subsection{Screw Theory and Wrenches}
-\label{sec:orgef60c30}
+\label{sec:orgfc04ba7}
 Dumas 2004, Lynch and Park 2017
 
 \subsection{Quaternions}
-\label{sec:org25237d9}
+\label{sec:org65e1cb2}
 
 \subsection{Balance of Forces and Moments}
-\label{sec:org64c0782}
-conservation of linear and angular momentum
+\label{sec:org0ccd151}
+conservation of linear and angular momentum (TODO check!)
 \begin{itemize}
-\item %FJ=mx¨+∂m∂xx˙x˙=mx¨
-\item %MJ=Iω¨+ω˙×Iω˙
+\item \(F_J = m\ddot{x} + \frac{\partial m}{\partial x} \dot{x}\dot{x} = m\ddot{x}\)
+\item \(M_J = I\ddot{\omega} + \dot{\omega} \times I\dot{\omega}\)
 \end{itemize}
 
 \subsection{Mass}
-\label{sec:org6e3fd14}
+\label{sec:org3ee3a48}
 resistance to linear acceleration
 
 \subsection{Mass Moment of Inertia}
-\label{sec:org01ed44a}
+\label{sec:org05fc151}
 resistance to angular acceleration
 Vector formula
 Generalized Steiner
 \subsubsection{Conventional Methods}
-\label{sec:org5cf946a}
+\label{sec:orgf0a43d8}
 \subsubsection{Using CT scans}
-\label{sec:orgc273ae7}
-\citep{DuPlessis2013,Durston2022} \url{https://doi.org/10.1242/jeb.242280}
+\label{sec:org1a78e3f}
+\citep{DuPlessis2013,Durston2022}
 
 \subsection{Reference Frames and Ficticious Forces}
-\label{sec:org274659f}
+\label{sec:orge4c93d5}
 Take home message: Make sure, in this and all that follows, in what reference frame parameters are defined and whether they were transformed.
 
 D’Alambert Force, Euler force, Centrifugal force, Coriolis force
@@ -112,47 +112,32 @@ With these tools at our hands, we can advance to elementary examples. I’ll sta
 
 
 \subsection{Application: The N-Segment Piglet Limb}
-\label{sec:orge697170}
+\label{sec:org5321bfb}
 
 \section{Results}
-\label{sec:orgb64af67}
+\label{sec:orgff6d7a6}
 \subsection{Issue 1: Beam Hardening}
-\label{sec:org0dd2f2c}
-
-\includegraphics[width=16cm]{figures/cupping.pdf}
-
+\label{sec:orgeb51aa9}
 \subsection{Issue 2: Chemical Composition}
-\label{sec:org035ffb7}
+\label{sec:orgf412c36}
 \begin{itemize}
 \item water streaks on the scan
 \end{itemize}
-
-\includegraphics[width=16cm]{figures/regression.pdf}
-
 \subsection{Issue 3: Marker Artifacts}
-\label{sec:org21b2146}
+\label{sec:orgdc3358c}
 \begin{itemize}
 \item helical scanning
 \end{itemize}
 
 \section{Discussion}
-\label{sec:org4ec6dc5}
+\label{sec:org4195f4b}
 \subsection{Which Inertia Component is Relevant?}
-\label{sec:org69962d6}
+\label{sec:orgb3e7c4f}
 
 
-\section{References}
-\label{sec:orgc2d292c}
+\section{Acknowledgements}
+\label{sec:orgdc4f21e}
+\pagebreak
 
-
-Dumas, R., Aissaoui, R., \& de Guise, J. A. (2004). A 3D generic inverse dynamic method using wrench notation and quaternion algebra. Computer methods in biomechanics and biomedical engineering, 7(3), 159-166. \url{https://doi.org/10.1080/10255840410001727805}
-
-Dumas, R. (2019). 3D Kinematics and Inverse Dynamics , MATLAB Central File Exchange. Accessed July 1, 2020.
-
-Lynch, K. M., \& Park, F. C. (2017). Modern Robotics. Cambridge University Press. ISBN 9781107156302. \url{http://www.modernrobotics.org}
-
-Meurer A., Smith C.P., Paprocki M., Čertík O., Kirpichev S.B., Rocklin M., Kumar A., Ivanov S., Moore J.K., Singh S., Rathnayake T., Vig S., Granger B.E., Muller R.P., Bonazzi F., Gupta H., Vats S., Johansson F., Pedregosa F., Curry M.J., Terrel A.R., Roučka Š., Saboo A., Fernando I., Kulal S., Cimrman R., Scopatz A. (2017). SymPy: symbolic computing in Python. PeerJ Computer Science 3:e103 \url{https://doi.org/10.7717/peerj-cs.103}
-
-Moore, J., McMurry, R., Milam, B. (2016). Simulating Robot, Vehicle, Spacecraft, and Animal Motion. SciPy 2016 Tutorial. \url{https://www.youtube.com/watch?v=r4piIKV4sDw}. Accessed July 1, 2020.
-
-Owen, F. (undated). Rotating reference frame and the five-term acceleration equation. Alpha Omega Engineering, Inc. web document. Accessed July 1, 2020.
+% \bibliographystyle{apalike}
+% \bibliography{literature.bib}

@@ -1,6 +1,0 @@
-* Input
-Hello World! This is my new paper!
-
-** subheadings
-can also happen in import files.
-Those are then shifted by =\minlevel=.

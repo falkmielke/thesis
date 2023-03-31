@@ -48,7 +48,7 @@ Walking piglets are graceful in their simplicity.
 And "graceful", just like in (human) sports or in playing musical instruments, often describes something which is complex and complicated but performed to look simple.
 Well, sports and music requires training, and the most adept athletes or musicians seem to us as if they have never done anything else in their lives.
 But in contrast to hominid trained specialists, the piglets we study indeed have never done anything else in their lives!
-They are born, and they walk gracefully within 96 hours, as my colleague Charlotte concluded from her exemplary PhD work citep:VandenHole2019.
+They are born, and they walk gracefully within 96 hours, as my colleague Charlotte concluded from her exemplary PhD work citep:VandenHole2019thesis.
 How much trouble it would save us, and how much different trouble it would cause, if our own toddlers could pull that trick!
 
 
@@ -132,7 +132,7 @@ It nevertheless turned out to be the most relevant data for my entire PhD citep:
 Acquiring videos is just the first step: as always in science, we need to get to numbers and statistics to get reliable results.
 Where are we at the analysis side?
 You might be underwhelmed.
-We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns citep:Hildebrand1985, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles.
+We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns citep:Hildebrand1989, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles.
 #TODO recent citations
 Those are doubtlessly great methods to get an overview, and they remain the go-to first analysis for any kinematic data set.
 Yet as I will argue in the chapters to follow, they only capture limited information and are therefore insufficient for a falsification approach.
@@ -186,7 +186,7 @@ The thesis closes with a general discussion to wrap up and project the presented
 
 \pagebreak
 # References
-\bibliographystyle{apalike}
-\bibliography{literature.bib}
+# \bibliographystyle{apalike}
+# \bibliography{literature.bib}
 
 # TODO: check all the other intro attempts again; check notes Peter/Chris meeting
