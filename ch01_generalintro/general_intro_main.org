@@ -10,9 +10,12 @@
 
 
 
-* Why Piglets?
-We are studying piglets, and you may validly ask, "why"?
+* Which Model Species?
+In this thesis, I will draw upon data from two model species: piglets and baboons.
+You may validly ask, "why"?
 
+** Piglets
+Why do we study piglets?
 
 The first is the trivial reason: *because we can*.
 Our institute at the University of Antwerp has phenomenal equipment.
@@ -48,7 +51,7 @@ Walking piglets are graceful in their simplicity.
 And "graceful", just like in (human) sports or in playing musical instruments, often describes something which is complex and complicated but performed to look simple.
 Well, sports and music requires training, and the most adept athletes or musicians seem to us as if they have never done anything else in their lives.
 But in contrast to hominid trained specialists, the piglets we study indeed have never done anything else in their lives!
-They are born, and they walk gracefully within 96 hours, as my colleague Charlotte concluded from her exemplary PhD work citep:VandenHole2019thesis.
+They are born, and they walk more or less gracefully within 8 hours, as my colleague Charlotte concluded from her exemplary PhD work citep:VandenHole2019thesis.
 How much trouble it would save us, and how much different trouble it would cause, if our own toddlers could pull that trick!
 
 
@@ -103,8 +106,44 @@ The falsification approach is a unifying aspect of all the chapters herein.
 *To summarize*, there are some genuine reasons as well as grant-acquiring rationalizations for studying suid ontogeny.
 Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
 
+** TODO Baboons
+There also is a limitation to piglets.
+Or, rather, I consider it a bonus.
+They have two extra limbs on the ground, thus four limbs in total.
+This gives us about twice the number of joints to analyze when studying grounded locomotion.
+Not trivial to handle, as we will see below.
 
-* What Tools Do We Have?
+
+It came as a great coincidence that, during SEB conference 2021, I watched my colleage François Druelle presenting a data set acquired from bipedally walking baboons (/Papio anubis/).
+The rationale to study these animals can be directly transferred to this thesis: they are facultatively bipedal, i.e. they occasionally walk on their hind limbs, just like humans often do.
+Prof. Druelle and colleagues thus analyzed a developmental series of baboons: infant, adolescent, and adult individuals citep:Druelle2021.
+Their intention is to find out if and how the use of a bipedal gait changes with age.
+
+
+That sounded like a familiar task, and with the euphoria of just having implemented a different, potentially useful method (FCAS, see below), I reached out to François and he kindly provided the data.
+Not only the videos, but also the tracking (i.e. kinematics "to go").
+I much appreciate the time and effort François and his students put into the exchange.
+And I regret that this has not been put into a brief publication.
+
+
+Nevertheless, work on the baboon data set has a prominent place in this thesis.
+The fact that there are fewer joints (bipedal), the fact that the data set has been well studied before, and the fact that this is also a developmental series (though different: age groups are discrete), predestined this data set to be my "playground".
+I used it to refine my procedures and code.
+And I ended up writing two "tutorial"-chapters, one each for Fourier Methods (part I) and Probabilistic Modeling (part II).
+
+
+Yet in fact, you could argue the other way round.
+Piglets are a putative model species, but require some transfer work to draw reliable conclusions about humans and human development.
+/Papio/, on the other hand, are bipedal primates, and their bipedalism develops gradually over time.
+Just like in our own species.
+On the downside, baboons are less readily available, also for dynamic measurements (e.g. XROMM, part III).
+Hence it is good to keep both model species in the loop.
+
+
+* TODO Why Locomotion?
+
+
+* Which Analytical Tools Do We Have?
 One would think that our toolbox to study terrestrial locomotion is well-developed and sophisticated.
 After all, locomotion has been intriguing people for hundreds, thousands, maybe tens of thousands of years.
 Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it (first for pornography, and second) for locomotion (Fig. \ref{fig:muybridge},\ref{fig:jumpiglet}).
@@ -126,7 +165,9 @@ Compare modern day smartphone cams to, for example, contemporary x-ray technique
 Visible light videography seems to be far more accessible than other imaging techniques.
 We can thus expect that far better camera equipment is available than would minimally be required for our research questions.
 Sounds too easy - which is probably why my supervisors decided to send me out to a pig farm in 2017 with an inferior JVC camcorder (although a synced 4-cam 300fps Norpix system, and a set of high res GoPro's, were available at the time).
-It nevertheless turned out to be the most relevant data for my entire PhD citep:Mielke2023.
+Although that would not be fair to claim.
+There is also always an allocation to be set on the spectrum of video quality (especially framerate) and manually processing time (see Ch. \ref{ch:digitization}, below), and I might still be clicking points on videos today if my supervisors had decided differently.
+And at any rate, that video data turned out to be the most relevant data for my entire PhD citep:Mielke2023.
 
 
 Acquiring videos is just the first step: as always in science, we need to get to numbers and statistics to get reliable results.
@@ -141,7 +182,8 @@ Yet as I will argue in the chapters to follow, they only capture limited informa
 People have certainly /tried/ to complement the conventional measurements with more in-depth computational methods.
 "Planar Covariation" theory came out of one attempt to develop a technique which captures the essence of terrestrial locomotion citep:Borghese1996,Ivanenko2008.
 I think it is flawed, in a sense that it biases the data for high correlation just to find out that it is highly correlated.
-Throughout the chapters of this thesis, you will find subtle and polite rants about the planar covariation technique, so I will not go into detail here - and I want to mention that I would be happy to discuss this at the defence.
+Throughout the chapters of this thesis, you will find subtle and polite rants about the planar covariation technique, so I will not go into detail here
+
 
 Another attempt to go beyond footfall science is ... #TODO but I don't remember
 
@@ -149,11 +191,12 @@ Another attempt to go beyond footfall science is ... #TODO but I don't remember
 And then there is one strain of locomotor science which deviates from the Western mainstream.
 It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to it (Ch. \ref{TODO}).
 His group excelled in at least two ways citep:Bongaardt2000,Bernstein1935.
-They used clever engineering to get continuous measures of joint positions, long before videography was able to capture sufficiently high frame rates citep:Bernstein1927b.
-And they applied angular transformations (i.e. Fourier Series) to analyze the data citep:Bernstein1927a.
+They used clever engineering to get continuous measures of joint positions citep:Bernstein1927b and applied angular transformations (i.e. Fourier Series) to analyze the data citep:Bernstein1927a.
 These early works are remarkable, and the day I first read through it and realized what they were up to was maybe one of the happiest days of my PhD.
 Essentially, what I did in the work summarized herein, is transferring Bernstein's ideas to a computer framework, and extending them with moderen statistical models.
-I acknowledge that I am not the first one to take this route citep:Pike2002,Webb2007; however, given the usefulness of the transformation, there are astonishingly few groups to date who have applied Fourier Analysis to locomotor data.
+I acknowledge that I am not the first one to take this route citep:Pike2002,Webb2007.
+And there is a group of authors who have translated, popularized, and advanced the "Bernstein school" citep:Latash2010,Latash2008,Latash1998,Laczko2016.
+However, given the usefulness of the transformation, I find that +there are+ google scholar returns astonishingly few studies to date who have applied Fourier Analysis to locomotor data.
 
 
 *To summarize,* there are a lot of computational tools at hand to study locomotion.
@@ -164,7 +207,7 @@ This thesis is also an attempt to rectify that.
 
 
 \pagebreak
-* Thesis Outline\label{TODO}
+* TODO Thesis Outline
 
 And this is where my PhD project found its place.
 We study piglet locomotion, attempting to falsify a difference that is due to birth weight category.
@@ -190,3 +233,7 @@ The thesis closes with a general discussion to wrap up and project the presented
 # \bibliography{literature.bib}
 
 # TODO: check all the other intro attempts again; check notes Peter/Chris meeting
+
+
+* TODO On Video Digitization\label{ch:digitization}
+Because it is central for all the parts to follow below, I would like to briefly review the issue of video digitization.
