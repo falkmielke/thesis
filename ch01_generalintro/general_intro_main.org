@@ -20,7 +20,8 @@ Why do we study piglets?
 The first is the trivial reason: *because we can*.
 Our institute at the University of Antwerp has phenomenal equipment.
 We have incubator-like rearing containers in the "Ark" (a teaching stable in our Veterinary Science department), which can be a cozy warm home to newborn piglets.
-We have the \(3D^2YMOX\) (3-Dimensional DYnamic MOrphology using X-rays) facility, which measuring animals from hoof to head in light and x-ray vision, more about it in the appendix.
+We have the \(3D^2YMOX\) ([[https://www.uantwerpen.be/en/research-groups/3d2ymox][3-Dimensional DYnamic MOrphology using X-rays]]) facility, which measuring animals from hoof to head in light and x-ray vision.
+# TODO, more about it in the appendix.
 We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab and Biomedical Physics (Bimef), and not least bioligists at FunMorph (Functional Morphology).
 The settings could not have been better, and I cannot overstate my praise of all the fantastic people who helped with this study (see acknowledgements, Ch. \ref{Acknowledgements}), and all those who previously managed to acquire funding for what enabled my work.
 Thank you!
