@@ -24,25 +24,52 @@ Here, I am going to write a summary of this extraordinary manuscript.
 
 @@latex:\clearpage@@
 
+
+#+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door to motion. Lower right: subject running towards the experimental setup.
+#+LABEL: fig:slamming
+#+ATTR_LATEX: :width 12cm
+[[./figures/slamming_door.pdf]]
+
+
 * Introduction
-Until this point, this thesis has been busy with methodological development in terms of measuring kinematics.
+"Slamming a door in someone's face" is not a friendly thing to do.
+Yet "friendliness" is not a scientific category, and thus we must consider this as a purely physical process (Fig. \ref{fig:slamming}).
+If the person in question was moving (which we could quantify using Fourier methods and probabilistic modeling, see above), the unexpected appearance of an obstacle will certainly change the subject's trajectory, and in unfortunate, but most probable cases also *change the subject's momentum*.
+The door itself, set up on a hinge (unless it was a sliding door, which we assume is not the case; point \(P\) in Fig. \ref{fig:slamming}), will gain rotational momentum through the act of slamming, will subsequently transfer inertia to the subject in the collision process, which might ultimately cancel out the inertia of the person if in opposite direction and approximately equal magnitude.
+More generally, the subject might (i) decelerate but proceed, (ii) come to a hold, or (iii) ungently bounce backwards from the collision.
+Trained experimenters might even succeed in (iv) transferring angular momentum to the surprised subject, generating a spin (though attention must be paid to whether that spin is partially caused by an evasive motor response of the subject).
+Due to the numerous involved variables, it is not clear /a priori/ how exactly a subject will be hit, and what the exact consequences of the collision are.
+Predicting the outcome of such scientific experiments is enabled by a major field of biomechanics which is called *dynamic modeling*.
+
+In this chapter, I will discuss a specific contribution to dynamic modeling, namely the extraction of inertial properties from CT scans.
+Establishing the connection to the previous topics of this thesis is impossible without a superficial overeview of the dynamic modeling technique.
+By providing such an overview in the following paragraphs, I hope to enable the reader to better understand the purpose and meaning of the specific contribution.
+Again, this will contain methodological considerations, backed up with actual measurements of (at least a part of) a piglet.
+
+
+Until this point, this thesis has been busy with methodological development in terms of measuring, modeling and predicting /kinematics/.
 With Fourier-based methods and probabilistic models in place, one can
   (i) quantify measured kinematics
   (ii) simulate locomotion by predictive sampling of trained models.
-This is a full grasp at *how limb segments of animals change their position in space*.
-Segments could be axial or peripheral parts of the animal which move as a unit (rigid- or pseudo-rigid bodies).
+This is a complete quantification of /how/ limb segments of animals change their position in space.
+Segments could be axial or peripheral parts of the animal which move as a unit (rigid- or pseudo-rigid bodies), which is to a large extent analogous to a door on a hinge.
 
 
-Another aspect of locomotion is *why segments move*.
+Having cleared the /how/ in previous chapters, the other relevant aspect of locomotion is /why/ segments move.
 This opens up the rabbit hole of elementary physics:
 #+begin_quote
 A rigid body will change its linear or angular momentum if there are external forces or external torques applied to it.
 #+end_quote
 This is also called the *Conservation of Momentum*.
-And the study of the conservation of momentum in moving rigid body systems is called "Dynamics", which is the topic of this third part of the thesis.
-Again, this will contain methodological considerations, backed up with actual measurements of (at least a part of) a piglet.
+These things seem quite intuitive: the slamming door somehow carries the force to abruptly stop the subject.
+And because there must be movement before or after the event of interest, and because that movement changes (i.e. it is "dynamic"), the study of the conservation of momentum in moving rigid body systems is called "dynamics".
+"Conservation" as it is understood in physics implies that the measure of interest (momentum) cannot be created or lost, only gets converted to another form or transferred to another object.
+These conversions and transfers are precisely the reason /why segments or subjects move/, and we seek to quantify and model (i.e. predict) them.
 
 
+How would we quantify and model such an abstract thing as "momentum"?
+There are many ways, all useful under different circumstances.
+I will present herein the methods which seemed most useful and intuitive to me (and why), which does not imply that they are generally preferred by all experts in the field (rather the contrary: they lack acceptance, despite their usefulness, which I hope to change by kindling understanding).
 In a nutshell:
 + Wrenches and quaternions are a useful computational tools for calculating rigid body dynamic models.
 + Balance Equations are the mathematical manifestation of conservation of momentum.
@@ -51,21 +78,24 @@ In a nutshell:
 + Computed Tomography might be a shortcut to approximate material constants which are crucial for the calculation of dynamics.
 
 
-Again, a lot of the herein summarized work is physics textbook knowledge, re-formulated to be more readily applied to animal locomotion.
+Again, a lot of the herein summarized work is physics textbook knowledge, re-formulated to be more readily applied to animal locomotion; as mentioned above, I consider this necessary context.
 Again, the premise for the presented work was "falsification": for example, instead of assuming that CT scan data is useful to easily extract inertial properties of body segments, this strategy attempts to find flaws in that procedure.
+I will start by summarizing the theory behind Inverse Dynamics, pointing at sources and conventions that turned out to be useful for the present research.
 
-Yet prior to being able to judge a procedure, it is necessary to describe it.
-I will therefore start by summarizing the theory behind Inverse Dynamics, pointing at sources and conventions that turned out to be useful for the present research.
 
 * Dynamics: Theory
 ** Balance of Forces and Moments
+Since the "slamming door" experiment could be unpleasant for the faces of living subjects, one might be tempted to turn to a robot.
+
 When constructing a robot with motors and actuators at the joints, the default problem is to set the appropriate joint torques to generate a desired movement.
 This is called the forward problem citep:Lynch2017.
 Conversely, *inverse dynamics* describes the calculation of joint moments which were necessary to generate an observed movement.
-The study of animal locomotion is mostly concerned with the inverse situation.
+For example, from observing (i.e. measuring) a hinge door moving at a certain angular velocity, we can calculate the force and moment the experimentor had to apply to set it in motion.
+The study of animal locomotion is mostly concerned with this inverse situation.
+The central quantities are "forces" and "moments", the latter being a physical quantity related to forces and involved in rotational movement.
+We will approach forces and moments separately, before joining them in a common framework.
 
 
-The central units herein are forces and "moments", the latter being a physical quantity related to forces.
 Forces are the product of mass and an acceleration, \(F=ma\), one of Newton's laws of motion.
 In fact, force is better expressed as the temporal change of linear momentum \(p\), hence \(F=\frac{d p}{d t}\) (total derivative).
 Linear momentum is defined as follows: \(p=m\dot x\), with \(m\) the mass and \(\dot x\) the linear velocity (change of position over time).
@@ -95,8 +125,20 @@ Hence, we get a more or less familiar equation for the Force \(F\), which tells 
 \(F\) is a three element vector.
 
 
-Mass is therein the resistance of an object to linear acceleration, i.e. to change of linear momentum \(p\).
+
+#+CAPTION: Force and Moment. A force applied distal to the hinge \(P\) (situation A) will generate a larger momentum than a force similar in magnitude, but applied proximal to the hinge (situation B). The reason is that the moment is defined as the vector cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector.
+#+LABEL: fig:slamming_moment
+#+ATTR_LATEX: :width 12cm
+[[./figures/slamming_shift.pdf]]
+
+In the door slamming experiment, and experimenter must apply force to the door in order for the experiment to succeed.
+Yet the movement of the door depends on where the force is applied (Fig. \ref{fig:slamming_moment}).
+Consider slamming a door by applying a force close to the hinge.
+This either requires much higher force, or yields much less spectacular experimental outcomes than applying force to the distal side of the door (furthest from hinge).
+
+Mass, in the force equation, is the resistance of an object to linear acceleration, i.e. to change of linear momentum \(p\).
 Analogously, Mass Moment of Inertia (\(I\)) is the resistance of an object to rotational acceleration, which induces a change in angular momentum \(M\).
+From experience, we can tell that lifting a door out of its hinge is a different process than conventionally rotating it, thought few have carried out this comparison in the absence of gravitation and friction.
 And so, the series of equations above can be applied analogously to angular momentum \(L\) (with angular velocity \(\dot \omega\)).
 
 
@@ -113,10 +155,10 @@ And with further manipulation citep:Widnall2009 we get:
 
 Again, there is an (angular) velocity product term which we hope to sufficiently well approximate by setting it to zero.
 And, just as in the linear case, we identify a cause for any change in angular momentum, and call it the moment.
-There is one extra step, however: the momentum requires a reference point, and it changes depending on which point is chosen.
+There is one extra step, however: the momentum requires a reference point (usually the hinge, \(P\), as above), and momentum changes depending on which point is chosen.
 
 
-The analogy above is no coincidence.
+The force-moment-analogy above is no coincidence.
 Force is a 3D vector.
 Moment is a 3D vector with a reference point.
 And Moments are in fact just Forces acting at a lever.
@@ -136,7 +178,7 @@ The trick here is to concatenate the vectors \(F\) and \(M\) to form a six eleme
 "6D" might seem unhandy, and one may ask "why".
 The answer is computational convenience citep:Dumas2004: the wrench saves us from double computation, by linking the two parts of momentum.
 
-#+CAPTION: A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tim points towards the point of application. Note that this is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
+#+CAPTION: A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tip points towards the point of application. Note that this is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
 #+LABEL: fig:wrench
 #+ATTR_LATEX: :width 6cm
 [[./figures/the_wrench.pdf]]
@@ -184,30 +226,68 @@ Also, working with time series of quaternions (\(q(t)\)), there is a formula for
 #+end_center
 
 
-Most of these formulas are included as functions in common quaternion toolboxes (for example in [[https://www.mathworks.com/discovery/quaternion.html][matlab]], [[https://cran.r-project.org/web/packages/onion/onion.pdf][R]], and [[https://pypi.org/project/numpy-quaternion][Python]]).
-And those also enable the conversion to other notations of spatial rotation (Euler- or Tait-Bryan angles, Rotation Matrices).
+These formulas are usually included as functions in common quaternion toolboxes (for example in [[https://www.mathworks.com/discovery/quaternion.html][matlab]], [[https://cran.r-project.org/web/packages/onion/onion.pdf][R]], and [[https://pypi.org/project/numpy-quaternion][Python]]).
+And toolboxes also provide the capability of conversion to other notations of spatial rotation (Euler- or Tait-Bryan angles, Rotation Matrices).
+# http://www.euclideanspace.com/physics/kinematics/angularvelocity/QuaternionDifferentiation2.pdf
 
-    # http://www.euclideanspace.com/physics/kinematics/angularvelocity/QuaternionDifferentiation2.pdf
+
+Just like with wrenches, quaternions cause discomfort because we seemingly leave the familiar space of 3D geometry.
+However, if one simply accepts that maths can handle 4D or 6D problems, the reward is computational convenience.
+Superimposition and the generation of temporal derivatives are readily available.
+Quaternions also avoid some of the pitfalls of the alternative methods (gimbal lock problem, order dependence).
+They have an intuitive geometric interpretation through the axis-angle-analogy.
+And if anatomically relevant axes are required for communication, they can easily be transformed to such.
+
+This does not imply that inverse dynamic calculations are impossible with Euler Angles.
+Yet in most applications, quaternions are mathematically elegant and efficient.
 
 
-** Computational Convenience
+* Dynamics: Application
+** Numeric Approaches
 citep:Dumas2004
 
-** Balance of Wrenches
+** Analytic Justification: Balance of Wrenches
  conservation of linear and angular momentum
  + FJ=mx¨+∂m∂xx˙x˙=mx¨
  + MJ=Iω¨+ω˙×Iω˙
 
+position derivatives come from kinematics
+there is quaternion fourier trafo (?)
 
 ** Mass Moment of Inertia
 resistance to angular acceleration
 Vector formula
 Generalized Steiner
-*** Conventional Methods
-*** Using CT scans
+Conventional Methods
+
+
+* Extracting Mass Moment of Inertia from CT Scans
 citep:DuPlessis2013,Durston2022
 
-** Reference Frames and Ficticious Forces
+
+
+* Results
+** Issue 1: Beam Hardening
+** Issue 2: Chemical Composition
++ water streaks on the scan
+** Issue 3: Marker Artifacts
++ helical scanning
+
+* Discussion
+** Which Inertia Component is Relevant?
+
+
+* Acknowledgements
+# Joaquim & VisionLab
+tbd.
+
+# \pagebreak
+# References
+# \bibliographystyle{apalike}
+# \bibliography{literature.bib}
+
+#+begin_comment
+** COMMENT Reference Frames and Ficticious Forces
  Take home message: Make sure, in this and all that follows, in what reference frame parameters are defined and whether they were transformed.
  # http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces/
 
@@ -247,25 +327,8 @@ citep:DuPlessis2013,Durston2022
  With these tools at our hands, we can advance to elementary examples. I’ll start by isolating Euler, i.e. with an example that should show the Euler force in isolation, in the next notebook. If you don’t mind the explanations, feel free to skip ahead to the code from the application to a general (n-link) limb.
 
 
-** Application: The N-Segment Piglet Limb
+** COMMENT Application: The N-Segment Piglet Limb
 # http://mielke-bio.info/falk/posts/16.id_lmx5_nlink
 
-* Results
-** Issue 1: Beam Hardening
-** Issue 2: Chemical Composition
-+ water streaks on the scan
-** Issue 3: Marker Artifacts
-+ helical scanning
 
-* Discussion
-** Which Inertia Component is Relevant?
-
-
-* Acknowledgements
-# Joaquim & VisionLab
-tbd.
-
-# \pagebreak
-# References
-# \bibliographystyle{apalike}
-# \bibliography{literature.bib}
+#+end_comment
