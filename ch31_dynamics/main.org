@@ -287,7 +287,7 @@ Transformation from one to another reference frame is possible by matrix multipl
 It turns out that reference frames are not required for the calculations above: one can and should simply stay in the inertial reference frame.
 
 If one, however, decides to venture into the reference frames (as the author did), be aware that ficticious forces add to the balance.
-Interested readers may refer to a practical guide by the author citep:Mielke2020.
+Interested readers may refer to a practical guide by the author citep:Mielke2020wrenches.
 
 
 ** Quaternions
@@ -329,20 +329,23 @@ Better yet, one can stack quaternions by (non-commutatively) multiplying them:
 \[ q_2 \cdot \left( q_1\cdot P\cdot q_1^{-1}\right) \cdot q_2^{-1} = (q_2\cdot q_1) P (q_2\cdot q_1)^{-1} \]
 #+end_center
 
-Also, working with time series of quaternions (\(q(t)\), i.e. the angular position of an object changing over time), there is a formula for getting the angular velocity \(\dot \theta\) from the time differences \(dq/dt\) which fortunately even works with numeric differentials \(\frac{\Delta q}{\Delta t}\) of real measurements citep:Baker1999.
+Working with time series of quaternions (\(q(t)\), i.e. the angular position of an object changing over time), there is a formula for getting the angular velocity \(\dot \theta\) from the time differences \(dq/dt\) which fortunately even works with numeric differentials \(\frac{\Delta q}{\Delta t}\) of real measurements citep:Baker1999.
 #+begin_center
 \[\dot \theta = 2 \frac{\Delta q}{\Delta t} \cdot q^{-1} \]
 #+end_center
 
+A quaternion variant for the Kabsch algorithm exists citep:Kabsch1976,Lawrence2019,Kneller1991.
+This algorithm is useful to find the rotational difference between rigid bodies, including the change of rotation of a rigid body between two measurement times.
 
-These formulas are usually included as functions in common quaternion toolboxes (for example in [[https://www.mathworks.com/discovery/quaternion.html][matlab]], [[https://cran.r-project.org/web/packages/onion/onion.pdf][R]], and [[https://pypi.org/project/numpy-quaternion][Python]]).
+
+Quaternion operations are usually included as functions in common quaternion toolboxes (for example in [[https://www.mathworks.com/discovery/quaternion.html][matlab]], [[https://cran.r-project.org/web/packages/onion/onion.pdf][R]], and [[https://pypi.org/project/numpy-quaternion][Python]]).
 And toolboxes also provide the capability of conversion to other notations of spatial rotation (Euler- or Tait-Bryan angles, Rotation Matrices).
 # http://www.euclideanspace.com/physics/kinematics/angularvelocity/QuaternionDifferentiation2.pdf
 
 
-Just like with wrenches, quaternions cause discomfort because we seemingly leave the familiar space of 3D geometry.
+Just like with wrenches, quaternions cause discomfort to untrained analysts because they seemingly leave the familiar space of 3D geometry.
 However, if one simply accepts that maths can handle 4D or 6D problems, the reward is computational convenience.
-Superimposition and the generation of temporal derivatives are readily available.
+Superposition and the generation of temporal derivatives are readily available.
 Quaternions also avoid some of the pitfalls of the alternative methods (gimbal lock problem, order dependence).
 They have an intuitive geometric interpretation through the axis-angle-analogy.
 And if anatomically relevant axes are required for communication, they can easily be transformed to such.
@@ -354,26 +357,44 @@ Yet in most applications, quaternions are mathematically elegant and efficient.
 * Dynamics: Application
 
 ** Generic Approach
-The theoretical considerations above assembled several technical advantages which are worth summarizing.
+The theoretical considerations above assemble several technical advantages which are worth summarizing.
 + The Balance of Wrenches, equation \eqref{eqn:balance_of_wrenches}, can be calculated entirely in the Inertial Reference Frame, without repeated switch to joint coordinate systems.
 + Wrenches can easily be moved to other reference points via equation \eqref{eqn:shift_wrench}.
 + A convenient point to calculate the balance of wrenches is the center of mass (see below); rotation about that point is an expression of spin angular momentum (an intrinsic property) and some components simplify (e.g. gravitational wrench \(W_{g}\)).
-+ Expressing rotational motion by quaternions avoids issues of other methods; favorable features are linear superimposition and direct derivative calculation.
++ Expressing rotational motion by quaternions avoids issues of other methods; favorable features are linear superposition and direct derivative calculation.
 
 These favorable technical properties have not gone unnoticed citep:Dumas2004.
 Dumas et al. (2004) presented a numeric procedure to perform segment-wise balance of wrenches @@latex:\citep[equation 15 in][]{Dumas2004}@@.
-This enables the complete solution of inverse dynamic problems with a single, easy to apply formula.
+This enables the complete solution of inverse dynamic problems with a single, easy to apply numeric formula.
 Dumas /et al./ have provided and since improved an implementation of their procedure in Matlab citep:DumasMatlab.
 
 
-The author of this thesis has reproduced that procedure in python, both numerically and analytically TODO .
+The author of this thesis has reproduced that procedure in python, both numerically and analytically citep:Mielke2021id.
 
 
 ** Algorithm
-start from GRF, calculate BOW proximally
+With wrenches, quaternions, or the numerical formula at hand, one can compute the Balance of Wrenches for a single segment.
+Limb segments are usually arranged in a chain, e.g. a human leg consists of the thigh, a lower leg, a foot, and toes.
+The issue is that, whereas the inertial wrenches (gravitational wrench, friction, ...) are known, connecting wrenches usually are not.
+Each segment (e.g. the thigh) receives a wrench input from all adjacent segments (e.g. the pelvis and the lower leg).
+The dynamic wrench of a segment can be measured (e.g. by quantifying movement of the thigh).
 
-position derivatives come from kinematics
-there is quaternion fourier trafo (?)
+There is one exception: the ground contact.
+Instrumented runways can contain force plates to measure contact forces and moments at the contact of the distal limb on the ground.
+Force plates usually generate electronic read-outs from directional, pressure sensitive piezo crystals.
+By calibrating the plate, one can convert a voltage profile to forces, moments, and a contact point, all of which are changing over time.
+
+
+Hence, the practical strategy TODO citep:Robertson2013,Lynch2017 is to start at the most distal limb segment (e.g. the foot-toe complex), and measure its movement and ground contact wrench.
+In that situation, all wrenches in the balance are known, except the wrench at the proximal joint (human foot example: the ankle wrench).
+The contact point, in calculating the segment which is in ground contact, is also called the tip wrench; trivially, it is zero if the distal segment is lifted off the ground.
+One can calculate the wrench on the proximal joint by subtracting from the dynamic wrench of the segment (measured linear and angular movement) the known external wrenches (ground contact wrench, gravitational wrench, ...; all shifted to the COM).
+The proximal joint wrench, shifted to the joint position and inverted in sign (Newton's \(n^{th}\) law), is an input for calculating the balance of the proximally adjacent segment.
+
+TODO figure as in Dumas
+
+
+
 
 
 ** Mass Moment of Inertia
