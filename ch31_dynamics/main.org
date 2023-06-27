@@ -1,4 +1,4 @@
-#+TITLE: Inverse Dynamics
+#+TITLE: Inverse Dynamics: A Methodological Overview
 #+AUTHOR: Falk Mielke
 #+DATE: <2023-03-07 Thu>
 
@@ -182,8 +182,8 @@ Angular momentum \(L\) relative to point \(P\), which we denote \(L_P\), is calc
 From cross product properties, we see that the direction of \(L\) does not change during the slamming (stays parallel to the hinge axis), and the magnitude stays constant and greater than zero if velocity is greater than zero.
 
 In contrast, the point mass door has a different angular momentum when calculating it relative to point \(D\): the position vector \(r_DD\) becomes zero, so \(L_{D} = 0\) at all times.
-Other points require more complex calculations, except in the special case where rotation happens about the center of mass (COM).
-In this special case, we speak of "spin angular momentum", which is an intrinsic property of the object in a sense that we do not need to give a reference point any more because everyone knows that the COM is the reference point for spin angular momentum.
+Other points require more complex calculations, except in the special case where rotation happens about the center of mass (\(COM\)).
+In this special case, we speak of "spin angular momentum", which is an intrinsic property of the object in a sense that we do not need to give a reference point any more because everyone knows that the \(COM\) is the reference point for spin angular momentum.
 # https://www.youtube.com/watch?v=sNaaL19opxw
 
 
@@ -358,12 +358,12 @@ Yet in most applications, quaternions are mathematically elegant and efficient.
 
 ** Generic Approach
 The theoretical considerations above assemble several technical advantages which are worth summarizing.
-+ The Balance of Wrenches, equation \eqref{eqn:balance_of_wrenches}, can be calculated entirely in the Inertial Reference Frame, without repeated switch to joint coordinate systems.
++ The Balance of Wrenches, equation \eqref{eqn:balance_of_wrenches}, can be calculated entirely in the inertial reference frame, without repeated switch to joint coordinate systems.
 + Wrenches can easily be moved to other reference points via equation \eqref{eqn:shift_wrench}.
-+ A convenient point to calculate the balance of wrenches is the center of mass (see below); rotation about that point is an expression of spin angular momentum (an intrinsic property) and some components simplify (e.g. gravitational wrench \(W_{g}\)).
++ A convenient point to calculate the balance of wrenches is the center of mass (\(COM\), see below); rotation about that point is an expression of spin angular momentum (an intrinsic property) and some components simplify (e.g. gravitational wrench \(W_{g}\)).
 + Expressing rotational motion by quaternions avoids issues of other methods; favorable features are linear superposition and direct derivative calculation.
 
-These favorable technical properties have not gone unnoticed citep:Dumas2004.
+These favorable technical properties have not gone unnoticed citep:Dumas2004,Dumas2007.
 Dumas et al. (2004) presented a numeric procedure to perform segment-wise balance of wrenches @@latex:\citep[equation 15 in][]{Dumas2004}@@.
 This enables the complete solution of inverse dynamic problems with a single, easy to apply numeric formula.
 Dumas /et al./ have provided and since improved an implementation of their procedure in Matlab citep:DumasMatlab.
@@ -385,17 +385,90 @@ Force plates usually generate electronic read-outs from directional, pressure se
 By calibrating the plate, one can convert a voltage profile to forces, moments, and a contact point, all of which are changing over time.
 
 
-Hence, the practical strategy TODO citep:Robertson2013,Lynch2017 is to start at the most distal limb segment (e.g. the foot-toe complex), and measure its movement and ground contact wrench.
+Hence, the practical strategy citep:Robertson2013,Lynch2017,Dumas2004 is to start at the most distal limb segment (e.g. the foot-toe complex), and measure its movement and ground contact wrench.
 In that situation, all wrenches in the balance are known, except the wrench at the proximal joint (human foot example: the ankle wrench).
 The contact point, in calculating the segment which is in ground contact, is also called the tip wrench; trivially, it is zero if the distal segment is lifted off the ground.
-One can calculate the wrench on the proximal joint by subtracting from the dynamic wrench of the segment (measured linear and angular movement) the known external wrenches (ground contact wrench, gravitational wrench, ...; all shifted to the COM).
-The proximal joint wrench, shifted to the joint position and inverted in sign (Newton's \(n^{th}\) law), is an input for calculating the balance of the proximally adjacent segment.
+One can calculate the wrench on the proximal joint by subtracting from the dynamic wrench of the segment (measured linear and angular movement) the known external wrenches (ground contact wrench, gravitational wrench, ...; all shifted to the \(COM\)).
+The proximal joint wrench, shifted to the joint position and inverted in sign (Newton's \(n^{th}\) law), then becomes the tip wrench when calculating the balance of the proximally adjacent segment (Fig. \ref{fig:wrenchbalance}).
 
-TODO figure as in Dumas
+#+CAPTION: Wrench balance of a piglet femur (sketch), as it can be computed for each segment from distal to proximal. The tip wrench (\(W_{tip}\), at the distal joint) is the input from the distal adjacent segment. Dynamic wrench (\(W_{dyn}\), at the center of mass/\(COM\)) is calculated from kinematics (see above). Gravitational wrench (\(W_{g}\), at \(COM\)) is known by the weight of the segment. These wrenches allow to calculate the joint wrench (\(W_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate systen (\(ICS\), i.e. the inertial reference frame).
+#+LABEL: fig:wrenchbalance
+#+ATTR_LATEX: :width 8cm
+[[./figures/wrench_balance.pdf]]
+
+
+** Inertial Properties
+The procedure is quite trivial to implement, however the measurement uncertainty is not in homogeneous.
+Whereas force plates and spatial coordinates can be accurately measured in a calibrated lab reference frame, the *inertial properties* of each segment require rough measurements and approximation.
+The relevant inertial properties are mass \(m\), center of mass \(COM\), and mass moment of inertia \(I\).
+
+
+There are several ways to retrieve them.
+The classical method requires a dissection of the segment; this can be a precise anatomical disarticulation or slicing of a frozen specimen.
+The segment mass is then measured on a simple scale.
+Center of mass could be derived from a classical pendulum experiment: hang an object from a thread, measure oscillation period, apply \(T=2\pi\sqrt{\frac{l}{g}}\) solved for effective length \(l\), repeat the procedure with the object hung from a different axis.
+A common simplification is to give the position of the \(COM\) as a fraction of the segment length, inaccurately assuming that it lies on the segment long axis.
+Anatomical landmark references are required to transform the relative \(COM\) position into the lab reference frame.
+Finally, the classical method to determine mass moment of inertia is by using a trifilar pendulum citep:Schedlinski2001,Korr1962.
+
+The so-retrieved measurements are filled in to the calculations outlined above.
+
+
+Measurement uncertainty of the inertial properties is not determined by the accuracy of the measurement instruments.
+The pendulum measurements above can yield most accurate results.
+However, the dissected limb is only a limited representation of the segment /in vivo/.
+
+A first issue is the choice of a disarticulation cutting surface: which mass particles are assigned to which segment?
+This choice affects mass, but also COM and mass moment of inertia.
+
+Second, muscles (as a complex composition of fiber bundles and fibers) deform, shift and slide past each other during contraction and movement citep:Bol2013.
+Their cross section and fibre distribution can change on non-isometric movements.
+Gravity pulls soft tissue into a direction which might be different /in vivo/ and on the preserved configuration of the limb.
+Zeugopodial and autopodial segments often include multiple bones which might experience a shift in their relative position during a stride cycle.
+All this reduces congruence of the preserved, measured body part and the /in vivo/ situation: mass is constant, yet the COM of a segment is not stable during locomotion, and the mass moment of inertia tensor will most certainly vary during the process.
+
+Third, there might be shrinkage and tissue loss during the preservation of the specimen.
+Formol, ethanol, or temperature are typical agents used as a fixative; any fixative has its effect on soft tissue citep:Buytaert2014.
+This issue can putatively change all inertials properties of the sample.
+
+Fourth, 3D volumetric imaging (e.g. CT scans) could be an option to replace the measurements above, yet they come with their own set of problems and limitations.
+
+
+The implications of these conceptual issues will be discussed in detail in the next chapter.
+
+
+* Summary
+This chapter serves as a brief overview of the method of inverse dynamic calculations.
+It outlines the overall procedure, and documents the specific procedure that the author applied for inverse dynamic measurement of piglet locomotion.
+
+
+In particular, the Wrench-Quaternion method citep:Dumas2004 has proven useful for joining kinematics and force measurements for dynamic calculation.
+The reason is computational convenience.
+Wrenches are the conceptual link of forces and moments, and they allow convenient computer implementations.
+Quaternions have favorable properties to calculate spatial rotation in the context of rigid body motion (superposition, singularity avoidance, transformability).
+This establishes the conceptual framework to perform the relevant calculations of the established algorithm, which involves starting at the distal segments where external forces are known (e.g. ground contact) and processing the calculation towards the torso of the animal.
+
+
+A crucial simplification of that procedure is that we treat body segments of animals as rigid bodies, which they are not.
+By /post mortem/ fixation and dissection, or by volumetric digitization, segments can be separated and their inertial properties measured.
 
 
 
+* TODO move Flying Femur to a separate chapter
+# Once more, this will contain methodological considerations, backed up with actual measurements of (at least a part of) a piglet.
+#+TITLE: The "Flying Femur"
+#+SUBTITLE: Computed Tomography and the Potential Facilitation of Inverse Dynamic Calculations
 
+* Inertial Properties
+
+#+CAPTION: Inertial properties of a limb segment.
+#+LABEL: fig:inertials
+#+ATTR_LATEX: :width 8cm
+[[./figures/inertial_properties.pdf]]
+
+** Mass
+
+** Center of Mass
 
 ** Mass Moment of Inertia
 resistance to angular acceleration
@@ -405,11 +478,6 @@ Conventional Methods
 
 
 
-
-* TODO move Flying Femur to a separate chapter
-# Once more, this will contain methodological considerations, backed up with actual measurements of (at least a part of) a piglet.
-#+TITLE: The "Flying Femur"
-#+SUBTITLE: Computed Tomography and the Potential Facilitation of Inverse Dynamic Calculations
 
 * Extracting Mass Moment of Inertia from CT Scans
 citep:DuPlessis2013,Durston2022
