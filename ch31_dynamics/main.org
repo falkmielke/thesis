@@ -19,10 +19,20 @@
 
 
 * Abstract
-Here, I am going to write a summary of this extraordinary manuscript.
+This thesis has so far explored the measurement and modeling of movement of terrestially locomotion.
+A topic which remains to be discussed is the /cause/ of that movement.
+The segments of animal limbs can be modeled as rigid bodies, each of which has a specific momentum.
+Momentum is a conservative quantity, i.e. it changes due to energy transfer with its surrounding.
+The retrospective inference of reasons for momentum change is often labeled "inverse dynamics".
+
+The field of (inverse) dynamics is subject to various conventions and some methodological flexibility.
+The purpose of this chapter is to set the table and clarify conventions used in this thesis.
+The physical fundamentals and general algorithm applied in inverse dynamics calculations is presented, as well as elegant mathematical tools to implement it (wrenches, quaternions).
+To illustrate the basic principles of physics which come to play in this chapter, a hypothetical collision experiment is discussed.
+It turns out that, whereas most quantities in inverse dynamic calculations can be accurately measured, the inertial properties of segments are the achilles heel of accurate dynamic modeling.
+
 
 @@latex:\clearpage@@
-
 
 #+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup.
 #+LABEL: fig:slamming
@@ -31,21 +41,27 @@ Here, I am going to write a summary of this extraordinary manuscript.
 
 
 * Introduction
+** A Momentum Experiment
 "Slamming a door in someone's face" is not a friendly thing to do.
 Yet "friendliness" is not a scientific category, and thus we must consider this as a purely physical process (Fig. \ref{fig:slamming}).
-If a person in question is running at constant velocity (which we could quantify using Fourier methods and probabilistic modeling, see before), the unexpected appearance of an obstacle will certainly change the subject's trajectory, and in unfortunate, but most probable cases also *change the subject's momentum*.
-The non-sliding door itself, set up on a hinge (point \(P\) in Fig. \ref{fig:slamming}), will gain rotational momentum through the act of slamming.
-It will subsequently transfer inertia to the subject in what physicists call a collision, thereby ultimately canceling out the inertia of the person if the impact is in opposite direction and approximately equal magnitude to the running.
-More generally, the subject might (i) decelerate but proceed, (ii) come to a hold, or (iii) ungently bounce backwards from the elastic collision.
+If a person in question is running at constant velocity (which we could quantify using Fourier methods and probabilistic modeling, see before), the unexpected appearance of an obstacle will certainly force the subject to change trajectory.
+If the unfortunate subject is unable to adjust on time, physicists would call this a "collision experiment".
+In most probable cases the impact will thus *change the subject's momentum*.
+The non-sliding door itself, set up on a hinge (point \(P\) in Fig. \ref{fig:slamming}), will gain rotational momentum through the act of slamming, performed by an experimenter.
+In the collision case, the subject might (i) decelerate but proceed, (ii) come to a hold, or (iii) ungently bounce backwards from the elastic collision.
+The door will thus transfer inertia to the subject, thereby ultimately canceling out (part of) the inertia of the person if the impact is in opposite direction and approximately equal magnitude to the running.
 Trained experimenters might even succeed in (iv) transferring angular momentum to the surprised subject, generating a spin (though attention must be paid to whether that spin is partially caused by an evasive motor response of the subject).
-All these possible phenomena are due to the conservation of energy and momentum, which we will explore below.
+All these possible outcomes are manifestation of the *conservation of energy and momentum*, which we will explore in detail below, using the hypothetical door slamming experiment as a metaphor.
 Due to the numerous involved variables, it is not clear /a priori/ how exactly a subject will be hit, and what the exact consequences of the collision are.
 Predicting the outcome of such scientific experiments is enabled by a major field of biomechanics which is called *dynamic modeling*.
 
+
+** Kinematics and Kinetics
 In the next chapter \ref{TODO}, I will discuss a specific contribution to dynamic modeling, namely the extraction of inertial properties from CT scans.
+Prior to that, the question of "why we would need that" (i.e. CT scan analysis) has to be addressed by illustrating the overall context.
 Establishing the connection to the previous topics of this thesis is impossible without a superficial overview of the dynamic modeling technique.
-By providing such an overview in the following paragraphs, I hope to enable the reader to better understand the purpose and meaning of the specific contribution.
-Experienced biomechanicists are welcome to skip to the next chapter.
+By providing such an overview in the following paragraphs, I hope to enable the reader to better understand the purpose and meaning of the specific contribution of the next chapter.
+Experienced biomechanicists who are also familiar with "screw theory" are welcome to skip to the next chapter.
 
 
 Until this point, this thesis has been busy with methodological development in terms of measuring, modeling and predicting /kinematics/.
@@ -60,15 +76,18 @@ This opens up the rabbit hole of elementary physics:
 #+begin_quote
 A rigid body will change its linear or angular momentum if there are external forces or external torques applied to it.
 #+end_quote
-This is also called the *Conservation of Momentum*.
-These things seem quite intuitive: the slamming door will impact the subject upon impact.
+This, again, is a formulation of the conservation of momentum, as introduced above.
+
+These things seem quite intuitive: the slamming door will affect the subject upon impact.
 And because there must be movement before or after the event of interest, and because that movement changes (i.e. it is "dynamic"), the study of the conservation of momentum in moving rigid body systems is called "dynamics".
+In contrast to kinematics, dynamics are sometimes also called "kinetics", the study of motion and its causes.
 "Conservation" as it is understood in physics implies that the measure of interest (momentum) cannot be created or lost, only gets converted to another form or transferred to another object.
-These conversions and transfers are precisely the reason /why segments or subjects change their movement/, and we seek to quantify and model (i.e. predict) them.
+Thus, dynamics are also linked to the calculation of transformations and transfers of energy from one form to another.
+These conversions and transformations are precisely the reason /why segments or subjects change their movement/, and we seek to quantify and model (i.e. predict) them.
 
 
 In applied terms, which algorithm or technique would we apply to quantify and model such an abstract thing as "momentum"?
-There are many ways, all useful under different circumstances.
+There are many, all useful under different circumstances.
 I will present herein the methods which seemed most useful and intuitive to me, and I will explain "why".
 Yet this does not imply that they are generally preferred by all experts in the field.
 # (rather the contrary: they lack acceptance, despite their usefulness, which I hope to change by kindling understanding)
@@ -82,12 +101,12 @@ In a nutshell:
 
 Once more, the herein summarized work is physics textbook knowledge, re-formulated to be more readily applied by the author to animal locomotion; as mentioned above, I consider this necessary context.
 # And once more, the premise for the presented work was "falsification": for example, instead of assuming that CT scan data is useful to easily extract inertial properties of body segments, this strategy attempts to find flaws in that procedure.
-Therefore, this chapter will summarize the theory behind Inverse Dynamics, and point at sources and conventions that turned out to be useful for the purpose of this thesis.
+This chapter will summarize the theory behind inverse dynamics, and point at literature references and conventions which turned out to be useful for the purpose of this thesis.
 
 
 * Dynamics: Theory
 ** Forward and Inverse Problems
-Since the "slamming door" experiment could be unpleasant for the faces of living subjects, one might be tempted to measure on a robot.
+Since the "slamming door" experiment (Fig. \ref{fig:slamming}) could be unpleasant for the faces of living subjects, one might be tempted to measure on a robot.
 
 When constructing a robot with motors and actuators at the joints, the first problem is to set the appropriate joint torques to generate a desired movement.
 This is called the forward problem citep:Lynch2017.
@@ -139,7 +158,7 @@ In the door slamming experiment, and experimenter must apply force to the door i
 Yet the movement of the door depends on where the force is applied (Fig. \ref{fig:slamming_moment}).
 Consider slamming a door by applying a force close to the hinge.
 This either requires much higher force, or yields much less spectacular experimental outcomes than applying force to the distal side of the door (furthest from hinge, e.g. at the handle).
-In fact, this simple physical observation explains why handles are where they are.
+In fact, this simple physical observation explains why doors have evolved handles in the place where we observe them in extant doors.
 
 
 Otherwise, the calculation of angular quantities is largely analogous to the linear case citep:Lewin801L20,Tipler2007.
@@ -171,7 +190,7 @@ The change of angular momentum is called moment (\(M\)), and with further manipu
 
 Again, there is an (angular) velocity product term which we hope to sufficiently well approximate by setting it to zero.
 Just as in the linear case, we identify a cause for any change in angular momentum, and call it the moment \(M\) (others may call it torque \(\tau\)).
-However, there is one extra step: calculation of the angular momentum requires a reference point (usually the hinge, \(P\), as above, but any point could be chosen).
+However, there is one extra step: calculation of the *angular momentum requires a reference point* (usually the hinge, \(P\), as above, but any point could be chosen).
 The calculated angular momentum actually changes depending on which reference point is chosen.
 Returning to the example of the door, rotating on a hinge (Fig. \ref{fig:slamming_momentum}).
 We can approximate the door by a point mass in point \(D\).
@@ -182,7 +201,8 @@ Angular momentum \(L\) relative to point \(P\), which we denote \(L_P\), is calc
 From cross product properties, we see that the direction of \(L\) does not change during the slamming (stays parallel to the hinge axis), and the magnitude stays constant and greater than zero if velocity is greater than zero.
 
 In contrast, the point mass door has a different angular momentum when calculating it relative to point \(D\): the position vector \(r_DD\) becomes zero, so \(L_{D} = 0\) at all times.
-Other points require more complex calculations, except in the special case where rotation happens about the center of mass (\(COM\)).
+This is non-intuitive: the door rotates, after all; yet remember that we are reducing it to a point mass here and \(L_{D} = 0\) only holds for the point mass case!
+Other points and non-pointmass-objects require more complex calculations, except maybe in the special case where rotation happens about the center of mass (\(COM\)).
 In this special case, we speak of "spin angular momentum", which is an intrinsic property of the object in a sense that we do not need to give a reference point any more because everyone knows that the \(COM\) is the reference point for spin angular momentum.
 # https://www.youtube.com/watch?v=sNaaL19opxw
 
@@ -211,14 +231,14 @@ The trick is to concatenate the vectors \(F\) and \(M\) to form a six element ve
 "6D" might seem unhandy, and one may ask "why".
 The pure and simple answer is computational convenience citep:Dumas2004,Mueller2018: the wrench saves us from double computation, by linking the two intrinsically related parts of momentum.
 
-#+CAPTION: A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tip points towards the point of application. Note that this figure is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
+#+CAPTION: A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tip points towards the point of application (they can be moved around, adjusting the moment component; see text). Note that this figure is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
 #+LABEL: fig:wrench
 #+ATTR_LATEX: :width 6cm
 [[./figures/the_wrench.pdf]]
 
 
 Any modern scripting language used to solve inverse dynamic questions can easily work on six element arrays/vectors instead of three-dimensional ones.
-A mathematical shorthand for writing wrenches are square brackets and a semicolon indicating that the components are concatenated:
+A mathematical shorthand for writing wrenches are square brackets and a semicolon indicating that the (column vector) components are concatenated (to form a longer column vector):
 #+begin_center
 \(W = \left[ F; M \right]\)
 #+end_center
@@ -243,7 +263,8 @@ Wrenches can be added up, for example the dynamic wrench can be easily shifted (
 #+end_center
 
 
-The \(x\) and \(theta\) in the dynamic wrench refer to the movement of the rigid body itself.
+The \(x\) and \(theta\) in the dynamic wrench refer to the movement of the rigid body itself and are immediately derived from the object's kinematics.
+The inertial properties \(m\) and \(I\) have to be measured or approximated separately (see below).
 The dynamic wrench expresses the total change of momentum of an object.
 
 
@@ -265,7 +286,7 @@ We can sum up all external wrenches to get a total external wrench \(W_{ext}\):
 \[W_{ext} = \sum\limits_{ext} W_{i} = W_{tip}+W_{g}+W_{f}+\ldots\]
 #+end_center
 
-Any other external forces and moments should be added in wrench form.
+Any other known external forces and moments should be added in wrench form.
 
 
 Equations \eqref{eqn:dynamic_wrench} and \eqref{eqn:external_wrench} constitute the *Balance of Wrenches*:
@@ -274,6 +295,7 @@ Equations \eqref{eqn:dynamic_wrench} and \eqref{eqn:external_wrench} constitute 
 \[W_{dyn} = \sum\limits_{ext} W_{i} \]
 #+end_center
 
+In other words:
 #+begin_center
 The change of [linear;angular] momentum of a rigid body is equal to the sum of external wrenches acting on it.
 #+end_center
@@ -283,7 +305,7 @@ The change of [linear;angular] momentum of a rigid body is equal to the sum of e
 
 For simplicity, I ignored the issue of reference frames in all equations above.
 Just like reference points, reference frames need to be well documented.
-Transformation from one to another reference frame is possible by matrix multiplitation with a transformation matrix.
+Transformation from one to another reference frame is possible by matrix multiplication with a transformation matrix.
 It turns out that reference frames are not required for the calculations above: one can and should simply stay in the inertial reference frame.
 
 If one, however, decides to venture into the reference frames (as the author did), be aware that ficticious forces add to the balance.
@@ -291,8 +313,8 @@ Interested readers may refer to a practical guide by the author citep:Mielke2020
 
 
 ** Quaternions
-On top of the Force/Moment complexity comes the issue of quantifying rotation in space.
-Angular momentum depends on angular acceleration, which is a temporal derivative of "angle".
+On top of the force/moment complexity comes the issue of quantifying rotation in space.
+Angular momentum depends on angular acceleration \(\ddot\theta\), which is a temporal derivative of "angle".
 But getting that angle in 3D is not exactly trivial, and there are several complementary notations.
 
 
@@ -379,7 +401,7 @@ The issue is that, whereas the inertial wrenches (gravitational wrench, friction
 Each segment (e.g. the thigh) receives a wrench input from all adjacent segments (e.g. the pelvis and the lower leg).
 The dynamic wrench of a segment can be measured (e.g. by quantifying movement of the thigh).
 
-There is one exception: the ground contact.
+There is one exception: the distalmost segment which has ground contact.
 Instrumented runways can contain force plates to measure contact forces and moments at the contact of the distal limb on the ground.
 Force plates usually generate electronic read-outs from directional, pressure sensitive piezo crystals.
 By calibrating the plate, one can convert a voltage profile to forces, moments, and a contact point, all of which are changing over time.
@@ -387,8 +409,8 @@ By calibrating the plate, one can convert a voltage profile to forces, moments, 
 
 Hence, the practical strategy citep:Robertson2013,Lynch2017,Dumas2004 is to start at the most distal limb segment (e.g. the foot-toe complex), and measure its movement and ground contact wrench.
 In that situation, all wrenches in the balance are known, except the wrench at the proximal joint (human foot example: the ankle wrench).
-The contact point, in calculating the segment which is in ground contact, is also called the tip wrench; trivially, it is zero if the distal segment is lifted off the ground.
-One can calculate the wrench on the proximal joint by subtracting from the dynamic wrench of the segment (measured linear and angular movement) the known external wrenches (ground contact wrench, gravitational wrench, ...; all shifted to the \(COM\)).
+The external wrench at the ground contact point, in the balance calculation of the segment which is in ground contact, is also called the tip wrench; trivially, it is zero if the distal segment is lifted off the ground.
+One can calculate the wrench on the proximal joint by subtracting all known external wrenches (ground contact wrench, gravitational wrench, ...; all shifted to the \(COM\)) from the dynamic wrench of the segment (measured linear and angular movement).
 The proximal joint wrench, shifted to the joint position and inverted in sign (Newton's \(n^{th}\) law), then becomes the tip wrench when calculating the balance of the proximally adjacent segment (Fig. \ref{fig:wrenchbalance}).
 
 #+CAPTION: Wrench balance of a piglet femur (sketch), as it can be computed for each segment from distal to proximal. The tip wrench (\(W_{tip}\), at the distal joint) is the input from the distal adjacent segment. Dynamic wrench (\(W_{dyn}\), at the center of mass/\(COM\)) is calculated from kinematics (see above). Gravitational wrench (\(W_{g}\), at \(COM\)) is known by the weight of the segment. These wrenches allow to calculate the joint wrench (\(W_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate systen (\(ICS\), i.e. the inertial reference frame).
@@ -398,25 +420,34 @@ The proximal joint wrench, shifted to the joint position and inverted in sign (N
 
 
 ** Inertial Properties
-The procedure is quite trivial to implement, however the measurement uncertainty is not in homogeneous.
+The procedure is quite trivial to implement, however the measurement uncertainty for all the involved quantities is not homogeneous.
 Whereas force plates and spatial coordinates can be accurately measured in a calibrated lab reference frame, the *inertial properties* of each segment require rough measurements and approximation.
 The relevant inertial properties are mass \(m\), center of mass \(COM\), and mass moment of inertia \(I\).
+This justifies a closer look at them.
 
 
-There are several ways to retrieve them.
-The classical method requires a dissection of the segment; this can be a precise anatomical disarticulation or slicing of a frozen specimen.
+There are several ways to retrieve inertial properties.
+The classical method requires a dissection of the segment; this can be a precise anatomical disarticulation or straight-cut slicing of a frozen specimen.
+In the case of our slamming door, one would take the door off the hinge.
 The segment mass is then measured on a simple scale.
-Center of mass could be derived from a classical pendulum experiment: hang an object from a thread, measure oscillation period, apply \(T=2\pi\sqrt{\frac{l}{g}}\) solved for effective length \(l\), repeat the procedure with the object hung from a different axis.
-A common simplification is to give the position of the \(COM\) as a fraction of the segment length, inaccurately assuming that it lies on the segment long axis.
+Center of mass could be derived from a classical pendulum experiment (Fig. \ref{fig:door_inertials}): hang an object from a thread, measure oscillation period, apply \(T=2\pi\sqrt{\frac{l}{g}}\) solved for effective length \(l\), repeat the procedure with the object hung along a different axis.
+A common simplification is to express the position of the \(COM\) as a fraction of the segment length, inaccurately assuming that it lies on the segment long axis.
 Anatomical landmark references are required to transform the relative \(COM\) position into the lab reference frame.
 Finally, the classical method to determine mass moment of inertia is by using a trifilar pendulum citep:Schedlinski2001,Korr1962.
 
 The so-retrieved measurements are filled in to the calculations outlined above.
 
 
+#+CAPTION: Measuring inertial properties of the slamming door: the center of mass.
+#+LABEL: fig:door_inertials
+#+ATTR_LATEX: :width 6cm
+[[./figures/door_inertials.pdf]]
+
+
 Measurement uncertainty of the inertial properties is not determined by the accuracy of the measurement instruments.
-The pendulum measurements above can yield most accurate results.
-However, the dissected limb is only a limited representation of the segment /in vivo/.
+This is where the "slamming door" analogy fails, because a door is actually rigid.
+The pendulum methods above yield numerically accurate results.
+However, the dissected limb is only a limited representation of the segment /in vivo/, for several reasons.
 
 A first issue is the choice of a disarticulation cutting surface: which mass particles are assigned to which segment?
 This choice affects mass, but also COM and mass moment of inertia.
@@ -431,15 +462,17 @@ Third, there might be shrinkage and tissue loss during the preservation of the s
 Formol, ethanol, or temperature are typical agents used as a fixative; any fixative has its effect on soft tissue citep:Buytaert2014.
 This issue can putatively change all inertials properties of the sample.
 
-Fourth, 3D volumetric imaging (e.g. CT scans) could be an option to replace the measurements above, yet they come with their own set of problems and limitations.
+Fourth, 3D volumetric imaging (e.g. CT scans) could be an option to replace the measurements above, yet they come with their own set of problems and limitations (e.g. imaging artifacts).
 
 
 The implications of these conceptual issues will be discussed in detail in the next chapter.
+Yet note already that these four effects violate an assumption above: the velocity product terms in the balance of forces are non-negligible because the mass distribution is altered.
 
 
 * Summary
-This chapter serves as a brief overview of the method of inverse dynamic calculations.
-It outlines the overall procedure, and documents the specific procedure that the author applied for inverse dynamic measurement of piglet locomotion.
+This chapter serves as a brief overview of the basic methodology of inverse dynamics.
+This method exploits the fundamental physical phenomenon of conservation of momentum to model and predict the movement of systems of more or less rigid bodies.
+I outlined the general procedure, and documented the specific procedure applicable to inverse dynamic measurements of quadruped, terrestrial locomotion.
 
 
 In particular, the Wrench-Quaternion method citep:Dumas2004 has proven useful for joining kinematics and force measurements for dynamic calculation.
