@@ -1,0 +1,175 @@
+#+TITLE: Extracting Inertial Properties from X-Ray Computed Tomography: A Failed Attempt
+#+AUTHOR: Falk Mielke
+#+DATE: <2023-07-05 Thu>
+
+#+SETUPFILE: latex_header.org
+#+EXPORT_FILE_NAME: pt3ch7_inertials
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+#+OPTIONS: toc:t
+
+#+STARTUP: noinlineimges showeverything entitiespretty
+@@latex:\clearpage@@
+#+ODT: <text:p text:style-name="PageBreak"/>
+
+
+* Abstract
+
+* Introduction
+** Computed Tomography and Density
+Since the advent of x-ray imaging, people were intrigued by the ability to see the inner structure of objects and living creatures (such as the famous hand of Röntgen's wife, "Über eine neue Art von Strahlen", 1895).
+This desire probably increased by the development of computed tomography citep:Beckmann2006,Hounsfield1973, a set of techniques which enable the reconstruction of three dimensional structural images.
+The transmission images obtained via high energy electromagnetic radiation often serve to answer qualitative questions (e.g. whether a bone is fractured, whether there are porosities in a drill core).
+Quantitative questions are possible with regard to the shape of a scanned structure (e.g. the size of porosities, the length of a fracture, the shape of a bone).
+However, researchers have been struggling with the quantitative extraction of material properties from Computed Tomography (CT) data.
+The material property of primary interest is physical density; from a given density distribution, the other relevant inertial properties can be calculated.
+
+
+Reseachters have long suggested to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet the relation is nothing more than a correlation which only holds under specific circumstances.
+Even the pioneer works acknowledge that there must be discrepancies between known and measured densities, which can be explained by the polychromatic character (source spectrum) of the used radiation, chemical composition (absorption spectrum), and scan artifacts.
+# scattering types,
+These issues demand a detailed explanation, below.
+Notwithstanding this list of problems, people have attempted to extract density and inertial propertes from CT scans citep:DuPlessis2013,Durston2022.
+The purpose of this chapter is whether or not (or under which circumstances) CT gray values can be used to estimate density, thereby mass, and derived inertial properties.
+
+
+** Emission and Absorption
+Visible light and x-ray radiation are astonishingly analogous.
+The reason is that both are just electromagnetic radiation; they differ in wavelength.
+To understand what is happening during a CT experiment, I will use the analogy of visible light.
+
+
+On military signal flashlights, one can set the light to be white (i.e. bulb spectrum, unfiltered) or filtered either red or green.
+The same principle holds for party lights or colored window sheets.
+The white light is general purpose, and the maximum number of photons you can expect with a given bulb.
+Lights are devices which constantly emit photons of a specific variety of wavelengths.
+Applying a red filter sheet will change the composition of the passing light, trivially, by blocking all the "non-red" photons.
+Because red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our perceptive system.
+
+Most plants have evolved to be green; their cells hold organelles with chlorophyl, which is optimized to absorb some wavelengths of light very well.
+The ensemble of non-absorbed photons appears green to us, which is why leaves are green.
+Contrary to internet myth, the military use case of red flashlight is an operation that requires as inconspicuous light as possible in a vegetated environment.
+Red light will hardly reflect from gras or bush, and can therefore reduce the chance of being spotted by enemy surveillance.
+
+
+Red LED's are an alternative to red filters: they immediately produce a spectrum that is biased towards low frequencies.
+We can assess that red LEDs have a different *source spectrum* than vintage light bulbs.
+If the light from a light source is filtered (e.g. by a red sheet of thin plastic), the *emission spectrum* is altered.
+A red LED viewed through a green-pass filter might appear to be "off", when really power is "on".
+Finally, light hitting an object will also change its spectral composition, depending on the material's *absorption, transmission, and reflection spectra*.
+In a way, this is also a filtering process: the outgoing light will depend on the incoming spectrum and the material properties of the object.
+Plant leaves will almost entirely absorb a narrow band of red light.
+
+
+#+CAPTION: X-Ray emission spectrum. An x-ray source will emit photons with a variety of energies ("colors"). Bremsstrahlung will cover a wide range of photon energies, whereas discrete peaks are caused by specific absorption processes in the target material. @@latex:\citep[taken from ][, creative commons license]{Berger2018fig8}@@.
+#+LABEL: fig:xray_emission
+#+ATTR_LATEX: :width 10cm
+[[./figures/Berger2018.png]]
+
+The situation is exactly analogous for x-rays citep:Berger2018.
+X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...).
+When hit by an electron beam which was evoked by applying voltage (e.g. \(60 kV\)) to the anode and a warmed-up kathode, the target will emit x-ray photons of a specific variety of energies (spectrum, Fig. \ref{fig:xray_emission}).
+The source emission is generally *polychromatic*, i.e. consisting of multiple colors/energies.
+Most available CT machines have a polychromatic source; the usual exception are synchrotrons.
+On the other hand, x-ray detectors are monochromatic, integrating intensities over all wavelengths (in a specific way, which is another layer of nuisance).
+There is ongoing development on the frontier of "spectral CT" citep:Liu2023, yet resolution (spectral and spatial) are still below par.
+
+
+Similar to the processes occurring in the anode target of the source, x-ray photons interact with matter they encounter on their trajectory.
+Much simplified, they are either absorbed or scattered (Rayleigh scattering, Compton scattering); "attenuation" is the term to describe that not all photons reach the detector.
+Absorption is favourable, scattering is not, and the probability of either of these interactions depends on the photon energy, the elementary composition of the material (absorption spectrum; characteristic bands), and the trajectory of the photon (thickness, angle).
+
+The fraction of attenuated photons, measured from multiple incident angles, is what enables the extraction of structural information (Lambert-Beer's Law).
+And attenuation is precisely the property which correlates with physical density: the higher the density, the higher the attenuation.
+However, in some cases the specific emission of the source matches the absorption peaks of the material - think of applying a red-eliminating filter sheet to a red light LED, making the LED "invisible".
+Examples of problematic substances are water and formol, because they absorb a broad range of photon energies.
+
+
+** Scan Artifacts
+To be maximally fuzzy on this, there is no such thing as CT scanning artifacts.
+The term "artifact" implies that there is an unavoidable error in the measurement, yet x-ray images are usually accurate.
+Any tomographic reconstruction just shows exactly what is measured.
+However, some aspects of the measurement might be unfavorable.
+For example, we speak of a "beam hardening artifact" if absorption in the superficial layers of an objects alter the spectrum of the beam, which will affect the representation of the underlying regions citep:VanGompel2011.
+However, that is just a normal manifestation of the actual physical process (the stochastic interaction of electromagnetic radiation and matter).
+Ring artifacts stem from sensitivity variations on the image detector, which are technically inevitable (due to constraints of the physical detection process), but can be removed reliably citep:Sijbers2004.
+Partial volume effects are caused by finite scan resolution and voxel volume.
+Streak artifacts are caused by limited dynamic range.
+
+
+Other so-called artifacts might stem from the choice and limitations of the reconstruction algorithm. TODO [Feldkamp & SIRT, Poly-SIRT]
+
+
+Scan artifacts are normal.
+Some are avoidable: for example, curiously enough, beam hardening can be minimized by hardening the beam by the use of metal filter plates.
+Others show intrinsic features of the tomography procedure.
+The reason that we still call them artifacts is that we think of matter as a distribution of densities, i.e. a mass distribution, whereas x-ray scanning actually yields a distribution of x-ray attenuation.
+In other words, the appropriate way to measure an exact mass distribution of an object would be to slice it into little voxel cubes and weigh each of them.
+Tomography is certainly a time-saving alternative.
+Yet it must be stated that X-Ray CT does not quantify density.
+
+
+#+begin_comment
+% https://doi.org/10.1117/12.2595473
+% https://doi.org/10.2214/ajr.143.5.1101
+% https://doi.org/10.1016/S0963-8695(97)00020-0
+% https://doi.org/10.1093/iob/obad005
+scattering types of xray beams
+poly-SIRT
+Liu2023 spectral CT https://www.nature.com/articles/s41598-023-33264-2#citeas
+#+end_comment
+
+
+* Materials and Methods
+** The Flying Femur
+
+
+
+** Inertial Properties
+
+#+CAPTION: Inertial properties of a limb segment.
+#+LABEL: fig:inertials
+#+ATTR_LATEX: :width 8cm
+[[./figures/inertial_properties.pdf]]
+
+*** Mass
+
+*** Center of Mass
+
+*** Mass Moment of Inertia
+resistance to angular acceleration
+Vector formula
+Generalized Steiner
+Conventional Methods
+
+* Results
+** Issue 1: Beam Hardening
+** Issue 2: Chemical Composition
++ water streaks on the scan
+** Issue 3: Marker Artifacts
++ helical scanning
+
+
+* Discussion
+
+** Which Inertia Component is Relevant?
+
+* Summary
+
+
+
+
+* Acknowledgements
+# Joaquim & VisionLab
+tbd.
+
+# \pagebreak
+# References
+# \bibliographystyle{apalike}
+# \bibliography{literature.bib}
+

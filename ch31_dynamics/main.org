@@ -459,7 +459,7 @@ Zeugopodial and autopodial segments often include multiple bones which might exp
 All this reduces congruence of the preserved, measured body part and the /in vivo/ situation: mass is constant, yet the COM of a segment is not stable during locomotion, and the mass moment of inertia tensor will most certainly vary during the process.
 
 Third, there might be shrinkage and tissue loss during the preservation of the specimen.
-Formol, ethanol, or temperature are typical agents used as a fixative; any fixative has its effect on soft tissue citep:Buytaert2014.
+Formol, ethanol, or temperature are typical agents used as a fixative; any fixative has its effect on soft tissue citep:Buytaert2014,Pech1987.
 This issue can putatively change all inertials properties of the sample.
 
 Fourth, 3D volumetric imaging (e.g. CT scans) could be an option to replace the measurements above, yet they come with their own set of problems and limitations (e.g. imaging artifacts).
