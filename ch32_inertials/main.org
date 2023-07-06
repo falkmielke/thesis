@@ -22,48 +22,63 @@
 
 * Introduction
 ** Computed Tomography and Density
-Since the advent of x-ray imaging, people were intrigued by the ability to see the inner structure of objects and living creatures (such as the famous hand of Röntgen's wife, "Über eine neue Art von Strahlen", 1895).
-This desire probably increased by the development of computed tomography citep:Beckmann2006,Hounsfield1973, a set of techniques which enable the reconstruction of three dimensional structural images.
-The transmission images obtained via high energy electromagnetic radiation often serve to answer qualitative questions (e.g. whether a bone is fractured, whether there are porosities in a drill core).
-Quantitative questions are possible with regard to the shape of a scanned structure (e.g. the size of porosities, the length of a fracture, the shape of a bone).
+Since the advent of x-ray imaging, people are intrigued by the ability to see the inner structure of objects and living creatures (such as the famous hand of Röntgen's wife, "Über eine neue Art von Strahlen", 1895).
+This desire probably increased by the development of computed tomography citep:Beckmann2006,Hounsfield1973, a set of techniques which enable the reconstruction and visualization of three-dimensional structural images.
+The transmission images obtained via high energy electromagnetic radiation often serve to answer qualitative questions (e.g. whether a bone is fractured, whether there are porosities in asphalt drill cores).
+Quantitative questions are obvious with regard to the shape of a scanned structure (e.g. the size of porosities, the length of a fracture, the shape of a bone).
 However, researchers have been struggling with the quantitative extraction of material properties from Computed Tomography (CT) data.
 The material property of primary interest is physical density; from a given density distribution, the other relevant inertial properties can be calculated.
 
 
 Reseachters have long suggested to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet the relation is nothing more than a correlation which only holds under specific circumstances.
-Even the pioneer works acknowledge that there must be discrepancies between known and measured densities, which can be explained by the polychromatic character (source spectrum) of the used radiation, chemical composition (absorption spectrum), and scan artifacts.
+Even these pioneer works acknowledge that there must be discrepancies between known and measured densities, which can be explained by (i) the polychromatic character (source spectrum) of the used radiation, (ii) chemical composition (absorption spectrum), and (iii) scan artifacts.
 # scattering types,
 These issues demand a detailed explanation, below.
-Notwithstanding this list of problems, people have attempted to extract density and inertial propertes from CT scans citep:DuPlessis2013,Durston2022.
-The purpose of this chapter is whether or not (or under which circumstances) CT gray values can be used to estimate density, thereby mass, and derived inertial properties.
+Notwithstanding this list of known problems, people have repeatedly attempted to extract density and inertial propertes from CT scans citep:Phillips1997,DuPlessis2013,Durston2022.
+The purpose of this chapter is to explore whether or not (or under which circumstances) CT gray values can be used to estimate density, thereby mass, and derived inertial properties.
+I will start by giving a brief intro to the CT scanning technology, then introducing a simple experimental setup to measure dynamics of an excised piglet femur, and with that re-attempting the extraction of inertial properties.
 
 
 ** Emission and Absorption
-Visible light and x-ray radiation are astonishingly analogous.
+Visible light and x-ray radiation are, to a large degree, analogous.
 The reason is that both are just electromagnetic radiation; they differ in wavelength.
-To understand what is happening during a CT experiment, I will use the analogy of visible light.
+To understand what is happening with x-ray light during a CT experiment, I will use the analogy of visible light.
 
 
-On military signal flashlights, one can set the light to be white (i.e. bulb spectrum, unfiltered) or filtered either red or green.
-The same principle holds for party lights or colored window sheets.
-The white light is general purpose, and the maximum number of photons you can expect with a given bulb.
-Lights are devices which constantly emit photons of a specific variety of wavelengths.
-Applying a red filter sheet will change the composition of the passing light, trivially, by blocking all the "non-red" photons.
+On some military signal flashlights, one can set the light to be white (i.e. bulb spectrum, unfiltered) or filtered either red or green, sometimes a third color.
+Light are photons, and filters let through some of them and prohibit others from passing.
+The same principle holds for party lights or colored window sheets: a light source is placed behind a filter sheet.
+On the military flashlight, the white light is general purpose, and this unfiltered setting lets through the maximum number of photons you can expect with a given bulb.
+Lights are devices which constantly emit photons of a specific variety of wavelengths; we call this variety the "spectrum" (see below).
+Put simply, applying a red filter sheet will change the composition of the passing light by blocking all the "non-red" photons.
 Because red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our perceptive system.
 
-Most plants have evolved to be green; their cells hold organelles with chlorophyl, which is optimized to absorb some wavelengths of light very well.
-The ensemble of non-absorbed photons appears green to us, which is why leaves are green.
-Contrary to internet myth, the military use case of red flashlight is an operation that requires as inconspicuous light as possible in a vegetated environment.
+Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyl, which is optimized to absorb some non-green (e.g. red) wavelengths of light very well.
+The ensemble of non-absorbed photons appears green to us, which is why leaves appear green to our receptor system.
+But leaves only appear green if there is a green content in the incident light!
+Green leaves will look red under red light.
+Contrary to internet myth, the military use case of red flashlight would be an operation which requires as inconspicuous light as possible in a vegetated environment.
 Red light will hardly reflect from gras or bush, and can therefore reduce the chance of being spotted by enemy surveillance.
+If you need to look for something in a dark forest, and you would like to avoid being seen, use a red flashlight.
 
 
-Red LED's are an alternative to red filters: they immediately produce a spectrum that is biased towards low frequencies.
-We can assess that red LEDs have a different *source spectrum* than vintage light bulbs.
-If the light from a light source is filtered (e.g. by a red sheet of thin plastic), the *emission spectrum* is altered.
+#+CAPTION: A hypothetical spectrum. The x-axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case, visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (\(Hz\)) and photon energy (\(keV\)). The y-axis shows photon occurrence probability, i.e. intensity, or the difference of it (which could be in an absorbtion spectrum, see text).
+#+LABEL: fig:spectrum
+#+ATTR_LATEX: :width 10cm
+[[./figures/spectrum.pdf]]
+
+
+Spectrum, spectrum, spectrum; good to agree on some terms (Fig. \ref{fig:spectrum}).
+Red LED's are an alternative to red filters: they immediately produce a spectrum which is biased towards low frequencies.
+We can assess that red LEDs have a different *source spectrum or emission spectrum* than "vintage" (tungsten) light bulbs.
+If the light from a white source is filtered (e.g. by a red sheet of thin plastic), the spectrum is altered.
 A red LED viewed through a green-pass filter might appear to be "off", when really power is "on".
-Finally, light hitting an object will also change its spectral composition, depending on the material's *absorption, transmission, and reflection spectra*.
-In a way, this is also a filtering process: the outgoing light will depend on the incoming spectrum and the material properties of the object.
+Finally, light hitting an object will also change its spectral composition, depending on the material's *absorption, transmission, and reflection spectrum*.
+This is also a filtering process: the outgoing light will depend on the incoming spectrum and the material properties of the object.
 Plant leaves will almost entirely absorb a narrow band of red light.
+All that is happening here are interactions of photons and matter.
+Those interactions crucially depend on the energy/frequency/wavelength of the photons, and the energetic/vibrational/resonant molecular properties of the matter.
+A (differential) spectrum is a way to depict this wavelength dependence.
 
 
 #+CAPTION: X-Ray emission spectrum. An x-ray source will emit photons with a variety of energies ("colors"). Bremsstrahlung will cover a wide range of photon energies, whereas discrete peaks are caused by specific absorption processes in the target material. @@latex:\citep[taken from ][, creative commons license]{Berger2018fig8}@@.
@@ -72,46 +87,91 @@ Plant leaves will almost entirely absorb a narrow band of red light.
 [[./figures/Berger2018.png]]
 
 The situation is exactly analogous for x-rays citep:Berger2018.
+X-rays are also photons, "elementary particles which are the quantum of the electromagnetic field" ([[https://en.wikipedia.org/wiki/Photon][wikipedia: photon]]), just at a different wavelength (range \(10pm - 10nm\)).
 X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...).
 When hit by an electron beam which was evoked by applying voltage (e.g. \(60 kV\)) to the anode and a warmed-up kathode, the target will emit x-ray photons of a specific variety of energies (spectrum, Fig. \ref{fig:xray_emission}).
-The source emission is generally *polychromatic*, i.e. consisting of multiple colors/energies.
-Most available CT machines have a polychromatic source; the usual exception are synchrotrons.
-On the other hand, x-ray detectors are monochromatic, integrating intensities over all wavelengths (in a specific way, which is another layer of nuisance).
-There is ongoing development on the frontier of "spectral CT" citep:Liu2023, yet resolution (spectral and spatial) are still below par.
+The source emission is generally *polychromatic*, i.e. consisting of multiple colors/energies (just as the spectra in Figs. \ref{fig:spectrum} and \ref{fig:xray_emission}).
+Most available CT machines have a polychromatic source; the common exception are synchrotrons.
+On the other hand, x-ray detectors are monochromatic, integrating intensities over a wide range of wavelengths (in a specific way, detection sensitivity spectrum, which is another layer of nuisance).
+There is ongoing development on the frontier of "spectral CT" citep:Liu2023, yet resolution (spectral and spatial) are currently still below par.
 
 
-Similar to the processes occurring in the anode target of the source, x-ray photons interact with matter they encounter on their trajectory.
+Once set on their path from within the x-ray source, x-ray photons interact with matter they encounter on their trajectory.
 Much simplified, they are either absorbed or scattered (Rayleigh scattering, Compton scattering); "attenuation" is the term to describe that not all photons reach the detector.
-Absorption is favourable, scattering is not, and the probability of either of these interactions depends on the photon energy, the elementary composition of the material (absorption spectrum; characteristic bands), and the trajectory of the photon (thickness, angle).
+Absorption is favourable, scattering is not, and the probability of either of these interactions depends on (i) the wavelength (photon energy), (ii) the elementary composition of the material (absorption spectrum; characteristic bands), and (iii) the trajectory of the photon (thickness, angle).
 
-The fraction of attenuated photons, measured from multiple incident angles, is what enables the extraction of structural information (Lambert-Beer's Law).
+The varying fraction of attenuated photons, measured from multiple incident angles for 3D view, is what enables the extraction of structural information (Lambert-Beer's Law).
 And attenuation is precisely the property which correlates with physical density: the higher the density, the higher the attenuation.
-However, in some cases the specific emission of the source matches the absorption peaks of the material - think of applying a red-eliminating filter sheet to a red light LED, making the LED "invisible".
-Examples of problematic substances are water and formol, because they absorb a broad range of photon energies.
+Or so it seems.
+Yet in some cases the specific emission of the source matches the absorption peaks of the material - remember the example of applying a red-eliminating filter sheet to a red light LED, making the LED "invisible".
+Examples of substances problematic for x-ray are water and formol, because they absorb a broad range of photon energies within the x-ray range.
 
 
 ** Scan Artifacts
-To be maximally fuzzy on this, there is no such thing as CT scanning artifacts.
-The term "artifact" implies that there is an unavoidable error in the measurement, yet x-ray images are usually accurate.
+X-ray images do not always look as we would want them to look.
+We call the unfavorable image features "artifacts".
+In the opinion of the author, there is actually no such thing as CT scanning artifacts.
+The term "artifact" implies that there is an unavoidable error in the measurement, yet correctly obtained x-ray images are usually accurate.
 Any tomographic reconstruction just shows exactly what is measured.
-However, some aspects of the measurement might be unfavorable.
-For example, we speak of a "beam hardening artifact" if absorption in the superficial layers of an objects alter the spectrum of the beam, which will affect the representation of the underlying regions citep:VanGompel2011.
+Only that some aspects of the measurement might be unfavorable to the observer.
+For example, we speak of a "beam hardening artifact" if absorption in the superficial layers of an objects alter the spectrum of the beam on its trajectory, which will affect the virtual representation of the underlying regions citep:VanGompel2011.
 However, that is just a normal manifestation of the actual physical process (the stochastic interaction of electromagnetic radiation and matter).
-Ring artifacts stem from sensitivity variations on the image detector, which are technically inevitable (due to constraints of the physical detection process), but can be removed reliably citep:Sijbers2004.
+Curiously enough, beam hardening can be minimized by hardening the beam by the use of metal filter plates.
+Ring artifacts stem from sensitivity variations on the image detector, which are technically inevitable (due to constraints of the physical detection process), but can be rectified reliably citep:Sijbers2004.
 Partial volume effects are caused by finite scan resolution and voxel volume.
 Streak artifacts are caused by limited dynamic range.
+All these should be considered properties of the scan, rather than interpreting them as an annoyance.
 
 
-Other so-called artifacts might stem from the choice and limitations of the reconstruction algorithm. TODO [Feldkamp & SIRT, Poly-SIRT]
+Another group of so-called artifacts might stem from the choice and limitations of the reconstruction algorithm.
+There are iterative/algebraic and analytical reconstruction methods citep:Gilbert1972,Andersen1984,Feldkamp1984,Geyer2015,Hansen2021, all of which have their specific limitations.
+These algorithms are constantly refined and improved by capable scientists, and specific algorithm variants can already overcome specific limitations @@latex:\citep[e.g.][]{Six2019,Frenkel2022}@@.
+In the future, the question of reconstruction artifacts will rather be one of algorithm choice.
 
 
-Scan artifacts are normal.
-Some are avoidable: for example, curiously enough, beam hardening can be minimized by hardening the beam by the use of metal filter plates.
-Others show intrinsic features of the tomography procedure.
-The reason that we still call them artifacts is that we think of matter as a distribution of densities, i.e. a mass distribution, whereas x-ray scanning actually yields a distribution of x-ray attenuation.
-In other words, the appropriate way to measure an exact mass distribution of an object would be to slice it into little voxel cubes and weigh each of them.
-Tomography is certainly a time-saving alternative.
-Yet it must be stated that X-Ray CT does not quantify density.
+To summarize: scan artifacts are normal.
+Some are to a certain degree avoidable, others show intrinsic features of the technical and computational tomography procedure.
+Artifacts are interpreted as "something is not as it is supposed to be", despite attenuation-based images being close to technical perfection.
+I suspect that the reason we still call them artifacts is that we actually think of matter and physical objects as a distribution of density, i.e. a mass distribution, whereas x-ray scanning really yields a distribution of x-ray attenuation.
+
+Conversely, the only appropriate way to measure an exact mass distribution of an object would be to slice it into little voxel cubes and weigh each of them.
+In that sense, computational tomography is certainly a time-saving alternative.
+#+begin_center
+Yet it must be kept in mind that X-Ray images do not quantify density, they quantify attenuation, most often lumped over a spectrum.
+#+end_center
+
+
+** Density Approximations
+The fact that two physical properties (attenuation and density) are fundamentally different things does not imply that researchers cannot use one to measure the other.
+Scientists have repeatedly suggested and attempted to convert CT scan gray values to approximate density citep:DuPlessis2013,Durston2022.
+
+
+For example, citet:DuPlessis2013 acknowledge difficulties of accuracy and repeatability in extracting density from CT data.
+They then average gray values of putatively homogeneous blocks of polymer plastic material, apply linear regression which, as they point out themselves, does not appropriately cover two of the measured data points.
+The latter problem is attributed to differences in chemical composition (without discussing the known composition of the objects).
+The authors then argue that chemical composition can be assessed by performing a dual energy CT scan (DECT), i.e. scanning at two different tube voltages and taking the ratio of gray values.
+Note that this version of DECT is not really "dual energy": the spectrum of energies elicited in a \(60\ kV\) scan is included in the \(230\ kV\) scan; the photons below \(60\ kV\) might even contribute the majority of light in the other scan.
+A better differential would have been a scan with metal filter beam hardening.
+Nevertheless, comparing the calibration line and the DECT ratio results, the putative outliers do not stand out more than other regression elements (especially PTFE puts the original regression in doubt).
+For a toy pig of unknown plastic material, they get higher than actuall mass estimates; they identify chlorine and calcium content as the cause.
+On another unknown sample which is assessed similar enough in chemical composition, they retrieve an accurate prediction.
+The authors do not report measurement uncertainty which manifests in gray value distributions, suboptimal regression goodness of fit and potentially high sensitivity (PTFE), and other sources of variability citep:Macaulay2017.
+Finally, they destroyed a toy pig for the study, which cannot be excused.
+
+To summarize, citet:DuPlessis2013 achieve density prediction in a particular use case (homogeneous, chemically identical objects) and suggest a DECT ratio to assess chemical composition.
+
+
+citet:Durston2022 take a huge leap from there and measure inertial properties from frozen cadaver parts.
+They also acknowledge the critical assumption of a linear relation between attenuation and density, and consequentially use a linear relation as a conversion from CT scan in Hounsfield Units to actual density.
+They supplement the calibration curves, which show systematic errors at close look (the regression line lies tiltet compared to the majority of relevant calibration objects, pulled by the "air" sample point).
+Still, the linear fit is surprising, given that this study uses tissue phantoms provided for medical CT, all of which will putatively have a different chemical composition.
+To validate results from CT density estimates, the authors apply two approaches.
+The first is a comparison of virtual and physical dissection, comparing segment mass measurements.
+The second is a trifilar pendulum reference for one axis of the mass moment of inertia.
+There is also a validation of the pendulum method, by applying it to manufactured nylon blocks, yet the error estimates remain vague.
+
+Results of the citet:Durston2022 study remain unworthy of the considerable effort they put in.
+They juxtapose pie charts of segment masses...
 
 
 #+begin_comment
@@ -122,6 +182,7 @@ Yet it must be stated that X-Ray CT does not quantify density.
 scattering types of xray beams
 poly-SIRT
 Liu2023 spectral CT https://www.nature.com/articles/s41598-023-33264-2#citeas
+% AI density estimation https://doi.org/10.1016/j.media.2021.102061
 #+end_comment
 
 

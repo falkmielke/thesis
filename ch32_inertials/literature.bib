@@ -1,3 +1,16 @@
+
+@article{Andersen1984,
+    author = {Andersen, A. H. and Kak, A. C.},
+    year = {1984},
+    title = {{Simultaneous Algebraic Reconstruction Technique (SART): A Superior Implementation of the Art Algorithm}},
+    doi = {10.1177/016173468400600107},
+    journal = {Ultrasonic Imaging},
+    volume = {6},
+    number = {1},
+    pages = {81-94},
+    abstract = { In this paper we have discussed what appears to be a superior implementation of the Algebraic Reconstruction Technique (ART). The method is based on 1) simultaneous application of the error correction terms as computed by ART for all rays in a given projection; 2) longitudinal weighting of the correction terms back-distributed along the rays; and 3) using bilinear elements for discrete approximation to the ray integrals of a continuous image. Since this implementation generates a good reconstruction in only one iteration, it also appears to have a computational advantage over the more traditional implementation of ART. Potential applications of this implementation include image reconstruction in conjunction with ray tracing for ultrasound and microwave tomography in which the curved nature of the rays leads to a non-uniform ray density across the image. },
+}
+
 @online{Baker1999,
     author = {Baker, Martin John},
     year = {1999},
@@ -142,6 +155,68 @@
     issn = {0022-0949},
 }
 
+@article{Frenkel2022,
+    title = {{Tabu-DART: a dynamic update strategy for efficient discrete algebraic reconstruction}},
+    year = {2022},
+    author = {Frenkel, Daniel and Six, Nathana{\"e}l and De Beenhouwer, Jan and Sijbers, Jan},
+    doi = {10.1007/s00371-022-02616-w},
+    journal = {The Visual Computer},
+    pages = {1--13},
+    publisher = {Springer},
+}
+
+
+@article{Geyer2015,
+    author = {Geyer, Lucas L. and Schoepf, U. Joseph and Meinel, Felix G. and Nance, John W. and Bastarrika, Gorka and Leipsic, Jonathon A. and Paul, Narinder S. and Rengo, Marco and Laghi, Andrea and De Cecco, Carlo N.},
+    year = {2015},
+    title = {State of the Art: Iterative CT Reconstruction Techniques},
+    doi = {10.1148/radiol.2015132766},
+    journal = {Radiology},
+    volume = {276},
+    number = {2},
+    pages = {339-357},
+    abstract = {Owing to recent advances in computing power, iterative reconstruction (IR) algorithms have become a clinically viable option in computed tomographic (CT) imaging. Substantial evidence is accumulating about the advantages of IR algorithms over established analytical methods, such as filtered back projection. IR improves image quality through cyclic image processing. Although all available solutions share the common mechanism of artifact reduction and/or potential for radiation dose savings, chiefly due to image noise suppression, the magnitude of these effects depends on the specific IR algorithm. In the first section of this contribution, the technical bases of IR are briefly reviewed and the currently available algorithms released by the major CT manufacturers are described. In the second part, the current status of their clinical implementation is surveyed. Regardless of the applied IR algorithm, the available evidence attests to the substantial potential of IR algorithms for overcoming traditional limitations in CT imaging. },
+}
+
+@article{Gilbert1972,
+    author = {Gilbert, Peter},
+    year = {1972},
+    title = {{Iterative methods for the three-dimensional reconstruction of an object from projections}},
+    doi = {10.1016/0022-5193(72)90180-4},
+    journal = {Journal of Theoretical Biology},
+    volume = {36},
+    number = {1},
+    pages = {105-117},
+    issn = {0022-5193},
+    url = {https://www.sciencedirect.com/science/article/pii/0022519372901804},
+    abstract = {A method of reconstruction (ART) has recently been proposed (Gordon, Bender & Herman, 1970) which consists in iteratively changing a trial structure until its projections are consistent with the original projections of the unknown structure. It is shown that in general ART produces erroneous reconstructions. An alternative iterative method is proposed which will give correct reconstructions under certain conditions. One of the potential applications of this method is in determining the three-dimensional structure of objects from electron micrographs.},
+}
+
+@article{Feldkamp1984,
+    author = {Feldkamp, L. A. and Davis, L. C. and Kress, J. W.},
+    year = {1984},
+    title = {Practical cone-beam algorithm},
+    doi = {10.1364/JOSAA.1.000612},
+    journal = {Journal of the Optical Society of America A},
+    keywords = {Detector arrays; Image intensifiers; Reconstruction algorithms; Scanners; Three dimensional reconstruction; X ray imaging},
+    number = {6},
+    pages = {612--619},
+    publisher = {Optica Publishing Group},
+    volume = {1},
+    month = {Jun},
+    url = {https://opg.optica.org/josaa/abstract.cfm?URI=josaa-1-6-612},
+    abstract = {A convolution-backprojection formula is deduced for direct reconstruction of a three-dimensional density function from a set of two-dimensional projections. The formula is approximate but has useful properties, including errors that are relatively small in many practical instances and a form that leads to convenient computation. It reduces to the standard fan-beam formula in the plane that is perpendicular to the axis of rotation and contains the point source. The algorithm is applied to a mathematical phantom as an example of its performance.},
+}
+
+@book{Hansen2021,
+  author = {Hansen, Per Christian and J{\o}rgensen, Jakob and Lionheart, William RB},
+  year = {2021},
+  title = {{Computed tomography: algorithms, insight, and just enough theory}},
+  doi = {10.1137/1.9781611976670},
+  publisher = {SIAM},
+}
+
+
 @article{Hounsfield1973,
     author = {Hounsfield, G. N.},
     year = {1973},
@@ -229,6 +304,20 @@
     url = {http://www.modernrobotics.org},
 }
 
+@article{Macaulay2017,
+    author = {Macaulay, Sophie and Hutchinson, John R. and Bates, Karl T.},
+    year = {2017},
+    title = {A quantitative evaluation of physical and digital approaches to centre of mass estimation},
+    doi = {10.1111/joa.12667},
+    journal = {Journal of Anatomy},
+    volume = {231},
+    number = {5},
+    pages = {758-775},
+    keywords = {biomechanics, centre of gravity, inertial properties, mass properties, validation, volumetric modelling},
+    url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/joa.12667},
+    abstract = {Abstract Centre of mass is a fundamental anatomical and biomechanical parameter. Knowledge of centre of mass is essential to inform studies investigating locomotion and other behaviours, through its implications for segment movements, and on whole body factors such as posture. Previous studies have estimated centre of mass position for a range of organisms, using various methodologies. However, few studies assess the accuracy of the methods that they employ, and often provide only brief details on their methodologies. As such, no rigorous, detailed comparisons of accuracy and repeatability within and between methods currently exist. This paper therefore seeks to apply three methods common in the literature (suspension, scales and digital modelling) to three ‘calibration objects’ in the form of bricks, as well as three birds to determine centre of mass position. Application to bricks enables conclusions to be drawn on the absolute accuracy of each method, in addition to comparing these results to assess the relative value of these methodologies. Application to birds provided insights into the logistical challenges of applying these methods to biological specimens. For bricks, we found that, provided appropriate repeats were conducted, the scales method yielded the most accurate predictions of centre of mass (within 1.49 mm), closely followed by digital modelling (within 2.39 mm), with results from suspension being the most distant (within 38.5 mm). Scales and digital methods both also displayed low variability between centre of mass estimates, suggesting they can accurately and consistently predict centre of mass position. Our suspension method resulted not only in high margins of error, but also substantial variability, highlighting problems with this method.},
+}
+
 @online{Mielke2020wrenches,
     author = {Mielke, Falk},
     year = {2020},
@@ -291,9 +380,20 @@
     publisher = {Taylor & Francis},
 }
 
-
-
-
+@article{Phillips1997,
+    author = {Phillips, D.H. and Lannutti, J.J.},
+    year = {1997},
+    title = {{Measuring physical density with X-ray computed tomography}},
+    doi = {10.1016/S0963-8695(97)00020-0},
+    journal = {{NDT & E International}},
+    volume = {30},
+    number = {6},
+    pages = {339-350},
+    issn = {0963-8695},
+    url = {https://www.sciencedirect.com/science/article/pii/S0963869597000200},
+    keywords = {CT, computed tomography, ceramics, powders, compaction, density},
+    abstract = {X-ray computed tomography (CT) can quantify variations in material density. However, little practical information concerning accurate translation of CT numbers (an approximation of the material's linear attenuation coefficient) into mass density exists. We describe our development of this methodology. Issues addressed include the physics of mapping CT density to mass density; development and scanning of density standards; post-reconstruction filtering to reduce the effects of quantum noise; and segmentation of the object data from the surrounding medium. Examples of our use of this procedure in studying density gradients during powder pressing and firing are given.},
+}
 
 @article{Phelps1975,
     author = {Phelps, Michael E. and Gado, Mokhtar H. and Hoffman, Edward J.},
@@ -345,6 +445,21 @@
     abstract = {High resolution micro-CT images are often corrupted by ring artefacts, prohibiting quantitative analysis and hampering post processing. Removing or at least significantly reducing such artefacts is indispensable. However, since micro-CT systems are pushed to the extremes in the quest for the ultimate spatial resolution, ring artefacts can hardly be avoided. Moreover, as opposed to clinical CT systems, conventional correction schemes such as flat-field correction do not lead to satisfactory results. Therefore, in this note a simple but efficient and fast post processing method is proposed that effectively reduces ring artefacts in reconstructed μ-CT images.},
 }
 
+@article{Six2019,
+    author = {Six, Nathana\"{e}l and De Beenhouwer, Jan and Sijbers, Jan},
+    year = {2019},
+    title = {{poly-DART: A discrete algebraic reconstruction technique for polychromatic X-ray CT}},
+    doi = {10.1364/OE.27.033670},
+    journal = {Opt. Express},
+    keywords = {Image quality; Image reconstruction; Inverse problems; Magnetic resonance imaging; X ray computed tomography; X ray imaging},
+    number = {23},
+    pages = {33670--33682},
+    publisher = {Optica Publishing Group},
+    volume = {27},
+    month = {Nov},
+    url = {https://opg.optica.org/oe/abstract.cfm?URI=oe-27-23-33670},
+    abstract = {The discrete algebraic reconstruction technique (DART) is a tomographic method to reconstruct images from X-ray projections in which prior knowledge on the number of object materials is exploited. In monochromatic X-ray CT (e.g., synchrotron), DART has been shown to lead to high-quality reconstructions, even with a low number of projections or a limited scanning view. However, most X-ray sources are polychromatic, leading to beam hardening effects, which significantly degrade the performance of DART. In this work, we propose a new discrete tomography algorithm, poly-DART, that exploits sparsity in the attenuation values using DART and simultaneously accounts for the polychromatic nature of the X-ray source. The results show that poly-DART leads to a vastly improved segmentation on polychromatic data obtained from Monte Carlo simulations as well as on experimental data, compared to DART.},
+}
 
 @book{Tipler2007,
   title = {Physics for scientists and engineers},
