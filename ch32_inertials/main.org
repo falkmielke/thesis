@@ -30,13 +30,13 @@ However, researchers have been struggling with the quantitative extraction of ma
 The material property of primary interest is physical density; from a given density distribution, the other relevant inertial properties can be calculated.
 
 
-Reseachters have long suggested to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet the relation is nothing more than a correlation which only holds under specific circumstances.
+Reseachters have long suggested to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet it was immediately noted that the relation is nothing more than a correlation which only holds under specific circumstances.
 Even these pioneer works acknowledge that there must be discrepancies between known and measured densities, which can be explained by (i) the polychromatic character (source spectrum) of the used radiation, (ii) chemical composition (absorption spectrum), and (iii) scan artifacts.
 # scattering types,
 These issues demand a detailed explanation, below.
-Notwithstanding this list of known problems, people have repeatedly attempted to extract density and inertial propertes from CT scans citep:Phillips1997,DuPlessis2013,Durston2022.
-The purpose of this chapter is to explore whether or not (or under which circumstances) CT gray values can be used to estimate density, thereby mass, and derived inertial properties.
-I will start by giving a brief intro to the CT scanning technology, then introducing a simple experimental setup to measure dynamics of an excised piglet femur, and with that re-attempting the extraction of inertial properties.
+Notwithstanding this list of known problems, people have repeatedly attempted to extract density and inertial propertes from CT scans @@latex: \citep[][, as well as the present study]{Phillips1997,DuPlessis2013,Durston2022}@@.
+The purpose of this chapter is to explore whether or not (or under which circumstances) CT gray values can be used to estimate density distributions, and thereby mass and other derived inertial properties.
+I will start by giving a brief intro to the CT scanning technology, reviewing similar attempts by others, then introducing a simple experimental setup to measure dynamics of an excised piglet femur, and with that re-attempting the extraction of inertial properties.
 
 
 ** Emission and Absorption
@@ -47,33 +47,33 @@ To understand what is happening with x-ray light during a CT experiment, I will 
 
 On some military signal flashlights, one can set the light to be white (i.e. bulb spectrum, unfiltered) or filtered either red or green, sometimes a third color.
 Light are photons, and filters let through some of them and prohibit others from passing.
-The same principle holds for party lights or colored window sheets: a light source is placed behind a filter sheet.
-On the military flashlight, the white light is general purpose, and this unfiltered setting lets through the maximum number of photons you can expect with a given bulb.
-Lights are devices which constantly emit photons of a specific variety of wavelengths; we call this variety the "spectrum" (see below).
+The same principle holds for party lights or colored window sheets: a light source is placed behind a filter sheet which blocks most colors.
+On the military flashlight, the "white" setting is general purpose, unfiltered, which will let pass the maximum number of photons you can expect from a given bulb.
+Lights are devices which constantly emit photons of a specific variety of wavelengths (colors); we call this variety the "spectrum" (see below).
 Put simply, applying a red filter sheet will change the composition of the passing light by blocking all the "non-red" photons.
 Because red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our perceptive system.
 
-Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyl, which is optimized to absorb some non-green (e.g. red) wavelengths of light very well.
+Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyl, which is optimized to absorb some non-green (e.g. red) wavelengths of light very well (Fig. \ref{fig:spectrum}, green curve).
 The ensemble of non-absorbed photons appears green to us, which is why leaves appear green to our receptor system.
 But leaves only appear green if there is a green content in the incident light!
 Green leaves will look red under red light.
 Contrary to internet myth, the military use case of red flashlight would be an operation which requires as inconspicuous light as possible in a vegetated environment.
-Red light will hardly reflect from gras or bush, and can therefore reduce the chance of being spotted by enemy surveillance.
+Red light will hardly reflect from gras or bush, and can therefore reduce the chance of being spotted at night by enemy surveillance.
 If you need to look for something in a dark forest, and you would like to avoid being seen, use a red flashlight.
 
 
-#+CAPTION: A hypothetical spectrum. The x-axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case, visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (\(Hz\)) and photon energy (\(keV\)). The y-axis shows photon occurrence probability, i.e. intensity, or the difference of it (which could be in an absorbtion spectrum, see text).
+#+CAPTION: Spectra. The x-axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case the range of visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (\(Hz\)) and photon energy (\(keV\)). The y-axis shows photon occurrence probability, or normalized intensity \(I\), or the intensity difference \(\Delta I\) for the absorption spectrum. Black curve: emission spectrum of a white LED \citep{Tanabe2005}. Green curve: the approximate absorption spectrum of Chlorophyl A \citep{Zscheile1934}. The chlorophyl will hardly get excited by the LED.
 #+LABEL: fig:spectrum
-#+ATTR_LATEX: :width 10cm
+#+ATTR_LATEX: :width 13cm
 [[./figures/spectrum.pdf]]
 
 
-Spectrum, spectrum, spectrum; good to agree on some terms (Fig. \ref{fig:spectrum}).
+To characterize light which is emitted, reflected, or absorbed, one can use a spectrum (Fig. \ref{fig:spectrum}).
 Red LED's are an alternative to red filters: they immediately produce a spectrum which is biased towards low frequencies.
-We can assess that red LEDs have a different *source spectrum or emission spectrum* than "vintage" (tungsten) light bulbs.
+We can assess that red LEDs have a different *source spectrum or emission spectrum* than white LEDS or "vintage" (tungsten) light bulbs.
 If the light from a white source is filtered (e.g. by a red sheet of thin plastic), the spectrum is altered.
-A red LED viewed through a green-pass filter might appear to be "off", when really power is "on".
-Finally, light hitting an object will also change its spectral composition, depending on the material's *absorption, transmission, and reflection spectrum*.
+A red LED viewed through a green-pass filter (e.g. a leaf) might appear to be "off", when really power is "on", because the majority of photons are absorbed by the filter.
+Light hitting an object will also change its spectral composition, depending on the material's *absorption, transmission, and reflection spectrum*.
 This is also a filtering process: the outgoing light will depend on the incoming spectrum and the material properties of the object.
 Plant leaves will almost entirely absorb a narrow band of red light.
 All that is happening here are interactions of photons and matter.
@@ -81,42 +81,49 @@ Those interactions crucially depend on the energy/frequency/wavelength of the ph
 A (differential) spectrum is a way to depict this wavelength dependence.
 
 
-#+CAPTION: X-Ray emission spectrum. An x-ray source will emit photons with a variety of energies ("colors"). Bremsstrahlung will cover a wide range of photon energies, whereas discrete peaks are caused by specific absorption processes in the target material. @@latex:\citep[taken from ][, creative commons license]{Berger2018fig8}@@.
+#+CAPTION: X-Ray emission spectrum. An x-ray source will emit photons with a variety of energies ("colors"). Bremsstrahlung will cover a wide range of photon energies, whereas discrete peaks are caused by specific emission processes in the target material. \citep[taken from ][, creative commons license]{Berger2018fig8}.
 #+LABEL: fig:xray_emission
 #+ATTR_LATEX: :width 10cm
 [[./figures/Berger2018.png]]
 
-The situation is exactly analogous for x-rays citep:Berger2018.
+The situation is exactly analogous for x-rays citep:Berger2018,Buzug2008.
 X-rays are also photons, "elementary particles which are the quantum of the electromagnetic field" ([[https://en.wikipedia.org/wiki/Photon][wikipedia: photon]]), just at a different wavelength (range \(10pm - 10nm\)).
-X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...).
-When hit by an electron beam which was evoked by applying voltage (e.g. \(60 kV\)) to the anode and a warmed-up kathode, the target will emit x-ray photons of a specific variety of energies (spectrum, Fig. \ref{fig:xray_emission}).
+X-ray sources are "targets" of an electron beam, i.e. anodes made of certain metals (Tungsten, Molybdenum, ...).
+When hit by electrons which are evoked by applying voltage (e.g. \(60 kV\)) to the anode and a warmed-up kathode, the target will emit x-ray photons of a specific composition of energies (spectrum, Fig. \ref{fig:xray_emission}).
 The source emission is generally *polychromatic*, i.e. consisting of multiple colors/energies (just as the spectra in Figs. \ref{fig:spectrum} and \ref{fig:xray_emission}).
-Most available CT machines have a polychromatic source; the common exception are synchrotrons.
-On the other hand, x-ray detectors are monochromatic, integrating intensities over a wide range of wavelengths (in a specific way, detection sensitivity spectrum, which is another layer of nuisance).
+Most commercial CT scanners have a polychromatic source; the common exception are synchrotrons.
+On the other hand, x-ray detectors are usually monochromatic, integrating intensities over a wide range of wavelengths (in a specific way, described by a detection sensitivity spectrum, which adds another layer of nuisance).
 There is ongoing development on the frontier of "spectral CT" citep:Liu2023, yet resolution (spectral and spatial) are currently still below par.
 
 
-Once set on their path from within the x-ray source, x-ray photons interact with matter they encounter on their trajectory.
+Once set on their path from within the x-ray source, x-ray photons interact stochastically with matter they encounter on their trajectory.
 Much simplified, they are either absorbed or scattered (Rayleigh scattering, Compton scattering); "attenuation" is the term to describe that not all photons reach the detector.
-Absorption is favourable, scattering is not, and the probability of either of these interactions depends on (i) the wavelength (photon energy), (ii) the elementary composition of the material (absorption spectrum; characteristic bands), and (iii) the trajectory of the photon (thickness, angle).
+Absorption is favourable, scattering is not, there can be secondary effects, and the probability of either of these interactions depends on (i) the wavelength (photon energy), (ii) the elementary composition of the material (absorption spectrum; characteristic bands), and (iii) the trajectory of the photon (thickness, angle).
 
 The varying fraction of attenuated photons, measured from multiple incident angles for 3D view, is what enables the extraction of structural information (Lambert-Beer's Law).
-And attenuation is precisely the property which correlates with physical density: the higher the density, the higher the attenuation.
+And attenuation is precisely the property which seemingly correlates with physical density: the higher the density, the higher the attenuation.
 Or so it seems.
-Yet in some cases the specific emission of the source matches the absorption peaks of the material - remember the example of applying a red-eliminating filter sheet to a red light LED, making the LED "invisible".
+Yet think of a case in which the specific emission of the source does not match the absorption peaks of the material - remember the example of a white LED not exciting chlorophyl of a green leaf.
+Or the opposite case, a substance with absorption which is congruent to the emission spectrum.
 Examples of substances problematic for x-ray are water and formol, because they absorb a broad range of photon energies within the x-ray range.
+
+
+To summarize: both in the visual and x-ray range of electromagnetic radiation, emission and absorption are determined by stochastic interactions of elementary particles.
+Spectra summarize ensemble properties of a given light source or material; differential spectra can capture absorption.
+The filtering properties of matter can be used to acquire images and reconstruct 3D structure, even in the absence of precise spectral information.
 
 
 ** Scan Artifacts
 X-ray images do not always look as we would want them to look.
 We call the unfavorable image features "artifacts".
-In the opinion of the author, there is actually no such thing as CT scanning artifacts.
-The term "artifact" implies that there is an unavoidable error in the measurement, yet correctly obtained x-ray images are usually accurate.
-Any tomographic reconstruction just shows exactly what is measured.
-Only that some aspects of the measurement might be unfavorable to the observer.
+In the opinion of the provocative author, there is actually no such thing as CT scanning artifacts.
+The term "artifact" implies that there is an unavoidable error in the measurement, yet instead it can be ascertained that correctly obtained x-ray images are usually accurate.
+Any tomographic reconstruction just shows exactly what is measured, convoluted with ideally negligible reconstruction algorithm characteristics.
+
+Some aspects of the measurement might be unfavorable to the observer.
 For example, we speak of a "beam hardening artifact" if absorption in the superficial layers of an objects alter the spectrum of the beam on its trajectory, which will affect the virtual representation of the underlying regions citep:VanGompel2011.
 However, that is just a normal manifestation of the actual physical process (the stochastic interaction of electromagnetic radiation and matter).
-Curiously enough, beam hardening can be minimized by hardening the beam by the use of metal filter plates.
+Curiously enough, beam hardening can be minimized by pre-hardening the beam with the use of metal filter plates.
 Ring artifacts stem from sensitivity variations on the image detector, which are technically inevitable (due to constraints of the physical detection process), but can be rectified reliably citep:Sijbers2004.
 Partial volume effects are caused by finite scan resolution and voxel volume.
 Streak artifacts are caused by limited dynamic range.
@@ -129,19 +136,19 @@ These algorithms are constantly refined and improved by capable scientists, and 
 In the future, the question of reconstruction artifacts will rather be one of algorithm choice.
 
 
-To summarize: scan artifacts are normal.
+To summarize: scan artifacts, if we want to use that label, are perfectly normal.
 Some are to a certain degree avoidable, others show intrinsic features of the technical and computational tomography procedure.
 Artifacts are interpreted as "something is not as it is supposed to be", despite attenuation-based images being close to technical perfection.
-I suspect that the reason we still call them artifacts is that we actually think of matter and physical objects as a distribution of density, i.e. a mass distribution, whereas x-ray scanning really yields a distribution of x-ray attenuation.
+I suspect that the major reason we still perceive artifacts as problematic is that we actually think of matter and physical objects as a distribution of density, i.e. a mass distribution, whereas x-ray scanning really yields a distribution of x-ray attenuation.
 
 Conversely, the only appropriate way to measure an exact mass distribution of an object would be to slice it into little voxel cubes and weigh each of them.
 In that sense, computational tomography is certainly a time-saving alternative.
 #+begin_center
-Yet it must be kept in mind that X-Ray images do not quantify density, they quantify attenuation, most often lumped over a spectrum.
+Yet it must be kept in mind that x-ray images do not quantify density, they quantify attenuation, most often lumped over a spectrum.
 #+end_center
 
 
-** Density Approximations
+** Density Approximations: Two Case Studies
 The fact that two physical properties (attenuation and density) are fundamentally different things does not imply that researchers cannot use one to measure the other.
 Scientists have repeatedly suggested and attempted to convert CT scan gray values to approximate density citep:DuPlessis2013,Durston2022.
 
@@ -151,44 +158,77 @@ They then average gray values of putatively homogeneous blocks of polymer plasti
 The latter problem is attributed to differences in chemical composition (without discussing the known composition of the objects).
 The authors then argue that chemical composition can be assessed by performing a dual energy CT scan (DECT), i.e. scanning at two different tube voltages and taking the ratio of gray values.
 Note that this version of DECT is not really "dual energy": the spectrum of energies elicited in a \(60\ kV\) scan is included in the \(230\ kV\) scan; the photons below \(60\ kV\) might even contribute the majority of light in the other scan.
-A better differential would have been a scan with metal filter beam hardening.
-Nevertheless, comparing the calibration line and the DECT ratio results, the putative outliers do not stand out more than other regression elements (especially PTFE puts the original regression in doubt).
-For a toy pig of unknown plastic material, they get higher than actuall mass estimates; they identify chlorine and calcium content as the cause.
+A better differential would have been a \(230\ kV\) scan with metal filter beam hardening.
+Nevertheless, comparing the calibration line and the DECT ratio results, the putative outliers do not stand out more than other regression elements (especially PTFE puts the original regression in doubt: it is perfectly fit by the calibration regression, is a modest outlier on the DECT ratio, and clearly does have a special chemical composition).
+For a toy pig of unknown plastic material, the authors get higher than actuall mass estimates; they identify chlorine and calcium content as the cause.
 On another unknown sample which is assessed similar enough in chemical composition, they retrieve an accurate prediction.
-The authors do not report measurement uncertainty which manifests in gray value distributions, suboptimal regression goodness of fit and potentially high sensitivity (PTFE), and other sources of variability citep:Macaulay2017.
+The authors do not quantify or report measurement uncertainty which manifests in gray value distributions, suboptimal regression goodness of fit and potentially high regression sensitivity (PTFE), and other sources of variability citep:Macaulay2017.
 Finally, they destroyed a toy pig for the study, which cannot be excused.
 
 To summarize, citet:DuPlessis2013 achieve density prediction in a particular use case (homogeneous, chemically identical objects) and suggest a DECT ratio to assess chemical composition.
 
 
-citet:Durston2022 take a huge leap from there and measure inertial properties from frozen cadaver parts.
-They also acknowledge the critical assumption of a linear relation between attenuation and density, and consequentially use a linear relation as a conversion from CT scan in Hounsfield Units to actual density.
-They supplement the calibration curves, which show systematic errors at close look (the regression line lies tiltet compared to the majority of relevant calibration objects, pulled by the "air" sample point).
-Still, the linear fit is surprising, given that this study uses tissue phantoms provided for medical CT, all of which will putatively have a different chemical composition.
-To validate results from CT density estimates, the authors apply two approaches.
-The first is a comparison of virtual and physical dissection, comparing segment mass measurements.
-The second is a trifilar pendulum reference for one axis of the mass moment of inertia.
-There is also a validation of the pendulum method, by applying it to manufactured nylon blocks, yet the error estimates remain vague.
+citet:Durston2022 attempt a huge leap from there and measure inertial properties from frozen cadaver parts, both conventionally and digitally.
+Emphasis: they use whole birds, and their considerable amount of work must be appreciated!
+As the authors above, Durston et al. acknowledge the critical assumption of a linear relation between attenuation and density, and consequentially use a linear relation as a conversion from CT scan in Hounsfield Units to actual density.
+They supplement the calibration regressions, which show systematic errors at close look (the regression line lies tilted compared to the majority of relevant calibration objects, because it is biased by the "air" sample point).
+Still, that the linear fit works at all is surprising, given that this study uses tissue phantoms provided for medical CT, all of which will putatively have a slightly different chemical composition.
 
-Results of the citet:Durston2022 study remain unworthy of the considerable effort they put in.
-They juxtapose pie charts of segment masses...
+To validate their results from CT density estimates, the authors apply two approaches.
+The first is a comparison of virtual and physical dissection, with regard to segment mass measurements.
+The second is a trifilar pendulum "ground truth" for one axis of the mass moment of inertia.
+There is also a validation of the pendulum method, by applying it to manufactured nylon blocks, yet quantitative error estimates remain vague.
+
+Overall, results of the citet:Durston2022 study remain superficial considering the author's valuable efforts on this project.
+They juxtapose pie charts of segment masses to verify mass distribution.
+They compare the virtually and physically derived dorsoventral moment of inertia, and present what must be considered a clear mismatch, given the lack of meaningful error margins.
+They briefly discuss the influence of partial volume effects on density (which, agreeably, could be a problem with feathers), however that is irrelevant for mass and moment of inertia because volume and density both change if a voxel contains air and tissue.
+They present "moment of inertia distributions" in various ways, i.e. the contribution of each voxel to a COM-centered \(I\), which is of no practical use for an articulated skeletal system (which they confirm themselves, by comparing extended and retracted wing configuration).
+It is a good reproducibility control that their data confirms previous findings of segment masses of some bird species; yet whether the moment of inertia is of any relevance for flying birds of prey who are presumably operating in an air drag regime (light bones and feathers, large wingspans) remains questionable.
 
 
-#+begin_comment
-% https://doi.org/10.1117/12.2595473
-% https://doi.org/10.2214/ajr.143.5.1101
-% https://doi.org/10.1016/S0963-8695(97)00020-0
-% https://doi.org/10.1093/iob/obad005
-scattering types of xray beams
-poly-SIRT
-Liu2023 spectral CT https://www.nature.com/articles/s41598-023-33264-2#citeas
-% AI density estimation https://doi.org/10.1016/j.media.2021.102061
-#+end_comment
+
+The critique of the studies above is harsh.
+Yet there is a unifying feature and a reason for the highlighted flaws in theses and other studies: they are /output driven/, and fall short of discussing the mechanics of CT imaging.
+As argued above, practitioners often simply assume that structural CT data represents physical density, instead of failing to falsify this claim.
+The result are studies which yield approximate density distributions, yet fail to quantify the inaccuracy and uncertainty of their quantitative data.
+
+The author of this thesis is no exception.
+As the authors of the studies reviewed above, I lacked insight and was driven by good hope when starting the work presented below.
+In consequence, this whole study is one that proves its own irrelevance by falsifying the hypothesis that CT gray values can be converted to physical density.
+/Mea culpa./
+By documenting and discussing these failed attempts in this chapter, I hope to save future researchers from the same fault.
+
+
+** Reductionist Approach
+This study follows up on the idea of using a calibrated CT scan citep:DuPlessis2013.
+Calibration is attempted with cheap, leftover plastic pieces of known material and density, as well as commercial bone mineral calibration phantoms.
+We chose a dissected porcine femur as the object of interest of which we seek to estimate the density distribution, and thereby COM and moment of inertia.
+
+
+#+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was mounted in a PET bottle to fit into the cylindrical scan volume of the FleXCT scanner of the University of Antwerp. The image on the left shows the sample mount, inset is magnified. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
+#+LABEL: fig:femur_scan
+#+ATTR_LATEX: :width 18cm
+[[./figures/femur_scan.pdf]]
+
+
+The hypothesis that CT images are a valid approximation of physical density is already falsified by the theoretical considerations above.
+The following relevant questions remain:
++ Are the cheap plastic parts appropriate calibration options for organic tissue?
++ How far off the true value is the calculated mass moment of inertia, i.e. what is the measurement error?
++ How much do known artifacts contribute to the measurement error?
+
+
+It should be pointed out that preliminary (naïve) results of this study were first presented at the conference of the [[http://mielke-bio.info/falk/posts/26.seb2021][Society of Experimental Biology (SEB) in 2021]], which was one year prior to the citet:Durston2022 study.
+
+
+
 
 
 * Materials and Methods
 ** The Flying Femur
 
+All code used on this project, including python implementations of the mathematical formula's below, can be [[https://git.sr.ht/~falk/flying_femur][found online]] (\nolinkurl{https://git.sr.ht/~falk/flying_femur}).
 
 
 ** Inertial Properties
@@ -199,17 +239,79 @@ Liu2023 spectral CT https://www.nature.com/articles/s41598-023-33264-2#citeas
 [[./figures/inertial_properties.pdf]]
 
 *** Mass
+The mass of a volume element of a rigid body is calculated as the density of that element, multiplied with its volume.
+@@latex:\label{eqn:mass}@@
+#+begin_center
+\[ m_{i} = \rho_{i} V_{i} \]
+#+end_center
+
+Summing up all volume elements will give the total mass of the object.
+
 
 *** Center of Mass
+The center of mass is the mass-weighted average position vector of all volume elements of an object.
+@@latex:\label{eqn:com}@@
+#+begin_center
+\[ COM = \frac{1}{\sum_i m_{i}} \sum\limits_{i \in V} m_{i} r_{i} \]
+#+end_center
 
 *** Mass Moment of Inertia
-resistance to angular acceleration
-Vector formula
-Generalized Steiner
-Conventional Methods
+As stated before, mass moment of inertia is the resistance of an object to angular acceleration.
+It can be calculated for any rigid body (see Fig. \ref{fig:inertials}) via an integral formula over all volume elements citep:WikipediaMOI:
+@@latex:\label{eqn:mmoi}@@
+#+begin_center
+\[ I = \sum\limits_{i \in V} m_{i} \left( \lVert r_{i} \rVert ^2 E_3 - r_{i} \otimes r_{i} \right) \]
+#+end_center
+with the rigid body's volume \(V\) split up into voxels \(i\) which have mass \(m_i\) and position vector \(r_{i}\); \(E_{3}\) is the \(3\times 3\) identity matrix and \(\otimes\) the outer product.
+
+Ideally, this is calculated with respect to the COM as reference point.
+Otherwise, the reference point can be changed by the generalized parallel axis / Steiner's theorem @@latex:\citep[][, p. 245]{Lynch2017}@@.
+@@latex:\label{eqn:steiner}@@
+#+begin_center
+\[ I_{p} = I_{0} + m \cdot \left( p^{T} p E_{3} - p p^{T} \right)  \]
+#+end_center
+with \(p\) being the shift vector.
+
+
+** Scan Artifacts
+To estimate the effect of beam hardening artifact, one of the scanned calibration objects was selected and virtually modified.
+I selected PTFE, because it has the highest density in the data set and is therefore prone to suffering from beam hardening.
+The PTFE cylinder has almost ideal cylindrical shape, and was aligned with the scan rotation axis.
+The object was segmented and cropped out of the whole scan so that the center of the cylinder aligns with the center of the cropped volume.
+
+To quantify the amount of cupping, the cylinder was transformed to cylinder coordinates, and then flattened by averaging along its vertical (long) axis.
+# https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.warp_polar
+
+@@latex:\label{eqn:expfit}@@
+#+begin_center
+\[ I = a+b\cdot e^{k\cdot r} \]
+#+end_center
+By using an exponential regression \eqref{eqn:expfit} to the exponential part of that cylinder profile, one can extract a parameter \(k\) which quantifies the amount of cupping.
+With that \(k\) known, one can rectify the gray values of the scan by applying a correction factor which would push up the exponential line to a flat constant.
+
+Similarly, one can multiply the intensity values of each voxel in the original volume with an exponential of its distance to the center point.
+Depending on the chosen value for \(k\) in that exponential, one can virtually control the amount of beam hardening (Fig. \ref{fig:beam_hardening}).
+
 
 * Results
+** Density Calibration
+
+# /data/04_dynamics/21_flying_femur_revival/02_inertials/02_Regression.py
+
+#+CAPTION: Density calibration of a CT scan.
+#+LABEL: fig:density_calibration
+#+ATTR_LATEX: :width 12cm
+[[./figures/regression.pdf]]
+
+
 ** Issue 1: Beam Hardening
+
+# /data/04_dynamics/21_flying_femur_revival/11_cupping/05_PlotPTFEInertia.py
+#+CAPTION: Beam hardening artifact.
+#+LABEL: fig:beam_hardening
+#+ATTR_LATEX: :width 12cm
+[[./figures/cupping.pdf]]
+
 ** Issue 2: Chemical Composition
 + water streaks on the scan
 ** Issue 3: Marker Artifacts
@@ -234,3 +336,14 @@ tbd.
 # \bibliographystyle{apalike}
 # \bibliography{literature.bib}
 
+
+#+begin_comment
+% https://doi.org/10.1117/12.2595473
+% https://doi.org/10.2214/ajr.143.5.1101
+% https://doi.org/10.1016/S0963-8695(97)00020-0
+% https://doi.org/10.1093/iob/obad005
+scattering types of xray beams
+poly-SIRT
+Liu2023 spectral CT https://www.nature.com/articles/s41598-023-33264-2#citeas
+% AI density estimation https://doi.org/10.1016/j.media.2021.102061
+#+end_comment
