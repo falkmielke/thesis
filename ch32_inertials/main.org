@@ -267,6 +267,35 @@ Those were not calibrated, as described above, with the plastic debris; they con
 The scans serve the falsification of the density acquisition method by comparing known segment- and total weight to the outcome of the CT method.
 
 
+** Scan Parameters
+The scan was performed on a customized Tescan Unitom XL, with the following settings:
+
+#+begin_center
+|------------------+-------------------|
+| voltage          | \(150 kV       \) |
+| power            | \(55 W         \) |
+| current          | \(\approx 360 mA     \) |
+| filter           | \(1.0 mm\ Al   \) |
+| detector field   | \(1920\times 1896 px\) |
+| pixel size       | \(0.15 mm      \) |
+| exposure time    | \(50 ms        \) |
+| averages         | \(3            \) |
+| projections      | \(2879         \) |
+| source-detector  | \(800 mm       \) |
+| source-object    | \(267 mm       \) |
+| binning          | \(none         \) |
+| resolution       | \(50 \mu m       \) |
+| scan duration    | \(10 min       \) |
+| reco value range | \([-0.2, 1.0]  \) |
+|------------------+-------------------|
+#+end_center
+
+The \(1.0 mm\) Aluminium filter plate and the relatively high voltage were chosen to reduce beam hardening and metal bead artifacts (see below).
+Three averages indicate that every projection is the average of three scan images from the same angle, which is a trick to reduce pixel noise.
+Scan geometry was set to give reasonable scan duration and sufficient resolution.
+The reconstruction value range was chosen to cover the entire histogram, excluding the metal beads, which gives best dynamic range on the plastic and organic tissue.
+
+
 ** Inertial Properties
 
 All code used on this project, including python implementations of the mathematical formula's below, can be [[https://git.sr.ht/~falk/flying_femur][found online]] (\nolinkurl{https://git.sr.ht/~falk/flying_femur} and \nolinkurl{http://mielke-bio.info/falk/posts/23.ct_density}).
@@ -294,7 +323,7 @@ Summing up all volume elements will give the total mass of the object.
 \[ \sum_{i} m_{i} = \sum\limits_{i \in V} \rho_{i} V_{i} \]
 #+end_center
 
-The crucial part here is to get \(\rho_{i}\), the density per voxel.
+The crucial part here is to get \(\rho_{i}\), the density per voxel (see below).
 
 
 *** Center of Mass
@@ -325,9 +354,39 @@ Otherwise, the reference point can be changed by the generalized parallel axis /
 with \(p\) being the shift vector.
 
 
+** Density Regression
+The preliminary step in the procedures above is the relation of gray values \(\gamma\) and physical densities \(\rho\).
+This is the search for an (idealized) function \(\gamma = f(\rho )\), which can predict the CT gray value for any given density.
+The inverse, \(\rho = f^{-1}(\gamma )\), can then be used to assign densities to gray values from the scan.
+Several regression functions were attempted, based on a guessed relation of the gray values of the calibration objects.
+
+The regression was performed in Python, namely [[https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html][using the =scipy.optimize.minimize= function]] to minimize the Euclidean difference between observed and fit values with the Nelder-Mead algorithm, tolerance set to \(10^{-16}\) citep:Gao2012.
+Convergence was supported by setting meaningful parameter start values close to the expected outcome.
+
+#+NAME: tab:regressions
+#+ATTR_LATEX: :environment tabular :align lrrr
+#+CAPTION: Density Regression Functions and regression start values.
+#+begin_table
+|-------------+---------------+------------------------------|
+|             | function      | start values                 |
+|-------------+---------------+------------------------------|
+|-------------+---------------+------------------------------|
+| linear      | \(a + b \cdot x\)  | \(a=0.175, b=10^{-4}\)          |
+| exponential | \(a+b\cdot e^{c\cdot x}\) | \(a=0.12, b=0.05, c=0.0015\) |
+| constant    | no regression | /actual density/               |
+|-------------+---------------+------------------------------|
+|-------------+---------------+------------------------------|
+#+end_table
+
+Ideally, all measured points would lie on either of these functions.
+Yet that turns out not to be the case in the actual data.
+Subsets of the calibration objects were selected for the regression to be plausible: one group were air and the plastic parts, which approximate a linear relation; the other group were air, water, and the two bone mineral density phantoms, which seem to follow an exponential relation.
+
+
+
 ** Scan Artifacts
-To estimate the effect of beam hardening artifact, one of the scanned calibration objects was selected and virtually modified.
-I selected PTFE, because it has the highest density in the data set and is therefore prone to suffering from beam hardening.
+To estimate the effect of beam hardening artifact, one of the scanned calibration objects was selected by segmentation and virtually modified.
+I selected PTFE, because it has the highest density in the data set and is therefore most prone to suffering from beam hardening.
 The PTFE cylinder has almost ideal cylindrical shape, and was aligned with the scan rotation axis.
 The object was segmented and cropped out of the whole scan so that the center of the cylinder aligns with the center of the cropped volume.
 
