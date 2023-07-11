@@ -134,6 +134,7 @@ Another group of so-called artifacts might stem from the choice and limitations 
 There are iterative/algebraic and analytical reconstruction methods citep:Gilbert1972,Andersen1984,Feldkamp1984,Geyer2015,Hansen2021, all of which have their specific limitations.
 These algorithms are constantly refined and improved by capable scientists, and specific algorithm variants can already overcome specific limitations @@latex:\citep[e.g.][]{Six2019,Frenkel2022}@@.
 In the future, the question of reconstruction artifacts will rather be one of algorithm choice.
+The most common reconstruction algorithm, used in 99% of the CT service facilities with cone-beam setups, is "filtered backprojection" (FBP, or Feldkamp/Davis/Kress = FDK algorithm).
 
 
 To summarize: scan artifacts, if we want to use that label, are perfectly normal.
@@ -336,6 +337,7 @@ The outcome is the three-by-one position vector of the center of mass (COM).
 \[ COM = \frac{1}{\sum_i m_{i}} \sum\limits_{i \in V} m_{i} r_{i} \]
 #+end_center
 
+
 *** Mass Moment of Inertia
 As stated before, mass moment of inertia is the resistance of an object to angular acceleration.
 It can be calculated for any rigid body (see Fig. \ref{fig:inertials}) via an integral formula over all volume elements citep:WikipediaMOI:
@@ -349,9 +351,15 @@ Ideally, this is calculated with respect to the COM as reference point.
 Otherwise, the reference point can be changed by the generalized parallel axis / Steiner's theorem @@latex:\citep[][, p. 245]{Lynch2017}@@.
 @@latex:\label{eqn:steiner}@@
 #+begin_center
-\[ I_{p} = I_{0} + m \cdot \left( p^{T} p E_{3} - p p^{T} \right)  \]
+\[ I_{p} = I_{0} + m \cdot \left( s^{T} s E_{3} - s s^{T} \right)  \]
 #+end_center
-with \(p\) being the shift vector.
+with \(s\) being the shift vector.
+
+
+It is difficult to get an intuition about Mass Moment of Inertia, but classroom demos can illustrate that this measure depends exclusively on the geometric distribution of mass of an object citep:Lewin801L19,LewinMOI.
+It is independent of the total mass.
+Under controlled experimental conditions, a homogeneous aluminium cylinder will roll down a slope in exactly the same time as a homogeneous lead cylinder of identical form.
+This has implications for interpreting the "mass scaling" results below.
 
 
 ** Density Regression
@@ -361,11 +369,11 @@ The inverse, \(\rho = f^{-1}(\gamma )\), can then be used to assign densities to
 Several regression functions were attempted, based on a guessed relation of the gray values of the calibration objects.
 
 The regression was performed in Python, namely [[https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html][using the =scipy.optimize.minimize= function]] to minimize the Euclidean difference between observed and fit values with the Nelder-Mead algorithm, tolerance set to \(10^{-16}\) citep:Gao2012.
-Convergence was supported by setting meaningful parameter start values close to the expected outcome.
+Convergence was supported by setting meaningful parameter start values close to the expected outcome (Tab. \ref{tab:regressions}).
 
 #+NAME: tab:regressions
-#+ATTR_LATEX: :environment tabular :align lrrr
-#+CAPTION: Density Regression Functions and regression start values.
+#+ATTR_LATEX: :environment tabular :align |l|l|l|
+#+CAPTION: Density Regression Functions and regression start values. The "constant" option refers to assigning each voxel the average, known density, which might be a good approximation for the calculation of mass moment of inertia.
 #+begin_table
 |-------------+---------------+------------------------------|
 |             | function      | start values                 |
@@ -383,9 +391,14 @@ Yet that turns out not to be the case in the actual data.
 Subsets of the calibration objects were selected for the regression to be plausible: one group were air and the plastic parts, which approximate a linear relation; the other group were air, water, and the two bone mineral density phantoms, which seem to follow an exponential relation.
 
 
+One of the options for converting gray values to densities is the "constant" option (Tab. \ref{tab:regressions}).
+This refers to the idea of setting a constant, or uniform, density value for the whole sub-volume of a segment.
+This method requires the weighting of each object; by dividing mass by volume one gets the true (average) density of the whole object.
+Though tautologous for mass calculation, the constant density is used for comparison in the calculation of mass moment of inertia.
+
 
 ** Scan Artifacts
-To estimate the effect of beam hardening artifact, one of the scanned calibration objects was selected by segmentation and virtually modified.
+To estimate the effect of beam hardening artifacts, one of the scanned calibration objects was selected by segmentation and virtually modified.
 I selected PTFE, because it has the highest density in the data set and is therefore most prone to suffering from beam hardening.
 The PTFE cylinder has almost ideal cylindrical shape, and was aligned with the scan rotation axis.
 The object was segmented and cropped out of the whole scan so that the center of the cylinder aligns with the center of the cropped volume.
@@ -401,11 +414,55 @@ By using an exponential regression \eqref{eqn:expfit} to the exponential part of
 With that \(k\) known, one can rectify the gray values of the scan by applying a correction factor which would push up the exponential line to a flat constant.
 
 Similarly, one can multiply the intensity values of each voxel in the original volume with an exponential of its distance to the center point.
-Depending on the chosen value for \(k\) in that exponential, one can virtually control the amount of beam hardening (Fig. \ref{fig:beam_hardening}).
+Depending on the chosen value for \(k\) in that exponential, one can virtually control the amount of beam hardening (Fig. \ref{fig:cupping_methods}).
+
+
+#+CAPTION: Beam hardening artifact simulation. The top view (A) and side view (B) of a PTFE cylinder with beam hardening strength \(k\) virtually set to \(k=0.5\). (C) Line profile of scan gray values along the blue line indicated in panel A shows the typical "cupping". (D) cylinder coordinate transformation of the slice marked by a blue line in panel B gives the gray values along the radial lines \(r\) at angles \(\phi\) as indicated in panel A. (E) Top and side view for different simulated beam hardening strengths \(k\).
+#+LABEL: fig:cupping_methods
+#+ATTR_LATEX: :width 18cm
+[[./figures/cupping_methods.pdf]]
+
+** Error Propagation
+How large a problem are miscalculations of the moment of inertia for calculations of joint moment?
+To evaluate this, one has to consider error propagation with the balance equations \eqref{eqn:moment}.
+The variable \(I\) only enters the balance equations through the dynamic wrench, \(M = I \ddot\theta\).
+This function is linear, so error propagation is quite simple citep:Hughes2010,Normann2016:
+@@latex:\label{eqn:moment}@@
+#+begin_center
+\[\Delta M = \sqrt{\left(\frac{\partial M}{\partial I}\Delta I\right)^2} = \sqrt{\left(\Delta I \ddot\theta\right)^2}\]
+#+end_center
+
+Sensitivity is linear at this level: any percentage of error in \(I\) will directly propagate to the moment calculation.
+
+
+Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, first by inaccuracy in the mass itself (see "regression" above), and second by unceretainty in the COM position and therefore the position vectors \(r_{i}\) of each mass element.
+#+begin_center
+\[ \Delta I = \left \Delta I \right\mid_{m_i} + \left \Delta I \right\mid_{r_i} = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
+#+end_center
+
+The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertainty of the mass elements contribute linearly but are added up; errors in the mass of further away mass elements contribute more to the total error.
+#+begin_center
+\[ \Delta I \mid_{m_i} = \sqrt{\sum\limits_{i}\left(\left( \lVert r_{i} \rVert ^2 E_3 - r_{i} \otimes r_{i} \right)\right)^2 \cdot \Delta m_{i} }\]
+#+end_center
+
+
+The partial derivative with respect to \(r_{i}\) must be added, because \(I\) is usually taken relative to the COM (hence, \(\Delta r_i = \Delta COM\)).
+We know that the choice of reference point for moment of inertia can be adjusted by using generalized Steiner, and so the error in the COM propagates as a Steiner component, equation \eqref{eqn:steiner}, with \(s=\Delta COM\).
+Yet \(\Delta COM\) also depends non-trivially on the relative mass of volume elements, equation \eqref{eqn:com}.
+#+begin_center
+\[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left(-\left(\Delta \sum_i m_{i} \right)^{-2} \sum\limits_{i} r_{i} \cdot m_{i} \right)^2\]
+#+end_center
+This now lines out how the target parameter, \(I\), depends on mass elements \(m_{i}\) in different ways.
+
+
+In practical terms, the expected error can be readily computed by iteratively changing the variables of interest by a percent, to infer how "a percent change" in a parameter effects the result of the calculation.
+This is called *"sensitivity analysis"*.
+By the analytical considerations above, even without exact analytical solutions, we can see that the variables to change are the regression parameters (\(\pm 5\%\) of their value), the COM position \(\pm 5\%\) of femur length, \(0.25 mm\) in each direction), the total mass (\(\pm 5\%\), which are \(0.26 g\)).
+
 
 
 * Results
-** Density Calibration
+** Density Calibration Regression
 
 # /data/04_dynamics/21_flying_femur_revival/02_inertials/02_Regression.py
 
@@ -415,27 +472,112 @@ Depending on the chosen value for \(k\) in that exponential, one can virtually c
 [[./figures/regression.pdf]]
 
 
+** Issue 0: Mass Mismatch and Total Mass Normalization
+
+
 ** Issue 1: Beam Hardening
 
 # /data/04_dynamics/21_flying_femur_revival/11_cupping/05_PlotPTFEInertia.py
-#+CAPTION: Beam hardening artifact.
-#+LABEL: fig:beam_hardening
-#+ATTR_LATEX: :width 12cm
-[[./figures/cupping.pdf]]
+#+CAPTION: Effect of beam hardening on mass moment of inertia. (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B) Calculated mass moments of inertia, unscaled (\(\times\)) and scaled \(\circ\). In this cylinder, \(I_z\) is always larger than \(I_x, I_y\) which are approximately identical. The solid, dark red line indicates the theoretical (true) \(I_z\) of the PTFE cylinder, the dashed red line marks the true value of the other inertial axes. The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the true values. However, this is only true for the unscaled curves; when scaling to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text) the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening due to the normalization.
+#+LABEL: fig:cupping_results
+#+ATTR_LATEX: :width 18cm
+[[./figures/cupping_results.pdf]]
 
-** Issue 2: Chemical Composition
-+ water streaks on the scan
-** Issue 3: Marker Artifacts
-+ helical scanning
+To evaluate what effect beam hardening will have on the calculated mass moment of inertia, we simulated beam hardening on a well described PTFE cylinder within the scan volume.
+
+The only reliable recovery of the true mass moment of inertia (Fig. \ref{fig:cupping_results}B, horizontal lines) is found to be if there is exactly zero cupping.
+This generally holds for homogeneous objects: moment of inertia is determined by the geometric distribution of mass elements around the COM; iff the relative mass of all mass elements are well approximated by the density regression (which is only and exclusively the case in homogeneous objects), and iff cupping is negligible, then we can calculate appropriate \(I\) values.
+However, if the object is non-homogeneous (as a femur), then for example the relative density of marrow and calcified bone are not appropriately covered, and \(I\) will be incorrect.
+Also, if there are *any beam hardening or streak artifacts*, which is non-trivial to remove from FBP reconstructed scans, *the moment of inertia will be incorrect*.
+Attention should also be put on the units of the calculated mass moments of inertia: it is in the order of \(10^{-7} kg m^2\).
+This is small, justifying extra attention to numeric accuracy of computational methods as well as sources of physical inaccuracy (e.g. COM miscalculation).
+Three corollaries:
+(1) mass scaling, which above I suspected to retain density distribution, will produce erroneous moments of inertia.
+(2) Using "constant" regression (i.e. modelling uniform mass distribution) will only produce accurate inertia for homogeneous objects.
+(3) iterative reconstruction methods might partially overcome this issue citep:Six2019, but their application requires prior information and extra work.
+
+With conventional methods, we must conclude that the chance of getting an accurate measurement for mass moment of inertia from conventional CT scans is low, and the potential influence of typical error sources is fatal.
+
+
+
+** Issue 2: Metal Bead Artifacts and Chemical Composition
+
+#+CAPTION: Metal Bead Artifacts, marked with orange arrows. Despite the use of an aluminium filter to harden the x-ray beam, metal beads produce conspicuous, star-shaped streaks on the scan reconstructions. The reason that the center of the metal beads appears black is a clipping setting during image preprocessing.
+#+LABEL: fig:metal_artifacts
+#+ATTR_LATEX: :width 12cm
+[[./figures/metal_artifacts.png]]
+
+Another typical artifact in CT scans are metal bead artifacts (Fig. \ref{metal_artifacts}).
+Metals are chemical elements with overproportionally higher x-ray attenuation than carbohydrate compounds.
+They absorb a large fraction of the incoming radiation, demanding the use of hight energy to avoid shadows arising from missing information in the projections, which can be detrimental to contrast on softer tissue.
+The shadows appear as "streaks" or "starbursts" on CT scans, they complicate segmentation, and are unwanted in XROMM visualizations citep:Brainerd2010.
+As with other artifacts, metal bead artifacts have their source in limitations of the tomographic method (limited dynamic range, rotationally symmetric scan geometry), and might be corrected by appropriate counter-measures.
+Beam hardening reduction by using metal filter plates can improve dynamic range and contrast (at the cost of exposure).
+The use of a helical scan geometry in a cone-beam CT should reduce the length and contrast of streaks, because projections from above or below the bead elevation level will project through the tissue behind the bead.
+
+Though pronounced on metal beads due to their spatial confinement, th problem is not restricted to metal.
+Streak artifacts also appear between multiple regions of dense bone or strongly absorbant solute (i.e. water), especially if two such regions can be behind each other in the projection geometry.
+
+To re-iterate, there are two reasons for these effects.
+The first is a kind of "beam hardening", taken to the extreme: the spectrum of the photon ensemble changes along the projection trajectory, and much more so if x-ray interactions with matter are more numerous.
+The second factor is that they are more numerous in some materials than others (irrespective of density): chemical composition is key.
+
+
+** Sensitivity Analysis
+
+
+#+NAME: tab:sensitivity
+#+ATTR_LATEX: :environment tabular :align |l|l|c|c|c|c|
+#+CAPTION: Sensitivity Analysis of the Mass Moment of Inertia calculations. For reference, the actual femur weighed \(5.271 g\) and had a length of \(46 mm\).
+#+begin_table
+|----------------------+--------------+----------+---------+---------+---------|
+| *parameter*            | *change*       | \(\sum_{i}m_{i}\) | \(I_x\) | \(I_y\) | \(I_z\) |
+|----------------------+--------------+----------+---------+---------+---------|
+|----------------------+--------------+----------+---------+---------+---------|
+| *(reference)*          | none         |          |         |         |         |
+|----------------------+--------------+----------+---------+---------+---------|
+| *regression \(a\)*     | \(+5\%\)     |          |         |         |         |
+| *regression \(b\)*     | \(+5\%\)     |          |         |         |         |
+|----------------------+--------------+----------+---------+---------+---------|
+| *COM \(x\)*            | \(+0.25 mm\) |          |         |         |         |
+| *COM \(y\)*            | \(+0.25 mm\) |          |         |         |         |
+| *COM \(z\)*            | \(+0.25 mm\) |          |         |         |         |
+|----------------------+--------------+----------+---------+---------+---------|
+| *mass \(\sum_{i} m_{i}\)* | \(+0.26 g\)  |          |         |         |         |
+|----------------------+--------------+----------+---------+---------+---------|
+|----------------------+--------------+----------+---------+---------+---------|
+
 
 
 * Discussion
+** Miscalculated Mass
+
+** Intuitive Inertia
 
 ** Which Inertia Component is Relevant?
+movement in vivo
+sensitivity analysis
+
+** Dynamic Images
+
+** Lack of Alternatives
++ pendulum
++ dissection
++ CAD models
 
 * Summary
+At the end of this chapter, it should be clear that the only people using CT images to calculate inertial properties would be Biologists who are agnostic to the basic principles of physics.
+This includes the author.
+Tomographic images depict attenuation, not physical density, and though these are occasionally correlated, they remain fundamentally different properties of matter.
+Above, I discussed potential flaws in the calculation of mass, center of mass, and mass moment of inertia, as well as corner cases in which the calculation might co-incidentally yield appropriate results.
+In all other cases, the calculation will certainly yield wrong results.
+The magnitude of the error is most likely non-negligible, since some axes of inertia in balance equations have very small base magnitude and are therefore susceptible to faults.
 
 
+However, with all that objection put to paper, it must be stated that there is no effective alternative to the use of CT scans.
+There is no "density tomography", and common alternative methods (pendulum, dissection, CAD models) suffer from equally large error margins for other reasons (e.g. measurement inaccuracy, non-static configuration during movements).
+Using attenuation values to calculate densities is about as accurate as setting \(\pi \equiv 3\) in physics classes (a totally valid thing to do, if at the same time setting \(g \equiv 10\)).
+Yet when knowing and avoiding typical pitfalls (beam hardening, metal beads, symmetries), and when keeping track of error magnitudes (e.g. by sensitivity analysis, or Gaussian error propagation), the so-calculated inertial properties might be a just sufficiently accurate approximation of the true values.
 
 
 * Acknowledgements
