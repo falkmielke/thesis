@@ -463,7 +463,6 @@ By the analytical considerations above, even without exact analytical solutions,
 
 * Results
 ** Density Calibration Regression
-
 # /data/04_dynamics/21_flying_femur_revival/02_inertials/02_Regression.py
 
 #+CAPTION: Density calibration of a CT scan.
@@ -473,6 +472,48 @@ By the analytical considerations above, even without exact analytical solutions,
 
 
 ** Issue 0: Mass Mismatch and Total Mass Normalization
+
+
+In a second experiment, a piglet body was CT scanned, virtually segmented, and analogously dissected to see whether the total mass of the virtual segments matches the actual masses.
+Note that this scan was historically performed prior to the density calibration experiments, and thus the only available calibration points were air, water, and two density calibration phantoms.
+Consequently, an exponential regression was used to convert gray values to density.
+
+This virtual density conversion leads to an over-estimation of the mass of the specimen.
+
+
+#+NAME: tab:pigletdissection
+#+ATTR_LATEX: :environment tabular :align |l|c|c|c|
+#+CAPTION: Segment mass verification on an actual piglet specimen. Note that the total mass at euthanasia was measured \(1.125 kg\), a slight loss is expected due to condensation and preservation.
+#+begin_table
+|-----------------+-----------------+------------+------------|
+| *segment*         | *CT segmentation* | *dissection* | *difference* |
+|-----------------+-----------------+------------+------------|
+|-----------------+-----------------+------------+------------|
+| *masses \([kg]\)* |                 |            |            |
+| head            |           0.247 |      0.230 |        +7% |
+| torso+trunk     |           0.666 |      0.580 |       +15% |
+| LF humerus      |           0.033 |      0.027 |       +22% |
+| LF radioulna    |           0.016 |      0.014 |       +14% |
+| LF metacarpal   |           0.009 |      0.006 |       +50% |
+| LF hoof         |           0.006 |      0.005 |       +20% |
+| LH femur        |           0.052 |      0.050 |        +4% |
+| LH tibiafibula  |           0.027 |      0.020 |       +35% |
+| LH metatarsal   |           0.012 |      0.010 |       +20% |
+| LH hoof         |           0.004 |      0.004 |        +0% |
+| RF humerus      |           0.031 |      0.031 |        +0% |
+| RF radioulna    |           0.019 |      0.015 |       +27% |
+| RF metacarpal   |           0.008 |      0.006 |       +33% |
+| RF hoof         |           0.005 |      0.005 |        +0% |
+| RH femur        |           0.050 |      0.053 |        -6% |
+| RH tibiafibula  |           0.023 |      0.021 |       +10% |
+| RH metatarsal   |           0.013 |      0.011 |       +18% |
+| RH hoof         |           0.005 |      0.003 |       +67% |
+|-----------------+-----------------+------------+------------|
+| *TOTAL*           |           *1.226* |      *1.091* |            |
+|-----------------+-----------------+------------+------------|
+|-----------------+-----------------+------------+------------|
+#+TBLFM: @3$4..@-2$4=100*($2-$3)/$3;%+.0f%%
+#+end_table
 
 
 ** Issue 1: Beam Hardening
@@ -502,7 +543,7 @@ With conventional methods, we must conclude that the chance of getting an accura
 
 ** Issue 2: Metal Bead Artifacts and Chemical Composition
 
-#+CAPTION: Metal Bead Artifacts, marked with orange arrows. Despite the use of an aluminium filter to harden the x-ray beam, metal beads produce conspicuous, star-shaped streaks on the scan reconstructions. The reason that the center of the metal beads appears black is a clipping setting during image preprocessing.
+#+CAPTION: Metal Bead Artifacts, marked with orange arrows. Despite the use of an aluminium filter to harden the x-ray beam, metal beads produce conspicuous, star-shaped streaks on the scan reconstructions. The reason that the center of the metal beads appears black is a clipping setting during image preprocessing (intentional, do remove their mass).
 #+LABEL: fig:metal_artifacts
 #+ATTR_LATEX: :width 12cm
 [[./figures/metal_artifacts.png]]
@@ -518,6 +559,7 @@ The use of a helical scan geometry in a cone-beam CT should reduce the length an
 Though pronounced on metal beads due to their spatial confinement, th problem is not restricted to metal.
 Streak artifacts also appear between multiple regions of dense bone or strongly absorbant solute (i.e. water), especially if two such regions can be behind each other in the projection geometry.
 
+
 To re-iterate, there are two reasons for these effects.
 The first is a kind of "beam hardening", taken to the extreme: the spectrum of the photon ensemble changes along the projection trajectory, and much more so if x-ray interactions with matter are more numerous.
 The second factor is that they are more numerous in some materials than others (irrespective of density): chemical composition is key.
@@ -527,25 +569,26 @@ The second factor is that they are more numerous in some materials than others (
 
 
 #+NAME: tab:sensitivity
-#+ATTR_LATEX: :environment tabular :align |l|l|c|c|c|c|
-#+CAPTION: Sensitivity Analysis of the Mass Moment of Inertia calculations. For reference, the actual femur weighed \(5.271 g\) and had a length of \(46 mm\).
+#+ATTR_LATEX: :environment tabular :align |l|l|c|c|c|c|c|
+#+CAPTION: Sensitivity Analysis of the Mass Moment of Inertia calculations. For reference, the actual femur weighed \(5.271 g\), had a length of \(46 mm\), volume of \(4.637\times 10^{-6} m^{3}\) and an average density of \(\approx 1140 kg m^{-3}\).
 #+begin_table
-|----------------------+--------------+----------+---------+---------+---------|
-| *parameter*            | *change*       | \(\sum_{i}m_{i}\) | \(I_x\) | \(I_y\) | \(I_z\) |
-|----------------------+--------------+----------+---------+---------+---------|
-|----------------------+--------------+----------+---------+---------+---------|
-| *(reference)*          | none         |          |         |         |         |
-|----------------------+--------------+----------+---------+---------+---------|
-| *regression \(a\)*     | \(+5\%\)     |          |         |         |         |
-| *regression \(b\)*     | \(+5\%\)     |          |         |         |         |
-|----------------------+--------------+----------+---------+---------+---------|
-| *COM \(x\)*            | \(+0.25 mm\) |          |         |         |         |
-| *COM \(y\)*            | \(+0.25 mm\) |          |         |         |         |
-| *COM \(z\)*            | \(+0.25 mm\) |          |         |         |         |
-|----------------------+--------------+----------+---------+---------+---------|
-| *mass \(\sum_{i} m_{i}\)* | \(+0.26 g\)  |          |         |         |         |
-|----------------------+--------------+----------+---------+---------+---------|
-|----------------------+--------------+----------+---------+---------+---------|
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+| *parameter*            | *change*       | \(\sum_{i}m_{i}\) | \(\Delta COM\) | \(I_x\)      | \(I_y\)      | \(I_z\)      |
+|                      |              |  \([g]\) |  \([px]\) | \([kg m^2]\) | \([kg m^2]\) | \([kg m^2]\) |
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+| *(reference)*          | none         |      6.4 |         0 |              |              |              |
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+| *regression \(a\)*     | \(+5\%\)     |      6.1 |           |              |              |              |
+| *regression \(b\)*     | \(+5\%\)     |      6.1 |           |              |              |              |
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+| *COM \(x\)*            | \(+0.25 mm\) |      6.7 |           |              |              |              |
+| *COM \(y\)*            | \(+0.25 mm\) |      6.4 |           |              |              |              |
+| *COM \(z\)*            | \(+0.25 mm\) |          |           |              |              |              |
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+| *mass \(\sum_{i} m_{i}\)* | \(+0.26 g\)  |          |           |              |              |              |
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
 
 
 
@@ -582,6 +625,7 @@ Yet when knowing and avoiding typical pitfalls (beam hardening, metal beads, sym
 
 * Acknowledgements
 # Joaquim & VisionLab
+# CVG for the most accurate piglet dissection possible
 tbd.
 
 # \pagebreak
