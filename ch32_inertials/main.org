@@ -23,38 +23,39 @@
 * Introduction
 ** Computed Tomography and Density
 Since the advent of x-ray imaging, people are intrigued by the ability to see the inner structure of objects and living creatures (such as the famous hand of Röntgen's wife, "Über eine neue Art von Strahlen", 1895).
-This desire probably increased by the development of computed tomography citep:Beckmann2006,Hounsfield1973, a set of techniques which enable the reconstruction and visualization of three-dimensional structural images.
+This desire even increased by the development of computed tomography citep:Beckmann2006,Hounsfield1973, a set of techniques which enable the reconstruction and visualization of three-dimensional structural images.
 The transmission images obtained via high energy electromagnetic radiation often serve to answer qualitative questions (e.g. whether a bone is fractured, whether there are porosities in asphalt drill cores).
 Quantitative questions are obvious with regard to the shape of a scanned structure (e.g. the size of porosities, the length of a fracture, the shape of a bone).
 However, researchers have been struggling with the quantitative extraction of material properties from Computed Tomography (CT) data.
 The material property of primary interest is physical density; from a given density distribution, the other relevant inertial properties can be calculated.
 
 
-Reseachters have long suggested to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet it was immediately noted that the relation is nothing more than a correlation which only holds under specific circumstances.
-Even these pioneer works acknowledge that there must be discrepancies between known and measured densities, which can be explained by (i) the polychromatic character (source spectrum) of the used radiation, (ii) chemical composition (absorption spectrum), and (iii) scan artifacts.
+Reseachers suggested early on to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet it was immediately noted that the relation is nothing more than a correlation which only holds under specific circumstances.
+Even these pioneer works acknowledge that there must be discrepancies between real and x-ray-derived densities, which can be explained by (i) the polychromatic character (source spectrum) of the used radiation, (ii) chemical composition (absorption spectrum), and (iii) scan artifacts.
 # scattering types,
 These issues demand a detailed explanation, below.
 Notwithstanding this list of known problems, people have repeatedly attempted to extract density and inertial propertes from CT scans @@latex: \citep[][, as well as the present study]{Phillips1997,DuPlessis2013,Durston2022}@@.
 The purpose of this chapter is to explore whether or not (or under which circumstances) CT gray values can be used to estimate density distributions, and thereby mass and other derived inertial properties.
-I will start by giving a brief intro to the CT scanning technology, reviewing similar attempts by others, then introducing a simple experimental setup to measure dynamics of an excised piglet femur, and with that re-attempting the extraction of inertial properties.
+I will start by giving a brief intro to crucial aspects of CT scanning technology, reviewing similar attempts by others, then introducing a simple experimental setup to measure dynamics of an excised piglet femur, and with that re-attempting the extraction of inertial properties.
 
 
 ** Emission and Absorption
 Visible light and x-ray radiation are, to a large degree, analogous.
-The reason is that both are just electromagnetic radiation; they differ in wavelength.
-To understand what is happening with x-ray light during a CT experiment, I will use the analogy of visible light.
+The reason for this is that both are just electromagnetic radiation; they differ in wavelength and thereby energy.
+To illustrate what is happening with x-ray light during a CT experiment, I will use the analogy of visible light.
 
 
 On some military signal flashlights, one can set the light to be white (i.e. bulb spectrum, unfiltered) or filtered either red or green, sometimes a third color.
-Light are photons, and filters let through some of them and prohibit others from passing.
+Light are photons, "elementary particles which are the quantum of the electromagnetic field" ([[https://en.wikipedia.org/wiki/Photon][wikipedia: photon]]).
+Filters let through some of them and prohibit others from passing.
 The same principle holds for party lights or colored window sheets: a light source is placed behind a filter sheet which blocks most colors.
 On the military flashlight, the "white" setting is general purpose, unfiltered, which will let pass the maximum number of photons you can expect from a given bulb.
-Lights are devices which constantly emit photons of a specific variety of wavelengths (colors); we call this variety the "spectrum" (see below).
+"Lights" are devices which constantly emit photons of a specific variety of wavelengths (colors); we call this variety the "spectrum" (see below).
 Put simply, applying a red filter sheet will change the composition of the passing light by blocking all the "non-red" photons.
-Because red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our perceptive system.
+Because red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our visual perceptive system.
 
-Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyl, which is optimized to absorb some non-green (e.g. red) wavelengths of light very well (Fig. \ref{fig:spectrum}, green curve).
-The ensemble of non-absorbed photons appears green to us, which is why leaves appear green to our receptor system.
+Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyll, which is optimized to absorb some non-green (e.g. red) wavelengths of light very well (Fig. \ref{fig:spectrum}, green curve).
+The ensemble of non-absorbed photons appears green to us, which is why leaves generally appear green to our view.
 But leaves only appear green if there is a green content in the incident light!
 Green leaves will look red under red light.
 Contrary to internet myth, the military use case of red flashlight would be an operation which requires as inconspicuous light as possible in a vegetated environment.
@@ -62,7 +63,7 @@ Red light will hardly reflect from gras or bush, and can therefore reduce the ch
 If you need to look for something in a dark forest, and you would like to avoid being seen, use a red flashlight.
 
 
-#+CAPTION: Spectra. The x-axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case the range of visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (\(Hz\)) and photon energy (\(keV\)). The y-axis shows photon occurrence probability, or normalized intensity \(I\), or the intensity difference \(\Delta I\) for the absorption spectrum. Black curve: emission spectrum of a white LED \citep{Tanabe2005}. Green curve: the approximate absorption spectrum of Chlorophyl A \citep{Zscheile1934}. The chlorophyl will hardly get excited by the LED.
+#+CAPTION: Spectra. The x-axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case the range of visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (\(Hz\)) and photon energy (\(keV\)). The y-axis shows photon occurrence probability, or normalized intensity \(I\), or the intensity difference \(\Delta I\) for the absorption spectrum. Black curve: emission spectrum of a white LED \citep{Tanabe2005}. Green curve: the approximate absorption spectrum of chlorophyll A \citep{Zscheile1934}. The chlorophyll will hardly get excited by the LED.
 #+LABEL: fig:spectrum
 #+ATTR_LATEX: :width 13cm
 [[./figures/spectrum.pdf]]
@@ -73,12 +74,13 @@ Red LED's are an alternative to red filters: they immediately produce a spectrum
 We can assess that red LEDs have a different *source spectrum or emission spectrum* than white LEDS or "vintage" (tungsten) light bulbs.
 If the light from a white source is filtered (e.g. by a red sheet of thin plastic), the spectrum is altered.
 A red LED viewed through a green-pass filter (e.g. a leaf) might appear to be "off", when really power is "on", because the majority of photons are absorbed by the filter.
-Light hitting an object will also change its spectral composition, depending on the material's *absorption, transmission, and reflection spectrum*.
+
+In fact, light hitting /any/ object will change its spectral composition, depending on the material's *absorption, transmission, and reflection spectrum*.
 This is also a filtering process: the outgoing light will depend on the incoming spectrum and the material properties of the object.
 Plant leaves will almost entirely absorb a narrow band of red light.
 All that is happening here are interactions of photons and matter.
 Those interactions crucially depend on the energy/frequency/wavelength of the photons, and the energetic/vibrational/resonant molecular properties of the matter.
-A (differential) spectrum is a way to depict this wavelength dependence.
+A (differential) spectrum is a way to depict a wavelength dependence.
 
 
 #+CAPTION: X-Ray emission spectrum. An x-ray source will emit photons with a variety of energies ("colors"). Bremsstrahlung will cover a wide range of photon energies, whereas discrete peaks are caused by specific emission processes in the target material. \citep[taken from ][, creative commons license]{Berger2018fig8}.
@@ -87,13 +89,14 @@ A (differential) spectrum is a way to depict this wavelength dependence.
 [[./figures/Berger2018.png]]
 
 The situation is exactly analogous for x-rays citep:Berger2018,Buzug2008.
-X-rays are also photons, "elementary particles which are the quantum of the electromagnetic field" ([[https://en.wikipedia.org/wiki/Photon][wikipedia: photon]]), just at a different wavelength (range \(10pm - 10nm\)).
-X-ray sources are "targets" of an electron beam, i.e. anodes made of certain metals (Tungsten, Molybdenum, ...).
-When hit by electrons which are evoked by applying voltage (e.g. \(60 kV\)) to the anode and a warmed-up kathode, the target will emit x-ray photons of a specific composition of energies (spectrum, Fig. \ref{fig:xray_emission}).
+X-rays are also photons, just at a different wavelength (range \(10pm - 10nm\)).
+X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...), shot at with an electron beam which is evoked by applying voltage (e.g. \(60 kV\)) to the anode and a warmed-up kathode.
+When hit by electrons, the target will emit x-ray photons of a specific composition of energies (spectrum, Fig. \ref{fig:xray_emission}).
 The source emission is generally *polychromatic*, i.e. consisting of multiple colors/energies (just as the spectra in Figs. \ref{fig:spectrum} and \ref{fig:xray_emission}).
-Most commercial CT scanners have a polychromatic source; the common exception are synchrotrons.
-On the other hand, x-ray detectors are usually monochromatic, integrating intensities over a wide range of wavelengths (in a specific way, described by a detection sensitivity spectrum, which adds another layer of nuisance).
-There is ongoing development on the frontier of "spectral CT" citep:Liu2023, yet resolution (spectral and spatial) are currently still below par.
+Most household CT scanners (in contrast to synchrotrons) have a polychromatic source.
+On the other hand, x-ray detectors usually produce monochrome images, but are not monochromatic!
+They integrate intensities over a wide range of wavelengths (in a specific way that could be described by a detection sensitivity spectrum, which adds another layer of nuisance).
+There is ongoing development on the frontier of "spectral CT" citep:Liu2023, yet resolution (spectral and spatial) are currently still below par (whereas price is not).
 
 
 Once set on their path from within the x-ray source, x-ray photons interact stochastically with matter they encounter on their trajectory.
@@ -101,40 +104,40 @@ Much simplified, they are either absorbed or scattered (Rayleigh scattering, Com
 Absorption is favourable, scattering is not, there can be secondary effects, and the probability of either of these interactions depends on (i) the wavelength (photon energy), (ii) the elementary composition of the material (absorption spectrum; characteristic bands), and (iii) the trajectory of the photon (thickness, angle).
 
 The varying fraction of attenuated photons, measured from multiple incident angles for 3D view, is what enables the extraction of structural information (Lambert-Beer's Law).
-And attenuation is precisely the property which seemingly correlates with physical density: the higher the density, the higher the attenuation.
+And attenuation is precisely the property which is thought to correlate with physical density: the higher the density, the higher the attenuation.
 Or so it seems.
-Yet think of a case in which the specific emission of the source does not match the absorption peaks of the material - remember the example of a white LED not exciting chlorophyl of a green leaf.
-Or the opposite case, a substance with absorption which is congruent to the emission spectrum.
+Yet think of a case in which the specific emission of the source does not match the absorption peaks of the material - remember the example of a white LED not exciting chlorophyll of a green leaf.
+Or the opposite case, a substance with an absorption spectrum which is mostly congruent to the emission spectrum of the source.
 Examples of substances problematic for x-ray are water and formol, because they absorb a broad range of photon energies within the x-ray range.
 
 
 To summarize: both in the visual and x-ray range of electromagnetic radiation, emission and absorption are determined by stochastic interactions of elementary particles.
-Spectra summarize ensemble properties of a given light source or material; differential spectra can capture absorption.
+Spectra summarize ensemble properties of a given light source or material; differential spectra measure relative absorption.
 The filtering properties of matter can be used to acquire images and reconstruct 3D structure, even in the absence of precise spectral information.
 
 
 ** Scan Artifacts
 X-ray images do not always look as we would want them to look.
-We call the unfavorable image features "artifacts".
+The unfavorable image features are commonly called "artifacts".
 In the opinion of the provocative author, there is actually no such thing as CT scanning artifacts.
-The term "artifact" implies that there is an unavoidable error in the measurement, yet instead it can be ascertained that correctly obtained x-ray images are usually accurate.
+The term "artifact" implies that there is an unavoidable "error" in the measurement, yet instead it can be ascertained that correctly obtained x-ray images are highly accurate.
 Any tomographic reconstruction just shows exactly what is measured, convoluted with ideally negligible reconstruction algorithm characteristics.
 
-Some aspects of the measurement might be unfavorable to the observer.
-For example, we speak of a "beam hardening artifact" if absorption in the superficial layers of an objects alter the spectrum of the beam on its trajectory, which will affect the virtual representation of the underlying regions citep:VanGompel2011.
-However, that is just a normal manifestation of the actual physical process (the stochastic interaction of electromagnetic radiation and matter).
-Curiously enough, beam hardening can be minimized by pre-hardening the beam with the use of metal filter plates.
+Acknowledged, some aspects of the measurement might be unfavorable to the observer.
+For example, we speak of a "beam hardening artifact" if absorption in the superficial layers of an objects alter the spectrum of the beam on its trajectory, which will affect the virtual representation of the deeper regions citep:VanGompel2011.
+However, that is just a normal manifestation of the actual physical process (the stochastic interaction of electromagnetic radiation and matter, see above).
+Curiously, beam hardening can be minimized by pre-hardening the beam with the use of metal filter plates.
 Ring artifacts stem from sensitivity variations on the image detector, which are technically inevitable (due to constraints of the physical detection process), but can be rectified reliably citep:Sijbers2004.
 Partial volume effects are caused by finite scan resolution and voxel volume.
-Streak artifacts are caused by limited dynamic range.
-All these should be considered properties of the scan, rather than interpreting them as an annoyance.
+Streak artifacts are caused by limited dynamic range and "photon starvation" (i.e. beam hardening, again).
+All these could be considered properties of the scan, rather than interpreting them as an annoyance.
 
 
 Another group of so-called artifacts might stem from the choice and limitations of the reconstruction algorithm.
 There are iterative/algebraic and analytical reconstruction methods citep:Gilbert1972,Andersen1984,Feldkamp1984,Geyer2015,Hansen2021, all of which have their specific limitations.
-These algorithms are constantly refined and improved by capable scientists, and specific algorithm variants can already overcome specific limitations @@latex:\citep[e.g.][]{Six2019,Frenkel2022}@@.
+These algorithms are constantly refined and improved by capable scientists, and specific algorithm variants can already overcome specific scan limitations @@latex:\citep[e.g.][]{Six2019,Frenkel2022}@@.
 In the future, the question of reconstruction artifacts will rather be one of algorithm choice.
-The most common reconstruction algorithm, used in 99% of the CT service facilities with cone-beam setups, is "filtered backprojection" (FBP, or Feldkamp/Davis/Kress = FDK algorithm).
+The most common reconstruction algorithm, used in a vast majority of the CT service facilities with cone-beam setups, is "filtered backprojection" (FBP, or Feldkamp/Davis/Kress = FDK algorithm).
 
 
 To summarize: scan artifacts, if we want to use that label, are perfectly normal.
@@ -155,25 +158,28 @@ Scientists have repeatedly suggested and attempted to convert CT scan gray value
 
 
 For example, citet:DuPlessis2013 acknowledge difficulties of accuracy and repeatability in extracting density from CT data.
+
 They then average gray values of putatively homogeneous blocks of polymer plastic material, apply linear regression which, as they point out themselves, does not appropriately cover two of the measured data points.
 The latter problem is attributed to differences in chemical composition (without discussing the known composition of the objects).
 The authors then argue that chemical composition can be assessed by performing a dual energy CT scan (DECT), i.e. scanning at two different tube voltages and taking the ratio of gray values.
-Note that this version of DECT is not really "dual energy": the spectrum of energies elicited in a \(60\ kV\) scan is included in the \(230\ kV\) scan; the photons below \(60\ kV\) might even contribute the majority of light in the other scan.
-A better differential would have been a \(230\ kV\) scan with metal filter beam hardening.
-Nevertheless, comparing the calibration line and the DECT ratio results, the putative outliers do not stand out more than other regression elements (especially PTFE puts the original regression in doubt: it is perfectly fit by the calibration regression, is a modest outlier on the DECT ratio, and clearly does have a special chemical composition).
+Note that this version of DECT is not really "dual" energy: the spectrum of energies elicited in a \(60\ kV\) scan is included in the \(230\ kV\) scan; the photons below \(60\ kV\) might even contribute the majority of light in the high energy scan.
+A better differential would have been achieved by incorporating metal filters in the \(230\ kV\) scan.
+Nevertheless, comparing the calibration line and the DECT ratio results, the putative outliers do not stand out more than other regression elements (especially PTFE puts the original regression in doubt: it is perfectly fit by the calibration regression, is a modest outlier on the DECT ratio, and clearly does have a special chemical composition containing fluor).
+
 For a toy pig of unknown plastic material, the authors get higher than actuall mass estimates; they identify chlorine and calcium content as the cause.
 On another unknown sample which is assessed similar enough in chemical composition, they retrieve an accurate prediction.
-The authors do not quantify or report measurement uncertainty which manifests in gray value distributions, suboptimal regression goodness of fit and potentially high regression sensitivity (PTFE), and other sources of variability citep:Macaulay2017.
+The authors do not quantify or report measurement uncertainty which manifests in gray value distributions, suboptimal regression goodness of fit and potentially high regression sensitivity (PTFE), or other sources of variability citep:Macaulay2017.
 Finally, they destroyed a toy pig for the study, which cannot be excused.
 
-To summarize, citet:DuPlessis2013 achieve density prediction in a particular use case (homogeneous, chemically identical objects) and suggest a DECT ratio to assess chemical composition.
+In a nutshell, citet:DuPlessis2013 attempt density prediction in a particular use case (homogeneous, chemically identical objects) and suggest a DECT ratio to assess chemical composition.
 
 
 citet:Durston2022 attempt a huge leap from there and measure inertial properties from frozen cadaver parts, both conventionally and digitally.
 Emphasis: they use whole birds, and their considerable amount of work must be appreciated!
+
 As the authors above, Durston et al. acknowledge the critical assumption of a linear relation between attenuation and density, and consequentially use a linear relation as a conversion from CT scan in Hounsfield Units to actual density.
-They supplement the calibration regressions, which show systematic errors at close look (the regression line lies tilted compared to the majority of relevant calibration objects, because it is biased by the "air" sample point).
-Still, that the linear fit works at all is surprising, given that this study uses tissue phantoms provided for medical CT, all of which will putatively have a slightly different chemical composition.
+They supplement the calibration regressions, which show systematic errors at close look (the regression line lies tilted compared to the majority of relevant calibration objects, because it is biased by the "air" sample point; the authors do not discuss this).
+Still, that the linear fit works at all is surprising, given that this study uses tissue phantoms provided for medical CT, all of which will putatively have a slightly different chemical composition (linearity assumption violated).
 
 To validate their results from CT density estimates, the authors apply two approaches.
 The first is a comparison of virtual and physical dissection, with regard to segment mass measurements.
@@ -181,21 +187,21 @@ The second is a trifilar pendulum "ground truth" for one axis of the mass moment
 There is also a validation of the pendulum method, by applying it to manufactured nylon blocks, yet quantitative error estimates remain vague.
 
 Overall, results of the citet:Durston2022 study remain superficial considering the author's valuable efforts on this project.
-They juxtapose pie charts of segment masses to verify mass distribution.
-They compare the virtually and physically derived dorsoventral moment of inertia, and present what must be considered a clear mismatch, given the lack of meaningful error margins.
+They juxtapose pie charts of segment masses to verify mass distribution, which is far too inaccurate.
+They compare the virtually and physically derived dorsoventral moment of inertia, and present what must be a clear mismatch, considering the lack of meaningful error margins.
 They briefly discuss the influence of partial volume effects on density (which, agreeably, could be a problem with feathers), however that is irrelevant for mass and moment of inertia because volume and density both change if a voxel contains air and tissue.
 They present "moment of inertia distributions" in various ways, i.e. the contribution of each voxel to a COM-centered \(I\), which is of no practical use for an articulated skeletal system (which they confirm themselves, by comparing extended and retracted wing configuration).
 It is a good reproducibility control that their data confirms previous findings of segment masses of some bird species; yet whether the moment of inertia is of any relevance for flying birds of prey who are presumably operating in an air drag regime (light bones and feathers, large wingspans) remains questionable.
 
 
 
-The critique of the studies above is harsh.
-Yet there is a unifying feature and a reason for the highlighted flaws in theses and other studies: they are /output driven/, and fall short of discussing the mechanics of CT imaging.
+This critique of the studies above is harsh, and I apologize for pointing a finger.
+Yet there is a unifying feature and a reason for the highlighted flaws in theses and other studies: they are /output driven/, and fall short of discussing the mechanistics of CT imaging.
 As argued above, practitioners often simply assume that structural CT data represents physical density, instead of failing to falsify this claim.
-The result are studies which yield approximate density distributions, yet fail to quantify the inaccuracy and uncertainty of their quantitative data.
+The results are studies which yield approximate density distributions, yet fail to quantify the inaccuracy and uncertainty of their quantitative data.
 
 The author of this thesis is no exception.
-As the authors of the studies reviewed above, I lacked insight and was driven by good hope when starting the work presented below.
+As the authors of the studies reviewed here, I lacked insight and was driven by good hope when starting the work on the present project.
 In consequence, this whole study is one that proves its own irrelevance by falsifying the hypothesis that CT gray values can be converted to physical density.
 /Mea culpa./
 By documenting and discussing these failed attempts in this chapter, I hope to save future researchers from the same fault.
@@ -204,10 +210,10 @@ By documenting and discussing these failed attempts in this chapter, I hope to s
 ** Reductionist Approach
 This study follows up on the idea of using a calibrated CT scan citep:DuPlessis2013.
 Calibration is attempted with cheap, leftover plastic pieces of known material and density, as well as commercial bone mineral calibration phantoms.
-We chose a dissected porcine femur as the object of interest of which we seek to estimate the density distribution, and thereby COM and moment of inertia.
+We chose a dissected porcine femur as the object of interest of which we seek to estimate the density distribution, and thereby COM and moment of inertia (Fig. \ref{fig:femur_scan}).
+We also attempted to validate the method on dissected animal specimens @@latex:\citep[as][]{Durston2022}@@.
 
-
-#+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was mounted in a PET bottle to fit into the cylindrical scan volume of the FleXCT scanner of the University of Antwerp. The image on the left shows the sample mount, inset is magnified. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
+#+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was mounted in a PET bottle to fit into the cylindrical scan volume of the FleXCT scanner of the University of Antwerp. The image on the left shows the sample mount, magnified on the inset. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
 #+LABEL: fig:femur_scan
 #+ATTR_LATEX: :width 18cm
 [[./figures/femur_scan.pdf]]
@@ -231,47 +237,64 @@ It should be pointed out that preliminary (naïve) results of this study were fi
 # p.68 in PhD notes 2
 As discussed in the previous chapter, the goal of inverse dynamics is to calculate the segment-wise balance of wrenches, thereby elucidating which forces and moments each joint has to handle in a motor task.
 The unit of calculation is therefore a segment.
-In a reductionist approach, the purpose of this experiment is to perform all experiments and calculations on an extracted, single segment.
+In a reductionist approach, the purpose of this experiment is to perform all procedures and calculations on an extracted, single segment.
 
-For this purpose, one femur was excised from a piglet specimen which had been used previously in XROMM\footnote{X-ray Reconstruction Of Moving Morphology citep:Brainerd2010} experiments (see below) and euthanized after succesful completion of the experiment (approved by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium, approval number 2017–25).
-The femur was extracted by carefully disarticulating the right upper hindlimb of a piglet, and removing all meat.
+For this purpose, one femur was excised from a piglet specimen which had been used previously in XROMM\footnote{X-ray Reconstruction Of Moving Morphology citep:Brainerd2010} experiments (see below).
+The animal was euthanized after succesful completion of the experiment.
+All this was approved by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium (approval number 2017–25).
+The femur was extracted by carefully disarticulating the parts of the right hindlimb of the piglet, isolating the femur, and removing all meat.
 
-#+CAPTION: The "flying femur" experiment: an excised piglet femur used for a reduced XROMM experiment. Left: the femur oscillating on a pendulum. Right: a motor moving the femur in a realistic way.
+#+CAPTION: The "flying femur" experiment: an excised piglet femur XROMM experiments as an allegory of reductionism. Left: the femur oscillating on a pendulum. Right: installation with a motor capable of moving the femur in a realistic way.
 #+LABEL: fig:flying_femur_fotos
 #+ATTR_LATEX: :width 18cm
 [[./figures/flying_femur_fotos.png]]
 
 
 The extracted bone underwent the full XROMM procedure (Fig. \ref{fig:flying_femur_fotos}).
-Metal bead markers, \(0.5 mm\) standard soldering balls made out of a lead-tin alloy (\(Sn_{63}Pb_{37}\)), were glued to the extracted bone to simulate the typical XROMM necessity of marked bones.
-Biplanar x-ray video recordings were performed on the University of Antwerp's 3D²YMOX system citep:Nguyen2021,Sanctorum2020, with two recording modes: the femur hung on a long, thin wire pendulum (appearing on camera to be "flying"), and rotated by a motor.
-After the experiment, the femur was subjected to a calibrated micro-CT scan at a local micro-CT facility.
-Plastic parts for calipration were donated by the mechanical workshop of the university, covering a range of physical density from polypropylene (PP, \(916 \frac{kg}{m^3}\)) to Polytetrafluoroethylene (PP, \(2210 \frac{kg}{m^3}\); see overview table in the Results section).
-In addition to the plastic debris, two professional calibration phantoms were included in the scan.
+Metal bead markers, \(0.5 mm\) standard soldering balls made out of a lead-tin alloy (\(Sn_{63}Pb_{37}\)), were glued to the extracted bone to simulate the typical XROMM necessity of marked bones and facilitate video digitization.
+Biplanar x-ray video recordings were performed on the University of Antwerp's 3D²YMOX system citep:Nguyen2021,Sanctorum2020, with two recording modes.
+In one mode, the femur hung on a long, thin wire pendulum (appearing on camera to be "flying").
+In a second mode, the bone was rotated realistically by a motor to which it was attached with an ingenious, radiotranslucent, custom-made plastic clamp.
+
+After the XROMM experiment, the femur was subjected to a calibrated micro-CT scan at a local micro-CT facility.
+Plastic parts for calibration were donated by the mechanical workshop of the university (who thought it was worthless waste), covering a range of physical density from polypropylene (PP, \(916 \frac{kg}{m^3}\)) to Polytetrafluoroethylene (PP, \(2210 \frac{kg}{m^3}\)).
+# ; see overview table in the Results section).
+In addition to the plastic debris, two professional calibration phantoms (Bruker) were included in the scan.
 Those are hydroxyapathite cylinders, immersed in water over night, with a diameter of about half a centimeter and a length of a centimeter.
-They calibrate bone /mineral/ density of \(0.25\ \frac{kg}{m^3}\) and \(0.75\ \frac{kg}{m^3}\), and they have a /physical/ density of \(1254\ \frac{kg}{m^3}\) and \(1485\ \frac{kg}{m^3}\), measured by dividing the weight (measured with a fine scale) and the volume (from CT scan).
+They calibrate bone /mineral/ density of \(0.25\ \frac{kg}{m^3}\) and \(0.75\ \frac{kg}{m^3}\), and they have a /physical/ density of \(1254\ \frac{kg}{m^3}\) and \(1485\ \frac{kg}{m^3}\).
+The latter was measured by dividing the weight (measured with a fine scale) and the volume (from CT scan), after the author had found out that those are different quantities.
 Air and tap water volumes in the scan have known densities and complete the calibration series.
 
 
 Outcomes of the "flying femur" experiment are twofold.
-Firstly, this provides a test case as a reference for actual XROMM, just with simpler calculations, but including an "order of magnitude" estimate of the moments of forces required to move the bone (motor experiment).
+Firstly, this provides a test case as a reference for actual XROMM, just with simpler calculations, but including an "order of magnitude" estimate of the moments and forces required to move the bone (motor experiment).
 Secondly, the validity of the calibrated CT method for extracting inertial properties is to be evaluated.
 
 
 ** Piglet Data
-The femur was part of a bigger whole set of experiments.
-That project involved newborn piglets reared temporarily at the veterinary facilities of the university, and subjected to XROMM recording sessions.
-Experiments were approved by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium, approval number 2017–25.
+The femur was part of an animal, and thus also part of a bigger whole set of experiments.
+That project involved newborn piglets reared temporarily at the veterinary facilities of the University of Antwerp, and subjected to XROMM recording sessions.
+Experiments were approved by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium (approval number 2017–25) and performed in June and July 2019.
 
 The part of these experiment relevant for this chapter are the CT scans.
-Those were not calibrated, as described above, with the plastic debris; they contained only air, water, and the bone mineral density phantoms.
-The scans serve the falsification of the density acquisition method by comparing known segment- and total weight to the outcome of the CT method.
+Those were not calibrated with the full array plastic debris; they contained only air, water, and the bone mineral density phantoms.
+One of the piglet scans was chosen for the validation of the density acquisition method by comparing known segment- and total weight to the outcome of the CT method.
+For this purpose, the animal was dissected both physically and virtually (segmentation, Fig. \ref{fig:piglet_segmentation}) and the results compared.
+Segments were weighted individually on a precision scale.
+Virtual segments were processed with the density regression procedure (see below) to compute segment-wise masses.
+
+#+CAPTION: Virtual dissection (segmentation) of a piglet CT scan. Example slice.
+#+LABEL: fig:piglet_segmentation
+#+ATTR_LATEX: :width 12cm
+[[./figures/virtual_dissection.png]]
 
 
 ** Scan Parameters
-The scan was performed on a customized Tescan Unitom XL, with the following settings:
 
-#+begin_center
+#+NAME: tab:ct_settings
+#+ATTR_LATEX: :environment tabular :align |l|c|
+#+CAPTION: CT scan settings for the calibrated femur scan.
+#+begin_table
 |------------------+-------------------|
 | voltage          | \(150 kV       \) |
 | power            | \(55 W         \) |
@@ -289,30 +312,37 @@ The scan was performed on a customized Tescan Unitom XL, with the following sett
 | scan duration    | \(10 min       \) |
 | reco value range | \([-0.2, 1.0]  \) |
 |------------------+-------------------|
-#+end_center
+#+end_table
 
+The scan was performed on a customized Tescan Unitom XL, with appropriate settings (Tab. \ref{tab:ct_settings}).
 The \(1.0 mm\) Aluminium filter plate and the relatively high voltage were chosen to reduce beam hardening and metal bead artifacts (see below).
-Three averages indicate that every projection is the average of three scan images from the same angle, which is a trick to reduce pixel noise.
+Three averages indicate that every projection is the average of three scan images from the same angle, which is a common trick to reduce pixel noise.
 Scan geometry was set to give reasonable scan duration and sufficient resolution.
 The reconstruction value range was chosen to cover the entire histogram, excluding the metal beads, which gives best dynamic range on the plastic and organic tissue.
+
+
+The piglet scans for the second experiment were performed at a different facility and with slightly different settings.
+Piglets were scanned in frozen state and in bags of two individuals at a time, to save time and cost.
+Air, water, and the bone mineral density phantoms were available for calibration in these scans.
+Resolution was lower, but exposure settings were comparable to the ones on the femur experiment.
 
 
 ** Inertial Properties
 
 All code used on this project, including python implementations of the mathematical formula's below, can be [[https://git.sr.ht/~falk/flying_femur][found online]] (\nolinkurl{https://git.sr.ht/~falk/flying_femur} and \nolinkurl{http://mielke-bio.info/falk/posts/23.ct_density}).
 
-#+CAPTION: Calculation of inertial properties of a limb segment (femur) from CT scans. CT scans are 3D images, consisting of voxels (cubes) each of which is associated with a gray value. If these could be associated with physical density, it would be possible to calculate the center of mass (COM) and other inertial properties. In this procedure, voxels are treated as little mass elements \(m_{i}\), which are at a given vector position \(r_{i}\) from an arbitrary CT origin. The procedure might involve segmentation of the segment of interest.
+#+CAPTION: Calculation of inertial properties of a limb segment (femur) from CT scans. CT scans are 3D images, consisting of voxels (cubes) each of which is associated with a gray value. If these could be associated with physical density, it would be possible to calculate the mass, center of mass (COM) and mass moment of inertia. In this procedure, voxels are treated as little mass elements \(m_{i}\), which are at a given vector position \(r_{i}\) from an arbitrary CT origin. The procedure might involve segmentation of the scan to isolate the volume of interest.
 #+LABEL: fig:inertials
 #+ATTR_LATEX: :width 8cm
 [[./figures/inertial_properties.pdf]]
 
 *** CT Segmentation
 A preliminary step to calculate inertial properties from CT scans is the segmentation of the scan.
-Segmentation is the separation of the "relevant" and "irrelevant" sub-volumes of the scan, in this case the bone and the surrounding air or background.
-More generally, limb segments which are treated as a unit have are labeled in dedicated software (e.g. 3D Slicer) with a kind of "color brush" or "magic wand" tool; thresholding of grey values and other tricks may simplify the procedure in certain situations.
+Segmentation is the separation of the "relevant" and "irrelevant" sub-volumes within the image stack, in this case the bone and the surrounding air or background.
+More generally, limb segments which are treated as a unit have are labeled in dedicated software (e.g. [[https://www.slicer.org][3D Slicer]]) with a kind of "color brush" or "magic wand" tool; thresholding of grey values and other tricks may simplify the procedure in certain situations.
 The outcome of this procedure is a 3D boolean mask which can be used to identify the voxels in the scan which are associated with the bone of interest.
 
-This step might seem trivial, and indeed it is.
+This step might seem trivial, time consuming, yet necessary, and indeed it is.
 Of course, if e.g. the mass of a bone is to be calculated, one intends to sum up the mass of only the bone, excluding the mass of the surrounding air or support material.
 
 
@@ -324,12 +354,12 @@ Summing up all volume elements will give the total mass of the object.
 \[ \sum_{i} m_{i} = \sum\limits_{i \in V} \rho_{i} V_{i} \]
 #+end_center
 
-The crucial part here is to get \(\rho_{i}\), the density per voxel (see below).
+The crucial part here is to get \(\rho_{i}\), the density per voxel, which we attempt via a regression (see below).
 
 
 *** Center of Mass
 The center of mass is the mass-weighted average position vector of all volume elements of an object.
-Mass \(m_{i}\)is a scalar, the position vector \(r_{i}\) is a three-by-one vector, and their product is summed up for all voxels of the segmented bone.
+For each volume element \(i\), mass \(m_{i}\) is a scalar, the position vector \(r_{i}\) is a three-by-one vector, and their product is summed up for all voxels of the segmented bone.
 The result is normalized by the total mass.
 The outcome is the three-by-one position vector of the center of mass (COM).
 @@latex:\label{eqn:com}@@
@@ -347,33 +377,33 @@ It can be calculated for any rigid body (see Fig. \ref{fig:inertials}) via an in
 #+end_center
 with the rigid body's volume \(V\) split up into voxels \(i\) which have mass \(m_i\) and position vector \(r_{i}\); \(E_{3}\) is the \(3\times 3\) identity matrix and \(\otimes\) the outer product.
 
-Ideally, this is calculated with respect to the COM as reference point.
+Initially, this is always calculated with respect to the COM as reference point.
 Otherwise, the reference point can be changed by the generalized parallel axis / Steiner's theorem @@latex:\citep[][, p. 245]{Lynch2017}@@.
 @@latex:\label{eqn:steiner}@@
 #+begin_center
 \[ I_{p} = I_{0} + m \cdot \left( s^{T} s E_{3} - s s^{T} \right)  \]
 #+end_center
-with \(s\) being the shift vector.
+with \(s\) being the shift vector connecting the original and target points.
 
 
 It is difficult to get an intuition about Mass Moment of Inertia, but classroom demos can illustrate that this measure depends exclusively on the geometric distribution of mass of an object citep:Lewin801L19,LewinMOI.
-It is independent of the total mass.
+For symmetrical objects, it is independent of the total mass.
 Under controlled experimental conditions, a homogeneous aluminium cylinder will roll down a slope in exactly the same time as a homogeneous lead cylinder of identical form.
 This has implications for interpreting the "mass scaling" results below.
 
 
 ** Density Regression
-The preliminary step in the procedures above is the relation of gray values \(\gamma\) and physical densities \(\rho\).
+The critical step in the procedures above is the relation of gray values \(\gamma\) and physical densities \(\rho\).
 This is the search for an (idealized) function \(\gamma = f(\rho )\), which can predict the CT gray value for any given density.
 The inverse, \(\rho = f^{-1}(\gamma )\), can then be used to assign densities to gray values from the scan.
-Several regression functions were attempted, based on a guessed relation of the gray values of the calibration objects.
+Several regression functions were attempted, based on a guessed relation of the observed gray values of the calibration objects.
 
 The regression was performed in Python, namely [[https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html][using the =scipy.optimize.minimize= function]] to minimize the Euclidean difference between observed and fit values with the Nelder-Mead algorithm, tolerance set to \(10^{-16}\) citep:Gao2012.
 Convergence was supported by setting meaningful parameter start values close to the expected outcome (Tab. \ref{tab:regressions}).
 
 #+NAME: tab:regressions
 #+ATTR_LATEX: :environment tabular :align |l|l|l|
-#+CAPTION: Density Regression Functions and regression start values. The "constant" option refers to assigning each voxel the average, known density, which might be a good approximation for the calculation of mass moment of inertia.
+#+CAPTION: Density Regression Functions and regression start values.
 #+begin_table
 |-------------+---------------+------------------------------|
 |             | function      | start values                 |
@@ -381,7 +411,6 @@ Convergence was supported by setting meaningful parameter start values close to 
 |-------------+---------------+------------------------------|
 | linear      | \(a + b \cdot x\)  | \(a=0.175, b=10^{-4}\)          |
 | exponential | \(a+b\cdot e^{c\cdot x}\) | \(a=0.12, b=0.05, c=0.0015\) |
-| constant    | no regression | /actual density/               |
 |-------------+---------------+------------------------------|
 |-------------+---------------+------------------------------|
 #+end_table
@@ -391,10 +420,13 @@ Yet that turns out not to be the case in the actual data.
 Subsets of the calibration objects were selected for the regression to be plausible: one group were air and the plastic parts, which approximate a linear relation; the other group were air, water, and the two bone mineral density phantoms, which seem to follow an exponential relation.
 
 
+#+begin_comment
+# The "constant" option refers to assigning each voxel the average, known density, which might be a good approximation for the calculation of mass moment of inertia.
 One of the options for converting gray values to densities is the "constant" option (Tab. \ref{tab:regressions}).
 This refers to the idea of setting a constant, or uniform, density value for the whole sub-volume of a segment.
 This method requires the weighting of each object; by dividing mass by volume one gets the true (average) density of the whole object.
 Though tautologous for mass calculation, the constant density is used for comparison in the calculation of mass moment of inertia.
+#+end_comment
 
 
 ** Scan Artifacts
@@ -403,14 +435,14 @@ I selected PTFE, because it has the highest density in the data set and is there
 The PTFE cylinder has almost ideal cylindrical shape, and was aligned with the scan rotation axis.
 The object was segmented and cropped out of the whole scan so that the center of the cylinder aligns with the center of the cropped volume.
 
-To quantify the amount of cupping, the cylinder was transformed to cylinder coordinates, and then flattened by averaging along its vertical (long) axis.
+To quantify the amount of cupping, the cylinder was transformed to cylinder coordinates (scikit image/transform/warp polar, \nolinkurl{https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.warp_polar}), and then flattened by averaging along its vertical (long) axis.
 # https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.warp_polar
 
 @@latex:\label{eqn:expfit}@@
 #+begin_center
 \[ I = a+b\cdot e^{k\cdot r} \]
 #+end_center
-By using an exponential regression \eqref{eqn:expfit} to the exponential part of that cylinder profile, one can extract a parameter \(k\) which quantifies the amount of cupping.
+By using an exponential regression \eqref{eqn:expfit} to the exponential part of that cylinder profile, one can extract a parameter \(k\) which quantifies the amount of cupping (\(k\) as in the Dutch word "kopje").
 With that \(k\) known, one can rectify the gray values of the scan by applying a correction factor which would push up the exponential line to a flat constant.
 
 Similarly, one can multiply the intensity values of each voxel in the original volume with an exponential of its distance to the center point.
@@ -422,6 +454,7 @@ Depending on the chosen value for \(k\) in that exponential, one can virtually c
 #+ATTR_LATEX: :width 18cm
 [[./figures/cupping_methods.pdf]]
 
+
 ** Error Propagation
 How large a problem are miscalculations of the moment of inertia for calculations of joint moment?
 To evaluate this, one has to consider error propagation with the balance equations \eqref{eqn:moment}.
@@ -432,32 +465,32 @@ This function is linear, so error propagation is quite simple citep:Hughes2010,N
 \[\Delta M = \sqrt{\left(\frac{\partial M}{\partial I}\Delta I\right)^2} = \sqrt{\left(\Delta I \ddot\theta\right)^2}\]
 #+end_center
 
-Sensitivity is linear at this level: any percentage of error in \(I\) will directly propagate to the moment calculation.
+Sensitivity is linear at this level: any percentage of measurement inaccuracy in \(I\) will directly propagate to the joint moment calculation.
 
 
-Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, first by inaccuracy in the mass itself (see "regression" above), and second by unceretainty in the COM position and therefore the position vectors \(r_{i}\) of each mass element.
+Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, by inaccuracy in the mass itself (regression), and by unceretainty in the COM position and therefore the position vectors \(r_{i}\) of each mass element.
 #+begin_center
 \[ \Delta I = \left \Delta I \right\mid_{m_i} + \left \Delta I \right\mid_{r_i} = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
 #+end_center
 
-The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertainty of the mass elements contribute linearly but are added up; errors in the mass of further away mass elements contribute more to the total error.
+The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertainty of the mass elements contribute linearly but are added up; errors in the mass of further away mass elements contribute more to the total error of the moment of inertia.
 #+begin_center
 \[ \Delta I \mid_{m_i} = \sqrt{\sum\limits_{i}\left(\left( \lVert r_{i} \rVert ^2 E_3 - r_{i} \otimes r_{i} \right)\right)^2 \cdot \Delta m_{i} }\]
 #+end_center
 
 
-The partial derivative with respect to \(r_{i}\) must be added, because \(I\) is usually taken relative to the COM (hence, \(\Delta r_i = \Delta COM\)).
+The partial derivative with respect to \(r_{i}\) must be added, because \(I\) is taken relative to the COM (hence, \(\Delta r_i = \Delta COM\)).
 We know that the choice of reference point for moment of inertia can be adjusted by using generalized Steiner, and so the error in the COM propagates as a Steiner component, equation \eqref{eqn:steiner}, with \(s=\Delta COM\).
 Yet \(\Delta COM\) also depends non-trivially on the relative mass of volume elements, equation \eqref{eqn:com}.
 #+begin_center
 \[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left(-\left(\Delta \sum_i m_{i} \right)^{-2} \sum\limits_{i} r_{i} \cdot m_{i} \right)^2\]
 #+end_center
-This now lines out how the target parameter, \(I\), depends on mass elements \(m_{i}\) in different ways.
+This last equation now lines out how the target parameter, \(I\), depends on mass elements \(m_{i}\) in different ways.
 
 
 In practical terms, the expected error can be readily computed by iteratively changing the variables of interest by a percent, to infer how "a percent change" in a parameter effects the result of the calculation.
 This is called *"sensitivity analysis"*.
-By the analytical considerations above, even without exact analytical solutions, we can see that the variables to change are the regression parameters (\(\pm 5\%\) of their value), the COM position \(\pm 5\%\) of femur length, \(0.25 mm\) in each direction), the total mass (\(\pm 5\%\), which are \(0.26 g\)).
+By the analytical considerations above, even without exact analytical solutions, we can see that the variables to change are the regression parameters (\(\pm 5\%\) of their value), the COM position \(\pm 5\%\) of femur length, \(0.25 mm\) in each direction), and the total mass (\(\pm 5\%\), which are \(0.26 g\)).
 
 
 
@@ -465,20 +498,46 @@ By the analytical considerations above, even without exact analytical solutions,
 ** Density Calibration Regression
 # /data/04_dynamics/21_flying_femur_revival/02_inertials/02_Regression.py
 
-#+CAPTION: Density calibration of a CT scan.
+#+CAPTION: Density calibration of a CT scan. The polymer materials show a linear relation between density \(\rho\) and CT gray value \(\gamma\) (exception: PVC, excluded from regression), whereas the positions of BMD phantoms (ld: low density; hd: high density) implies an exponential relation. Violins illustrate the distribution of gray values, yet each object in the scan is associated with exactly one true (average) density.
 #+LABEL: fig:density_calibration
-#+ATTR_LATEX: :width 12cm
+#+ATTR_LATEX: :width 16cm
 [[./figures/regression.pdf]]
+
+To establish a transform function which can convert CT gray values \(\gamma\) to physical density \(\rho\) and back, we compared different regression functions which fit the observed gray values of different polymer materials of known densities (Fig. \ref{fig:density_calibration}).
+
+The random plastic parts obtained from the workshop have known densities, and plotting \(\gamma\) against \(\rho\) most of them show a linear relation.
+The exception is PVC, which was therefore excluded from the regression (whether it was truly PVC, or a mislabeled different polymer, cannot be assessed retrospectively).
+Bone mineral density (BMD) phantoms and water do not fall on that line.
+Their gray values imply an exponential relation of \(\gamma\) and \(\rho\).
+Regression was performed by minimizing least square difference of observations and the target function.
+Both the linear and exponential function can be inverted.
+The femur of unknown density distribution lies right between the two regression lines, but spans a large range of gray values and densities because of its heterogeneous composition (marrow, cavities, muscle tissue, calcified bone, metal markers and glue).
+
+With the regression outcome, it is possible to convert any voxel gray value to densities, which applies for example to the femur.
 
 
 ** Issue 0: Mass Mismatch and Total Mass Normalization
 
+To confirm the outcome of the regressions above, we compared the actual mass of the femur (which is \(5.271 g\)) to the outcome of the digital measurement.
+
+As seen in the regression (Fig. \ref{fig:density_calibration}), the majority of femur voxels have a gray value which falls right in between the two regression lines.
+This also reflects in the calculated outcomes.
+With the linear regression reported above, the femur mass is calculated to weigh \(6.38 g\) (\(+21 \%\)).
+The exponential regression yields a lower than actual mass (\(4.96 g\), \(-29 \%\)).
+Though it appears that the correct regression would lie somewhere between the exponential and linear attempt, there is no data or theoretical justification supporting any intermediate hypothesis; there is no reason to think that all biological tissues generally fall in between the presented cases.
+
+We conclude that, at least for a femur, the regression method is not accurate.
+
+
+To exclude that problems arose from the composition of this isolated bone, we applied the regression method to more complex data.
 
 In a second experiment, a piglet body was CT scanned, virtually segmented, and analogously dissected to see whether the total mass of the virtual segments matches the actual masses.
-Note that this scan was historically performed prior to the density calibration experiments, and thus the only available calibration points were air, water, and two density calibration phantoms.
+This scan was performed at a different facility and prior to the density calibration experiments, and thus the only available calibration points were air, water, and two density calibration phantoms.
 Consequently, an exponential regression was used to convert gray values to density.
+Although an exponential regression was used, this virtual density conversion leads to a considerable over-estimation of the mass of most of the segments, and the specimen total (as opposed to the under-estimation in case of the femur exponential regression).
 
-This virtual density conversion leads to an over-estimation of the mass of the specimen.
+This result once again highlights how erratic the digital density conversion is.
+
 
 
 #+NAME: tab:pigletdissection
@@ -567,35 +626,54 @@ The second factor is that they are more numerous in some materials than others (
 
 ** Sensitivity Analysis
 
-
 #+NAME: tab:sensitivity
 #+ATTR_LATEX: :environment tabular :align |l|l|c|c|c|c|c|
 #+CAPTION: Sensitivity Analysis of the Mass Moment of Inertia calculations. For reference, the actual femur weighed \(5.271 g\), had a length of \(46 mm\), volume of \(4.637\times 10^{-6} m^{3}\) and an average density of \(\approx 1140 kg m^{-3}\).
 #+begin_table
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
-| *parameter*            | *change*       | \(\sum_{i}m_{i}\) | \(\Delta COM\) | \(I_x\)      | \(I_y\)      | \(I_z\)      |
-|                      |              |  \([g]\) |  \([px]\) | \([kg m^2]\) | \([kg m^2]\) | \([kg m^2]\) |
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
-| *(reference)*          | none         |      6.4 |         0 |              |              |              |
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
-| *regression \(a\)*     | \(+5\%\)     |      6.1 |           |              |              |              |
-| *regression \(b\)*     | \(+5\%\)     |      6.1 |           |              |              |              |
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
-| *COM \(x\)*            | \(+0.25 mm\) |      6.7 |           |              |              |              |
-| *COM \(y\)*            | \(+0.25 mm\) |      6.4 |           |              |              |              |
-| *COM \(z\)*            | \(+0.25 mm\) |          |           |              |              |              |
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
-| *mass \(\sum_{i} m_{i}\)* | \(+0.26 g\)  |          |           |              |              |              |
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
-|----------------------+--------------+----------+-----------+--------------+--------------+--------------|
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *parameter*              | *change*      | *\(\sum_{i}m_{i}\)* | *\(\Delta COM\)* |          *\(I_{xx}\)* |          *\(I_{yy}\)* |          *\(I_{zz}\)* |
+|                        |             |        \([g]\) |  \([px]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) |
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *(reference)*            | none        |           6.38 |         0 |                0.52 |                1.36 |                1.67 |
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *regression \(a\)*       | \(+5\%\)    |           6.12 |        <1 |                0.50 |                1.31 |                1.60 |
+| *regression \(b\)*       | \(+5\%\)    |           6.07 |         0 |                0.49 |                1.30 |                1.59 |
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *COM \(x\mid y \mid z\)* | \(+2.5 mm\) |           6.38 |        50 |                0.52 |                1.36 |                1.67 |
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *mass \(\sum_{i} m_{i}\)*   | \(+0.26 g\) |           6.70 |         0 |                0.55 |                1.43 |                1.75 |
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *regression type*        | expon.      |           4.96 |         5 |                0.42 |                1.09 |                1.34 |
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
 
+
+To put all the aforementioned issues into perspective, we calculated how a change in one parameter affects the outcome of the calculation of inertial properties (Tab. \ref{tab:sensitivity}).
+
+Moderate changes in the density calibration regression directly influence the mass, and thereby the moment of inertia; even the COM is mildly affected.
+The effect on \(I\) is in the order of \(7-8\%\).
+Shifting the COM alone does not affect inertial parameters, which is expected.
+However, this does not incorporate errors in an inverse dynamics workflow, where a COM shift will translate to a joint wrench difference according to the Steiner law.
+Adjusting the mass expectably has the same effect as a change in regression parameters, and a \(5\%\) mass increase causes a \(\Delta I\) of more than \(8\%\).
+Finally, the exponential regression leads to a moderate shift in COM (\(0.25 mm\)), but a considerable underestimation of mass (\(-29 \%\)) and moment of inertia (\(-32 \%\)).
+
+These simulations confirm that moment of inertia crucially depends on the mass that is assigned to each voxel in the CT data set.
 
 
 * Discussion
 ** Miscalculated Mass
+In this chapter, I challenge the common misperception that structural information from CT images can be easily converted to a density distribution.
+
+(i) the polychromatic character (source spectrum) of the used radiation, (ii) chemical composition (absorption spectrum), and (iii) scan artifacts
+
++ Are the cheap plastic parts appropriate calibration options for organic tissue?
++ How far off the true value is the calculated mass moment of inertia, i.e. what is the measurement error?
++ How much do known artifacts contribute to the measurement error?
 
 ** Intuitive Inertia
+mass scaling?
+
 
 ** Which Inertia Component is Relevant?
 movement in vivo
@@ -624,8 +702,11 @@ Yet when knowing and avoiding typical pitfalls (beam hardening, metal beads, sym
 
 
 * Acknowledgements
+If I interchanged "we" and "I" in the text above, this indicates that a certain part of the project was supported by the following fabulous people.
 # Joaquim & VisionLab
+# Jonathan Brecko / naturalscience and Björn De Samber / FleXCT for scans
 # CVG for the most accurate piglet dissection possible
+# JS for motor and clamp construction and general support
 tbd.
 
 # \pagebreak
