@@ -513,36 +513,37 @@ Regression was performed by minimizing least square difference of observations a
 Both the linear and exponential function can be inverted.
 The femur of unknown density distribution lies right between the two regression lines, but spans a large range of gray values and densities because of its heterogeneous composition (marrow, cavities, muscle tissue, calcified bone, metal markers and glue).
 
-With the regression outcome, it is possible to convert any voxel gray value to densities, which applies for example to the femur.
+With the regression outcome, it is technically possible to convert any voxel gray value to putative density values, which applies for example to the femur.
 
 
 ** Issue 0: Mass Mismatch and Total Mass Normalization
 
-To confirm the outcome of the regressions above, we compared the actual mass of the femur (which is \(5.271 g\)) to the outcome of the digital measurement.
+To confirm the outcome of the regressions above, we compared the actual mass of the femur (which is \(5.271 g\)) to the outcome of the digital approximation.
 
 As seen in the regression (Fig. \ref{fig:density_calibration}), the majority of femur voxels have a gray value which falls right in between the two regression lines.
 This also reflects in the calculated outcomes.
-With the linear regression reported above, the femur mass is calculated to weigh \(6.38 g\) (\(+21 \%\)).
+With the linear regression, the femur mass is calculated to be \(6.38 g\) (\(+21 \%\)).
 The exponential regression yields a lower than actual mass (\(4.96 g\), \(-29 \%\)).
-Though it appears that the correct regression would lie somewhere between the exponential and linear attempt, there is no data or theoretical justification supporting any intermediate hypothesis; there is no reason to think that all biological tissues generally fall in between the presented cases.
+Though it appears that the correct regression would lie somewhere between the exponential and linear attempt, there is no data, nor theoretical justification supporting any intermediate hypothesis.
+Neither is there any reason to think that all biological tissues generally fall in between the presented cases.
 
 We conclude that, at least for a femur, the regression method is not accurate.
 
 
-To exclude that problems arose from the composition of this isolated bone, we applied the regression method to more complex data.
+To exclude that problems arose from the special composition of this isolated bone, we applied a similar regression method to more complex data.
 
-In a second experiment, a piglet body was CT scanned, virtually segmented, and analogously dissected to see whether the total mass of the virtual segments matches the actual masses.
-This scan was performed at a different facility and prior to the density calibration experiments, and thus the only available calibration points were air, water, and two density calibration phantoms.
+In a second experiment, a piglet body was CT scanned, virtually segmented, and analogously dissected to see whether the total mass of the virtual segments matches their actual masses.
+The corresponding scan was performed at a different facility and long before the density calibration experiments, and thus the only available calibration points were air, water, and two density calibration phantoms.
 Consequently, an exponential regression was used to convert gray values to density.
-Although an exponential regression was used, this virtual density conversion leads to a considerable over-estimation of the mass of most of the segments, and the specimen total (as opposed to the under-estimation in case of the femur exponential regression).
+Although an exponential regression was used (prone to under-estimation in case of the femur), this virtual density conversion leads to a considerable over-estimation of the mass of most of the segments, and the specimen total.
 
-This result once again highlights how erratic the digital density conversion is.
+This result highlights how erratic the digital density approximation is.
 
 
 
 #+NAME: tab:pigletdissection
 #+ATTR_LATEX: :environment tabular :align |l|c|c|c|
-#+CAPTION: Segment mass verification on an actual piglet specimen. Note that the total mass at euthanasia was measured \(1.125 kg\), a slight loss is expected due to condensation and preservation.
+#+CAPTION: Segment mass verification on an actual piglet specimen. On the lighter segments, measurement accuracy and rounding are limiting. Note that the total mass at euthanasia was measured \(1.125 kg\), a slight loss is expected due to condensation and preservation.
 #+begin_table
 |-----------------+-----------------+------------+------------|
 | *segment*         | *CT segmentation* | *dissection* | *difference* |
@@ -578,7 +579,7 @@ This result once again highlights how erratic the digital density conversion is.
 ** Issue 1: Beam Hardening
 
 # /data/04_dynamics/21_flying_femur_revival/11_cupping/05_PlotPTFEInertia.py
-#+CAPTION: Effect of beam hardening on mass moment of inertia. (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B) Calculated mass moments of inertia, unscaled (\(\times\)) and scaled \(\circ\). In this cylinder, \(I_z\) is always larger than \(I_x, I_y\) which are approximately identical. The solid, dark red line indicates the theoretical (true) \(I_z\) of the PTFE cylinder, the dashed red line marks the true value of the other inertial axes. The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the true values. However, this is only true for the unscaled curves; when scaling to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text) the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening due to the normalization.
+#+CAPTION: Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder. (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B) Calculated mass moments of inertia, unscaled (\(\times\)) and scaled \(\circ\). In this cylinder, \(I_z\) is always larger than \(I_x, I_y\) which are approximately identical. The solid, dark red line indicates the theoretical (true) \(I_z\) of the PTFE cylinder, the dashed red line marks the true value of the other inertial axes. The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the true values. However, this is only true for the unscaled curves; when scaling to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text) the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening due to the normalization.
 #+LABEL: fig:cupping_results
 #+ATTR_LATEX: :width 18cm
 [[./figures/cupping_results.pdf]]
@@ -589,14 +590,14 @@ The only reliable recovery of the true mass moment of inertia (Fig. \ref{fig:cup
 This generally holds for homogeneous objects: moment of inertia is determined by the geometric distribution of mass elements around the COM; iff the relative mass of all mass elements are well approximated by the density regression (which is only and exclusively the case in homogeneous objects), and iff cupping is negligible, then we can calculate appropriate \(I\) values.
 However, if the object is non-homogeneous (as a femur), then for example the relative density of marrow and calcified bone are not appropriately covered, and \(I\) will be incorrect.
 Also, if there are *any beam hardening or streak artifacts*, which is non-trivial to remove from FBP reconstructed scans, *the moment of inertia will be incorrect*.
-Attention should also be put on the units of the calculated mass moments of inertia: it is in the order of \(10^{-7} kg m^2\).
+Attention should also be put on the units of the calculated mass moments of inertia: it is in the order of \(10^{-7} kg m^2\) for this cylinder.
 This is small, justifying extra attention to numeric accuracy of computational methods as well as sources of physical inaccuracy (e.g. COM miscalculation).
-Three corollaries:
-(1) mass scaling, which above I suspected to retain density distribution, will produce erroneous moments of inertia.
-(2) Using "constant" regression (i.e. modelling uniform mass distribution) will only produce accurate inertia for homogeneous objects.
-(3) iterative reconstruction methods might partially overcome this issue citep:Six2019, but their application requires prior information and extra work.
+# Three corollaries:
+# (1) Mass scaling, which above I suspected to retain density distribution, will produce erroneous moments of inertia if artifacts are present.
+# (2) Using "constant" regression (i.e. modelling uniform mass distribution) will only produce accurate inertia for homogeneous objects.
+# (3) Iterative reconstruction methods might partially overcome this issue citep:Six2019, but their application requires prior information and extra work.
 
-With conventional methods, we must conclude that the chance of getting an accurate measurement for mass moment of inertia from conventional CT scans is low, and the potential influence of typical error sources is fatal.
+We conclude that the chance of getting an accurate measurement for mass moment of inertia from conventional CT scans is low under the influence of common error sources.
 
 
 
@@ -607,15 +608,15 @@ With conventional methods, we must conclude that the chance of getting an accura
 #+ATTR_LATEX: :width 12cm
 [[./figures/metal_artifacts.png]]
 
-Another typical artifact in CT scans are metal bead artifacts (Fig. \ref{metal_artifacts}).
+Another typical kind of artifacts in CT scans appear around metal beads (Fig. \ref{metal_artifacts}).
 Metals are chemical elements with overproportionally higher x-ray attenuation than carbohydrate compounds.
 They absorb a large fraction of the incoming radiation, demanding the use of hight energy to avoid shadows arising from missing information in the projections, which can be detrimental to contrast on softer tissue.
 The shadows appear as "streaks" or "starbursts" on CT scans, they complicate segmentation, and are unwanted in XROMM visualizations citep:Brainerd2010.
 As with other artifacts, metal bead artifacts have their source in limitations of the tomographic method (limited dynamic range, rotationally symmetric scan geometry), and might be corrected by appropriate counter-measures.
 Beam hardening reduction by using metal filter plates can improve dynamic range and contrast (at the cost of exposure).
-The use of a helical scan geometry in a cone-beam CT should reduce the length and contrast of streaks, because projections from above or below the bead elevation level will project through the tissue behind the bead.
+The use of a helical scan geometry in a cone-beam CT should reduce the length and contrast of streaks, because projections from above or below the bead elevation level will project through the tissue immediately behind the bead.
 
-Though pronounced on metal beads due to their spatial confinement, th problem is not restricted to metal.
+Though it is pronounced on metal beads due to their spatial confinement, the problem is not restricted to metal.
 Streak artifacts also appear between multiple regions of dense bone or strongly absorbant solute (i.e. water), especially if two such regions can be behind each other in the projection geometry.
 
 
@@ -630,56 +631,109 @@ The second factor is that they are more numerous in some materials than others (
 #+ATTR_LATEX: :environment tabular :align |l|l|c|c|c|c|c|
 #+CAPTION: Sensitivity Analysis of the Mass Moment of Inertia calculations. For reference, the actual femur weighed \(5.271 g\), had a length of \(46 mm\), volume of \(4.637\times 10^{-6} m^{3}\) and an average density of \(\approx 1140 kg m^{-3}\).
 #+begin_table
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-| *parameter*              | *change*      | *\(\sum_{i}m_{i}\)* | *\(\Delta COM\)* |          *\(I_{xx}\)* |          *\(I_{yy}\)* |          *\(I_{zz}\)* |
-|                        |             |        \([g]\) |  \([px]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) |
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-| *(reference)*            | none        |           6.38 |         0 |                0.52 |                1.36 |                1.67 |
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-| *regression \(a\)*       | \(+5\%\)    |           6.12 |        <1 |                0.50 |                1.31 |                1.60 |
-| *regression \(b\)*       | \(+5\%\)    |           6.07 |         0 |                0.49 |                1.30 |                1.59 |
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-| *COM \(x\mid y \mid z\)* | \(+2.5 mm\) |           6.38 |        50 |                0.52 |                1.36 |                1.67 |
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-| *mass \(\sum_{i} m_{i}\)*   | \(+0.26 g\) |           6.70 |         0 |                0.55 |                1.43 |                1.75 |
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-| *regression type*        | expon.      |           4.96 |         5 |                0.42 |                1.09 |                1.34 |
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
-|------------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *parameter*            | *change*      | *\(\sum_{i}m_{i}\)* | *\(\Delta COM\)* |          *\(I_{xx}\)* |          *\(I_{yy}\)* |          *\(I_{zz}\)* |
+|                      |             |        \([g]\) |  \([px]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) |
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *(reference)*          | none        |           6.38 |         0 |                0.52 |                1.36 |                1.67 |
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *regression \(a\)*     | \(+5\%\)    |           6.12 |        <1 |                0.50 |                1.31 |                1.60 |
+| *regression \(b\)*     | \(+5\%\)    |           6.07 |         0 |                0.49 |                1.30 |                1.59 |
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *mass \(\sum_{i} m_{i}\)* | \(+0.26 g\) |           6.70 |         0 |                0.55 |                1.43 |                1.75 |
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *COM \(x\)*            | \(+2.5 mm\) |           6.38 |        50 |                0.52 |                1.40 |                1.71 |
+| *COM \(y\)*            | \(+2.5 mm\) |           6.38 |        50 |                0.56 |                1.36 |                1.71 |
+| *COM \(z\)*            | \(+2.5 mm\) |           6.38 |        50 |                0.56 |                1.40 |                1.67 |
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+| *regression type*      | expon.      |           4.96 |         5 |                0.42 |                1.09 |                1.34 |
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
+|----------------------+-------------+----------------+-----------+---------------------+---------------------+---------------------|
 
 
 To put all the aforementioned issues into perspective, we calculated how a change in one parameter affects the outcome of the calculation of inertial properties (Tab. \ref{tab:sensitivity}).
 
 Moderate changes in the density calibration regression directly influence the mass, and thereby the moment of inertia; even the COM is mildly affected.
 The effect on \(I\) is in the order of \(7-8\%\).
-Shifting the COM alone does not affect inertial parameters, which is expected.
-However, this does not incorporate errors in an inverse dynamics workflow, where a COM shift will translate to a joint wrench difference according to the Steiner law.
-Adjusting the mass expectably has the same effect as a change in regression parameters, and a \(5\%\) mass increase causes a \(\Delta I\) of more than \(8\%\).
+Adjusting the mass has a similar effect as a change in regression parameters, and a \(5\%\) mass increase causes a \(\Delta I\) of more than \(8\%\).
+Shifting the COM alone does affect inertial parameters depending on the shift direction, which is expected (Steiner theorem).
+The effect of the notable shift (\(5\%\) of the femur length) is a change in \(I\) of about \(4\%\), yet mass changes seem to affect all inertia axes alike, whereas the error due to COM shift affects the axes differently.
+This is an artificial adjustment, changing the COM without a change in mass, but it does help to estimate errors in an inverse dynamics workflow, where a COM misplacement will also affect a joint wrench according to the Steiner theorem.
 Finally, the exponential regression leads to a moderate shift in COM (\(0.25 mm\)), but a considerable underestimation of mass (\(-29 \%\)) and moment of inertia (\(-32 \%\)).
 
-These simulations confirm that moment of inertia crucially depends on the mass that is assigned to each voxel in the CT data set.
+These simulations confirm that moment of inertia crucially depends on the mass that is assigned to each voxel in the CT data set, because the relative error in the outcome can exceed the input inaccuracy.
 
 
 * Discussion
-** Miscalculated Mass
+** Density and Attenuation
 In this chapter, I challenge the common misperception that structural information from CT images can be easily converted to a density distribution.
+We think of objects in terms of their mass because that is what humans are confronted with in their everyday experience of the physical world.
+And the structures which we see in CT visualizations resemble that experience.
+However, they quantify attenuation, which is a different phenomenon.
 
-(i) the polychromatic character (source spectrum) of the used radiation, (ii) chemical composition (absorption spectrum), and (iii) scan artifacts
 
-+ Are the cheap plastic parts appropriate calibration options for organic tissue?
-+ How far off the true value is the calculated mass moment of inertia, i.e. what is the measurement error?
-+ How much do known artifacts contribute to the measurement error?
+Reasons for the mismatch are numerous.
+X-ray radiation used in commercial CT scanners is often polychromatic.
+Absorption is wavelength-dependent in a non-trivial way.
+The whole process contains stochastic aspects (e.g. scattering).
+Scientists tend to introduce the constraint that chemical composition must be homogeneous within samples, yet that constraint is neither realistic, nor practical.
+Finally, the effects some qualify as scan artifacts seem to be an issue, but as argued above they might just be the manifestation of the inappropriate modeling of a normal physical process.
 
-** Intuitive Inertia
-mass scaling?
+
+** Miscalculated Mass
+The thorough measurements reported above confirm that the outcome of a CT scan cannot be directly related to physical density.
+We followed the strategy of others, using a kind of calibration regression to convert CT values to density citep:Mull1984,Phillips1997,DuPlessis2013,Durston2022,Fath2023.
+Our measurements show severe differences between the actual density and the calculated values, with errors of more than \(20\%\) of the actual mass.
+
+
+Neither plastic parts, nor the calibration cylinders we used provided an accurate reference for the density of the test object.
+The bone mineral density phantoms arguably serve a different purpose (calibrating /mineral/ density), but resemble the compact parts of the bone in their chemical composition.
+Yet it is not only the chemical composition of the scanned object, but also the spatial arrangement of its components, because the trajectory of the x-ray beam affects attenuation.
+It is insufficient to just assume "comparable chemical composition".
+The calibration object must also have the same shape and spatial arrangement as the object of interest.
+The ideal object to calibrate an unknown femur would thus be an identical femur of known mass distribution.
+
+The reason, as illustrated in the introduction, is that the spectrum of the beam changes at each instance in the tissue, because photons of different wavelengths have specific absorption probabilities.
+The most obvious example of this is beam hardening, and I showed by a simple virtual simulation that beam hardening leads to a systematic under-estimation of mass and moment of inertia (Fig. \ref{fig:cupping_results}).
+In a more extreme case of this, radio-opaque metal beads will absorb almost all passing photons, leading to problems with conventional reconstruction algorithms which appear as starburst artifacts.
+
+
+Recent developments attempt to improve the reconstruction algorithm citep:Six2019,Frenkel2022,Yang2021, but their application requires prior information and extra work.
+Others might eagerly await "spectral CT" citep:Liu2023, yet technical and economic challenges are still limiting the capability and availability of such machines.
+
+
+** Non-Intuitive Inertia
+It is perfectly normal that physical measurements are subject to measurement inaccuracy.
+However, the error range must be reported.
+
+Above, we demonstrated an analytical assessment of what errors should be expected, as well as a numerical sensitivity analysis.
+The results enable an evaluation of the relative importance of different parameters for the accuracy of the outcome.
+For example, changes in the mass or in the regression outcome directly influence the moment of inertia, at a rate higher than the input error.
+A COM miscalculation might cause errors of less magnitude, but errors are not necessarily isotropic.
+
+
+Yet by far the greatest effect was due to a change in the regression type, switching from linear to exponential.
+Neither of these is accurate, yet in the absence of a model which covers the nature of attenuation, there is no other reasonable option.
+The exponential fit seemed plausible from the BMD phantoms.
+The majority of observed femur gray values were not far off the exponential regression line.
+Nevertheless, the calculated moment of inertia was about \(30\%\) off the reference.
+Note that this error subsumes both an apparent over-estimation in the linear reference regression, and an under-estimation of \(I\) in the exponential attempt.
+Also, the considerable percentage is explained by the fact that moment of inertia values are relatively small in baseline magnitude.
+A shortcoming of the present study is that we are unable to determine a "ground truth" inertia for the test object, lacking sufficiently accurate physical measurement apperature and expertise.
+
+
+Nevertheless, our findings have practical application.
+Any regression should be as accurate as possible (the more/diverse calibration objects, and the more resemblance of the test object, the better).
+A probabilistic regression would be favorable, since it yields error margins for the regression parameters.
+With those, a sensitivity analysis can and should be performed.
+We also showed that scaling voxel-wise density so that the mass matches the known total mass is not an option: it can amplify issues from beam hardening (Fig. \ref{fig:cupping_results}) and marker streaks and make the outcome more unpredictable.
 
 
 ** Which Inertia Component is Relevant?
 movement in vivo
 sensitivity analysis
-
-** Dynamic Images
+Dynamic Images
 
 ** Lack of Alternatives
 + pendulum
@@ -690,9 +744,9 @@ sensitivity analysis
 At the end of this chapter, it should be clear that the only people using CT images to calculate inertial properties would be Biologists who are agnostic to the basic principles of physics.
 This includes the author.
 Tomographic images depict attenuation, not physical density, and though these are occasionally correlated, they remain fundamentally different properties of matter.
-Above, I discussed potential flaws in the calculation of mass, center of mass, and mass moment of inertia, as well as corner cases in which the calculation might co-incidentally yield appropriate results.
+Above, I discussed potential flaws in the CT-based approximation of mass, center of mass, and mass moment of inertia, as well as corner cases in which the calculation might co-incidentally yield appropriate results.
 In all other cases, the calculation will certainly yield wrong results.
-The magnitude of the error is most likely non-negligible, since some axes of inertia in balance equations have very small base magnitude and are therefore susceptible to faults.
+The magnitude of the error is non-negligible, since some axes of inertia in balance equations have very small base magnitude and are therefore susceptible to faults.
 
 
 However, with all that objection put to paper, it must be stated that there is no effective alternative to the use of CT scans.
@@ -716,10 +770,6 @@ tbd.
 
 
 #+begin_comment
-% https://doi.org/10.1117/12.2595473
-% https://doi.org/10.2214/ajr.143.5.1101
-% https://doi.org/10.1016/S0963-8695(97)00020-0
-% https://doi.org/10.1093/iob/obad005
 scattering types of xray beams
 poly-SIRT
 Liu2023 spectral CT https://www.nature.com/articles/s41598-023-33264-2#citeas
