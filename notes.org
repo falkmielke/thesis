@@ -1,0 +1,6 @@
+#+title: Notes
+
+
+* find/replace
++ gray values
++ absorption
