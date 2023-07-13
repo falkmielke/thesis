@@ -14,7 +14,6 @@
 
 #+OPTIONS: toc:t
 
-#+LaTeX_HEADER: \usepackage{amsmath}
 
 #+STARTUP: noinlineimges showeverything entitiespretty
 @@latex:\clearpage@@
