@@ -243,7 +243,7 @@ We also attempted to validate the method on dissected animal specimens @@latex:\
 #+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was fixed ("mounted") in a PET bottle to fit into the cylindrical scan volume of [[https://www.uantwerpen.be/en/research-groups/vision-lab/x-ray-imaging-resear/flexct][the FleXCT scanner of the University of Antwerp]]. The image on the left shows the sample mount, magnified on the inset. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
 #+LABEL: fig:femur_scan
 #+ATTR_LATEX: :width 18cm
-[[./figures/femur_scan.pdf]]
+[[./figures/femur_scan.jpg]]
 
 
 The hypothesis that CT images are a valid approximation of physical density is already falsified by the theoretical considerations above.
