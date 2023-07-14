@@ -496,11 +496,11 @@ We call this strategy "scaling", and it is optionally compared to the "unscaled"
 
 ** Error Propagation
 What magnitude do miscalculations of the moment of inertia have, and how much of a problem is that for calculations of joint moment?
-To evaluate this, one has to consider error propagation with the balance equations \eqref{eqn:moment}.
+To evaluate this, one has to consider error propagation with the balance equations \eqref{eqn:moment_error}.
 The variable \(I\) only enters the balance equations through the dynamic wrench, \(M = I \ddot\theta\).
 This function is linear, so error propagation is quite simple\footnote{We should not assume that the error in measuring \(\ddot \theta\) is zero, but will here focus only on the \(I\) component.} citep:Hughes2010,Normann2016:
 #+begin_src latex
-\begin{equation}\label{eqn:moment}
+\begin{equation}\label{eqn:moment_error}
 \Delta M = \sqrt{\left(\frac{\partial M}{\partial I}\Delta I\right)^2} = \sqrt{\left(\Delta I \ddot\theta\right)^2}
 \end{equation}
 #+end_src
@@ -509,7 +509,7 @@ Sensitivity is linear at this level: any percentage of measurement inaccuracy in
 
 
 Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, by inaccuracy in the mass itself (regression), and by unceretainty in the COM position and therefore the position vectors \(r_{i}\) of each mass element.
-\[ \Delta I = \left \Delta I \right\mid_{m_i} + \left \Delta I \right\mid_{r_i} = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
+\[ \Delta I = \left. \Delta I \right|_{m_i} + \left. \Delta I \right|_{r_i} = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
 
 
 The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertainty of the mass elements contribute linearly but are added up; errors in the mass of further away mass elements contribute more to the total error of the moment of inertia.
@@ -519,7 +519,7 @@ The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertain
 The partial derivative with respect to \(r_{i}\) must be added, because \(I\) is taken relative to the COM (hence, \(\Delta r_i = \Delta COM\)).
 We know that the choice of reference point for moment of inertia can be adjusted by using generalized Steiner, and so the error in the COM propagates as a Steiner component, equation \eqref{eqn:steiner}, with \(s=\Delta COM\).
 Yet \(\Delta COM\) also depends non-trivially on the relative mass of volume elements, equation \eqref{eqn:com}.
-\[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left(-\left(\Delta \sum_i m_{i} \right)^{-2} \sum\limits_{i} r_{i} \cdot m_{i} \right)^2\]
+\[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left( \frac{ \sum\limits_{i} r_{i} \cdot m_{i} }{\Delta \sum_i m_{i} }\right)^{2}}\]
 
 
 With this last equation we have lined out how the target parameter, \(I\), ultimately depends on mass elements \(m_{i}\) and their position in different ways.
@@ -895,10 +895,10 @@ Yet when knowing and avoiding typical pitfalls (beam hardening, metal beads, sym
 
 
 
-\clearpage
-# References
-\bibliographystyle{apalike}
-\bibliography{literature.bib}
+# \clearpage
+# # References
+# \bibliographystyle{apalike}
+# \bibliography{literature.bib}
 
 * COMMENT Acknowledgements
 # If I interchanged "we" and "I" in the text above, this indicates that a certain part of the project was supported by the following fabulous people.

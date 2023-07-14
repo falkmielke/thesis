@@ -2,7 +2,7 @@
 
 
 \section{Abstract}
-\label{sec:org5f776ce}
+\label{sec:org608c530}
 An essential part of the inverse dynamic workflow is the measurement of inertial properties, in particular mass, center of mass, and mass moment of inertia.
 In the past, these have often been approximated by assigning average values to limb segments.
 Recent studies have explored the potentially more accurate retrieval of inertials from CT data, which would work by associating voxel gray values of the CT image stack with densities.
@@ -21,9 +21,9 @@ In conclusion, I emphasize the value of a sensitivity analysis, and indicate pro
 
 \clearpage
 \section{Introduction}
-\label{sec:org72cb931}
+\label{sec:orgb80d559}
 \subsection{Computed Tomography and Density}
-\label{sec:orgfd0a1a9}
+\label{sec:org754f466}
 Since the advent of x-ray imaging, people are intrigued by the ability to see the inner structure of objects and living creatures (such as the famous hand of Röntgen's wife, ``Über eine neue Art von Strahlen'', 1895).
 This desire even increased by the development of computed tomography \citep{Beckmann2006,Hounsfield1973}, a set of techniques which enable the reconstruction and visualization of three-dimensional structural images.
 The transmission images obtained via high energy electromagnetic radiation often serve to answer qualitative questions (e.g. whether a bone is fractured, whether there are porosities in asphalt drill cores).
@@ -42,7 +42,7 @@ I will start by giving a brief intro to crucial aspects of CT scanning technolog
 
 
 \subsection{Emission and Absorption}
-\label{sec:orgc26eb5e}
+\label{sec:orge8c3674}
 Visible light and x-ray radiation are, to a large degree, analogous.
 The reason for this is that both are just electromagnetic radiation; they differ in wavelength and thereby energy.
 To illustrate what is happening with x-ray light during a CT experiment, I will use the analogy of visible light.
@@ -126,7 +126,7 @@ The filtering properties of matter can be used to acquire images and reconstruct
 
 
 \subsection{Scan Artifacts}
-\label{sec:orga958dac}
+\label{sec:org93ff288}
 X-ray images do not always look as we would want them to look.
 The unfavorable image features are commonly called ``artifacts''.
 In the opinion of the provocative author, there is actually no such thing as CT scanning artifacts.
@@ -166,7 +166,7 @@ Yet it must be kept in mind that x-ray images do not quantify density, they quan
 
 
 \subsection{Density Approximations: Two Case Studies}
-\label{sec:org26977a7}
+\label{sec:orgf339bf1}
 The fact that two physical properties (attenuation and density) are fundamentally different things does not imply that researchers cannot use one to measure the other.
 Scientists have repeatedly suggested and attempted to convert CT scan gray values to approximate density \citep{DuPlessis2013,Durston2022}.
 
@@ -224,7 +224,7 @@ By documenting and discussing these failed attempts in this chapter, I hope to s
 
 
 \subsection{Reductionist Approach}
-\label{sec:org1c12ebd}
+\label{sec:org53ebda5}
 This study follows up on the idea of using a calibrated CT scan \citep{DuPlessis2013}, and adds a biologically relevant test object as well as an evaluation of the error margins, which is crucial for practical use.
 Calibration is attempted with cheap, leftover plastic pieces of known material and density, as well as commercial bone mineral calibration phantoms.
 We chose a dissected porcine femur as the object of interest of which we seek to estimate the density distribution, and thereby total mass, center of mass, and mass moment of inertia (Fig. \ref{fig:femur_scan}).
@@ -252,9 +252,9 @@ It should be pointed out that preliminary (naïve) results of this study were fi
 
 
 \section{Materials and Methods}
-\label{sec:orgd5fa8da}
+\label{sec:org1185d71}
 \subsection{The Flying Femur}
-\label{sec:org44a57a3}
+\label{sec:org45b0e81}
 
 As discussed in the previous chapter, the goal of inverse dynamics is to calculate the segment-wise balance of wrenches, thereby elucidating which forces and moments each joint has to handle in a motor task.
 The unit of calculation is therefore a segment.
@@ -294,7 +294,7 @@ Secondly, the validity of the ``calibrated CT'' method for extracting inertial p
 
 
 \subsection{Piglet Data}
-\label{sec:org60ef107}
+\label{sec:orgb7cd81d}
 Originally, the femur was part of an animal, and thus also part of a bigger whole set of experiments.
 That project involved newborn piglets reared temporarily at the veterinary facilities of the University of Antwerp, and subjected to XROMM recording sessions.
 Experiments were approved by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium (approval number 2017–25) and performed in June and July 2019.
@@ -314,7 +314,7 @@ Virtual segments were processed with the density regression procedure (see below
 
 
 \subsection{Scan Parameters}
-\label{sec:orga5eb04f}
+\label{sec:org7ee5220}
 
 \begin{table}[htbp]
 \caption{\label{tab:ct_settings}CT scan settings for the calibrated femur scan.}
@@ -354,7 +354,7 @@ Resolution was lower, but exposure settings were comparable to the ones on the f
 
 
 \subsection{Inertial Properties}
-\label{sec:org889ae9c}
+\label{sec:orgcb7dc22}
 
 All code used on this project, including python implementations of the mathematical formula's below, can be \href{https://git.sr.ht/\~falk/flying\_femur}{found online} (\nolinkurl{https://git.sr.ht/~falk/flying_femur} and \nolinkurl{http://mielke-bio.info/falk/posts/23.ct_density}).
 
@@ -365,7 +365,7 @@ All code used on this project, including python implementations of the mathemati
 \end{figure}
 
 \subsubsection{CT Segmentation}
-\label{sec:org0b7c4af}
+\label{sec:orga28902e}
 Of course, if e.g. the mass of a bone is to be calculated, one intends to sum up the mass of only the bone, excluding the mass of the surrounding air or support material.
 A preliminary step to calculate inertial properties from CT scans is the segmentation of the scan.
 Segmentation is the separation of the ``relevant'' and ``irrelevant'' sub-volumes within the image stack, in this case the bone and the surrounding air or background.
@@ -376,7 +376,7 @@ This step might seem trivial, time consuming, yet necessary, and indeed it is al
 
 
 \subsubsection{Mass}
-\label{sec:orgfe0cb13}
+\label{sec:orgc67bdd5}
 The mass of a volume element \(m_{i}\) of a rigid body is calculated as the density \(\rho_{i}\) of that element, multiplied with its volume \(V_{i}\) (Fig. \ref{fig:inertials}).
 Summing up all volume elements will give the total mass of the object:
 \begin{equation}\label{eqn:mass}
@@ -387,7 +387,7 @@ The crucial part here is to get \(\rho_{i}\), the density per voxel, which we at
 
 
 \subsubsection{Center of Mass}
-\label{sec:org3abf09a}
+\label{sec:orgb72de19}
 The center of mass is the mass-weighted average position vector of all volume elements of a rigid body (Fig. \ref{fig:inertials}).
 For each volume element \(i\), mass \(m_{i}\) is a scalar, the position vector \(r_{i}\) is a three-by-one vector, and their product is summed up for all voxels of the segmented bone.
 The result is normalized by dividing the total mass.
@@ -398,7 +398,7 @@ The outcome is the three-by-one position vector of the center of mass (COM, shor
 
 
 \subsubsection{Mass Moment of Inertia}
-\label{sec:org4399097}
+\label{sec:org04c9f63}
 As stated before, mass moment of inertia is the resistance of an object to angular acceleration.
 It can be calculated for any rigid body (see Fig. \ref{fig:inertials}) via an integral formula over all volume elements \citep{WikipediaMOI}:
 \begin{equation}\label{eqn:mmoi}
@@ -424,7 +424,7 @@ This has implications for interpreting the ``beam hardening simulation'' results
 
 
 \subsection{Density Regression}
-\label{sec:org485d8e8}
+\label{sec:orgd2f0cae}
 The critical step in the procedures above is the relation of gray values \(\gamma\) and physical densities \(\rho\).
 This is the search for an (idealized) function \(\gamma = f(\rho )\), which can predict the CT gray value for any given density.
 The inverse, \(\rho = f^{-1}(\gamma )\), can then be used to assign densities to gray values from the scan.
@@ -454,7 +454,7 @@ Subsets of the calibration objects were selected for the regression to be plausi
 
 
 \subsection{Scan Artifacts}
-\label{sec:org29e91b5}
+\label{sec:org52dbaff}
 To estimate the effect of beam hardening artifacts, one of the scanned calibration objects was selected by segmentation and virtually modified.
 I selected PTFE, because it has the highest attenuation in the data set and is therefore most prone to suffering from beam hardening.
 The PTFE cylinder has almost ideal cylindrical shape, and was well aligned with the scan rotation axis.
@@ -491,12 +491,12 @@ We call this strategy ``scaling'', and it is optionally compared to the ``unscal
 
 
 \subsection{Error Propagation}
-\label{sec:orge2f9318}
+\label{sec:orgae14f30}
 What magnitude do miscalculations of the moment of inertia have, and how much of a problem is that for calculations of joint moment?
-To evaluate this, one has to consider error propagation with the balance equations \eqref{eqn:moment}.
+To evaluate this, one has to consider error propagation with the balance equations \eqref{eqn:moment_error}.
 The variable \(I\) only enters the balance equations through the dynamic wrench, \(M = I \ddot\theta\).
 This function is linear, so error propagation is quite simple\footnote{We should not assume that the error in measuring \(\ddot \theta\) is zero, but will here focus only on the \(I\) component.} \citep{Hughes2010,Normann2016}:
-\begin{equation}\label{eqn:moment}
+\begin{equation}\label{eqn:moment_error}
 \Delta M = \sqrt{\left(\frac{\partial M}{\partial I}\Delta I\right)^2} = \sqrt{\left(\Delta I \ddot\theta\right)^2}
 \end{equation}
 
@@ -504,7 +504,7 @@ Sensitivity is linear at this level: any percentage of measurement inaccuracy in
 
 
 Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, by inaccuracy in the mass itself (regression), and by unceretainty in the COM position and therefore the position vectors \(r_{i}\) of each mass element.
-\[ \Delta I = \left \Delta I \right\mid_{m_i} + \left \Delta I \right\mid_{r_i} = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
+\[ \Delta I = \left. \Delta I \right|_{m_i} + \left. \Delta I \right|_{r_i} = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
 
 
 The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertainty of the mass elements contribute linearly but are added up; errors in the mass of further away mass elements contribute more to the total error of the moment of inertia.
@@ -514,7 +514,7 @@ The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertain
 The partial derivative with respect to \(r_{i}\) must be added, because \(I\) is taken relative to the COM (hence, \(\Delta r_i = \Delta COM\)).
 We know that the choice of reference point for moment of inertia can be adjusted by using generalized Steiner, and so the error in the COM propagates as a Steiner component, equation \eqref{eqn:steiner}, with \(s=\Delta COM\).
 Yet \(\Delta COM\) also depends non-trivially on the relative mass of volume elements, equation \eqref{eqn:com}.
-\[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left(-\left(\Delta \sum_i m_{i} \right)^{-2} \sum\limits_{i} r_{i} \cdot m_{i} \right)^2\]
+\[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left( \frac{ \sum\limits_{i} r_{i} \cdot m_{i} }{\Delta \sum_i m_{i} }\right)^{2}}\]
 
 
 With this last equation we have lined out how the target parameter, \(I\), ultimately depends on mass elements \(m_{i}\) and their position in different ways.
@@ -526,7 +526,7 @@ From the analytical considerations above, we can see that the variables to chang
 
 
 \subsection{Error Estimation}
-\label{sec:org8164c54}
+\label{sec:org5e8e546}
 Calculating the effect of an error is only one part of sensitivity analysis.
 The second, equally relevant part is an estimate of how uncertain parameter estimates actually are.
 A great way to measure this are probabilistic statistics (Ch. \ref{cpt:statistics}).
@@ -565,9 +565,9 @@ Subsetting is necessary because the number of observations adds computational lo
 
 
 \section{Results}
-\label{sec:org3ac3d68}
+\label{sec:orgd338191}
 \subsection{Density Calibration Regression}
-\label{sec:org114c751}
+\label{sec:org880496a}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=16cm]{./figures/regression.pdf}
@@ -588,7 +588,7 @@ With the regression outcome, it is technically possible to convert any observed 
 
 
 \subsection{Issue 0: Mass Mismatch and Total Mass Normalization}
-\label{sec:org6b68bcc}
+\label{sec:org183d29d}
 
 To confirm the outcome of the regressions above, we compared the actual mass of the femur (which is \(5.271 g\)) to the outcome of the digital approximation.
 
@@ -649,7 +649,7 @@ RH hoof & 0.005 & 0.003 & +67\%\\[0pt]
 
 
 \subsection{Issue 1: Beam Hardening}
-\label{sec:orgab8e55f}
+\label{sec:orgca94bca}
 
 \begin{figure}[htbp]
 \centering
@@ -672,7 +672,7 @@ We conclude that the chance of getting an accurate measurement for mass moment o
 
 
 \subsection{Issue 2: Metal Bead Artifacts and Chemical Composition}
-\label{sec:org9f0931f}
+\label{sec:orgd9f8ffb}
 
 \begin{figure}[htbp]
 \centering
@@ -698,7 +698,7 @@ They are more numerous in some materials than others (irrespective of density, e
 
 
 \subsection{Sensitivity Analysis}
-\label{sec:orgec7982d}
+\label{sec:org768a505}
 
 \begin{table}[htbp]
 \caption{\label{tab:sensitivity}Sensitivity Analysis of the Mass Moment of Inertia calculations of the femur scan. For reference, the actual femur weighed \(5.271 g\), had a length of \(46 mm\), volume of \(4.637\times 10^{-6} m^{3}\) and an average density of \(\approx 1140 kg m^{-3}\).}
@@ -761,9 +761,9 @@ These results indicate that the \(5\%\) error margins used above are rather cons
 
 
 \section{Discussion}
-\label{sec:orgfa8ea5f}
+\label{sec:org3c02141}
 \subsection{Density and Attenuation}
-\label{sec:org294452d}
+\label{sec:org5e34015}
 In this chapter, I challenge the common misconception that structural information from CT images can be easily converted to a density distribution.
 Humans think of objects in terms of their mass because that is what we are confronted with in our everyday experience of the physical world.
 And the structures which we recognize in CT visualizations resemble that experience.
@@ -779,7 +779,7 @@ Finally, the effects some qualify as scan artifacts seem to be an issue, but as 
 
 
 \subsection{Miscalculated Mass}
-\label{sec:orge94cc17}
+\label{sec:org737d0a4}
 The thorough measurements reported above confirm that the outcome of a CT scan cannot be directly related to physical density.
 We followed the strategy of others, using a kind of calibration regression to convert CT values to density \citep{Mull1984,Phillips1997,DuPlessis2013,Durston2022,Fath2023}.
 Our measurements show severe differences between the actual density and the calculated values, with errors of more than \(20\%\) of the actual mass.
@@ -804,7 +804,7 @@ Others might eagerly await ``spectral CT'' \citep{Liu2023}, yet technical and ec
 
 
 \subsection{Non-Intuitive Inertia}
-\label{sec:org06bff2f}
+\label{sec:org267fc97}
 It is perfectly normal that physical measurements are subject to measurement inaccuracy.
 However, the error range must be quantified and reported.
 
@@ -843,7 +843,7 @@ Third, again, there is no mechanistic reason to assume a linear relation; the po
 
 
 \subsection{Inertia Components}
-\label{sec:org085fe0d}
+\label{sec:orgaad4540}
 To my knowledge, this study is the first to perform a detailed sensitivity analysis of the CT density calibration.
 Sensitivity is high, so are the measured error margins, which implies that potential inaccuracies are potentially fatal for the derived measurements.
 
@@ -867,7 +867,7 @@ Thus, that inertial component demands close attention.
 
 
 \subsection{Lack of Alternatives}
-\label{sec:orgded80b0}
+\label{sec:orgcbe870c}
 The femur CT scan used in this experiment was recorded with all necessary diligence, under ideal conditions, with good image quality and resolution.
 For example, a beam hardening filter was used, sample mounting was flawless, contrast and dynamic range were optimized.
 Still, we see a distribution for gray values which hinders determining the femur mass at an accuracy better than \(10\%\) (see probabilistic regression).
@@ -890,7 +890,7 @@ All those are promising developments that would certainly impact the accuracy of
 
 \clearpage
 \section{Summary}
-\label{sec:orge3e81b3}
+\label{sec:org65e7851}
 At the end of this chapter, it should be clear that the only people using CT images to calculate inertial properties would be Biologists who are agnostic to the basic principles of physics.
 This includes the author.
 Tomographic images depict attenuation, not physical density, and though these are occasionally correlated, they remain fundamentally different properties of matter.
@@ -904,10 +904,3 @@ There is no ``density tomography'', and common alternative methods suffer from e
 
 Using attenuation values to calculate densities might be about as accurate as setting \(\pi \equiv 3\) in physics classes (a totally valid thing to do, if at the same time setting \(g \equiv 10\)).
 Yet when knowing and avoiding typical pitfalls (beam hardening, metal beads, symmetries), and when keeping track of error magnitudes (by performing a sensitivity analysis, involving e.g. Gaussian error propagation and probabilistic regression), the calculated inertials might be a just sufficiently accurate approximation of the true values.
-
-
-
-\clearpage
-
-\bibliographystyle{apalike}
-\bibliography{literature.bib}

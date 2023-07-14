@@ -12,7 +12,7 @@ The results are complementary to the prior analysis, and we find the capability 
 
 \FloatBarrier\clearpage
 \section{Introduction}
-\label{intro}
+\label{intro12}
 
 \subsection{Recurring Solutions}
 \label{sec:org10ede19}
@@ -85,7 +85,7 @@ Physiological, ``real'' signals normally require few harmonics to be appropriate
 
 How can Fourier Series be applied?
 The method is based on the following formula \citep{Fourier1822,Gray1995,Bracewell2000,Mielke2019}, which is presented here for completeness and should not worry the reader.
-\begin{equation}\label{eqn:fourier_coefficients}
+\begin{equation}\label{eqn:fourier_coefficients1}
 c_{n} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{-2\pi i n \frac{t}{T}} \cdot f(t)  \quad\quad \forall n>0
 \end{equation}
 Where \(c_{n}\) is a complex Fourier coefficient, \(T\) is the period of the signal or in our case the stride cycle duration, \(t\) is the time (i.e. ``x'' of the signal), \(f(t)\) is the signal (i.e. ``y'' of the signal), \(e\) is the Euler number, \(i\) is the square root of minus one.
@@ -108,7 +108,7 @@ Knowing the assumptions and limitations (see below) and paying attention to the 
 
 \bigskip
 There are numerous morphotypes of the Fourier theorem, which justifies a brief overview.
-Equation \eqref{eqn:fourier_coefficients} is the exponential form of the Fourier Series.
+Equation \eqref{eqn:fourier_coefficients1} is the exponential form of the Fourier Series.
 The formula exists in other variants (which are equivalent by Euler's formula): the rare but useful ``amplitude-phase'' form, and maybe most notably the more abundant ``sine-cosine'' representation.
 Historically, trigonometric functions are more convenient to handle, whereas modern computer implementations easily capture complex numbers, whereas humans have most intuition for amplitude and phase.
 The Fourier Series is related to, but slightly different from, Fourier Transform, a relation which will be discussed in detail below (Ch. \ref{properties:transform}).
@@ -193,7 +193,7 @@ Some of these disadvantages are emphasized when working with trigonometric funct
 
 
 \textbf{Fourier Series Decomposition is not a regression.}
-Determining the ``parameters'', i.e. Fourier coefficients, works by eqn. \eqref{eqn:fourier_coefficients}, which can be directly translated to computer code (see above and appendix \ref{appendix:code}).
+Determining the ``parameters'', i.e. Fourier coefficients, works by eqn. \eqref{eqn:fourier_coefficients1}, which can be directly translated to computer code (see above and appendix \ref{appendix:code}).
 The procedure is deterministic, exact, and reversible; no start values are required.
 The trigonometric formulas provided in many publications resemble regression models, but applying a regression procedure is not necessary.
 We will demonstrate the overall procedure below and provide code for some relevant scientific scripting languages as proof of concept.
@@ -319,7 +319,7 @@ The formula for the inverse Fourier Series is the following:
 	f(t) = \sum\limits_{n=0}^{N} (2\cdot c_{n})\cdot e^{2\pi i n \frac{t}{T}}
 \end{equation}
 
-Notation herein as in \eqref{eqn:fourier_coefficients}, with \(N\) being the order (number of coefficients).
+Notation herein as in \eqref{eqn:fourier_coefficients1}, with \(N\) being the order (number of coefficients).
 Computer code for application in R, Matlab and Python can be found in appendix \ref{appendix:code} and the supplements.
 
 The existence of this inverse formula means that just as exchanging a coordinate basis for linear coordinates, \textbf{one can convert freely between time- and frequency domain}.
@@ -462,7 +462,7 @@ If instead there are sufficient reference points, multiple rotation axes and ang
 Note that there have been attempts to directly calculate Fourier coefficients from 3D joint angles, using quaternions \citep{Kenwright2015}, which would be the most elegant solution for this purpose.
 
 
-After removing end-start-differences as described above (ch. \ref{properties:endstart}), joint angle profiles are plugged into the Fourier equation \eqref{eqn:fourier_coefficients}, e.g. by using the corresponding programming functions supplemented to this manuscript.
+After removing end-start-differences as described above (ch. \ref{properties:endstart}), joint angle profiles are plugged into the Fourier equation \eqref{eqn:fourier_coefficients1}, e.g. by using the corresponding programming functions supplemented to this manuscript.
 Thereby, joint angle profiles are transformed to the frequency domain.
 Though we above emphasized the complex values of the coefficients, they can as well be represented by a one-dimensional array of alternating real- and imaginary parts of the coefficients.
 The transformation should be inverted, and original and re-transformed joint angle profiles plotted together, to exclude coding errors and confirm that order was chosen high enough (Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
@@ -540,7 +540,7 @@ We applied a stepwise modeling approach, modeling the PCA-transformed Fourier co
 \\ & + v_{clr}\cdot\beta_{clr,i} + v_{df}\cdot\beta_{df,i} + v_{trnk}\cdot\beta_{trnk,i} + v_{str1}\cdot\beta_{str1,i} + v_{str2}\cdot\beta_{str2,i} +
 \\ & + \epsilon_{i}
 \end{split}
- \label{eq:jap} \end{equation}
+ \label{eq:jap_model} \end{equation}
 
 
 In the case of the baboon data set, we were able to successfully train this complex model despite limited sample size.

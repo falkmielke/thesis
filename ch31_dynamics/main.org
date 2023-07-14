@@ -264,12 +264,12 @@ On the other hand, we have any *external wrenches* acting on the object.
 The most important ones are the gravitational wrench, friction wrench, and the tip wrench.
 \[W_{g} = \left[ mg; 0 \right]\]
 \[W_{f} \approx \left[ 0; 0 \right]\]
-\[W_{tip}_{} = \left[ F_{tip}; M_{tip} \right]\]
+\[W_{tip} = \left[ F_{tip}; M_{tip} \right]\]
 
 We can sum up all external wrenches to get a total external wrench \(W_{ext}\):
 #+begin_src latex
 \begin{equation}\label{eqn:external_wrench}
-W_{ext} = \sum\limits_{ext} W_{i} = W_{tip}+W_{g}+W_{f}+\ldots
+W_{ext} = \sum\limits_{ext} W_{i} = W_{tip} +W_{g}+W_{f}+\ldots
 \end{equation}
 #+end_src
 
@@ -468,10 +468,10 @@ By /post mortem/ fixation and dissection, or by volumetric digitization, segment
 
 
 
-\clearpage
-# References
-\bibliographystyle{apalike}
-\bibliography{literature.bib}
+# \clearpage
+# # References
+# \bibliographystyle{apalike}
+# \bibliography{literature.bib}
 
 * COMMENT Acknowledgements
 # Joaquim & VisionLab

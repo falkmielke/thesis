@@ -63,6 +63,8 @@ ENTRY
     type
     volume
     year
+    doi
+    url
   }
   {}
   { label extra.label sort.label }
@@ -479,6 +481,22 @@ FUNCTION {format.incoll.inproc.crossref}
   " \cite{" * crossref * "}" *
 }
 
+FUNCTION {output.doi}
+{
+    doi empty$
+        { skip$ }
+        { "\href{http://dx.doi.org/" doi * "}{doi:" * doi * "}" * output }
+    if$
+}
+
+FUNCTION {output.url}
+{
+    url empty$
+        { skip$ }
+        { "url: \url{" * url * "}" * output }
+    if$
+}
+
 FUNCTION {article}
 { output.bibitem
   format.authors "author" output.check
@@ -495,6 +513,24 @@ FUNCTION {article}
       format.pages output
     }
   if$
+  new.block
+  output.doi
+  new.block
+  note output
+  fin.entry
+}
+
+FUNCTION {online}
+{ output.bibitem
+  format.authors "author" output.check
+  author format.key output                              % special for
+  output.year.check                                     % apalike
+  new.block
+  format.title "title" output.check
+  new.block
+  organization
+  new.block
+  output.url
   new.block
   note output
   fin.entry
