@@ -1,0 +1,13 @@
+#+title: Empty
+
+#+SETUPFILE: latex_header.org
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+
+

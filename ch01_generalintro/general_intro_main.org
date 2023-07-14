@@ -22,6 +22,7 @@ Our institute at the University of Antwerp has phenomenal equipment.
 We have incubator-like rearing containers in the "Ark" (a teaching stable in our Veterinary Science department), which can be a cozy warm home to newborn piglets.
 We have the \(3D^2YMOX\) ([[https://www.uantwerpen.be/en/research-groups/3d2ymox][3-Dimensional DYnamic MOrphology using X-rays]]) facility, which measuring animals from hoof to head in light and x-ray vision.
 # TODO, more about it in the appendix.
+The [[https://www.uantwerpen.be/flexct][FleXCT scanning facility]] is just around the block, and the friendly, but expensive technicians there will scan anything you bring them.
 We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab and Biomedical Physics (Bimef), and not least bioligists at FunMorph (Functional Morphology).
 The settings could not have been better, and I cannot overstate my praise of all the fantastic people who helped with this study (see acknowledgements, Ch. \ref{Acknowledgements}), and all those who previously managed to acquire funding for what enabled my work.
 Thank you!
@@ -66,11 +67,11 @@ Which brings us to the third reason: *piglets are, to a certain degree, analogou
 In other words, we have the working hypothesis that piglets are a good model species for some aspects of human ontogeny (Fig. \ref{fig:jolante}).
 Emphasis on "/to a certain degree/" - are they, really?
 Domestic pigs are maybe the only species in the world that is more degenerate than our own (or maybe not).
-They are sedentary, comparatively hairless, highly social, omnivorous (which means they can live of the crap other humans feed them), have probably gone through a couple of founder situations in their evolution, yet are far more proliferous than is good for themselves and the planet.
+They are sedentary, comparatively hairless, highly social, omnivorous (which means they can live of the crap humans feed them), have probably gone through a couple of founder situations in their evolution, yet are far more proliferous than is good for themselves and the planet.
 That is already quite a lot to have in common.
 And indeed, many researchers rightfully argue that we can draw conclusions about humans from studying piglets - for some aspects of our humble existence.
 For example, highly relevant research about infant gut function was achieved by the group of Prof. Per Sangild citep:Muk2023,Che2010,Cilieborg2011,Sangild2006.
-He argued in his Francqui honorary lecture here at the University of Antwerp (April 26, 2022) that having kids during a PhD is detrimental for progress of the project; which teases me to acquire contradicting evidence (this thesis).
+He argued in his Francqui honorary lecture here at the University of Antwerp (April 26, 2022) that having kids during a PhD is detrimental for progress of the project; which teases me to contribute contradicting evidence (this thesis).
 
 But the question remains: *can piglet serve as a model species for the study of human /locomotion/?*
 An obvious "show stopper" might be that, as mentioned above, piglets are precocial, whereas humans are about as altricial as can be.
@@ -89,34 +90,39 @@ But how to approach the potential lack of an effect?
 To set the frontier right from the start, I will insist to apply good scientific methods citep:Chamberlin1890,Platt1964,Popper2002.
 If we /searched for/ differences in piglet locomotion, just search hard enough, we would surely find them.
 Instead, our attempts must be to *falsify the hypothesis that there are differences in piglet locomotion*.
+
+
 As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
-Firstly, some methods loose information in processing.
-For example, measure dynamically similar speed of two animals.
-If we do not see differences in that measure, we cannot exclude that the subjects differ in other aspects, despite indiscernible speed.
-Secondly, methods might have trouble handling variation.
+First, some methods loose information in processing.
+For example, imagine you measured two animals, e.g. a stork and an elephant, while co-incidentally running at dynamically similar speed.
+If we do not see differences in that measure, we cannot exclude that the subjects differ in the way they move their limbs, despite indiscernible speed.
+Second, methods might have trouble handling variation.
 One subject animal was observed to be slower in one trial, but does that mean it /cannot/ go faster as well?
-So, on the one hand, failing to incorporate (or even summarizing) repeated measurements might be neglecting variation.
+So, on the one hand, failing to incorporate (or even summarize) repeated measurements might be neglecting variation.
 What does it mean if there is a significant difference in standard error of the mean?
-On the other hand, methods can amplify variation, by not including all measures (which brings us to the next point).
-Thirdly, the matter is complex: just for kinematics, there are subject characteristics (age, sex, ...), spatiotemporal gait variables (speed, duty factor, clearance, ...), dynamic posture and effective range of motion, and finally coordination.
+On the other hand, methods can amplify variation, by not including all parameters: imagine the "unexplained" variation within a set of recordings of piglet aged 0-10 days, but not documenting the age (which brings us to the next point).
+Third, the matter is complex: just for kinematics, there are subject characteristics (age, sex, ...), spatiotemporal gait variables (speed, duty factor, clearance, ...), dynamic posture and effective range of motion, and finally coordination.
 Stay tuned for more on this.
-We better have a potent modeling framework to incorporate all that data: if we do not incorporate all measures, differences might be due to sampling biases and "hidden" variables.
+Fourth, if we measure, we must keep track measurement uncertainty.
+If we do not know how accurate a figure was, it is meaningless.
+We better have a potent modeling framework to incorporate all that data: if we do not incorporate all measures or fail to explain their variability, differences might be due to sampling biases and "hidden" variables.
 The falsification approach is a unifying aspect of all the chapters herein.
 
 
 *To summarize*, there are some genuine reasons as well as grant-acquiring rationalizations for studying suid ontogeny.
 Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
 
+
 ** TODO Baboons
 There also is a limitation to piglets.
 Or, rather, I consider it a bonus.
 They have two extra limbs on the ground, thus four limbs in total.
 This gives us about twice the number of joints to analyze when studying grounded locomotion.
-Not trivial to handle, as we will see below.
+Not trivial to handle, but feasible, as we will see below.
 
 
 It came as a great coincidence that, during SEB conference 2021, I watched my colleage François Druelle presenting a data set acquired from bipedally walking baboons (/Papio anubis/).
-The rationale to study these animals can be directly transferred to this thesis: they are facultatively bipedal, i.e. they occasionally walk on their hind limbs, just like humans often do.
+The rationale to study these animals can be directly transferred to this thesis: they are facultatively bipedal, i.e. they occasionally walk on their hind limbs, just like humans often do citep:Aerts2023b.
 Prof. Druelle and colleagues thus analyzed a developmental series of baboons: infant, adolescent, and adult individuals citep:Druelle2021.
 Their intention is to find out if and how the use of a bipedal gait changes with age.
 
@@ -124,7 +130,7 @@ Their intention is to find out if and how the use of a bipedal gait changes with
 That sounded like a familiar task, and with the euphoria of just having implemented a different, potentially useful method (FCAS, see below), I reached out to François and he kindly provided the data.
 Not only the videos, but also the tracking (i.e. kinematics "to go").
 I much appreciate the time and effort François and his students put into the exchange.
-And I regret that this has not been put into a brief publication.
+And I regret that this has not been put into a publication.
 
 
 Nevertheless, work on the baboon data set has a prominent place in this thesis.
@@ -135,19 +141,19 @@ And I ended up writing two "tutorial"-chapters, one each for Fourier Methods (pa
 
 Yet in fact, you could argue the other way round.
 Piglets are a putative model species, but require some transfer work to draw reliable conclusions about humans and human development.
-/Papio/, on the other hand, are bipedal primates, and their bipedalism develops gradually over time.
-Just like in our own species.
+/Papio/, on the other hand, are bipedal primates, and their bipedalism develops gradually over time -- just like in our own species.
 On the downside, baboons are less readily available, also for dynamic measurements (e.g. XROMM, part III).
 Hence it is good to keep both model species in the loop.
 
 
 * TODO Why Locomotion?
+# As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
 
 
 * Which Analytical Tools Do We Have?
-One would think that our toolbox to study terrestrial locomotion is well-developed and sophisticated.
+One would think that our toolbox to study terrestrial locomotion is well-developed and sophisticated citep:Demuth2023.
 After all, locomotion has been intriguing people for hundreds, thousands, maybe tens of thousands of years.
-Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it (first for pornography, and second) for locomotion (Fig. \ref{fig:muybridge},\ref{fig:jumpiglet}).
+Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it (first for pornography, and second) for locomotion (Figs. \ref{fig:muybridge}, \ref{fig:jumpiglet}).
 
 #+CAPTION: "The Horse in Motion", by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
 #+ATTR_LATEX: :width 16cm :placement [t!]
@@ -162,20 +168,19 @@ Whenever humans develop a new imaging technique, from cave drawings to digital c
 
 In consequence, the /technology/ for studying locomotion is available, and sophisticated.
 Consumer grade cameras have a high temporal and spatial resolution, and can be calibrated to measure 3D space.
-Compare modern day smartphone cams to, for example, contemporary x-ray techniques for studying the inside of things: both are equally recent, resolution of the latter is usually inferior, price difference is defeating, yet we do not even have color on x-ray (although it is just another form of electromagnetic radiation).
+Compare modern day smartphone cams to, for example, contemporary x-ray techniques for studying the inside of things: both are equally recent, resolution of the latter is usually inferior, price difference is defeating, yet we do not even have color on x-ray (although it is just another form of electromagnetic radiation, see Ch. \ref{cpt:inertials}).
 Visible light videography seems to be far more accessible than other imaging techniques.
 We can thus expect that far better camera equipment is available than would minimally be required for our research questions.
 Sounds too easy - which is probably why my supervisors decided to send me out to a pig farm in 2017 with an inferior JVC camcorder (although a synced 4-cam 300fps Norpix system, and a set of high res GoPro's, were available at the time).
 Although that would not be fair to claim.
-There is also always an allocation to be set on the spectrum of video quality (especially framerate) and manually processing time (see Ch. \ref{ch:digitization}, below), and I might still be clicking points on videos today if my supervisors had decided differently.
-And at any rate, that video data turned out to be the most relevant data for my entire PhD citep:Mielke2023.
+There is also always an allocation to be set on the spectrum of video quality (especially framerate) and manually processing time (see Ch. \ref{cpt:digitization}, below), and I might still be clicking points on videos today if my supervisors had decided differently.
+And, after all, that video data might be the most relevant data of this PhD citep:Mielke2023.
 
 
-Acquiring videos is just the first step: as always in science, we need to get to numbers and statistics to get reliable results.
+Acquiring videos is just the first step: as always in science, we need numbers and statistics to get reliable results.
 Where are we at the analysis side?
 You might be underwhelmed.
-We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns citep:Hildebrand1989, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles.
-#TODO recent citations
+We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns citep:Hildebrand1989, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles citep:Ekhator2023,Plocek2023,Young2023,Jones2023.
 Those are doubtlessly great methods to get an overview, and they remain the go-to first analysis for any kinematic data set.
 Yet as I will argue in the chapters to follow, they only capture limited information and are therefore insufficient for a falsification approach.
 
@@ -183,17 +188,17 @@ Yet as I will argue in the chapters to follow, they only capture limited informa
 People have certainly /tried/ to complement the conventional measurements with more in-depth computational methods.
 "Planar Covariation" theory came out of one attempt to develop a technique which captures the essence of terrestrial locomotion citep:Borghese1996,Ivanenko2008.
 I think it is flawed, in a sense that it biases the data for high correlation just to find out that it is highly correlated.
-Throughout the chapters of this thesis, you will find subtle and polite rants about the planar covariation technique, so I will not go into detail here
+Throughout the chapters of this thesis, you will find subtle and polite rants about the planar covariation technique, so I will not go into detail here.
 
 
-Another attempt to go beyond footfall science is ... #TODO but I don't remember
+# TODO Another attempt to go beyond footfall science is ... #TODO but I don't remember
 
 
 And then there is one strain of locomotor science which deviates from the Western mainstream.
-It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to it (Ch. \ref{TODO}).
+It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to it (Ch. \ref{cpt:fourier_review}).
 His group excelled in at least two ways citep:Bongaardt2000,Bernstein1935.
 They used clever engineering to get continuous measures of joint positions citep:Bernstein1927b and applied angular transformations (i.e. Fourier Series) to analyze the data citep:Bernstein1927a.
-These early works are remarkable, and the day I first read through it and realized what they were up to was maybe one of the happiest days of my PhD.
+These early works are remarkable, and the day I first read through it and realized their importance was maybe one of the happiest days of my PhD.
 Essentially, what I did in the work summarized herein, is transferring Bernstein's ideas to a computer framework, and extending them with moderen statistical models.
 I acknowledge that I am not the first one to take this route citep:Pike2002,Webb2007.
 And there is a group of authors who have translated, popularized, and advanced the "Bernstein school" citep:Latash2010,Latash2008,Latash1998,Laczko2016.
@@ -208,33 +213,29 @@ This thesis is also an attempt to rectify that.
 
 
 \pagebreak
-* TODO Thesis Outline
+* Thesis Outline
 
 And this is where my PhD project found its place.
 We study piglet locomotion, attempting to falsify a difference that is due to birth weight category.
 
 This requires a methodological foundation on topics unfamiliar to most Biologists (Fourier Analysis, probabilistic models), which I introduce in dedicated chapters.
 
-_Part I: Fourier Analysis_
-+ I will introduce Fourier Methods with a practical guide and review its occurrence specifically in the field of locomotor biomechanics (Ch. \ref{TODO}) \(\rightarrow\) /unpublished, baboon data/.
-+ The power of Fourier tools is then unleashed onto a large cross-species study that covers most of the ungulate clade (Ch. \ref{TODO}) \(\rightarrow\) /FCAS paper/ citep:Mielke2019.
+_Part I: Kinematic Analysis_
++ I will introduce Fourier Methods with a practical guide and review its occurrence specifically in the field of locomotor biomechanics (Ch. \ref{cpt:fourier_review}).
++ The power of Fourier tools is then unleashed onto a large cross-species study that covers most of the ungulate clade @@latex: \citep[Ch. \ref{cpt:fcas},][]{Mielke2019}@@.
 
 _Part II: Probabilistic Modeling_
-+ Building on that, I will introduce the basics of probabilistic modeling (Ch. \ref{TODO}) \(\rightarrow\) "tiny textbook of statistics"
-+ ... before turning around the conventional modeling strategy and applying it to piglets (Ch. \ref{TODO}) \(\rightarrow\) /Modelling paper/ citep:Mielke2023.
++ Processing complex kinematic data, I will introduce the basics of probabilistic modeling (Ch. \ref{cpt:statistics}) in a "tiny textbook of statistics"...
++ ... before turning around the conventional modeling strategy and applying it to piglets @@latex:\citep[Ch. \ref{cpt:piglets},][]{Mielke2023}@@.
 
 _Part III: Dynamics_
-+ Finally, I will touch on further methodological challenges on the way to quantify forces and moments which arise in the locomotor apparatus during locomotion (Ch. \ref{TODO}) \(\rightarrow\) /unpublished; Wrench-Quaternion and CT work/.
++ Kinematics are just half of locomotor research: the study of forces and moments is reviewed and summarized in Ch. \ref{cpt:dynamics_workflow}.
++ To calculate joint moments, one needs to measure inertial properties, yet it turns out that these are not trivial to retrieve from x-ray tomographic images (Ch. \ref{cpt:inertials}).
 
-The thesis closes with a general discussion to wrap up and project the presented work to potential future applications.
+The thesis closes with a general discussion to round up and project the presented work to potential future applications (Ch. \ref{cpt:generaldiscussion}).
 
 \pagebreak
-# References
-# \bibliographystyle{apalike}
-# \bibliography{literature.bib}
-
-# TODO: check all the other intro attempts again; check notes Peter/Chris meeting
 
 
-* TODO On Video Digitization\label{ch:digitization}
-Because it is central for all the parts to follow below, I would like to briefly review the issue of video digitization.
+
+

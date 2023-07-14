@@ -10,3 +10,22 @@
 
 
 * What Happened to the General Intro?
+
+
+Instead, our attempts must be to *falsify the hypothesis that there are differences in piglet locomotion*.
+
+
+But different weight might go in hand with different physical constraints, and one has to account for the trivial consequences of a different physical appearance citep:Aerts2023. #TODO
+
+
+
+As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
+First, some methods loose information in processing.
+Second, methods might have trouble handling variation.
+Third, the matter is complex: just for kinematics, there are subject characteristics (age, sex, ...), spatiotemporal gait variables (speed, duty factor, clearance, ...), dynamic posture and effective range of motion, and finally coordination.
+Fourth, if we measure, we must keep track measurement uncertainty.
+
+
+Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
+
+citep:Demuth2023
