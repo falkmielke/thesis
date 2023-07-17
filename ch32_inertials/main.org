@@ -790,6 +790,7 @@ In a more extreme case of this, radio-opaque metal beads will absorb almost all 
 
 Recent developments attempt to improve the reconstruction algorithm citep:Six2019,Frenkel2022,Yang2021,Batenburg2011, but their application requires prior information and extra work.
 Others might eagerly await "spectral CT" citep:Liu2023, yet technical and economic challenges are still limiting the capability and availability of such machines.
+Dual-/Multi Energy CT might be another route to overcome the limitations of monochrome detector screens, and they might combine well with iterative, model-based reconstruction techniques.
 
 
 ** Non-Intuitive Inertia

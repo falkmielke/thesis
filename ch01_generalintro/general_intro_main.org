@@ -151,7 +151,7 @@ Hence it is good to keep both model species in the loop.
 
 
 * Which Analytical Tools Do We Have?
-One would think that our toolbox to study terrestrial locomotion is well-developed and sophisticated citep:Demuth2023.
+One would think that our toolbox to study terrestrial locomotion is well-developed and sophisticated citep:McHenry2023,Demuth2023.
 After all, locomotion has been intriguing people for hundreds, thousands, maybe tens of thousands of years.
 Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it (first for pornography, and second) for locomotion (Figs. \ref{fig:muybridge}, \ref{fig:jumpiglet}).
 

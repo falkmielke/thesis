@@ -4,3 +4,7 @@
 * find/replace
 + gray values
 + absorption
+
+
+* important literature
++ Fischer/Blickhan tri-segmented limb https://doi.org/10.1002/jez.a.333

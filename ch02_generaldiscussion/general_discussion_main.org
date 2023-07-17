@@ -8,6 +8,93 @@
       '("literature.bib"))
 #+END_SRC
 
+* First Principles
+# The three parts of this thesis, which tackled kinematic data analysis, modeling, and inverse dynamics,
+The three parts of this thesis each have a different focus.
+Yet they have one thing in common:
+each of them takes a basic principle of physics research and applies it to the study of biomechanics.
+
+
+Part one is concerned with kinematic data analysis, and the generation of meaningful measures from videos of moving animals.
+The basic principle therein is coordinate transformation citep:Tipler2007: physicists are well aware that computational problems simplify if one converts the data to an appropriate coordinate space.
+For locomotor kinematics, I repeat and apply a suggestion of others which relies on the repetitive, periodic character of many locomotor behaviors.
+By applying a Fourier Series Decomposition, it is possible to transform joint angle profiles to the frequency domain, where their mathematical structure is much simplified (they are represented by an array of harmonic constituents, instead of a raw signal with an indefinite number of noisy samples).
+
+
+Part two focuses on statistical modeling of kinematic measurements.
+It builds on the application of another physical principle: namely that most variables do not take exact values, but rather follow a probability distribution citep:2022Probability.
+This is especially true in the biological sciences, where variability in a trait, in reproductive success, and in the correlation of these two are the key prerequisites of our central working model.
+Statistical models which incorporate variability, though rarely applied, are useful in biological applications citep:Røraas2019.
+I provide a brief tutorial to outline why and how probabilistic models work (e.g. the MCMC sampling methodology), and apply probabilistic, predictive modeling to a kinematic data set.
+Whereas prediction in conventional statistics would be deterministic, I demonstrate that probabilistic prediction can be used to generate relevant insights into the earliest developmental changes of piglet locomotion.
+
+
+Finally, the third part of the thesis is devoted to inverse dynamics.
+The goal of inverse dynamics are estimates of joint forces and moments, which can be calculated from force measurements by treating limb segments as rigid bodies and (stepwise) calculation of their balance of wrenches.
+Crucial measurements required for these balance equations are the inertial properties (mass, center of mass, mass moment of inertia).
+As I demonstrate, the commonly desired assumption that inertial properties can be derived from x-ray computed tomography cannot stand up to closer inspection.
+This finding is enabled by a third basic principle commonly applied in physics (which is actually a first principle): the quantification of a measurements inaccuracy citep:Hughes2010.
+
+
+There are certainly more examples of basic principles in physics which would deserve application in Biology in general @@latex:\citep[e.g.][]{Busemeyer2015,Aerts1995}@@, or in Biomechanics in particular.
+# TODO
+
+
+
+* Predictive Power
+Yet are these adaptations from the physical sciences inevitable?
+Why/when should conventional methods be replaced by the methods suggested herein?
+
+
+The quality criterium of predictive models is how well it can be used to predict experimental circumstances that deviate from those it was trained on.
+This refers to the distinction of descriptive, explanatory, and predictive modeling citep:Shmueli2010,Shmueli2011.
+In Biomechanics, explanatory modeling is rarely applied, because the causal theory for animal movement are physical first principles (conservation of momentum).
+Virtually all quantitative analyses in locomotor science are descriptive: they "summarize or represent the data structure in a compact manner", and "focus is at the measurable level rather than at the construct level" citep:Shmueli2010.
+For example, spatiotemporal gait characteristics (e.g. dimensionless speed) are meausred and compared between study groups.
+There are numerous recent examples of studies in which spatiotemporal gait variables are the basis of comparison  @@latex:\citep[e.g.][]{Cheu2022,Ekhator2023,Plocek2023,Young2023,Jones2023,Druelle2021,McHenry2023}@@.
+However, it is rarely modeled how and why a study group reaches a certain speed (explanatory statistics).
+Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the segments or joints, e.g. measuring the (joint) angles between segments.
+
+
+One exemplary study of kinematics was performed by citet:Hutchinson2006.
+For comparison: this was at a time when high-end consumer GPUs housed about 256MB of memory; long before the era of DeepLabCut.
+The authors digitized an enormous number of strides of different species of elephants.
+Their measurements are extensive (in terms of the number of derived quantities), yet mostly descriptive.
+The authors discuss whether more or less subtle discontinuities in the spatiotemporal measures actually reflect gait changes citep:Hutchinson2006,Alexander1989, but emphasize the overall smooth speed-dependence of spatiotemporal parameters.
+They put some effort into a convincing argumentation that a subset of their measurements were close to what can be considered the maximum speed elephants can reach.
+And they document the seemingly restricted repertoire of elephant gaits: these animals seem unable to trot or gallop, reaching the highest measured locomotor speeds with unchanged gait.
+
+Yet these questions could be addressed in the frequency domain: does the ensemble of Fourier coefficients differ between observation groups (see Ch. \ref{cpt:fcas})?
+Are African and Asian elephants really identical in their intralimb coordination, or do they display the same spatiotemporals with altered joint profile patterns (analogous to Ch. \ref{cpt:piglets})?
+Could we predict which joint loadings are critical if we set up a virtual elephant model to gallop?
+
+
+A particularly well studied species are humans, yet inference about our ancestors is tricky citep:Polk2004,Stamos2023,Stamos2023.
+Interesting debates are ongoing with regard to the bipedality and arboreality of particular fossil specimens.
+Note that the methodological advances presented in this thesis could be used for quantitative predictions of hominid locomotion.
+Trained with locomotor data of e.g. extant humans and chimpanzees (phylogenetic bracket), a probabilistic model which relates antomical and developmental traits to joint angle profiles could be tuned to predict stride cycles of intermediate forms (Ch. \ref{cpt:statistics}).
+The emphasis is on "stride cycles": this refers to complete joint angle profiles, from which the corresponding joint positions can be recovered (information retention of the Fourier Series, Ch. \ref{cpt:fcas}).
+These predictions could thus be matched to trace fossils.
+Adding putative inertial properties (Ch. \ref{cpt:inertials}) to the predicted strides would enable forward dynamic modeling, and an estimation of the plausibility of certain gaits (e.g. by excluding those beyond joint load limits).
+
+
+These examples illustrate how the methodological advances presented herein could extend our knowledge about terrestrial locomotion, with datasets which already exist.
+There are multiple potential benefits from predictive approaches citep:Shmueli2010, such as hypothesis generation, measurement comparison, improvement of explanatory models, and assessing predictive accuracy of a model.
+The latter benefit was exploited herein in a comparative study of newborn piglets.
+
+
+* Piglet Locomotor Development
+heterogeneity!
+variability!
+
+...
+
+
+# sensitivity/error propagation analysis https://doi.org/10.3389/fbioe.2022.767914
+
+
+# Sandra study on equine inertial properties https://doi.org/10.1111/j.1469-7580.2011.01353.x
+
 
 * What Happened to the General Intro?
 
