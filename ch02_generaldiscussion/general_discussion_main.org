@@ -149,16 +149,13 @@ To summarize: this project provided evidence that there is little difference in 
 Though differences in /why/ segments move in a particular way are unlikely in the light of this finding, methodological limitations prohibited definitive conclusions on dynamic differences in the study groups.
 
 
-* Other Objections
+* Piglets
+limited conclusions for human development
 yes, precocial, but how else to measure?
 piglets are great!
 
-...
 
 
-# sensitivity/error propagation analysis https://doi.org/10.3389/fbioe.2022.767914
-
-# Sandra study on equine inertial properties https://doi.org/10.1111/j.1469-7580.2011.01353.x
 
 
 * What Happened to the General Intro?
@@ -173,5 +170,8 @@ Fourth, if we measure, we must keep track measurement uncertainty.
 
 Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
 
-
 citep:Demuth2023
+
+# sensitivity/error propagation analysis https://doi.org/10.3389/fbioe.2022.767914
+
+# Sandra study on equine inertial properties https://doi.org/10.1111/j.1469-7580.2011.01353.x

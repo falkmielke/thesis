@@ -47,9 +47,10 @@ Yet "friendliness" is not a scientific category, and thus we must consider this 
 If a person in question is running at constant velocity (which we could quantify using Fourier methods and probabilistic modeling, see before), the unexpected appearance of an obstacle will certainly force the subject to change trajectory.
 If the unfortunate subject is unable to adjust on time, physicists would call this a "collision experiment".
 In most probable cases the impact will thus *change the subject's momentum*.
+Momentum quantifies the linear and angular movement of a body, as will be explained below.
 The non-sliding door itself, set up on a hinge (point \(P\) in Fig. \ref{fig:slamming}), will gain rotational momentum through the act of slamming, performed by an experimenter.
 In the collision case, the subject might (i) decelerate but proceed, (ii) come to a hold, or (iii) ungently bounce backwards from the elastic collision.
-The door will thus transfer inertia to the subject, thereby ultimately canceling out (part of) the inertia of the person if the impact is in opposite direction and approximately equal magnitude to the running.
+The door will thus transfer momentum to the subject, thereby ultimately canceling out (part of) the momentum of the person if the impact is approximately equal in magnitude, but opposite in direction, of the running.
 Trained experimenters might even succeed in (iv) transferring angular momentum to the surprised subject, generating a spin (though attention must be paid to whether that spin is partially caused by an evasive motor response of the subject).
 All these possible outcomes are manifestation of the *conservation of energy and momentum*, which we will explore in detail below, using the hypothetical door slamming experiment as a metaphor.
 Due to the numerous involved variables, it is not clear /a priori/ how exactly a subject will be hit, and what the exact consequences of the collision are.
@@ -57,32 +58,33 @@ Predicting the outcome of such scientific experiments is enabled by a major fiel
 
 
 ** Kinematics and Kinetics
-In the next chapter \ref{TODO}, I will discuss a specific contribution to dynamic modeling, namely the extraction of inertial properties from CT scans.
-Prior to that, the question of "why we would need that" (i.e. CT scan analysis) has to be addressed by illustrating the overall context.
-Establishing the connection to the previous topics of this thesis is impossible without a superficial overview of the dynamic modeling technique.
-By providing such an overview in the following paragraphs, I hope to enable the reader to better understand the purpose and meaning of the specific contribution of the next chapter.
-Experienced biomechanicists who are also familiar with "screw theory" are welcome to skip to the next chapter.
+In the next chapter (Ch. \ref{cpt:inertials}), I will discuss a specific contribution to dynamic modeling, namely the extraction of inertial properties from CT scans.
+This chapter serves to illustrate the overall context and to establish the connection with the previous topics of this thesis.
+It answers the question of the relevance of CT-based inertial property quantification, by providing a superficial overview of the dynamic modeling technique.
+# By providing such an overview in the following paragraphs, I hope to enable the reader to better understand the purpose and meaning of the specific contribution of the next chapter.
+# Experienced biomechanicists who are also familiar with "screw theory" are welcome to skip to the next chapter.
 
 
-Until this point, this thesis has been busy with methodological development in terms of measuring, modeling and predicting /kinematics/.
+Until this point, this thesis focused on methodological development in terms of measuring, modeling and predicting /kinematics/.
 With Fourier-based methods and probabilistic models in place, one can
-  (i) quantify measured kinematics
+  (i) quantify measured kinematics, and
   (ii) simulate locomotion by predictive sampling of trained models.
 This is a complete quantification of /how/ limb segments of animals change their position in space.
 Segments could be axial or peripheral parts of the animal which move as a unit (rigid- or pseudo-rigid bodies, hence the general term "rigid body dynamics"), which is to a large extent analogous to a door on a hinge.
 
 Having cleared the /how/ in previous chapters, the other relevant aspect of locomotion is /why/ segments move.
-This opens up the rabbit hole of elementary physics:
+This opens up a rabbit hole of elementary physics citep:Noether1918:
 #+begin_quote
-A rigid body will change its linear or angular momentum if there are external forces or external torques applied to it.
+A rigid body will not change its linear or angular momentum if there are no external forces or external torques applied to it.
 #+end_quote
 This, again, is a formulation of the conservation of momentum, as introduced above.
+# TODO: Peter: "the change of momentum is dynamics" but momentum of the universe does not change; conservation of momentum holds on open systems; impulse-momentum-theorem not found
 
 These things seem quite intuitive: the slamming door will affect the subject upon impact.
 And because there must be movement before or after the event of interest, and because that movement changes (i.e. it is "dynamic"), the study of the conservation of momentum in moving rigid body systems is called "dynamics".
 In contrast to kinematics, dynamics are sometimes also called "kinetics", the study of motion and its causes.
 "Conservation" as it is understood in physics implies that the measure of interest (momentum) cannot be created or lost, only gets converted to another form or transferred to another object.
-Thus, dynamics are also linked to the calculation of transformations and transfers of energy from one form to another.
+Thus, dynamics are also linked to the calculation of transformations and transfers of energy from one form or object to another (e.g. mechanical energy transfer, dissipation of heat).
 These conversions and transformations are precisely the reason /why segments or subjects change their movement/, and we seek to quantify and model (i.e. predict) them.
 
 
