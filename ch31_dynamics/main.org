@@ -73,12 +73,12 @@ This is a complete quantification of /how/ limb segments of animals change their
 Segments could be axial or peripheral parts of the animal which move as a unit (rigid- or pseudo-rigid bodies, hence the general term "rigid body dynamics"), which is to a large extent analogous to a door on a hinge.
 
 Having cleared the /how/ in previous chapters, the other relevant aspect of locomotion is /why/ segments move.
-This opens up a rabbit hole of elementary physics citep:Noether1918:
+This opens up a rabbit hole of elementary physics @@latex:\citep["Erhaltungssätze", \textit{sensu}][]{Noether1918}@@:
 #+begin_quote
 A rigid body will not change its linear or angular momentum if there are no external forces or external torques applied to it.
 #+end_quote
-This, again, is a formulation of the conservation of momentum, as introduced above.
-# TODO: Peter: "the change of momentum is dynamics" but momentum of the universe does not change; conservation of momentum holds on open systems; impulse-momentum-theorem not found
+This, again, is a formulation of the conservation of momentum citep:NASA2021, as introduced above.
+# TODO: Peter: "the change of momentum is dynamics" but momentum of the universe does not change; conservation of momentum holds on open systems (most definitions are wrong, NASA is right); impulse-momentum-theorem not a theorem: impulse is just defined as the change of linear momentum over time (temporal integral, [[https://en.wikipedia.org/wiki/Impulse_(physics)][https://en.wikipedia.org/wiki/Impulse_(physics)]] ).
 
 These things seem quite intuitive: the slamming door will affect the subject upon impact.
 And because there must be movement before or after the event of interest, and because that movement changes (i.e. it is "dynamic"), the study of the conservation of momentum in moving rigid body systems is called "dynamics".
