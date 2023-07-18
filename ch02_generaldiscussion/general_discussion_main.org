@@ -11,34 +11,35 @@
 * First Principles
 # The three parts of this thesis, which tackled kinematic data analysis, modeling, and inverse dynamics,
 The three parts of this thesis each have a different focus.
-Yet they have one thing in common:
+Yet they follow a common scheme:
 each of them takes a basic principle of physics research and applies it to the study of biomechanics.
 
 
-Part one is concerned with kinematic data analysis, and the generation of meaningful measures from videos of moving animals.
+Part one was concerned with kinematic data analysis, and the generation of meaningful measures from videos of moving animals.
 The basic principle therein is coordinate transformation citep:Tipler2007: physicists are well aware that computational problems simplify if one converts the data to an appropriate coordinate space.
-For locomotor kinematics, I repeat and apply a suggestion of others which relies on the repetitive, periodic character of many locomotor behaviors.
+For locomotor kinematics, I reproduced and applied a suggestion of others citep:Bernstein1927,Webb2007 which relies on the repetitive, periodic character of many locomotor behaviors.
 By applying a Fourier Series Decomposition, it is possible to transform joint angle profiles to the frequency domain, where their mathematical structure is much simplified (they are represented by an array of harmonic constituents, instead of a raw signal with an indefinite number of noisy samples).
+The transformation is a prerequisite of the subsequent part, which could hardly be adapted to raw joint angle profiles or other kinematic measures.
 
 
-Part two focuses on statistical modeling of kinematic measurements.
-It builds on the application of another physical principle: namely that most variables do not take exact values, but rather follow a probability distribution citep:2022Probability.
-This is especially true in the biological sciences, where variability in a trait, in reproductive success, and in the correlation of these two are the key prerequisites of our central working model.
+Part two focused on statistical modeling of kinematic measurements.
+It built on the application of another physical principle: namely that most measured variables do not take exact values, but rather follow probability distributions citep:2022Probability.
+This is especially true in the biological sciences, where variability in a trait, in reproductive success, and in the correlation of these two are the key prerequisites of our central working model citep:Darwin1859.
 Statistical models which incorporate variability, though rarely applied, are useful in biological applications citep:Røraas2019.
-I provide a brief tutorial to outline why and how probabilistic models work (e.g. the MCMC sampling methodology), and apply probabilistic, predictive modeling to a kinematic data set.
-Whereas prediction in conventional statistics would be deterministic, I demonstrate that probabilistic prediction can be used to generate relevant insights into the earliest developmental changes of piglet locomotion.
+I provided a brief tutorial to outline why and how probabilistic models work (e.g. the MCMC sampling methodology), and applied probabilistic, predictive modeling to a comprehensive kinematic data set.
+Prediction in conventional statistics would be deterministic, i.e. yielding point estimates which do not reflect the stochastic, variable nature of the phenomenon.
+I demonstrated that probabilistic prediction can be used to generate relevant insights into the earliest developmental changes of piglet locomotion.
 
 
-Finally, the third part of the thesis is devoted to inverse dynamics.
-The goal of inverse dynamics are estimates of joint forces and moments, which can be calculated from force measurements by treating limb segments as rigid bodies and (stepwise) calculation of their balance of wrenches.
+Finally, the third part of the thesis was devoted to inverse dynamics.
+The goal of inverse dynamics are estimates of joint forces and moments, which can be calculated from force measurements by treating limb segments as rigid bodies, and by (stepwise) calculation of their balance of wrenches.
 Crucial measurements required for these balance equations are the inertial properties (mass, center of mass, mass moment of inertia).
-As I demonstrate, the commonly desired assumption that inertial properties can be derived from x-ray computed tomography cannot stand up to closer inspection.
-This finding is enabled by a third basic principle commonly applied in physics (which is actually a first principle): the quantification of a measurements inaccuracy citep:Hughes2010.
+As I demonstrated, the commonly desired assumption that inertial properties can be accurately derived from x-ray computed tomography cannot stand up to closer inspection.
+This finding was enabled by a third basic principle commonly applied in physics (which is actually a first principle): the quantification of a measurements inaccuracy citep:Hughes2010.
 
 
 There are certainly more examples of basic principles in physics which would deserve application in Biology in general @@latex:\citep[e.g.][]{Busemeyer2015,Aerts1995}@@, or in Biomechanics in particular.
 # TODO
-
 
 
 * Predictive Power
@@ -46,13 +47,15 @@ Yet are these adaptations from the physical sciences inevitable?
 Why/when should conventional methods be replaced by the methods suggested herein?
 
 
-The quality criterium of predictive models is how well it can be used to predict experimental circumstances that deviate from those it was trained on.
+The two decisive analysis characteristics are the occurrence of variability, and predictive modeling.
+Variability is omnipresent in Biology, and it is surprising how many studies use statistics which blush over the fact that their model parameters are probabilistic.
+Yet the quality criterium of predictive models is how well it can be used to predict experimental circumstances that deviate from those it was trained on.
 This refers to the distinction of descriptive, explanatory, and predictive modeling citep:Shmueli2010,Shmueli2011.
-In Biomechanics, explanatory modeling is rarely applied, because the causal theory for animal movement are physical first principles (conservation of momentum).
+In Biomechanics, explanatory modeling is rarely applied, because the causal theory for animal movement are physical first principles (conservation of momentum, Ch. \ref{cpt:dynamics_workflow}).
 Virtually all quantitative analyses in locomotor science are descriptive: they "summarize or represent the data structure in a compact manner", and "focus is at the measurable level rather than at the construct level" citep:Shmueli2010.
-For example, spatiotemporal gait characteristics (e.g. dimensionless speed) are meausred and compared between study groups.
-There are numerous recent examples of studies in which spatiotemporal gait variables are the basis of comparison  @@latex:\citep[e.g.][]{Cheu2022,Ekhator2023,Plocek2023,Young2023,Jones2023,Druelle2021,McHenry2023}@@.
-However, it is rarely modeled how and why a study group reaches a certain speed (explanatory statistics).
+For example, spatiotemporal gait characteristics (e.g. dimensionless speed) are often meausred and compared between study groups.
+There are numerous recent examples of studies in which spatiotemporal gait variables are the basis and goal of comparison  @@latex:\citep[e.g.][]{Cheu2022,Ekhator2023,Plocek2023,Young2023,Jones2023,Druelle2021,McHenry2023}@@.
+However, it is rarely modeled how and why a study group reaches a certain speed (explanatory statistics), and the predictive power of studies on spatiotemporal varialbles is low (e.g. we cannot predict the speed of an individual with a muscle lesion from measuring normal individuals).
 Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the segments or joints, e.g. measuring the (joint) angles between segments.
 
 
@@ -62,11 +65,11 @@ The authors digitized an enormous number of strides of different species of elep
 Their measurements are extensive (in terms of the number of derived quantities), yet mostly descriptive.
 The authors discuss whether more or less subtle discontinuities in the spatiotemporal measures actually reflect gait changes citep:Hutchinson2006,Alexander1989, but emphasize the overall smooth speed-dependence of spatiotemporal parameters.
 They put some effort into a convincing argumentation that a subset of their measurements were close to what can be considered the maximum speed elephants can reach.
-And they document the seemingly restricted repertoire of elephant gaits: these animals seem unable to trot or gallop, reaching the highest measured locomotor speeds with unchanged gait.
+And they document the seemingly restricted repertoire of elephant gaits: these animals seem unable to trot or gallop, reaching the highest measured locomotor speeds with their default gait.
 
-Yet these questions could be addressed in the frequency domain: does the ensemble of Fourier coefficients differ between observation groups (see Ch. \ref{cpt:fcas})?
+Yet these questions could be addressed in the frequency domain: how does the ensemble of Fourier coefficients change with speed (see Ch. \ref{cpt:fcas}), and could we predict higher speeds?
 Are African and Asian elephants really identical in their intralimb coordination, or do they display the same spatiotemporals with altered joint profile patterns (analogous to Ch. \ref{cpt:piglets})?
-Could we predict which joint loadings are critical if we set up a virtual elephant model to gallop?
+Could we even predict which joint loadings are critical if we set up a virtual elephant model to gallop?
 
 
 A particularly well studied species are humans, yet inference about our ancestors is tricky citep:Polk2004,Stamos2023,Stamos2023.
@@ -74,18 +77,52 @@ Interesting debates are ongoing with regard to the bipedality and arboreality of
 Note that the methodological advances presented in this thesis could be used for quantitative predictions of hominid locomotion.
 Trained with locomotor data of e.g. extant humans and chimpanzees (phylogenetic bracket), a probabilistic model which relates antomical and developmental traits to joint angle profiles could be tuned to predict stride cycles of intermediate forms (Ch. \ref{cpt:statistics}).
 The emphasis is on "stride cycles": this refers to complete joint angle profiles, from which the corresponding joint positions can be recovered (information retention of the Fourier Series, Ch. \ref{cpt:fcas}).
-These predictions could thus be matched to trace fossils.
-Adding putative inertial properties (Ch. \ref{cpt:inertials}) to the predicted strides would enable forward dynamic modeling, and an estimation of the plausibility of certain gaits (e.g. by excluding those beyond joint load limits).
+These predictions could be turned in to virtual animations of the complete behavior, and matched to trace fossils.
+Adding putative inertial properties (Ch. \ref{cpt:inertials}) to the predicted strides would enable forward dynamic modeling, and an estimation of the plausibility of certain gaits (e.g. by comparing energy efficiency).
 
 
 These examples illustrate how the methodological advances presented herein could extend our knowledge about terrestrial locomotion, with datasets which already exist.
-There are multiple potential benefits from predictive approaches citep:Shmueli2010, such as hypothesis generation, measurement comparison, improvement of explanatory models, and assessing predictive accuracy of a model.
-The latter benefit was exploited herein in a comparative study of newborn piglets.
+There are multiple potential goals of predictive approaches citep:Shmueli2010, such as hypothesis generation, measurement comparison, improvement of explanatory models, and assessing predictive accuracy of a model.
+The latter goal was targeted herein in a comparative study of newborn piglets.
 
 
-* Piglet Locomotor Development
-heterogeneity!
-variability!
+* How and Why Piglets Move
+The primary goal of this thesis was to falsify the hypothesis that there are differences in locomotion of low- and normal birth weight piglets (LBW and NBW, Ch. \ref{cpt:generalintro}).
+There are two main aspects in which the study groups could differ: in kinematics (/how/ animal limb segments move) and dynamics (/why/ animal limb segments move).
+And there are putatively confounding effects: age (i.e. locomotor maturation), size and weight (i.e. physical appearance) of the animals citep:Aerts2023, and the variability of locomotor behavior.
+
+
+Previous studies from our group have compared kinematics on the level of spatiotemporal characteristics of newborn piglet gait citep:VandenHole2017.
+They discussed delayed locomotor maturation as a proximal explanation of the difference which were observed.
+I could confirm this by training probabilistic models on the FCAS data of a large number of NBW piglet strides and applying it to LBW observations (Ch. \ref{cpt:piglets}).
+The models accurately predict size and weight of the LBW piglets.
+This is evidence that, when age and maturation are not considered as a model factor, low- and normal birth weight piglet locomotion are indistinguishable.
+A third model, which is constructed to guess the age of LBW observations, provides evidence of a developmental delay /post partum/.
+
+The FCAS data entering the model contains literally all kinematic data which could be used to distinguish the study groups.
+The predictive models are designed to find differences and accurately incorporate the variablilty of the phenomenon.
+The only differences found are related to the age of LBW piglets.
+There are no apparent differences related to size or weight.
+This provides strong evidence against the existence of differences in /how/ LBW and NBW piglets move.
+Their kinematics are indistinguishable.
+However, there is evidence that maturation of LBW locomotion halts aproximately four hours after birth (developmental delay).
+We suspect competition within litters and limited metabolic reserves as the reason. #TODO
+
+
+In fact, this lack of differences in the collective output of the animals neuromotor system is surprising.
+The FCAS data quantifies joint angle profiles, angles are indifferent to size.
+Yet piglets of low- and normal birth weight operate at different mass regimes: NBW are about twice as heavy as LBWs.
+To produce the same kinematics, one would think that they must tune their motors differently.
+These would be differences in /why/ we observe the movements.
+Different weight implies different physical constraints, size does matter citep:Aerts2023.
+
+Yet we encountered issues in addressing this question.
+
+
+
+* Other Objections
+yes, precocial, but how else to measure?
+piglets are great!
 
 ...
 
@@ -99,10 +136,6 @@ variability!
 * What Happened to the General Intro?
 
 
-Instead, our attempts must be to *falsify the hypothesis that there are differences in piglet locomotion*.
-
-
-But different weight might go in hand with different physical constraints, and one has to account for the trivial consequences of a different physical appearance citep:Aerts2023. #TODO
 
 
 
