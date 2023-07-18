@@ -48,7 +48,7 @@ Why/when should conventional methods be replaced by the methods suggested herein
 
 
 The two decisive analysis characteristics are the occurrence of variability, and predictive modeling.
-Variability is omnipresent in Biology, and it is surprising how many studies use statistics which blush over the fact that their model parameters are probabilistic.
+Variability is omnipresent in Biology, and it is surprising how many studies use statistics which model point estimates for actually variable measurements.
 Yet the quality criterium of predictive models is how well it can be used to predict experimental circumstances that deviate from those it was trained on.
 This refers to the distinction of descriptive, explanatory, and predictive modeling citep:Shmueli2010,Shmueli2011.
 In Biomechanics, explanatory modeling is rarely applied, because the causal theory for animal movement are physical first principles (conservation of momentum, Ch. \ref{cpt:dynamics_workflow}).
@@ -107,7 +107,16 @@ This provides strong evidence against the existence of differences in /how/ LBW 
 Their kinematics are indistinguishable.
 However, there is evidence that maturation of LBW locomotion halts aproximately four hours after birth (developmental delay).
 We suspect competition within litters and limited metabolic reserves as the reason. #TODO
+Note that these observations are restricted to walking gait at voluntary speed; we cannot exclude more obvious LBW/NBW differences at more challenging motor tasks.
+However, the apparent developmental delay in even this basic motor skill indicates the high sensitivity of the method.
+Also, the relevance of stair- or treadmill studies must be questioned for animals whose major priority is to find and access their mother's teats.
 
+
+
+#+CAPTION: XROMM using python and blender. Full video ([[https://ody.sh/fZe3OpgHGN]]) and code ([[https://git.sr.ht/~falk/foss_xromm]]) are available.
+#+LABEL: fig:piglet_xromm
+#+ATTR_LATEX: :width 12cm
+[[./figures/piglet_xromm_t02_0214.png]]
 
 In fact, this lack of differences in the collective output of the animals neuromotor system is surprising.
 The FCAS data quantifies joint angle profiles, angles are indifferent to size.
@@ -116,8 +125,28 @@ To produce the same kinematics, one would think that they must tune their motors
 These would be differences in /why/ we observe the movements.
 Different weight implies different physical constraints, size does matter citep:Aerts2023.
 
-Yet we encountered issues in addressing this question.
+Yet we encountered conceptual and practical issues in addressing this question.
+The first issue is a practical one, reported in chapter \ref{cpt:inertials}: inertial parameters, which others have extracted from calibrated CT scans, cannot be determined at sufficient accuracy.
+Then there is the issue of variability, which is evident from the study of kinematics (Ch. \ref{cpt:piglets}).
+Differences between NBW and LBW (when normalized for size, see below) seem to be lower in magnitude than the effect of maturation, and lower than normal variability of the process.
+This was only evident after performing actual 3D measurements.
+Not only are the recordings variable, but of the 392 recordings we obtained in several recording sessions in summer 2019, not a single one showed locomotion which strictly fulfilled the "steady state" criterium and gave single limb forces.
+Not a single stride could be considered "representative", because young piglets in our setup literally always tumbled, moved, jumped, sidestepped, stopped, or interfered with each other.
+The XROMM procedure is a low through-put method, and it was not possible to digitize a sufficient number of strides to assess LBW differences in joint moment orchestration.
+Finally, the software conventionally used for XROMM caused issues: due to its large dependency tree and lack of documentation, XMALab (Brown University, USA, https://xromm.org) was dysfunctional for about half a year during this PhD; Maya AudoDesk is non-free software.
 
+These issues nonwithstanding, I succeeded in porting the XROMM workflow citep:Brainerd2010 to an alternative software environment (cf. [[https://git.sr.ht/~falk/foss_xromm]], Fig. \ref{fig:piglet_xromm}).
+This workflow includes the complete calculation of inverse dynamics, i.e. joint forces and moments can be visualized.
+Except for ORS Dragonfly (Object Research Systems, Canada, https://www.theobjects.com), which was used for CT segmentation but could be replaced by 3D Slicer (Slicer Community, https://www.slicer.org), all the tools in the workflow are free and open source.
+The example animation can be viewed in blender from any perspective, and replayed at self-chosen speed.
+However, segment position glitches occur when markers leave the focal volume of the biplanar x-ray, joint forces and moments do not seem to withstand a visual quality check (their direction and magnitude are questionable), and thus an error in the computational pipeline cannot be excluded.
+However, the primary issue remains the workload of the low through-put procedure, in contrast to the high through-put demand of appropriate statistics, given the variability of locomotion.
+
+The few (three) strides which passed stability criteria, which I analyzed and visualized with XROMM techniques with considerable efforts, are not representative and cannot provide falsifying evidence with regard to birth-weight dependent differences in piglet locomotor dynamics.
+
+
+To summarize: this project provided evidence that there is little difference in /how/ LBW and NBW piglets move.
+Though differences in /why/ segments move in a particular way are unlikely in the light of this finding, methodological limitations prohibited definitive conclusions on dynamic differences in the study groups.
 
 
 * Other Objections
@@ -129,14 +158,10 @@ piglets are great!
 
 # sensitivity/error propagation analysis https://doi.org/10.3389/fbioe.2022.767914
 
-
 # Sandra study on equine inertial properties https://doi.org/10.1111/j.1469-7580.2011.01353.x
 
 
 * What Happened to the General Intro?
-
-
-
 
 
 As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
@@ -147,5 +172,6 @@ Fourth, if we measure, we must keep track measurement uncertainty.
 
 
 Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
+
 
 citep:Demuth2023

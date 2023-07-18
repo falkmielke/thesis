@@ -235,7 +235,7 @@ By documenting and discussing these failed attempts in this chapter, I hope to s
 
 
 ** Reductionist Approach
-This study follows up on the idea of using a calibrated CT scan citep:DuPlessis2013, and adds a biologically relevant test object as well as an evaluation of the error margins, which is crucial for practical use.
+This study follows up on the idea of using a calibrated CT scan citep:DuPlessis2013, and adds a biologically relevant test object as well as an evaluation of the error margins citep:Hughes2010,Arroyave2022,Myers2015, which is crucial for practical use.
 Calibration is attempted with cheap, leftover plastic pieces of known material and density, as well as commercial bone mineral calibration phantoms.
 We chose a dissected porcine femur as the object of interest of which we seek to estimate the density distribution, and thereby total mass, center of mass, and mass moment of inertia (Fig. \ref{fig:femur_scan}).
 We also attempted to validate the method on dissected animal specimens @@latex:\citep[as][]{Durston2022}@@.
@@ -496,9 +496,9 @@ We call this strategy "scaling", and it is optionally compared to the "unscaled"
 
 ** Error Propagation
 What magnitude do miscalculations of the moment of inertia have, and how much of a problem is that for calculations of joint moment?
-To evaluate this, one has to consider error propagation with the balance equations \eqref{eqn:moment_error}.
+To evaluate this, one has to consider error propagation citep:Hughes2010,Arroyave2022,Myers2015 with the balance equations \eqref{eqn:moment_error}.
 The variable \(I\) only enters the balance equations through the dynamic wrench, \(M = I \ddot\theta\).
-This function is linear, so error propagation is quite simple\footnote{We should not assume that the error in measuring \(\ddot \theta\) is zero, but will here focus only on the \(I\) component.} citep:Hughes2010,Normann2016:
+This function is linear, so error propagation is quite simple\footnote{We should not assume that the error in measuring \(\ddot \theta\) is zero, but will here focus only on the \(I\) component.} citep:Normann2016:
 #+begin_src latex
 \begin{equation}\label{eqn:moment_error}
 \Delta M = \sqrt{\left(\frac{\partial M}{\partial I}\Delta I\right)^2} = \sqrt{\left(\Delta I \ddot\theta\right)^2}
