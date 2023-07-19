@@ -236,23 +236,58 @@ Yet in the light of the present thesis, it seems more worthwile to strive for ap
 #+end_comment
 
 
-* What Happened to the General Intro?
+* Methodological Advances
+Independent of model species, this thesis presented a number of advances in locomotor studies.
+
+
+Conventional studies of kinematics mainly rely on highly derived spatiotemporal variables.
+
+Raw kinematic traces are often qualitatively compared, yet inaccessible for multivariate statistical analysis.
+Fourier Analysis methods are known and rarely used, yet a subtle completion made them more accessible for kinematic analysis: equation \eqref{eqn:affines_phase}, which determines the phase of a signal.
+Together with the delay theorem, a cyclic joined angle profile can be "rolled" around the stride cycle.
+The affine components (mean, amplitude, phase) of the joint angle profiles can be isolated, allowing a Procrustes-like alignment and more relevant quantitative comparison of temporal patterns in joint angle movement.
+
+I have demonstrated the potential of this set of mathematical tricks on a data set of ungulates (comparative/descriptive) and on an equally large data set from piglet kinematics (comparative/predictive).
+
+
+Having data in this form opens up countless possibilities for data analysis.
+
+Variability in locomotor output might be considered a nuisance, yet especially in neonates, variability and the reduction of it are a feature of the system.
+Variability enables learning and locomotor maturation; even seemingly innate neuromotor control has to pass the "reality test".
+Being able to quantify and compare this feature is a huge advantage of probabilistic models.
+Predictive modeling, in particular, can be implemented to compare groups (as demonstrated), refine model design, support hypothesis building; models can take an evolutionary, comparative, longitudinal or cross-sectional, or exploratory flavor.
+The modeling toolbox chosen herein has proven to be sufficiently adaptable to handle even complex model constructs, which relate subject characteristics, spatiotemporal variables, and raw kinematics in FCAS form.
+The achievement of the author in this field is mainly educational: probabilistic models are popular in other fields, and I daresay that few biomechanicists are fully aware of their potential.
+Consequently, all code produced for this thesis is publicly available for others to adapt and replicate.
+
+With all these data types and modeling capabilities at hand, researchers can fine tune their models to answer highly specific questions about study subjects and their locomotor development.
+
+
+In contrast to kinematic data analysis and modeling, my contribution inverse dynamic modeling is less than I hoped to achieve.
+
+As discussed above, this is due to the discrepancy in data throughput of the XROMM method, and variability of the phenomenon of interest.
+Also, initial technical misconceptions about CT scans have temporarily misled my efforts and caused visible problems in the outcome of my custom-made XROMM workflow.
+"Realization is the death of the idea" (quote attributed to Heiner Müller).
+In reaction, the "flying femur" experiment as a reductive approach enabled the understanding of all details of the workflow.
+This included a sensitivity analysis, which reveals surprising error margins for the inertial properties which enter the inverse dynamic calculations.
+A clear reminder that for anything we measure, we should put all necessary efforts into understanding the mechanistic fundamentals of our measurement, and we must keep track of measurement uncertainty.
+
+Both the reductive approach and the sensitivity analysis are advisible strategies hopefully adopted by future biomechanicists.
+
+
+It is my sincere hope that future researchers take these analysis tools, adapt and correct them where needed, and improve our understanding of how and why various animals move in different phases of their existence.
+I hope this goal excuses the extensive, tutorial-like chapters of this thesis, and I apologize if the colloquial tone of some text fragments was not to the taste of every recipient.
+Thank you for your interest in my work!
+
+
 
 
 #+begin_comment
-As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
-First, some methods loose information in processing.
-Second, methods might have trouble handling variation.
-Third, the matter is complex: just for kinematics, there are subject characteristics (age, sex, ...), spatiotemporal gait variables (speed, duty factor, clearance, ...), dynamic posture and effective range of motion, and finally coordination.
-Fourth, if we measure, we must keep track measurement uncertainty.
-
-
-Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
-
 citep:Demuth2023
 
 # sensitivity/error propagation analysis https://doi.org/10.3389/fbioe.2022.767914
 
 # Sandra study on equine inertial properties https://doi.org/10.1111/j.1469-7580.2011.01353.x
 
+The Killers - Bones
 #+end_comment

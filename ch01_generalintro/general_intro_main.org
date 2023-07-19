@@ -103,7 +103,7 @@ What does it mean if there is a significant difference in standard error of the 
 On the other hand, methods can amplify variation, by not including all parameters: imagine the "unexplained" variation within a set of recordings of piglet aged 0-10 days, but not documenting the age (which brings us to the next point).
 Third, the matter is complex: just for kinematics, there are subject characteristics (age, sex, ...), spatiotemporal gait variables (speed, duty factor, clearance, ...), dynamic posture and effective range of motion, and finally coordination.
 Stay tuned for more on this.
-Fourth, if we measure, we must keep track measurement uncertainty.
+Fourth, if we measure, we must keep track of measurement uncertainty.
 If we do not know how accurate a figure was, it is meaningless.
 We better have a potent modeling framework to incorporate all that data: if we do not incorporate all measures or fail to explain their variability, differences might be due to sampling biases and "hidden" variables.
 The falsification approach is a unifying aspect of all the chapters herein.
