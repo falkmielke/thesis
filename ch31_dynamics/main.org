@@ -83,7 +83,7 @@ This, again, is a formulation of the conservation of momentum citep:NASA2021, as
 These things seem quite intuitive: the slamming door will affect the subject upon impact.
 And because there must be movement before or after the event of interest, and because that movement changes (i.e. it is "dynamic"), the study of the conservation of momentum in moving rigid body systems is called "dynamics".
 In contrast to kinematics, dynamics are sometimes also called "kinetics", the study of motion and its causes.
-"Conservation" as it is understood in physics implies that the measure of interest (momentum) cannot be created or lost, only gets converted to another form or transferred to another object.
+"Conservation" as it is understood in physics implies that the measure of interest (momentum) cannot be created or lost, only gets converted to another form (e.g. kinetic to thermal energy by friction) or transferred to another object.
 Thus, dynamics are also linked to the calculation of transformations and transfers of energy from one form or object to another (e.g. mechanical energy transfer, dissipation of heat).
 These conversions and transformations are precisely the reason /why segments or subjects change their movement/, and we seek to quantify and model (i.e. predict) them.
 
@@ -95,15 +95,15 @@ Yet this does not imply that they are generally preferred by all experts in the 
 # (rather the contrary: they lack acceptance, despite their usefulness, which I hope to change by kindling understanding)
 In a nutshell:
 + Wrenches and quaternions are a useful computational tools for calculating rigid body dynamic models.
-+ Balance Equations are the mathematical manifestation of conservation of momentum.
-+ Reference frame considerations can simplify calculations; however, only static frame calculations result in correct joint moments.
-+ Fictitious Forces are unbalanced change of momentum. If one intends to calculate balances in an accelerating frame, include four fictitious forces: D’Alambert, Euler, Coriolis, and the Centrifugal force.
-+ Computed Tomography might be a shortcut to approximate material constants which are crucial for the calculation of dynamics (next chapter).
++ Balance Equations (see below) are the mathematical manifestation of conservation of momentum.
++ Reference frame considerations can simplify calculations; however, static frame calculations are sufficient and result in correct joint moments.
+# + Fictitious Forces are unbalanced change of momentum. If one intends to calculate balances in an accelerating frame, include four fictitious forces: D’Alambert, Euler, Coriolis, and the Centrifugal force.
++ Computed Tomography might be a shortcut to approximate structural properties which are crucial for the calculation of dynamics (next chapter).
 
 
 Once more, the herein summarized work is physics textbook knowledge, re-formulated to be more readily applied by the author to animal locomotion; as mentioned above, I consider this necessary context.
-# And once more, the premise for the presented work was "falsification": for example, instead of assuming that CT scan data is useful to easily extract inertial properties of body segments, this strategy attempts to find flaws in that procedure.
 This chapter will summarize the theory behind inverse dynamics, and point at literature references and conventions which turned out to be useful for the purpose of this thesis.
+# And once more, the premise for the presented work was "falsification": for example, instead of assuming that CT scan data is useful to easily extract inertial properties of body segments, this strategy attempts to find flaws in that procedure.
 
 
 * Dynamics: Theory
@@ -122,6 +122,7 @@ We will approach forces and moments separately, before joining them in a common 
 ** Forces
 Forces are the product of mass and an acceleration, \(F=m\ddot x\), one of Newton's laws of motion citep:Newton1687,Tipler2007.
 In fact, force is better expressed as the temporal change of linear momentum \(p\), hence \(F=\frac{d p}{d t}\) (total derivative).
+They are vector quantities (magnitude, direction) and can occasionally cancel out (superposition).
 Linear momentum is defined as follows: \(p=m\dot x\), with \(m\) the mass and \(\dot x\) the linear velocity (change of position over time).
 
 Combining these equations and applying the total derivative:
@@ -139,7 +140,7 @@ F = m \cdot \ddot x + \frac{\partial m}{\partial x} \cdot \dot x \dot x
 
 
 Because \(a=\ddot x\), the first part of the RHS expression in equation @@latex:\eqref{eqn:force}@@ is the familiar \(F=ma\).
-The second part is more enigmatic: those are "velocity product terms", i.e. the partial derivatives of the mass matrix, accounting e.g. for configuration changes of a chain of segments.
+The second part is more enigmatic: those are "velocity product terms", which involve partial derivatives of the mass matrix, thereby accounting e.g. for configuration changes of a chain of segments.
 Assuming here that mass distribution of single segments is constant (which is generally an inaccurate simplifying assumption), I will neglect that part.
 
 Hence, we get a more or less familiar equation for the Force \(F\), which tells us that the change in linear momentum (\(m\ddot x\)) must be equal to a (external) force.
@@ -148,7 +149,7 @@ Hence, we get a more or less familiar equation for the Force \(F\), which tells 
 
 ** Moments
 
-#+CAPTION: Force and Moment. A force applied further away from the hinge \(P\) (situation A) will generate a larger momentum than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the vector cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector.
+#+CAPTION: Force and Moment. A force applied further away from the hinge \(P\) (situation A) will generate a larger momentum than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector.
 #+LABEL: fig:slamming_moment
 #+ATTR_LATEX: :width 12cm
 [[./figures/slamming_shift.pdf]]
@@ -162,7 +163,7 @@ In fact, this simple physical observation explains why doors have evolved handle
 
 Otherwise, the calculation of angular quantities is largely analogous to the linear case citep:Lewin801L20,Tipler2007.
 Mass, in the force equation, is the resistance of an object to linear acceleration, i.e. to change of linear momentum \(p\).
-Analogously, Mass Moment of Inertia (\(I\)) is the resistance of an object to rotational acceleration, which induces a change in angular momentum \(L\).
+Analogously, Mass Moment of Inertia\footnote{Note that \(I\) is a matrix, usually 3-by-3; this is analogous to mass, which in its general form for complex objects is also a matrix \citep{Lynch2017}.} (\(I\)) is the resistance of an object to rotational acceleration, which induces a change in angular momentum \(L\).
 From experience, we can tell that lifting a door out of its hinge is a different process than conventionally rotating it, thought few have carried out this comparison in the absence of gravitation and friction.
 And so, the series of equations above can be applied analogously to angular momentum \(L\) (with angular velocity \(\dot \theta\)).
 \[L = I \dot \theta\]
@@ -194,7 +195,7 @@ Angular momentum \(L\) relative to point \(P\), which we denote \(L_P\), is calc
 
 From cross product properties, we see that the direction of \(L\) does not change during the slamming (stays parallel to the hinge axis), and the magnitude stays constant and greater than zero if velocity is greater than zero.
 
-In contrast, the point mass door has a different angular momentum when calculating it relative to point \(D\): the position vector \(r_DD\) becomes zero, so \(L_{D} = 0\) at all times.
+In contrast, the point mass door has a different angular momentum when calculating it relative to point \(D\): the position vector \(r_{DD}\) becomes zero, so \(L_{D} = 0\) at all times.
 This is non-intuitive: the door rotates, after all; yet remember that we are reducing it to a point mass here and \(L_{D} = 0\) only holds for the point mass case!
 Other points and non-pointmass-objects require more complex calculations, except maybe in the special case where rotation happens about the center of mass (\(COM\)).
 In this special case, we speak of "spin angular momentum", which is an intrinsic property of the object in a sense that we do not need to give a reference point any more because everyone knows that the \(COM\) is the reference point for spin angular momentum.
@@ -242,7 +243,7 @@ A mathematical shorthand for writing wrenches are square brackets and a semicolo
 
 
 ** Balance of Wrenches
-Plugging in equations \eqref{eqn:force} and \eqref{eqn:moment} from above, we get an expression for what can be referred to as the *dynamic wrench*:
+Plugging in the non-zero part of equations \eqref{eqn:force} and \eqref{eqn:moment} from above, we get an expression for what can be referred to as the *dynamic wrench*:
 #+begin_src latex
 \begin{equation}\label{eqn:dynamic_wrench}
 W_{dyn} = \left[ m\ddot x; I\ddot \theta \right]
@@ -257,13 +258,13 @@ Wrenches can be added up, for example the dynamic wrench can be easily shifted (
 #+end_src
 
 
-The \(x\) and \(theta\) in the dynamic wrench refer to the movement of the rigid body itself and are immediately derived from the object's kinematics.
+The \(x\) and \(\theta\) in the dynamic wrench refer to the movement of the rigid body itself and are immediately derived from the object's kinematics.
 The inertial properties \(m\) and \(I\) have to be measured or approximated separately (see below).
 The dynamic wrench expresses the total change of momentum of an object.
 
 
-On the other hand, we have any *external wrenches* acting on the object.
-The most important ones are the gravitational wrench, friction wrench, and the tip wrench.
+On the other handside of the equation, we have any *external wrenches* acting on the object.
+The most important ones are the gravitational wrench, friction wrench, and the tip wrench (stay tuned).
 \[W_{g} = \left[ mg; 0 \right]\]
 \[W_{f} \approx \left[ 0; 0 \right]\]
 \[W_{tip} = \left[ F_{tip}; M_{tip} \right]\]
@@ -304,7 +305,7 @@ Interested readers may refer to a practical guide by the author citep:Mielke2020
 
 ** Quaternions
 On top of the force/moment complexity comes the issue of quantifying rotation in space.
-Angular momentum depends on angular acceleration \(\ddot\theta\), which is a temporal derivative of "angle".
+Angular momentum depends on angular acceleration \(\ddot\theta\), which is the second temporal derivative of "angle".
 But getting that angle in 3D is not exactly trivial, and there are several complementary notations.
 
 
@@ -328,8 +329,8 @@ There also exists a conjugate, \(q^{-1}\):
 
 
 And this object allows for convenient spatial rotation, by almost-simple multiplication:
-take any 3D point \(P\) with 4D coordinates \(0, a, b, c\):
-\[P_{rot} = q\cdot P\cdot q^{-1}\]
+take any 3D point \(D\) with 4D coordinates \(0, a, b, c\), e.g. the door handle point from our example: after rotation, it will be \(D_{rot}\), which can be calculated by.
+\[D_{rot} = q\cdot D\cdot q^{-1}\]
 
 The dot "\(\cdot\)" is just vector multiplication, and computational tools can handle this operation quickly and efficiently.
 Better yet, one can stack quaternions by (non-commutatively) multiplying them:
@@ -370,7 +371,7 @@ The theoretical considerations above assemble several technical advantages which
 These favorable technical properties have not gone unnoticed citep:Dumas2004,Dumas2007.
 Dumas et al. (2004) presented a numeric procedure to perform segment-wise balance of wrenches @@latex:\citep[equation 15 in][]{Dumas2004}@@.
 This enables the complete solution of inverse dynamic problems with a single, easy to apply numeric formula.
-Dumas /et al./ have provided and since improved an implementation of their procedure in Matlab citep:DumasMatlab.
+Dumas /et al./ have provided and since then improved an implementation of their procedure in Matlab citep:DumasMatlab.
 
 
 The author of this thesis has reproduced that procedure in python, both numerically and analytically citep:Mielke2021id.
@@ -454,7 +455,7 @@ Yet note already that these four effects violate an assumption above: the veloci
 \clearpage
 * Summary
 This chapter serves as a brief overview of the basic methodology of inverse dynamics.
-This method exploits the fundamental physical phenomenon of conservation of momentum to model and predict the movement of systems of more or less rigid bodies.
+This method exploits the fundamental physical phenomenon of conservation of momentum to model and infer the reasons for movement of systems of more or less rigid bodies.
 I outlined the general procedure, and documented the specific procedure applicable to inverse dynamic measurements of quadruped, terrestrial locomotion.
 
 
