@@ -116,11 +116,11 @@ Conversely, *inverse dynamics* is a second problem which describes the inference
 For example, from observing (i.e. measuring) a hinge door moving at a certain angular velocity, we can calculate the force and moment the experimentor has applied previously to set it in motion.
 The study of animal locomotion is mostly concerned with this second, inverse situation.
 The central quantities are "forces" and "moments", the latter being a physical quantity related to forces and involved in rotational movement.
-We will approach forces and moments separately, before joining them in a common framework.
+I will approach forces and moments separately, before joining them in a common framework, by first explaining how force is related to linear momentum (a measure for the motion of a system), how this is analogous to moment and angular momentum, and finally how these concepts are applied in practice.
 
 
 ** Forces
-Forces are the product of mass and an acceleration, \(F=m\ddot x\), one of Newton's laws of motion citep:Newton1687,Tipler2007.
+Forces are the product of mass and an acceleration, \(F=m\ddot x\) (or, more familiar to most, \(F=ma\)), which is one of Newton's laws of motion citep:Newton1687,Tipler2007.
 In fact, force is better expressed as the temporal change of linear momentum \(p\), hence \(F=\frac{d p}{d t}\) (total derivative).
 They are vector quantities (magnitude, direction) and can occasionally cancel out (superposition).
 Linear momentum is defined as follows: \(p=m\dot x\), with \(m\) the mass and \(\dot x\) the linear velocity (change of position over time).

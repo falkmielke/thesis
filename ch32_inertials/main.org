@@ -60,7 +60,7 @@ I will start by giving a brief intro to crucial aspects of CT scanning technolog
 ** Emission and Absorption
 Visible light and x-ray radiation are, to a large degree, analogous.
 The reason for this is that both are just electromagnetic radiation; they differ in wavelength and thereby energy.
-To illustrate what is happening with x-ray light during a CT experiment, I will use the analogy of visible light.
+To illustrate what is happening with x-ray light during a CT measurement, I will use the analogy of visible light.
 
 
 On some military signal flashlights, one can set the light to be white (i.e. bulb spectrum, unfiltered) or filtered either red or green, sometimes a third color.
@@ -75,7 +75,7 @@ Because red photons pass the filter, the filtered spectrum will be predominantly
 Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyll, which absorbs some non-green (e.g. red) wavelengths of light very well (Fig. \ref{fig:spectrum}, green curve).
 The ensemble of non-absorbed photons appears green to us, which is why leaves generally appear green to our view.
 But leaves only appear green if there is a green content in the incident light!
-Green leaves will look red under red light.
+Green leaves will look red under red light (and "darker", i.e. lower number of reflected photons than for an equal input intensity of green light).
 Contrary to internet myth, the military use case of red flashlight would be an operation which requires as inconspicuous light as possible in a vegetated environment.
 Red light will hardly reflect from gras or bush, and can therefore reduce the chance of being spotted at night by enemy surveillance.
 If you want to avoid being seen while looking for something in a dark forest, use a red flashlight.
@@ -90,12 +90,12 @@ If you want to avoid being seen while looking for something in a dark forest, us
 To characterize light which is emitted, reflected, or absorbed, one can plot a spectrum (Fig. \ref{fig:spectrum}).
 Red LED's are an alternative to red filters: they immediately produce a spectrum which is biased towards low frequencies.
 We can assess that red LEDs have a different *source spectrum or emission spectrum* than white LEDS or "vintage" (tungsten) light bulbs.
-If the light from a white source is filtered (e.g. by a red sheet of thin plastic), the spectrum is altered.
+If the light from a white source is filtered (e.g. by a red sheet of thin, translucent plastic), the spectrum is altered.
 A red LED viewed through a green-pass filter (e.g. a leaf) might appear to be "off", when really power is "on", because the majority of photons are absorbed by the filter.
 
 In fact, light hitting /any/ object will change its spectral composition, depending on the material's *absorption, transmission, and reflection spectrum*.
 This is also a filtering process: the outgoing light will depend on the incoming spectrum and the material properties of the object.
-Plant leaves will almost entirely absorb a narrow band of red light.
+Plant leaves will almost entirely absorb a narrow band of incoming red light.
 Interactions of photons and matter crucially depend on the energy/frequency/wavelength of the photons, and the energetic/vibrational/resonant molecular properties of the matter.
 A (differential) spectrum is a way to depict a wavelength dependence.
 
@@ -107,7 +107,7 @@ A (differential) spectrum is a way to depict a wavelength dependence.
 
 The situation is exactly analogous for x-rays citep:Berger2018,Buzug2008.
 X-rays are also photons, just at a different wavelength (range \(10pm - 10nm\)).
-X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...), shot at with an electron beam which is evoked by applying voltage (e.g. \(60 kV\)) to the anode and a warmed-up kathode.
+X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...), shot at with an electron beam which is evoked by applying voltage (e.g. \(60 kV\)) to the warmed-up anode and kathode.
 When hit by electrons, the target will emit x-ray photons of a specific composition of energies (spectrum, Fig. \ref{fig:xray_emission}).
 The source emission is generally *polychromatic*, i.e. consisting of multiple colors/energies (just as the spectra in Figs. \ref{fig:spectrum} and \ref{fig:xray_emission}).
 Most household CT scanners (in contrast to synchrotrons) have a polychromatic source.
@@ -161,7 +161,7 @@ Another group of so-called artifacts might stem from the choice and limitations 
 There are iterative/algebraic and analytical reconstruction methods citep:Gilbert1972,Andersen1984,Feldkamp1984,Geyer2015,Hansen2021, all of which have their specific limitations.
 These algorithms are constantly refined and improved by capable scientists, and specific algorithm variants can already overcome specific scan limitations @@latex:\citep[e.g.][]{Six2019,Frenkel2022}@@.
 In the future, the question of reconstruction artifacts will rather be one of algorithm choice.
-The most common reconstruction algorithm, used in a vast majority of the CT service facilities with cone-beam setups, is "filtered backprojection" (FBP, or Feldkamp/Davis/Kress = FDK algorithm).
+Today, the most common reconstruction algorithm, used in a vast majority of the CT service facilities with cone-beam setups, is "filtered backprojection" (FBP, or Feldkamp/Davis/Kress = FDK algorithm).
 
 
 To summarize: scan artifacts, if we want to use that label, are perfectly normal.
@@ -170,8 +170,8 @@ Artifacts are interpreted as "something is not as it is supposed to be", despite
 Artifacts are in conflict with our psychological image of the real world: metal beads do not look like "stars" (radial light rays) to us in the real world, so we reject the image.
 I suspect that the major reason we still perceive artifacts as problematic is that we actually think of matter and physical objects as a distribution of density, i.e. a mass distribution, whereas x-ray scanning really yields a distribution of x-ray attenuation.
 
-On the other hand, if we assume that density cannot be recovered from attenuation images, the only appropriate way to measure an exact mass distribution of an object would be to slice it into little voxel cubes and weigh each of them.
-In that sense, computational tomography is certainly a time-saving alternative.
+On the other hand, if we assume that density cannot be recovered from attenuation images, the only appropriate way to measure an exact mass distribution of an object would be to physically slice it into millions of little voxel cubes and weigh each of them.
+Compared to that option, computational tomography is certainly a time-saving alternative.
 
 
 Yet it must be kept in mind that x-ray images do not quantify density, they quantify attenuation, most often lumped over a spectrum.
@@ -179,10 +179,10 @@ Yet it must be kept in mind that x-ray images do not quantify density, they quan
 
 ** Density Approximations: Two Case Studies
 The fact that two physical properties (attenuation and density) are fundamentally different things does not imply that researchers cannot use one to measure the other.
-Scientists have repeatedly suggested and attempted to convert CT scan gray values to approximate density citep:DuPlessis2013,Durston2022.
+Scientists have repeatedly suggested and attempted to convert CT scan gray values to approximate density, which I will discuss on two examples citep:DuPlessis2013,Durston2022.
 
 
-For example, citet:DuPlessis2013 acknowledge difficulties of accuracy and repeatability in extracting density from CT data.
+citet:DuPlessis2013 acknowledge general difficulties of accuracy and repeatability in extracting density from CT data.
 
 They then average gray values of putatively homogeneous blocks of polymer plastic material, apply linear regression which, as they point out themselves, does not appropriately cover two of the measured data points.
 The latter problem is attributed to differences in chemical composition (without discussing the known composition of the objects).
@@ -191,10 +191,10 @@ Note that this version of DECT is not really "dual" energy: the spectrum of ener
 A better differential would have been achieved by incorporating metal filters in the \(230\ kV\) scan.
 Nevertheless, comparing the calibration line and the DECT ratio results, the putative outliers do not stand out more than other regression elements (especially PTFE puts the original regression in doubt: it is perfectly fit by the calibration regression, is a modest outlier on the DECT ratio, despite a special chemical composition containing fluorine).
 
-For a toy pig of unknown plastic material, the authors get higher than actuall mass estimates; they identify chlorine and calcium content as the cause.
+For a toy pig of unknown plastic material, the authors retrieve higher than actuall mass estimates; they identify chlorine and calcium content as the cause.
 On another unknown sample which is assessed to be "similar enough" in chemical composition, they retrieve an accurate prediction.
 The authors do not quantify or report measurement uncertainty which manifests in gray value distributions, suboptimal regression goodness of fit and potentially high regression sensitivity (PTFE), or other sources of variability citep:Macaulay2017.
-Finally, they destroyed a toy pig for the study, which cannot be excused.
+Finally, they destroy a toy pig for the study, which cannot be excused.
 
 In a nutshell, citet:DuPlessis2013 attempt density prediction in a particular use case (homogeneous, chemically identical objects) and suggest a DECT ratio to assess chemical composition.
 
@@ -236,9 +236,9 @@ By documenting and discussing these failed attempts in this chapter, I hope to s
 
 ** Reductionist Approach
 This study follows up on the idea of using a calibrated CT scan citep:DuPlessis2013, and adds a biologically relevant test object as well as an evaluation of the error margins citep:Hughes2010,Arroyave2022,Myers2015, which is crucial for practical use.
-Calibration is attempted with cheap, leftover plastic pieces of known material and density, as well as commercial bone mineral calibration phantoms.
-We chose a dissected porcine femur as the object of interest of which we seek to estimate the density distribution, and thereby total mass, center of mass, and mass moment of inertia (Fig. \ref{fig:femur_scan}).
-We also attempted to validate the method on dissected animal specimens @@latex:\citep[as][]{Durston2022}@@.
+Calibration is attempted with cheap, leftover plastic pieces of known material and density, as well as commercial bone mineral density calibration phantoms.
+I chose a dissected porcine femur as the object of interest of which I seek to estimate the density distribution, and thereby total mass, center of mass, and mass moment of inertia (Fig. \ref{fig:femur_scan}).
+I also attempted to validate the method on dissected animal specimens @@latex:\citep[as][, but less sophisticated]{Durston2022}@@.
 
 #+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was fixed ("mounted") in a PET bottle to fit into the cylindrical scan volume of [[https://www.uantwerpen.be/en/research-groups/vision-lab/x-ray-imaging-resear/flexct][the FleXCT scanner of the University of Antwerp]]. The image on the left shows the sample mount, magnified on the inset. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
 #+LABEL: fig:femur_scan
@@ -250,7 +250,7 @@ The hypothesis that CT images are a valid approximation of physical density is a
 The following relevant questions remain:
 + Are the cheap plastic parts appropriate calibration options for organic tissue?
 + How far off the true value is the calculated mass moment of inertia, i.e. what is the measurement error?
-+ How much do known artifacts contribute to the measurement error?
++ How (much) exactly do known artifacts contribute to the measurement error?
 
 
 It should be pointed out that preliminary (naïve) results of this study were first presented at the [[http://mielke-bio.info/falk/posts/26.seb2021][conference of the Society of Experimental Biology (SEB) in 2021]], one year prior to the citet:Durston2022 study.
@@ -327,7 +327,7 @@ Virtual segments were processed with the density regression procedure (see below
 | current          | \(\approx 360 mA     \) |
 | filter           | \(1.0 mm\ Al   \) |
 | detector field   | \(1920\times 1896 px\) |
-| pixel size       | \(0.15 mm      \) |
+| pixel size       | \((0.15 mm)^{2}   \) |
 | exposure time    | \(50 ms        \) |
 | averages         | \(3            \) |
 | projections      | \(2879         \) |
@@ -341,7 +341,7 @@ Virtual segments were processed with the density regression procedure (see below
 
 The scan was performed on a customized Tescan Unitom XL, with appropriate settings (Tab. \ref{tab:ct_settings}).
 The \(1.0 mm\) Aluminium filter plate and the relatively high voltage were chosen to reduce beam hardening and metal bead artifacts (see below).
-Three averages indicate that every projection is the average of three scan images from the same angle, which is a common trick to reduce pixel noise.
+Three "averages" indicate that every projection is the average of three scan images from the same angle, which is a common trick to reduce pixel noise.
 Scan geometry was set to give sufficient resolution at reasonable scan duration.
 The reconstruction value range was chosen to cover the entire histogram, excluding the metal beads, which gives best dynamic range on the plastic and organic tissue.
 
@@ -365,7 +365,7 @@ All code used on this project, including python implementations of the mathemati
 Of course, if e.g. the mass of a bone is to be calculated, one intends to sum up the mass of only the bone, excluding the mass of the surrounding air or support material.
 A preliminary step to calculate inertial properties from CT scans is the segmentation of the scan.
 Segmentation is the separation of the "relevant" and "irrelevant" sub-volumes within the image stack, in this case the bone and the surrounding air or background.
-More generally, limb segments which are treated as a unit have to be labeled in dedicated software (e.g. [[https://www.slicer.org][3D Slicer]]), typically with a kind of "color brush" or "magic wand" tool; thresholding of grey values, boolean operations, and other tricks may simplify the segmentation procedure in certain situations.
+More generally, limb segments which are treated as a unit have to be labeled in dedicated software (e.g. [[https://www.slicer.org][3D Slicer]]), typically with a kind of "color brush" or "magic wand" tool; thresholding of grey values, boolean operations, algebraic operations ("filling" etc.), and other tricks may simplify the segmentation procedure in certain situations.
 The outcome is a 3D boolean mask which can be used to distinguish the voxels in the scan which are associated with the bone of interest.
 
 This step might seem trivial, time consuming, yet necessary, and indeed it is all of that.
@@ -396,13 +396,14 @@ The outcome is the three-by-one position vector of the center of mass (COM, shor
 
 
 *** Mass Moment of Inertia
-As stated before, mass moment of inertia is the resistance of an object to angular acceleration.
+As stated before, mass moment of inertia is a tensor (speak: \(3\times 3\) matrix) which measures the resistance of an object to angular acceleration.
 It can be calculated for any rigid body (see Fig. \ref{fig:inertials}) via an integral formula over all volume elements citep:WikipediaMOI:
 #+begin_src latex
 \begin{equation}\label{eqn:mmoi}
- I = \sum\limits_{i \in V} m_{i} \left( \lVert r_{i} \rVert ^2 E_3 - r_{i} \otimes r_{i} \right)
+ I = \sum\limits_{i \in V} m_{i} \left( \lVert r_{i} \rVert^{2}E_3 - r_{i} \otimes r_{i} \right)
 \end{equation}
 #+end_src
+
 ... with the rigid body's volume \(V\) split up into voxels \(i\) which have mass \(m_i\) and position vector \(r_{i}\); \(E_{3}\) is the \(3\times 3\) identity matrix and \(\otimes\) the outer product.
 
 Initially, this is always calculated with respect to the COM as reference point, the algorithm usually includes subtracting the COM from the position vectors.
@@ -445,7 +446,7 @@ Convergence was supported by setting meaningful parameter start values close to 
 
 Ideally, all measured points would lie on either of these functions.
 Yet that turns out not to be the case in the actual data.
-Subsets of the calibration objects were selected for the regression to be plausible: one group were air and the plastic parts, which approximate a linear relation; the other group were air, water, and the two bone mineral density phantoms, which seem to follow an exponential relation.
+Subsets of the calibration objects were selected for the regression to be plausible: one group were air and the plastic parts, which approximate a linear relation; the other group were air, water, and the two bone mineral density phantoms, which seem to follow an exponential relation; the sample labeled "PVC" was plausible for neither group and excluded.
 
 
 #+begin_comment
@@ -464,7 +465,7 @@ The PTFE cylinder has almost ideal cylindrical shape, and was well aligned with 
 The object was segmented and cropped out of the whole scan so that the long axis of the cylinder aligns with the center of the cropped volume.
 
 
-Beam hardening manifests in a radial attenuation gradient in objects: superficial layers which are reached first by x-ray beams seem to attenuate more than internal volume elements.
+Beam hardening manifests in a radial attenuation gradient in objects: superficial layers which are reached first by x-ray beams seem to attenuate more (in absolute terms) than internal volume elements, because they receive a higher input radiation; the inner elements are partially shielded by the outer elements.
 The attenuation gradient produces a cup-like profile in the gray value images, which is why beam hardening of cylinders is called "cupping".
 To quantify the amount of cupping, the cylinder was transformed to cylinder coordinates (scikit image/transform/warp polar, \nolinkurl{https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.warp_polar}), and then flattened by averaging along its vertical (long) axis.
 # https://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.warp_polar
@@ -498,7 +499,7 @@ We call this strategy "scaling", and it is optionally compared to the "unscaled"
 What magnitude do miscalculations of the moment of inertia have, and how much of a problem is that for calculations of joint moment?
 To evaluate this, one has to consider error propagation citep:Hughes2010,Arroyave2022,Myers2015 with the balance equations \eqref{eqn:moment_error}.
 The variable \(I\) only enters the balance equations through the dynamic wrench, \(M = I \ddot\theta\).
-This function is linear, so error propagation is quite simple\footnote{We should not assume that the error in measuring \(\ddot \theta\) is zero, but will here focus only on the \(I\) component.} citep:Normann2016:
+This function is linear in \(I\), so error propagation is quite simple\footnote{We should not assume that the error in measuring \(\ddot \theta\) is zero, but will here focus only on the \(I\) component.} citep:Normann2016:
 #+begin_src latex
 \begin{equation}\label{eqn:moment_error}
 \Delta M = \sqrt{\left(\frac{\partial M}{\partial I}\Delta I\right)^2} = \sqrt{\left(\Delta I \ddot\theta\right)^2}
@@ -525,16 +526,16 @@ Yet \(\Delta COM\) also depends non-trivially on the relative mass of volume ele
 With this last equation we have lined out how the target parameter, \(I\), ultimately depends on mass elements \(m_{i}\) and their position in different ways.
 
 
-In practical terms, the expected error can be readily computed by iteratively changing the variables of interest by a percent, to infer how "a percent change" in a parameter effects the result of the calculation.
+In practical terms, the expected error can be conveniently computed by iteratively changing the variables of interest by a percent, to infer how "a percent change" in a parameter effects the result of the calculation.
 This is a numerical *"sensitivity analysis"*.
-From the analytical considerations above, we can see that the variables to change in the numeric computation are the regression parameters (\(\pm 5\%\) of their value), the COM position \(\pm 5\%\) of femur length, \(0.25 mm\) in each direction), and the total mass (\(\pm 5\%\), which are \(0.26 g\)).
+From the analytical considerations above, we can see that the variables to change in the numeric computation are the regression parameters (\(\pm 5\%\) of their value), the COM position (\(\pm 5\%\) of femur length, \(0.25 mm\) in each direction), and the total mass (\(\pm 5\%\), which are \(0.26 g\)).
 
 
 ** Error Estimation
 Calculating the effect of an error is only one part of sensitivity analysis.
 The second, equally relevant part is an estimate of how uncertain parameter estimates actually are.
 A great way to measure this are probabilistic statistics (Ch. \ref{cpt:statistics}).
-Besides yielding outcomes for the intercept and slope, they also allow to estimate the uncertainty of these parameters by sampling a model residual error.
+Besides yielding outcomes for the intercept and slope, they also allow to estimate the uncertainty of these parameters by sampling a model residual.
 
 
 To estimate the uncertainty in the density regression, I repeated the procedure in a probabilistic modeling framework @@latex:\citep[PyMC, Version 5.6,][]{Salvatier2016}@@.
@@ -543,7 +544,7 @@ The linear regression function was almost unaltered:
 
 
 In this framework, the residual \(\varepsilon\) is calculated, measuring how much residual difference remains after optimization of the regression parameters.
-In a linear regression, \(\varepsilon\) corresponds to an uncertainty in slope.
+In a linear regression, \(\varepsilon\) corresponds to an uncertainty in intercept (it affects all calibration objects alike).
 Beyond the standard model residual, I introduced \(\varepsilon_{j}\), with index \(j\) referring to the materials used for calibration.
 Each material thus receives its own residual, all of which are drawn from a higher level normal \(\varepsilon\) (hierarchical model design).
 This helps to account for systematic increase of the gray value uncertainty with increasing density ("widening" of the distribution), as it was also observed in citet:DuPlessis2013.
@@ -560,7 +561,7 @@ The posterior distributions were calculated from the last \(4\cdot 2^{12}\) samp
 Gelman-Rubin statistics and trace plots indicated convergence and well-behaved sampling.
 
 
-One important distinction from least squares regression is that it does not require averaging of the observed gray values.
+One important distinction from least squares regression is that probabilistic regression does not require averaging of the observed gray values.
 Hence, the regression took a large number of voxels into account, capturing the variability in gray values of the homogeneous polymer materials.
 A subset of \(10000\) randomly selected voxels per material were added to the data array.
 Subsetting is necessary because the number of observations adds computational load for the MCMC sampler.
@@ -575,7 +576,7 @@ Subsetting is necessary because the number of observations adds computational lo
 #+ATTR_LATEX: :width 16cm
 [[./figures/regression.pdf]]
 
-To establish a transform function which can convert CT gray values \(\gamma\) to physical density \(\rho\) and back, we compared different regression functions which fit the observed gray values of different polymer materials of known densities (Fig. \ref{fig:density_calibration}).
+To establish a transform function which can convert CT gray values \(\gamma\) to physical density \(\rho\) and back, we compared different regression functions which fit the observed gray values of different polymer- and other materials of known densities (Fig. \ref{fig:density_calibration}).
 
 The random plastic parts obtained from the workshop have known densities, and most of them show a linear relation when plotting \(\gamma\) against \(\rho\).
 The exception is PVC, which was therefore excluded from the regression (whether it was truly PVC, or a mislabeled different polymer, cannot be assessed retrospectively).
@@ -605,7 +606,7 @@ We conclude that, at least for a femur, the regression method is not reliable.
 To exclude that problems arose from the special composition of this isolated bone, we applied a similar regression method to more complex data.
 
 In a second experiment, a piglet body was CT scanned, virtually segmented, and analogously physically dissected to see whether the total calculated masses of the virtual segments match their actual counterparts.
-The corresponding scan was performed at a different facility and long before the density calibration experiments, and thus the only available calibration points were air, water, and two density calibration phantoms.
+The corresponding scan was performed at a different facility and long before the density calibration experiments, and at the time the only available calibration points were air, water, and two density calibration phantoms.
 # Consequently, an exponential regression was used to convert gray values to density.
 Although an exponential regression was used (under-estimation in case of the femur), this virtual density conversion leads to a considerable over-estimation of the mass of most of the segments, and the specimen total.
 
@@ -654,13 +655,13 @@ The contradicting results highlights how erratic the digital density approximati
 #+ATTR_LATEX: :width 18cm
 [[./figures/cupping_results.pdf]]
 
-To evaluate what effect beam hardening will have on the calculated mass moment of inertia, we simulated beam hardening on a well described PTFE cylinder within the scan volume.
+To evaluate what effect beam hardening has on the calculated mass moment of inertia, we simulated beam hardening on a well described PTFE cylinder within the scan volume.
 
 The only reliable recovery of the true mass moment of inertia (Fig. \ref{fig:cupping_results}B, horizontal lines) is found to be if there is exactly zero cupping.
 This generally holds for homogeneous objects: moment of inertia is determined by the geometric distribution of mass elements around the COM; iff the relative mass of all mass elements are well approximated by the density regression (which is only and exclusively the case in homogeneous objects), and iff cupping is negligible, then we can calculate appropriate \(I\) values.
 However, if the object is non-homogeneous (as a femur, or a cylinder with considerable cupping), then the relative density of voxels are not appropriately covered, and \(I\) will be incorrect.
 If there are *any beam hardening or streak artifacts*, which is non-trivial to remove from FBP reconstructed scans, *the moment of inertia will be incorrect*.
-Mass scaling, which was suggested as a strategy to recover density distribution, will produce erroneous moments of inertia if artifacts are present.
+Mass scaling, which was suggested as a strategy to recover total mass from density distribution, will produce erroneous moments of inertia if artifacts are present.
 Attention should also be put on the units of the calculated mass moments of inertia: it is in the order of \(10^{-7} kg m^2\) for this cylinder.
 This is small, justifying extra attention to numeric accuracy of computational methods as well as sources of physical inaccuracy (e.g. COM miscalculation).
 # (2) Using "constant" regression (i.e. modelling uniform mass distribution) will only produce accurate inertia for homogeneous objects.
@@ -680,7 +681,7 @@ We conclude that the chance of getting an accurate measurement for mass moment o
 Another typical kind of artifacts in CT scans appear around metal beads (Fig. \ref{metal_artifacts}).
 
 Metals are chemical elements with overproportionally higher x-ray attenuation than carbohydrate compounds.
-They absorb a large fraction of the incoming radiation, demanding the use of hight energy for sufficient penetration to avoid shadows arising from missing information in the projections, which can be detrimental to contrast on softer tissue.
+They absorb a large fraction of the incoming radiation, demanding the use of higher energy for sufficient penetration to avoid shadows arising from missing information in the projections; yet higher energy can be detrimental to contrast on softer tissue.
 The shadows appear as "streaks" or "starbursts" on CT scans, they complicate segmentation, and are unwanted in XROMM visualizations citep:Brainerd2010.
 As with other artifacts, metal bead artifacts have their source in limitations of the tomographic method (limited dynamic range, rotationally symmetric scan geometry), and might be corrected by appropriate counter-measures.
 Beam hardening reduction by using metal filter plates can improve dynamic range and contrast (at the cost of exposure).
@@ -731,7 +732,7 @@ This is an artificial adjustment, changing the COM without a change in mass, but
 Mass changes seem to affect all inertia axes alike, whereas the error due to COM shift affects the axes differently.
 Finally, the exponential regression leads to a moderate shift in COM (\(0.25 mm\)), but a considerable underestimation of mass (\(-29 \%\)) and moment of inertia (\(-32 \%\)).
 
-These simulations confirm that moment of inertia crucially depends on the mass that is assigned to each voxel in the CT data set; the relative error in the outcome can even exceed the input inaccuracy.
+These simulations confirm that moment of inertia crucially depends on the mass and position assigned to each voxel in the CT data set; the relative error in the outcome can even exceed the input inaccuracy.
 
 
 #+CAPTION: Probabilistic density regression result. Traceplot showing the posterior distributions of model parameters (left) and sampling traces (right). The "uncertainty" (\(\varepsilon\)) quantifies the hierarchical model residual, i.e. the total uncertainty remaining after convergence. The colored distributions for "sigma" are the material-wise uncertainties in the gray values.
@@ -746,7 +747,7 @@ The result for the model residual \(\varepsilon\) is \(0.024 \pm 0.008\), which 
 Note that reference to the intercept here is in line with using a percent adjustment of the regression parameters above; a more realistic estimate for "percent mass change" would be the average gray value of the femur (\(0.39 \longrightarrow 6.3\%\)); that value is also in the range of the mass adjustment simulated above.
 Furthermore, the material-wise residuals \(\varepsilon_{j}\) turn out to increase with increasing density, yet that overall trend is not systematic for each material.
 The specific uncertainty for air is lowest of all materials with \(0.011\), whereas the specific uncertainty for PTFE is \(0.021\).
-The highest uncertainty is measured for HMPE (\(0.23\)) and polycarbonate (\(0.27\)), potentially indicating that these objects were less homogeneous than for example PTFE.
+The highest uncertainty is measured for HMPE (\(0.023\)) and polycarbonate (\(0.027\)), potentially indicating that these objects were less homogeneous than for example PTFE.
 Overall, one can attribute roughly half of the model residual to uncertainty in the slope.
 
 These results indicate that the \(5\%\) error margins used above are rather conservative estimates: the actual uncertainty is higher, and affects both the slope and the intercept.
@@ -806,7 +807,7 @@ A COM miscalculation might cause errors of less magnitude, but those are not nec
 
 Yet by far the greatest effect was due to a change in the regression type, switching from linear to exponential.
 Neither of these is accurate, yet in the absence of a model which covers the nature of attenuation (which would rather have to adjust the reconstruction algorithm than the regression), there is no other reasonable option.
-The exponential fit seemed plausible from the BMD phantoms.
+The exponential fit seemed plausible from the BMD phantoms, which are designed to resemble ossified tissue.
 The majority of observed femur gray values were not far off the exponential regression line.
 Nevertheless, the calculated moment of inertia was about \(30\%\) off the reference.
 Note that this error is the sum of both an over-estimation in the linear reference regression, and an under-estimation of \(I\) in the exponential attempt.
@@ -815,9 +816,10 @@ A shortcoming of the present study is that we are unable to determine a "ground 
 
 
 Nevertheless, our findings have practical application.
-Any regression should be as accurate as possible (optimal exposure and dynamic range, noise reduction e.g. by more averaging, more/diverse calibration objects).
+Any regression should be as accurate as possible (optimal exposure and dynamic range, noise reduction e.g. by more averaging, beam hardening filter, more/diverse calibration objects).
 A probabilistic regression is favorable, since it yields error margins for the regression parameters.
 With those, a sensitivity analysis can and should be performed.
+Results we obtain are technically accurate, confirming that cheap plastic parts are sufficient and might be preferred in most situations over expensive calibration phantoms.
 
 
 I also evaluated scaling voxel-wise density so that the mass matches the known total mass is not an option: it can amplify issues from beam hardening (Fig. \ref{fig:cupping_results}) or from marker streaks and thus make the outcome more unpredictable.
@@ -838,7 +840,7 @@ Sensitivity is high, so are the measured error margins, which implies that poten
 Yet whether or not an error margin is "fatal" also depends on the field of application.
 The purpose of the inertial estimation is to calculate joint moments in an inverse dynamic workflow.
 Joint moments of a limb in ground contact are dominated by the ground reaction force, i.e. by the gravitational load of the animal.
-For grounded limbs, the inertial properties of the limb segments themselves are negligible, and studies of high joint load will have little to worry about.
+For grounded limbs, the inertial properties of the limb segments themselves are negligible (order of magnitude of limb segment mass /versus/ total mass), and studies of high joint load will have little to worry about.
 
 In contrast, when calculating the inertia of limbs in the swing phase, the inertial components dominate the joint moment calculations.
 In those cases, measurement inaccuracy should receive a close inspection.
@@ -846,9 +848,10 @@ In those cases, measurement inaccuracy should receive a close inspection.
 
 There is another aspect to the miscalculation of inertials: the "rigid body" assumption.
 Segments /in vivo/ are not rigid.
-Anisometric muscle contractions will shift the COM and might even rotate the inertial axes.
+Anisotropic muscle contractions will shift the COM and might even rotate the inertial axes.
 Changing the configuration of a limb (e.g. flexing a leg during swing phase) is known to have a profound (usually favorable) effect on the compound limb inertia.
 
+Another factor is the preservation of the specimen (frozen in this case; formol, alcohol, staining, ...) which has an influence on the chemical composition and inertial properties (not assessed herein).
 Finally, in vivo movements are often restricted to one or few axes.
 If a femur swings forward, it might slightly rotate around its long axis, however the most relevant rotational movement is induced around the mediolateral axis.
 Thus, that inertial component demands close attention.
@@ -893,6 +896,8 @@ There is no "density tomography", and common alternative methods suffer from equ
 # , CAD models
 Using attenuation values to calculate densities might be about as accurate as setting \(\pi \equiv 3\) in physics classes (a totally valid thing to do, if at the same time setting \(g \equiv 10\)).
 Yet when knowing and avoiding typical pitfalls (beam hardening, metal beads, symmetries), and when keeping track of error magnitudes (by performing a sensitivity analysis, involving e.g. Gaussian error propagation and probabilistic regression), the calculated inertials might be a just sufficiently accurate approximation of the true values.
+
+
 
 
 
