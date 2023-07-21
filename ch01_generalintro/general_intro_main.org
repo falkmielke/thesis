@@ -113,7 +113,7 @@ The falsification approach is a unifying aspect of all the chapters herein.
 Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
 
 
-** TODO Baboons
+** Baboons
 There also is a limitation to piglets.
 Or, rather, I consider it a bonus.
 They have two extra limbs on the ground, thus four limbs in total.
@@ -146,8 +146,33 @@ On the downside, baboons are less readily available, also for dynamic measuremen
 Hence it is good to keep both model species in the loop.
 
 
-* TODO Why Locomotion?
-# As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
+* Why Locomotion?
+Fix a single solid metal rod to a support with a frictionless cylindrical joint, deflect it by a small angle, and let gravity do its predictable magic.
+This is a simple oscillator, a "physical pendulum", which physics professors enjoy assigning to their students as calculation exercise citep:2022Pendulums.
+
+Now add a second such element, another cylindrical joint and metal rod.
+Something astonishing happens: we get chaos citep:2021Chaos.
+Even more fun to calculate.
+Due to miniscule variations in the initial conditions of this system, it cannot be solved deterministically any more.
+
+Animal limbs resemble the physical pendulum: they have more restrictive joints, yet usually even more segments.
+We should expect chaos on this system.
+
+
+But chaos is not what we observe, quite the contrary.
+Locomotor movements are highly targeted, i.e. pseudo-deterministic, often repetetive.
+Variations (though ubiquitous) are minimized by training.
+This is achieved by (neuro-)motor control.
+The study of neuromechanics attempts to relate the central and peripheral control mechanisms to the observed motor outcome produced by the musculoskeletal system citep:Nishikawa2007,Full1999.
+Of course, the control "facilities" of each individual are bespoke for the precise anatomy of that individual: each brain is tuned to the layout of segments and motors of each individual.
+
+Because of this intimate link, the motor system can be considered a looking glass into the workings of the neural system of animals.
+This can be understood in an evolutionary sense: a change in the behavior, e.g. a transition to bipedality, will reflect in the control system citep:Zehr2016.
+It can also be understood in a medical sense: locomotion enables the diagnosis of disease citep:Mielke2023.
+Perturbations, both in the environment citep:Daley2018 and in the two systems citep:Ting2015,DeGroote2021,Sponberg2023, and the organisms response to it, can be analyzed to understand the robustness, plasticity, and rehabilitation of motor control.
+
+The vertebrate locomotor system is highly complex, therefore sensitive to changes, and therefore a relevant multi-purpose tool for diagnostic and comparative research.
+
 
 
 * Which Analytical Tools Do We Have?

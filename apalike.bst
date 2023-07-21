@@ -493,7 +493,7 @@ FUNCTION {output.url}
 {
     url empty$
         { skip$ }
-        { "url: \url{" * url * "}" * output }
+        { "\newline url: \url{" * url * "}" * output }
     if$
 }
 
