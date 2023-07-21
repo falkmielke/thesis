@@ -74,7 +74,8 @@
 % \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter.\ #1}}{}}
 
 \fancyhead[RO]{\color{gray}\scshape{\footnotesize{\leftmark}}}      % Chapter in the right on even pages
-\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\rightmark}}}     % Section in the left on odd pages
+%\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\rightmark}}}     % Section in the left on odd pages
+\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\ }}}
 
 \let\headruleORIG\headrule
 \renewcommand{\headrule}{\color{gray} \headruleORIG}
@@ -220,6 +221,11 @@ tbd.
 \bibliographystyle{apalike}
 \bibliography{library.bib}
 \addcontentsline{toc}{part}{Bibliography}
+
+
+\part{Appendix}
+\chapter{Video Digitization}\label{cpt:digitization}
+\input{ch91_digitization/digitization.tex}
 
 \end{document}
 

@@ -1,0 +1,21 @@
+#+title: Video Digitization
+
+#+SETUPFILE: latex_header.org
+#+EXPORT_FILE_NAME: digitization
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+To perform any kinematic analysis, one has to extract kinematic data.
+The standard way to do this has changed dramatically during the course of this PhD project.
+...
+
++ Analog citep:Bernstein1927b
++ DLTv citep:Hedrick2008
++ Progressive Tracking citep:MMielke2020
++ DeepLabCut citep:Mathis2018,Mathis2020
++ AniPose citep:Karashchuk2021
