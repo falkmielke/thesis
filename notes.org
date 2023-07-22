@@ -1,5 +1,7 @@
 #+title: Notes
 
+* TODO TODO's
+figure LBW vs. NBW
 
 * find/replace
 + gray values

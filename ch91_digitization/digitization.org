@@ -19,3 +19,5 @@ The standard way to do this has changed dramatically during the course of this P
 + Progressive Tracking citep:MMielke2020
 + DeepLabCut citep:Mathis2018,Mathis2020
 + AniPose citep:Karashchuk2021
+
+  Karashchuk2021,Mathis2020,Jackson2016,Corcoran2021,MMielke2020

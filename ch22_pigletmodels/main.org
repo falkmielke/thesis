@@ -1,7 +1,5 @@
-#+TITLE: A Workflow for Automatic, High Precision Livestock Diagnostic Screening of Locomotor Kinematics
-# TITLE: Locomotor Development Diagnostics in Postnatal Piglets Using Probabilistic Predictive Modeling
-# TITLE: Probabilistic Modeling Confirms Delayed, But Non-Deficient Locomotor Development in Low Birth Weight Piglets
-#+SUBTITLE: /keywords: locomotion, kinematics, probabilistic modeling, Fourier Series, Precision Livestock Farming, diagnostics, piglets, low birth weight/
+#+TITLE: Probabilistic Modeling Confirms Delayed, But Non-Deficient Locomotor Development in Low Birth Weight Piglets
+# SUBTITLE: /keywords: locomotion, kinematics, probabilistic modeling, Fourier Series, Precision Livestock Farming, diagnostics, piglets, low birth weight/
 #+AUTHOR: Falk Mielke, Chris Van Ginneken and Peter Aerts
 #+DATE: {{{time(%Y-%m-%d)}}}
 #+OPTIONS: toc:nil
@@ -114,10 +112,6 @@
 
 
 #+BEGIN_COMMENT
-
-TODO: funding info, contributions
-TODO: re-check model comparison (better on the supercomputer)
-TODO: upload data upon publication
 
 
 remember:
