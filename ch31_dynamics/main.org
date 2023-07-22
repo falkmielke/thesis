@@ -34,7 +34,7 @@ It turns out that, whereas most quantities in inverse dynamic calculations can b
 
 @@latex:\clearpage@@
 
-#+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup.
+#+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup. \(P\): hinge point/axis of the door, \(v\): velocity of the subject, \(\dot\theta\): angular velocity of the door, \(F\): force applied to the door by the experimentor.
 #+LABEL: fig:slamming
 #+ATTR_LATEX: :width 12cm
 [[./figures/slamming_door.pdf]]
@@ -139,7 +139,7 @@ F = m \cdot \ddot x + \frac{\partial m}{\partial x} \cdot \dot x \dot x
 #+end_src
 
 
-Because \(a=\ddot x\), the first part of the RHS expression in equation @@latex:\eqref{eqn:force}@@ is the familiar \(F=ma\).
+Because \(a=\ddot x\), the first part of the right handside expression in equation @@latex:\eqref{eqn:force}@@ is the familiar \(F=ma\).
 The second part is more enigmatic: those are "velocity product terms", which involve partial derivatives of the mass matrix\footnote{Mass is often taught as a scalar quantity, yet in more complex problems of composite systems, which have a mass distribution, it can be more useful to represent mass by a matrix/tensor. This is analogous to the mass moment of inertia, see below.}, thereby accounting e.g. for configuration changes of a chain of segments, deformations or mass shifts (e.g. muscles, blood flow, ...).
 Assuming here that mass distribution of single segments is constant or changes are comparatively small (which is generally an inaccurate simplifying assumption), this part is usually set to zero.
 
@@ -326,7 +326,7 @@ axis: \(\begin{pmatrix}x\\y\\z \end{pmatrix}\), angle: \(\theta\)
 #+end_center
 
 On the swinging door, the axis would be the line through the hinge points, and the angle could be measured as the radians separating open and closed state.
-Ideally, one would want to combine axis and angle into a single object \(q\), and it turns out that the following way is convenient:
+Ideally, one would want to combine axis and angle into a single object \(q\), and it turns out that the following way is convenient citep:Pennestri2010,Challis2020,Flashner2019:
 #+begin_src latex
 \begin{equation}\label{eqn:quaternion}
 \begin{pmatrix}cos(\theta/2)\\x\cdot sin(\theta/2)\\y\cdot sin(\theta/2)\\z\cdot sin(\theta/2) \end{pmatrix} = q = \begin{pmatrix}q_w\\q_x\\q_y\\q_z \end{pmatrix}
@@ -338,8 +338,10 @@ There also exists a conjugate, \(q^{-1}\):
 
 
 And this object \(q\) allows for convenient spatial rotation, by almost-simple multiplication:
-take any 3D point \(D\) with 4D coordinates \(0, a, b, c\), e.g. the door handle point from our example: after rotation, it will be \(D_{rot}\), which can be calculated by.
+take any 3D point's position vector \(D\) with 4D coordinates\footnote{The position vector \(D\) is transferred to 4D space (formally necessary for multiplication with 4D quaternions) by simply appending a "zero" as the first element; the quaternion multiplication ensures that \(D_{rot}\), though also 4D, always has a zero-valued first element, being effectively 3D.} (\(0, a, b, c\)).
+This could be the door handle point from our example: after rotation, it will be \(D_{rot}\), which can be calculated by:
 \[D_{rot} = q\cdot D\cdot q^{-1}\]
+
 
 The dot "\(\cdot\)" is just vector multiplication, and computational tools can handle this operation quickly and efficiently.
 Better yet, one can stack quaternions by (non-commutatively) multiplying them:
@@ -383,7 +385,7 @@ This enables the complete solution of inverse dynamic problems with a single, ea
 Dumas /et al./ have provided and since then improved an implementation of their procedure in Matlab citep:DumasMatlab.
 
 
-The sceptical author of this thesis has reproduced that procedure in python, both numerically and analytically citep:Mielke2021id.
+The sceptical author of this thesis has reproduced that procedure in Python, both numerically and analytically citep:Mielke2021id.
 
 
 ** Algorithm
@@ -403,8 +405,11 @@ By calibrating the plate, one can convert a voltage profile to forces, moments, 
 Hence, the practical strategy citep:Robertson2013,Lynch2017,Dumas2004 is to start at the most distal limb segment (e.g. the foot-toe complex), and measure its movement and ground contact wrench.
 In that situation, all wrenches in the balance are known, except the wrench at the proximal joint (human foot example: the ankle wrench).
 The external wrench at the ground contact point, in the balance calculation of the segment which is in ground contact, is also called the tip wrench; trivially, it is zero if the distal segment is lifted off the ground.
-One can calculate the wrench on the proximal joint by subtracting all known external wrenches (ground contact wrench, gravitational wrench, ...; all shifted to the \(COM\)) from the dynamic wrench of the segment (measured linear and angular movement).
-The proximal joint wrench, shifted to the joint position and inverted in sign (Newton's \(n^{th}\) law), then becomes the tip wrench when calculating the balance of the proximally adjacent segment (Fig. \ref{fig:wrenchbalance}).
+Note that the read-out of a force plate gives a contact point, which is not the COM, so the wrench can be taken at contact point and must then be shifted.
+One can calculate the balance of wrenches by subtracting all external wrenches (ground contact wrench, gravitational wrench, proximal joint wrench, ...; all shifted to the \(COM\) as the common reference point) from the dynamic wrench of the segment (measured linear and angular movement, also with respect to the COM).
+Exactly one of the external wrenches is unknown, the one on the proximal joint; one can solve for it (careful with reference points: the calculation comes out at the COM).
+The proximal joint wrench is shifted to the proximal joint position, its natural "point of attack"\footnote{This series of shifts should have illustrated why the wrench is a useful construct: computational rigor can make sure that the reference points are respected.}.
+Inverted in sign (Newton's \(n^{th}\) law), the joint wrench becomes the tip wrench of the proximally adjacent segment and adds to the balance of wrenches of that segment (Fig. \ref{fig:wrenchbalance}).
 
 #+CAPTION: Wrench balance of a piglet femur (sketch), as it can be computed for each segment from distal to proximal. The tip wrench (\(W_{tip}\), at the distal joint) is the input from the distal adjacent segment. Dynamic wrench (\(W_{dyn}\), at the center of mass/\(COM\)) is calculated from kinematics (see above). Gravitational wrench (\(W_{g}\), at \(COM\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(W_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate systen (\(ICS\), i.e. the inertial reference frame).
 #+LABEL: fig:wrenchbalance
