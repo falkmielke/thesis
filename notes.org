@@ -1,7 +1,8 @@
 #+title: Notes
 
 * TODO TODO's
-figure LBW vs. NBW
++ figure LBW vs. NBW
++ list of abbreviations
 
 * find/replace
 + gray values

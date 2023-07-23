@@ -431,7 +431,7 @@ The segment mass is then measured on a simple scale.
 Center of mass could be derived from a classical pendulum experiment (Fig. \ref{fig:door_inertials}): hang an object from a thread, measure oscillation period, apply \(T=2\pi\sqrt{\frac{l}{g}}\) solved for effective length \(l\), repeat the procedure with the object hung along a different axis.
 A common simplification is to express the position of the \(COM\) as a fraction of the segment length, inaccurately assuming that it lies on the segment long axis.
 Anatomical landmark references are required to transform the relative \(COM\) position into the lab reference frame.
-Finally, the classical method to determine mass moment of inertia is by using a trifilar pendulum citep:Schedlinski2001,Korr1962.
+Finally, the classical method to determine mass moment of inertia is by using a trifilar pendulum citep:Schedlinski2001,Korr1962,Wells1987.
 
 The so-retrieved measurements are filled in to the algorithm outlined above.
 
