@@ -322,7 +322,7 @@ It depends on the data which one works best (yay, more model comparison!).
 In my toolbox of choice =pymc3=, a multivariate posterior can be initialized with either (i) the empirical or (ii) the inferred correlation structure; a third choice is to use (iii) no correlation.
 For cases (i) and (ii), I introduce the observables as a multivariate Student's T distribution.
 The empirical correlation (i) enters the model in form of the Cholesky matrix calculated from the data\footnote{Subtle technical complication: this variant does not allow the inclusion of an explicit model residual; in such cases I report the standard deviation of the observables as model residuals.}.
-To get inferred correlation (ii), I instead initialize the =MvStudentT= with a so-called LKJ Prior \citep{LKJ2009}, which allows me to quantify the posterior correlation.
+To get inferred correlation (ii), I instead initialize the =MvStudentT= with a so-called LKJ Prior citep:LKJ2009, which allows me to quantify the posterior correlation.
 Finally, uncorrelated posterior (iii) do not need an =MvStudentT=, but go with just a =StudentT=, which can also sample multiple observables at once.
 
 Note that multivariate blocks will also be relevant on the predictor side (see below).

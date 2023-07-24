@@ -51,8 +51,10 @@ These scripts complete the following tasks:
 Highlighted above are the different categories of data (see Tab. \ref{tab:parameters} for a detailed overview).
 
 
+#+NAME: tab:parameters
+#+ATTR_LATEX: :environment tabular :align |l|l|l|l|
 #+CAPTION: Overview of data parameters.
-#+LABEL: tab:parameters
+@@latex:\begin{footnotesize}@@
 |--------------+-------------------+-----------------------------+---------------------------------------------|
 | *category*   | *parameter*       | *units*                     | *description*                               |
 |--------------+-------------------+-----------------------------+---------------------------------------------|
@@ -82,6 +84,7 @@ Highlighted above are the different categories of data (see Tab. \ref{tab:parame
 | coordination | \(PC_{i}\)        | 1.                          | PCA of non-affine components of             |
 |              |                   |                             | the Fourier coefficients of all joints      |
 |--------------+-------------------+-----------------------------+---------------------------------------------|
+@@latex:\end{footnotesize}@@
 
 
 In total, src_python[:session analysisdata]{stride_data.shape[0]} {{{results(\(40\))}}} stride cycles from src_python[:session analysisdata]{subject_data.shape[0]} {{{results(\(17\))}}} subject individuals entered the analysis.
@@ -109,7 +112,7 @@ Imagine an animal holds its trunk always perfectly vertical for some reason.
 As in the scenario above, a change of the hip angle profile will be visible as compensation in the more distal joints and segments.
 The reason is the "fixed trunk" constraint, and that the limb as a whole has to compensate for the change.
 
-I want to submit either of these sets of angles to the FCAS procedure \citep{Mielke2019}, to achieve temporal alignment and the separation of posture and coordination measures.
+I want to submit either of these sets of angles to the FCAS procedure citep:Mielke2019, to achieve temporal alignment and the separation of posture and coordination measures.
 However, which angles of those mentioned above are more appropriate?
 In other words: which of the constraint scenarios is more realistic?
 Joints are always mobile, as are segments, and neither of the extreme constrains above are realistic for freely moving animals.
@@ -133,7 +136,7 @@ The trunk angle, which appears to be variable among different strides in the dat
 :CUSTOM_ID: prep:dimensionless
 :END:
 
-Except for the trunk angle (in units of \(\pi\), where \(\pi\equiv 3\)), all spatiotemporal stride parameters are normalized, i.e. made dimensionless \citep[according to][]{Hof1996}.
+Except for the trunk angle (in units of \(\pi\), where \(\pi\equiv 3\)), all spatiotemporal stride parameters are normalized, i.e. made dimensionless @@latex:\citep[according to][]{Hof1996}@@.
 The reference \(l_0\) for spatial parameters is the leg length (hip-knee-ankle).
 Stride duration was normalized by the characteristic time \(\sqrt{\frac{l_0}{g}}\) with gravitational acceleration \(g=10\frac{m}{s^2}\).
 Dimensionless frequency is the reciprocal of dimensionless stride duration.

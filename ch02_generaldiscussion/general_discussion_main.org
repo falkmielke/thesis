@@ -125,7 +125,7 @@ Overall, the models provide strong evidence against the existence of fundamental
 
 #+CAPTION: XROMM using python and blender, unpublished. Full video ([[https://ody.sh/fZe3OpgHGN]]) and code ([[https://git.sr.ht/~falk/foss_xromm]]) are available.
 #+LABEL: fig:piglet_xromm
-#+ATTR_LATEX: :width 12cm
+#+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/piglet_xromm_t02_0214.png]]
 
 In fact, this lack of differences in the collective output of the animals neuromotor system is surprising.

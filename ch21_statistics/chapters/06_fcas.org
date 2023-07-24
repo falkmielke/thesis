@@ -11,7 +11,7 @@ Its purpose is to round off the baboon story and provide the basis for discussio
 ** Quantifying Posture and Coordination
 Among the most relevant outcomes of digitized videos and kinematics are joint angles.
 Their temporal profiles, i.e. the angle over time, and how they change for different settings or subjects, can yield insights on coordination and motor control.
-In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[cf.][]{Mielke2019}.
+In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition @@latex:\citep[cf.][]{Mielke2019}@@.
 This operation is simply a reversible transformation, and no information is lost in the process.
 Temporal profiles can thereby be investigated in the frequency domain, which involves a complex (math.) quantification of a given number of harmonics (this is often called the "spectrum" of a signal).
 Fun fact: this is perfectly analogous to harmonics on a guitar string, and because one can tune models of Fourier Coefficients with MCMC sampling (see above), guitars are now oficially my favorite metaphor in explaining statistics.
@@ -32,7 +32,7 @@ Herein, I chose to subsume mean and amplitude as "posture" (/sensu lato/).
 Phase quantifies the relative timing of oscillating parts with respect to each other, which is, if you like, a "regular" part of coordination.
 Lastly, if mean, amplitude, and phase are subtracted or normalized, the (non-affine) remainder of the signal can be described as an "irregular" part of coordination.
 
-This removal of affine signal components is achieved by the method of Fourier Coefficient Affine Superimposition \citep[FCAS,][]{Mielke2019}.
+This removal of affine signal components is achieved by the method of Fourier Coefficient Affine Superimposition @@latex:\citep[FCAS,][]{Mielke2019}@@.
 More precisely, the purpose of FCAS is to separate mean, amplitude, phase and the non-affine remainder, and use them in reasonable ways.
 In the present analysis, I used it to disassemble hip, knee, and ankle joint angle profiles and extract *posture* (mean joint angle and range of motion) and *coordination* (the remainder, including phase differences).
 Phase was not isolated for the different joints; however, a "global phase alignment" was performed by temporally aligning all angle profiles so that the phase difference of the /whole limb/ (head-hip-toe angle) is zero.

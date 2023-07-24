@@ -5,7 +5,7 @@
 \label{sec:orgcfa10a1}
 The purpose of this document is documentation and knowledge transfer.
 This is part of the process of preparing a manuscript on the 2D kinematics of olive baboons, yet the real manuscript will differ in structure and focus.
-The data set has been analyzed before \citep[currently under review, ][]{Druelle2021}, and the purpose of another upcoming manuscript is to extend the analysis to questions of \emph{posture} and \emph{coordination}.
+The data set has been analyzed before \citep[][]{Druelle2021}, and the purpose of another upcoming manuscript is to extend the analysis to questions of \emph{posture} and \emph{coordination}.
 To get a grasp on these additional research questions, a sophisticated statistical modeling procedure is required.
 In preparation, we realized that a significant amount of knowledge transfer is required to get all co-authors and interested readers up to level with the technical details and design decisions encountered on the way.
 
@@ -52,7 +52,7 @@ Familiar examples are the ``T-Test'' or ``ANOVA'' in all their variants.
 To summarize, this branch of statistics is called \textbf{hypothesis testing}; it is a complex field and valuable when it comes to falsifying hypotheses.
 
 The term ``hypothesis testing'' might be understood to be synonymous with ``Frequentist statistics'', or ``non-Bayesian statistics''.
-This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called ``Bayes factor'' but are not discussed herein \citep[/cf./][]{Shikano2019}.
+This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called ``Bayes factor'' but are not discussed herein \citep[cf.][]{Shikano2019}.
 Hence, we need to disentangle two categories of distinction.
 
 You might have noticed that the amount of rigor in the brief explanation above exceeds what you usually find in the applied literature.
@@ -61,7 +61,7 @@ What we usually desire in obtaining experimental data is a quantitative assessme
 There are two main frameworks to tackle these questions, both of which are captured by the term \textbf{modeling}: ``Frequentist'' models (usually least squares optimization), and ``Bayesian'' / probabilistic models (enabled by a technical trick called \emph{MCMC} = ``Markov Chain Monte Carlo'' sampling).
 Hence, we should distinguish the type of question (hypothesis / quantitative estimate) and the methodological school (Frequentist of Bayesian, see Tab. \ref{tab:statistics}).
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:statistics}\textbf{Statistics: An Overview.} Probabilistic models are the focus of this memorandum.}
 \centering
 \begin{tabular}{|l|l|l|}
@@ -449,9 +449,10 @@ These scripts complete the following tasks:
 Highlighted above are the different categories of data (see Tab. \ref{tab:parameters} for a detailed overview).
 
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:parameters}Overview of data parameters.}
 \centering
+\begin{footnotesize}
 \begin{tabular}{llll}
 \hline
 \textbf{category} & \textbf{parameter} & \textbf{units} & \textbf{description}\\[0pt]
@@ -483,6 +484,7 @@ coordination & \(PC_{i}\) & 1. & PCA of non-affine components of\\[0pt]
  &  &  & the Fourier coefficients of all joints\\[0pt]
 \hline
 \end{tabular}
+\end{footnotesize}
 \end{table}
 
 
@@ -563,7 +565,7 @@ This means that PCA can be favorable for sampling even if dimensionality is reta
 The inverse transformation allows to convert predicted PC values back to the original parameters.
 \bigskip
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:stridepca}Stride Parameter PCA: variance covered (\%) and eigenvector loadings.}
 \centering
 \begin{tabular}{lrrr}
@@ -691,7 +693,7 @@ Therefore, the body parameters presented here were transformed with the natural 
 
 \subsubsection{Bodymass is Age-Dependant (Surprise!)}
 \label{bodymass:results}
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:bodyproportions}Results of the Bodymass Model.}
 \centering
 \begin{tabular}{|l|r|c|c|}
@@ -797,7 +799,7 @@ After all, they are all just distributions, as probabilistic modeling is about j
 Tricky detail: a multivariate predictor block must be initialized with inferred correlation (LKJ), because this block contains inferred slopes and no observed data, and thus the correlation is that of the slopes, and not of the data.
 
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:proportions_empiricalcorrelation}Body proportions: empirical cross correlation. Asterisk indicates parameter pairs in which the Pearson Correlation \(p\)-value is less than \(0.05\).}
 \centering
 \begin{tabular}{llll}
@@ -809,7 +811,7 @@ log bmi (kg/m) & \(+1.00\) * & \(+0.94\) * & \(1\)\\[0pt]
 \end{tabular}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:proportions_correlation}Body proportions: inferred cross correlation. Asterisk indicates values for which the HDI does not include zero.}
 \centering
 \begin{tabular}{llll}
@@ -821,15 +823,18 @@ log bmi (kg/m) & \(+0.92\) * & \(+0.18\) & \(1\)\\[0pt]
 \end{tabular}
 \end{table}
 
-\begin{table}[htbp]
-\caption{\label{tab:proportions_predictors}Body proportions: model results. Note that these values refer to log-transformed body proportions. Adlt: adult; adol: adolescent; inft: infant.}
+\begin{table}[p]
+\caption{\label{tab:proportions_predictors}Body proportions: model results. Note that these values refer to log-transformed body proportions. }
 \centering
-\begin{tabular}{llllll}
- & intercept & female \(\rightarrow\) male & adlt \(\rightarrow\) adol & adlt \(\rightarrow\) inft & \(\epsilon\)\\[0pt]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & intercept & female  & adult  & adult  & \(\epsilon\)\\[0pt]
+ & & \(\rightarrow\) male & \(\rightarrow\) adolescent & \(\rightarrow\) infant & \\[0pt]
 \hline
 log body mass (kg) & \(+2.51\) & \(+0.05\) & \(-0.21\) & \(-1.44\) * & \(\pm 0.19\)\\[0pt]
 log leg length (m) & \(-0.87\) & \(+0.03\) & \(-0.03\) & \(-0.46\) * & \(\pm 0.08\)\\[0pt]
 log bmi (kg/m) & \(+2.60\) & \(+0.02\) & \(-0.18\) & \(-1.01\) * & \(\pm 0.16\)\\[0pt]
+\hline
 \end{tabular}
 \end{table}
 
@@ -863,7 +868,7 @@ Some observations:
 The visual comparison captures all relevant info in this simple example case.
 For subsequent models, such plots are equally valuable, yet the occurrence of continuous predictors and the increase in complexity require a lot more filtering and adjustment.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/bodyproportions_predictions.pdf}
 \caption{\label{fig:bodyproportions}Subject parameters: raw data and model predictions.}
@@ -917,9 +922,10 @@ The favored model in this case was one which got programmed on the \emph{empiric
 The speed parameter correlation can elucidate how animals reach higher speeds: they walk at increased stride frequency and cover a larger distance, whereby the dutyfactor tends to reduce.
 This, however, implies no consistent change in clearance, nor does it depend on mean trunk angle.
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:stridecorrelation}\textbf{Empirical Cross Correlation of Stride Cycle Parameters.} Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. \emph{d.s.}: ``dimensionless stride'' parameter.}
 \centering
+\begin{footnotesize}
 \begin{tabular}{lllllll}
  & clearance & d.s. distance & dutyfactor & d.s. frequency & d.s. speed & trunk angle\\[0pt]
 \hline
@@ -930,6 +936,7 @@ d.s. frequency & \(-0.01\) & \(+0.09\) & \(-0.52\) * & \(1\) & \(+0.89\) * & \(+
 d.s. speed & \(+0.15\) & \(+0.52\) * & \(-0.72\) * & \(+0.89\) * & \(1\) & \(+0.07\)\\[0pt]
 trunk angle & \(+0.38\) * & \(-0.12\) & \(-0.27\) & \(+0.12\) & \(+0.07\) & \(1\)\\[0pt]
 \end{tabular}
+\end{footnotesize}
 \end{table}
 
 
@@ -991,11 +998,14 @@ A value which is sampled, but not shown, is the \(\nu\) parameter (or degrees of
 It is high (\(\nu = 54.2\)), indicating that the posterior distribution has little more ``weight in the tails'' than a Normal distribution would.
 
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:strideresults}\textbf{Effects of Subject Characteristics on Stride Cycle Parameters.} Significant values (i.e. values with zero not in HDI) are indicated by an asterisk.}
 \centering
-\begin{tabular}{lllllll}
- & intercept & female \(\rightarrow\) male & adlt \(\rightarrow\) adol & adlt \(\rightarrow\) inft & c.log.bodymass & \(\epsilon\)\\[0pt]
+\begin{small}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+ & intercept & female  & adult  & adult  & c.log.bodymass & \(\epsilon\)\\[0pt]
+ &  & \(\rightarrow\) male & \(\rightarrow\) adol. & \(\rightarrow\) infant &  & \\[0pt]
 \hline
 clearance & \(+0.39\) & \(+0.05\) * & \(-0.05\) * & \(-0.06\) * & \(-0.12\) * & \(\pm 0.05\)\\[0pt]
 d.s. distance & \(+1.72\) & \(+0.16\) & \(-0.06\) & \(-0.13\) & \(-0.38\) & \(\pm 0.25\)\\[0pt]
@@ -1003,7 +1013,9 @@ dutyfactor & \(+0.58\) & \(-0.05\) & \(+0.01\) & \(+0.10\) * & \(-0.03\) & \(\pm
 d.s. frequency & \(+0.39\) & \(-0.02\) & \(-0.02\) & \(-0.06\) & \(+0.21\) * & \(\pm 0.10\)\\[0pt]
 d.s. speed & \(+0.68\) & \(+0.04\) & \(-0.06\) & \(-0.16\) * & \(+0.21\) & \(\pm 0.20\)\\[0pt]
 trunk angle & \(+0.67\) & \(+0.14\) * & \(-0.12\) & \(-0.20\) * & \(+0.10\) & \(\pm 0.18\)\\[0pt]
+\hline
 \end{tabular}
+\end{small}
 \end{table}
 
 
@@ -1028,13 +1040,13 @@ As with the subject parameters, we can compare the observed values with the pred
 The data and predictions are overall consistent with the effects identified by the model (Tab. \ref{tab:strideresults}), and it is good sport to reason how the prediction for male adults came about.
 
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/stride_pt1_predictions.pdf}
 \caption{\label{fig:stride1}Stride parameters: raw data and model predictions. Part 1.}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/stride_pt2_predictions.pdf}
 \caption{\label{fig:stride2}Stride parameters: raw data and model predictions. Part 2.}
@@ -1047,7 +1059,7 @@ The data and predictions are overall consistent with the effects identified by t
 Due to the intrinsic correlation of stride distance, stride frequency, and speed, it is an option to submit them to a PCA for optional dimensionality reduction.
 In posterior predictive sampling, the same PCA must be used to transform the samples to PCA space.
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/stride_pca_predictions.pdf}
 \caption{\label{fig:stridepca}Stride parameters: raw data and model predictions. PCA conversion.}
@@ -1066,7 +1078,7 @@ In other test models, parameters were added (e.g. leg length).
 The centering of bodymass was optionally omitted.
 Additionally, the correlation structure of the observables (``empirical'' per default) can be changed to ``inferred''.
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:stridemodelcomparison}Model Comparison. LOO is the model goodness indicator. For convenience, delta (LOO difference from highest ranking model) and standard error (range of the LOO estimate) are displayed.}
 \centering
 \begin{tabular}{rrrrl}
@@ -1149,7 +1161,7 @@ Its purpose is to round off the baboon story and provide the basis for discussio
 \label{sec:orgb18a99b}
 Among the most relevant outcomes of digitized videos and kinematics are joint angles.
 Their temporal profiles, i.e. the angle over time, and how they change for different settings or subjects, can yield insights on coordination and motor control.
-In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[cf.][]{Mielke2019}.
+In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[\emph{cf.}][]{Mielke2019}.
 This operation is simply a reversible transformation, and no information is lost in the process.
 Temporal profiles can thereby be investigated in the frequency domain, which involves a complex (math.) quantification of a given number of harmonics (this is often called the ``spectrum'' of a signal).
 Fun fact: this is perfectly analogous to harmonics on a guitar string, and because one can tune models of Fourier Coefficients with MCMC sampling (see above), guitars are now oficially my favorite metaphor in explaining statistics.
@@ -1195,11 +1207,13 @@ Furthermore, they differ in posterior design: because coordination observables w
 In contrast, the posture parameters correlate in a characteristic way (Tab. \ref{tab:posturecorrelation}), and the model with a sampled covariance structure was favored by model selection.
 Therefore, posture and coordination were handled by two separate models with similar general structure.
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:posturecorrelation}\textbf{Sampled Cross Correlation of Posture Parameters.} Significant correlations (as per HDI) are marked by asterisks. ``Angle'' refers to the temporal mean of the joint angle profile, whereas ``amplitude'' is related to range of motion at that joint.}
 \centering
-\begin{tabular}{lllllll}
- & hip angle & hip amplitude & knee angle & knee amplitude & ankle angle & ankle amplitude\\[0pt]
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+ & hip & hip & knee & knee & ankle & ankle \\[0pt]
+ & angle & amplitude & angle & amplitude & angle & amplitude\\[0pt]
 \hline
 hip angle & \(1\) & \(+0.53\) * & \(-0.57\) * & \(-0.07\) & \(+0.07\) & \(-0.26\)\\[0pt]
 hip amplitude & \(+0.53\) * & \(1\) & \(-0.12\) & \(-0.30\) & \(-0.08\) & \(-0.01\)\\[0pt]
@@ -1207,6 +1221,7 @@ knee angle & \(-0.57\) * & \(-0.12\) & \(1\) & \(-0.11\) & \(-0.38\) * & \(+0.25
 knee amplitude & \(-0.07\) & \(-0.30\) & \(-0.11\) & \(1\) & \(+0.03\) & \(+0.05\)\\[0pt]
 ankle angle & \(+0.07\) & \(-0.08\) & \(-0.38\) * & \(+0.03\) & \(1\) & \(-0.31\) *\\[0pt]
 ankle amplitude & \(-0.26\) & \(-0.01\) & \(+0.25\) & \(+0.05\) & \(-0.31\) * & \(1\)\\[0pt]
+\hline
 \end{tabular}
 \end{table}
 
@@ -1237,7 +1252,7 @@ Implications from model comparison are overall similar to those in the stride pa
 Some exceptions are better-ranked models with left-out predictors, which however were not used because I prefer to keep parameter selection and basic structure consistent throughout the chain of models.
 Interesting results are anticipated by the comparison: for example, the trunk angle, which per definition contributes ``half'' of the hip joint angle profiles (adjacent segment), is an integral part of the posture model but not relevant for coordination.
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:posturemodelcomparison}Model Comparison of Posture models.}
 \centering
 \begin{tabular}{rrrrl}
@@ -1261,7 +1276,7 @@ Interesting results are anticipated by the comparison: for example, the trunk an
 \end{tabular}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[p]
 \caption{\label{tab:coordinationmodelcomparison}Model Comparison of Coordination models.}
 \centering
 \begin{tabular}{rrrrl}
@@ -1392,7 +1407,7 @@ This is what the probabilistic model did: it separated effects of the subject an
 Ideally, the model has learned the concerted influence of these parameters on the outcome parameters.
 
 
-\begin{figure}[htbp]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/trace_quantiles_dutyfactor_0.png}
 \caption{\label{fig:dutyquantileprediction}Joint angle profile predictions for dutyfactor quantiles, for adult females. Thick lines: averages; thin lines: individual predictive samples. Caution: to emphasize differences, the range of y-values varies on the three panels.}

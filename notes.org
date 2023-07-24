@@ -1,12 +1,17 @@
 #+title: Notes
 
 * TODO TODO's
-+ figure LBW vs. NBW
-+ list of abbreviations
++ ch1 +appendix+ -> link to repo
++ ch2 +appendix+ -> integrate (M&M)
++ ch2 Link published article
++ ch2 data available
++ ch3 tiny textbook conclusion/summary overhaul
 
 * find/replace
 + gray values
 + absorption
++ \emph{cf.}
++ x-ray
 
 
 * important literature

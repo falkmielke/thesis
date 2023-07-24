@@ -216,7 +216,7 @@ I would love to learn those latter ones, but never found the time and urge, whic
 *"Which Model is the best for my data?"*
 As mentioned above, the best of all the logically plausible model designs should not be determined by pure personal preference, but rather by hard, quantitative measures.
 This is why this comparison step is also labeled "model selection".
-The topic is exceptionally well covered in my favorite statistical literature \citep[][ch. 11]{McElreath2018}, which I will briefly summarize.
+The topic is exceptionally well covered in my favorite statistical literature @@latex:\citep[][ch. 11]{McElreath2018}@@, which I will briefly summarize.
 
 The framework of information theory provides tools for quantitative assessment, namely Information Criteria (e.g. WAIC, LOO).
 The comparison problem has two balancing effects:

@@ -4,8 +4,13 @@
 #+DATE: {{{time(%Y-%m-%d)}}}
 
 #+SETUPFILE: org/latex_header.org
+#+EXPORT_FILE_NAME: pt2ch4_statistics
 
 #+BIBLIOGRAPHY: org/library.bib apalike
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("./literature.bib"))
+#+END_SRC
 
 #+OPTIONS: toc:t
 
@@ -17,14 +22,14 @@
 * Preface
 The purpose of this document is documentation and knowledge transfer.
 This is part of the process of preparing a manuscript on the 2D kinematics of olive baboons, yet the real manuscript will differ in structure and focus.
-The data set has been analyzed before \citep[currently under review, ][]{Druelle2021prep}, and the purpose of another upcoming manuscript is to extend the analysis to questions of /posture/ and /coordination/.
+The data set has been analyzed before @@latex:\citep[currently under review, ][]{Druelle2021prep}@@, and the purpose of another upcoming manuscript is to extend the analysis to questions of /posture/ and /coordination/.
 To get a grasp on these additional research questions, a sophisticated statistical modeling procedure is required.
 In preparation, we realized that a significant amount of knowledge transfer is required to get all co-authors and interested readers up to level with the technical details and design decisions encountered on the way.
 
 
 Here a quick overview of what this analysis is about:
 + I analyze bipedal locomotion in olive baboons, /Papio anubis/.
-+ Kinematics are processed with a previously established technique \citep["Fourier Coefficient Affine Superimposition", cf.][]{Mielke2019}.
++ Kinematics are processed with a previously established technique @@latex:\citep["Fourier Coefficient Affine Superimposition", cf.][]{Mielke2019}@@.
 + Probabilistic Models are used to infer major interrelations of subject-, spatiotemporal- and kinematic parameters.
 + Model design is validated by model comparison.
 + One purpose of these models is in-sample- and out-of-sample prediction.

@@ -32,14 +32,14 @@ To illustrate the basic principles of physics which come to play in this chapter
 It turns out that, whereas most quantities in inverse dynamic calculations can be accurately measured, the inertial properties of segments are the achilles heel of accurate dynamic modeling.
 
 
-@@latex:\clearpage@@
 
 #+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup. \(P\): hinge point/axis of the door, \(v\): velocity of the subject, \(\dot\theta\): angular velocity of the door, \(F\): force applied to the door by the experimentor.
 #+LABEL: fig:slamming
-#+ATTR_LATEX: :width 12cm
+#+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_door.pdf]]
 
 
+@@latex:\FloatBarrier\clearpage@@
 * Introduction
 ** A Momentum Experiment
 "Slamming a door in someone's face" is not a friendly thing to do.
@@ -140,7 +140,7 @@ F = m \cdot \ddot x + \frac{\partial m}{\partial x} \cdot \dot x \dot x
 
 
 Because \(a=\ddot x\), the first part of the right handside expression in equation @@latex:\eqref{eqn:force}@@ is the familiar \(F=ma\).
-The second part is more enigmatic: those are "velocity product terms", which involve partial derivatives of the mass matrix\footnote{Mass is often taught as a scalar quantity, yet in more complex problems of composite systems, which have a mass distribution, it can be more useful to represent mass by a matrix/tensor. This is analogous to the mass moment of inertia, see below.}, thereby accounting e.g. for configuration changes of a chain of segments, deformations or mass shifts (e.g. muscles, blood flow, ...).
+The second part is more enigmatic: those are "velocity product terms", which involve partial derivatives of the mass matrix@@latex:\footnote{Mass is often taught as a scalar quantity, yet in more complex problems of composite systems, which have a mass distribution, it can be more useful to represent mass by a matrix/tensor. This is analogous to the mass moment of inertia, see below.}@@, thereby accounting e.g. for configuration changes of a chain of segments, deformations or mass shifts (e.g. muscles, blood flow, ...).
 Assuming here that mass distribution of single segments is constant or changes are comparatively small (which is generally an inaccurate simplifying assumption), this part is usually set to zero.
 
 Hence, we get a more or less familiar equation for the Force \(F\), which tells us that the acceleration of a mass (\(m\ddot x\)), i.e. a change in linear momentum, must be equal to an external force.
@@ -151,7 +151,7 @@ Hence, we get a more or less familiar equation for the Force \(F\), which tells 
 
 #+CAPTION: Force and Moment. A force applied further away from the hinge \(P\) (situation A) will generate a larger momentum than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector.
 #+LABEL: fig:slamming_moment
-#+ATTR_LATEX: :width 12cm
+#+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_shift.pdf]]
 
 In the door slamming experiment, and experimenter must apply force to the door in order for the experiment to "succeed".
@@ -163,14 +163,14 @@ In fact, this simple physical observation explains why doors have evolved handle
 
 Otherwise, the calculation of angular quantities is largely analogous to the linear case citep:Lewin801L20,Tipler2007.
 Mass, in the force equation, is the resistance of an object to linear acceleration, i.e. to change of linear momentum \(p\).
-Analogously, Mass Moment of Inertia\footnote{Note that \(I\) is a matrix, usually 3-by-3; this is analogous to mass, which in its general form for complex objects is also a matrix \citep{Lynch2017}.} (\(I\)) is the resistance of an object to rotational acceleration, which induces a change in angular momentum \(L\).
+Analogously, Mass Moment of Inertia@@latex:\footnote{Note that \(I\) is a matrix, usually 3-by-3; this is analogous to mass, which in its general form for complex objects is also a matrix \citep{Lynch2017}.}@@ (\(I\)) is the resistance of an object to rotational acceleration, which induces a change in angular momentum \(L\).
 From experience, one can tell that lifting a door out of its hinge is a different process than conventionally rotating it, thought few have carried out this comparison in the absence of gravitation and friction.
 And so, the series of equations above can be applied analogously to angular momentum \(L\) (with angular velocity \(\dot \theta\)).
 \[L = I \dot \theta\]
 
 #+CAPTION: Derivation of Newton-Euler equation of rotational motion.
 #+LABEL: fig:miracle
-#+ATTR_LATEX: :width 8cm
+#+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/miracle_occurs.jpg]]
 
 
@@ -178,7 +178,7 @@ And so, the series of equations above can be applied analogously to angular mome
 The time derivative is as follows.
 \[\frac{dL}{dt} = I \cdot \frac{\partial \dot \theta}{\partial t} + \frac{\partial I}{\partial t} \cdot \dot \theta\]
 
-The time derivative of angular momentum is called moment (\(M\); see also: citet:WikipediaNewtonEuler,WikipediaTorque and below), and with further manipulation @@latex:\citep[details in][, p. 242, eqn. 8.23; Fig. \ref{fig:miracle}]{Lynch2017}@@ yields:
+The time derivative of angular momentum is called moment (\(M\); see also: citet:WikipediaNewtonEuler,WikipediaTorque and below), and with further manipulation @@latex:\citep[details in][p. 242, eqn. 8.23; otherwise see Fig. \ref{fig:miracle}]{Lynch2017}@@ yields:
 #+begin_src latex
 \begin{equation}\label{eqn:moment}
 M = I \ddot\theta + \dot\theta \times I\dot\theta
@@ -189,7 +189,7 @@ M = I \ddot\theta + \dot\theta \times I\dot\theta
 
 #+CAPTION: The slamming door, isolated sketch.
 #+LABEL: fig:slamming_momentum
-#+ATTR_LATEX: :width 12cm
+#+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_momentum.pdf]]
 
 Again, there is an (angular) velocity product term which we hope to sufficiently well approximate by setting it to zero (rigid body assumption, i.e. no or negligible change of \(I\)).
@@ -237,7 +237,7 @@ The pure and simple answer is computational convenience citep:Dumas2004,Mueller2
 
 #+CAPTION: A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tip points towards the point of application (they can be moved around, adjusting the moment component; see text). Note that this figure is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
 #+LABEL: fig:wrench
-#+ATTR_LATEX: :width 6cm
+#+ATTR_LATEX: :placement [p] :width 6cm
 [[./figures/the_wrench.pdf]]
 
 
@@ -247,7 +247,7 @@ A mathematical shorthand for writing wrenches are square brackets and a semicolo
 
 #+CAPTION: The door slamming experiment in wrench notation (see text). Point \(P\) is the origin of the reference frame, \(r_{PD}\) is the position vector to the attack point \(D\) of the wrench \(W\).
 #+LABEL: fig:slamming_wrench
-#+ATTR_LATEX: :width 12cm
+#+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_wrench.pdf]]
 
 
@@ -338,7 +338,7 @@ There also exists a conjugate, \(q^{-1}\):
 
 
 And this object \(q\) allows for convenient spatial rotation, by almost-simple multiplication:
-take any 3D point's position vector \(D\) with 4D coordinates\footnote{The position vector \(D\) is transferred to 4D space (formally necessary for multiplication with 4D quaternions) by simply appending a "zero" as the first element; the quaternion multiplication ensures that \(D_{rot}\), though also 4D, always has a zero-valued first element, being effectively 3D.} (\(0, a, b, c\)).
+take any 3D point's position vector \(D\) with 4D coordinates@@latex:\footnote{The position vector \(D\) is transferred to 4D space (formally necessary for multiplication with 4D quaternions) by simply appending a "zero" as the first element; the quaternion multiplication ensures that \(D_{rot}\), though also 4D, always has a zero-valued first element, being effectively 3D.}@@ (\(0, a, b, c\)).
 This could be the door handle point from our example: after rotation, it will be \(D_{rot}\), which can be calculated by:
 \[D_{rot} = q\cdot D\cdot q^{-1}\]
 
@@ -408,12 +408,12 @@ The external wrench at the ground contact point, in the balance calculation of t
 Note that the read-out of a force plate gives a contact point, which is not the COM, so the wrench can be taken at contact point and must then be shifted.
 One can calculate the balance of wrenches by subtracting all external wrenches (ground contact wrench, gravitational wrench, proximal joint wrench, ...; all shifted to the \(COM\) as the common reference point) from the dynamic wrench of the segment (measured linear and angular movement, also with respect to the COM).
 Exactly one of the external wrenches is unknown, the one on the proximal joint; one can solve for it (careful with reference points: the calculation comes out at the COM).
-The proximal joint wrench is shifted to the proximal joint position, its natural "point of attack"\footnote{This series of shifts should have illustrated why the wrench is a useful construct: computational rigor can make sure that the reference points are respected.}.
+The proximal joint wrench is shifted to the proximal joint position, its natural "point of attack"@@latex:\footnote{This series of shifts should have illustrated why the wrench is a useful construct: computational rigor can make sure that the reference points are respected.}@@.
 Inverted in sign (Newton's \(n^{th}\) law), the joint wrench becomes the tip wrench of the proximally adjacent segment and adds to the balance of wrenches of that segment (Fig. \ref{fig:wrenchbalance}).
 
 #+CAPTION: Wrench balance of a piglet femur (sketch), as it can be computed for each segment from distal to proximal. The tip wrench (\(W_{tip}\), at the distal joint) is the input from the distal adjacent segment. Dynamic wrench (\(W_{dyn}\), at the center of mass/\(COM\)) is calculated from kinematics (see above). Gravitational wrench (\(W_{g}\), at \(COM\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(W_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate systen (\(ICS\), i.e. the inertial reference frame).
 #+LABEL: fig:wrenchbalance
-#+ATTR_LATEX: :width 8cm
+#+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/wrench_balance.pdf]]
 
 
@@ -438,7 +438,7 @@ The so-retrieved measurements are filled in to the algorithm outlined above.
 
 #+CAPTION: Measuring inertial properties of the slamming door: the center of mass.
 #+LABEL: fig:door_inertials
-#+ATTR_LATEX: :width 6cm
+#+ATTR_LATEX: :placement [p] :width 6cm
 [[./figures/door_inertials.pdf]]
 
 

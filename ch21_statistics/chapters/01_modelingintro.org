@@ -20,7 +20,7 @@ Familiar examples are the "T-Test" or "ANOVA" in all their variants.
 To summarize, this branch of statistics is called *hypothesis testing*; it is a complex field and valuable when it comes to falsifying hypotheses.
 
 The term "hypothesis testing" might be understood to be synonymous with "Frequentist statistics", or "non-Bayesian statistics".
-This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called "Bayes factor" but are not discussed herein \citep[/cf./][]{Shikano2019}.
+This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called "Bayes factor" but are not discussed herein @@latex:\citep[/cf./][]{Shikano2019}@@.
 Hence, we need to disentangle two categories of distinction.
 
 You might have noticed that the amount of rigor in the brief explanation above exceeds what you usually find in the applied literature.
@@ -46,7 +46,7 @@ All these "schools" of statistics have historically developed different terminol
 In particular, there is a lot of confusion and ongoing discussion about the distinction and proper presentation of /confidence intervals/ and /credible intervals/.
 Please excuse that for the purpose of this tiny textbook, I calculated, but will not always report, credible intervals\footnote{I herein take the $\left[3\ \%,97\ \%\right]\ HDI$, i.e. Highest Density Interval, which is the smallest value range that covers $94\ \%$ of the posterior probability distribution.}.
 I will occasionally explain conventions on the way, but leave it up to the interested reader to dig deeper or ask back.
-You might notice that my way of tackling statistics with inclusive models were heavily primed by the book [[https://xcelab.net/rm/statistical-rethinking/]["Statistical Rethinking" by Richard McElreath]] \citep{McElreath2018}.
+You might notice that my way of tackling statistics with inclusive models were heavily primed by the book [[https://xcelab.net/rm/statistical-rethinking/]["Statistical Rethinking" by Richard McElreath]] citep:McElreath2018.
 
 
 The approach presented in this document is *probabilistic modeling*.

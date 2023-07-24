@@ -58,7 +58,7 @@ How much trouble it would save us, and how much different trouble it would cause
 
 
 #+CAPTION: "Leihmutter Jolante", by Ernst Kahl (date unknown).
-#+ATTR_LATEX: :placement [b!] :width 8cm
+#+ATTR_LATEX: :placement [p] :width 8cm
 #+LABEL: fig:jolante
 [[./figures/jolante.jpg]]
 
@@ -77,19 +77,24 @@ But the question remains: *can piglet serve as a model species for the study of 
 An obvious "show stopper" might be that, as mentioned above, piglets are precocial, whereas humans are about as altricial as can be.
 On the other hand, suids are the more altricial of the ungulates: feral /Sus scrofa/ females build nests and keep their young in shelter for a couple of weeks citep:Wischner2009.
 Unfortunately, domestication involved restraining sows, and the way we keep them might have favored more mobile young who have reduced mortality from crushing citep:Grandinson2002.
-# TODO: more to discuss
 The picture is complex, and certainly the analogy of piglets and humans should not be taken for granted citep:VandenHole2017.
 
 
-A second "show stopper" for this thesis would be if it turns out that the effect we would like to quantify (a difference between piglets of low- and normal birth weight, see below) is negligible in magnitude.
+A second "show stopper" for this thesis would be if it turns out that the effect we would like to quantify (a difference between piglets of low- and normal birth weight, see below and Fig. \ref{fig:birth_weight}) is negligible in magnitude.
 In other words: if the locomotion of newborn piglets of low and normal birth weight actually does not differ in a measurable way.
 First off, it is obvious that low and normal birth weights do differ: per definition, in terms of weight.
-But different weight might go in hand with different physical constraints, and one has to account for the trivial consequences of a different physical appearance citep:Aerts2023. #TODO
+But different weight might go in hand with different physical constraints, and one has to account for the trivial consequences of a different physical appearance citep:Aerts2023.
 The fact that there are hyperprolific sows, increased litter sizes, and an increased rate of intra-uterine growth restriction and low birth weight citep:Alvarenga2013,Quiniou2002 is in itself an argument for using domestic pigs as a model for human early development (see above), it gives us useful categories for comparison.
 But how to approach the potential lack of an effect?
 To set the frontier right from the start, I will insist to apply good scientific methods citep:Chamberlin1890,Platt1964,Popper2002.
 If we /searched for/ differences in piglet locomotion, just search hard enough, we would surely find them.
-Instead, our attempts must be to *falsify the hypothesis that there are differences in piglet locomotion*.
+Instead, our attempts must be to *falsify the hypothesis that there are birth-weight dependent differences in piglet locomotion*.
+
+#+CAPTION: Piglets of low and normal birth weight (left/right, respectively) for size comparison.
+#+ATTR_LATEX: :placement [p] :width 16cm
+#+LABEL: fig:birth_weight
+[[./figures/bw_comparison.jpg]]
+
 
 
 As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
@@ -136,13 +141,13 @@ And I regret that this has not been put into a publication.
 Nevertheless, work on the baboon data set has a prominent place in this thesis.
 The fact that there are fewer joints (bipedal), the fact that the data set has been well studied before, and the fact that this is also a developmental series (though different: age groups are discrete), predestined this data set to be my "playground".
 I used it to refine my procedures and code.
-And I ended up writing two "tutorial"-chapters, one each for Fourier Methods (part I) and Probabilistic Modeling (part II).
+And I ended up writing two "tutorial"-chapters, one each for Fourier Methods (part \ref{pt:1}) and Probabilistic Modeling (part \ref{pt:2}).
 
 
 Yet in fact, you could argue the other way round.
 Piglets are a putative model species, but require some transfer work to draw reliable conclusions about humans and human development.
 /Papio/, on the other hand, are bipedal primates, and their bipedalism develops gradually over time -- just like in our own species.
-On the downside, baboons are less readily available, also for dynamic measurements (e.g. XROMM, part III).
+On the downside, baboons are less readily available, also for dynamic measurements (e.g. XROMM, part \ref{pt:3}).
 Hence it is good to keep both model species in the loop.
 
 
@@ -181,12 +186,12 @@ After all, locomotion has been intriguing people for hundreds, thousands, maybe 
 Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it (first for pornography, and second) for locomotion (Figs. \ref{fig:muybridge}, \ref{fig:jumpiglet}).
 
 #+CAPTION: "The Horse in Motion", by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
-#+ATTR_LATEX: :width 16cm :placement [t!]
+#+ATTR_LATEX: :width 16cm :placement [p]
 #+LABEL: fig:muybridge
 [[./figures/muybridge_lq.jpg]]
 
 #+CAPTION: "The Piglet in Motion", by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion.
-#+ATTR_LATEX: :width 16cm :placement [b!]
+#+ATTR_LATEX: :width 16cm :placement [p]
 #+LABEL: fig:jumpiglet
 [[./figures/piglet_in_motion.jpg]]
 
@@ -245,16 +250,16 @@ We study piglet locomotion, attempting to falsify a difference that is due to bi
 
 This requires a methodological foundation on topics unfamiliar to most Biologists (Fourier Analysis, probabilistic models), which I introduce in dedicated chapters.
 
-_Part I: Kinematic Analysis_
+_Part \ref{pt:1}: Kinematic Analysis_
 + I will introduce Fourier Methods with a practical guide and review its occurrence specifically in the field of locomotor biomechanics (Ch. \ref{cpt:fourier_review}).
 + The power of Fourier tools is then unleashed onto a large cross-species study that covers most of the ungulate clade @@latex: \citep[Ch. \ref{cpt:fcas},][]{Mielke2019}@@.
 
-_Part II: Probabilistic Modeling_
+_Part \ref{pt:2}: Probabilistic Modeling_
 + Processing complex kinematic data, I will introduce the basics of probabilistic modeling (Ch. \ref{cpt:statistics}) in a "tiny textbook of statistics"...
 + ... before turning around the conventional modeling strategy and applying it to piglets @@latex:\citep[Ch. \ref{cpt:piglets},][]{Mielke2023}@@.
 
-_Part III: Dynamics_
-+ Kinematics are just half of locomotor research: the study of forces and moments is reviewed and summarized in Ch. \ref{cpt:dynamics_workflow}.
+_Part \ref{pt:3}: Dynamics_
++ Kinematics are just half of locomotor research: the study of forces and moments is reviewed and summarized in another overview chapter (Ch. \ref{cpt:dynamics_workflow}).
 + To calculate joint moments, one needs to measure inertial properties, yet it turns out that these are not trivial to retrieve from x-ray tomographic images (Ch. \ref{cpt:inertials}).
 
 The thesis closes with a general discussion to round up and project the presented work to potential future applications (Ch. \ref{cpt:generaldiscussion}).

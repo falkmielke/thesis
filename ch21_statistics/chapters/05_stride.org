@@ -69,7 +69,7 @@ Groupwise centering affects the data vector, however the bodymass slope is not a
 A Normal distribution was used for all the slopes, a multivariate Student's T for the observables.
 Informative priors (global mean and standard deviation) are used, which is a good heuristic to improve sampling without biasing the sampler.
 The multivariate block of observables is initialized with the empirical correlation (yet all three options of multivariate posterior were applied and compared, see below).
-# a Lewandowski-Kurowicka-Joe prior \citep{LKJ2009}, which is a standard procedure for multivariate normal parameters.
+# a Lewandowski-Kurowicka-Joe prior citep:LKJ2009, which is a standard procedure for multivariate normal parameters.
 
 
 ** Subject Parameters Affect Stride Characteristics
@@ -214,5 +214,5 @@ Note that this sampling problem would not become apparent in least squares model
 
 ** Summary: Stride Parameters
 The presented findings on stride parameters are substantial insights into the way in which spatiotemporal characteristics of gait in /Papio anubis/ are affected by sex, ageclass and bodymass.
-These findings are interesting by themselves and were part of the prior research on the data set \citep[][]{Druelle2021prep}.
+These findings are interesting by themselves and were part of the prior research on the data set citep:Druelle2021.
 They are re-iterated here with a different modeling framework and serve to exemplify important statistical concepts, most importantly (two-step) posterior predictive sampling and model comparison.

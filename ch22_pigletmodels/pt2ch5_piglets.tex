@@ -155,7 +155,7 @@ Seventeen landmarks (i.e. points of interest or ``key-points''; usually joint ce
 We selected a ``resnet 152'' network architecture and trained for \(540,672\) iterations (\(16\) days of computer workload).
 The network was then applied to digitize the continuous, full \(11\) hours of video twice: once in default direction and once horizontally mirrored, because training set was always rightward movement.
 
-\begin{figure}[t]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/fig1_landmarks.png}
 \caption{\label{fig:landmarks}Video digitization and joint angle definitions. White circles mark points of interest (``landmarks''). Movement was always rightwards. Labels show joint angles, defined as shown in the inset: straight joint (parallel segments) corresponds to zero; counter-clockwise angles are positive. Forelimb angle was used as a reference for temporal alignment, but did not enter the analysis.}
@@ -269,7 +269,7 @@ However, because we follow an ``all in'' strategy, the results have little instr
 
 
 
-\begin{figure}[t]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/histograms_observed.pdf}
 \caption{\label{fig:observations}Histogram of observations. Trivially, the LBW group measured the lowest body masses in the data set. This correlated with a lower body size, whereas age is rather uniformly sampled for all study groups. Recordings happened opportunistically within the first ten life hours of the animals, repeated measurements were possible. Number of strides per class are indicated in brackets on the legend. Bar heights are scaled by sample size to show relative value distributions.}
@@ -300,7 +300,7 @@ The key purpose of the model is posterior predictive sampling of the LBW strides
 
 \bigskip
 
-\begin{figure}[b!]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/raw_profile_comparison.pdf}
 \caption{\label{fig:raw_data}Joint angle profiles per joint, grouped by birth weight category. An angle of zero would be a fully extended (i.e. straight) joint. Thick lines represent the average profiles, dashed lines indicate the average of the opposite birth weight group for comparison. Colored, shaded lines show all raw profiles available for the present analysis. Temporal alignment was done based on total forelimb angle (see methods), yet for the shown hindlimb averages (but not for the raw profiles), a separate alignment of the hindlimb was performed.}
@@ -385,7 +385,7 @@ These model results provide detailed insight into parameter interrelations in th
 Performing in-sample and out-of-sample predictive inference with the models trained on NBW strides elucidated if and how left-out strides differed from NBW model expectation (Fig. \ref{fig:predictions}).
 Note that, to capture variance (i.e. uncertainty in the prediction), each stride was sampled repeatedly.
 
-\begin{figure}[t!]
+\begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/histograms_prediction_comparison.pdf}
 \caption{\label{fig:predictions}Predictive sampling of subject characteristics. For all included subject characteristics, models which were trained on NBW strides correctly inferred the training data (gray) and values from the validation set (blue). In contrast, the same models wrongly inferred the characteristics of LBW subjects (orange). The \(x\)-axes show the difference (\(\Delta\)) between actual and predicted values per prediction. To facilitate comparison, histogram heights are again normalized per category.}
@@ -409,7 +409,7 @@ However, age inference is non-normal, i.e. some strides are classified as typica
 \bigskip
 
 
-\begin{table}[b!]
+\begin{table}[p]
 \caption{\label{tab:prediction}Age inference per LBW animal (compared to NBW average, last row). \(\Delta\): ``inferred - actual'' difference. Underestimation is defined as \(\Delta < 0\), ``count'': per stride, ``rate'': per predictive sample. \(h\): hours, \(std\): standard deviation.}
 \centering
 \begin{tabular}{|l|c|c|c|c|c|c|}
