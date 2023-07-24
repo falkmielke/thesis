@@ -12,12 +12,15 @@
 
 To perform any kinematic analysis, one has to extract kinematic data.
 The standard way to do this has changed dramatically during the course of this PhD project.
-...
+Some milestone publications are listed here for the interested reader.
+More details can be found in the articles marked as "review".
+The author was involved in one of the studies citep:MMielke2020.
 
-+ Analog citep:Bernstein1927b
-+ DLTv citep:Hedrick2008
-+ Progressive Tracking citep:MMielke2020
++ analog @@latex:\citep[e.g.][]{Bernstein1927b}@@
++ (Review) DLTv citep:Hedrick2008
++ Argus citep:Jackson2016
++ (Review) Progressive Tracking citep:MMielke2020
 + DeepLabCut citep:Mathis2018,Mathis2020
++ ThruTracker citep:Corcoran2021
 + AniPose citep:Karashchuk2021
-
-  Karashchuk2021,Mathis2020,Jackson2016,Corcoran2021,MMielke2020
++ (Review) overview deep learning methods citep:Cronin2021

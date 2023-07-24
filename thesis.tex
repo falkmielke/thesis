@@ -3,6 +3,8 @@
 \documentclass[12pt,a4paper,twoside]{report}
 
 \usepackage[utf8]{inputenc}
+%\usepackage{carlito} %% https://tug.org/FontCatalogue/dejavusans/
+%\renewcommand*\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
 
 \usepackage{longtable}
@@ -88,16 +90,8 @@
 \arrayrulecolor{black}
 
 
-\title{Methodological Advances \\in \\Studying Postnatal Locomotor Development}
-\author{\textbf{Falk Mielke}
-\bigskip\\
-\textit{University of Antwerp}
-\bigskip\\
-\begin{tabular}{r | l}
-  promoters & Chris Van Ginneken
-               \\ & Peter Aerts
-\end{tabular}
-}
+\title{Methodological Advances \linebreak in \linebreak Studying Postnatal Locomotor Development}
+\author{Falk Mielke}
 \date{2023-07-24}
 
 \lstset{ 
@@ -161,8 +155,24 @@
 
 %%% Document
 \begin{document}
+\makeatletter
+    \begin{titlepage}
+        \begin{center}
+        	\ \vspace{3cm}\\
+            {\LARGE \bfseries  \@title }\\[6ex] 
+            {\large  \@author}\\[8ex] 
+            { PhD Thesis, \@date }\\[8ex] 
+            \begin{tabular}{r | l}
+              promoters & Chris Van Ginneken
+               \\ & Peter Aerts
+			\end{tabular}\\[12ex]
+            {\includegraphics[width=6cm]{figures/we-en-rgb.pdf}\\[4ex]}
+        \end{center}
+    \end{titlepage}
+\makeatother
+\thispagestyle{empty}
 
-\maketitle
+\newpage
 \linespread{1.0}
 \setcounter{tocdepth}{1}
 \tableofcontents
@@ -221,14 +231,15 @@
 
 
 \part{Appendix}\label{acknowledgements}
+\addcontentsline{toc}{section}{Bibliography}
 \bibliographystyle{apalike}
 \bibliography{library.bib}
-\addcontentsline{toc}{part}{Bibliography}
 
-
+\clearpage
 \section{Video Digitization}\label{cpt:digitization}
 \input{ch91_digitization/digitization.tex}
 
+\clearpage
 \section{List of Abbreviations}\label{abbreviations}
 \input{ch92_abbreviations/abbreviations.tex}
 
