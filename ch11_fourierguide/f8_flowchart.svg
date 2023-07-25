@@ -7,8 +7,11 @@
    viewBox="0 0 180 200"
    version="1.1"
    id="svg5"
-   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="f8_flowchart.svg"
+   inkscape:export-filename="f8_flowchart.pdf"
+   inkscape:export-xdpi="150"
+   inkscape:export-ydpi="150"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,13 +27,13 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.078437"
-     inkscape:cx="496.0883"
-     inkscape:cy="380.64345"
-     inkscape:window-width="1920"
-     inkscape:window-height="1056"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:zoom="1.1072812"
+     inkscape:cx="340.02201"
+     inkscape:cy="377.95276"
+     inkscape:window-width="1908"
+     inkscape:window-height="1044"
+     inkscape:window-x="5"
+     inkscape:window-y="29"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -217,23 +220,23 @@
        id="g7651"
        transform="translate(-5.8208336,-11.821259)">
       <rect
-         style="fill:#cccccc;fill-opacity:0.960784;stroke:#777777;stroke-width:0.264583;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:#cccccc;fill-opacity:0.960784;stroke:#777777;stroke-width:0.311555;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
          id="rect6723"
-         width="39.651249"
-         height="4.8721046"
-         x="134.6601"
-         y="96.668892" />
+         width="55.515057"
+         height="4.8251324"
+         x="118.7728"
+         y="96.692375" />
       <text
          xml:space="preserve"
          style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:0.264583"
-         x="154.46506"
-         y="100.69244"
+         x="146.53343"
+         y="100.21599"
          id="text311"><tspan
            sodipodi:role="line"
            id="tspan309"
            style="stroke-width:0.264583"
-           x="154.46506"
-           y="100.69244">collective variables</tspan></text>
+           x="146.53343"
+           y="100.21599">spatiotemporal gait variables</tspan></text>
     </g>
     <g
        id="g7611"

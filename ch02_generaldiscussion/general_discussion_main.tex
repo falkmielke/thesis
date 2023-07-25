@@ -1,5 +1,5 @@
 \section{First Principles}
-\label{sec:orgb3dc731}
+\label{sec:orgd97f170}
 The three parts of this thesis each had a slightly different focus, spanning the range of methodology which is characteristic for biomechanical research (kinematics, dynamics, statistics).
 They follow a common scheme:
 each of the parts took a basic principle of physics research and applied it to the study of biomechanics.
@@ -30,22 +30,22 @@ As I then demonstrated, the commonly desired assumption that inertial properties
 This finding was enabled by a third basic principle commonly applied in physics (which is actually a first principle): the quantification of a measurements inaccuracy \citep{Hughes2010}.
 
 
-There are certainly more examples of basic principles in physics which would deserve application in Biology in general \citep[e.g.][]{Busemeyer2015,Aerts1995}, or in Biomechanics in particular \citep{Dumas2004}.
+There are certainly more examples of basic principles in physics which would deserve application in biology in general \citep[e.g. Quantum Cognition,][]{Busemeyer2015,Aerts1995}, or in biomechanics in particular \citep[e.g. wrenches and quaternions,][]{Dumas2004}.
 
 
 \section{Predictive Power}
-\label{sec:org7fb0635}
+\label{sec:org12de810}
 Yet are these adaptations from the physical sciences inevitable?
 Why/when should conventional methods be questioned and compared to the yet uncommon methods suggested herein?
 
 
 The two decisive analysis characteristics are the occurrence of variability, and predictive modeling.
 
-Variability is omnipresent in Biology, and it is surprising how many studies use statistics which model point estimates for actually variable measurements.
+Variability is omnipresent in biology, and it is surprising how many studies use statistics which model point estimates for actually variable measurements.
 
-Yet the ultimate quality criterium of statistical models (and classifiers, and neural networks/``AI'') is how well they can be used to predict experimental circumstances which deviate from those they were trained on.
+Yet the ultimate quality criterion of statistical models (and classifiers, and neural networks/``AI'') is how well they can be used to predict experimental circumstances which deviate from those they were trained on.
 This refers to the distinction of descriptive, explanatory, and predictive modeling \citep{Shmueli2010,Shmueli2011}.
-In Biomechanics, explanatory modeling is rarely applied, because the causal theory for animal movement are known to be physical first principles (conservation of momentum, Ch. \ref{cpt:dynamics_workflow}).
+In biomechanics, explanatory modeling is rarely applied, because the causal theory for animal movement are known to be physical first principles (conservation of momentum, Ch. \ref{cpt:dynamics_workflow}).
 Virtually all quantitative analyses in locomotor science are descriptive: they ``summarize or represent the data structure in a compact manner'', and ``focus is at the measurable level rather than at the construct level'' \citep{Shmueli2010}.
 For example, spatiotemporal gait characteristics (e.g. dimensionless speed) are often measured and compared between study groups.
 There are numerous recent examples of studies in which spatiotemporal gait variables are the basis and (own) goal of comparison  \citep[e.g.][]{Cheu2022,Ekhator2023,Plocek2023,Young2023,Jones2023,Druelle2021,McHenry2023}.
@@ -79,7 +79,7 @@ Interesting debates are ongoing with regard to the bipedality and arboreality of
 Note that the methodological advances presented in this thesis could be used for quantitative predictions of hominid (or any other animals') locomotion.
 Trained with locomotor data of e.g. extant humans and chimpanzees (phylogenetic bracket), a probabilistic model which relates antomical, morphological, and developmental traits to joint angle profiles could be tuned to predict stride cycles of intermediate forms (Ch. \ref{cpt:statistics}).
 The emphasis is on ``stride cycles'': this refers to complete joint angle profiles, from which all corresponding joint positions can be recovered (information retention of the Fourier Series, Ch. \ref{cpt:fcas}).
-These predictions could be turned in to dynamic simulations and virtual animations of the complete behavior, and matched to trace fossils \citep[as in][, but with less manual work]{Nyakatura2019}.
+These predictions could be turned into dynamic simulations and virtual animations of the complete behavior, and matched to trace fossils \citep[as in][but with less manual work]{Nyakatura2019}.
 Adding qualified estimates of inertial properties (Ch. \ref{cpt:inertials}) to the predicted strides would enable forward dynamic modeling, and an estimation of the plausibility of certain hypothesized gaits (e.g. by comparing energy efficiency).
 By now, thes modeling tasks are not possible, because joint angle profiles and their variability are difficult to capture numerically, and in consequence reconstruction remains vague or non-quantitative.
 
@@ -90,7 +90,7 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 
 
 \section{How and Why Piglets Move}
-\label{sec:orged862fe}
+\label{sec:org2698b03}
 The primary goal of this thesis was to falsify the hypothesis that there are differences in locomotion of low- and normal birth weight piglets (LBW and NBW, Ch. \ref{cpt:generalintro}).
 There are two main aspects in which the study groups could differ: in kinematics (\emph{how} animal limb segments move) and dynamics (\emph{why} animal limb segments move).
 And there are putatively confounding effects: age (i.e. locomotor maturation), size and weight of the animals \citep[i.e. physical appearance, cf.][]{Aerts2023}, and the variability of locomotor behavior.
@@ -110,19 +110,19 @@ We suspect competition within litters and limited metabolic reserves as the reas
 Note that these observations are restricted to walking gait at voluntary speed; we cannot exclude more obvious LBW/NBW differences emerging in more challenging motor tasks.
 However, the apparent developmental delay in even this basic motor skill indicates the high sensitivity of the method.
 Also, the relevance of stair, treadmill, or wind tunnel studies for animals whose major priority is to find and access their mother's teats is questionable.
-Overall, the models provide strong evidence against the existence of fundamental differences in \emph{how} LBW and NBW piglets locomote.
+Overall, the models provide strong evidence against the existence of fundamental differences in \emph{how} LBW and NBW piglets move.
 
 
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=12cm]{./figures/piglet_xromm_t02_0214.png}
-\caption{\label{fig:piglet_xromm}XROMM using python and blender, unpublished. Full video (\url{https://ody.sh/fZe3OpgHGN}) and code (\url{https://git.sr.ht/\~falk/foss\_xromm}) are available.}
+\caption{\label{fig:piglet_xromm}XROMM using Python and Blender, unpublished. Full video (\url{https://ody.sh/fZe3OpgHGN}) and code (\url{https://git.sr.ht/\~falk/foss\_xromm}) are available.}
 \end{figure}
 
 In fact, this lack of differences in the collective output of the animals neuromotor system is surprising.
-The FCAS data quantifies joint angle profiles, angles are indifferent to size.
-Yet piglets of low- and normal birth weight operate under different body mass constraints: NBW are about twice as heavy as LBWs.
+The FCAS data quantifies joint angle profiles - angles are indifferent to size.
+Yet piglets of low- and normal birth weight operate under different body mass constraints: NBW are about twice as heavy as LBW.
 To produce the same kinematics, one would think that they must tune their motors differently, like using different gears.
 These would be differences in \emph{why} we observe the (indistinguishable) movements.
 Different weight implies different physical constraints, size does matter \citep{Aerts2023}.
@@ -131,10 +131,10 @@ Yet we encountered conceptual and practical issues in addressing this second big
 The first issue is a practical one, reported in chapter \ref{cpt:inertials}: inertial parameters, which others have extracted from calibrated CT scans, cannot be determined at sufficient accuracy.
 Then, again, there is the issue of variability, as evident from the study of kinematics (Ch. \ref{cpt:piglets}):
 differences between NBW and LBW (when normalized for size, see below) seem to be lower in magnitude than the effect of maturation, and lower than normal variability of the behavior.
-This was confirmed by actual 3D measurements (which we did, unpublished): we actually attempted the full experimental procedure for XROMM.
-Of course those recordings are variable, but of the 392 recordings we obtained in several recording sessions in summer 2019, not a single one showed locomotion which strictly fulfilled the ``steady state'' criterium and gave single limb forces (hitting the force plate correctly was likely, but not guaranteed, and happened in 189 recordings, 85 of them walking gait).
+This was actually confirmed by analysis of 3D kinematics (which we did, unpublished): we originally attempted the full experimental procedure for XROMM.
+Of course those recordings are variable, but of the 392 recordings we obtained in several recording sessions in summer 2019, not a single one showed locomotion which strictly fulfilled the ``steady state'' criterion and gave single limb forces (hitting the force plate correctly was likely, but not guaranteed, and happened in 189 recordings, 85 of them walking gait).
 Not a single stride could be considered ``representative'', because young piglets in our setup literally always tumbled, moved, jumped, sidestepped, stopped shortly after, or interfered with each other.
-The XROMM procedure is a low through-put method, and it was not possible to digitize a sufficient number of strides to assess LBW differences in joint moment orchestration on the background of motor variability.
+The XROMM and inverse dynamics procedure is a low through-put method, and it was not possible to digitize a sufficient number of strides to assess LBW differences in joint moment orchestration on the background of motor variability.
 
 
 These issues nonwithstanding, I succeeded in porting the XROMM workflow \citep{Brainerd2010} to an alternative software environment (cf. \url{https://git.sr.ht/\~falk/foss\_xromm}, Fig. \ref{fig:piglet_xromm}).
@@ -155,7 +155,7 @@ Though differences in \emph{why} segments move in a particular way are unlikely 
 
 
 \section{Piglets, Baboons, and Humans}
-\label{sec:org3dfd2a2}
+\label{sec:orgc33ed00}
 An important premise of this project is that piglets are a valid model species for humans, in terms of locomotion.
 This premise demands constant revision.
 
@@ -165,7 +165,7 @@ This suggestion is perfectly justified in the fact that it can be ethically prob
 Piglets are social, sedentary, and share similarity in their appearance (hairless, rotund habitus).
 Of course, one has to carefully discuss differences and similarities with the model species, and evaluate alternatives.
 
-One aspect which sets piglets apart from other mammalian model organisms is the relatively frequent occurrence of IUGR, Intra-Uterine Growth Retardation \citep{Widdowson1971,Wootton1983,Wu2006,VanGinneken2022}.
+One aspect which sets piglets apart from other mammalian model organisms is the relatively high frequency of occurrence of IUGR, Intra-Uterine Growth Retardation \citep{Widdowson1971,Wootton1983,Wu2006,VanGinneken2022}.
 This diagnosis is different from low birth weight \citep{Wootton1983}, i.e. the lowest quantile of weights in a litter.
 Then there is also pre-term birth: pre-term individuals can have a weight which is lower than normal, but appropriate for gestational age.
 Pre-terms can have low weight for gestational age, or even IUGR, thus double or triple the issues.
@@ -180,14 +180,14 @@ The piglet model has enabled progress with regard to the research of respiratory
 Maybe most importantly for this thesis, muscle histology and function have been studied \citep{VandenHole2018b,Alvarenga2013,Andersen2016,Aerts2023}.
 Results vary, indicating differences in locomotor performance and muscle mass, but failing to associate them with differences in fibre composition or force generating capacity.
 
-Yet, common to all the organ system under investigation, it must be stated that analogies of human infants and piglets are usually related to homogeneities on the cellular- or tissue level.
+Yet, common to all the organ systems under investigation, it must be stated that analogies of human infants and piglets are usually related to homogeneities on the cellular- or tissue level.
 Whereas developmental anomalies in gut, lung, and brain tissue can be related to dysfunctions in neonates of both species, characteristic anomalies of muscle tissue are lacking.
 Therefore, though it seems tempting to turn to piglets in light of all the prior research, it might be questionable to choose them as a model \emph{for musculoskeletel aspects}.
 
 
 Other characteristics of the piglet prohibit transfer of findings to our own species, with regard to locomotion.
 They are rather precocial \citep{Wischner2009}, and locomotion of newborns matures at a baffling pace \citep{VandenHole2017,VandenHole2018}.
-They are unguligrade, quadrupedal, and it must be assumed that during the approximately 94mya of evolution that separate us \citep{Timetree2017} their neural and musculoskeletal anatomy and morphology adapted to different locomotor constraints.
+They are unguligrade, quadrupedal, and it must be assumed that during the approximately 94 million years of evolution that separate us \citep{Timetree2017} their neural and musculoskeletal anatomy and morphology adapted to different locomotor constraints.
 
 
 To conclude, I must re-emphasize that piglets are an appropriate and inevitable model species with regard to anomalies on various organ systems.
@@ -201,10 +201,10 @@ But even if such differences occur, they cannot be easily extrapolated to humans
 This opens the discussion about alternative model species.
 Non-human primates, e.g. baboons, are sufficiently similar to humans in anatomy and habitus, and their usefulness in medical and evolutionary research is widely accepted \citep{Nardone2017,Liang2023,Aerts2023b,Druelle2021,BoulinguezAmbroise2021}.
 Their developmental trajectory is less steep than that of piglets (Ch. \ref{cpt:statistics}), but still on a manageable timescale for longitudinal studies \citep{Druelle2017}.
-Ethical concerns in using primates might express more strongly (for reasons unknown).
+Ethical concerns in using primates might weigh more strongly (for reasons unknown).
 Those objections can be partially mitigated for the kind of locomotor research demonstrated herein:
 kinematic studies from calibrated videography are non-invasive.
-The inaccuracies of inertial measurements (Ch. \ref{cpt:inertials}) justify doubt on the common practice of euthanizing individuals after experiments; one could as well use naturally deceased specimens or literature data to transfer the measured inertials to new observations (which would also enable longitudinal XROMM studies).
+The inaccuracies of inertial measurements (Ch. \ref{cpt:inertials}) justify doubt on the common practice of euthanizing individuals after experiments; one could as well use naturally deceased specimens or literature data to transfer the measured inertials to new observations (which would also enable longitudinal inverse dynamic studies).
 This all of course assumes ethical assessment of, amongst more, proportionate radiation dose (especially on young individuals), appropriate experimental circumstances (e.g. habituation requirement), and general welfare \citep{Young2018}.
 The main limiting factor for such studies is the availability of non-human primates and their offspring, even more of IUGR-like conditions, which, as is often argued, is one of the benefits of using domestic pigs as a model.
 
@@ -212,7 +212,7 @@ Yet in the light of the present thesis, it seems more worthwile to strive for ap
 
 
 \section{Methodological Advances}
-\label{sec:org6257865}
+\label{sec:orgb0bd3f5}
 Independent of the choice of model species, this thesis presented a number of advances in locomotor studies.
 
 
@@ -241,8 +241,8 @@ With all these data types and modeling capabilities at hand, future researchers 
 
 In contrast to kinematic data analysis and modeling, my contribution to inverse dynamic modeling is less than what I hoped to achieve.
 
-As discussed above, this is due to the discrepancy in data throughput of the XROMM method, and variability of the phenomenon of interest.
-Also, initial technical misconceptions about CT scans have temporarily misled my efforts and caused visible problems in the outcome of my custom-made XROMM workflow.
+As discussed above, this is due to the discrepancy in data throughput of the inverse dynamic workflow, and variability of the phenomenon of interest.
+Also, initial technical misconceptions about CT scans (Ch. \ref{cpt:inertials}) have temporarily misled my efforts; there were visible problems in the outcome of my custom-made inverse dynamics workflow.
 ``Realization is the death of the idea'' (quote attributed to Heiner Müller).
 In reaction, the ``flying femur'' experiment as a reductive approach enabled the understanding of all details of the workflow.
 This included a sensitivity analysis, which reveals surprisingly high error margins for the inertial properties, which might be prohibitive for inverse dynamic calculations.

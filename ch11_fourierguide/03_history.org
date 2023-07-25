@@ -6,7 +6,7 @@
 #+END_SRC
 
 The analogy of limbs and a pendulum was established early on citep:Weber1836,Braune1895, and maybe that is why Fourier Series was immediately among the relevant considerations for analysis.
-To our knowledge, the first formal application of it was by Nikolas A. Bernstein citep:Bernstein1927a,Bernstein1935, who in the early years of his work was concerned with methodological advances in measuring motor actions citep:Bongaardt2000.
+To my knowledge, the first formal application of it was by Nikolas A. Bernstein citep:Bernstein1927a,Bernstein1935, who in the early years of his work was concerned with methodological advances in measuring motor actions citep:Bongaardt2000.
 Bernstein suggested and applied a trigonometrical sum, which consisted only of sines and bares some resemblance in form to a Taylor approximation.
 
 In his later work, Bernstein advocated a hierarchical organization of motor control @@latex:\citep[\textit{cf.}][]{Bongaardt2000}@@.
@@ -35,7 +35,8 @@ Along these lines, Fourier Series was used to get a frequency spectrum and compu
 Multi-Dimensional variants of Fourier analysis for two angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D angles using Quaternions citep:Kenwright2015 point at promising future directions.
 
 
-Finally, recent work by the authors has expanded on the aspect of multi-variate analysis and favorable data properties in the frequency domain citep:Mielke2019,Mielke2023.
+Finally, recent work by the author (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}) has expanded on the aspect of multi-variate analysis and favorable data properties in the frequency domain citep:Mielke2019,Mielke2023.
+
 
 
 Overall, although some references exist, the studies using Fourier Analysis are sparse among locomotion literature.

@@ -12,18 +12,18 @@ Not all of the reported properties of Fourier methods are directly linked to lit
 
 * Not a Regression
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
-A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters with clever adjustment rules.
-An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are adjusted so that the formula best describes the observed data relation of `y` and `x`.
+A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever utdate rules.
+An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
 Typical optimization algorithms are the Nelder-Mead simplex citep:Nelder1965 or variants of the BFGS algorithm citep:Broyden1970,Fletcher1970,Goldfrab1970,Shanno1970,Zhu1997.
 Though it is immensely useful, regression has several technical disadvantages: convergence is not guaranteed, start values are required and might affect the result, the algorithm might get stuck in local optima, accuracy is finite, the iterative procedure is computationally expensive, and reversibility requires the inverse function and another regression.
 Some of these disadvantages are emphasized when working with trigonometric functions.
 
 
 *Fourier Series Decomposition is not a regression.*
-Determining the "parameters", i.e. Fourier coefficients, works by eqn. \eqref{eqn:fourier_coefficients}, which can be directly translated to computer code (see above and appendix \ref{appendix:code}).
+Determining the "parameters", i.e. Fourier coefficients, works by eqn. \eqref{eqn:fourier_coefficients1}, which can be directly translated to computer code (see above and supplement \ref{appendix:code}).
 The procedure is deterministic, exact, and reversible; no start values are required.
 The trigonometric formulas provided in many publications resemble regression models, but applying a regression procedure is not necessary.
-We will demonstrate the overall procedure below and provide code for some relevant scientific scripting languages as proof of concept.
+I will demonstrate the overall procedure below and provide code for some relevant scientific scripting languages as proof of concept.
 
 
 * Relation to Fourier Transform
@@ -59,11 +59,11 @@ It is thus possible to re-sample the time line of a measurement by transforming 
 In consequence, FSD is useful for homogenizing and comparing signals of variable duration.
 This can be advantageous, if groups or paradigms of variable stride durations are to be compared.
 If discarding that information is unintended, "duration" can simply be retained as a separate variable.
-The same holds for speed and other collective variables which are related to the temporal structure of the signal.
+The same holds for speed and other spatiotemporal gait variables which are related to the temporal structure of the signal.
 
-It follows that *Fourier coefficients do not replace collective variables (e.g. duration, speed), but complement them*.
-In case of joint angle profiles, Fourier coefficients capture the kinematics, while collective variables quantify the system outcome as a whole.
-Both are related by morphology (i.e. limb segment dimensions), which is another relevant class of variables that can and should be associated with kinematics in modeling approaches.
+It follows that *Fourier coefficients do not replace spatiotemporal gait variables (e.g. duration, speed), but complement them*.
+In case of joint angle profiles, Fourier coefficients capture the kinematics, while gait variables quantify the system outcome as a whole.
+Both are related by morphology (i.e. limb segment dimensions), which is another relevant class of variables that can and should be associated with kinematics in modeling approaches (/cf./ Ch. \ref{cpt:statistics}).
 
 
 * Approximate Periodicity
@@ -84,9 +84,9 @@ However, abrubt changes from discontinuities are not physiological, so those val
 
 
 As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and concatenate it to the end of the original signal.
-This could be visualized as a rotation of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes cumulating to zero, and the signal ending where it started.
+This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes cumulating to zero, and the "double" signal ending where it started.
 This method is common in the Fourier analysis of ground reaction force measurements citep:Schneider1983,Alexander1980, where data usually starts and ends at zero.
-It nihilates the signal mean (zero'th component) and shifts all consecutive harmonics up by one due to period doubling.
+It nihilates the signal mean (zero'th coefficient) and shifts all consecutive harmonics up by one due to period doubling.
 The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant infromation of the signal.
 
 
@@ -94,12 +94,12 @@ A third method to mend end-start differences is to simply spread them over the w
 This can be achieved in a computationally efficient way by subtracting an array of numbers from the signal which is linearly increasing from zero to the end-start difference, and which has the same number of samples as the signal (pseudo-algorithm: ~signal -= linspace(0, end-start, number_of_samples)~).
 For this to be valid, it must be ensured that the end-start-difference is negligible in magnitude, non-physiological, and non-systematic.
 If those are givens, spreading the difference over the cycle is least invasive with regard to the outcome coefficients.
-As with the previous method, this smoothes the signal and reduces higher order components, yet without the caveat of altering the relation of relevant harmonics.
+As with the previous method, this smoothes the signal and reduces higher order coefficients, yet without the caveat of altering the relation of relevant harmonics.
 
 
 
 #+CAPTION: *Stride cycle end-start matching.* A stride cycle can be defined as the time interval between two frames which have the highest similarity in joint configuration and enclose exactly one swing and stance phase. (A) Putative start and end frame configurations, superimposed onto the original video frames. Several frames are candidates for cycle end, indicated by the series of cross markers. (B) Superimposition of end frame candidates onto the reference start frame, using Procrustes Superimposition. Only the axial line points (head to toe) are used for superimposition. (C) Configuration difference (measured as Procrustes distance \(pd\), shifted by the arbitrary formula \(log\left(pd*10^3+2\right)\) for visualization) over the whole stride cycle for different candidate start frames. (D) A heatmap of configuration difference can identify mathematically optimal stride cycle intervals. Dashed black crosshair: cycle start and end, conventionally determined by limb touch down. Blue crosshair: start and end frame with maximal configuration similarity, i.e. minimal Procrusted distance of the configurations at candidate frames.
-#+ATTR_LATEX: :placement [pt]
+#+ATTR_LATEX: :placement [p]
 #+LABEL: fig:endstart
 [[file:./figures/f3_endstart_Procrustes.pdf]]
 
@@ -109,7 +109,7 @@ The *choice of where the start and end of a cycle lie* is conventionally made by
 This time point is more or less distinctly visible on videos, and might be a requirement for data comparison.
 Yet, mathematically, that is just an arbitrary point in the cycle, and biomechanically, the configuration of the limb can be different on two touch downs (two strides might instead have higher cross-resemblance just before touchdown, or at mid-stance; Fig. \ref{fig:endstart}).
 The term configuration herein describes the relative spatial arrangement of a set of points of interest or markers.
-Thus, if emphasis of the analysis lies more on the cyclic character of the stride, and if researchers find it valid to choose a different point for start and end of the cycle, then optimal points could be found automatically by cross-comparing the configurations of the whole limb in a sufficient frame range around the limb touch downs @@latex:\citep[as applied in][]{Mielke2019,Mielke2022}@@.
+Thus, if emphasis of the analysis lies more on the cyclic character of the stride, and if researchers find it valid to choose a different point for start and end of the cycle, then optimal points could be found automatically by cross-comparing the configurations of the whole limb in a sufficient frame range around the limb touch downs @@latex:\citep[as applied in][]{Mielke2019,Mielke2023}@@.
 This can be achieved by taking all relevant points digitized in the videos (treating them in each frame as a geometric shape; Fig. \ref{fig:endstart}B) and calculating the Procrustes Distance between those frames or shapes citep:Rohlf1990.
 That Procrustes Distance is a direct measure for the configuration difference between frames (Fig. \ref{fig:endstart}C).
 In a cross-comparison, the two frames which have least Procrustes Distance are candidates for start and end of the cycle (Fig. \ref{fig:endstart}D), and should be verified by visually superimposing the video frames.
@@ -147,8 +147,8 @@ The formula for the inverse Fourier Series is the following:
 	f(t) = \sum\limits_{n=0}^{N} (2\cdot c_{n})\cdot e^{2\pi i n \frac{t}{T}}
 \end{equation}
 # c_{n} = \frac{1}{T}\sum\limits_{t=0}^{T} e^{-2\pi i n \frac{t}{T}} \cdot f(t)  \quad\quad \forall n>0
-Notation herein as in \eqref{eqn:fourier_coefficients}, with \(N\) being the order (number of coefficients).
-Computer code for application in R, Matlab and Python can be found in appendix \ref{appendix:code} and the supplements.
+Notation herein as in \eqref{eqn:fourier_coefficients1}, with \(N\) being the order (number of coefficients).
+Computer code for application in R, Matlab and Python can again be found in supplement \ref{appendix:code} and online (\url{https://git.sr.ht/~falk/fcas_code}).
 
 The existence of this inverse formula means that just as exchanging a coordinate basis for linear coordinates, *one can convert freely between time- and frequency domain*.
 
@@ -168,12 +168,12 @@ And because of the relatively few coefficients needed for accurate representatio
 How to decide how many coefficients should be retained?
 That number is the "order" of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
-Each data point (i.e. each measured joint angle profile) should be converted to the frequency domain with a given order, and then converted back to the time domain.
+Each observation (i.e. each measured joint angle profile) should be converted to the frequency domain with a given order, and then converted back to the time domain.
 The (root-mean-square) difference of the original signal and the re-transformed one should be small in magnitude and normally distributed around zero.
 Additionally, original and re-transformed signals should be plotted on top of each other for visual inspection.
 
 
-This strategy is of general use, and we will demonstrate it on the test case below (ch. \ref{casestudy:dataprep}).
+This strategy is of general use, and we will demonstrate it on the test case below (Ch. \ref{casestudy:dataprep}).
 In the particular case of joint angle kinematics, it has often been concluded that relatively few coefficients are sufficient to capture the essence of the phenomenon.
 This is physically plausible, because the elements of limbs are rigid bodies with a certain inertia.
 Such elements cannot perform too abrupt accelerations, and in consequence, the profiles are smooth.
@@ -183,7 +183,7 @@ The stride cycle is the defining time interval, and normally all elements move i
 
 * Affine Components
 Some attributes of a signal are emphasized by Fourier methods.
-Those can be summarized intuitively as those attributes of the signal which can be changed without altering the "perceived shape" of the signal.
+Those can be summarized intuitively as those attributes of the signal which can be changed without altering the "perceived shape" of the signal when plotted.
 
 The most obvious one is the average of the signal over time, i.e. its *mean value*.
 When changing the mean of a signal in the time domain by adding the same scalar value to every sample, the signal shifts "up and down", but retains its temporal structure.
@@ -198,18 +198,18 @@ The third special signal aspect is *phase*, and it has to do with the periodicit
 Phase is quantized in the time domain by sampling, and it can be changed by taking a number of samples from the end of the signal and appending it to the start ("rolling" the signal around, or changing the start point of the cycle).
 In the frequency domain, changing the phase rotates the coefficients in the complex plane (but note that higher order coefficients rotate exactly \(n\) times quicker).
 Because the frequency domain is independent of sampling, phase can be changed by any scalar number here, and is not limited to the sample raster.
-This allows efficient temporal resampling, as wel as an optimal alignment of multiple signals @@latex:\citep[\textit{cf.} supplementary information of][]{Mielke2019}@@.
+This allows efficient temporal resampling, as well as an optimal alignment of multiple signals (/cf./ Ch. \ref{apdx:fourier}).
 Phase is an angle, best used in the range of zero and \(2\pi\).
-It is changed in the frequency domain, just as any rotation in a complex plane, by multiplication of a complex exponential @@latex:\citep["delay/shift theorem", \textit{cf.}][]{Bracewell2000}@@.
+It is changed in the frequency domain, just as any rotation in a complex plane, by multiplication of a complex exponential @@latex:\citep[``delay/shift theorem'', \textit{cf.}][]{Bracewell2000}@@.
 
 The fact that amplitude is the distance and phase the angle of Fourier coefficients in the complex valued frequency space illustrates the relation of the exponential and amplitude-phase form of the Fourier formula: the latter are just the corresponding polar coordinates.
 
 
-Mean, amplitude and phase are called *affine components* of a signal, which describes the fact that they can be adjusted by scalar operations without altering the "signal shape".
+Mean, amplitude and phase are called *affine components* of a signal, which describes the fact that they can be adjusted by scalar operations without altering the "signal shape" (see Ch. \ref{cpt:fcas}).
 They can even be standardized (mean: zero, amplitude: one, phase: zero).
 They can be associated with biological meaning: the mean quantifies dynamic posture, the amplitude is related to effective range of motion, the phase quantifies relative timing of joint movements.
 What remains after standardization, i.e. after isolation of the affine components, is in a way the essence of a signal, its "shape", which is defined by the temporal (or frequential) structure of the behavior.
-In the case of joint angle profiles, this remainder can be considered coordination /sensu strictu/ citep:Mielke2019,Mielke2022.
+In the case of joint angle profiles, this remainder can be considered coordination /sensu strictu/ citep:Mielke2019,Mielke2023.
 
 * Multivariate Analysis
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
@@ -217,7 +217,7 @@ Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which a
 Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
 
 This raises the question of the effect of multivariate analysis methods, such as Principal Component Analysis (PCA).
-PCA is a coordinate transformation which finds orthogonal coordinate axes in the data set that are oriented towards the largest variability within the data.
+PCA is a coordinate transformation which finds orthogonal coordinate axes in the data set that are oriented towards the largest variability within the data citep:MacLeod2007.
 A common purpose of PCA is dimensionality reduction, and it is particularly effective if there are strong co-variations within the data.
 It seems clear that Fourier coefficients of a single joint angle profile are intrinsically linked, for example through the phase rotation in the complex plane (exponential form).
 However, it is not obvious whether that holds any advantages for PCA, because the phase rotation does not cause linear correlation.
@@ -228,7 +228,7 @@ It might be different in the apmlitude-phase formulation, which should be explor
 
 If more than one joint is of interest, coefficient number is multiplied, but the situation for multivariate analysis changes.
 Different joints are often interrelated through adjacency along their linking segments.
-Biarticular muscles and tendons can cause correlated movements, which makes top-down sense, because a typical vertebrate limb during swing phase tends to be extended and flexed altogether.
+Biarticular muscles and tendons can cause correlated movements, which makes top-down sense, because a typical vertebrate limb during swing phase tends to be extended and flexed altogether citep:Fischer2006.
 This situation is favorable for PCA, in a sense that dimensionality reduction can often be achived with relatively little information loss.
 Note, however, that PCA must be adjusted in a way that accounts for the FSD properties as follows.
 It is common practice and often advisible to standardize input variables prior to PCA, so that their value ranges are comparable (usually done by subtraction of the mean and division of a variability measure).

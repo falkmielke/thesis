@@ -9,29 +9,29 @@
 When reviewing prior attempts to use Fourier-based methods for the analysis of kinematics, a lack of consistency becomes apparent.
 Prior studies using the method exist, but hardly reference each other, which indicates independent events of lateral Fourier gene transfer into the population of biologists.
 Authors seem to be unaware of the different available methods and how to apply them efficiently.
-Some of the choices for application are of little relevance for the outcome of the analysis (e.g. whether to use the sine-cosine, exponential, or phase-amplitude form of Fourier Series), whereas others have severe impact.
-We pointed out that Fourier methods do not require a regression algorithm for data conversion, and that often the most appropriate tool in the Fourier toolbox to analyze joint angle profiles is Fourier Series (and not FFT).
+Some of the choices for application are of little relevance for the outcome of the analysis (e.g. whether to use the sine-cosine, exponential, or phase-amplitude form of Fourier Series), whereas others have severe impact (e.g. choice of order).
+I pointed out that Fourier methods do not require a regression algorithm for data conversion, and that often the most appropriate tool in the Fourier toolbox to analyze joint angle profiles is Fourier Series (and not FFT).
 Usually, few coefficients are sufficient to capture all relevant kinematic information, and multivariate methods such as PCA are readily available for further dimensionality reduction.
 Some properties of joint angle profiles become directly accessible by FSD (affine components), and a mathematically precise phase alignment is possible.
 
-Yet, as demonstrated above, we would argue that the biggest advantage of transforming the data to the frequency domain is that it enables the quantitative analysis of coordination.
+Yet, as demonstrated above, I would argue that the biggest advantage of transforming the data to the frequency domain is that it enables the quantitative analysis of coordination.
 Though joint angle profiles could theoretically be resampled and submitted to multivariate analysis directly, this approach would face major technical challenges if sample size is limited, or data points are structurally different, misaligned, or undersampled (all of which is practically always the case in comparative kinematics).
 FSD circumvents these problems by providing an elegant, concise representation of the data: a set of relatively few, partially meaningful complex coefficients which can be converted back to the original data.
 
 
 This availability for quantitative analysis has far reaching potential.
-We demonstrated it on a relatively small, but well studied data set of bipedal walking in baboons, and were able to predict stride cycles for a coincidentally unobserved combination of subject attributes.
+I demonstrated it on a relatively small, but well studied data set of bipedal walking in baboons, and were able to predict stride cycles for a coincidentally unobserved combination of subject attributes.
 Using phylogenetic and morphometric bracketing, the same procedure could be applied to infer the locomotion of extinct species, e.g. hominids.
 Another potential purpose of this quantitative method is its combination with dynamics, i.e. force and moment measurements:
 consider a perturbation analysis, where normal locomotion is interrupted, and a subject can succeed or not in maintaining dynamic balance.
 Certainly, success will depend on the specific movement of some limb elements, and quantitative kinematic modeling can highlight which.
 
-Another study by the authors has used the FSD and probabilistic modeling approach (described there in more detail) to use an "inverted" model of subject characteristics and kinematics to analyze developmental deficiency in piglets citep:Mielke2022.
+I will get back to and extend the use of FSD and the probabilistic modeling approach in the following chapters (Ch. \ref{cpt:statistics}, Ch. \ref{cpt:piglets}).
 
 
 None of these analysis components are novel.
 Fourier Analysis is a standard tool in physics and engineering.
-We see equally great potential for the biological sciences, where cyclic phenomena are abundant (genetics, physiology, behavior, ...).
-We suspect that the reason for the limited use of these tools to date is limited accessibility, caused by terminological confusion and the lack of attention for example studies.
-We referenced some excellent work that made use of the Fourier theorem citep:Bernstein1935,Pike2002,Webb2007, as well as our own attempts to extend the capability of the technique in the context of kinematics citep:Mielke2019,Mielke2022.
-Thereby, we hope that this review can increase availability of the Fourier method to biological sciences, potentially even beyond the study of locomotor kinematics.
+I see equally great potential for the biological sciences, where cyclic phenomena are abundant (genetics, physiology, behavior, ...).
+I suspect that the reason for the limited use of these tools to date is limited accessibility, caused by terminological confusion and the lack of attention for example studies.
+I referenced some excellent work that made use of the Fourier theorem citep:Bernstein1935,Pike2002,Webb2007, as well as our own attempts to extend the capability of the technique in the context of kinematics citep:Mielke2019,Mielke2023.
+Thereby, I hope that this review can increase availability of the Fourier method to biological sciences, potentially even beyond the study of locomotor kinematics.

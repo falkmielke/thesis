@@ -1,11 +1,14 @@
 #+title: Notes
 
 * TODO TODO's
-+ ch1 +appendix+ -> link to repo
-+ ch2 +appendix+ -> integrate (M&M)
++ all chapters: +appendix+ -> supplement
 + ch2 Link published article
 + ch2 data available
 + ch3 tiny textbook conclusion/summary overhaul
++ Is there a pagebreak before every abstract?
++ ch2
+
++ FCAS tutorial to fcas_code repository
 
 * find/replace
 + gray values

@@ -6,10 +6,14 @@
 
 This is an example how the Fourier Series can be implemented in the Python programming language (\nolinkurl{https://python.org}).
 
-Similar implementations for R and Matlab are provided "ready-to-use" in the Supplementary Material.
+Similar implementations for R and Matlab are provided "ready-to-use" on the following git repository:
 
-\footnotesize
-#+BEGIN_SRC python :results none :tangle no :export code
+\url{https://git.sr.ht/~falk/fcas_code}
+
+
+
+#+BEGIN_EXPORT latex
+\begin{lstlisting}
 def FourierSeriesDecomposition(time, signal, order):
     # calculate the Fourier Series decomposition of a signal,
     # given the sample time array ("time")
@@ -33,9 +37,12 @@ def FourierSeriesDecomposition(time, signal, order):
 
     return fsd
 
-#+END_SRC
+\end{lstlisting}
+#+END_EXPORT
 
-#+BEGIN_SRC python :results none :tangle no :export code
+\pagebreak
+#+BEGIN_EXPORT latex
+\begin{lstlisting}
 def FourierSeriesRecomposition(coefficients, output_time):
     # reconstruct a signal from its frequency space representation
     # i.e. take coefficients list and return the signal at given output_time points
@@ -57,6 +64,6 @@ def FourierSeriesRecomposition(coefficients, output_time):
                                  ]))
     return numpy.real(signal)
 
-#+END_SRC
+\end{lstlisting}
+#+END_EXPORT
 
-\footnotesize
