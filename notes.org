@@ -2,9 +2,6 @@
 
 * TODO TODO's
 + all chapters: +appendix+ -> supplement
-+ ch2 Link published article
-+ ch2 data available
-+ ch3 tiny textbook conclusion/summary overhaul
 + Is there a pagebreak before every abstract?
 + ch2
 

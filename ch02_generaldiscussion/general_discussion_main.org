@@ -10,7 +10,7 @@
 
 * First Principles
 # The three parts of this thesis, which tackled kinematic data analysis, modeling, and inverse dynamics,
-The three parts of this thesis each had a slightly different focus, spanning the range of methodology which is characteristic for biomechanical research (kinematics, dynamics, statistics).
+The three parts of this thesis each had a slightly different focus, spanning the range of methodologies which is characteristic for biomechanical research (kinematics, dynamics, statistics).
 They follow a common scheme:
 each of the parts took a basic principle of physics research and applied it to the study of biomechanics.
 
@@ -34,9 +34,9 @@ I demonstrated that probabilistic prediction can be used to generate precise, re
 
 
 Finally, the third part of the thesis was devoted to inverse dynamics.
-The goal and working material of inverse dynamics are estimates of joint forces and moments, which can be calculated from force measurements by treating limb segments as rigid bodies, and by (stepwise) calculation of their balance of wrenches (Ch. \ref{cpt:dynamics_workflow}).
+The goal of inverse dynamics are estimates of joint forces and moments, which can be calculated from measured or estimated external forces and moments by treating limb segments as rigid bodies, and by (stepwise) calculation of their balance of wrenches (Ch. \ref{cpt:dynamics_workflow}).
 Rigid bodies must be associated with inertial properties (mass, center of mass, mass moment of inertia), which are crucial prerequisites for the balance equations.
-As I then demonstrated, the commonly desired assumption that inertial properties can be accurately derived from x-ray computed tomography cannot stand up to closer inspection (Ch. \ref{cpt:inertials}).
+As I then demonstrated, the assumption that inertial properties can be accurately derived from x-ray computed tomography cannot stand up to closer inspection (Ch. \ref{cpt:inertials}).
 This finding was enabled by a third basic principle commonly applied in physics (which is actually a first principle): the quantification of a measurements inaccuracy citep:Hughes2010.
 
 
@@ -46,7 +46,7 @@ There are certainly more examples of basic principles in physics which would des
 
 * Predictive Power
 Yet are these adaptations from the physical sciences inevitable?
-Why/when should conventional methods be questioned and compared to the yet uncommon methods suggested herein?
+Why/when should conventional methods be questioned and compared to the yet uncommon methods suggested in this thesis?
 
 
 The two decisive analysis characteristics are the occurrence of variability, and predictive modeling.
@@ -63,8 +63,8 @@ However, it is rarely modeled how and why a study group reaches a certain speed 
 
 Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the segments or joints, e.g. measuring the (joint) angles between segments.
 The bone-joint system of vertebrates is well approximated by rigid bodies, they can rotate, but hardly translate with respect to each other.
-And a common scheme we often see in all kinds of locomotor patterns is oscillation, i.e. that positions change repetitively over time: be it a primate arm-and-hand system which takes a berry to the mouth to be extended again to grab a berry to take it to the mouth, or be it an ungulate head bobbing in rhythm with the pronging locomotion of its postcranium.
-A potential reason for the abundance of oscillation in vertebrates is the evolution-like optimization of behavioral tasks: there is no use to gain efficiency in a one-time task, yet repeated modules of a task are worth adjustment.
+And a common scheme we often see in all kinds of locomotor patterns is oscillation, i.e. that positions change repetitively over time: be it a baboon hindlimb flexing-extending-flexing-etc. on a bipedal walk to a water hole citep:Druelle2021, or be it an ungulate head-nodding in rhythm with its locomotion citep:Loscher2016.
+A potential reason for the abundance of oscillation in vertebrates (together with structural constraints, e.g. nuchal ligament in head nodding) is the evolution-like optimization of behavioral tasks: there is no use to gain efficiency in a one-time task, yet repeated modules of a task are worth adjustment.
 In all these cases which show repetetive or recurrent behavior, Fourier methods are the natural choice for transformation.
 Thus, in a way, predictive models of Fourier coefficients go back to the construct level: they model how certain oscillatory components of a behavior will contribute to the whole.
 
@@ -79,7 +79,7 @@ The authors discuss whether more or less subtle discontinuities in the spatiotem
 They put some effort into a convincing argumentation that a subset of their measurements were close to what can be considered the maximum speed elephants can reach.
 And they document the seemingly restricted repertoire of elephant gaits: these animals seem unable to trot or gallop, reaching the highest measured locomotor speeds with their default gait.
 
-Yet these questions could be addressed and expanded in the frequency domain: how does the ensemble of Fourier coefficients change with speed (see Ch. \ref{cpt:fcas}; amplitudes or mean of specific joint angles will certainly change), and could we predict what happens at higher speeds (limits to effective ROM)?
+Yet, if joint kinematics are available, these questions could be addressed and expanded in the frequency domain: how does the ensemble of Fourier coefficients change with speed (see Ch. \ref{cpt:fcas}; amplitudes or mean of specific joint angles will certainly change), and could we predict what happens at higher speeds (limits to effective ROM)?
 Could we even predict which joint loadings are critical if we set up a virtual elephant model to gallop?
 Are African and Asian elephants really identical in their intralimb coordination, or do they achieve the same spatiotemporals with altered joint profile patterns (analogous to Ch. \ref{cpt:piglets})?
 
@@ -101,11 +101,11 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 
 * How and Why Piglets Move
 The primary goal of this thesis was to falsify the hypothesis that there are differences in locomotion of low- and normal birth weight piglets (LBW and NBW, Ch. \ref{cpt:generalintro}).
-There are two main aspects in which the study groups could differ: in kinematics (/how/ animal limb segments move) and dynamics (/why/ animal limb segments move).
+There are two main aspects in which the study groups could differ: in kinematics (/how/ animal limb segments move) and dynamics (/why/ animal limb segments move as observed).
 And there are putatively confounding effects: age (i.e. locomotor maturation), size and weight of the animals @@latex:\citep[i.e. physical appearance, cf.][]{Aerts2023}@@, and the variability of locomotor behavior.
 
 
-Previous studies from our group have compared kinematics on the level of spatiotemporal characteristics of newborn piglet gait citep:VandenHole2017.
+Previous studies from our group have compared kinematics on the level of spatiotemporal characteristics of newborn piglet gait citep:VandenHole2018.
 They discussed delayed locomotor maturation as a proximal explanation of the observed difference.
 I herein extended their analysis and confirmed maturational delay by training probabilistic models on the FCAS data of a large number of NBW piglet strides, applied to LBW observations (Ch. \ref{cpt:piglets}).
 The FCAS data entering the model contains literally all kinematic information which could be used to distinguish the study groups.
@@ -118,7 +118,7 @@ We suspect competition within litters and limited metabolic reserves as the reas
 
 Note that these observations are restricted to walking gait at voluntary speed; we cannot exclude more obvious LBW/NBW differences emerging in more challenging motor tasks.
 However, the apparent developmental delay in even this basic motor skill indicates the high sensitivity of the method.
-Also, the relevance of stair, treadmill, or wind tunnel studies for animals whose major priority is to find and access their mother's teats is questionable.
+Also, the relevance of any hypothetical, "more challenging" stair, treadmill, or wind tunnel experiment for animals whose major priority is to find and access their mother's teats is questionable.
 Overall, the models provide strong evidence against the existence of fundamental differences in /how/ LBW and NBW piglets move.
 
 
@@ -135,7 +135,7 @@ To produce the same kinematics, one would think that they must tune their motors
 These would be differences in /why/ we observe the (indistinguishable) movements.
 Different weight implies different physical constraints, size does matter citep:Aerts2023.
 
-Yet we encountered conceptual and practical issues in addressing this second big question.
+Yet we encountered conceptual and practical issues in addressing this second big question (i.e. /why/ they move as observed).
 The first issue is a practical one, reported in chapter \ref{cpt:inertials}: inertial parameters, which others have extracted from calibrated CT scans, cannot be determined at sufficient accuracy.
 Then, again, there is the issue of variability, as evident from the study of kinematics (Ch. \ref{cpt:piglets}):
 differences between NBW and LBW (when normalized for size, see below) seem to be lower in magnitude than the effect of maturation, and lower than normal variability of the behavior.
@@ -163,7 +163,7 @@ Though differences in /why/ segments move in a particular way are unlikely in th
 
 
 * Piglets, Baboons, and Humans
-An important premise of this project is that piglets are a valid model species for humans, in terms of locomotion.
+An important premise of this project was that piglets are a valid model species for humans, in terms of locomotion.
 This premise demands constant revision.
 
 
@@ -211,7 +211,7 @@ Their developmental trajectory is less steep than that of piglets (Ch. \ref{cpt:
 Ethical concerns in using primates might weigh more strongly (for reasons unknown).
 Those objections can be partially mitigated for the kind of locomotor research demonstrated herein:
 kinematic studies from calibrated videography are non-invasive.
-The inaccuracies of inertial measurements (Ch. \ref{cpt:inertials}) justify doubt on the common practice of euthanizing individuals after experiments; one could as well use naturally deceased specimens or literature data to transfer the measured inertials to new observations (which would also enable longitudinal inverse dynamic studies).
+The inaccuracies of inertial measurements (Ch. \ref{cpt:inertials}) justify doubt on the common practice of euthanizing individuals after experiments; one could as well use naturally deceased specimens, model data, or literature data to transfer the measured inertials to new observations (which would also enable longitudinal inverse dynamic studies).
 This all of course assumes ethical assessment of, amongst more, proportionate radiation dose (especially on young individuals), appropriate experimental circumstances (e.g. habituation requirement), and general welfare citep:Young2018.
 The main limiting factor for such studies is the availability of non-human primates and their offspring, even more of IUGR-like conditions, which, as is often argued, is one of the benefits of using domestic pigs as a model.
 
