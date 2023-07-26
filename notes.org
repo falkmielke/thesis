@@ -1,7 +1,6 @@
 #+title: Notes
 
 * TODO TODO's
-+ check citations
 + FCAS tutorial to fcas_code repository
 
 * find/replace

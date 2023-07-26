@@ -644,6 +644,8 @@ FUNCTION {incollection}
     }
   if$
   new.block
+  output.doi
+  new.block
   note output
   fin.entry
 }

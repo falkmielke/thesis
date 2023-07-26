@@ -304,6 +304,8 @@ Both the reductive approach and the sensitivity analysis are advisible strategie
 It is my sincere hope that future researchers take these analysis tools, reproduce, adapt, and correct them where needed, and improve our understanding of how and why various animals move in different phases and circumstances of their existence.
 I hope this goal explains some extensive, tutorial-like chapters within this thesis, and it hopefully excuses the colloquial tone of some paragraphs which might not have been to the intended entertainment or taste of every recipient.
 \bigskip
+
+
 Thank you for your interest in my work!
 
 

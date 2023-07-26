@@ -11,16 +11,19 @@
 
 
 To perform any kinematic analysis, one has to extract kinematic data.
-The standard way to do this has changed dramatically during the course of this PhD project.
-Some milestone publications are listed here for the interested reader.
+Therefore, one has to "track" the trajectory of points of interest on a digital video.
+
+The standard way to do this has changed dramatically during the course of this PhD project:
+whereas the gold standard used to be having a student assistent to click points frame-wise on the videos ("video tracking" of points), there are now deep learning algorithms to replace those students ("pose estimation" of whole animals).
+Some relevant publications are listed here for the interested reader.
 More details can be found in the articles marked as "review".
 The author was involved in one of the studies citep:MMielke2020.
 
-+ analog @@latex:\citep[e.g.][]{Bernstein1927b}@@
-+ (Review) DLTv citep:Hedrick2008
-+ Argus citep:Jackson2016
-+ (Review) Progressive Tracking citep:MMielke2020
-+ DeepLabCut citep:Mathis2018,Mathis2020
-+ ThruTracker citep:Corcoran2021
-+ AniPose citep:Karashchuk2021
-+ (Review) overview deep learning methods citep:Cronin2021
+# + analog @@latex:\citep[e.g.][]{Bernstein1927b}@@
++ (review) DLTv: citet:Hedrick2008
++ Argus: citet:Jackson2016
++ (review) Progressive Tracking: citet:MMielke2020
++ DeepLabCut: citet:Mathis2018,Mathis2020
++ ThruTracker: citet:Corcoran2021
++ AniPose: citet:Karashchuk2021
++ (review) overview of deep learning methods: citet:Cronin2021
