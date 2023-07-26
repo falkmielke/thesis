@@ -13,7 +13,7 @@ In preparation of a potential manuscript (which did not materialize after all), 
 In a nutshell:
 \begin{itemize}
 \item I analyze bipedal locomotion in olive baboons, \emph{Papio anubis}.
-\item Kinematics are processed with a previously established technique ("Fourier Coefficient Affine Superimposition", Ch. \ref{cpt:fcas}).
+\item Kinematics are processed with a previously established technique (``Fourier Coefficient Affine Superimposition'', Ch. \ref{cpt:fcas}).
 \item \textbf{Probabilistic Models} are used to infer major interrelations of subject-, spatiotemporal- and kinematic parameters.
 \item Model design is validated by model comparison.
 \item One purpose of these models is in-sample- and out-of-sample prediction.
@@ -149,7 +149,7 @@ I thereby make sure that my model roughly works as I intend.
 This is first and foremost important for setting up and getting used to a modeling framework (see below).
 But I can also apply simplified models and observe how they fail, which helps to explore the limitations of a given model design.
 This might seem trivial for simple, linear models.
-However, when going to multi-level, multivariate models\footnote{If you are unfamiliar with the terms "multi-level" or "multivariate", I would like to ask some patience: they will get clearer below, and in fact you might already have encountered them under alternative names.}, things get complex, and model structures are neither straight forward, nor intuitive.
+However, when going to multi-level, multivariate models\footnote{If you are unfamiliar with the terms ``multi-level'' or ``multivariate'', I would like to ask some patience: they will get clearer below, and in fact you might already have encountered them under alternative names.}, things get complex, and model structures are neither straight forward, nor intuitive.
 Recovering the artificial parameters which I put into the data gives me some confidence that the model structure is as intended (which is not to say that the model is a good one for my real data set).
 Critically, some models are inherently ambiguous (e.g. think of a toy model as the one above which instead has age as an explicit parameter \emph{and} as a level for bodymass).
 By playing around with the parameters which generate the simulated data set, and then checking how the model changes, one can learn which effects end up where and how unique, and how sensitive, the model components are.
@@ -200,7 +200,7 @@ In my idealistic strive for reproducibility, I prefer to publish models of which
 
 One example to illustrate the ``high/low-level'' dichotomy is formula notation.
 Many available model programming libraries strive to give an ``easy to use'' interface for novice statisticians to produce models.
-These users want to enter things like \texttt{speed \textasciitilde{} 1 + sex + age + (bm*age)} and get the result in convenient table format.
+These users want to enter things like ``\texttt{speed \textasciitilde{} 1 + sex + age + (bm*age)}'', and get the result in convenient table format.
 This notation is called ``formula notation'' (e.g. the Python library \texttt{patsy} is used for it).
 Convenient as this may be, I tended to encounter problems with this approach: most real models are not ``easy to use''.
 \begin{itemize}
@@ -573,7 +573,7 @@ The inverse transformation allows to convert predicted PC values back to the ori
 \begin{table}[p]
 \caption{\label{tab:stridepca}Stride PCA: variance covered (\%) and eigenvector loadings.}
 \centering
-\begin{tabular}{lrrr}
+\begin{tabular}{l|rrr}
  & d.s. distance & d.s. frequency & d.s. speed\\[0pt]
 \hline
 PC1 (\(69.1 \%\)) & -0.39 & -0.61 & -0.69\\[0pt]
@@ -1154,7 +1154,7 @@ These findings are interesting by themselves and were part of the prior research
 They are re-iterated here with a different modeling framework and serve to exemplify important statistical concepts, most importantly (two-step) posterior predictive sampling and model comparison.
 
 \FloatBarrier\clearpage
-\subsection{Joint Angle Profiles}
+\subsection{Posture and Coordination}
 \label{sec:orgc82aa48}
 The remaining classes of model parameters (Tab. \ref{tab:parameters}, Ch. \ref{intro:dataprep}) are posture and coordination.
 In this chapter, I will briefly describe how they are acquired, before even briefer presenting the results of probabilistic models which quantify their dependence on subject and spatiotemporal gait variables.

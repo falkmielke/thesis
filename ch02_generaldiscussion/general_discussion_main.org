@@ -59,7 +59,7 @@ In biomechanics, explanatory modeling is rarely applied, because the causal theo
 Virtually all quantitative analyses in locomotor science are descriptive: they "summarize or represent the data structure in a compact manner", and "focus is at the measurable level rather than at the construct level" citep:Shmueli2010.
 For example, spatiotemporal gait characteristics (e.g. dimensionless speed) are often measured and compared between study groups.
 There are numerous recent examples of studies in which spatiotemporal gait variables are the basis and (own) goal of comparison  @@latex:\citep[e.g.][]{Cheu2022,Ekhator2023,Plocek2023,Young2023,Jones2023,Druelle2021,McHenry2023}@@.
-However, it is rarely modeled how and why a study group reaches a certain speed (explanatory statistics), and the predictive power of studies on spatiotemporal varialbles is low (e.g. we could not predict the speed of an individual with a stiff joint from measuring normal individuals).
+However, it is rarely modeled how and why a study group reaches a certain speed (explanatory statistics), and the predictive power of studies on spatiotemporal variables is low (e.g. we could not predict the speed of an individual with a stiff joint from measuring normal individuals).
 
 Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the segments or joints, e.g. measuring the (joint) angles between segments.
 The bone-joint system of vertebrates is well approximated by rigid bodies, they can rotate, but hardly translate with respect to each other.
@@ -153,9 +153,18 @@ The example animation ([[https://ody.sh/fZe3OpgHGN]]) can be viewed in Blender (
 At the current (incomplete) stage of development, we observe segment position glitches when markers enter or leave the focal volume of the biplanar x-ray.
 Also, joint forces and moments do not seem to withstand a visual quality check (their direction and magnitude are sometimes questionable, which falls within the error margin of inertial properties).
 This might be an interesting, publishable observation, or a "bug"; ultimately an error in the computational pipeline cannot be excluded.
-At any rate, the primary issue remains the workload of the low through-put XROMM procedure, in contrast to the high through-put demand of appropriate statistics, given the variability of locomotion.
+At any rate, the primary issues remain the workload of the low through-put XROMM procedure, in contrast to the high through-put demand of appropriate statistics, given the variability of locomotion, coupled with the inaccuracy in determination of inertial segment properties.
 
 The few (three, non-steady) strides which I analyzed and visualized with XROMM techniques with considerable efforts are not representative and cannot provide falsifying evidence with regard to birth-weight dependent differences in piglet locomotor dynamics.
+
+
+This of course does not imply that there can be no studies of few, representative behavioral observations.
+It must be emphasized once more that this major limitation of the present study is tied to two things: the fact that subjects are newborns, and the research question posed herein.
+The high variability in locomotor behavior is a specific feature of the "newborn piglet" model; at later ages, locomotor behavior stabilizes and becomes more recurrent.
+Our research question was whether one can falsify diagnostic differences in LBW and NBW piglets, and the answer must account for stochastic variation to exclude co-incidental findings.
+In many other situations, there is either no reason to assume that measurement uncertainty and variability in a behavior are considerable, or they would not prohibit general mechanistic conclusions @@latex:\citep[e.g.][]{Aerts1998,Astley2012,Montuelle2015}@@.
+Single or rare observations of a behavior can be instructive in many regards @@latex:\citep[e.g.][]{Druelle2020,Scheidt2022,Dawson2011,Schwarz2020}@@.
+Thus, with most other study settings and subjects, mechanistic evaluations of single strides or actions can generate valuable insights into the workings of the vertebrate musculoskeletal system.
 
 
 To summarize: this project provided evidence that there is little difference in /how/ LBW and NBW piglets move.
@@ -167,8 +176,8 @@ An important premise of this project was that piglets are a valid model species 
 This premise demands constant revision.
 
 
-Domestic pigs have long been suggested als a model species for human newborns citep:Book1974,Cooper1975, though there might be alternatives citep:Mellor1986.
-This suggestion is perfectly justified in the fact that it can be ethically problematic to study human new-borns, especially on individuals burdened with an impeded or altered development trajectory.
+Piglets have long been suggested als a model species for human newborns citep:Book1974,Cooper1975,Mayerl2023, though there might be alternatives citep:Mellor1986.
+This suggestion is perfectly justified in the fact that it can be ethically problematic to study human newborns, especially on individuals burdened with an impeded or altered development trajectory.
 Piglets are social, sedentary, and share similarity in their appearance (hairless, rotund habitus).
 Of course, one has to carefully discuss differences and similarities with the model species, and evaluate alternatives.
 
@@ -181,10 +190,10 @@ The situation is complex, classification non-trivial, and there is persistent de
 
 
 Nevertheless, researchers study newborn piglets, tracing back epidemiologic or congenital issues to histological or structural anomalies.
-Piglets are somewhat similar to humans in the way their cerebral cortex develops citep:Lind2007, they are available for gene editing citep:Lind2007, and a lot of research has focused on neural development in piglets and implications for human infants citep:Conrad2012,Radlowski2014,Leyshon2016,Mudd2017,Dickerson1971,Fanous2020.
-The piglet model has enabled progress with regard to the research of respiratory problems citep:Williams1974,Spengler2019, metabolic issues citep:Mellor1986,MotaRojas2011,VandenHole2019, and gut (un-)health citep:Che2010,Cilieborg2011,Sangild2006,DInca2011,VandenHole2021.
+These can be neurological studies: piglets are somewhat similar to humans in the way their cerebral cortex develops @@latex:\citep[e.g.][]{Lind2007}@@, they are available for gene editing citep:Lind2007, and a lot of research has focused on neural development in piglets and implications for human infants citep:Conrad2012,Radlowski2014,Leyshon2016,Mudd2017,Dickerson1971,Fanous2020.
+The piglet model has enabled progress with regard to the research of respiratory problems citep:Williams1974,Spengler2019, metabolic issues citep:Mellor1986,MotaRojas2011,VandenHole2019, mastication and gut (un-)health citep:Che2010,Cilieborg2011,Sangild2006,DInca2011,VandenHole2021,Mayerl2023b.
 
-Maybe most importantly for this thesis, muscle histology and function have been studied citep:VandenHole2018b,Alvarenga2013,Andersen2016,Aerts2023.
+Maybe most importantly for this thesis, muscle and bone histology and function have been studied citep:VandenHole2018b,Alvarenga2013,Andersen2016,Aerts2023,Magrini2023.
 Results vary, indicating differences in locomotor performance and muscle mass, but failing to associate them with differences in fibre composition or force generating capacity.
 
 Yet, common to all the organ systems under investigation, it must be stated that analogies of human infants and piglets are usually related to homogeneities on the cellular- or tissue level.
@@ -193,7 +202,7 @@ Therefore, though it seems tempting to turn to piglets in light of all the prior
 
 
 Other characteristics of the piglet prohibit transfer of findings to our own species, with regard to locomotion.
-They are rather precocial citep:Wischner2009, and locomotion of newborns matures at a baffling pace citep:VandenHole2017,VandenHole2018.
+They are rather precocial citep:Wischner2009,JYoung2023, and locomotion of newborns matures at a baffling pace citep:VandenHole2017,VandenHole2018.
 They are unguligrade, quadrupedal, and it must be assumed that during the approximately 94 million years of evolution that separate us citep:Timetree2017 their neural and musculoskeletal anatomy and morphology adapted to different locomotor constraints.
 
 
@@ -294,7 +303,7 @@ Both the reductive approach and the sensitivity analysis are advisible strategie
 
 It is my sincere hope that future researchers take these analysis tools, reproduce, adapt, and correct them where needed, and improve our understanding of how and why various animals move in different phases and circumstances of their existence.
 I hope this goal explains some extensive, tutorial-like chapters within this thesis, and it hopefully excuses the colloquial tone of some paragraphs which might not have been to the intended entertainment or taste of every recipient.
-
+\bigskip
 Thank you for your interest in my work!
 
 

@@ -27,7 +27,7 @@ The rich spectrum of Fourier-based methods comprises versatile techniques which 
 * Fourier Series
 
 #+CAPTION: *Kinematic data generation workflow.* (A) Videos of animals are taken, here a baboon walking bipedally from left to right. The frames captured at touch-down, mid-stance, lift-off, mid-swing, and consecutive touch-down are shown. (B) Points of interests, e.g. joints, are digitized, which yields their pixel position over time. In this case the knee \(x\) and \(y\) positions are shown relative to their first value. Vertical bars indicate timing of the frames from the upper panel. (C) Joint angles are calculated from groups of three of those points of interest. Their change over time is a joint angle profile. I herein define joint angles to be zero at a fully extended (straight) joint, and positive for joint flexion. Per definition of "steady state locomotion", joint angles in steady state movement will return to approximately their start value over a cycle (indicated by the horizontal line, discussed below). Mathematically, this is called "periodicity", the joint angle profiles in steady state locomotion are thus "cyclic".
-#+ATTR_LATEX: :placement [pt]
+#+ATTR_LATEX: :placement [pt] :width 16cm
 #+LABEL: fig:jointangle
 [[./figures/f1_jointangle.pdf]]
 
@@ -82,7 +82,7 @@ The capital sigma tells mathematicians that this is a series, and thus the equat
 
 
 At first, the analytical formula might seem quite complex for everyday application, and computer code might be more usable.
-In supplement \ref{appendix:code} and online (\url{https://git.sr.ht/~falk/fcas_code}), I provide code for Python, R and Matlab which can just be copied and used\footnote{The "order" parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
+In supplement \ref{appendix:code} and online (\url{https://git.sr.ht/~falk/fcas_code}), I provide code for Python, R and Matlab which can just be copied and used\footnote{The ``order'' parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
 #+BEGIN_EXPORT latex
 \begin{lstlisting}
 coefficients = FourierSeriesDecomposition(time, signal, order)

@@ -237,7 +237,7 @@ The pure and simple answer is computational convenience citep:Dumas2004,Mueller2
 
 #+CAPTION: A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tip points towards the point of application (they can be moved around, adjusting the moment component; see text). Note that this figure is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
 #+LABEL: fig:wrench
-#+ATTR_LATEX: :placement [p] :width 6cm
+#+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/the_wrench.pdf]]
 
 
@@ -338,7 +338,7 @@ There also exists a conjugate, \(q^{-1}\):
 
 
 And this object \(q\) allows for convenient spatial rotation, by almost-simple multiplication:
-take any 3D point's position vector \(D\) with 4D coordinates@@latex:\footnote{The position vector \(D\) is transferred to 4D space (formally necessary for multiplication with 4D quaternions) by simply appending a "zero" as the first element; the quaternion multiplication ensures that \(D_{rot}\), though also 4D, always has a zero-valued first element, being effectively 3D.}@@ (\(0, a, b, c\)).
+take any 3D point's position vector \(D\) with 4D coordinates@@latex:\footnote{The position vector \(D\) is transferred to 4D space (formally necessary for multiplication with 4D quaternions) by simply appending a ``zero'' as the first element; the quaternion multiplication ensures that \(D_{rot}\), though also 4D, always has a zero-valued first element, being effectively 3D.}@@ (\(0, a, b, c\)).
 This could be the door handle point from our example: after rotation, it will be \(D_{rot}\), which can be calculated by:
 \[D_{rot} = q\cdot D\cdot q^{-1}\]
 
@@ -438,7 +438,7 @@ The so-retrieved measurements are filled in to the algorithm outlined above.
 
 #+CAPTION: Measuring inertial properties of the slamming door: the center of mass.
 #+LABEL: fig:door_inertials
-#+ATTR_LATEX: :placement [p] :width 6cm
+#+ATTR_LATEX: :placement [p] :width 10cm
 [[./figures/door_inertials.pdf]]
 
 

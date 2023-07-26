@@ -1,6 +1,6 @@
 \clearpage
 \section{Abstract}
-\label{sec:orgc3d91ac}
+\label{sec:org95b28bd}
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
 They would be particularly useful in the analysis of locomotor kinematics, where movements can usually be broken down into repetitive cycles.
 I herein repeat the basics of Fourier analysis and transformation to the frequency domain by reviewing previous studies which applied it in some form in the field of locomotor biomechanics.
@@ -15,7 +15,7 @@ The results are complementary to the prior analysis, and the capability to predi
 \label{intro12}
 
 \subsection{Recurring Solutions}
-\label{sec:orgdd8d8d1}
+\label{sec:orga7c10a8}
 In 1822, a French mathematician initiated the remarkable discovery that any continuous signal, no matter how complex, can be represented by a sum of relatively simple trigonometric functions \citep{Fourier1822}.
 Despite some initial limitations which were mended by scientists to follow, Fourier's work opened the door to the frequency domain.
 Fourier analysis has become a widely-used tool in physics and engineering, whereas biologists have only occasionally made the transformation.
@@ -35,11 +35,11 @@ The rich spectrum of Fourier-based methods comprises versatile techniques which 
 
 
 \subsection{Fourier Series}
-\label{sec:org6a84974}
+\label{sec:org4351561}
 
 \begin{figure}[pt]
 \centering
-\includegraphics[width=.9\linewidth]{./figures/f1_jointangle.pdf}
+\includegraphics[width=16cm]{./figures/f1_jointangle.pdf}
 \caption{\label{fig:jointangle}\textbf{Kinematic data generation workflow.} (A) Videos of animals are taken, here a baboon walking bipedally from left to right. The frames captured at touch-down, mid-stance, lift-off, mid-swing, and consecutive touch-down are shown. (B) Points of interests, e.g. joints, are digitized, which yields their pixel position over time. In this case the knee \(x\) and \(y\) positions are shown relative to their first value. Vertical bars indicate timing of the frames from the upper panel. (C) Joint angles are calculated from groups of three of those points of interest. Their change over time is a joint angle profile. I herein define joint angles to be zero at a fully extended (straight) joint, and positive for joint flexion. Per definition of ``steady state locomotion'', joint angles in steady state movement will return to approximately their start value over a cycle (indicated by the horizontal line, discussed below). Mathematically, this is called ``periodicity'', the joint angle profiles in steady state locomotion are thus ``cyclic''.}
 \end{figure}
 
@@ -93,7 +93,7 @@ The capital sigma tells mathematicians that this is a series, and thus the equat
 
 
 At first, the analytical formula might seem quite complex for everyday application, and computer code might be more usable.
-In supplement \ref{appendix:code} and online (\url{https://git.sr.ht/~falk/fcas_code}), I provide code for Python, R and Matlab which can just be copied and used\footnote{The "order" parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
+In supplement \ref{appendix:code} and online (\url{https://git.sr.ht/~falk/fcas_code}), I provide code for Python, R and Matlab which can just be copied and used\footnote{The ``order'' parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
 \begin{lstlisting}
 coefficients = FourierSeriesDecomposition(time, signal, order)
 \end{lstlisting}
@@ -184,7 +184,7 @@ Not all of the reported properties of Fourier methods are directly linked to lit
 
 
 \subsection{Not a Regression}
-\label{sec:orgfa97873}
+\label{sec:org656e3f7}
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
 A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever utdate rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
@@ -222,7 +222,7 @@ Though both procedures could be applied to stride cycle kinematics, \textbf{FSD 
 
 
 \subsection{Time Scale Independence}
-\label{sec:orgaabea23}
+\label{sec:orgfe047d1}
 Another favorable property follows from the cyclicity: \textbf{Fourier coefficients are independent of temporal scale or sampling}.
 Due to the normalization mentioned above, the FSD of the signal does not contain any information about the original duration of the signal (e.g. stride duration), nor does it matter much where the cycle started.
 On the inverse FSD, a new time frame and temporal sampling must be chosen.
@@ -294,7 +294,7 @@ The bottom line is that, in steady state locomotion, the \textbf{periodicity ass
 
 
 \subsection{Reversibility}
-\label{sec:org3572f4c}
+\label{sec:orgdfd3517}
 Some data operations can be undone (math.: invertible, i.e. reversible), others not.
 For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
 Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
@@ -338,7 +338,7 @@ When implementing a version of the equations above in computer code, a good chec
 And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often \textbf{efficient to store} kinematic data in the form of FSD coefficients.
 
 \subsection{Choice of Order}
-\label{sec:org1faeb3d}
+\label{sec:org6dc786a}
 How to decide how many coefficients should be retained?
 That number is the ``order'' of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
@@ -356,7 +356,7 @@ The stride cycle is the defining time interval, and normally all elements move i
 
 
 \subsection{Affine Components}
-\label{sec:org00b707b}
+\label{sec:org9f14a52}
 Some attributes of a signal are emphasized by Fourier methods.
 Those can be summarized intuitively as those attributes of the signal which can be changed without altering the ``perceived shape'' of the signal when plotted.
 
@@ -387,7 +387,7 @@ What remains after standardization, i.e. after isolation of the affine component
 In the case of joint angle profiles, this remainder can be considered coordination \emph{sensu strictu} \citep{Mielke2019,Mielke2023}.
 
 \subsection{Multivariate Analysis}
-\label{sec:org947ac0f}
+\label{sec:org7027b53}
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
 Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
 Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
@@ -456,7 +456,7 @@ Care should be taken that joint angles do not show jumps at any time point of th
 Such jumps would lead to a wrong FSD, because that procedure does not natively consider angular value ranges or interval wrapping and thus treats the jump as if it were an actual discontinuity.
 The joint angle definition chosen herein, with fully extended limb corresponding to a joint angle of zero, and angles ranging from \(-\pi\) to \(+\pi\), usually avoids such discontinuities.
 
-In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an `arctan` formula.
+In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an \texttt{arctan} formula.
 When working in three dimensions, the question is whether sufficient anatomical reference points can be digitized to calculate actual anatomical joint angles.
 If not, it must be sufficient to calculate a single angle between the segment vectors, though that does not necessarily correspond to anatomical degrees of freedom.
 If instead there are sufficient reference points, multiple rotation axes and angles per joint can be used and integrated just as in a multi-joint analysis (see below).
@@ -481,7 +481,7 @@ The transformation should be inverted, and original and re-transformed joint ang
 \end{figure}
 
 \subsection{Multivariate analysis}
-\label{sec:org2c17156}
+\label{sec:org2440b46}
 Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
 The conventional next step is to analyze their relation to each other.
 
@@ -510,7 +510,7 @@ Thus, the PCA outcome essentially contains the whole of what was captured by the
 
 
 \subsection{Statistics and Modeling}
-\label{sec:org25fbd32}
+\label{sec:org8017e9e}
 Despite the direct link to the raw data, the data table resulting from PCA might seem abstract.
 Nevertheless, those values are useful, because they are much more compact than the original two-dimensional time series of varying length.
 And this compactness is crucial for statistical testing and modeling, for which computational complexity can be restrictive.
@@ -533,7 +533,7 @@ The usual modeling steps are:
 
 I applied all these to the baboon data set.
 In total, \(40\) stride cycles from \(17\) subject individuals entered the analysis.
-I applied a stepwise modeling approach, modeling the PCA-transformed Fourier coefficients (\(\theta\)) generated from a set of joint angles (hip, knee, and ankle) as a function of sex (`male`), age class (`adol`, `inft`), body mass (`cbm`/centered), limb length (`ll`), clearance (`clr`), duty factor (`df`), trunk angle (`trnk`) and speed-related parameters (`str`, from a PCA of stride duration, length, speed and frequency).
+I applied a stepwise modeling approach, modeling the PCA-transformed Fourier coefficients (\(\theta\)) generated from a set of joint angles (hip, knee, and ankle) as a function of sex (\texttt{male}), age class (\texttt{adol}, \texttt{inft}), body mass (\texttt{cbm} /centered), limb length (\texttt{ll}), clearance (\texttt{clr}), duty factor (\texttt{df}), trunk angle (\texttt{trnk}) and speed-related parameters (\texttt{str}, from a PCA of stride duration, length, speed and frequency).
 \begin{equation}
 \begin{split}
  \theta_{i}  \sim &\quad v_{1,i}\cdot\alpha_{i} +
@@ -550,7 +550,8 @@ I then confirmed model convergence and ensured that the model is favorable over 
 The implementation in PyMC (a Pyhton library, \url{https://www.pymc.io}) has the capability of posterior predictive sampling: the trained model can be used to generate an arbitrarily high number of virtual data points, which underly the same variability as the original data.
 Most notably, this includes predicting ``out-of-sample'', i.e. parameter combinations which were not directly observed (in this case, male adult baboons were not included in the data, but could be predicted; Fig. \ref{fig:modelprediction}).
 Though the model infers abstract PCA values, the much emphasized reversibility of the method enables the computation of joint angle profiles from the predicted values.
-For interested readers, all data and documented code for all the steps described above are available online (\url{https://git.sr.ht/\~falk/papio\_fcas}).
+All data and documented code for all the steps described above are available online (\url{https://git.sr.ht/\~falk/papio\_fcas}).
+I will return to this data set and extend the explanation of the modeling procedure later in this thesis (Ch. \ref{cpt:statistics}).
 
 
 \begin{figure}[p]

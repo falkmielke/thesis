@@ -1,10 +1,7 @@
 #+title: Notes
 
 * TODO TODO's
-+ all chapters: +appendix+ -> supplement
-+ Is there a pagebreak before every abstract?
-+ ch2
-
++ check citations
 + FCAS tutorial to fcas_code repository
 
 * find/replace

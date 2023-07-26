@@ -24,7 +24,8 @@ We have the \(3D^2YMOX\) ([[https://www.uantwerpen.be/en/research-groups/3d2ymox
 # TODO, more about it in the appendix.
 The [[https://www.uantwerpen.be/flexct][FleXCT scanning facility]] is just around the block, and the friendly, but expensive technicians there will scan anything you bring them.
 We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab and Biomedical Physics (Bimef), and not least bioligists at FunMorph (Functional Morphology).
-The settings could not have been better, and I cannot overstate my praise of all the fantastic people who helped with this study (see acknowledgements, Ch. \ref{acknowledgements}), and all those who previously managed to acquire funding for what enabled my work.
+The settings could not have been better, and I cannot overstate my praise of all the fantastic people who helped with this study, and all those who previously managed to acquire funding for what enabled my work.
+# (see acknowledgements, Ch. \ref{acknowledgements})
 Thank you!
 
 Such equipment and personnel could have been used to study other species of animals.
@@ -90,7 +91,7 @@ To set the frontier right from the start, I will insist to apply good scientific
 If we /searched for/ differences in piglet locomotion, just search hard enough, we would surely find them.
 Instead, our attempts must be to *falsify the hypothesis that there are birth-weight dependent differences in piglet locomotion*.
 
-#+CAPTION: Piglets of low and normal birth weight (left/right, respectively) for size comparison.
+#+CAPTION: Piglets of low and normal birth weight (left/right, respectively) for size comparison. The animals are female siblings.
 #+ATTR_LATEX: :placement [p] :width 16cm
 #+LABEL: fig:birth_weight
 [[./figures/bw_comparison.jpg]]
