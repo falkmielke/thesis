@@ -16,7 +16,7 @@ These become apparent when assembling an overview of past attempts to apply rela
 
 In this study, I review the history of the application of Fourier Series in terrestrial vertebrate locomotion.
 
-Some properties and practical misunderstandings are highlighted, before applying the method to a previously analyzed data set on bipedal locomotion in baboons citep:Druelle2021 to once more demonnstrate the enormous potential of Fourier analysis.
+Some properties and practical misunderstandings are highlighted, before applying the method to a previously analyzed data set on bipedal locomotion in baboons citep:Druelle2021 to once more demonstrate the enormous potential of Fourier analysis.
 
 This article is not targeted at a mathematically rigorous audience, who will certainly find shortcomings in the simplified explanations I provide.
 Instead, I aim at facilitating the entry to the topic for applied biologists, especially in biomechanics.

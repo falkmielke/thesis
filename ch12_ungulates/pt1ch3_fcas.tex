@@ -34,7 +34,7 @@ A common tool to quantitatively compare kinematics are spatiotemporal gait param
 The limitation of gait parameters is that they do not resolve differences in intralimb coordination.
 Intralimb coordination is a complex phenomenon, which has been difficult to capture in quantitative methods.
 In some hallmark studies, the comparative analysis of intralimb coordination has been performed by relatively sparse sampling from large groups, with nevertheless respectable workload \citep{Stoessel2012,Fischer2002,Isler2005}.
-Gatesy and Pollard \citep[2011, ][]{Gatesy2011} have attributed the limited quantitative accessibility of coordination to limitations in transferability of kinematic profiles.
+\citet[][]{Gatesy2011} have attributed the limited quantitative accessibility of coordination to limitations in transferability of kinematic profiles.
 According to their theoretical considerations, the temporal change of a joint angle within a limb can hardly be disentangled from morphology, posture, and the interaction with adjacent joints, which makes it hard to transfer observations between groups.
 These authors call for novel methods to resolve these dependencies.
 We herein present such a method, and exemplify it on a broad sample of terrestrial ungulates.
@@ -61,7 +61,7 @@ We explore such a superimposition in this study, terming it Fourier Coefficient 
 \begin{center}
 \includegraphics[width = 16cm]{figures/fig1_flowchart.pdf}
 \end{center}
-\caption{\textbf{Analysis work flow, schematic. }
+\caption{Analysis work flow, schematic.
 \textbf{A} Video material of walking ungulates is digitized by tracking trace marks (shoulder, elbow, carpus and fetlock joints; see supplementary movie \ref{fcas_supplementary_files}) over a stride cycle, and joint angle profiles are computed (angle defined zero at fully extended limb, positive direction indicated by arrows). Thin black lines are the original measurement, whereas blue lines show the same profile, filtered by FSD with $7$ components.
 \textit{(continues next page)}
   }
@@ -256,7 +256,7 @@ We report the correlation of these affine differences to the PC axes, as well as
 \begin{figure}[p]%[tbhp]
 \centering
 \includegraphics[width=.8\linewidth]{figures/fig2_alignment.pdf}
-\caption{\textbf{Superimposition can improve joint angle profile averaging.}
+\caption{Superimposition can improve joint angle profile averaging.
 Mean joint angle profiles of different forelimb joints ($[e]$: elbow, $[c]$: carpus joint) for the genera \textit{Equus} (brown, $\triangledown$), \textit{Lama} (blue, $\square$), and \textit{Giraffa} (yellow, $\circ$). These examples were chosen for their high sample size (more examples in Fig. \ref*{fig:examples}). See methods and supplementary tutorial \ref{fcas_supplementary_files} for nomenclature and definition of FCAS.
 \textbf{Upper row}: input data (``video aligned''). \textbf{Lower row}: after carpal superimposition using FCAS.
 \textbf{A} Forelimb joint angle profiles ($\alpha$) over time ($t$, stride cycle period $T$), centered around their temporal averages (gray horizontal axes) to emphasize temporal differences. Thick lines are genus averages for elbow (solid line) and carpus (dashed line) angles. Thin dotted lines indicate $\pm$standard deviation range of individual observations. Scale bar $22.5^{\circ}$, time axis $T$.
@@ -283,7 +283,7 @@ Thus, equids turn out to be more distinct from the other groups than was visible
 
 \begin{figure}[p]
 \includegraphics[width = 16cm]{figures/fig3_pca.pdf}
-\caption{\textbf{Bivariate plot of the Principal Component Analysis of elbow-carpus coordination visualizes a slice of the ungulate ``coordination space''. }
+\caption{Bivariate plot of the Principal Component Analysis of elbow-carpus coordination visualizes a slice of the ungulate ``coordination space''.
 The PCA is based on the genus average Fourier coefficients of relative elbow profiles after carpal superimposition.
 Gray grid lines on the biplot indicate the ($0.1$, $0.9$) quantiles of all observations; reconstructions were done on their intersections.
 Outset line plots on the margins represent these reconstructed angular profiles (black) at the quantile values for each component axis, relative to the reconstructed mean (gray).
@@ -327,7 +327,7 @@ This further supported the observations from PCA reconstruction.
 
 \begin{table}[p]%[tbhp]
 \centering
-\caption{ \textbf{Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates} (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the angle profiles. }
+\caption{ Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the angle profiles. }
 \begin{tabular}{l @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc}
 \toprule
 {} & \multicolumn{2}{c}{\underline{\textbf{PC1}}} & \multicolumn{2}{c}{\underline{\textbf{PC2}}} & \multicolumn{2}{c}{\underline{\textbf{PC3}}} & \multicolumn{2}{c}{\underline{\textbf{PC4}}} \\
@@ -388,9 +388,9 @@ However, the number and choice of timemarks involves some critical design decisi
 When for example superimposing only based on limb touch down, the alignment is insensitive to differences in hoof placement trajectories before and after that time point.
 The hoof can reach the ground at a flat angle with smooth horizontal deceleration.
 But the impact can also be vertical, following a more or less brief period where the hoof hovers above the substrate before being placed.
-The end of hoof forwards movement might provide a more homologous timemark, but it might still be that the two cases differ fundamentally in the underlying dynamics at that particular episode of the stride cycle.
+The end of hoof forward movement might provide a more homologous timemark, but it might still be that the two cases differ fundamentally in the underlying dynamics at that particular episode of the stride cycle.
 FCAS represents a mathematically optimal superimposition that equally incorporates all the information contained in the profiles.
-The advantage of this strategy is its independence from selected points, and instead the sensitivity to the joint angle trajectory over the whole stride cycle.
+The advantage of this strategy is its independence of selected points, and instead the sensitivity to the joint angle trajectory over the whole stride cycle.
 Working in the frequency domain also has the advantage of providing a manageable feature vector for multivariate analysis or classification via machine learning.
 Fourier Series requires periodic signals to work upon.
 As we argued initially, this requirement is often met in the study of locomotion, in which case a transformation to the frequency domain opens up new ways of analyzing the data.
@@ -622,7 +622,7 @@ Based on Zurano et al. (2019), and complemented from various other sources \cite
 \begin{figure} [b!]
   \caption{
 \textit{(next page.)}
-\textbf{Representative joint angle profile examples.}
+Representative joint angle profile examples.
 Taxa were selected based on their position in the PCA (Fig. \ref*{fig:pca}) and to inspect cases of geometric or phylogenetic uniformity.
 Display of time domain angle profiles (left), mean angle (middle) and frequency domain (right) as before (see Figs. \ref*{fig:workflow}, \ref*{fig:superimposition}).
 \textbf{A} Two genera (\textit{Taurotragus}, \textit{Alces}) that are approximately geometrically similar (size, body mass), but distributed along PC1. % confirm the trend that was shown by the angle profile reconstructions.textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
@@ -636,7 +636,7 @@ Display of time domain angle profiles (left), mean angle (middle) and frequency 
 \includegraphics[width = 16cm]{figures/figS2_pc_axes.pdf}
 \caption[Representative Examples]{
 \textit{(contd.)}
-\textbf{Representative joint angle profile examples.}
+Representative joint angle profile examples.
 \textbf{B} Closely related taxa (Cervidae) along PC1.
 \textbf{C, D} Two pairs of closely related taxa (Tylopoda; Rhinoceroidae) that are spread along PC2.
  }
@@ -647,7 +647,7 @@ Display of time domain angle profiles (left), mean angle (middle) and frequency 
 \begin{figure}[pt]
 \centering
 \includegraphics[width = 16cm]{figures/figS3_more_pca.pdf}
-\caption[Further PC Axes]{\textbf{Principal Component Analysis, further axes.} Data as before (Fig. \ref*{fig:pca}), but with additional principal components (lower biplot) and labeling of all taxa.
+\caption[Further PC Axes]{Principal Component Analysis, further axes. Data as before (Fig. \ref*{fig:pca}), but with additional principal components (lower biplot) and labeling of all taxa.
  }
 \label{fig:more_pca}
 \end{figure}

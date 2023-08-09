@@ -53,7 +53,7 @@ If instead there are sufficient reference points, multiple rotation axes and ang
 Note that there have been attempts to directly calculate Fourier coefficients from 3D joint angles, using quaternions citep:Kenwright2015, which would be the most elegant solution for this purpose.
 
 
-After removing end-start-differences as described above (ch. \ref{properties:endstart}), joint angle profiles are plugged into the Fourier equation \eqref{eqn:fourier_coefficients1}, e.g. by using the corresponding programming functions supplemented to this manuscript.
+After removing end-start-differences as described above (Ch. \ref{properties:endstart}), joint angle profiles are plugged into the Fourier equation \eqref{eqn:fourier_coefficients1}, e.g. by using the corresponding programming functions supplemented to this manuscript.
 Thereby, joint angle profiles are transformed to the frequency domain.
 Though I above emphasized the complex values of the coefficients, they can as well be represented by a one-dimensional array of alternating real- and imaginary parts of the coefficients.
 The transformation should be inverted, and original and re-transformed joint angle profiles plotted together, to exclude coding errors and confirm that order was chosen high enough (Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
@@ -72,7 +72,7 @@ The transformation should be inverted, and original and re-transformed joint ang
 Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
 The conventional next step is to analyze their relation to each other.
 
-For example, it might be apparent that two or more data points are phase shifted relative to each other: all the characteristic maxima and minima of the joint angle profile would appear later or earlier in the time domain plot.
+For example, it might be apparent that two or more data points are phase shifted relative to each other: all the characteristic maxima and minima of the joint angle profile would consistently appear later or earlier in the time domain plot.
 If one assumed that strides are cyclic, it must be conclude that these phase shifts are due to our arbitrary choice of the start point within the cycle.
 Phase differences should therefore be minimized.
 However, different joints, when analyzed together, might theoretically give contradicting information on the relative phase shift of different strides.
@@ -82,15 +82,15 @@ And just as with phase, there are design choices about whether to keep the other
 
 
 Independent of these choices, the result of the previous steps is a data table consisting of multiple observations (strides, in rows) and variables (Fourier coefficients, in columns).
-The observations can be related to their corresponding master data (i.e. subject characteristics, morphology, collective variables, isolated affine components) by a simple stride index.
+The observations can be related to their corresponding master data (i.e. subject characteristics, morphology, collective variables, isolated affine components) by a simple stride index lookup.
 
 Such a data structure is eligible for multidimensional analysis methods, and one of the simplest such method is Principal Component Analysis (PCA).
 Often, PCA justifies a significant reduction of data dimensionality (i.e. number of data columns), depending on how much variance is concentrated on the first components.
 Apart from the residual variance not covered by the retained principal components, PCA is again information preserving and reversible (which should be confirmed, Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
-Often, PCA is just used to open the data for subsequent multivariate methods (e.g. factor analysis).
+Most often, PCA is just used to prepare the data for subsequent multivariate methods (e.g. factor analysis).
 
 
-To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from digitizing videos.
+To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from raw video dititizations.
 Joint angles were calculated and submitted to two transformation procedures: FSD and PCA.
 All procedures to this point can be performed without loss of information: any of the resultant data rows could be converted back to an animation of moving points.
 Thus, the PCA outcome essentially contains the whole of what was captured by the original kinematic data: the spatiotemporal coordination of the moving body appendages of interest.
@@ -109,7 +109,7 @@ The two major advantages are that (1) probabilistic models capture the variabili
 The usual modeling steps are:
 + data simulation (prior to acquisition; can provide valuable information on required sample size, feasibility, and model structure)
 + model construction
-+ (MCMC) sampling
++ (MCMC) sampling or "model fitting"
 + model comparison and refinement
 + posterior checks (model "hygiene")
 + predictive sampling

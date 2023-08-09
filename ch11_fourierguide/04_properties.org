@@ -12,7 +12,7 @@ Not all of the reported properties of Fourier methods are directly linked to lit
 
 * Not a Regression
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
-A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever utdate rules.
+A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever update rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
 Typical optimization algorithms are the Nelder-Mead simplex citep:Nelder1965 or variants of the BFGS algorithm citep:Broyden1970,Fletcher1970,Goldfrab1970,Shanno1970,Zhu1997.
 Though it is immensely useful, regression has several technical disadvantages: convergence is not guaranteed, start values are required and might affect the result, the algorithm might get stuck in local optima, accuracy is finite, the iterative procedure is computationally expensive, and reversibility requires the inverse function and another regression.
@@ -86,7 +86,8 @@ However, abrubt changes from discontinuities are not physiological, so those val
 As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and concatenate it to the end of the original signal.
 This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes cumulating to zero, and the "double" signal ending where it started.
 This method is common in the Fourier analysis of ground reaction force measurements citep:Schneider1983,Alexander1980, where data usually starts and ends at zero.
-It nihilates the signal mean (zero'th coefficient) and shifts all consecutive harmonics up by one due to period doubling.
+# It nihilates the signal mean (zero'th coefficient) and
+The procedure shifts harmonics up by one due to period doubling.
 The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant infromation of the signal.
 
 
@@ -132,7 +133,7 @@ One can freely change the reference coordinate system.
 Moving from an earth-bound reference frame to the coordinates defined by the object and back is possible without loss of information.
 Another common, invertible coordinate transformation is the Principal Component Analysis, which transforms data into the space spanned by the orthogonal eigenvectors of a data covariance matrix.
 Because these transformations retain all information, and because an inverse mathematical operation exists, one can move the given data forth and back between the different spaces or domains.
-Even more, one can transform or untransform unrelated, new data between spaces, although that data was not involved in calculating those spaces.
+Even more, one can transform or untransform unrelated, new data between spaces, although that data was not involved in defining those spaces.
 This feature is useful and common for averages and extrapolations.
 
 
@@ -156,7 +157,7 @@ The existence of this inverse formula means that just as exchanging a coordinate
 However, one limiting factor is the order of the Fourier Series.
 Some signals (i.e. those with sharp turns or quick changes) require a high number of harmonics to be accurately represented in frequency space.
 Conversely, when operating with a finite order, some signals might be filtered on the first transformation to the (pruned) frequency domain.
-Real measurements are usually subject to Gaussian noise, such noise involves changes as quick as measurement sampling, and thus it is lost in FSD.
+Real measurements are usually subject to measurement noise, such noise involves changes as quick as measurement sampling, and thus it is lost in FSD.
 This *filtering property of FSD* can represent a loss of information (if the noise is considered informative, but note that in that case the residual after re-transformation might be even more informative).
 
 However, in cases where this filtering effect is negligible or even favorable, FSD and its inversion can be applied.
@@ -187,8 +188,8 @@ Those can be summarized intuitively as those attributes of the signal which can 
 
 The most obvious one is the average of the signal over time, i.e. its *mean value*.
 When changing the mean of a signal in the time domain by adding the same scalar value to every sample, the signal shifts "up and down", but retains its temporal structure.
-The mean is completely captured by the zero'th coefficient, which therefore is always a real number.
-Apart from that, changing the mean of a signal leaves its frequency domain representation unchanged.
+The mean is completely captured by the zero'th Fourier coefficient, which therefore is always a real number.
+Apart from that one number, changing the mean of a signal leaves its frequency domain representation unchanged.
 
 Another attribute of the signal is the *amplitude*, or how much values change around the mean.
 In the time domain, amplitude is altered by centering the signal and multiplying it with a scalar, followed by un-centering.

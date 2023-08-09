@@ -1,6 +1,6 @@
 \clearpage
 \section{Abstract}
-\label{sec:org95b28bd}
+\label{sec:org08e6bfa}
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
 They would be particularly useful in the analysis of locomotor kinematics, where movements can usually be broken down into repetitive cycles.
 I herein repeat the basics of Fourier analysis and transformation to the frequency domain by reviewing previous studies which applied it in some form in the field of locomotor biomechanics.
@@ -15,7 +15,7 @@ The results are complementary to the prior analysis, and the capability to predi
 \label{intro12}
 
 \subsection{Recurring Solutions}
-\label{sec:orga7c10a8}
+\label{sec:orga6b6e64}
 In 1822, a French mathematician initiated the remarkable discovery that any continuous signal, no matter how complex, can be represented by a sum of relatively simple trigonometric functions \citep{Fourier1822}.
 Despite some initial limitations which were mended by scientists to follow, Fourier's work opened the door to the frequency domain.
 Fourier analysis has become a widely-used tool in physics and engineering, whereas biologists have only occasionally made the transformation.
@@ -26,7 +26,7 @@ These become apparent when assembling an overview of past attempts to apply rela
 
 In this study, I review the history of the application of Fourier Series in terrestrial vertebrate locomotion.
 
-Some properties and practical misunderstandings are highlighted, before applying the method to a previously analyzed data set on bipedal locomotion in baboons \citep{Druelle2021} to once more demonnstrate the enormous potential of Fourier analysis.
+Some properties and practical misunderstandings are highlighted, before applying the method to a previously analyzed data set on bipedal locomotion in baboons \citep{Druelle2021} to once more demonstrate the enormous potential of Fourier analysis.
 
 This article is not targeted at a mathematically rigorous audience, who will certainly find shortcomings in the simplified explanations I provide.
 Instead, I aim at facilitating the entry to the topic for applied biologists, especially in biomechanics.
@@ -35,7 +35,7 @@ The rich spectrum of Fourier-based methods comprises versatile techniques which 
 
 
 \subsection{Fourier Series}
-\label{sec:org4351561}
+\label{sec:orge422a0d}
 
 \begin{figure}[pt]
 \centering
@@ -184,9 +184,9 @@ Not all of the reported properties of Fourier methods are directly linked to lit
 
 
 \subsection{Not a Regression}
-\label{sec:org656e3f7}
+\label{sec:orge4dc5c5}
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
-A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever utdate rules.
+A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever update rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
 Typical optimization algorithms are the Nelder-Mead simplex \citep{Nelder1965} or variants of the BFGS algorithm \citep{Broyden1970,Fletcher1970,Goldfrab1970,Shanno1970,Zhu1997}.
 Though it is immensely useful, regression has several technical disadvantages: convergence is not guaranteed, start values are required and might affect the result, the algorithm might get stuck in local optima, accuracy is finite, the iterative procedure is computationally expensive, and reversibility requires the inverse function and another regression.
@@ -222,7 +222,7 @@ Though both procedures could be applied to stride cycle kinematics, \textbf{FSD 
 
 
 \subsection{Time Scale Independence}
-\label{sec:orgfe047d1}
+\label{sec:orge13d68b}
 Another favorable property follows from the cyclicity: \textbf{Fourier coefficients are independent of temporal scale or sampling}.
 Due to the normalization mentioned above, the FSD of the signal does not contain any information about the original duration of the signal (e.g. stride duration), nor does it matter much where the cycle started.
 On the inverse FSD, a new time frame and temporal sampling must be chosen.
@@ -257,7 +257,8 @@ However, abrubt changes from discontinuities are not physiological, so those val
 As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and concatenate it to the end of the original signal.
 This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes cumulating to zero, and the ``double'' signal ending where it started.
 This method is common in the Fourier analysis of ground reaction force measurements \citep{Schneider1983,Alexander1980}, where data usually starts and ends at zero.
-It nihilates the signal mean (zero'th coefficient) and shifts all consecutive harmonics up by one due to period doubling.
+
+The procedure shifts harmonics up by one due to period doubling.
 The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant infromation of the signal.
 
 
@@ -294,7 +295,7 @@ The bottom line is that, in steady state locomotion, the \textbf{periodicity ass
 
 
 \subsection{Reversibility}
-\label{sec:orgdfd3517}
+\label{sec:org6b71c12}
 Some data operations can be undone (math.: invertible, i.e. reversible), others not.
 For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
 Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
@@ -305,7 +306,7 @@ One can freely change the reference coordinate system.
 Moving from an earth-bound reference frame to the coordinates defined by the object and back is possible without loss of information.
 Another common, invertible coordinate transformation is the Principal Component Analysis, which transforms data into the space spanned by the orthogonal eigenvectors of a data covariance matrix.
 Because these transformations retain all information, and because an inverse mathematical operation exists, one can move the given data forth and back between the different spaces or domains.
-Even more, one can transform or untransform unrelated, new data between spaces, although that data was not involved in calculating those spaces.
+Even more, one can transform or untransform unrelated, new data between spaces, although that data was not involved in defining those spaces.
 This feature is useful and common for averages and extrapolations.
 
 
@@ -329,7 +330,7 @@ The existence of this inverse formula means that just as exchanging a coordinate
 However, one limiting factor is the order of the Fourier Series.
 Some signals (i.e. those with sharp turns or quick changes) require a high number of harmonics to be accurately represented in frequency space.
 Conversely, when operating with a finite order, some signals might be filtered on the first transformation to the (pruned) frequency domain.
-Real measurements are usually subject to Gaussian noise, such noise involves changes as quick as measurement sampling, and thus it is lost in FSD.
+Real measurements are usually subject to measurement noise, such noise involves changes as quick as measurement sampling, and thus it is lost in FSD.
 This \textbf{filtering property of FSD} can represent a loss of information (if the noise is considered informative, but note that in that case the residual after re-transformation might be even more informative).
 
 However, in cases where this filtering effect is negligible or even favorable, FSD and its inversion can be applied.
@@ -338,7 +339,7 @@ When implementing a version of the equations above in computer code, a good chec
 And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often \textbf{efficient to store} kinematic data in the form of FSD coefficients.
 
 \subsection{Choice of Order}
-\label{sec:org6dc786a}
+\label{sec:org6e3b45f}
 How to decide how many coefficients should be retained?
 That number is the ``order'' of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
@@ -356,14 +357,14 @@ The stride cycle is the defining time interval, and normally all elements move i
 
 
 \subsection{Affine Components}
-\label{sec:org9f14a52}
+\label{sec:org0548115}
 Some attributes of a signal are emphasized by Fourier methods.
 Those can be summarized intuitively as those attributes of the signal which can be changed without altering the ``perceived shape'' of the signal when plotted.
 
 The most obvious one is the average of the signal over time, i.e. its \textbf{mean value}.
 When changing the mean of a signal in the time domain by adding the same scalar value to every sample, the signal shifts ``up and down'', but retains its temporal structure.
-The mean is completely captured by the zero'th coefficient, which therefore is always a real number.
-Apart from that, changing the mean of a signal leaves its frequency domain representation unchanged.
+The mean is completely captured by the zero'th Fourier coefficient, which therefore is always a real number.
+Apart from that one number, changing the mean of a signal leaves its frequency domain representation unchanged.
 
 Another attribute of the signal is the \textbf{amplitude}, or how much values change around the mean.
 In the time domain, amplitude is altered by centering the signal and multiplying it with a scalar, followed by un-centering.
@@ -387,7 +388,7 @@ What remains after standardization, i.e. after isolation of the affine component
 In the case of joint angle profiles, this remainder can be considered coordination \emph{sensu strictu} \citep{Mielke2019,Mielke2023}.
 
 \subsection{Multivariate Analysis}
-\label{sec:org7027b53}
+\label{sec:org3b4eff0}
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
 Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
 Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
@@ -463,7 +464,7 @@ If instead there are sufficient reference points, multiple rotation axes and ang
 Note that there have been attempts to directly calculate Fourier coefficients from 3D joint angles, using quaternions \citep{Kenwright2015}, which would be the most elegant solution for this purpose.
 
 
-After removing end-start-differences as described above (ch. \ref{properties:endstart}), joint angle profiles are plugged into the Fourier equation \eqref{eqn:fourier_coefficients1}, e.g. by using the corresponding programming functions supplemented to this manuscript.
+After removing end-start-differences as described above (Ch. \ref{properties:endstart}), joint angle profiles are plugged into the Fourier equation \eqref{eqn:fourier_coefficients1}, e.g. by using the corresponding programming functions supplemented to this manuscript.
 Thereby, joint angle profiles are transformed to the frequency domain.
 Though I above emphasized the complex values of the coefficients, they can as well be represented by a one-dimensional array of alternating real- and imaginary parts of the coefficients.
 The transformation should be inverted, and original and re-transformed joint angle profiles plotted together, to exclude coding errors and confirm that order was chosen high enough (Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
@@ -481,11 +482,11 @@ The transformation should be inverted, and original and re-transformed joint ang
 \end{figure}
 
 \subsection{Multivariate analysis}
-\label{sec:org2440b46}
+\label{sec:org95d8a28}
 Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
 The conventional next step is to analyze their relation to each other.
 
-For example, it might be apparent that two or more data points are phase shifted relative to each other: all the characteristic maxima and minima of the joint angle profile would appear later or earlier in the time domain plot.
+For example, it might be apparent that two or more data points are phase shifted relative to each other: all the characteristic maxima and minima of the joint angle profile would consistently appear later or earlier in the time domain plot.
 If one assumed that strides are cyclic, it must be conclude that these phase shifts are due to our arbitrary choice of the start point within the cycle.
 Phase differences should therefore be minimized.
 However, different joints, when analyzed together, might theoretically give contradicting information on the relative phase shift of different strides.
@@ -495,22 +496,22 @@ And just as with phase, there are design choices about whether to keep the other
 
 
 Independent of these choices, the result of the previous steps is a data table consisting of multiple observations (strides, in rows) and variables (Fourier coefficients, in columns).
-The observations can be related to their corresponding master data (i.e. subject characteristics, morphology, collective variables, isolated affine components) by a simple stride index.
+The observations can be related to their corresponding master data (i.e. subject characteristics, morphology, collective variables, isolated affine components) by a simple stride index lookup.
 
 Such a data structure is eligible for multidimensional analysis methods, and one of the simplest such method is Principal Component Analysis (PCA).
 Often, PCA justifies a significant reduction of data dimensionality (i.e. number of data columns), depending on how much variance is concentrated on the first components.
 Apart from the residual variance not covered by the retained principal components, PCA is again information preserving and reversible (which should be confirmed, Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
-Often, PCA is just used to open the data for subsequent multivariate methods (e.g. factor analysis).
+Most often, PCA is just used to prepare the data for subsequent multivariate methods (e.g. factor analysis).
 
 
-To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from digitizing videos.
+To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from raw video dititizations.
 Joint angles were calculated and submitted to two transformation procedures: FSD and PCA.
 All procedures to this point can be performed without loss of information: any of the resultant data rows could be converted back to an animation of moving points.
 Thus, the PCA outcome essentially contains the whole of what was captured by the original kinematic data: the spatiotemporal coordination of the moving body appendages of interest.
 
 
 \subsection{Statistics and Modeling}
-\label{sec:org8017e9e}
+\label{sec:orgf81cc77}
 Despite the direct link to the raw data, the data table resulting from PCA might seem abstract.
 Nevertheless, those values are useful, because they are much more compact than the original two-dimensional time series of varying length.
 And this compactness is crucial for statistical testing and modeling, for which computational complexity can be restrictive.
@@ -524,7 +525,7 @@ The usual modeling steps are:
 \begin{itemize}
 \item data simulation (prior to acquisition; can provide valuable information on required sample size, feasibility, and model structure)
 \item model construction
-\item (MCMC) sampling
+\item (MCMC) sampling or ``model fitting''
 \item model comparison and refinement
 \item posterior checks (model ``hygiene'')
 \item predictive sampling
