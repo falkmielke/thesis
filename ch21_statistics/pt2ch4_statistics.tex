@@ -3,8 +3,8 @@
 
 \section{Preface}
 \label{sec:orgcfa10a1}
-The text of this chapter originally served as a memorandum, for internal documentation and knowledge transfer, called ``A Tiny Textbook About a Fraction of Statistical Methodology'' (distributed 2021-10-16).
-It applies probabilistic, predictive modeling to a previously analyzed data set \citep[][]{Druelle2021}, which was kindly provided by François Druelle.
+The text of this chapter originally served as a memorandum, for internal documentation and knowledge transfer, distributed on October 16th, 2021 under the original title ``A Tiny Textbook About a Fraction of Statistical Methodology'' .
+It applies probabilistic, predictive modeling to a previously analyzed data set, which was kindly provided by François Druelle \citep[][]{Druelle2021}.
 The prior analysis, which focused on the comparison of spatiotemporal variables, is herein extended to questions of \emph{posture} and \emph{coordination}.
 To tackle these additional research questions, a sophisticated statistical modeling procedure is required.
 In preparation of a potential manuscript (which did not materialize after all), I realized that a significant amount of knowledge transfer is required to get all co-authors and interested readers up to level with the technical details and design decisions encountered on the way.
@@ -14,18 +14,17 @@ In a nutshell:
 \begin{itemize}
 \item I analyze bipedal locomotion in olive baboons, \emph{Papio anubis}.
 \item Kinematics are processed with a previously established technique (``Fourier Coefficient Affine Superimposition'', Ch. \ref{cpt:fcas}).
-\item \textbf{Probabilistic Models} are used to infer major interrelations of subject-, spatiotemporal- and kinematic parameters.
+\item \textbf{Probabilistic Models} are used to infer major interrelations of subject-, spatiotemporal-, and kinematic parameters.
 \item Model design is validated by model comparison.
 \item One purpose of these models is in-sample- and out-of-sample prediction.
 \item For reference, all analysis code, including the \texttt{org mode} document compiling this text are available here: \url{https://git.sr.ht/\~falk/papio\_fcas}.
 \end{itemize}
 
 In accordance with the originally internal target audience, this chapter takes a more colloquial tone than actual publications.
-For the sake of readability, I have retained that tone in the latest form.
-For compansation, I provide practical tipps and trial-and-error-based experiences for readers interested in implementing their own models.
+As a compensation, I provide practical tipps and trial-and-error-based experiences for readers interested in implementing their own models.
 
 The document also lacks a conventional introduction.
-If the relevance and importance of statistical modeling is not immediately obvious to the reader, I kindly refer them to the applied chapter to follow (Ch. \ref{cpt:piglets}).
+If the relevance and importance of statistical modeling is not immediately obvious to the reader, I kindly refer them to the applied chapter to follow (Ch. \ref{cpt:piglets}), which contains extensive elaboration on the topic.
 
 
 \FloatBarrier
@@ -47,17 +46,8 @@ Finally, one must set an \emph{a priori} threshold above which the rejection of 
 A proper hypothesis to test must relate to the data, contain rejectable predictions and (ideally exclusive) alternatives, and finally must be linked to a confidence threshold \citep{Chamberlin1890,Platt1964,Popper2002}.
 
 
-Yet there is a caveat: the metrics generated from conventional hypothesis testing do not yield a quantitative assessment of effect size.
-In other words: a low \emph{p-value} does not indicate a large speed change with age, it just indicates that the change (i.e. rejection of the null hypothesis ``speed does not depend on ageclass'') is more likely to be true.
-Also, there must be an assumption of \emph{how} speed changes with age: is it increasing linearly or is it low for young, high for middle, and low again for high-aged individuals?
-The reason is that all tests explicitly require a set of mathematical assumptions to be met (e.g. ``Normal distribution'' of the data, one- or two-sided comparison).
-And because of this, there exists a whole zoo of different test for different assumption situations, the choice of which is a science by itself.
-Familiar examples are the ``t-Test'' or ``ANOVA'' in all their variants.
-To summarize, this branch of statistics is called \textbf{hypothesis testing}; it is a complex field and valuable when it comes to falsifying hypotheses.
-
-
 \begin{table}[p]
-\caption{\label{tab:statistics}\textbf{Statistics: An Overview.} Probabilistic models are the focus of this chapter.}
+\caption{\label{tab:statistics}Statistics: An Overview. Probabilistic models are the focus of this chapter.}
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
@@ -70,6 +60,14 @@ To summarize, this branch of statistics is called \textbf{hypothesis testing}; i
 \end{tabular}
 \end{table}
 
+Yet there is a caveat: the metrics generated from conventional hypothesis testing do not yield a quantitative assessment of effect size.
+In other words: a low \emph{p-value} does not indicate a large speed change with age, it just indicates that the change (i.e. rejection of the null hypothesis ``speed does not depend on ageclass'') is more likely to be true.
+Also, there must be an assumption of \emph{how} speed changes with age: is it increasing linearly or is it low for young, high for middle, and low again for high-aged individuals?
+The reason is that all tests explicitly require a set of mathematical assumptions to be met (e.g. ``Normal distribution'' of the data, one- or two-sided comparison).
+And because of this, there exists a whole zoo of different test for different assumption situations, the choice of which is a science by itself.
+Familiar examples are the ``t-Test'' or ``ANOVA'' in all their variants.
+To summarize, this branch of statistics is called \textbf{hypothesis testing}; it is a complex field and valuable when it comes to falsifying hypotheses.
+
 
 The term ``hypothesis testing'' might be understood to be synonymous with ``Frequentist statistics'', or ``non-Bayesian statistics''.
 This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called ``Bayes factor'' but are not discussed herein \citep[cf.][]{Shikano2019}.
@@ -78,9 +76,10 @@ Hence, we need to disentangle two categories of distinction (Tab. \ref{tab:stati
 Not all researchers are after hypotheses.
 What we usually desire in obtaining experimental data is a quantitative assessment of different effects which exist in the data and influence the outcome of a quantitative measurement.
 There are two main frameworks to tackle these questions, both of which are captured by the term \textbf{modeling}: ``Frequentist'' models (usually least squares optimization), and ``Bayesian'' / probabilistic models (enabled by a technical trick called \emph{MCMC} = ``Markov Chain Monte Carlo'' sampling).
-Hence, we should distinguish the type of question (hypothesis / quantitative estimate) and the methodological school (Frequentist of Bayesian, see Tab. \ref{tab:statistics}).
+Hence, we should distinguish the type of question (hypothesis / quantitative estimate) and the methodological school (Frequentist or Bayesian, see Tab. \ref{tab:statistics}).
 
 
+\FloatBarrier
 
 All these ``strains'' of statistics have historically developed different terminologies, sometimes even different meaning to the same terminologies, which can be confusing and even misleading (e.g. try to find out about the term ``likelihood'', cf. ``Bayesian Statistics without Frequentist Language'' by Richard McElreath, 2017, \url{https://www.youtube.com/watch?v=yakg94HyWdE}).
 In particular, there is a lot of confusion and ongoing discussion about the distinction and proper presentation of \emph{confidence intervals} and \emph{credible intervals}.
@@ -99,13 +98,13 @@ In fact, good modeling frameworks are sufficiently flexible to enable any model 
 
 
 Hypothesis testing and modeling are non-exclusive, as one can ask both questions of effect significance and effect magnitude at the same time.
-If a given data model turns out to match the data well, this affects the hypotheses which can be hypothesized (e.g. see the examples on ``assumptions'' above).
+If a given data model turns out to match the data well, this affects the hypotheses which can be hypothesized (e.g. Normality assumption can be confirmed or rejected by measuring the goodness of fit of a ``Student's T'' model, see below).
 On the other hand, because most models also contain a residual variance, it is tempting (but not always legitimate for rigorous reviewers) to use the credible intervals and residual variance to reject hypotheses without additional test.
 I would like to emphasize: all four major segments of statistics are intimately related, best executed in parallel, and should ideally yield consistent results.
 
 Hence, one might validly ask why I focus on probabilistic modeling.
 Firstly, most people are already familiar with the Frequentist side, since academic education on statistics is heavily biased towards these methods.
-My readers probably know these methods already, and chances are they are more of an expert than I am.
+Readers probably know these methods already, and chances are they are more of an expert than I am.
 Secondly, one perspective of the particular data set at hand is prediction, which is challenging for processes which are intrinsically variable (such as locomotion).
 Probabilistic models are ideal for this purpose, as will become clear below.
 
@@ -191,7 +190,7 @@ A ``quick and (more or less) dirty'' model generation can facilitate \textbf{hyp
 
 In principle, there is nothing wrong about publishing these ``quick'' model outcomes directly (but there are some advantages to probabilistic procedures, which are covered herein).
 However, the ``high-level'' aspect comes with some limitations.
-By ``high-level'', I mean that the syntax is close to human intuition, and less demanting in terms of programming skills.
+By ``high-level'', I mean that the syntax is close to human intuition, and less demanding in terms of programming skills.
 ``Low-level'', in contrast, refers to high control and detailed initialization, closer to ``machine language'', which can be challenging for inexperienced users.
 This should not be confused with unnecessary complexity and cumbersome syntax, which is abundant in both approaches (maybe more often found in high level APIs).
 In my experience, the model construction procedure on high level modeling toolboxes tends to be intransparent and limited.
@@ -208,9 +207,9 @@ Convenient as this may be, I tended to encounter problems with this approach: mo
 \item Model internals are intransparent: parameter interactions, ``random and fixed'' effects (i.e. multi-level parameters), multivariate parameter blocks\ldots{} abstracting these abundant model components to formula notation might obfuscate the actual inner working of the model (because formulas introduce an extra level of abstraction).
 \item Formula syntax: although not being an expert, I experienced that formula notation is not universal; or if so, it involves syntactical details which I am unable to remember or intuitively disentangle (e.g., what is the difference between \texttt{bm*age} and \texttt{bm|age}?).
 \end{itemize}
-The alternative is a low-level toolbox in which one has to initialize intercept, slopes and outcome separately, and use operators to produce the formula in code.
+The alternative is a low-level toolbox in which one has to initialize intercept, slopes and outcome separately, and use operators to produce the ``formula'' (here: the mathematical formulation) in code.
 
-Which to choose has a lot to do with prior experience, and I acknowledge that the major reason for my preference for low level interfaces lies at least partly in my personal inexperience with formula notation and the like, and in my attraction to tinkering business.
+Which to choose has a lot to do with prior experience, and I acknowledge that the major reason for my preference for low level interfaces lies at least partly in my personal inexperience with formula notation and the like, and in my attraction to code tinkering.
 
 
 Here is my approach: object-oriented programming.
@@ -222,7 +221,7 @@ At the same time, I retain precise control of the mathematical model internals.
 This strategy could be labelled \textbf{``building a high level API from low level ground''}.
 Of course, the ``low level ground'' requires some tensor juggling and programming insights, which is certainly a show stopper for inexperienced programmers.
 
-But for me, the benefits of ``full control'' over the models outweigh the disadvantage of short term convenience.
+But for me, the benefits of ``full control'' over the models outweigh the disadvantage of short term inconvenience.
 Furthermore, the system really ``flies'' with the highly iterative quest of finding the right model for a data set (see below).
 
 
@@ -242,7 +241,7 @@ This refers to questions of inclusion/exclusion, mathematical choices, and the h
 More on all this below.
 Generally, the possibilities tend to be more numerous than one would like.
 
-\textbf{How to choose?} Two things guide model design choices: (i) logical arguments and (ii) Model comparison.
+\textbf{How to choose?} Two things guide model design choices: (i) logical arguments and (ii) model comparison.
 Model comparison is covered in detail \hyperref[workflow:comparison]{below}.
 It is a ``hard'', numerical guide to which model succeeds best in representing the data.
 Models are compared \emph{ex post}, i.e. sampling (model fitting) is a prerequisite.
@@ -268,9 +267,9 @@ There are technical tricks to increase the chance that the most attractive local
 There are many different update rules and algorithms (``Metropolis'', ``NUTS'', ``Hamiltonian Monte Carlo'', \ldots{}) all well explained on Wikipedia.
 
 A defining difference to conventional regression is that the matter and outcome of parameter optimization are distributions of model parameter values (as opposed to point estimates).
-I tend to think of the sampling as a procedure that attempts to ``deform'' the shape of the initially set distribution (e.g. a Normal \(\mathcal{{N}}\left(\mu = 0.0,\ \sigma = 1.0\right)\)) to reach optimal agreement with the data distribution (e.g. a slightly narrower, shifted Normal \(\mathcal{{N}}\left(0.6,\ 0.1\right)\) for an imaginary set of dutyfactors) by adjusting the model parameters.
+I tend to think of the sampling as a procedure that attempts to ``deform'' the shape of the initially set distribution (e.g. a Normal \(\mathcal{{N}}\left(\mu = 0.0,\ \sigma = 1.0\right)\)) to reach optimal agreement with the data distribution (e.g. a slightly narrower, shifted Normal \(\mathcal{{N}}\left(0.6,\ 0.1\right)\) for a hypothetical set of dutyfactors) by adjusting the model parameters.
 A bit like pressing a blob of pudding into an animal-shaped form.
-Note that what I write above (except maybe the pudding metaphor) is not an exact description, e.g. a starting point should more exactly be called an initial distribution shape, called ``prior''.
+Note that what I write above (except maybe the pudding metaphor) is not an exact description, e.g. a starting point should more exactly be called an initial distribution shape, or ``prior''.
 
 The purpose of sampling is clear: explore the parameter space and find model parameters which lead to a best resemblance of model and data.
 
@@ -285,7 +284,7 @@ Non-scientific because it is not easy, maybe even impossible, to establish repro
 Formula links are hidden and prone to break, data types are a mess, cell references are limited, variable definition is impractical, and version control is hindered by the proprietary file format.
 However, when taught well, spreadsheets can prime people on good database structure (for example, it is good practice to use the functions \texttt{vlookup}, \texttt{offset}, \texttt{match} and \texttt{indirect} + \texttt{address} frequently).
 And, acknowledged, well-made spreadsheet files are often designed to accomplish one given task a time (e.g. they can make a handy ``dashboard'' when connected to external data sources).
-Let's call this one-task-one-spreadsheet strategy \emph{``task-boxing''} (``boxing'' as in ``unboxing''), because steps of a larger procedure are solved by individual black box spreadsheets.
+Let's call this one-task-one-spreadsheet strategy \emph{``task-boxing''} (``boxing'' as in ``unboxing'', not like the sports), because steps of a larger procedure are solved by individual black box spreadsheets.
 
 When advancing to scripting languages like Python, Matlab, or R, one learns to process spreadsheets and other database-like data sources in programming.
 Noteworthy in this regard are ``data frames'' (\emph{cf.} R: \texttt{dplyr}, Python: \texttt{pandas}, Matlab: \texttt{table}), as the programming analogon to a single spreadsheet.
@@ -298,6 +297,7 @@ The problem is that complex scripts are hard to generalize and maintain.
 Complexity should be avoided; good documentation is indispensible.
 
 \textbf{Is there an intermediate way?}
+It would be good to break the complex scripts and spreadsheets down to meaningful unit tasks, but what is a good unit?
 In my experience, one has to find a middle ground between the antagonist strategies outlined above.
 Functional programming can help to split tasks, whereas object-oriented programming can help to define working units and how they are processed.
 A good framework must be available for version control (git/mercurial/subversion).
@@ -314,6 +314,8 @@ Model comparison requires many models to be sampled.
 Hence, one must be able to write models to hard disk and recall them when necessary.
 This may seem trivial, but it is a critical skill.
 In particular, when it comes to \hyperref[workflow:prediction]{prediction (Ch. \ref{workflow:prediction})}, it must be ensured that model input data can be dynamically altered after storing and re-loading of the model.
+Obviously, the association of model settings, structure, and outcome, must be maintained at all time, e.g. by ``settings'' log files.
+
 
 I found all my personal requirements met in the library \texttt{pymc} for Pyhton \citep{Salvatier2016}.
 % In fact, I started it shortly after I began learning to program in Python.
@@ -326,7 +328,7 @@ Compatible choices exist in the \texttt{R} programming language, or language-ind
 \textbf{``Which Model is the best for my data?''}
 As mentioned above, the best of all the logically plausible model designs should not be determined by pure personal preference, but rather by hard, quantitative measures.
 This is why this comparison step is also labeled ``model selection''.
-The topic is exceptionally well covered in my favorite statistical literature \citep[][Ch. 11]{McElreath2018}, which I will briefly summarize.
+The topic is exceptionally well covered in my favorite statistical literature \citep[][Ch. 11 therein]{McElreath2018}, which I will briefly summarize.
 
 The framework of information theory provides tools for quantitative assessment, namely Information Criteria (e.g. WAIC, LOO).
 The comparison problem has two balancing effects:
@@ -345,7 +347,7 @@ If, in direct comparison, a model including a certain parameter receives signifi
 
 \subsubsection{Posterior Prediction}
 \label{workflow:prediction}
-The other extraordinarily powerful tool in the modeling workflow is ``prediction''.
+The other extraordinarily powerful tool in the modeling workflow is ``prediction'' \citep{Shmueli2010}.
 This feature can serve two relevant purposes, which are technically almost identical.
 
 \begin{enumerate}
@@ -392,7 +394,7 @@ Even more: by sampling a high number of values, one can infer the \emph{distribu
 Take this one step further: what if the settings I choose are not part of the original data set?
 \textbf{Can the model make predictions beyond the data I provided?}
 (Percussive playing skills in the guitar analogy\ldots{} or maybe time to admit that analogies can hardly be extrapolated beyond their scope.)
-Prediction is the ultimate test to every model: when probing an unobserved or intentionally filtered category of observations, can the model produce outcoms that later stand the test of reality?
+Prediction is the ultimate test to every model: when probing an unobserved or intentionally filtered category of observations, can the model produce outcomes which later stand the test of reality?
 With this capability, the model is able to generate informed hypotheses which stimulate future research.
 Even if a subsequent observation is impossible (thinking of inferring palaeontological data), the model can yield a distribution of values for a given phenomenon which is most plausible with the actual data.
 Another use case is to test evolutionary hypotheses, for example by relating hypothetical traits (e.g. extreme morphology) to limited physical or ecological parameter spaces (e.g. contact forces).
@@ -440,7 +442,7 @@ Data was processed via a sequence of python scripts which can already be found h
 These scripts complete the following tasks:
 \begin{itemize}
 \item import data per stride cycle to python
-\item store master data (\textbf{subject info} e.g. age, \textbf{spatiotemporal gait variables} e.g. relative speed)
+\item store master data (\textbf{subject info} e.g. age, and \textbf{spatiotemporal gait variables} e.g. relative speed)
 \item calculate joint angle temporal profiles
 \item remove end-start difference (make ``cyclical'')
 \item transformation to the frequency domain via Fourier Series
@@ -510,8 +512,9 @@ By this definition, if you sit straight on a chair right now, your trunk angle w
 Segment angles of coupled series of segments (``limbs'') are highly correlated, which can be problematic for statistical analysis.
 To illustrate this, imagine a limb in which the knee joint is fixed, i.e. held at a constant angle throughout the stride cycle.
 The thigh and the shank segments will both have temporally varying segment angle profiles, but the correlation of these profiles is perfect.
-Further, imagine that there is an effect changing the hip angle (a joint angle, see below) temporal profile under certain circumstances; that effect will be visible in the shank as well, although the knee does not move.
-The reason is the ``fixed knee'' constraint.
+Further, imagine that there is an effect changing the hip angle (a joint angle, see below) temporal profile under certain circumstances; that effect will be visible in the shank \textit{segment angle} as well, although the knee does not move.
+The reason is the ``fixed knee'' constraint introduced here for illustration; the correlation is hardly less with mobile joints (the distal segments just hang on a chain downstream of a given joint, and never fully cancel out the proximal movements).
+
 
 \textbf{Joint angles} measure the difference of two segment angles, which is equal to the angle between two segments.
 Joint angles are also interdependent through musculoskeletal coupling and the influence of gravity.
@@ -586,7 +589,7 @@ PC3 (\(0.2 \%\)) & -0.32 & -0.62 & +0.72\\[0pt]
 \subsection{Subject Parameters}
 \label{sec:orgb7153d3}
 The first order model parameters are the subject parameters, because they are characteristic and more or less constant for each of the animal subjects under research.
-The purpose of this chapter is to find out how they interrelate.
+The purpose of this section is to find out how they interrelate.
 
 Within this group of parameters, \emph{sex} stays constant for a given subject.
 Of the \(17\) subjects included, \(5\) were male.
@@ -643,7 +646,7 @@ Each model ``starts'' with an intercept (though it wouldn't need to, or the inte
 For continuous variables, the intercept is intuitive to understand: it is the observable value when the predictor is zero.
 With categorical variables, the intercept value is the value observed for a given ``reference'' set/selection of parameter values.
 For example, in the bodymass model below, the intercept is approximately corresponding to the average bodymass of adult, female animals.
-The choice of reference is done by the statistician and arbitrary, and sometimes only visible by the category changes associated with slopes.
+The choice of reference is done by the statistician, it is an arbitrary one, and sometimes only visible by the category changes associated with slopes.
 
 \item \textbf{Slopes \(\beta\):}
 \label{sec:org2c291e4}
@@ -657,10 +660,10 @@ Some mathematical explanation:
 
 \item \textbf{Residual \(\epsilon\):}
 \label{sec:orgbf53734}
-Even with all measured parameters, some unexplained variation remains in model of partly random processes.
+Even with all measured parameters, some unexplained variation remains in models of partly random processes.
 This can be measurement ``noise'', or simply unexplained variation.
 Its order of magnitude is estimated in the sampling procedure as the ``residual''.
-The terms ``residual'', ``epsilon'', and ``standard deviation'' (in model context) can be considered approximately synonymous (\emph{statistician-smiley}).
+The terms ``residual'', ``epsilon'', and ``standard deviation'' (in model context) can be considered approximately synonymous (\emph{:statistician-smiley:}).
 
 \item \textbf{Prior Choice and Sampling:}
 \label{sec:orgf31f4ce}
@@ -718,6 +721,7 @@ Therefore, the body parameters presented here were transformed with the natural 
 
 
 As expected, bodymass and ageclass are associated (Tab. \ref{tab:bodyproportions}).
+But how much?
 On average, adolescents are \(2.4\ kg\) and infants are \(9.4\ kg\) lighter than adult individuals.
 The effect of an animal being infant is deemed relevant because the credible interval does not include zero.
 The credible interval is the smallest possible value range to contain \(94\ \%\) of the values, i.e. from \(3\ \%\) to \(97\ \%\) quantile of the samples; termed ``highest (probability) density interval'' or HDI.
@@ -728,7 +732,7 @@ Although we know that adolescents weigh less than adults, the data set is insuff
 In contrast to age, sex seems to have no effect on bodymass (keeping in mind that there are generally few and no adult males in the sample; slope: \(+0.6\ [-1.9, +3.7]\ kg\) ).
 
 Finally, the parameter \(\nu\) (``nu'') deserves some explanation, to demonstrate another neat modeling trick \citep{Wiecki2013}.
-An often disputed, but indispensible assumption in conventional statistics is the Normality Assumption (i.e. that values of a variable are normally distributed).
+An often disputed, but indispensible assumption in conventional statistics is the Normality assumption (i.e. that values of a variable are normally distributed).
 Likewise, in probabilistic modeling, one can choose the distribution \emph{type} (e.g. Normal) of a model parameter, which together with the distribution \emph{properties} (e.g. \(\mu = 0\), \(\sigma = 1\)) is the \textbf{prior} for that parameter.
 Distribution properties are adjusted in MCMC sampling, and the prior only influences the result when sample size is very small.
 In contrast, the distribution type stays fixed and has major influence on the outcome.
@@ -743,6 +747,7 @@ This is a relatively high value, confirming that bodymass is approximately norma
 Usually, model comparison favors the use of a Normal posterior in such cases.
 
 
+\FloatBarrier
 \subsubsection{Multi-Level Modeling}
 \label{sec:org25b6e1a}
 For all following models, there is the option to include the bodymass parameter as a hierarchical (better: multi-level) parameter.
@@ -769,12 +774,12 @@ These will be handled below.
 
 \subsubsection{Multivariate Posterior Structures: Mor(e)phometrics}
 \label{sec:orgf2c37c2}
-Together with bodymass, I modeled leg length (ankle-knee-hip distance) and body mass index (BMI, bodymass divided by ankle-knee-hip-head distance).
+Together with bodymass, I modeled leg length (ankle-knee-hip distance, cumulated) and body mass index (BMI, bodymass divided by ankle-knee-hip-head distance).
 The model formula from above remains unchanged, except for the left side.
 But that, namely ``multiple parameters on the left side'', is a concept on its own.
 The solution is a \textbf{Multivariate Posterior}.
 I imagine this as multiple models, sampled in parallel, but cross-connected through the data and the correlations (like a ladder with steps of chewing gum, floating in free space\ldots{} yes, I'm running out of metaphors).
-In unconnected model, the MCMC sampler would explore the parameter space randomly, and might be ``at different ends'' for two variables at a given time.
+In an unconnected model, the MCMC sampler would explore the parameter space randomly, and might be ``at different ends'' for two variables at a given time.
 In contrast, when they are connected by a multivariate posterior, the sampler path is also connected, and therefore a positive correlation of two parameters reflects in the values the sampler sees simultaneously.
 The connection can be either fixed (empirical correlation, based on the data) or inferred.
 The correlation is crucial for predictive sampling to avoid unplausible parameter combinations.
@@ -793,11 +798,11 @@ The inferred correlation is not \emph{per se} more exact; imagine a situation wh
 It depends on the data which one works best (yay, more model comparison!).
 
 
-In my toolbox of choice \texttt{pymc}, a multivariate posterior can be initialized with either (i) the empirical or (ii) the inferred correlation structure; a third choice is to use (iii) no correlation.
+In my toolbox of choice, \texttt{PyMC}, a multivariate posterior can be initialized with either (i) the empirical or (ii) the inferred correlation structure; a third choice is to use (iii) no correlation.
 For cases (i) and (ii), I introduce the observables as a multivariate Student's T distribution.
 The empirical correlation (i) enters the model in form of the Cholesky matrix calculated from the data\footnote{Subtle technical complication: this variant does not allow the inclusion of an explicit model residual; in such cases I report the standard deviation of the observables as model residuals.}.
 To get inferred correlation (ii), I instead initialize the \texttt{MvStudentT} with a so-called LKJ Prior \citep{LKJ2009}, which allows me to quantify the posterior correlation.
-Finally, uncorrelated posterior (iii) do not need an \texttt{MvStudentT}, but go with just a \texttt{StudentT}, which can also sample multiple observables at once.
+Finally, uncorrelated posterior (iii) do not need an \texttt{MvStudentT}, but go with independent \texttt{StudentT}'s; the system can sample multiple observables at once.
 
 Note that multivariate blocks will also be relevant on the predictor side (see below).
 The only difference between observables and predictors in modeling is the somewhat arbitrary choice of which variables we define as ``dependent'', and which as ``independent''.
@@ -906,9 +911,9 @@ With this knowledge about the subject parameteres, I will proceed to the next pa
 \item trunk angle
 \end{itemize}
 
+The ``diml.'' indication refers to ``dimensionless'', which means that the parameter was subject to spatiotemporal normalization (see Ch. \ref{prep:dimensionless}).
 Just as bodymass and its relation to the other subject parameters was the focus of the previous chapter, we now move spatiotemporal gait variables to the ``left handside'' of the equation, i.e. they are observables, and we guess that they will be in part predicted by subject parameters.
 
-The ``diml.'' indication above refers to ``dimensionless'', which means that the parameter was subject to spatiotemporal normalization (see Ch. \ref{prep:dimensionless}).
 
 
 \subsubsection{Model Design}
@@ -930,7 +935,7 @@ The speed parameter correlation can elucidate how animals reach higher speeds: t
 This, however, implies no consistent change in clearance, nor does it depend on mean trunk angle.
 
 \begin{table}[p]
-\caption{\label{tab:stridecorrelation}\textbf{Empirical Cross Correlation of Spatiotemporal Gait Variables.} Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. \emph{d.s.}: ``dimensionless stride'' parameter.}
+\caption{\label{tab:stridecorrelation}Empirical Cross Correlation of Spatiotemporal Gait Variables. Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. \emph{d.s.}: ``dimensionless stride'' parameter.}
 \centering
 \begin{footnotesize}
 \begin{tabular}{l|llllll}
@@ -960,7 +965,7 @@ From there, one can iteratively leave out parameters, perform model comparison, 
 Alternatively, starting from a minimal model (ii), one can gradually increase complexity and find the point when adding parameters does not indicate improvement.
 Either way, the procedure is iterative: sample all plausible, possible models, and perform model comparison (Ch. \ref{strides:comparison}).
 Ideally, both strategies will converge on ``the best model''.
-This model is simply the one which, of a broad range of models, had favorable model scores.
+This model is simply the one which, of a broad range of models, had favorable model scores, and is logically consistent.
 It is labeled \emph{ex post} as the reference model.
 
 
@@ -975,7 +980,7 @@ Here is thus the formula for one gait variable:
 Therein, \(i\) is one of the spatiotemporal gait variables, which are all sampled in a multivariate model.
 The intercept vector \(v_{1}\) is simply a column vector of ones.
 The boolean \(v_{male}\) holds values one for every stride for a male subject, and zero for females.
-The same is true for \(v_{adol}\) and \(v_{inft}\), which is why they are mutually exclusive.
+Similarly for \(v_{adol}\) and \(v_{inft}\), which are mutually exclusive in the equation (i.e. animal is either adolescent, or infant, or neither, but never two of those options).
 In contrast, \(v_{cbm}\) for centered log bodymass contains continuous values; the centering was done per ageclass, and after log transformation.
 Groupwise centering affects the data vector, however the bodymass slope is not affected by ageclass (a model with \(\beta_{bm\mid ageclass}\) was also included in model comparison).
 
@@ -984,13 +989,13 @@ Groupwise centering affects the data vector, however the bodymass slope is not a
 \label{sec:orgffbfe48}
 A Normal distribution was used for all the slopes, a multivariate Student's T for the observables.
 Informative priors (global mean and standard deviation) are used, which is a good heuristic to improve sampling without biasing the sampler.
-The multivariate block of observables is initialized with the empirical correlation (yet all three options of multivariate posterior were applied and compared, see below).
+The multivariate block of observables is initialized with the empirical correlation, which facilitates the work of the sampler (yet all three options of multivariate posterior were applied and compared, see below).
 \end{enumerate}
 
 
 \subsubsection{Subject Parameters Affect Stride Characteristics}
 \label{sec:orge85b957}
-The gait variable model quantifies how stride (or gait) characteristics in bipedal baboon walking are affected by subject parameters (Tab. \ref{tab:strideresults}).
+The model of spatiotemporal gait variables quantifies how stride (or gait) characteristics in bipedal baboon walking are affected by subject parameters (Tab. \ref{tab:strideresults}).
 
 Clearance is highest in adult males of low bodymass (though we did not actually observe those; the effects are separately determined for age class, sex, and bodymass).
 Females and subadults lift their feet less during the swing, as do animals of comparatively higher bodymass.
@@ -1006,7 +1011,7 @@ It is high (\(\nu = 54.2\)), indicating that the posterior distribution has hard
 
 
 \begin{table}[p]
-\caption{\label{tab:strideresults}\textbf{Effects of Subject Characteristics on Spatiotemporal Gait Variables.} Significant values (i.e. values with zero not in HDI) are indicated by an asterisk.}
+\caption{\label{tab:strideresults}Effects of Subject Characteristics on Spatiotemporal Gait Variables. Significant values (i.e. values with zero not in HDI) are indicated by an asterisk.}
 \centering
 \begin{small}
 \begin{tabular}{|l|l|l|l|l|l|l|}
@@ -1079,7 +1084,7 @@ In posterior predictive sampling, the same PCA must be used to transform the sam
 One of the great features of quantitative models is the ability to perform model comparison.
 An arsenal of ``information criteria'' is available to compare models and choose which one succeeds best in capturing the effects present in the data, without being over-complex.
 
-In addition to the reference model above, many other models where sampled for comparison.
+In addition to the reference model above, many other models were sampled for comparison.
 Those are similar to the reference, but individual parameters are removed in turn, or their hierarchical structure is altered (in the case of bodymass).
 In other test models, parameters were added (e.g. leg length).
 The centering of bodymass was optionally omitted.
@@ -1107,7 +1112,7 @@ Additionally, the correlation structure of the observables (``empirical'' per de
 
 
 The outcome of this particular comparison method (Tab. \ref{tab:stridemodelcomparison}) are ``LOO'' values (``Leave One Out'') as a quantification for the model performance/complexity tradeoff.
-As mentioned, there are alternative quantifiers (e.g. WAIC), but experience shows that rankings from different information criteria are highly correlated.
+As mentioned, there are alternative quantifiers (e.g. WAIC), but experience shows that rankings from different information criteria are often similar.
 Given relatively little difference and wide standard error ranges in the LOO estimate, we can conclude that almost all of the tested models yield some plausible descriptions of the data (in other words: most models do not perform significantly better or worse than the reference).
 In fact, the reference model is not the highest on the list: for example, choosing a Normal distribution instead of a Student's T for the observables would be better, which is consistent with the inferred high value for \(\nu\).
 This switch in this case would be little more than cosmetics, since that extra parameter does not affect the results presented above.
@@ -1161,7 +1166,7 @@ In this chapter, I will briefly describe how they are acquired, before even brie
 
 
 This chapter does not introduce any new concepts of statistics, but instead has some nice graphs and figures.
-Its purpose is to round off the baboon story and provide the basis for discussion with co-authors.
+Its purpose is to round off the baboon story and provide the basis for further discussion.
 
 
 \subsubsection{Quantifying Posture and Coordination}
@@ -1171,7 +1176,7 @@ Their temporal profiles, i.e. the angle over time, and how they change for diffe
 In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[\emph{cf.}][]{Mielke2019}.
 This operation is simply a reversible transformation, and no information is lost in the process.
 Temporal profiles can thereby be investigated in the frequency domain, which involves a complex (math.) quantification of a given number of harmonics (this is often called the ``spectrum'' of a signal).
-Fun fact: this is perfectly analogous to harmonics on a guitar string, and because one can tune models of Fourier Coefficients with MCMC sampling (see above), guitars are now oficially my favorite metaphor in explaining statistics.
+This is perfectly analogous to harmonics on a guitar string, and because one can tune models of Fourier Coefficients with MCMC sampling (see above), guitars are now oficially my favorite metaphor in explaining statistics.
 
 Some characteristics are particularly prominent in the frequency domain/spectrum:
 \begin{itemize}
@@ -1215,7 +1220,7 @@ In contrast, the posture parameters correlate in a characteristic way (Tab. \ref
 Therefore, posture and coordination were handled by two separate models with similar general structure.
 
 \begin{table}[p]
-\caption{\label{tab:posturecorrelation}\textbf{Sampled Cross Correlation of Posture Parameters.} Significant correlations (as per HDI) are marked by asterisks. ``Angle'' refers to the temporal mean of the joint angle profile, whereas ``amplitude'' is related to range of motion at that joint.}
+\caption{\label{tab:posturecorrelation}Sampled Cross Correlation of Posture Parameters. Significant correlations (as per HDI) are marked by asterisks. ``Angle'' refers to the temporal mean of the joint angle profile, whereas ``amplitude'' is related to range of motion at that joint.}
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
@@ -1331,7 +1336,7 @@ The final cherry on this cake (Fig. \ref{fig:japprediction}) is thus a promising
 
 \begin{landscape}\clearpage
 \begin{table}[t!]
-\caption{\label{tab:postureresults}\textbf{Results of the Posture Model.} Significant values are indicated by an asterisk.}
+\caption{\label{tab:postureresults}Results of the Posture Model. Significant values are indicated by an asterisk.}
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
@@ -1347,7 +1352,7 @@ ankle amplitude & \(+0.68\) & \(-0.07\) & \(-0.04\) & \(+0.05\) & \(+0.10\) & \(
 \end{table}
 
 \begin{table}[b!]
-\caption{\label{tab:coordinationresults}\textbf{Results of the Coordination Model.} Significant values are indicated by an asterisk.}
+\caption{\label{tab:coordinationresults}Results of the Coordination Model. Significant values are indicated by an asterisk.}
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
@@ -1428,13 +1433,13 @@ The prediction (Fig. \ref{fig:dutyquantileprediction}) depicts the exact tempora
 Changing from LDS to HDS, the hip mean angle increases (more flexed), which indicates that a prerequisite for quicker strides is a somewhat extended posture.
 The knee is affected in terms of amplitude.
 Curiously, the ankle joint profile is hardly altered during the swing phase (phases not indicated in figure, but it is the latter part of the cycle progress and can be guessed from the ankle) except that obviously the ``second trough'' in the trace starts later; the stance phase again is altered in terms of mean angle.
-As a bonus, we can see the variance in the strides (as shaded traces in the background).
+As a bonus, we can see the variance in the strides (as shaded traces in the background), though that variance might be an over-estimation due to low data sample size (partially influenced by wide priors).
 Remember that dutyfactor cross-influences other spatiotemporal gait variables (Tab. \ref{tab:stridecorrelation}).
 Luckily, it is easily possible and might be worth comparing the speed etc. of the selected, predicted strides.
 
 
 The capacity to fix some parameters and ``playing'' with others is immensely useful for all kinds of research questions, beyond the context of kinematic analysis.
-As shown above, the prerequisite is a well-fit probabilistic model of the phenomenon you want to analyze.
+As shown above, the prerequisite is a well-fit probabilistic model of the phenomenon you want to analyze, and a sufficiently high number of observations.
 
 
 

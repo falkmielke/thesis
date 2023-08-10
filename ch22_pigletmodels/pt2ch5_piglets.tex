@@ -35,12 +35,12 @@ However, the high dimensionality of kinematic data sets, the multi-parameter, mu
 
 
 Several recent technological advances have enabled researchers to tackle scientific questions on locomotion in a more efficient way.
-Firstly, the past few years have brought huge leaps in terms of computer vision, deep learning, and thereby semi-automatic video digitization methods \citep[][; cf. Ch. \ref{cpt:digitization}]{Karashchuk2021,Mathis2020,Jackson2016,Corcoran2021,MMielke2020}.
+Firstly, the past few years have brought huge leaps in terms of computer vision, deep learning, and thereby semi-automatic video digitization methods \citep[][\textit{cf.} Ch. \ref{cpt:digitization}]{Karashchuk2021,Mathis2020,Jackson2016,Corcoran2021,MMielke2020}.
 These tools typically require a manually digitized subset of the data as the ``training set'' for a neural network, which is then able to digitize further videos in high through-put, hopefully with reasonable accuracy.
 A second field of technological advance are probabilistic models, which build on an elegant technical implementation of Bayesian theory \citep[Markov Chain Monte Carlo / MCMC sampling, \textit{cf.}][]{McElreath2018,Gelman2013,vandeSchoot2021}.
 Such models can naturally incorporate hierarchical parameter interrelations and intrinsic variability.
 The main reason for this is that probabilistic models work on data distributions, and their outcome are distributions and ``effect likelihoods'', rather than point estimates.
-This can be informative on an intrinsically varying process such as locomotion \citep{Mielke2018,DeGroote2021}.
+This can be informative on an intrinsically varying process such as locomotion \citep{Mielke2018}. % DeGroote2021
 Machine Learning methods for video digitization are validly advancing to be the standard in kinematic analysis, whereas probabilistic models still lack recognition in the field, despite their potential.
 
 
@@ -74,7 +74,7 @@ And one of the most common sets of techniques in physics and engineering to hand
 With FSD, joint angle profiles are transformend into their representation in the frequency domain, i.e. an array of harmonics.
 Some of the characteristics of the profiles (namely mean angle, amplitude, and phase) are more readily captured by those harmonics and can optionally be removed.
 This is most intuitive in the case of phase: removing phase differences enables a mathematically optimal temporal alignment of the profiles.
-By isolating the other characteristics, mean and amplitude, the joint angle profiles can be transformed to meaningful quantities such as dynamic posture (mean joint angle and effective range of motion), and coordination \emph{sensu stricto} \citep[relative phase/joint timing and residual kinematics, \textit{cf.}][, and Ch. \ref{cpt:fourier_review}]{Mielke2019}.
+By isolating the other characteristics, mean and amplitude, the joint angle profiles can be transformed to meaningful quantities such as dynamic posture (mean joint angle and effective range of motion), and coordination \emph{sensu stricto} \citep[relative phase/joint timing and residual kinematics, \textit{cf.}][and Ch. \ref{cpt:fourier_review}]{Mielke2019}.
 Harmonics are independent of temporal sampling and duration: the coefficient array is of fixed size, which is useful for subsequent multivariate analysis methods, such as Principal Component Analysis (PCA).
 Another advantage of this transformation procedure is that it is reversible because all mathematical information is retained in the process (which is not the case when using collective variables alone).
 This means that joint angle profiles can be reconstructed for any observed or hypothetical point in parameter space, which enables in-sample and out-of-sample predictive sampling.
@@ -148,7 +148,7 @@ We used the software DeepLabCut \citep[DLC,][]{Mathis2018} for digitization of a
 In addition, a custom made point tracking software \citep{MMielke2020} was used to generate a training set.
 In total, our dataset contained \(180\) videos (more than \(11\) hours, \(169\) animals).
 Our goal was to prepare a general DLC network which would be capable of automatically tracking piglets at multiple ages, and which can be shared and re-used for subsequent research questions.
-Though the quality of the DLC digitization ultimately prohibited this outcome, this is the reason why the full data set was used for digitization and for the calculation of some derived measures (size PCA).
+This was the initial motivation to use the full data set for digitization and for the calculation of some derived measures (size PCA), yet the quality of the automated digitization was insufficient, and no generalizable neural network could be trained.
 The analysis focus of this study (see below) was only a subset of the data (i.e. the 58 animals of the youngest age class).
 The video processing workflow, applied to the full data set, was as follows.
 To get a balanced training set, one stride of each of the animals was selected, and the video was cut, cropped to runway height, and optionally mirrored horizontally so that movement would always be rightwards.
@@ -170,7 +170,7 @@ The next step is to find the relevant temporal sequences of walking in the conti
 Naturally, the trained network would only extract potentially useful landmark traces for episodes which resembled the training set, i.e. in episodes with a piglet moving perpendicular to the image axis, in lateral aspect and rightward direction.
 We automatically extracted \(2597\) of such sequences by filtering for high digitization ``likelihood'' provided by DLC, low noise (i.e. steady landmark movement) and consistent, plausible inter-landmark distances.
 We further applied an automatic algorithm to find footfalls and label stride cycles in the candidate episodes (\(4730\) cycles).
-This procedure involved a start-end-matching optimization (using Procrustes superimposition) to ensure that strides were indeed cyclical.
+This procedure involved a start-end-matching optimization (using Procrustes superimposition, \textit{cf.} Ch. \ref{cpt:fourier_review}) to ensure that strides were indeed cyclical.
 To further assess digitization quality, gait variables were automatically extracted.
 Definition of these variables was chosen to simplify the automatic procedure, as follows.
 Stride distance, frequency, and speed are trivial measures of the animal movement.
@@ -192,9 +192,9 @@ The landmark data provided by DLC was further processed for analysis.
 Python code for the whole procedure is available (\nolinkurl{https://git.sr.ht/~falk/piglet_fcas}, Python version 3.10.8 at time of model calculation, \nolinkurl{https://www.python.org}).
 First, joint angle profiles (i.e. joint angle values over time) were extracted for all relevant joints and for the total forelimb angle (croup-withers-hoof).
 Shoulder, elbow, carpal, hip, stifle, and tarsal were the six joints sufficiently well digitized and therefore considered relevant for analysis.
-We then applied Fourier Series decomposition in the framework we previously termed Fourier Coefficient Affine Superimposition \citep[FCAS,][, Ch. \ref{cpt:fourier_review}]{Mielke2019}, a flexible procedure which subsumes the following steps.
+We then applied Fourier Series decomposition in the framework we previously termed Fourier Coefficient Affine Superimposition \citep[FCAS,][and Ch. \ref{cpt:fourier_review}]{Mielke2019}, a flexible procedure which subsumes the following steps.
 Joint angle profiles are cyclic, i.e. periodical, and can therefore be transformed to the frequency domain with a Fourier Series decomposition (8 harmonics were deemed sufficient by visual comparison of raw and transformed/retransformed profiles).
-In the frequency domain, the affine components (mean, amplitude, phase) of a joint angle profile are easily accessible \citep[\textit{cf.}][, Ch. \ref{cpt:fcas}]{Mielke2019}.
+In the frequency domain, the affine components (mean, amplitude, phase) of a joint angle profile are easily accessible \citep[\textit{cf.}][and Ch. \ref{cpt:fcas}]{Mielke2019}.
 The forelimb angle served as reference to temporally align all cycles in the data set (removal of phase differences between different cycles; forelimb angle was not used further).
 Then, mean and amplitude of the joint oscillations were isolated for all joint angles and are categorized as ``dynamic posture'' parameters.
 Mean joint angle is the temporal average, whereas amplitude is related to effective range of motion (eROM).
@@ -248,7 +248,7 @@ To summarize, four categories of variables were used for analysis:
 \end{itemize}
 
 Our guiding question for model design is whether a probabilistic, linear model is able to infer subject characteristics (specifically: age, mass, and size) from raw kinematics (expressed as dynamic posture and coordination) and spatiotemporal gait variables (collective variables).
-Given the common conception that kinematics are a complex output of an individual motor system, this might be considered an ``inverse'' modeling approach.
+Given the common conception that kinematics are a complex output of an individual motor system, this might be considered an ``inverse'' modeling approach (it is certainly an inversion of the model presented in Ch. \ref{cpt:statistics}).
 The present analysis focused on three outcome variables (Fig. \ref{fig:observations}): mass (\(kg\)), size (\emph{arb. units}, from a PCA of marker distances), and age (\(h\)).
 Though these outcome variables were specific per individual and recording session, we analyzed them ``per stride'' (i.e. there were multiple strides with identical subject measures on the outcome side).
 
@@ -483,7 +483,7 @@ This could be interpreted as evidence for a lower capacity  of LBW to produce no
 Yet there are proximal, trivial explanations: based on conventions, the \(10 \%\) lower quantile of birth weights in a litter is considered LBW, and there is a hard cap of \(800\ g\).
 The resulting share is equal in our training set for video digitization, and in the final data set, because of pseudo-random, opportunistic sampling on-site (i.e. recording work was permanent, yet determined by farrowing and feeding of the subjects).
 The minority of LBW training videos might lead to an under-learning of those animals, reduced digitization quality and therefore an exclusion bias for ``non-normal'' individuals.
-Though it seems unlikely, we cannot rule out reduced locomotor capacity in LBWs, because the present data set is unsuited to count the occurrence of locomotor behavior.
+Though it seems unlikely, we cannot rule out reduced locomotor endurance in LBWs, because the present data set is unsuited to count the occurrence of locomotor behavior.
 On the other hand, the strict stride filtering criteria for ``good'' kinematics may have involuntarily filtered out deficient individuals.
 Our conclusion that low birth weight individuals are non-deficient is strictly tied to the definition of the low birth weight category, which is herein based on weight criteria and did not regard phenotypical indicators of intra-uterine growth restriction \citep[which we did not record, \textit{cf.}][]{Amdi2013}.
 
@@ -500,7 +500,7 @@ Note however that the causality might be inverse.
 We measured age underestimation only in the case of the individuals which were recorded late within our sampling time frame (age \(> 5\ h\), Tab. \ref{tab:prediction}).
 This is consistent with prior evidence that energy reserves are depleted after birth (normal locomotion) but not replenished after four hours in the case of LBW \citep{LeDividich2017,VandenHole2019}.
 Assuming that this is the case, i.e. energy reserves are depleted, we would expect two effects: (i) the animal might succeed in the locomotor task less frequently (not quantified, see above), and (ii) the kinematics might be altered, which we observed.
-The present model was trained from NBW data and thereby tuned to kinematic development from animals with normal energy levels (therefore it can infer age from kinematics in NBW).
+The present model was trained from NBW data and thereby tuned to kinematic development from animals with normal energy levels (therefore it can correctly infer age from kinematics in NBW).
 That same model quantifies the potentially energy-deficient animals as younger.
 It might be that energy deficiency coincidentally causes effects which are exactly opposite to the changes that piglet kinematics undergo in normal development.
 However, the more likely explanation is an actual delay or a temporary halt in development.

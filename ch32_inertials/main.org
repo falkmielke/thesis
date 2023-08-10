@@ -34,7 +34,7 @@ By performing a thorough sensitivity analysis, and by simulating common CT artif
 The results are alarming: in the test case, mass is overestimated by more than a fifth, and error propagation indicates that this has an even worse effect on moment of inertia, which directly translates to errors in inertial dynamics.
 However, there is no reason to expect alternative, conventional methods to be more accurate.
 Thus, though CT images are not ideal for the purpose, they might be the best option available in most cases.
-In conclusion, I emphasize the value of a sensitivity analysis, and indicate promising research progress of others which might lead to improving CT reconstructions for the purpose of estimating material characteristics.
+In conclusion, I emphasize the value of a sensitivity analysis, and point at promising research progress of others which might lead to improving CT reconstructions for the purpose of estimating material characteristics.
 
 
 \clearpage
@@ -69,8 +69,8 @@ Filters let through some of them, while prohibiting others from passing.
 The same principle holds for party lights or colored window sheets: a light source is placed behind one or more filter sheets which block most colors and let through certain others.
 On the military flashlight, the "white" setting is general purpose, unfiltered, which will let pass the maximum number of photons you can expect from a given bulb.
 "Lights" (i.e. the item) are devices which constantly emit photons of a specific variety of wavelengths (colors); we call this variety the "spectrum" (see below).
-Put simply, applying a red-pass filter sheet will change the composition of the passing light by blocking all the "non-red" photons.
-Because red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our visual perceptive system.
+Put simply, applying a red-pass filter sheet will change the composition of the passing light by blocking the majority of "non-red" photons.
+Because relatively more red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our visual perceptive system.
 
 Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyll, which absorbs some non-green (e.g. red) wavelengths of light very well (Fig. \ref{fig:spectrum}, green curve).
 The ensemble of non-absorbed photons appears green to us, which is why leaves generally appear green to our view.
@@ -106,7 +106,7 @@ A (differential) spectrum is a way to depict a wavelength dependence.
 [[./figures/Berger2018.png]]
 
 The situation is exactly analogous for x-rays citep:Berger2018,Buzug2008.
-X-rays are also photons, just at a different wavelength (range \(10\ pm -- 10\ nm\)).
+X-rays are also photons, just at a different wavelength (range \(10\ pm\) to \(10\ nm\)).
 The detector is a complex sensor device, similar in function to digital camera sensors, which will detect any light which is not absorbed or scattered by the sample or air on its way through the scanner chamber.
 X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...), shot at with an electron beam which is evoked by applying voltage (e.g. \(60\ kV\)) to the warmed-up anode and cathode.
 When hit by electrons, the target will emit x-ray photons of a specific composition of energies (spectrum, Fig. \ref{fig:xray_emission}).
@@ -124,9 +124,9 @@ Absorption is favourable, scattering is not, there can be secondary scattering a
 
 
 The varying fraction of attenuated photons, measured from multiple incident angles for 3D view, is what enables the extraction of structural information (Lambert-Beer's Law).
-If children place their hands inside a conical light beam, a shadow will be projected onto the wall.
+If children place their hands inside a conical light beam, an animal-shaped shadow will be projected onto the wall.
 Their hands attenuate the light.
-Photos of the hand's attenuation pattern from all possible directions (i.e. rotating the hand) can in fact be used to reconstruct the 3D shape of the hand.
+Photos of the hand's attenuation pattern from all possible directions (i.e. rotating the hand) can in fact be used to reconstruct the 3D shape of the hand to falsify the hypothesis that an actual animal was causing the projection.
 
 And attenuation is precisely the property which is thought to correlate with physical density: the higher the density, the higher the attenuation.
 Or so it seems.
@@ -151,7 +151,7 @@ Any tomographic reconstruction just shows exactly what is measured, convoluted w
 Acknowledged, some aspects of the measurement might be unfavorable to the observer, because they deviate from the image which that observer expects, based on their personal experience of the real world.
 For example, we speak of a "beam hardening artifact" if absorption in the superficial layers of an object alter the spectrum of the beam on its trajectory, which will affect the virtual representation of the deeper regions citep:VanGompel2011.
 Low energy photons have lower penetration depth than high energy photons, because they are more likely to interact with matter.
-This causes a gradual change of the spectrum, which will shift towards higher average energy.
+This causes a gradual change of the spectrum, which will shift towards higher average energy along the ray's trajectory through thick material.
 An observer will know that a cylinder is homogeneous, and reject the image which shows a radial density gradient.
 However, that gradient is in fact a normal manifestation of the actual physical process (the stochastic interaction of electromagnetic radiation and matter, see above).
 Curiously, beam hardening can be minimized by pre-hardening the beam with the use of metal filter plates citep:Triche2019.
@@ -203,7 +203,7 @@ Finally, they destroy a toy pig for the study, which cannot be excused.
 In a nutshell, citet:DuPlessis2013 attempt density prediction in a particular use case (homogeneous, chemically identical objects) and suggest a DECT ratio to assess chemical composition.
 
 
-citet:Durston2022 attempt a huge leap from there and measure inertial properties of frozen cadaver parts, both conventionally and digitally.
+citet:Durston2022 attempt a huge leap from there and measure inertial properties of frozen cadaver parts, both conventionally and computationally.
 Emphasis: they use whole birds, and their considerable amount of work must be appreciated!
 
 As the authors above, Durston et al. acknowledge the critical assumption of a linear relation between attenuation and density, and consequentially use a simple linear relation as a conversion from CT scan in Hounsfield Units to actual density.
@@ -241,13 +241,7 @@ In consequence, this study is centered around the hypothesis that CT gray values
 This study follows up on the idea of using a calibrated CT scan citep:DuPlessis2013, and adds a biologically relevant test object as well as an evaluation of the error margins citep:Hughes2010,Arroyave2022,Myers2015, which is crucial for practical use.
 Calibration is attempted with cheap, leftover plastic pieces of known material and density, as well as commercial bone mineral density calibration phantoms.
 I chose a dissected porcine femur as the object of interest of which I seek to estimate the density distribution, and thereby total mass, center of mass, and mass moment of inertia (Fig. \ref{fig:femur_scan}).
-I also attempted to validate the method on dissected animal specimens @@latex:\citep[as][, but less sophisticated]{Durston2022}@@.
-
-#+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was fixed ("mounted") in a PET bottle to fit into the cylindrical scan volume of [[https://www.uantwerpen.be/en/research-groups/vision-lab/x-ray-imaging-resear/flexct][the FleXCT scanner of the University of Antwerp]]. The image on the left shows the sample mount, magnified on the inset. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
-#+LABEL: fig:femur_scan
-#+ATTR_LATEX: :placement [p] :width 18cm
-[[./figures/femur_scan.jpg]]
-
+I also attempted to validate the method on dissected animal specimens @@latex:\citep[as][but less sophisticated]{Durston2022}@@.
 
 The hypothesis that CT images are a valid approximation of physical density is already falsified by the theoretical considerations above.
 The following relevant questions remain:
@@ -259,9 +253,15 @@ The following relevant questions remain:
 It should be pointed out that preliminary (naive) results of this study were first presented at the [[http://mielke-bio.info/falk/posts/26.seb2021][conference of the Society of Experimental Biology (SEB) in 2021]], one year prior to the citet:Durston2022 study.
 
 
+#+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was fixed ("mounted") in a PET bottle to fit into the cylindrical scan volume of [[https://www.uantwerpen.be/en/research-groups/vision-lab/x-ray-imaging-resear/flexct][the FleXCT scanner of the University of Antwerp]]. The image on the left shows the sample mount, magnified on the inset. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
+#+LABEL: fig:femur_scan
+#+ATTR_LATEX: :placement [p] :width 18cm
+[[./figures/femur_scan.jpg]]
 
 
-\clearpage
+
+
+\FloatBarrier\clearpage
 * Materials and Methods
 ** The Flying Femur
 
@@ -287,7 +287,7 @@ Biplanar x-ray video recordings were performed on the [[https://www.uantwerpen.b
 In one setting, the femur hung on a long, thin wire pendulum (appearing on camera to be "flying").
 In a second setting, the bone was rotated to mimic in vivo motion by a motor to which it was attached with a radiotranslucent, custom-made plastic clamp.
 
-After the experiment, the femur was subjected to a calibrated micro-CT scan at a local micro-CT facility (FleXCT, imec-VisionLab, University of Antwerp, Belgium).
+After the experiment, the femur was subjected to a calibrated scan at a local micro-CT facility (FleXCT, imec-VisionLab, University of Antwerp, Belgium).
 Plastic parts for calibration were donated by the mechanical workshop of the university, covering a range of physical density from polypropylene (PP, \(916\ \frac{kg}{m^3}\)) to Polytetrafluoroethylene (PTFE, \(2210\ \frac{kg}{m^3}\)).
 # ; see overview table in the Results section).
 In addition to the plastic debris, two professional calibration phantoms (Bruker, USA) were included in the scan.
@@ -529,7 +529,7 @@ Yet \(\Delta COM\) also depends non-trivially on the relative mass of volume ele
 \[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left( \frac{ \sum\limits_{i} r_{i} \cdot m_{i} }{\Delta \sum_i m_{i} }\right)^{2}}\]
 
 
-With this last equation we have lined out how the target parameter, \(I\), ultimately depends on mass elements \(m_{i}\) and their position in different ways.
+With this last equation we have lined out how the target parameter, \(I\), ultimately depends logically on mass elements \(m_{i}\) and their position in different ways.
 
 
 In practical terms, the expected error can be conveniently computed by iteratively changing the variables of interest by a percent, to infer how "a percent change" in a parameter effects the result of the calculation.
@@ -596,7 +596,7 @@ The femur of unknown density distribution lies right between the two regression 
 With the regression outcome, it is technically possible to convert any observed or simulated voxel gray value to putative density values, which applies for example to the femur.
 
 
-** Issue 0: Mass Mismatch and Total Mass Normalization
+** Issue 0: Mass Mismatch
 
 To confirm the outcome of the regressions above, we compared the actual mass of the femur (which is \(5.271\ g\)) to the outcome of the digital approximation.
 
@@ -609,7 +609,7 @@ Neither is there any reason to think that all biological tissues generally fall 
 
 We conclude that, at least for a femur, the regression method is not reliable.
 
-
+\bigskip
 To exclude that problems arose from the special composition of this isolated bone, we applied a similar regression method to more complex data.
 
 In a second experiment, a piglet body was CT scanned, virtually segmented, and analogously physically dissected to see whether the total calculated masses of the virtual segments match their actual counterparts (Tab. \ref{tab:pigletdissection}).
@@ -739,14 +739,15 @@ This is an artificial adjustment, changing the COM without a change in mass or m
 Mass changes seem to affect all inertia axes alike, whereas the error due to COM shift affects the axes differently.
 Finally, the exponential regression leads to a moderate shift in COM (\(0.25\ mm\)), but an underestimation of mass (\(-29 \%\) compared to linear regression; \(-6 \%\) compared to actual mass) and moment of inertia (\(-32 \%\) compared to linear regression).
 
-These simulations confirm that moment of inertia crucially depends on the mass and position assigned to each voxel in the CT data set; the relative error in the outcome can even exceed the input inaccuracy.
+These simulations confirm that moment of inertia crucially depends on the mass and position assigned to each voxel in the CT data set; the relative error in the outcome will exceed the input inaccuracy.
 
 
-#+CAPTION: Probabilistic density regression result. Traceplot showing the posterior distributions of model parameters (left) and sampling traces (right). The "uncertainty" (\(\varepsilon\)) quantifies the hierarchical model residual, i.e. the total uncertainty remaining after convergence. The colored distributions for "sigma" are the material-wise uncertainties in the gray values.
+#+CAPTION: Probabilistic density regression result. Traceplot showing the posterior distributions of model parameters (left) and sampling traces (right). The "uncertainty" (\(\varepsilon\)) quantifies the hierarchical model residual, i.e. the total uncertainty remaining after convergence. The colored distributions for "sigma" are the material-wise uncertainties in the gray values (\(\varepsilon_{i}\)).
 #+LABEL: fig:probabilistic_density
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/probabilistic_regression.png]]
 
+\bigskip
 To also get an estimate how variable the actual gray value observations were, a probabilistic linear regression was applied (Fig. \ref{fig:probabilistic_density}).
 
 The intercept was sampled at \(0.173\pm 10^{-4}\), and the slope was \(1.6\times 10^{-4} \pm 10^{-7}\), both consistent with the least squares regression.
@@ -792,7 +793,7 @@ The ideal object to calibrate an unknown femur would thus be an identical femur 
 
 
 The reason, as illustrated in the introduction, is that photons of different wavelengths have specific absorption probabilities.
-The spectrum of the beam changes at each instance in the tissue.
+The spectrum of the beam along its trajectory changes at each instance in the tissue.
 The most obvious example of this is beam hardening, and I showed by a simple virtual simulation that beam hardening leads to a systematic under-estimation of mass and moment of inertia (Fig. \ref{fig:cupping_results}).
 In a more extreme case of this, radio-opaque metal beads will absorb almost all passing photons ("photon starvation"), leading to problems with conventional reconstruction algorithms which appear as starburst artifacts.
 
@@ -882,6 +883,7 @@ The mass can be measured accurately with sufficiently fine scales, yet dissectio
 Center of mass can be estimated by pendulum methods, yet in addition to the dissection issues, the problem of accurately relating the COM to an anatomical reference frame arises.
 The conventional instrument to measure moment of inertia is the trifilar pendulum citep:Korr1962,Wells1987,Schedlinski2001.
 As citet:Durston2022 have demonstrated, this method is far from trivial, requires a well-prepared setup, and still suffers from limitations (e.g. that all axes have to be measured separately, and then transformed to an anatomical reference frame).
+Pendular methods usually rely on negligibility of the instruments' masses and on the small angle approximation.
 Hence, the accuracy of these methods remains hard to estimate.
 
 

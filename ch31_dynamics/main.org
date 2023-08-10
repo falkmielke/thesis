@@ -26,8 +26,8 @@ Momentum is a conservative quantity, i.e. it changes due to energy transfer with
 The retrospective inference of reasons for momentum change is often labeled "inverse dynamics".
 
 The field of (inverse) dynamics is subject to various conventions and some methodological flexibility.
-The purpose of this chapter is to set the table and clarify conventions used in this thesis.
-The physical fundamentals and general algorithm applied in inverse dynamics calculations is presented, as well as elegant mathematical tools to implement it (wrenches, quaternions).
+The purpose of this chapter is to set the table and clarify conventions used further on in this thesis.
+The physical fundamentals and general algorithms applied in inverse dynamics calculations are presented, as well as elegant mathematical tools to implement them (wrenches, quaternions).
 To illustrate the basic principles of physics which come to play in this chapter, a hypothetical collision experiment is discussed.
 It turns out that, whereas most quantities in inverse dynamic calculations can be accurately measured, the inertial properties of segments are the achilles heel of accurate dynamic modeling.
 
@@ -94,7 +94,7 @@ I will present herein the methods which seemed most useful and intuitive to me, 
 Yet this does not imply that they are generally preferred by all experts in the field.
 # (rather the contrary: they lack acceptance, despite their usefulness, which I hope to change by kindling understanding)
 In a nutshell:
-+ Wrenches and quaternions are a useful computational tools for calculating rigid body dynamic models.
++ Wrenches and quaternions are useful computational tools for calculating rigid body dynamic models.
 + Balance Equations (see below) are the mathematical manifestation of conservation of momentum.
 + Reference frame considerations can simplify calculations; however, static frame calculations are sufficient and result in correct joint moments.
 # + Fictitious Forces are unbalanced change of momentum. If one intends to calculate balances in an accelerating frame, include four fictitious forces: D’Alambert, Euler, Coriolis, and the Centrifugal force.
@@ -102,7 +102,7 @@ In a nutshell:
 
 
 Once more, the herein summarized work is physics textbook knowledge, re-formulated to be more readily applied by the author to animal locomotion; as mentioned above, I consider this necessary context.
-This chapter will summarize the theory behind inverse dynamics, and point at literature references and conventions which turned out to be useful for the purpose of this thesis.
+This chapter will summarize the theory behind inverse dynamics, and point to literature references and conventions which turned out to be useful in preparation of this thesis.
 # And once more, the premise for the presented work was "falsification": for example, instead of assuming that CT scan data is useful to easily extract inertial properties of body segments, this strategy attempts to find flaws in that procedure.
 
 
@@ -198,7 +198,7 @@ In this case, I used the vector formula (explicit by the cross product; this cou
 There is another extra step compared to the linear momentum: calculation of the *angular momentum requires a reference point* (usually the hinge, \(P\), as above, but any point could be chosen).
 The calculated angular momentum actually changes depending on which reference point is chosen.
 Returning to the example of the door, rotating on a hinge (Fig. \ref{fig:slamming_momentum}).
-We can approximate the door by a point mass in point \(D\).
+We are free to approximate the door by a point mass in point \(D\), to see in which way the results deviate from common experience.
 Angular momentum \(L\) relative to point \(P\), which we denote \(L_P\), is calculated by using the cross product of the vector from point \(P\) to \(D\) (\(r_{PD}\)) and the linear momentum \(p=mv\):
 \[L_{P} = r_{PD} \times p = m r_{PD} \times v \]
 
@@ -207,13 +207,14 @@ From cross product properties, we see that the direction of \(L\) does not chang
 In contrast, the point mass door has a different angular momentum when calculating it relative to point \(D\): the position vector \(r_{DD}\) becomes zero, so \(L_{D} = 0\) at all times.
 This is non-intuitive: the door rotates, after all; yet remember that we are reducing it to a point mass here and \(L_{D} = 0\) only holds for the point mass case!
 Other points and non-pointmass-objects require more complex calculations, except maybe in the special case where rotation happens about the center of mass (\(COM\)).
-In this special case, we speak of "spin angular momentum", which is an intrinsic property of the object in a sense that we do not need to give a reference point any more because everyone knows that the \(COM\) is the reference point for spin angular momentum.
+In that special case, we speak of "spin angular momentum", which is an intrinsic property of the object in a sense that we do not need to give a reference point any more because everyone knows that the \(COM\) is the reference point for spin angular momentum.
 # https://www.youtube.com/watch?v=sNaaL19opxw
 
 
 But the general idea is that one needs to keep track of a reference point for angular momentum, and thus also for all calculations regarding angular momentum or mass moment of inertia.
 
 
+\FloatBarrier
 ** Screw Theory and Wrenches
 
 The formulas for force and moment above resemble each other.
@@ -223,7 +224,7 @@ The force-moment-analogy is no coincidence.
 Force is a 3D vector, acting at a point.
 Moment is a 3D vector with a reference point.
 The moment is in fact just the corresponding force acting at a lever.
-And the lever is usually the same position vector used to calculate angular momentum; in other words, given that we stay in the same reference frame, we might just need the force and the reference point and the moment follows.
+And the lever is usually the same position vector used to calculate angular momentum; in other words, given that we stay in the same reference frame, we might just need the force and the reference point, and the moment follows.
 
 Would it not be useful then to join force and moment?
 
@@ -251,8 +252,9 @@ A mathematical shorthand for writing wrenches are square brackets and a semicolo
 [[./figures/slamming_wrench.pdf]]
 
 
+\FloatBarrier
 ** Balance of Wrenches
-Plugging in the non-zero part of equations \eqref{eqn:force} and \eqref{eqn:moment} from above, we get an expression for what can be referred to as the *dynamic wrench*:
+Plugging in the non-zero part of equations \eqref{eqn:force} and \eqref{eqn:moment} from above, we get an expression for what can be referred to as the *dynamic wrench* (defined at the COM):
 #+begin_src latex
 \begin{equation}\label{eqn:dynamic_wrench}
 W_{dyn} = \left[ m\ddot x; I\ddot \theta \right]
@@ -262,7 +264,7 @@ W_{dyn} = \left[ m\ddot x; I\ddot \theta \right]
 Wrenches can be added up, for example the dynamic wrench can be easily shifted (vector \(s\)) to a different reference point, which does not require extra adjustment of the mass moment of inertia:
 #+begin_src latex
 \begin{equation}\label{eqn:shift_wrench}
-\bar W_{dyn} = W_{dyn} + \left[ 0; s \times F \right]
+\bar W_{dyn} = W_{dyn} + [ 0; s \times \underbrace{(m\ddot x)}_{F} ]
 \end{equation}
 #+end_src
 
@@ -374,7 +376,7 @@ Yet in most applications, quaternions are mathematically elegant and efficient.
 
 ** Generic Approach
 The theoretical considerations above assemble several technical advantages which are worth summarizing.
-+ The Balance of Wrenches, equation \eqref{eqn:balance_of_wrenches}, can be calculated entirely in the inertial reference frame, without repeated switch to joint coordinate systems (and return to ICS).
++ The Balance of Wrenches, equation \eqref{eqn:balance_of_wrenches}, can be calculated entirely in the inertial reference frame, without repeated switch to joint coordinate systems (and return).
 + Wrenches can easily be moved to other reference points via equation \eqref{eqn:shift_wrench}.
 + A convenient point to calculate the balance of wrenches is the center of mass (\(COM\), see below); rotation about that point is an expression of spin angular momentum (an intrinsic property) and most components simplify (e.g. gravitational wrench \(W_{g}\), dynamic wrench \(W_{dyn}\)).
 + Expressing rotational motion by quaternions avoids issues of other methods; favorable features are linear superposition and direct derivative calculation.
@@ -392,9 +394,7 @@ The sceptical author of this thesis has reproduced that procedure in Python, bot
 With wrenches, quaternions, or the numerical formula at hand, one can compute the Balance of Wrenches for a single segment.
 Limb segments are usually arranged in a chain, e.g. a human leg consists of the thigh, a lower leg, a foot, and toes.
 However, there is an issue.
-The inertial wrenches (gravitational wrench, friction, ...) are known.
-The dynamic wrench is measured from kinematics and inertials.
-Yet connecting wrenches are usually unknown: each segment (e.g. the thigh) receives an unknown wrench input from all adjacent segments (e.g. the pelvis and the lower leg).
+The inertial wrenches (gravitational wrench, friction, ...) are known; the dynamic wrench is measured from kinematics and inertials; yet connecting wrenches are usually unknown: each segment (e.g. the thigh) receives an unknown wrench input from all adjacent segments (e.g. the pelvis and the lower leg).
 
 There is one exception: the distalmost segment which has ground contact.
 Instrumented runways can contain force plates to measure contact forces and moments at the contact of the distal limb on the ground.
@@ -410,8 +410,9 @@ One can calculate the balance of wrenches by subtracting all external wrenches (
 Exactly one of the external wrenches is unknown, the one on the proximal joint; one can solve for it (careful with reference points: the calculation comes out at the COM).
 The proximal joint wrench is shifted to the proximal joint position, its natural "point of attack"@@latex:\footnote{This series of shifts should have illustrated why the wrench is a useful construct: computational rigor can make sure that the reference points are respected.}@@.
 Inverted in sign (Newton's \(n^{th}\) law), the joint wrench becomes the tip wrench of the proximally adjacent segment and adds to the balance of wrenches of that segment (Fig. \ref{fig:wrenchbalance}).
+There, the procedure is repeated.
 
-#+CAPTION: Wrench balance of a piglet femur (sketch), as it can be computed for each segment from distal to proximal. The tip wrench (\(W_{tip}\), at the distal joint) is the input from the distal adjacent segment. Dynamic wrench (\(W_{dyn}\), at the center of mass/\(COM\)) is calculated from kinematics (see above). Gravitational wrench (\(W_{g}\), at \(COM\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(W_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate systen (\(ICS\), i.e. the inertial reference frame).
+#+CAPTION: Wrench balance of a piglet femur (sketch), as it can be computed for each segment from distal to proximal. The tip wrench (\(W_{tip}\), at the distal joint) is the input from the distal adjacent segment or from ground contact. Dynamic wrench (\(W_{dyn}\), at the center of mass/\(COM\)) is calculated from kinematics (see above). Gravitational wrench (\(W_{g}\), at \(COM\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(W_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate system (\(ICS\), i.e. the inertial reference frame).
 #+LABEL: fig:wrenchbalance
 #+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/wrench_balance.pdf]]
@@ -448,7 +449,7 @@ The pendulum methods above yield numerically accurate results.
 However, the dissected limb is only a limited representation of the segment /in vivo/, for several reasons.
 
 A first issue is the choice of a disarticulation cutting surface: which mass particles are assigned to which segment?
-This choice affects mass, but also COM and mass moment of inertia.
+This choice affects mass, but also COM and mass moment of inertia, and because cuts are generally further away from the COM, this effect matters.
 
 Second, muscles (as a complex composition of fiber bundles and fibers) deform, shift and slide past each other during contraction and movement citep:Bol2013.
 Their cross section and fibre distribution can change on non-isometric movements.
@@ -460,30 +461,31 @@ Third, there might be shrinkage and tissue loss during the preservation of the s
 Formol, ethanol, or temperature are typical agents used as a fixative; any fixative has its effect on soft tissue citep:Buytaert2014,Pech1987.
 This issue can putatively change all inertials properties of the sample.
 
-Fourth, 3D volumetric imaging (e.g. CT scans) could be an option to replace the measurements above, yet they come with their own set of problems and limitations (topic of the next chapter).
+Fourth, 3D volumetric imaging (e.g. CT scans) could be an option to replace the measurements above, yet such scans do not solve all of the other issues, and instead come with their own set of problems and limitations (topic of the next chapter).
+
 
 
 The implications of these conceptual issues will be discussed in detail in the next chapter.
-Yet note already that these four effects violate an assumption above: the velocity product terms in the balance of forces are non-negligible because the mass distribution is altered.
+Yet note already that these four effects violate an assumption above: inertial properties are hard to determine, and the velocity product terms in the balance of forces are non-negligible because the mass distribution is not constant.
 
 
 \clearpage
 * Summary
 This chapter serves as a brief overview of the basic methodology of inverse dynamics.
 This method exploits the fundamental physical phenomenon of conservation of momentum to model and infer the reasons for movement of systems of more or less rigid bodies.
-I outlined the general procedure, and documented one specific procedure applicable to inverse dynamic measurements of quadruped, terrestrial locomotion.
+I outlined the general algorithm, and documented one specific procedure applicable to inverse dynamic measurements of quadruped, terrestrial locomotion.
 
 
 In particular, the Wrench-Quaternion method citep:Dumas2004 has proven useful for joining kinematics and force measurements for dynamic calculation.
 The reason is computational convenience.
 Wrenches are the conceptual link of forces and moments, and they allow convenient computer implementations.
 Quaternions have favorable properties to calculate spatial rotation in the context of rigid body motion (superposition, singularity avoidance, transformability).
-This establishes the conceptual framework to perform the relevant calculations of the established algorithm, which involves starting at the distal segments where external forces are known (e.g. ground contact) and processing the calculation towards the torso of the animal.
+This establishes the conceptual framework to perform the relevant calculations of the conventional algorithm, which involves starting at the distal segments where external forces are known (e.g. ground contact) and processing the calculation towards the torso of the animal.
 
 
 A crucial simplification of that procedure is that we treat body segments of animals as rigid bodies, which they are not.
 By /post mortem/ fixation and dissection, or by volumetric digitization, segments can be separated and their inertial properties measured.
-The accuracy of these methods is the topic of the next chapter.
+The accuracy of these methods will be the topic of the next chapter.
 
 
 # \clearpage
