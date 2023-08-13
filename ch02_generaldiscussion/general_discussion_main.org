@@ -51,7 +51,7 @@ Why/when should conventional methods be questioned and compared to the yet uncom
 
 The two decisive analysis characteristics are the occurrence of variability, and predictive modeling.
 
-Variability is omnipresent in biology, and it is surprising how many studies use statistics which model point estimates for actually variable measurements.
+Variability is omnipresent in biology, and I find it surprising how many studies use statistics which model point estimates for actually variable measurements.
 
 Yet the ultimate quality criterion of statistical models (and classifiers, and neural networks/"AI") is how well they can be used to predict experimental circumstances which deviate from those they were trained on, or in other words how they transfer to novel circumstances.
 This refers to the distinction of descriptive, explanatory, and predictive modeling citep:Shmueli2010,Shmueli2011.
@@ -63,21 +63,32 @@ However, it is rarely modeled how and why a study group reaches a certain speed 
 
 
 Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the joints, e.g. measuring the (joint) angles between segments.
-The bone-joint system of vertebrates is well approximated by rigid bodies, they can rotate, but hardly translate with respect to each other.
-And a common scheme we often see in all kinds of locomotor patterns is oscillation, i.e. that positions change repetitively over time: be it a baboon hindlimb flexing-extending-flexing-etc. on a bipedal walk to a water hole citep:Druelle2021, or be it an ungulate head-nodding in rhythm with its locomotion citep:Loscher2016.
-A potential reason for the abundance of oscillation in vertebrates (together with structural constraints, e.g. nuchal ligament in head nodding) is the evolution-like optimization of behavioral tasks: there is no use to gain efficiency in a one-time task, yet repeated modules of a task are worth adjustment.
-In all these cases which show repetetive or recurrent behavior, Fourier methods are the natural choice for transformation.
-The transformation enables researchers to tackle a standing problem: joint angles have been associated with issues of transferability citep:Gatesy2011, owing to the fact that they are influenced by morphological- and other constraints.
+Yet there is a standing problem with that construct: joint angles are constrained by morphology, which has been associated with issues of transferability citep:Gatesy2011.
 This complicates comparison of joint angles between morphologically disparate groups (e.g. between species, or birth weight categories).
-For example, citet:Gatesy2011 assess that motion transfer between a human and flamingo fails, causing "undesirable motion artifacts" due to morphological discrepancy.
+For example, citet:Gatesy2011 assess that motion transfer between a human and flamingo fails, causing "undesirable motion artifacts" due to morphological discrepancy@@latex:\footnote{These considerations must be flanked by discussions on dynamic similarity \citep{Aerts2023}.}@@.
 They also speculate that underlying patterns of coordination could be invariant to morphological disparity, yet they expose a lack of methods to directly assess coordination.
-Transformation to the frequency domain enables the isolation of affine components of joint angle profiles, and the extraction of measures of coordination.
-With FCAS, one could compare relative joint angle profiles (e.g. hip joint superimposition to inspect the knee joint, as in Ch. \ref{cpt:fcas}), or one could specifically adjust dynamic posture and attempt to only transfer coordination (Ch. \ref{cpt:piglets}).
-One could take a broader phylogenetic perspective and assess which morphological innovations induce changes in posture, range of motion, or coordination.
+As shown herein, FCAS enables the isolation of affine components of joint angle profiles, and, by partly removing them, the extraction of measures of coordination.
+Take a hypothetical lineage which evolves towards femur elongation (non-isometric, i.e. the other segments would not elongate similarly): to retain the ability to walk despite altered morphology, there are three options.
+These animals must either (i) change their posture, e.g. by walking with a more extended limb.
+In other cases, e.g. an elephant-like, straight limb situation as the "null" posture, they must (ii) adjust their effective range of motion to retain locomotor capacity.
+Then, (iii) an adjustment of the timing of joint angle changes, i.e. coordination, would follow.
+This example re-emphasizes the importance of being able to separate affine components (i, ii) and to process the remaining variables (iii) alone.
+The path for future researchers would be to select a suitable phylogenetic branch or example (maybe Tragulidae or Giraffidae, or more broadly Ruminantia), apply FCAS, and measure how a multivariate block of morphological variables correlates to affine and non-affine components of the joint angle data @@latex:\citep[a suitable method might be Two-Block Partial Least Squares,][]{Rohlf2000}@@.
+FCAS is the door-opener: at first instance, it can help to identify the mismatching aspects which prohibit motion transfer citep:Gatesy2011.
+It allows for the separation of different aspects of kinematics (especially coordination), potentially making some of these transferable.
 Motion transfer is in fact the extrapolation of kinematic aspects of one species or comparative category to another, i.e. a predictive problem.
-Applying a predictive model of NBW kinematics to LBW is an implicit form of motion transfer: which age/size would we assign to an NBW which walked like the LBW we observe?
-FCAS enables predictive modeling at the construct level of locomotion.
-It allows for the separation of different aspects of kinematics (e.g. coordination), potentially making some of these transferable.
+The application of a predictive model of NBW kinematics to LBW in this thesis is an implicit form of motion transfer: which age/size would we assign to an NBW which walked like the LBW we observe?
+FCAS thus enables predictive modeling at the construct level of locomotion.
+
+
+The Fourier-method is not always applicable, but often.
+Oscillation, i.e. that positions change repetitively over time, is a common scheme in all kinds of locomotor patterns: be it a baboon hindlimb flexing-extending-flexing-extending on a bipedal walk to a water hole citep:Druelle2021, or be it an ungulate head-nodding in rhythm with its locomotion citep:Loscher2016.
+There are multiple reasons for the abundance of oscillation in vertebrate locomotion.
+The bone-joint system of vertebrates is well approximated by rigid bodies, they can rotate, but hardly translate with respect to each other.
+There are other structural constraints, e.g. elastic elements such as the nuchal ligament in head nodding.
+There is neural organization: brain circuits are known to exhibit oscillations as well citep:Gupta2016, which might project downstream.
+Furthermore, the evolution-like optimization of behavioral tasks: there is little use to gain efficiency in a one-time control unit, yet repeated modules of a task are worth adjustment; this situation might have favored recurrent locomotor modes (but note that those are not omnipresent: think of cephalopod behthic crawling).
+In the many cases which show repetetive or recurrent behavior, Fourier analysis is the natural first choice for transformation.
 
 
 \bigskip
