@@ -13,7 +13,7 @@ This is shown to be independent of morphological features.
 Besides revealing fundamental characteristics of ungulate locomotion, we argue that the suggested method is generally suitable for the large scale quantitative assessment of coordination and dynamics in periodic locomotor phenomena.
 
 
-
+\bigskip
 \textit{This chapter is a slightly modified version of a previously published article \citep{Mielke2019}. The publication preceded the review in Ch. \ref{cpt:fourier_review}, which unfortunately causes some redundancy. The concept of affine components and the analogy to geometric morphometrics are extended and applied to a comprehensive data set. I must apologize that the relevant publication by \citet{Pike2002} had completely slipped my attention prior to this publication, I was unaware of its existence, but added reference ex post. }
 
 
@@ -57,28 +57,6 @@ Assume there is a mathematical operation that removes the affine differences bet
 This would be a Procrustes procedure which results in a mathematically optimal superimposition (two harmonic oscillations of the same frequency would become identical).
 We explore such a superimposition in this study, terming it Fourier Coefficient Affine Superimposition (FCAS, see below).
 
-\begin{figure}[p]
-\begin{center}
-\includegraphics[width = 16cm]{figures/fig1_flowchart.pdf}
-\end{center}
-\caption{Analysis work flow, schematic.
-\textbf{A} Video material of walking ungulates is digitized by tracking trace marks (shoulder, elbow, carpus and fetlock joints; see supplementary movie \ref{fcas_supplementary_files}) over a stride cycle, and joint angle profiles are computed (angle defined zero at fully extended limb, positive direction indicated by arrows). Thin black lines are the original measurement, whereas blue lines show the same profile, filtered by FSD with $7$ components.
-\textit{(continues next page)}
-  }
-\label{fig:workflow}
-\end{figure}
-
-\addtocounter{figure}{-1}
-\begin{figure} [p]
-  \caption{
-\textit{(contd.)}
-\textbf{B} Fourier Series decomposition and synthesis allow transformation of temporally periodic angle profiles back and forth between time domain and frequency domain. The zero'th Fourier coefficient ($c_{0}$, lower bar plot) corresponds to the temporal average of the angle profile (i.e. mean angle). The higher coefficients ($c_{n>0}$) can be plotted in the complex plane ($\Re, \Im$); line connections are only for visualization. Coefficients $i$ of joints $j$ have phases ($\phi_{ji}$) and amplitudes ($A_{ji}$), as indicated in gray for $c_{1}$ of the elbow. Average phase and amplitude of the angle profile can be derived (for example $\phi_{c}$, $A_{c}$ for carpus). Mean angle, amplitude, and phase are the affine components of the signal.
-\newline\textbf{C} Multiple groups are compared, in this case ungulate genera (\textit{Lama}, \textit{Giraffa}, and \textit{Equus}; coloured in blue, yellow, and brown respectively). By quantifying how they differ in affine components, operators can be extracted ($d\phi$, $dA$, $dc_{0}$). This is facilitated by the transformation to the frequency domain, but a synthesis of time domain traces (line plots on the left and right margin) is always possible.
-\newline \textbf{D} Affine operators are applied to superimpose the joint angle profiles. Superimposition operations from the carpus (reference joint) are applied to the carpus itself, but also transferred to the elbow (focal joint).
-\newline\textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
-  }
-\end{figure}
-
 
 
 The motivation behind this is the search for a quantitative, comparative measure of coordination of joints along a limb.
@@ -112,6 +90,29 @@ For this purpose, we digitized freely available video material from online video
 Rather than fixing an \textit{a priori} hypothesis, we are interested in extracting major patterns of variation in intralimb coordination in the proximal forelimb of ungulates.
 We discuss evidence for deviations from dynamic similarity, and possible reasons.
 This provides hypotheses for future, more controlled experimental tests that can likewise benefit from the herein proposed analytical methodology.
+
+
+\begin{figure}[p]
+\begin{center}
+\includegraphics[width = 16cm]{figures/fig1_flowchart.pdf}
+\end{center}
+\caption{Analysis work flow, schematic.
+\textbf{A} Video material of walking ungulates is digitized by tracking trace marks (shoulder, elbow, carpus and fetlock joints; see supplementary movie \ref{fcas_supplementary_files}) over a stride cycle, and joint angle profiles are computed (angle defined zero at fully extended limb, positive direction indicated by arrows). Thin black lines are the original measurement, whereas blue lines show the same profile, filtered by FSD with $7$ components.
+\textit{(continues next page)}
+  }
+\label{fig:workflow}
+\end{figure}
+
+\addtocounter{figure}{-1}
+\begin{figure}[p]
+  \caption{
+\textit{(contd.)}
+\textbf{B} Fourier Series decomposition and synthesis allow transformation of temporally periodic angle profiles back and forth between time domain and frequency domain. The zero'th Fourier coefficient ($c_{0}$, lower bar plot) corresponds to the temporal average of the angle profile (i.e. mean angle). The higher coefficients ($c_{n>0}$) can be plotted in the complex plane ($\Re, \Im$); line connections are only for visualization. Coefficients $i$ of joints $j$ have phases ($\phi_{ji}$) and amplitudes ($A_{ji}$), as indicated in gray for $c_{1}$ of the elbow. Average phase and amplitude of the angle profile can be derived (for example $\phi_{c}$, $A_{c}$ for carpus). Mean angle, amplitude, and phase are the affine components of the signal.
+\newline\textbf{C} Multiple groups are compared, in this case ungulate genera (\textit{Lama}, \textit{Giraffa}, and \textit{Equus}; coloured in blue, yellow, and brown respectively). By quantifying how they differ in affine components, operators can be extracted ($d\phi$, $dA$, $dc_{0}$). This is facilitated by the transformation to the frequency domain, but a synthesis of time domain traces (line plots on the left and right margin) is always possible.
+\newline \textbf{D} Affine operators are applied to superimpose the joint angle profiles. Superimposition operations from the carpus (reference joint) are applied to the carpus itself, but also transferred to the elbow (focal joint).
+\newline\textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
+  }
+\end{figure}
 
 
 

@@ -255,7 +255,7 @@ It should be pointed out that preliminary (naive) results of this study were fir
 
 #+CAPTION: *Experimental Setup.* A piglet femur was excised an marked with metal bead markers. Together with various calibration objects, the sample was fixed ("mounted") in a PET bottle to fit into the cylindrical scan volume of [[https://www.uantwerpen.be/en/research-groups/vision-lab/x-ray-imaging-resear/flexct][the FleXCT scanner of the University of Antwerp]]. The image on the left shows the sample mount, magnified on the inset. On the right is one CT projection of the sample, with the femur with markers clearly visible on top.
 #+LABEL: fig:femur_scan
-#+ATTR_LATEX: :placement [p] :width 18cm
+#+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/femur_scan.jpg]]
 
 
@@ -277,7 +277,7 @@ The femur was extracted by carefully disarticulating the parts of the right hind
 
 #+CAPTION: The "flying femur" experiment: an excised piglet femur used in XROMM experiments as an allegory of reductionism. Left: the femur oscillating on a pendulum. Right: installation with a motor capable of moving the femur in a realistic way.
 #+LABEL: fig:flying_femur_fotos
-#+ATTR_LATEX: :placement [p] :width 18cm
+#+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/flying_femur_fotos.png]]
 
 
@@ -489,7 +489,7 @@ Depending on the chosen value for \(k\) in that exponential, one can virtually m
 
 #+CAPTION: Beam hardening artifact simulation. The top view (A) and side view (B) of a PTFE cylinder with beam hardening strength \(k\) virtually set to \(k=0.5\). (C) Line profile of scan gray values along the blue line indicated in panel A shows the typical "cupping". (D) cylinder coordinate transformation of the slice marked by a blue line in panel B gives the gray values along the radial lines \(r\) at angles \(\phi\) indicated in panel A. (E) Top and side view for different simulated beam hardening strengths \(k\).
 #+LABEL: fig:cupping_methods
-#+ATTR_LATEX: :placement [p] :width 18cm
+#+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/cupping_methods.pdf]]
 
 
@@ -659,7 +659,7 @@ The contradicting results highlights how erratic the digital density approximati
 # /data/04_dynamics/21_flying_femur_revival/11_cupping/05_PlotPTFEInertia.py
 #+CAPTION: Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder. (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B) Calculated mass moments of inertia, unscaled (\(\times\)) and scaled (\(\circ\)); scaling was optional to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text). In this cylinder, \(I_z\) is always larger than \(I_x, I_y\) which are approximately identical. The solid horizontal line indicates the theoretical (true) \(I_z\) of the PTFE cylinder, the dashed line marks the true value of the other principal inertial axes. The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the true values. However, this is only true for the unscaled curves; when scaling, the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening due to the normalization.
 #+LABEL: fig:cupping_results
-#+ATTR_LATEX: :placement [p] :width 18cm
+#+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/cupping_results.pdf]]
 
 To evaluate what effect beam hardening has on the calculated mass moment of inertia, we simulated beam hardening on a well described PTFE cylinder within the scan volume.
@@ -931,6 +931,7 @@ Under this condition, the calculated inertials might be a just sufficiently accu
 # \bibliographystyle{apalike}
 # \bibliography{literature.bib}
 
+\clearpage
 * Acknowledgements
 If I interchanged "we" and "I" in the text above, this indicates that a certain part of the project was supported by the following fabulous people.
 A lot of the personal insights about x-ray theorety herein have been made possible by my time at the FleXCT (2022-2023). Thanks to Jan and Jan for this opportunity, and special thanks to the colleagues at the VisionLab, especially Joaquim, for the great discussions!

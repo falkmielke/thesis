@@ -1,6 +1,6 @@
 \clearpage
 \section{Abstract}
-\label{sec:org08e6bfa}
+\label{sec:org0e0e761}
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
 They would be particularly useful in the analysis of locomotor kinematics, where movements can usually be broken down into repetitive cycles.
 I herein repeat the basics of Fourier analysis and transformation to the frequency domain by reviewing previous studies which applied it in some form in the field of locomotor biomechanics.
@@ -15,7 +15,7 @@ The results are complementary to the prior analysis, and the capability to predi
 \label{intro12}
 
 \subsection{Recurring Solutions}
-\label{sec:orga6b6e64}
+\label{sec:org687f5a5}
 In 1822, a French mathematician initiated the remarkable discovery that any continuous signal, no matter how complex, can be represented by a sum of relatively simple trigonometric functions \citep{Fourier1822}.
 Despite some initial limitations which were mended by scientists to follow, Fourier's work opened the door to the frequency domain.
 Fourier analysis has become a widely-used tool in physics and engineering, whereas biologists have only occasionally made the transformation.
@@ -35,7 +35,7 @@ The rich spectrum of Fourier-based methods comprises versatile techniques which 
 
 
 \subsection{Fourier Series}
-\label{sec:orge422a0d}
+\label{sec:org15b93be}
 
 \begin{figure}[pt]
 \centering
@@ -184,7 +184,7 @@ Not all of the reported properties of Fourier methods are directly linked to lit
 
 
 \subsection{Not a Regression}
-\label{sec:orge4dc5c5}
+\label{sec:orge0313f3}
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
 A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever update rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
@@ -222,7 +222,7 @@ Though both procedures could be applied to stride cycle kinematics, \textbf{FSD 
 
 
 \subsection{Time Scale Independence}
-\label{sec:orge13d68b}
+\label{sec:org9525f22}
 Another favorable property follows from the cyclicity: \textbf{Fourier coefficients are independent of temporal scale or sampling}.
 Due to the normalization mentioned above, the FSD of the signal does not contain any information about the original duration of the signal (e.g. stride duration), nor does it matter much where the cycle started.
 On the inverse FSD, a new time frame and temporal sampling must be chosen.
@@ -295,7 +295,7 @@ The bottom line is that, in steady state locomotion, the \textbf{periodicity ass
 
 
 \subsection{Reversibility}
-\label{sec:org6b71c12}
+\label{sec:orge15e48c}
 Some data operations can be undone (math.: invertible, i.e. reversible), others not.
 For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
 Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
@@ -339,7 +339,7 @@ When implementing a version of the equations above in computer code, a good chec
 And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often \textbf{efficient to store} kinematic data in the form of FSD coefficients.
 
 \subsection{Choice of Order}
-\label{sec:org6e3b45f}
+\label{sec:orgbc976fd}
 How to decide how many coefficients should be retained?
 That number is the ``order'' of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
@@ -357,7 +357,7 @@ The stride cycle is the defining time interval, and normally all elements move i
 
 
 \subsection{Affine Components}
-\label{sec:org0548115}
+\label{sec:org365b8d2}
 Some attributes of a signal are emphasized by Fourier methods.
 Those can be summarized intuitively as those attributes of the signal which can be changed without altering the ``perceived shape'' of the signal when plotted.
 
@@ -388,7 +388,7 @@ What remains after standardization, i.e. after isolation of the affine component
 In the case of joint angle profiles, this remainder can be considered coordination \emph{sensu strictu} \citep{Mielke2019,Mielke2023}.
 
 \subsection{Multivariate Analysis}
-\label{sec:org3b4eff0}
+\label{sec:orgec4f474}
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
 Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
 Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
@@ -482,7 +482,7 @@ The transformation should be inverted, and original and re-transformed joint ang
 \end{figure}
 
 \subsection{Multivariate analysis}
-\label{sec:org95d8a28}
+\label{sec:orgfa73bf2}
 Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
 The conventional next step is to analyze their relation to each other.
 
@@ -511,7 +511,7 @@ Thus, the PCA outcome essentially contains the whole of what was captured by the
 
 
 \subsection{Statistics and Modeling}
-\label{sec:orgf81cc77}
+\label{sec:orgdb2050a}
 Despite the direct link to the raw data, the data table resulting from PCA might seem abstract.
 Nevertheless, those values are useful, because they are much more compact than the original two-dimensional time series of varying length.
 And this compactness is crucial for statistical testing and modeling, for which computational complexity can be restrictive.

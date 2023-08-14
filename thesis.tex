@@ -19,6 +19,7 @@
 \usepackage[american]{babel} % document language
 \usepackage[sort]{natbib} % citations
 \usepackage{apalike} % citations
+\usepackage[nottoc,numbib]{tocbibind}
 
 \usepackage{graphicx} % images
 \usepackage[hang,labelfont=bf,up,textfont=it,up]{caption}	% figure and table captions
@@ -65,7 +66,6 @@
 \hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
 \captionsetup{margin=0.2cm, font=normal, labelfont=bf, textfont=sl} %
 
-\linespread{1.25} % Line spacing - Palatino needs more space between lines
 \setlength{\parindent}{0pt}
 \usepackage{lmodern} % Headers and footers
 \usepackage{fancyhdr} % Headers and footers
@@ -92,7 +92,7 @@
 \arrayrulecolor{black}
 
 \usepackage{setspace}
-
+\linespread{1.0} % Line spacing - Palatino needs more space between lines
 
 \lstset{ 
   backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
@@ -153,14 +153,16 @@
 
 \title{Methodological Advances \linebreak in \linebreak Studying Postnatal Locomotor Development}
 \author{Falk Mielke}
-\date{2023-08-11}
+\date{2023-08-14}
 
 % https://tex.stackexchange.com/questions/11707/how-to-force-output-to-a-left-or-right-page
 \newcommand\cleartoleftpage{%
-  \ifodd\value{page}\else\hbox{}\cleardoublepage\fi
+\clearpage
+  %\ifodd\value{page}\else\hbox{}\cleardoublepage\fi
 }
 \newcommand\cleartorightpage{%
-\ifodd\value{page}\hbox{}\clearpage\else\hbox{}\cleardoublepage\fi
+\clearpage
+	%\ifodd\value{page}\hbox{}\clearpage\else\hbox{}\cleardoublepage\fi
 \hbox{}
 }
 
@@ -186,12 +188,14 @@
 \makeatother
 \thispagestyle{empty}
 
-\singlespacing
+\onehalfspacing
 \newpage
 \setcounter{tocdepth}{1}
+\begin{spacing}{1.1}
 \tableofcontents
+\end{spacing}
 
-\cleartoleftpage
+\cleartorightpage
 \chapter{General Introduction}\label{cpt:generalintro}
 \clearpage
 \input{ch01_generalintro/general_intro_main.tex}
@@ -252,9 +256,16 @@
 \part{Appendix}\label{acknowledgements}
 
 
-\addcontentsline{toc}{section}{Bibliography}
+%\addcontentsline{toc}{section}{Bibliography}
+\singlespacing
+\section{Bibliography}
+\renewcommand{\bibname}{}
+\makeatletter
+\renewcommand{\chapter}{\@gobbletwo}
+\makeatother
 \bibliographystyle{apalike}
 \bibliography{library.bib}
+%\printbibliography[heading=bibnumbered, title={References}]{library.bib}
 
 \clearpage
 \section{Video Digitization}\label{cpt:digitization}
@@ -262,8 +273,9 @@
 
 \clearpage
 \section{List of Abbreviations}\label{abbreviations}
+\begin{spacing}{1.5}
 \input{ch92_abbreviations/abbreviations.tex}
-
+\end{spacing}
 \end{document}
 
 %

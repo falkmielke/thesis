@@ -22,7 +22,7 @@ By applying a Fourier Series Decomposition, it is possible to transform joint an
 The Fourier Series method is a flexible tool which opens up a data set to multivariate statistics (Ch. \ref{cpt:fcas}).
 It is also a prerequisite of the subsequent part, which could hardly be adapted to untransformed kinematic measures.
 
-
+\medskip
 Part two focused on statistical modeling of kinematic measurements.
 It built on the application of another physical principle: namely that most measured variables do not take exact values, but rather follow probability distributions citep:2022Probability.
 This is especially true in the biological sciences, where variability in a trait, in reproductive success, and in the correlation of these two are the key prerequisites of our central working model citep:Darwin1859.
@@ -30,16 +30,17 @@ Statistical models which incorporate variability, though rarely applied in that 
 I provided a brief tutorial to outline why and how probabilistic models work in practice (e.g. the MCMC sampling methodology, Ch. \ref{cpt:statistics}).
 In that framework, I applied probabilistic, predictive modeling (see below) to a comprehensive data set of piglet kinematics (Ch. \ref{cpt:piglets}).
 Prediction in conventional statistics would be deterministic, i.e. yielding point estimates which do not reflect the stochastic, variable nature of the phenomenon.
-I demonstrated that probabilistic prediction can be used to generate precise, relevant insights into locomotor maturation of piglets.
+I demonstrated that probabilistic prediction can be used to generate relevant insights into locomotor maturation of piglets.
 
-
+\medskip
 Finally, the third part of the thesis was devoted to inverse dynamics.
 The goal of inverse dynamics are estimates of joint forces and moments, which can be calculated from measured or estimated external forces and moments by treating limb segments as rigid bodies, and by (stepwise) calculation of their balance of wrenches (Ch. \ref{cpt:dynamics_workflow}).
 Rigid bodies must be associated with inertial properties (mass, center of mass, mass moment of inertia), which are crucial prerequisites for the balance equations.
 As I then demonstrated, the assumption that inertial properties can be accurately derived from x-ray computed tomography cannot stand up to closer inspection (Ch. \ref{cpt:inertials}).
+They can be derived, but not accurately, yet they might provide the "best educated guess" available.
 This finding was enabled by a third basic principle commonly applied in physics (which is actually a first principle): the quantification of a measurements inaccuracy citep:Hughes2010.
 
-
+\medskip
 There are certainly more examples of basic principles in physics which would deserve application in biology in general @@latex:\citep[e.g. Quantum Cognition,][]{Busemeyer2015,Aerts1995}@@, or in biomechanics in particular @@latex:\citep[e.g. wrenches and quaternions,][]{Dumas2004}@@.
 # TODO
 
@@ -65,7 +66,7 @@ However, it is rarely modeled how and why a study group reaches a certain speed 
 Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the joints, e.g. measuring the (joint) angles between segments.
 Yet there is a standing problem with that construct: joint angles are constrained by morphology, which has been associated with issues of transferability citep:Gatesy2011.
 This complicates comparison of joint angles between morphologically disparate groups (e.g. between species, or birth weight categories).
-For example, citet:Gatesy2011 assess that motion transfer between a human and flamingo fails, causing "undesirable motion artifacts" due to morphological discrepancy@@latex:\footnote{These considerations must be flanked by discussions on dynamic similarity \citep{Aerts2023}.}@@.
+For example, citet:Gatesy2011 assess that motion transfer between a human and flamingo fails@@latex:\footnote{\textit{Cf.} \url{https://www.youtube.com/watch?v=1Wh8d9b2Wrw}}@@, causing "undesirable motion artifacts" due to morphological discrepancy@@latex:\footnote{Another popular example for "motion transfer" is the transfer of measured running kinematic data of chicken, \textit{Gallus domesticus}, to animate a \textit{Tyrannosaurus rex}, \textit{cf.} \url{https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/walk-dont-run }.}\(^,\)\footnote{These considerations must be flanked by discussions on dynamic similarity \citep{Aerts2023}.}@@.
 They also speculate that underlying patterns of coordination could be invariant to morphological disparity, yet they expose a lack of methods to directly assess coordination.
 As shown herein, FCAS enables the isolation of affine components of joint angle profiles, and, by partly removing them, the extraction of measures of coordination.
 Take a hypothetical lineage which evolves towards femur elongation (non-isometric, i.e. the other segments would not elongate similarly): to retain the ability to walk despite altered morphology, there are three options.
@@ -75,19 +76,19 @@ Then, (iii) an adjustment of the timing of joint angle changes, i.e. coordinatio
 This example re-emphasizes the importance of being able to separate affine components (i, ii) and to process the remaining variables (iii) alone.
 The path for future researchers would be to select a suitable phylogenetic branch or example (maybe Tragulidae or Giraffidae, or more broadly Ruminantia), apply FCAS, and measure how a multivariate block of morphological variables correlates to affine and non-affine components of the joint angle data @@latex:\citep[a suitable method might be Two-Block Partial Least Squares,][]{Rohlf2000}@@.
 FCAS is the door-opener: at first instance, it can help to identify the mismatching aspects which prohibit motion transfer citep:Gatesy2011.
-It allows for the separation of different aspects of kinematics (especially coordination), potentially making some of these transferable.
+It allows for the separation of different logical components of kinematics (especially coordination), potentially making some of them transferable.
 Motion transfer is in fact the extrapolation of kinematic aspects of one species or comparative category to another, i.e. a predictive problem.
 The application of a predictive model of NBW kinematics to LBW in this thesis is an implicit form of motion transfer: which age/size would we assign to an NBW which walked like the LBW we observe?
 FCAS thus enables predictive modeling at the construct level of locomotion.
 
 
 The Fourier-method is not always applicable, but often.
-Oscillation, i.e. that positions change repetitively over time, is a common scheme in all kinds of locomotor patterns: be it a baboon hindlimb flexing-extending-flexing-extending on a bipedal walk to a water hole citep:Druelle2021, or be it an ungulate head-nodding in rhythm with its locomotion citep:Loscher2016.
+Oscillation, i.e. that a limb configuration changes repetitively over time, is a common scheme in all kinds of locomotor patterns: be it a baboon hindlimb flexing-extending-flexing-extending on a bipedal walk to a water hole citep:Druelle2021, or be it an ungulate head-nodding in rhythm with its locomotion citep:Loscher2016.
 There are multiple reasons for the abundance of oscillation in vertebrate locomotion.
-The bone-joint system of vertebrates is well approximated by rigid bodies, they can rotate, but hardly translate with respect to each other.
-There are other structural constraints, e.g. elastic elements such as the nuchal ligament in head nodding.
+The bone-joint system of vertebrates is well approximated by rigid bodies, which can rotate, but hardly translate with respect to each other.
+There are other structural constraints, e.g. elastic elements such as the nuchal ligament which has a crucial role in head nodding.
 There is neural organization: brain circuits are known to exhibit oscillations as well citep:Gupta2016, which might project downstream.
-Furthermore, the evolution-like optimization of behavioral tasks: there is little use to gain efficiency in a one-time control unit, yet repeated modules of a task are worth adjustment; this situation might have favored recurrent locomotor modes (but note that those are not omnipresent: think of cephalopod behthic crawling).
+Furthermore, the evolution-like optimization of behavioral tasks: there is little use to gain efficiency in a one-time control unit, yet repeated modules of a task are worth adjustment; this situation might have favored recurrent locomotor modes (but note that those are not omnipresent: think of cephalopod benthic crawling).
 In the many cases which show repetetive or recurrent behavior, Fourier analysis is the natural first choice for transformation.
 
 
@@ -112,8 +113,7 @@ Note that the methodological advances presented in this thesis could be used for
 Trained with locomotor data of e.g. extant humans and chimpanzees (phylogenetic bracket), a probabilistic model which relates antomical, morphological, and developmental traits to joint angle profiles could be tuned to predict stride cycles of intermediate forms (Ch. \ref{cpt:statistics}).
 The emphasis is on "stride cycles": this refers to predicting complete joint angle profiles, from which all corresponding joint positions can be recovered (information retention of the Fourier Series, Ch. \ref{cpt:fcas}).
 These predictions could be turned into dynamic simulations and virtual animations of the complete behavior, and matched to trace fossils @@latex:\citep[as in][but with less manual work]{Nyakatura2019}@@.
-Adding qualified estimates of inertial properties (Ch. \ref{cpt:inertials}) to the predicted strides would enable forward dynamic modeling, and an estimation of the plausibility of certain hypothesized gaits (e.g. by comparing energy efficiency).
-By now, these modeling tasks are not possible, because joint angle profiles and their variability are difficult to capture numerically, and in consequence reconstruction remains vague or non-quantitative.
+Adding qualified estimates of inertial properties (Ch. \ref{cpt:inertials}) to the probabilistically predicted strides would enable forward dynamic modeling, and an estimation of the plausibility of certain hypothesized gaits (e.g. by comparing energy efficiency).
 
 \bigskip
 These two examples illustrate how the methodological advances presented herein could extend our knowledge about terrestrial locomotion, with datasets which already exist.
@@ -124,7 +124,7 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 * How and Why Piglets Move
 The primary goal of this thesis was to falsify the hypothesis that there are differences in locomotion of low- and normal birth weight piglets (LBW and NBW, Ch. \ref{cpt:generalintro}).
 There are two main aspects in which the study groups could differ: in kinematics (/how/ animal limb segments move) and dynamics (/why/ animal limb segments move as observed).
-And there are putatively confounding effects: age (i.e. locomotor maturation), size and weight of the animals @@latex:\citep[i.e. physical appearance, cf.][]{Aerts2023}@@, and the variability of locomotor behavior.
+And there are putatively confounding effects: locomotor maturation (i.e. age), size and weight of the animals @@latex:\citep[i.e. physical appearance, cf.][]{Aerts2023}@@, and the variability of locomotor behavior.
 
 
 Previous studies from our group have compared kinematics on the level of spatiotemporal characteristics of newborn piglet gait citep:VandenHole2018.
@@ -134,14 +134,14 @@ The FCAS data entering the model contains literally all kinematic information wh
 The predictive models accurately incorporate the variablilty of the phenomenon.
 The models predict size and weight of the LBW piglets as if they were "normal", i.e. there are no apparent kinematic differences which would lead the model to infer non-normal subject characteristics.
 The only differences found are related to the age of LBW piglets.
-This is evidence that, when age or maturation are not considered as a model factor, low- and normal birth weight piglet locomotion are indistinguishable.
-A third model, which is constructed to guess the age of LBW observations, provides evidence that maturation of LBW locomotion halts aproximately four hours /post partum/ (developmental delay).
+This indicates that, if models would not consider age or maturation as a model factor, low- and normal birth weight piglet locomotion would be indistinguishable.
+The "age" model provided evidence that maturation of LBW locomotion halts aproximately four hours /post partum/ (developmental delay).
 We suspect competition within litters and limited metabolic reserves as the reason for developmental delay citep:VandenHole2019.
 
 Note that these observations are restricted to walking gait at voluntary speed; we cannot exclude more obvious LBW/NBW differences emerging in more challenging motor tasks.
 However, the apparent developmental delay in even this basic motor skill indicates the high sensitivity of the method.
 Also, the relevance of any hypothetical, "more challenging" stair, treadmill, or wind tunnel experiment for animals whose major priority is to find and access their mother's teats is questionable.
-Overall, the models provide strong evidence against the existence of fundamental differences in /how/ LBW and NBW piglets move.
+Overall, the models provide strong evidence against the existence of fundamental differences in /how/ LBW and NBW piglets move: their coordination seems innate.
 
 
 
@@ -151,19 +151,19 @@ Overall, the models provide strong evidence against the existence of fundamental
 [[./figures/piglet_xromm_t02_0214.png]]
 
 In fact, this lack of differences in the collective output of the animals neuromotor system is surprising.
-The FCAS data quantifies joint angle profiles - angles are indifferent to size.
+The FCAS data quantifies joint angle profiles - and angles are indifferent to size.
 Yet piglets of low- and normal birth weight operate under different body mass constraints: NBW are about twice as heavy as LBW.
 To produce the same kinematics, one would think that they must tune their motors differently, like using different gears.
 These would be differences in /why/ we observe the (indistinguishable) movements.
 Different weight implies different physical constraints, size does matter citep:Aerts2023.
 
 Yet we encountered conceptual and practical issues in addressing this second big question (i.e. /why/ they move as observed).
-The first issue is a practical one, reported in chapter \ref{cpt:inertials}: inertial parameters, which others have extracted from calibrated CT scans, cannot be determined at sufficient accuracy.
+The first issue is a practical one (Ch. \ref{cpt:inertials}): inertial parameters, which others have extracted from calibrated CT scans, cannot be determined at sufficient accuracy.
 Then, again, there is the issue of variability, as evident from the study of kinematics (Ch. \ref{cpt:piglets}):
 differences between NBW and LBW (when normalized for size, see below) seem to be lower in magnitude than the effect of maturation, and lower than normal variability of the behavior.
 This was actually confirmed by analysis of 3D kinematics (which we did, unpublished): we originally attempted the full experimental procedure for XROMM.
 Of course those recordings are variable, but of the 392 recordings we obtained in several recording sessions in summer 2019, not a single one showed locomotion which strictly fulfilled the "steady state" criterion and gave single limb forces (hitting the force plate correctly was likely, but not guaranteed, and happened in 189 recordings, 85 of them walking gait).
-Not a single stride could be considered "representative", because young piglets in our setup literally always tumbled, jumped, sidestepped, stopped shortly after, or interfered with each other.
+Not a single stride could be considered "representative", because young piglets in our setup literally always tumbled, jumped, sidestepped, stopped shortly after, or interfered with each other, both LBW and NBW.
 The XROMM and inverse dynamics procedure is a low through-put method, and it was not possible to digitize a sufficient number of strides to assess LBW differences in joint moment orchestration on the background of motor variability.
 
 
@@ -209,7 +209,7 @@ This diagnosis is different from low birth weight citep:Wootton1983, i.e. the lo
 Then there is also pre-term birth: pre-term individuals can have a weight which is lower than normal, but appropriate for gestational age.
 Pre-terms can have low weight for gestational age, or even IUGR, thus double or triple the issues.
 Finally, there is low vitality citep:VandenHole2018, which is a momentary performance measure (locomotion/respiration scoring), likely linked to the other three state variables.
-The situation is complex, classification non-trivial, and there is persistent debate on which indicators matter.
+The situation is complex, classification non-trivial, and there is persistent debate on which indicators matter in which situation.
 
 
 Nevertheless, researchers study newborn piglets, tracing back epidemiologic or congenital issues to histological or structural anomalies.
@@ -226,7 +226,7 @@ Therefore, though it seems tempting to turn to piglets in light of all the prior
 
 Other characteristics of the piglet prohibit transfer of findings to our own species, with regard to locomotion.
 They are rather precocial citep:Wischner2009,JYoung2023, and locomotion of newborns matures at a baffling pace citep:VandenHole2017,VandenHole2018.
-They are unguligrade, quadrupedal, and it must be assumed that during the approximately 94 million years of evolution that separate us citep:Timetree2017 their neural and musculoskeletal anatomy and morphology adapted to different locomotor constraints.
+They are unguligrade, quadrupedal, strictly non-arboreal, and it must be assumed that during the approximately 94 million years of evolution that separate us citep:Timetree2017 their neural and musculoskeletal anatomy and morphology adapted to different locomotor constraints.
 
 
 To conclude, I must re-emphasize that piglets are an appropriate and inevitable model species with regard to anomalies on various organ systems.
@@ -245,7 +245,7 @@ Those objections can be partially mitigated for the kind of locomotor research d
 kinematic studies from calibrated videography are non-invasive.
 The inaccuracies of inertial measurements (Ch. \ref{cpt:inertials}) justify doubt on the common practice of euthanizing individuals after experiments; one could as well use naturally deceased specimens, model data, or literature data to transfer the measured inertials to new observations (which would also enable longitudinal inverse dynamic studies).
 All this of course demands ethical assessment of, amongst more, proportionate radiation dose (especially on young individuals), appropriate experimental circumstances (e.g. habituation requirement), and general welfare citep:Young2018.
-The main limiting factor for such studies is the availability of non-human primates and their offspring, even more of IUGR-like conditions, which, as is often argued, is one of the benefits of using domestic pigs as a model.
+The main limiting factor for such studies is the availability of non-human primates and their offspring, even more of IUGR-like conditions, which, as is often argued, is one of the benefits of using domestic piglets as a model.
 
 Yet in the light of the present thesis, it seems more worthwile to strive for appropriate conditions and experimental circumstances to study species which are more closely related to humans.
 
@@ -286,7 +286,7 @@ Yet in the light of the present thesis, it seems more worthwile to strive for ap
 
 
 * Methodological Advances
-Independent of the choice of model species, this thesis presented a number of advances in locomotor studies.
+Independent of the choice of model species, this thesis presented a number of advances in developmental or general studies of locomotor behavior.
 
 \bigskip
 Conventional studies of kinematics mainly rely on irreversibly derived spatiotemporal variables.

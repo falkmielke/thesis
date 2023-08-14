@@ -45,8 +45,16 @@ Furthermore, it should refer to testable subsets of the sample: ``\ldots{} that 
 Finally, one must set an \emph{a priori} threshold above which the rejection of the null hypothesis would most likely be false \citep[called ``p-value'', too commonly desired to be below \(p=0.05\),][]{Dallal2003}.
 A proper hypothesis to test must relate to the data, contain rejectable predictions and (ideally exclusive) alternatives, and finally must be linked to a confidence threshold \citep{Chamberlin1890,Platt1964,Popper2002}.
 
+Yet there is a caveat: the metrics generated from conventional hypothesis testing do not yield a quantitative assessment of effect size.
+In other words: a low \emph{p-value} does not indicate a large speed change with age, it just indicates that the change (i.e. rejection of the null hypothesis ``speed does not depend on ageclass'') is more likely to be true.
+Also, there must be an assumption of \emph{how} speed changes with age: is it increasing linearly or is it low for young, high for middle, and low again for high-aged individuals?
+The reason is that all tests explicitly require a set of mathematical assumptions to be met (e.g. ``Normal distribution'' of the data, one- or two-sided comparison).
+And because of this, there exists a whole zoo of different test for different assumption situations, the choice of which is a science by itself.
+Familiar examples are the ``t-Test'' or ``ANOVA'' in all their variants.
+To summarize, this branch of statistics is called \textbf{hypothesis testing}; it is a complex field and valuable when it comes to falsifying hypotheses.
 
-\begin{table}[p]
+
+\begin{table}[p!]
 \caption{\label{tab:statistics}Statistics: An Overview. Probabilistic models are the focus of this chapter.}
 \centering
 \begin{tabular}{|l|l|l|}
@@ -60,15 +68,9 @@ A proper hypothesis to test must relate to the data, contain rejectable predicti
 \end{tabular}
 \end{table}
 
-Yet there is a caveat: the metrics generated from conventional hypothesis testing do not yield a quantitative assessment of effect size.
-In other words: a low \emph{p-value} does not indicate a large speed change with age, it just indicates that the change (i.e. rejection of the null hypothesis ``speed does not depend on ageclass'') is more likely to be true.
-Also, there must be an assumption of \emph{how} speed changes with age: is it increasing linearly or is it low for young, high for middle, and low again for high-aged individuals?
-The reason is that all tests explicitly require a set of mathematical assumptions to be met (e.g. ``Normal distribution'' of the data, one- or two-sided comparison).
-And because of this, there exists a whole zoo of different test for different assumption situations, the choice of which is a science by itself.
-Familiar examples are the ``t-Test'' or ``ANOVA'' in all their variants.
-To summarize, this branch of statistics is called \textbf{hypothesis testing}; it is a complex field and valuable when it comes to falsifying hypotheses.
 
 
+\FloatBarrier
 The term ``hypothesis testing'' might be understood to be synonymous with ``Frequentist statistics'', or ``non-Bayesian statistics''.
 This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called ``Bayes factor'' but are not discussed herein \citep[cf.][]{Shikano2019}.
 Hence, we need to disentangle two categories of distinction (Tab. \ref{tab:statistics}).
@@ -79,7 +81,6 @@ There are two main frameworks to tackle these questions, both of which are captu
 Hence, we should distinguish the type of question (hypothesis / quantitative estimate) and the methodological school (Frequentist or Bayesian, see Tab. \ref{tab:statistics}).
 
 
-\FloatBarrier
 
 All these ``strains'' of statistics have historically developed different terminologies, sometimes even different meaning to the same terminologies, which can be confusing and even misleading (e.g. try to find out about the term ``likelihood'', cf. ``Bayesian Statistics without Frequentist Language'' by Richard McElreath, 2017, \url{https://www.youtube.com/watch?v=yakg94HyWdE}).
 In particular, there is a lot of confusion and ongoing discussion about the distinction and proper presentation of \emph{confidence intervals} and \emph{credible intervals}.
