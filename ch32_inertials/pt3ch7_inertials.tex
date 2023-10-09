@@ -510,17 +510,17 @@ Sensitivity is linear at this level: any percentage of measurement inaccuracy in
 
 
 Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, by inaccuracy in the mass itself (regression), and by unceretainty in the COM position and therefore the position vectors \(r_{i}\) of each mass element.
-\[ \Delta I = \left. \Delta I \right|_{m_i} + \left. \Delta I \right|_{r_i} = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
+\[ \Delta I = \sqrt{ \left. \Delta I \right|_{m_i} + \left. \Delta I \right|_{r_i} } = \sqrt{ \sum_{i} \left[ \left(\frac{\partial I}{\partial m_{i}} \Delta m_{i} \right)^2 + \left(\frac{\partial I}{\partial r_{i}} \Delta r_{i}\right)^2 \right] }\]
 
 
 The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertainty of the mass elements contribute linearly but are added up; errors in the mass of further away mass elements contribute more to the total error of the moment of inertia.
-\[ \Delta I \mid_{m_i} = \sqrt{\sum\limits_{i}\left(\left( \lVert r_{i} \rVert ^2 E_3 - r_{i} \otimes r_{i} \right)\right)^2 \cdot \Delta m_{i} }\]
+\[ \Delta I \mid_{m_i} = \sum\limits_{i}\left(\left( \lVert r_{i} \rVert ^2 E_3 - r_{i} \otimes r_{i} \right) \cdot \Delta m_{i} \right)^2 \]
 
 
 The partial derivative with respect to \(r_{i}\) must be added, because \(I\) is taken relative to the COM (hence, \(\Delta r_i = \Delta COM\)).
 We know that the choice of reference point for moment of inertia can be adjusted by using generalized Steiner, and so the error in the COM propagates as a Steiner component, equation \eqref{eqn:steiner}, with \(s=\Delta COM\).
 Yet \(\Delta COM\) also depends non-trivially on the relative mass of volume elements, equation \eqref{eqn:com}.
-\[ \Delta COM = \sqrt{ \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left( \frac{ \sum\limits_{i} r_{i} \cdot m_{i} }{\Delta \sum_i m_{i} }\right)^{2}}\]
+\[ \Delta COM =  \frac{1}{\sum_i m_{i}} \sum\limits_{i} \left( r_{i} \cdot \Delta m_{i} \right)^2  + \left( \frac{ \sum\limits_{i} r_{i} \cdot m_{i} }{\Delta \sum_i m_{i} }\right)^{2}\]
 
 
 With this last equation we have lined out how the target parameter, \(I\), ultimately depends logically on mass elements \(m_{i}\) and their position in different ways.

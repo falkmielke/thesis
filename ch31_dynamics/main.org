@@ -19,7 +19,7 @@
 
 
 * Abstract
-This thesis has so far explored the measurement and modeling of movement of terrestially locomotion.
+This thesis has so far explored the measurement and modeling of movement of (terrestially) locomoting animals.
 A topic which remains to be discussed is the /cause/ of that movement.
 The segments of animal limbs can be modeled as rigid bodies, each of which has a specific momentum.
 Momentum is a conservative quantity, i.e. it changes due to energy transfer with its surrounding.
@@ -254,6 +254,11 @@ A mathematical shorthand for writing wrenches are square brackets and a semicolo
 
 \FloatBarrier
 ** Balance of Wrenches
+As with force and moment, we can equate a dynamic wrench to external wrenches in the calculation of a "balance of wrenches".
+This can be achieved by, again, vertically concatenating force and moment balances.
+
+
+For one, we get a "dynamic wrench" on the left handside of the balance.
 Plugging in the non-zero part of equations \eqref{eqn:force} and \eqref{eqn:moment} from above, we get an expression for what can be referred to as the *dynamic wrench* (defined at the COM):
 #+begin_src latex
 \begin{equation}\label{eqn:dynamic_wrench}
