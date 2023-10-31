@@ -4,7 +4,7 @@
 \section{Abstract}
 Many phenomena related to motor behaviour in animals are spatially and temporally periodic, making them accessible for transformation to the frequency domain via Fourier Series.
 Although this has been applied previously, it had not been noticed that the characteristic arrangement of Fourier coefficients in their complex-valued representation resembles landmarks in geometric morphometrics.
-We define a superimposition procedure in the frequency domain which removes affine differences (mean, amplitude, phase) to reveal and compare the shape of periodic kinematic measures.
+We define a superimposition procedure in the frequency domain which \chng{extracts and isolates} affine differences (mean, amplitude, phase) to reveal and compare the shape of periodic kinematic measures.
 This procedure is conceptually linked to dynamic similarity, which can thereby be assessed on the level of individual limb elements.
 We demonstrate how to make intralimb coordination accessible for large scale, quantitative analyses.
 By applying this to a data set from terrestrial ungulates, dominant patterns in forelimb coordination during walking are identified.
@@ -53,8 +53,9 @@ Affine components are those that can be scaled linearly without altering the sha
 In the case of complex Fourier coefficients, those are (i) the mean profile value (i.e. ``y-value'') over time, captured as the zero'th Fourier coefficient, (ii) the amplitude of the harmonics, visible as the distance from the origin of the complex plane, and (iii) the phase, which is related to a (non-trivial) rotation in the complex plane (\textit{cf.} methods, Fig. \ref{fig:workflow}).
 These terms are analogous to the parameters of a harmonic oscillation of frequency $f$ over time $t$ of the form ``$y = c_0 + A\cdot sin(2\pi f\cdot t + \phi)$''.
 Such an oscillation has the mean $c_0$, amplitude $A$, and the phase $\phi$.
-Assume there is a mathematical operation that removes the affine differences between two such oscillations by shifting (i.e. changing $c_0$), scaling (changing $A$), and rotating (changing $\phi$) the complex coefficients in the frequency domain to a standardized arrangement.
+Assume there is a mathematical operation which \chng{extracts the affine components of} two such oscillations by shifting (i.e. changing $c_0$), scaling (changing $A$), and rotating (changing $\phi$) the complex coefficients in the frequency domain to a standardized arrangement.
 This would be a Procrustes procedure which results in a mathematically optimal superimposition (two harmonic oscillations of the same frequency would become identical).
+\chng{The differences would not be removed, as in ``discarded'', but isolated, and can still be part of subsequent analyses.}
 We explore such a superimposition in this study, terming it Fourier Coefficient Affine Superimposition (FCAS, see below).
 
 
@@ -141,11 +142,11 @@ The final material covers 87 of 117 genera (109 of 251 species) of terrestrial u
 \subsubsection{Fourier Series Decomposition (FSD) Exposes Affine Signal Components}
 We herein study periodic joint angle profiles, but with methods that generally apply to periodic signals.
 There are two fundamental ways in which two or multiple signal observations can differ.
-One type of differences are those which can be removed by a linear operation (i.e. addition or multiplication of scalars).
-Those are the mean, amplitude, and phase, which can be removed by ``y-shifting'', scaling around the mean, and phase-shifting, respectively.
+One type of differences are those which can be \chng{changed} by a linear operation (i.e. addition or multiplication of scalars).
+Those are the mean, amplitude, and phase, which can be \chng{standardized} by ``y-shifting'', scaling around the mean, and phase-shifting, respectively.
 These differences are termed affine differences.
 Other affine operations exist (reflection, shear, planar rotation), but they do not apply to time profiles because they disrupt the spatiotemporal integrity of the signal.
-Differences that cannot be removed by affine transformations are subsumed as non-affine.
+Differences that cannot be \chng{standardized} by affine transformations are subsumed as non-affine.
 \\In the time domain (plot of the signal value over time, Fig. \ref{fig:workflow}A), the affine differences are intuitively visible, but hard to capture mathematically due to temporal periodicity.
 Hence, Fourier Series decomposition (FSD, as defined in supplement \ref*{apdx:fourier}) is applied to the signals we study herein.
 This transformation decomposes a signal into a finite sum of its harmonics.
@@ -172,14 +173,14 @@ We also recommend to reconstruct test signals from coefficient values for visual
 
 \subsubsection{Fourier Coefficient Affine Superimposition (FCAS) Reveals Signal Shape}
 Taking all coefficients derived from the FSD of a signal together is data that is structurally analogous to two-dimensional landmarks.
-Hence, methods of geometric morphometrics can be applied \citep{Bookstein1991,Kendall1989,Gower1975,Dryden2016}, in particular Procrustes superimposition, which is a method that removes affine components of the form of an object to reveal its shape.
+Hence, methods of geometric morphometrics can be applied \citep{Bookstein1991,Kendall1989,Gower1975,Dryden2016}, in particular Procrustes superimposition, which is a method \chng{which standardizes} affine components of the form of an object to reveal its shape.
 For the complex Fourier coefficients, it is possible to define standard values for the affine components (i.e. mean of zero, amplitude of one, phase zero) and operators that shift or scale the signal to achieve standardization.
-Similarly, it is possible to find, extract, and apply operators that superimpose two signals by removing affine differences (Fig. \ref{fig:workflow}C), which we term FCAS.
+Similarly, it is possible to find, extract, and apply operators that superimpose two signals by \chng{standardizing affine components} (Fig. \ref{fig:workflow}C), which we term FCAS.
 In contrast to geometric morphometrics, the rotation is not uniform, but depends on the harmonic number.
 Also, the translational component is restricted to $c_{0}$, and all higher coefficients are only affected by rotation and scaling.
 These modifications do not hinder the general procedure.
 Analogous to the process of Generalized Procrustes Analysis in geometric morphometrics, the superimposition can be applied to find improved averages of signals.
-The (non-affine) residual after removal of affine differences is, in analogy to geometric morphometrics, the ``shape'' of the signal, and it is possible to define distance metrics to quantify shape differences (though not relevant for the present study).
+The (non-affine) residual after \chng{isolation} of affine differences is, in analogy to geometric morphometrics, the ``shape'' of the signal, and it is possible to define distance metrics to quantify shape differences (though not relevant for the present study).
 \\In case kinematic measures, such as joint angle profiles, are the signals of interest, both affine and non-affine differences can have consequences for the kinetics.
 However, only non-affine differences imply different coordination, whereas affine components are merely a change in temporal or spatial scale of the same patterns.
 Coordination should be evaluated in context of the limb.
@@ -192,7 +193,7 @@ For example, if in species A the carpus phase is lagging $+0.05$ stride cycles r
 Hence, relative profiles capture intralimb coordination.
 They are also represented in the frequency domain, but temporal profiles can be reconstructed at any point for visualization  (margins of Fig. \ref{fig:workflow}C and D).
 The Fourier coefficients of relative elbow profiles are subjected to further analysis.
-Because we are interested in dynamic temporal changes relative to the mean angles, we remove differences in $c_0$ by subtracting it from the profiles, despite acknowledging that posture or average angle might affect the dynamics.
+Because we are interested in dynamic temporal changes relative to the mean angles, we \chng{isolate} differences in $c_0$ by subtracting it from the profiles, despite acknowledging that posture or average angle might affect the dynamics.
 
 \subsubsection{Multivariate Analysis}
 A variety of multivariate methods exist that could be explored with relative elbow profile Fourier coefficients.
@@ -243,7 +244,7 @@ Within-group variability was high and observation count heterogeneous across gro
 Hence, we only deemed associations with $p<10^{-2}$ relevant.
 \\It can be instructive to quantify how much each of the affine differences contributes to the overall relative elbow trace difference.
 Therefore, the affine operations that would align the genera averages with their global average were computed.
-We report the correlation of these affine differences to the PC axes, as well as the residual shape difference that would remain after their removal.
+We report the correlation of these affine differences to the PC axes, as well as the residual shape difference that would remain after their \chng{isolation}.
 
 
 
@@ -407,7 +408,7 @@ Planar covariation \citep{Borghese1996,Hallemans2009,Ogihara2014} originated in 
 In contrast, we seek a method to highlight differences across taxa.
 Another method that has found application in the analysis of human locomotion is continuous relative phase \citep[CRP, \textit{cf.}][]{Lamb2014}.
 This method calculates the difference in instantaneous phases of two signals (using phase portrait plots or the Hilbert transform).
-CRP requires removal (normalization) of differences in mean angle and amplitude, whereas our method retains the other affine components.
+CRP requires removal of differences in mean angle and amplitude (i.e. normalization), whereas our method retains the other affine components.
 By intentionally phase-shifting random test signals (not shown), we found that both the relative phase from CRP (averaged over a stride cycle) and the FCAS phase difference as introduced herein (supplement \ref*{apdx:fourier}, Eq. \ref*{eqn:affines_phase}) accurately recover the shift.
 However, the methods do not yield identical results when other aspects of the signal are manipulated (which in general complicates the definition of a signal phase).
 It is thus possible that Hilbert transform and CRP offer alternatives for phase determination.
@@ -424,7 +425,7 @@ We argue that this way of superimposition results in measures that overcome the 
 \\FCAS crucially depends on reference and focal joints, but is not limited in the choice (or number) of these.
 Also, it is not limited to a single limb or to phylogenetic comparisons (for example, pseudo-cyclic episodes during gait transition could be compared) and it could be generalized to three-dimensional measurements.
 FCAS results in a mathematically optimal alignment, and is robust against low video frame rate due to the filtering properties of the Fourier Series with a finite number of coefficients.
-The capacity of a one-dimensional FSD to remove affine components in the frequency domain has not been emphasized in previous work.
+The capacity of a one-dimensional FSD to \chng{standardize} affine components in the frequency domain has not been emphasized in previous work.
 The delay theorem, from which we derive a formula that defines a zero phase (see supplement \ref*{apdx:fourier}, Eq. \ref*{eqn:affines_phase}), is of particular interest.
 FCAS is not limited to kinematics, and could potentially be applied to a broad variety of other periodic measurements, such as ground reaction force profiles.
 
@@ -442,7 +443,7 @@ The method also allows to reconstruct hypothetical profiles at arbitrary points 
 Overall, the group differences might seem subtle at visual inspection, attributing to the fact that ``bauplan'' and movement mode are homogeneous in the data set.
 However, even subtle changes in the coordination of the proximal limb have a considerable lever towards the ground contact point.
 Also, the reconstructed profiles are derived quantitatively, incorporating a lot of information.
-Hence, they are a sharp image of the most pronounced statistical differences that remain after the removal of affine parts of background variance.
+Hence, they are a sharp image of the most pronounced statistical differences that remain after the \chng{standardization} of affine parts of background variance.
 Likewise, dynamic similarity (as usually applied to spatiotemporal gait parameters) refers to similarity in non-affine dynamic measures.
 This conceptual link indicates that FCAS enables the direct comparison of dynamic differences in the coordination of large data sets of animals.
 For the present measurements of walking ungulates, PCA of FSD coefficients of relative elbow joint angle profiles revealed variation associated with several factors.

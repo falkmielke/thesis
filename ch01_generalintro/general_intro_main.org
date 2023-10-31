@@ -92,6 +92,10 @@ The fact that there are hyperprolific sows, increased litter sizes, and an incre
 But how to approach the potential lack of an effect?
 To set the frontier right from the start, I will insist to apply good scientific methods citep:Chamberlin1890,Platt1964,Popper2002.
 If we /searched for/ differences in piglet locomotion, just search hard enough, we would surely find them.
+\begin{change}
+The null hypothesis in statistical testing is that there are no differences between the study groups, which is why researchers tend to actively search for differences.
+However, with so many variables influencing locomotion (multiple testing), it is inevitable that some variables will differ, yet it cannot be presumed that these differences generalize to the population from which we sampled.
+\end{change}
 Instead, our attempts must be to *falsify the hypothesis that there are birth-weight dependent differences in piglet locomotion*.
 If we fail, we learned something.
 
@@ -172,11 +176,11 @@ But chaos is not what we observe, quite the contrary.
 Locomotor movements are highly targeted, i.e. pseudo-deterministic, often repetetive.
 Variations (though ubiquitous) are minimized by training.
 \begin{change}
-This observation is due to coordination: coordination is henceforth understood as the non-random temopral pattern that arises in the succession of movements of different joints within a limb (intra-limb coordination) or between limbs (inter-limb coordination).
+This observation is due to *coordination*: coordination is henceforth understood as the non-random temopral pattern of movement which manifests in a specific succession of movements of different joints within a limb (intra-limb coordination) or between limbs (inter-limb coordination).
 \end{change}
 Coordination is achieved by (neuro-)motor control.
 \begin{change}
-Control in the scope of this thesis is the central or peripheral nervous structure which establishes coordination.
+Control in the scope of this thesis is achieved by the central or peripheral nervous structure which establishes coordination.
 \end{change}
 The study of neuromechanics attempts to relate the central and peripheral control mechanisms to the observed motor outcome produced by the musculoskeletal system, i.e. coordination citep:Nishikawa2007,Full1999.
 Of course, the control "facilities" of each individual are bespoke for the precise anatomy of that individual: each brain is tuned to the layout of segments and motors of each individual.

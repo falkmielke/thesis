@@ -234,7 +234,7 @@ This situation is favorable for PCA, in a sense that dimensionality reduction ca
 Note, however, that PCA must be adjusted in a way that accounts for the FSD properties as follows.
 It is common practice and often advisible to standardize input variables prior to PCA, so that their value ranges are comparable (usually done by subtraction of the mean and division of a variability measure).
 Such a standardization would disrupt the temporal structure of the signal, and emphasize nuisance variability in higher order coefficients.
-A better strategy for multi-joint analyses is the standardization by removal of affine FSD components.
+A better strategy for multi-joint analyses is the standardization by \chng{extraction and isolation} of affine FSD components.
 As mentioned above, mean joint angle and joint amplitude can be standardized, and phase differences of all observations can be minimized by temporal alignment.
 With such preprocessing, the outcome of a PCA will equally represent each joint of interest, without disrupting the temporal structure of the joint angle profiles, and benefitting from intrinsic correlations of movements of the limb elements.
 PCA is invertible, and any downstream modeling outcomes can be related back to the original joint angle profiles.
