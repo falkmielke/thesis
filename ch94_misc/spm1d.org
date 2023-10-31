@@ -1,0 +1,129 @@
+#+title: Spm1d
+
+Date: Thu, 6 Oct 2022 09:20:55 +0200
+From: Falk Mielke <Falk.Mielke@uantwerpen.be>
+To: Merel Van Gorp <Merel.VanGorp@uantwerpen.be>
+Subject: Re: vraag statistiek biggen
+
+"SPM" is a niche; ik zie ze maar zichzelf referenceren en workshops
+geven. Ik hou er niet echt van. In alle lezingen/videos/documents die ik
+erover gezien heb zijn ze mathematisch niet exact (bv.
+https://www.youtube.com/watch?v=3D4WoDuBkUF9U "zero-dimensional" bestaat
+niet; Nyquist is niet belangerijk; ze gebruiken de term "random field"
+maar als buzzword en vertellen niet echt waarom dit belangerijk is -
+alle presentaties zijn uiteindelijk voor "normies"). De problemen die ze
+adresseren zijn problemen van t-tests en frequentist statistics.
+
+
+every other year, a new promotor comes to youtube
+Jos Vanrenterghem (Todd Pataky, Mark Robinson) 2016
+Andrew Jahn (2020)
+Stuart McErlain-Naylor (2020-)
+
+spm is very accessible
+https://www.youtube.com/watch?v=nKyNpoU6-_I
+https://www.youtube.com/watch?v=Dp-KK2w50UE
+
+it had many tests available (e.g. t-test, hotelling, anova)
+
+
+
+origin: Friston / neuroscience
+Statistical parametric maps in functional imaging: a general linear approach.
+
+http://www.scholarpedia.org/article/Statistical_parametric_mapping
+Friston, K. J. (2003). Statistical parametric mapping. Neuroscience databases: a practical guide, 237-250. https://doi.org/10.1007/978-1-4615-1079-6_16
+Friston, K.J., Holmes, A.P., Worsley, K.J., Poline, J.-.-P., Frith, C.D. and Frackowiak, R.S.J. (1994), Statistical parametric maps in functional imaging: A general linear approach. Hum. Brain Mapp., 2: 189-210. https://doi.org/10.1002/hbm.460020402
+
+! Worsley et al. NeuroImage (2004)
+
+random field theory https://spm1d.org/rft1d/
+https://en.wikipedia.org/wiki/Random_field
+
+* Todd Pataky
+long 2020 lecture https://www.youtube.com/watch?v=isLDO0iE6kQ
+** intro
++ discrete: roi analysis
++ two-sample tests (joint angles)
+
+other types:
++ functional data analysis (use basis functions to model continuous data, e.g. splines)
++ spm
++ dimensionality reduction (PCA, ICA, ...)
++ machine learning (ANN, SVM)
+
+exaggerating google scholar relevance with a bullshit graph
+doing invalid stats taxonomy (0D -> nD RFT)
+
+** demo
+he does this by simulating data (!) with a given smoothness (1d smooth gaussian random fields).
+
++ spm uses smoothness to find relevant t-value
++ but smoothness is given by measurement accuracy, not physiological
+
+
+** issues!
++ segmentation
++ registration (temporal normalization; non-linear registration)
++ normality
++ processing sensitivity (e.g. smoothing)
++ covariance
++ nununiform smoothness
++ ...
++ blind to cyclicity
+
+cda only solves "0d->nd" problem
+does not solve hypothesis testing weakness
+
+** is discrete analysis invalid?
+single maximum effect
+
+** the exploratory perspective (BIGGEST problem)
+a huge number of variables
+what should we measure and how?
+
++ unclear variables for kinematic/kinetic differences
++ unclear way to refute hypothesis (weak hypotheses)
+
+evidence of group differences in random sampling
+correct p-value interpretation
+
+[!] literature inertia, software availability
+
+* Jos Vanrenterghem (Todd Pataky, Mark Robinson) 2016
+promoting SPM in biomechanical data!
+https://www.youtube.com/watch?v=4WoDuBkUF9U
+https://www.youtube.com/watch?v=rFYsWuy1AaY
+https://www.youtube.com/watch?v=MSwMcOum4ZA
+https://www.youtube.com/watch?v=ZppldFXTmPg
+
+** Problems
+multiple testing, alpha level
+-> discrete analysis ("0D"); endless tables of data
+-> examples: foot pressure zones
+-> use peaks and average values
+**  biomech data
++ spatiotemporally smooth
+  + tissue viscoelasticity
+  + non-random variation, interdependency
+  + *use smoothness to measure interdependency*
+  + field smoothness
++ bounded data
+  + ex. foot shape
+  + key functional events
+  + register data against each other
+  + cannot compare different gaits
++ non-directed hypotheses
+  + better: explorative comparison
+  + non-directed: e.g. "exhibit identical knee kinematics"
+  + scope of nullH should not be changed after seing the data
+
+**  SPM
++ no need for discretization
++ allows for non-directed hypotheses
++ "do hypothesis testing on entire movement"
++ (comparison with intuitive assessment)
++ automatic zone detection
+example: Pataky (2010)
+
++ random field behavior, taking smoothness into account

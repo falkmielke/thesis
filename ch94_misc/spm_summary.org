@@ -1,0 +1,48 @@
+#+title: Spm Summary
+#+author: Falk Mielke
+#+date: 20231031
+
+
+** SPM and FCAS
+A classical purpose of kinematics research is the identification of differences between study groups.
+For example, one might look at low- and normal birth weight piglets, record hip joint angle profiles for approximately a hundred walking strides of each group, and ask at what temporal intervals they differ.
+One key property of joint angle profiles is that temporal samples are not independent.
+In other words: joint angles do not change at random, and the joint angle at a certain frame in a video will be more similar to the previous and next frame than what would be expected by chance.
+
+This is a well-known property.
+Naïvely, one might choose to overcome this by selecting key points in the joint angle profile (e.g. the peak flexion) and compare those events between study groups.
+However, this immediately raises questions about the number and choice/relevance of key points.
+Choice and relevance are rather philosophical questions; potentially they are motivated by a desired outcome (focusing points that differ).
+The number of key points has effects on significance thresholds (multiple testing), and it has been shown that comparing key points will increase the chance of false positives in difference detection (due to true measurement randomnes).
+
+Instead of points, one might look at intervals, yet again it would be desirable to have a non-subjective, automatic criterium of how to choose those.
+This can be provided by random field theory.
+In random field theory, the interdependence of measurement samples can be quantified by measuring how random changes between samples are.
+Randomness and smoothness are on two sides of a continuum, and the less random the changes between samples are, the "wider" the range of dependent data points can be considered.
+This concept has found its way into the framework of "Statistical Parametric Mapping" (SPM), which originates in neuroscience and functional imaging of the brain citep:Friston1994,Friston2003,Friston2008,Worsley2004, and was adapted for biomechanic research citep:Pataky2008,Pataky2010,Pataky2013.
+
+With some limitations, one can say that SPM enables the hypothesis-bases statistical comparison of joint angle profiles.
+Some of the limitations are the sensitivity to registration (especially non-linear registration techniques), to processing (e.g. smoothing), and the normality assumption.
+It retains all the limitations of the chosen hypothesis tests (e.g. normality assumption often not confirmed).
+It must be added that SPM does not generally account for the cyclicity of joint angle profiles (edge effects), though this can certainly be overcome.
+As the authors of the method put it citep:Pataky2020, the only purpose of SPM is the transfer of statistical methods to a multidimensional, interdependent data situation.
+
+
+This relates to FCAS on several flanks.
+FCAS can be used for spatiotemporal alignment (removing the phase differences), thereby reducing the dependency on more or less arbitrarily chosen key points in the joint angles.
+FCAS quantifies the temporal interrelation of sample points by translating it to harmonic components.
+However, FCAS is a transformation, whereas SPM is an analysis method: in fact, SPM can be used to compare the "coordination" residuals of superimposed joint angle profiles, or to compare relative angle profiles.
+In that regard, they are complementary.
+
+
+#+begin_comment
+Friston2008 http://www.scholarpedia.org/article/Statistical_parametric_mapping
+Friston, K. J. (2003). Statistical parametric mapping. Neuroscience databases: a practical guide, 237-250. https://doi.org/10.1007/978-1-4615-1079-6_16
+Friston, K.J., Holmes, A.P., Worsley, K.J., Poline, J.-.-P., Frith, C.D. and Frackowiak, R.S.J. (1994), Statistical parametric maps in functional imaging: A general linear approach. Hum. Brain Mapp., 2: 189-210. https://doi.org/10.1002/hbm.460020402
+Worsley2004 https://doi.org/10.1016/j.neuroimage.2004.07.026
+Pataky2008 https://doi.org/10.1016/j.jbiomech.2008.03.034
+Pataky2010 https://doi.org/10.1016/j.jbiomech.2010.03.008
+Pataky2013 https://doi.org/10.1016/j.jbiomech.2013.07.031
+Pataky2020 lecture https://www.youtube.com/watch?v=isLDO0iE6kQ
+
+#+end_comment
