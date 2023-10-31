@@ -1,0 +1,89 @@
+#+title: List of Publications
+
+#+SETUPFILE: latex_header.org
+#+EXPORT_FILE_NAME: publications
+
+#+BIBLIOGRAPHY: literature.bib apalike
+#+BEGIN_SRC elisp :results none :exports none :tangle no
+(setq bibtex-completion-bibliography
+      '("literature.bib"))
+#+END_SRC
+
+
+The following resources with contributions by the author are publicly available.
+Updated information can be found [[https://orcid.org/0000-0003-3229-0981][on the author's "orcid" profile]].
+
+** Journal Articles
+
++ *Mielke F*, Schunke V, Wölfer J and Nyakatura JA (2018), "Motion analysis of non-model organisms using a hierarchical model: Influence of setup enclosure dimensions on gait parameters of Swinhoe’s striped squirrels as a test case", Zoology. Vol. 129, pp. 35-44. [[https://doi.org/10.1016/j.zool.2018.05.009]]
+
++ *Mielke F*, Amson E and Nyakatura JA (2018), "Morpho-Functional Analysis Using Procrustes Superimposition by Static Reference", Evolutionary Biology., December, 2018. Vol. 45(4), pp. 449-461. [[https://doi.org/10.1007/s11692-018-9456-9]]
+
++ *Mielke F*, Van Ginneken C and Aerts P (2019), "Quantifying intralimb coordination of terrestrial ungulates with Fourier Coefficient Affine Superimposition", Zoological Journal of the Linnean Society., 11, 2019. Vol. 189(3), pp. 1067-1083. [[https://doi.org/10.1093/zoolinnean/zlz135]]
+
++ Mielke M, Aerts P, Van Ginneken C, Van Wassenbergh S and *Mielke F* (2020), "Progressive tracking: a novel procedure to facilitate manual digitization of videos", Biology Open., 11, 2020. Vol. 9(11). [[https://doi.org/10.1242/bio.055962]]
+
++ Nguyen V, Alves Pereira LF, Liang Z, *Mielke F*, Van Houtte J, Sijbers J and De Beenhouwer J (2022), "Automatic landmark detection and mapping for 2D/3D registration with BoneNet", Frontiers in Veterinary Science. 9, 923449. [[https://doi.org/10.3389/fvets.2022.923449]]
+
++ *Mielke F*, Van Ginneken C and Aerts P (2023), "A Workflow for Automatic, High Precision Livestock Diagnostic Screening of Locomotor Kinematics", Frontiers in Veterinary Science. Vol. 10. [[https://doi.org/10.3389/fvets.2023.1111140]]
+
++ Aerts P, *Mielke F*, Vanden Hole C, Van Gorp MJ and Van Ginneken C (2023), "Early development of locomotion in the term piglet model: does size matter?", Integrative and Comparative Biology. pp. icad054. [[https://doi.org/10.1093/icb/icad054]]
+
+** Conferences and Public Events
+(first author contributions only)
+
++ Annual Meeting of the [[https://www.dzg-ev.de/veranstaltungen/jahrestagungen][German Zoological Society (DZG, 2019)]]: "The Shape of Locomotion: A Method for Large Scale Analyses of Intra-Limb Coordination". [[http://mielke-bio.info/falk/posts/05.dzg][Recording of pre-talk available.]]
+
++ Annual Meeting of the [[https://sicb.org/meetings/sicb-annual-meeting-2021/][Society for Integrative and Comparative Biology (SICB, 2021)]]: "Swing it like a piglet!". [[http://mielke-bio.info/falk/posts/29.sicb2021][Recording available]].
+
++ Annual Meeting of the [[https://www.sebiology.org/resource/seb-2021-annual-conference.html][Society of Experimental Biology (SEB, 2021)]]: "CT Density Approximation to Integrate Inverse Dynamics into the XROMM Workflow". [[http://mielke-bio.info/falk/posts/26.seb2021][Recording available]].
+
+** Code Repositories
+Here you find the code and code history of recent projects around this thesis.
+
++ FCAS minimal code in various programming languages. https://git.sr.ht/~falk/fcas_code
++ Free and Open Source XROMM workflow, using blender and avoiding XMALab (for reasons of frustration and ideology). https://git.sr.ht/~falk/foss_xromm
++ Piglet kinematics analysis using FCAS and probabilistic modeling. https://git.sr.ht/~falk/piglet_fcas
++ Application of FCAS to baboon data. https://git.sr.ht/~falk/papio_fcas
++ Code of the "flying femur" project. https://git.sr.ht/~falk/flying_femur
++ Automatic video/image segmentation. https://git.sr.ht/~falk/piglet_image_autosegmentation
++ Thesis defence presentation. https://git.sr.ht/~falk/defence
++ PhD thesis wrapping. https://git.sr.ht/~falk/thesis
+
+
+** Blog Posts
+All listed posts are self-published and can be found on the website [[http://mielke-bio.info/falk]].
+
+*** Force Plate Calibration
++ equipment considerations http://mielke-bio.info/falk/posts/01.fpequipment
++ basic calculations http://mielke-bio.info/falk/posts/02.fpcalculations
++ calibration of force magnitude http://mielke-bio.info/falk/posts/03.fpcalibration1
++ calibration of contact point http://mielke-bio.info/falk/posts/04.fpcalibration2
+
+*** Video Analysis
++ landmark tracking http://mielke-bio.info/falk/posts/07.tracking
++ contrast enhancement http://mielke-bio.info/falk/posts/08.image_contrast
++ image undistortion http://mielke-bio.info/falk/posts/09.undistortion
++ stereo camera calibration http://mielke-bio.info/falk/posts/17.camera_calibration
++ automatic stride cycle extraction http://mielke-bio.info/falk/posts/27.cycle_extraction
++ image segmentation http://mielke-bio.info/falk/posts/30.difflineseg
+
+*** Inverse Dynamics
++ wrenches http://mielke-bio.info/falk/posts/10.id_lmx0a_wrenches
++ ficticious forces - overview http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces
++ Euler force http://mielke-bio.info/falk/posts/12.id_lmx1_stutter
++ Centrifugal force http://mielke-bio.info/falk/posts/13.id_lmx2_vinyl
++ Coriolis force http://mielke-bio.info/falk/posts/14.id_lmx3_slider
++ D'Alambert force http://mielke-bio.info/falk/posts/15.id_lmx4_arm
++ *Generalization* - n-link arm http://mielke-bio.info/falk/posts/16.id_lmx5_nlink
+
+*** CT Analysis
++ density approximation from CT data http://mielke-bio.info/falk/posts/23.ct_density
+
+*** Miscellaneous
++ probabilistic statistical modeling http://mielke-bio.info/falk/posts/06.patella
++ Procrustes superimposition http://mielke-bio.info/falk/posts/18.procrustes
++ quaternions http://mielke-bio.info/falk/posts/21.quaternions
++ photogrammetry http://mielke-bio.info/falk/posts/22.photogrammetry
++ custom wildlife cameras http://mielke-bio.info/falk/posts/24.funcameras
++ academic writing software use http://mielke-bio.info/falk/posts/32.scird2023
