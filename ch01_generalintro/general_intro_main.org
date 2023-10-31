@@ -102,7 +102,7 @@ If we fail, we learned something.
 
 
 
-As I will briefly summarize below, common methods of studying locomotion fall short in their falsification capacity.
+Common methods of studying locomotion fall short in their falsification capacity.
 First, some methods loose information in processing.
 For example, imagine you measured two maximally dissimilar animals, e.g. a stork and an elephant, while co-incidentally running at dynamically similar speed.
 We measure exactly the same (normalized) speed.
@@ -120,7 +120,7 @@ We better have a potent modeling framework to incorporate all that data: if we d
 The falsification approach is a unifying aspect of all the chapters herein.
 
 
-*To summarize*, there are some genuine reasons as well as grant-acquiring rationalizations for studying suid ontogeny.
+*To summarize*, there are some genuine reasons for studying suid ontogeny.
 Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate.
 
 
@@ -171,8 +171,14 @@ We should expect chaos on this system.
 But chaos is not what we observe, quite the contrary.
 Locomotor movements are highly targeted, i.e. pseudo-deterministic, often repetetive.
 Variations (though ubiquitous) are minimized by training.
-This is achieved by (neuro-)motor control.
-The study of neuromechanics attempts to relate the central and peripheral control mechanisms to the observed motor outcome produced by the musculoskeletal system citep:Nishikawa2007,Full1999.
+\begin{change}
+This observation is due to coordination: coordination is henceforth understood as the non-random temopral pattern that arises in the succession of movements of different joints within a limb (intra-limb coordination) or between limbs (inter-limb coordination).
+\end{change}
+Coordination is achieved by (neuro-)motor control.
+\begin{change}
+Control in the scope of this thesis is the central or peripheral nervous structure which establishes coordination.
+\end{change}
+The study of neuromechanics attempts to relate the central and peripheral control mechanisms to the observed motor outcome produced by the musculoskeletal system, i.e. coordination citep:Nishikawa2007,Full1999.
 Of course, the control "facilities" of each individual are bespoke for the precise anatomy of that individual: each brain is tuned to the layout of segments and motors of each individual.
 We do not know the exact wiring of each animal, though remarkably we observe "functioning" individuals time and time again, which are the less interesting cases in which the nervous system does a great job in steering its muscles.
 
@@ -227,7 +233,7 @@ Throughout the chapters of this thesis, you will find subtle and polite rants ab
 
 
 # TODO Another attempt to go beyond footfall science is ... #TODO but I don't remember
-
+# TODO SPM could fit here... or in the GD
 
 And then there is one strain of locomotor science which deviates from the Western mainstream.
 It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to it (Ch. \ref{cpt:fourier_review}).

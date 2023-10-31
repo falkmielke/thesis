@@ -9,7 +9,7 @@
       '("literature.bib"))
 #+END_SRC
 
-
+@@latex:\begin{change}@@
 The following resources with contributions by the author are publicly available.
 Updated information can be found [[https://orcid.org/0000-0003-3229-0981][on the author's "orcid" profile]].
 
@@ -41,49 +41,51 @@ Updated information can be found [[https://orcid.org/0000-0003-3229-0981][on the
 ** Code Repositories
 Here you find the code and code history of recent projects around this thesis.
 
-+ FCAS minimal code in various programming languages. https://git.sr.ht/~falk/fcas_code
-+ Free and Open Source XROMM workflow, using blender and avoiding XMALab (for reasons of frustration and ideology). https://git.sr.ht/~falk/foss_xromm
-+ Piglet kinematics analysis using FCAS and probabilistic modeling. https://git.sr.ht/~falk/piglet_fcas
-+ Application of FCAS to baboon data. https://git.sr.ht/~falk/papio_fcas
-+ Code of the "flying femur" project. https://git.sr.ht/~falk/flying_femur
-+ Automatic video/image segmentation. https://git.sr.ht/~falk/piglet_image_autosegmentation
-+ Thesis defence presentation. https://git.sr.ht/~falk/defence
-+ PhD thesis wrapping. https://git.sr.ht/~falk/thesis
++ FCAS minimal code in various programming languages. \newline https://git.sr.ht/~falk/fcas_code
++ Free and Open Source XROMM workflow, using blender and avoiding XMALab (for reasons of frustration and ideology).\newline https://git.sr.ht/~falk/foss_xromm
++ Piglet kinematics analysis using FCAS and probabilistic modeling.\newline https://git.sr.ht/~falk/piglet_fcas
++ Application of FCAS to baboon data.\newline https://git.sr.ht/~falk/papio_fcas
++ Code of the "flying femur" project.\newline https://git.sr.ht/~falk/flying_femur
++ Automatic video/image segmentation.\newline https://git.sr.ht/~falk/piglet_image_autosegmentation
++ Thesis defence presentation.\newline https://git.sr.ht/~falk/defence
++ PhD thesis wrapping.\newline https://git.sr.ht/~falk/thesis
 
 
 ** Blog Posts
 All listed posts are self-published and can be found on the website [[http://mielke-bio.info/falk]].
 
 *** Force Plate Calibration
-+ equipment considerations http://mielke-bio.info/falk/posts/01.fpequipment
-+ basic calculations http://mielke-bio.info/falk/posts/02.fpcalculations
-+ calibration of force magnitude http://mielke-bio.info/falk/posts/03.fpcalibration1
-+ calibration of contact point http://mielke-bio.info/falk/posts/04.fpcalibration2
++ equipment considerations\newline http://mielke-bio.info/falk/posts/01.fpequipment
++ basic calculations\newline http://mielke-bio.info/falk/posts/02.fpcalculations
++ calibration of force magnitude\newline http://mielke-bio.info/falk/posts/03.fpcalibration1
++ calibration of contact point\newline http://mielke-bio.info/falk/posts/04.fpcalibration2
 
 *** Video Analysis
-+ landmark tracking http://mielke-bio.info/falk/posts/07.tracking
-+ contrast enhancement http://mielke-bio.info/falk/posts/08.image_contrast
-+ image undistortion http://mielke-bio.info/falk/posts/09.undistortion
-+ stereo camera calibration http://mielke-bio.info/falk/posts/17.camera_calibration
-+ automatic stride cycle extraction http://mielke-bio.info/falk/posts/27.cycle_extraction
-+ image segmentation http://mielke-bio.info/falk/posts/30.difflineseg
++ landmark tracking\newline http://mielke-bio.info/falk/posts/07.tracking
++ contrast enhancement\newline http://mielke-bio.info/falk/posts/08.image_contrast
++ image undistortion\newline http://mielke-bio.info/falk/posts/09.undistortion
++ stereo camera calibration\newline http://mielke-bio.info/falk/posts/17.camera_calibration
++ automatic stride cycle extraction\newline http://mielke-bio.info/falk/posts/27.cycle_extraction
++ image segmentation\newline http://mielke-bio.info/falk/posts/30.difflineseg
 
 *** Inverse Dynamics
-+ wrenches http://mielke-bio.info/falk/posts/10.id_lmx0a_wrenches
-+ ficticious forces - overview http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces
-+ Euler force http://mielke-bio.info/falk/posts/12.id_lmx1_stutter
-+ Centrifugal force http://mielke-bio.info/falk/posts/13.id_lmx2_vinyl
-+ Coriolis force http://mielke-bio.info/falk/posts/14.id_lmx3_slider
-+ D'Alambert force http://mielke-bio.info/falk/posts/15.id_lmx4_arm
-+ *Generalization* - n-link arm http://mielke-bio.info/falk/posts/16.id_lmx5_nlink
++ wrenches\newline http://mielke-bio.info/falk/posts/10.id_lmx0a_wrenches
++ ficticious forces - overview\newline http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces
++ Euler force\newline http://mielke-bio.info/falk/posts/12.id_lmx1_stutter
++ Centrifugal force\newline http://mielke-bio.info/falk/posts/13.id_lmx2_vinyl
++ Coriolis force\newline http://mielke-bio.info/falk/posts/14.id_lmx3_slider
++ D'Alambert force\newline http://mielke-bio.info/falk/posts/15.id_lmx4_arm
++ *Generalization* - n-link arm\newline http://mielke-bio.info/falk/posts/16.id_lmx5_nlink
 
 *** CT Analysis
-+ density approximation from CT data http://mielke-bio.info/falk/posts/23.ct_density
++ density approximation from CT data\newline http://mielke-bio.info/falk/posts/23.ct_density
 
 *** Miscellaneous
-+ probabilistic statistical modeling http://mielke-bio.info/falk/posts/06.patella
-+ Procrustes superimposition http://mielke-bio.info/falk/posts/18.procrustes
-+ quaternions http://mielke-bio.info/falk/posts/21.quaternions
-+ photogrammetry http://mielke-bio.info/falk/posts/22.photogrammetry
-+ custom wildlife cameras http://mielke-bio.info/falk/posts/24.funcameras
-+ academic writing software use http://mielke-bio.info/falk/posts/32.scird2023
++ probabilistic statistical modeling\newline http://mielke-bio.info/falk/posts/06.patella
++ Procrustes superimposition\newline http://mielke-bio.info/falk/posts/18.procrustes
++ quaternions\newline http://mielke-bio.info/falk/posts/21.quaternions
++ photogrammetry\newline http://mielke-bio.info/falk/posts/22.photogrammetry
++ custom wildlife cameras\newline http://mielke-bio.info/falk/posts/24.funcameras
++ academic writing software use\newline http://mielke-bio.info/falk/posts/32.scird2023
+
+@@latex:\end{change}@@

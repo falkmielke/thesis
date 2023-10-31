@@ -166,6 +166,23 @@
 \hbox{}
 }
 
+\definecolor{darkgreen}{rgb}{0,0.3,0}
+% \newenvironment{change}[1]{
+  % {\color{darkgreen}
+    % #1
+  % }
+% }
+\newenvironment{change}{
+  \bgroup\color{darkgreen}
+\ignorespaces
+}{
+\egroup
+}
+\newcommand\chng[1]{
+  {\color{darkgreen} #1}
+}
+
+
 %%% Document
 \begin{document}
 \doublespacing
@@ -198,46 +215,42 @@
 \cleartorightpage
 \chapter{General Introduction}\label{cpt:generalintro}
 \clearpage
-\input{ch01_generalintro/general_intro_main.tex}
+% \input{ch01_generalintro/general_intro_main.tex}
 
 
 
 \cleartorightpage
 \part{Kinematic Analysis}\label{pt:1}
 \chapter{Fourier Methods in Locomotor Biomechanics}\label{cpt:fourier_review}
-\input{ch11_fourierguide/pt1ch2_fourieranalysis.tex}
+% \input{ch11_fourierguide/pt1ch2_fourieranalysis.tex}
 
 \cleartoleftpage
 \chapter{Fourier Coefficient Affine Superimposition}\label{cpt:fcas}
-\input{ch12_ungulates/pt1ch3_fcas.tex}
+% \input{ch12_ungulates/pt1ch3_fcas.tex}
 
 
 
 \cleartorightpage
 \part{Probabilistic Modeling}\label{pt:2}
-% \chapter{Introduction: Probabilistic Modeling}\label{cpt:modeling_intro}
-% \input{ch20_modeling/pt2ch0_modeling.tex}
 
 \chapter{Probabilistic Modeling Workflow}\label{cpt:statistics}
-\input{ch21_statistics/pt2ch4_statistics.tex}
+% \input{ch21_statistics/pt2ch4_statistics.tex}
 
 \cleartoleftpage
 \chapter{Predictive Modeling of Piglet Locomotor Kinematics}\label{cpt:piglets}
-\input{ch22_pigletmodels/pt2ch5_piglets.tex}
+% \input{ch22_pigletmodels/pt2ch5_piglets.tex}
 
 
 
 \cleartorightpage
 \part{Inverse Dynamics}\label{pt:3}
-% \chapter{Introduction: Inverse Dynamics}\label{cpt:dynamics_intro}
-% \input{ch30_dynamics/pt3ch6_dynamics.tex}
 
 \chapter{Inverse Dynamics Workflow}\label{cpt:dynamics_workflow}
-\input{ch31_dynamics/pt3ch6_dynamics.tex}
+% \input{ch31_dynamics/pt3ch6_dynamics.tex}
 
 \cleartoleftpage
 \chapter[Inertial Properties]{Approximating Inertial Properties of Biological Specimens using CT Data, or Not}\label{cpt:inertials}
-\input{ch32_inertials/pt3ch7_inertials.tex}
+% \input{ch32_inertials/pt3ch7_inertials.tex}
 
 
 
