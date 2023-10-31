@@ -39,8 +39,8 @@ So we can. And we did.
 There is another trivial reason: *curiosity*.
 We are scientists, and like to study.
 Piglets are interesting, as I hope this thesis will leave no doubt:
-they are precocial, but less than most ungulates; they are social, but neonate competition is fierce (see below); they are curious and active; and as discussed below they share some common features with our own species.
-Furthermore, the general workings of locomotion, which I will get to, below, are exciting to us.
+they are precocial, but less than most ungulates; they are social, but neonate competition is fierce; they are curious and active; and they share some common features with our own species.
+Furthermore, the general workings of locomotion are exciting to us.
 Just observing the outcome of the fine interplay of muscles, tendons, joints, bones - to us scientists, observing this commonplace behavior in high resolution and slow motion is the equivalent of an audiophile listening to a Dvořák symphony.
 Or to a physicist seeing a rainbow citep:Lewin2012.
 Have you actually /seen/ one?
@@ -84,7 +84,7 @@ Unfortunately, domestication involved restraining sows, and the way we keep them
 The picture is complex, and certainly the analogy of piglets and humans should not be taken for granted citep:VandenHole2017.
 
 
-A second "show stopper" for this thesis would be if it turns out that the effect we would like to quantify (a difference between piglets of low- and normal birth weight, see below and Fig. \ref{fig:birth_weight}) is negligible in magnitude.
+A second "show stopper" for this thesis would be if it turns out that the effect we would like to quantify (a difference between piglets of low- and normal birth weight, see Fig. \ref{fig:birth_weight}) is negligible in magnitude.
 In other words: if the locomotion of newborn piglets of low and normal birth weight actually does not differ in a measurable way.
 First off, it is obvious that low and normal birth weights do differ: per definition, in terms of weight.
 But different weight might go in hand with different physical constraints, and one has to account for the trivial consequences of a different physical appearance citep:Aerts2023.
@@ -107,9 +107,13 @@ If we fail, we learned something.
 
 
 Common methods of studying locomotion fall short in their falsification capacity.
-First, some methods loose information in processing.
-For example, imagine you measured two maximally dissimilar animals, e.g. a stork and an elephant, while co-incidentally running at dynamically similar speed.
-We measure exactly the same (normalized) speed.
+First, some methods \chng{miss or} loose information in processing.
+For example, imagine we measured two maximally dissimilar animals, a stork and an elephant.
+\begin{change}
+The stork will use high clearance, high flexion, being adapted to cluttered terrain and swampy underground, whereas the elephant is large, "graviportal", and usually walks with minimal joint flexion along the limb.
+\end{change}
+We could observe these animals while co-incidentally running at dynamically similar speed;
+\change{assume that we} measure exactly the same (normalized) speed.
 If we do not see differences in that measure, we cannot exclude that the subjects (very likely) differ in the way they move their limbs (coordination).
 Second, methods might have trouble handling variation.
 One subject animal was observed to be slower in one trial, but does that mean it /cannot/ go faster as well?
@@ -142,7 +146,7 @@ Prof. Druelle and colleagues thus analyzed a developmental series of baboons: in
 Their intention is to find out if and how the use of a bipedal gait changes with age.
 
 
-That sounded like a familiar task, and with the euphoria of just having implemented a different, potentially useful method (FCAS, see below), I reached out to François and he kindly provided the data.
+That sounded like a familiar task, and with the euphoria of just having implemented a different, potentially useful method (FCAS, see Ch. \ref{cpt:fcas}), I reached out to François and he kindly provided the data.
 Not only the videos, but also the tracking (i.e. kinematics "to go").
 I much appreciate the time and effort François and his colleagues and students put into generating the data, and I am thankful for the exchange.
 And I regret that this has not been put into a publication.
@@ -218,7 +222,7 @@ Visible light videography seems to be far more accessible than other imaging tec
 We can thus expect that far better camera equipment is available than would minimally be required for our research questions.
 Sounds too easy - which is probably why my supervisors decided to send me out to a pig farm in 2017 with an inferior JVC camcorder (while a synced 4-cam 300fps Norpix system, and a set of high res GoPro's, were available at the time).
 Although that would not be fair to claim.
-There is also always an allocation to be set on the spectrum of video quality (especially framerate) and manually processing time (see Ch. \ref{cpt:digitization}, below), and I might still be clicking points on videos today if my supervisors had decided differently.
+There is also always an allocation to be set on the spectrum of video quality (especially framerate) and manually processing time (see Ch. \ref{cpt:digitization}), and I might still be clicking points on videos today if my supervisors had decided differently.
 And, after all, that video data might be the most relevant data of this PhD citep:Mielke2023.
 
 
@@ -270,8 +274,8 @@ _Part \ref{pt:1}: Kinematic Analysis_
 + The power of Fourier tools is then unleashed onto a large cross-species study that covers most of the ungulate clade @@latex: \citep[Ch. \ref{cpt:fcas},][]{Mielke2019}@@.
 
 _Part \ref{pt:2}: Probabilistic Modeling_
-+ Processing complex kinematic data, I will introduce the basics of probabilistic modeling (Ch. \ref{cpt:statistics}) in a "tiny textbook of statistics"...
-+ ... before turning the conventional modeling strategy upside down and applying a predictive model to piglets @@latex:\citep[Ch. \ref{cpt:piglets},][]{Mielke2023}@@.
++ Processing complex kinematic data, I will introduce the basics of probabilistic modeling (Ch. \ref{cpt:statistics}) in a "tiny textbook of statistics", \chng{which is based on an example of locomotor development in baboons}.
++ \chng{Moving on to piglets, I will turn} the conventional modeling strategy upside down and applying a predictive model to piglets @@latex:\citep[Ch. \ref{cpt:piglets},][]{Mielke2023}@@.
 
 _Part \ref{pt:3}: Dynamics_
 + Kinematics are just half of locomotor research: the study of forces and moments is reviewed and summarized in another overview chapter (Ch. \ref{cpt:dynamics_workflow}).

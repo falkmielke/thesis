@@ -15,7 +15,7 @@ Their methodology is overeall similar to that of Bernstein, yet improved by heur
 The use of Fourier methods for asserting gait symmetry and variability were recognized citep:Soudan1982.
 
 
-Van Weeren /et al./ applied Fourier Series to measure skin marker displacement, not joint angles citep:vanWeeren1992, yet extracted the coefficients with a regression instead of direct transformation (see below).
+Van Weeren /et al./ applied Fourier Series to measure skin marker displacement, not joint angles citep:vanWeeren1992, yet extracted the coefficients with a regression instead of direct transformation.
 Schendel and colleagues quantified inter-vertebral angles with a sine-cosine Fourier Series citep:Schendel1995, again with a computational regression.
 It was found that relatively few harmonics can be sufficient to detect symmetry and lameness in horses citep:Audigie1999,Peham1996.
 Others have applied a Fourier Series to the segment angles of limb segments citep:Grasso2000, for example to infer amplitude and phase relations.
@@ -32,7 +32,7 @@ Thereby, the article has outstanding educational value for those attempting to f
 
 With the rise of computational approaches, inverse dynamic modelling of human gait was facilitated by transforming to the frequency domain citep:Ren2007; pattern recognition and classification methods were applied @@latex:\citep[e.g.][]{Mostayed2008}@@.
 Along these lines, Fourier Series was used to get a frequency spectrum and compute development- and pathology related change in overall locomotor frequency @@latex:\citep[e.g.][]{Kurz2011}@@.
-Multi-Dimensional variants of Fourier analysis for two angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D angles using Quaternions citep:Kenwright2015 point at promising future directions.
+Multi-Dimensional variants of Fourier analysis for two \chng{joint} angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D \chng{joint} angles using Quaternions citep:Kenwright2015 point at promising future directions.
 
 
 Finally, recent work by the author (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}) has expanded on the aspect of multi-variate analysis and favorable data properties in the frequency domain citep:Mielke2019,Mielke2023.
@@ -45,10 +45,10 @@ Few studies have explored downstream analysis of the Fourier coefficients.
 Confusions about mathematical terminology (e.g. "series" or "transform", "transformation" or "regression) complicate the situation.
 To summarize, variability in the use of Fourier Series arises from the following questions:
 + Which signals to use? (joint/segment angles)
-+ How to apply the transformation? (no regression required, see below)
++ How to apply the transformation? (no regression required)
 + Which form and implementation to use? ("Series" vs. "transform", "trigonometric" versus "complex exponential" form)
 + If and how to process data in the frequency domain? (multivariate analysis, modeling)
 + How many coefficients to retain? (order)
 + The possibility of inverting FSD has been neglected, maybe in consequence of the above.
 
-All these questions are the purpose of this review, and will be adressed below.
+All these questions are the purpose of this review, and will be adressed in the next sections.

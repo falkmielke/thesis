@@ -47,12 +47,12 @@ Yet "friendliness" is not a scientific category, and thus we must consider this 
 If a person in question is running at constant velocity (which we could quantify using Fourier methods and probabilistic modeling, see before), the unexpected appearance of an obstacle will certainly force the subject to change trajectory.
 If the unfortunate subject is unable to adjust on time, physicists would call this a "collision experiment".
 In most probable cases the impact will thus *change the subject's momentum*.
-Momentum quantifies the linear and angular movement of a body, as will be explained below.
+Momentum quantifies the linear and angular movement of a body.
 The non-sliding door itself, set up on a hinge (point \(P\) in Fig. \ref{fig:slamming}), will gain rotational momentum through the act of slamming, performed by an experimenter.
 In the collision case, the subject might (i) decelerate but proceed, (ii) come to a hold, or (iii) ungently bounce backwards from the elastic collision.
 The door will thus transfer momentum to the subject, thereby ultimately canceling out (part of) the momentum of the person if the impact is approximately equal in magnitude, but opposite in direction, of the running.
 Trained experimenters might even succeed in (iv) transferring angular momentum to the surprised subject, generating a spin (though attention must be paid to whether that spin is partially caused by an evasive motor response of the subject).
-All these possible outcomes are manifestation of the *conservation of energy and momentum*, which I will explore in detail below, using the hypothetical door slamming experiment as a metaphor.
+All these possible outcomes are manifestation of the *conservation of energy and momentum*, which I will explore \chng{on the metaphor of a} hypothetical door slamming experiment.
 Due to the numerous involved variables, it is not clear /a priori/ how exactly a subject will be hit, and what the exact consequences of the collision are.
 Predicting the outcome of such scientific experiments is enabled by a major field of biomechanics, which is called *dynamic modeling*.
 
@@ -95,7 +95,7 @@ Yet this does not imply that they are generally preferred by all experts in the 
 # (rather the contrary: they lack acceptance, despite their usefulness, which I hope to change by kindling understanding)
 In a nutshell:
 + Wrenches and quaternions are useful computational tools for calculating rigid body dynamic models.
-+ Balance Equations (see below) are the mathematical manifestation of conservation of momentum.
++ Balance Equations are the mathematical manifestation of conservation of momentum.
 + Reference frame considerations can simplify calculations; however, static frame calculations are sufficient and result in correct joint moments.
 # + Fictitious Forces are unbalanced change of momentum. If one intends to calculate balances in an accelerating frame, include four fictitious forces: D’Alambert, Euler, Coriolis, and the Centrifugal force.
 + Computed Tomography might be a shortcut to approximate structural properties which are crucial for the calculation of dynamics (next chapter).
@@ -140,7 +140,7 @@ F = m \cdot \ddot x + \frac{\partial m}{\partial x} \cdot \dot x \dot x
 
 
 Because \(a=\ddot x\), the first part of the right handside expression in equation @@latex:\eqref{eqn:force}@@ is the familiar \(F=ma\).
-The second part is more enigmatic: those are "velocity product terms", which involve partial derivatives of the mass matrix@@latex:\footnote{Mass is often taught as a scalar quantity, yet in more complex problems of composite systems, which have a mass distribution, it can be more useful to represent mass by a matrix/tensor. This is analogous to the mass moment of inertia, see below.}@@, thereby accounting e.g. for configuration changes of a chain of segments, deformations or mass shifts (e.g. muscles, blood flow, ...).
+The second part is more enigmatic: those are "velocity product terms", which involve partial derivatives of the mass matrix@@latex:\footnote{Mass is often taught as a scalar quantity, yet in more complex problems of composite systems, which have a mass distribution, it can be more useful to represent mass by a matrix/tensor. This is analogous to the mass moment of inertia.}@@, thereby accounting e.g. for configuration changes of a chain of segments, deformations or mass shifts (e.g. muscles, blood flow, ...).
 Assuming here that mass distribution of single segments is constant or changes are comparatively small (which is generally an inaccurate simplifying assumption), this part is usually set to zero.
 
 Hence, we get a more or less familiar equation for the Force \(F\), which tells us that the acceleration of a mass (\(m\ddot x\)), i.e. a change in linear momentum, must be equal to an external force.
@@ -178,7 +178,7 @@ And so, the series of equations above can be applied analogously to angular mome
 The time derivative is as follows.
 \[\frac{dL}{dt} = I \cdot \frac{\partial \dot \theta}{\partial t} + \frac{\partial I}{\partial t} \cdot \dot \theta\]
 
-The time derivative of angular momentum is called moment (\(M\); see also: citet:WikipediaNewtonEuler,WikipediaTorque and below), and with further manipulation @@latex:\citep[details in][p. 242, eqn. 8.23; otherwise see Fig. \ref{fig:miracle}]{Lynch2017}@@ yields:
+The time derivative of angular momentum is called moment (\(M\); see also: citet:WikipediaNewtonEuler,WikipediaTorque), and with further manipulation @@latex:\citep[details in][p. 242, eqn. 8.23; otherwise see Fig. \ref{fig:miracle}]{Lynch2017}@@ yields:
 #+begin_src latex
 \begin{equation}\label{eqn:moment}
 M = I \ddot\theta + \dot\theta \times I\dot\theta
@@ -275,7 +275,7 @@ Wrenches can be added up, for example the dynamic wrench can be easily shifted (
 
 
 The \(x\) and \(\theta\) in the dynamic wrench refer to the movement of the rigid body itself and are immediately derived from the object's kinematics.
-The inertial properties \(m\) and \(I\) have to be measured or approximated separately (see below).
+The inertial properties \(m\) and \(I\) have to be measured or approximated separately.
 The dynamic wrench expresses the total change of momentum of an object.
 
 
@@ -383,7 +383,7 @@ Yet in most applications, quaternions are mathematically elegant and efficient.
 The theoretical considerations above assemble several technical advantages which are worth summarizing.
 + The Balance of Wrenches, equation \eqref{eqn:balance_of_wrenches}, can be calculated entirely in the inertial reference frame, without repeated switch to joint coordinate systems (and return).
 + Wrenches can easily be moved to other reference points via equation \eqref{eqn:shift_wrench}.
-+ A convenient point to calculate the balance of wrenches is the center of mass (\(COM\), see below); rotation about that point is an expression of spin angular momentum (an intrinsic property) and most components simplify (e.g. gravitational wrench \(W_{g}\), dynamic wrench \(W_{dyn}\)).
++ A convenient point to calculate the balance of wrenches is the center of mass (\(COM\)); rotation about that point is an expression of spin angular momentum (an intrinsic property) and most components simplify (e.g. gravitational wrench \(W_{g}\), dynamic wrench \(W_{dyn}\)).
 + Expressing rotational motion by quaternions avoids issues of other methods; favorable features are linear superposition and direct derivative calculation.
 
 These favorable technical properties have not gone unnoticed citep:Dumas2004,Dumas2007.
@@ -489,7 +489,7 @@ This establishes the conceptual framework to perform the relevant calculations o
 
 
 A crucial simplification of that procedure is that we treat body segments of animals as rigid bodies, which they are not.
-By /post mortem/ fixation and dissection, or by volumetric digitization, segments can be separated and their inertial properties measured.
+By /post mortem/ fixation and dissection, or by \chng{digital volumetric segmentation}, segments can be separated and their inertial properties measured.
 The accuracy of these methods will be the topic of the next chapter.
 
 

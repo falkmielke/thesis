@@ -28,7 +28,7 @@ It built on the application of another physical principle: namely that most meas
 This is especially true in the biological sciences, where variability in a trait, in reproductive success, and in the correlation of these two are the key prerequisites of our central working model citep:Darwin1859.
 Statistical models which incorporate variability, though rarely applied in that context to date, are useful in biological applications citep:Roraas2019,DeGroote2021.
 I provided a brief tutorial to outline why and how probabilistic models work in practice (e.g. the MCMC sampling methodology, Ch. \ref{cpt:statistics}).
-In that framework, I applied probabilistic, predictive modeling (see below) to a comprehensive data set of piglet kinematics (Ch. \ref{cpt:piglets}).
+In that framework, I applied probabilistic, predictive modeling to a comprehensive data set of piglet kinematics (Ch. \ref{cpt:piglets}).
 Prediction in conventional statistics would be deterministic, i.e. yielding point estimates which do not reflect the stochastic, variable nature of the phenomenon.
 I demonstrated that probabilistic prediction can be used to generate relevant insights into locomotor maturation of piglets.
 
@@ -96,7 +96,7 @@ In the many cases which show repetetive or recurrent behavior, Fourier analysis 
 Some examples should illustrate how predictive modeling could complement existing analyses.
 
 One exemplary study of kinematics was performed by citet:Hutchinson2006.
-The authors digitized an enormous number of strides of different species of elephants@@latex:\footnote{For reference: this was at a time when high-end consumer GPUs housed about 256MB of memory; long before the era of DeepLabCut.}@@.
+The authors \chng{tracked landmarks on} an enormous number of strides of different species of elephants@@latex:\footnote{For reference: this was at a time when high-end consumer GPUs housed about 256MB of memory; long before the era of DeepLabCut.}@@.
 Their measurements are extensive (in terms of the number of derived quantities), yet descriptive.
 The authors discuss whether more or less subtle discontinuities in the spatiotemporal measures actually reflect gait changes citep:Alexander1989, but emphasize the overall smooth speed-dependence of spatiotemporal parameters.
 They put some effort into a convincing argumentation that a subset of their measurements were close to what can be considered the maximum speed elephants can reach.
@@ -151,7 +151,7 @@ Overall, the models provide strong evidence against the existence of fundamental
 [[./figures/piglet_xromm_t02_0214.png]]
 
 In fact, this lack of differences in the collective output of the animals neuromotor system is surprising.
-The FCAS data quantifies joint angle profiles - and angles are indifferent to size.
+The FCAS data quantifies joint angle profiles - \chng{which} are indifferent to size.
 Yet piglets of low- and normal birth weight operate under different body mass constraints: NBW are about twice as heavy as LBW.
 To produce the same kinematics, one would think that they must tune their motors differently, like using different gears.
 These would be differences in /why/ we observe the (indistinguishable) movements.
@@ -160,11 +160,11 @@ Different weight implies different physical constraints, size does matter citep:
 Yet we encountered conceptual and practical issues in addressing this second big question (i.e. /why/ they move as observed).
 The first issue is a practical one (Ch. \ref{cpt:inertials}): inertial parameters, which others have extracted from calibrated CT scans, cannot be determined at sufficient accuracy.
 Then, again, there is the issue of variability, as evident from the study of kinematics (Ch. \ref{cpt:piglets}):
-differences between NBW and LBW (when normalized for size, see below) seem to be lower in magnitude than the effect of maturation, and lower than normal variability of the behavior.
+differences between NBW and LBW (when normalized for size) seem to be lower in magnitude than the effect of maturation, and lower than normal variability of the behavior.
 This was actually confirmed by analysis of 3D kinematics (which we did, unpublished): we originally attempted the full experimental procedure for XROMM.
 Of course those recordings are variable, but of the 392 recordings we obtained in several recording sessions in summer 2019, not a single one showed locomotion which strictly fulfilled the "steady state" criterion and gave single limb forces (hitting the force plate correctly was likely, but not guaranteed, and happened in 189 recordings, 85 of them walking gait).
 Not a single stride could be considered "representative", because young piglets in our setup literally always tumbled, jumped, sidestepped, stopped shortly after, or interfered with each other, both LBW and NBW.
-The XROMM and inverse dynamics procedure is a low through-put method, and it was not possible to digitize a sufficient number of strides to assess LBW differences in joint moment orchestration on the background of motor variability.
+The XROMM and inverse dynamics procedure is a low through-put method, and it was not possible to \chng{track landmarks on} a sufficient number of strides to assess LBW differences in joint moment orchestration on the background of motor variability.
 
 
 These issues nonwithstanding, I succeeded in porting the XROMM workflow citep:Brainerd2010 to an alternative software environment (cf. [[https://git.sr.ht/~falk/foss_xromm]], Fig. \ref{fig:piglet_xromm}).

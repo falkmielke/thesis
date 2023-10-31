@@ -23,7 +23,7 @@ Some of these disadvantages are emphasized when working with trigonometric funct
 Determining the "parameters", i.e. Fourier coefficients, works by eqn. \eqref{eqn:fourier_coefficients1}, which can be directly translated to computer code (see above and supplement \ref{appendix:code}).
 The procedure is deterministic, exact, and reversible; no start values are required.
 The trigonometric formulas provided in many publications resemble regression models, but applying a regression procedure is not necessary.
-I will demonstrate the overall procedure below and provide code for some relevant scientific scripting languages as proof of concept.
+I will demonstrate the overall procedure and provide code for some relevant scientific scripting languages as proof of concept.
 
 
 * Relation to Fourier Transform
@@ -44,7 +44,7 @@ The result of FFT on a single window is a quasi-continuous frequency spectrum, a
 Because of this, joint angle profiles which look exactly identical, but differ in stride duration, would have different frequency spectra.
 In contrast, FSD only considers harmonics, which are the integer multiples of the signal period.
 Therefore, the outcome of FSD is usually a much shorter array of numbers (Fourier coefficients).
-The FSD formula involves a normalization for the signal period (i.e. stride cycle duration), and thus strides of different duration can be directly compared (but see below).
+The FSD formula involves a normalization for the signal period (i.e. stride cycle duration), and thus strides of different duration can be directly compared.
 FSD also avoids problems of FFT which are due to windowing.
 Though both procedures could be applied to stride cycle kinematics, *FSD is favorable if the periodicity/cyclicity assumption holds*.
 
@@ -111,7 +111,7 @@ This time point is more or less distinctly visible on videos, and might be a req
 Yet, mathematically, that is just an arbitrary point in the cycle, and biomechanically, the configuration of the limb can be different on two touch downs (two strides might instead have higher cross-resemblance just before touchdown, or at mid-stance; Fig. \ref{fig:endstart}).
 The term configuration herein describes the relative spatial arrangement of a set of points of interest or markers.
 Thus, if emphasis of the analysis lies more on the cyclic character of the stride, and if researchers find it valid to choose a different point for start and end of the cycle, then optimal points could be found automatically by cross-comparing the configurations of the whole limb in a sufficient frame range around the limb touch downs @@latex:\citep[as applied in][]{Mielke2019,Mielke2023}@@.
-This can be achieved by taking all relevant points digitized in the videos (treating them in each frame as a geometric shape; Fig. \ref{fig:endstart}B) and calculating the Procrustes Distance between those frames or shapes citep:Rohlf1990.
+This can be achieved by taking all relevant points \chng{tracked} in the videos (treating them in each frame as a geometric shape; Fig. \ref{fig:endstart}B) and calculating the Procrustes Distance between those frames or shapes citep:Rohlf1990.
 That Procrustes Distance is a direct measure for the configuration difference between frames (Fig. \ref{fig:endstart}C).
 In a cross-comparison, the two frames which have least Procrustes Distance are candidates for start and end of the cycle (Fig. \ref{fig:endstart}D), and should be verified by visually superimposing the video frames.
 Conversely, whether or not there are two such frames with a sub-threshold Procrustes Distance, and at what time in the cycle they appear, can be a useful proxy to confirm steady-state locomotion.
@@ -174,7 +174,7 @@ The (root-mean-square) difference of the original signal and the re-transformed 
 Additionally, original and re-transformed signals should be plotted on top of each other for visual inspection.
 
 
-This strategy is of general use, and we will demonstrate it on the test case below (Ch. \ref{casestudy:dataprep}).
+This strategy is of general use, and we will demonstrate it on the test case (Ch. \ref{casestudy:dataprep}).
 In the particular case of joint angle kinematics, it has often been concluded that relatively few coefficients are sufficient to capture the essence of the phenomenon.
 This is physically plausible, because the elements of limbs are rigid bodies with a certain inertia.
 Such elements cannot perform too abrupt accelerations, and in consequence, the profiles are smooth.

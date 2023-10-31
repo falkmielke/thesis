@@ -419,7 +419,7 @@ if __name__ == "__main__":
                      # , inner = None \
                      , inner = 'quartile' \
                     )
-    g.set_axis_labels("", "residual")
+    g.set_axis_labels("", "residual (FSD)")
     g.set_titles("{col_name}")
     # g.set_xticklabels(['3']+['']*6+['10']+['']*6+['17']+['']*6+['24'])
     g.set(ylim=(0, 0.05))
@@ -516,7 +516,7 @@ if __name__ == "__main__":
                      # , inner = None \
                      , inner = 'quartile' \
                     )
-    g.set_axis_labels("", "residual")
+    g.set_axis_labels("", "residual (FSD+PCA)")
     # g.set_titles("{col_name}")
     g.set_titles("")
     g.set(ylim=(0, 0.05))

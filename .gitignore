@@ -24,3 +24,4 @@ ch*/*.bbl
 /ch31_dynamics/archive/
 /reviews/
 /archive/
+*.pyc

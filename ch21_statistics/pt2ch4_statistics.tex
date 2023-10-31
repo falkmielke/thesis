@@ -98,8 +98,8 @@ In fact, good modeling frameworks are sufficiently flexible to enable any model 
 \bigskip
 
 
-Hypothesis testing and modeling are non-exclusive, as one can ask both questions of effect significance and effect magnitude at the same time.
-If a given data model turns out to match the data well, this affects the hypotheses which can be hypothesized (e.g. Normality assumption can be confirmed or rejected by measuring the goodness of fit of a ``Student's T'' model, see below).
+Hypothesis testing and modeling are non-exclusive, as one can ask both questions of effect significance and effect magnitude at the same time \chng{(though in the case of probabilistic models, we do not speak of significance, but of ``credible intervals'')}.
+If a given data model turns out to match the data well, this affects the hypotheses which can be hypothesized (e.g. Normality assumption can be confirmed or rejected by measuring the goodness of fit of a ``Student's T'' model).
 On the other hand, because most models also contain a residual variance, it is tempting (but not always legitimate for rigorous reviewers) to use the credible intervals and residual variance to reject hypotheses without additional test.
 I would like to emphasize: all four major segments of statistics are intimately related, best executed in parallel, and should ideally yield consistent results.
 
@@ -114,7 +114,7 @@ But before getting to the actual data, I attempt to give an abstract overview of
 \clearpage
 \subsection{Modeling Workflow}
 \label{intro:workflow}
-When cooking my soup of statistics, I tend to pragmatically stick to the ``ingredients'' outlined in the paragraphs below.
+When cooking my soup of statistics, I tend to pragmatically stick to the ``ingredients'' outlined in the paragraphs to follow.
 A prerequisite material is ``well-cleaned'' data, usually stored in database format (as ``csv'' for compatibility), containing as much information about the experiments as possible.
 ``Pragmatically'' here does not imply that these steps must be executed in sequential order for practical work.
 In fact, they are often repeated iteratively.
@@ -146,7 +146,7 @@ Is simulation worth it? Or, in another word:
 \textbf{Why?!} You might feel the urge to ask: why this extra step of using fake data to apply a fake model?
 The reason is simply that, by this tautologous simulation procedure, I ensure that the model structure I apply is in fact \emph{capable of} finding the effects I suspect in the real data.
 I thereby make sure that my model roughly works as I intend.
-This is first and foremost important for setting up and getting used to a modeling framework (see below).
+This is first and foremost important for setting up and getting used to a modeling framework.
 But I can also apply simplified models and observe how they fail, which helps to explore the limitations of a given model design.
 This might seem trivial for simple, linear models.
 However, when going to multi-level, multivariate models\footnote{If you are unfamiliar with the terms ``multi-level'' or ``multivariate'', I would like to ask some patience: they will get clearer below, and in fact you might already have encountered them under alternative names.}, things get complex, and model structures are neither straight forward, nor intuitive.
@@ -181,7 +181,7 @@ Just learn what might be going on in the data, and \textbf{build hypotheses} for
 \label{workflow:framework}
 Although I happen to be an advocate of probabilistic modeling frameworks, I tend to test some basic models with ``conventional'', frequentist statistics toolboxes.
 These are, for example, \texttt{statsmodels} in Python or \texttt{lmer} in R.
-The most general models are easily formulated in formula notation (see below).
+The most general models are easily formulated in formula notation.
 Per default, such frameworks are (i) Frequentist and have (ii) ``high-level'' APIs (Application Programming Interface).
 
 The ``Frequentist'' aspect was mentioned above, compared to ``probabilistic''.
@@ -223,7 +223,7 @@ This strategy could be labelled \textbf{``building a high level API from low lev
 Of course, the ``low level ground'' requires some tensor juggling and programming insights, which is certainly a show stopper for inexperienced programmers.
 
 But for me, the benefits of ``full control'' over the models outweigh the disadvantage of short term inconvenience.
-Furthermore, the system really ``flies'' with the highly iterative quest of finding the right model for a data set (see below).
+Furthermore, the system really ``flies'' with the highly iterative quest of finding the right model for a data set.
 
 
 \subsubsection{Modeling Design Choices}
@@ -243,7 +243,7 @@ More on all this below.
 Generally, the possibilities tend to be more numerous than one would like.
 
 \textbf{How to choose?} Two things guide model design choices: (i) logical arguments and (ii) model comparison.
-Model comparison is covered in detail \hyperref[workflow:comparison]{below}.
+Model comparison is covered in detail below \chng{(Ch. \ref{workflow:comparison})}.
 It is a ``hard'', numerical guide to which model succeeds best in representing the data.
 Models are compared \emph{ex post}, i.e. sampling (model fitting) is a prerequisite.
 Logical arguments, on the other hand, are soft criteria which exclude some implausible/unfeasible model structures \emph{ex ante}.
@@ -343,7 +343,7 @@ However, there are far too many degrees of freedom in the equation which might e
 To get around this, modern information criteria are designed to find the best tradeoff between model fit and complexity by quantifying and penalizing overfitting tendencies appropriately.
 
 Model comparison is one of the most powerful aspects of the modeling procedure, because it enables statisticians to make an informed choice about what is going on in the data.
-If, in direct comparison, a model including a certain parameter receives significantly less ``support'' than the model lacking it, then it is valid to accept the null hypothesis that the parameter in question is of no relevance for the data.
+If, in direct comparison, a model including a certain parameter receives less ``support'' than the model lacking it, then it is valid to accept the null hypothesis that the parameter in question is of no relevance for the data.
 
 
 \subsubsection{Posterior Prediction}
@@ -448,7 +448,7 @@ These scripts complete the following tasks:
 \item remove end-start difference (make ``cyclical'')
 \item transformation to the frequency domain via Fourier Series
 \item temporal alignment to remove phase differences in whole-limb movement
-\item \textbf{posture:} extraction of affine components (mean angle, amplitude = effective range of motion/eROM)
+\item \textbf{posture:} extraction of affine components (mean \chng{joint} angle, amplitude = effective range of motion/eROM)
 \item \textbf{coordination:} Principal Component Analysis of non-affine remainder
 \item perform statistical analysis
 \end{itemize}
@@ -497,7 +497,7 @@ coordination & \(PC_{i}\) & 1. & PCA of non-affine components of\\[0pt]
 
 
 In total, \(40\) stride cycles from \(17\) subject individuals entered the analysis.
-The goal of the analysis below is to quantify the interrelation within and between these categories of parameters.
+The goal of the subsequent analysis is to quantify the interrelation within and between these categories of parameters.
 This has to regard their implicit hierarchical structure (\emph{subject} \(\rightarrow\) \emph{stride} \(\rightarrow\) \(\lbrace\) \emph{posture}, \emph{coordination} \(\rbrace\) ).
 
 
@@ -513,7 +513,7 @@ By this definition, if you sit straight on a chair right now, your trunk angle w
 Segment angles of coupled series of segments (``limbs'') are highly correlated, which can be problematic for statistical analysis.
 To illustrate this, imagine a limb in which the knee joint is fixed, i.e. held at a constant angle throughout the stride cycle.
 The thigh and the shank segments will both have temporally varying segment angle profiles, but the correlation of these profiles is perfect.
-Further, imagine that there is an effect changing the hip angle (a joint angle, see below) temporal profile under certain circumstances; that effect will be visible in the shank \textit{segment angle} as well, although the knee does not move.
+Further, imagine that there is an effect changing the hip angle (a joint angle) temporal profile under certain circumstances; that effect will be visible in the shank \textit{segment angle} as well, although the knee does not move.
 The reason is the ``fixed knee'' constraint introduced here for illustration; the correlation is hardly less with mobile joints (the distal segments just hang on a chain downstream of a given joint, and never fully cancel out the proximal movements).
 
 
@@ -682,7 +682,7 @@ I skip this here for clarity.
 Usually, one would have to argue why the chosen model is the most appropriate one (though of course limited by availability of parameters).
 More on it when we get to spatiotemporal gait variables.
 For bodymass, the model choice is rather trivial, there is not many options but to use the other subject parameters as predictors.
-I do not use leg length and BMI as predictors for bodymass, because they share a hierarchy level, are correlated (as shown below), and thus the idea of one predicting the other might falsely imply causality.
+I do not use leg length and BMI as predictors for bodymass, because they share a hierarchy level, are correlated, and thus the idea of one predicting the other might falsely imply causality.
 
 \item \textbf{Data:}
 \label{sec:org71ae22a}
@@ -708,7 +708,7 @@ Therefore, the body parameters presented here were transformed with the natural 
 \centering
 \begin{tabular}{|l|r|c|c|}
 \hline
-\textbf{parameter} & \textbf{value} & \textbf{interval} & \textbf{sig.}\\[0pt]
+\textbf{parameter} & \textbf{value} & \textbf{interval} & \textbf{\chng{cred.}}\\[0pt]
 \hline
 \(\alpha\) & \(+12.3\) & \(\left(+10.2, +14.8\right)\) & \\[0pt]
 \(\beta_{male}\) & \(+0.6\) & \(\left(-1.9, +3.7\right)\) & \\[0pt]
@@ -718,6 +718,7 @@ Therefore, the body parameters presented here were transformed with the natural 
 \(\nu\) & \(+52.1\) & \(\left(+15.1, +94.0\right)\) & \\[0pt]
 \hline
 \end{tabular}
+\textit{\chng{Asterisk in the ``cred.'' column indicates model parameters for which the credible interval does not include zero.}}
 \end{table}
 
 
@@ -768,7 +769,7 @@ Just to review our options to model bodymass:
 \end{itemize}
 
 All of these choices in combination affect the model, and need to be compared.
-Even worse: they affect how to best model other parameters (see below; if \texttt{bm|age} is used, \texttt{leglength|age} might be a worse choice than \texttt{leglength} alone, but if \texttt{bm} is a population slope, \texttt{leglength|age} might become the model of choice).
+Even worse: they affect how to best model other parameters (if \texttt{bm|age} is used, \texttt{leglength|age} might be a worse choice than \texttt{leglength} alone, but if \texttt{bm} is a population slope, \texttt{leglength|age} might become the model of choice).
 Multi-level modeling gives a lot of options for model comparison.
 These will be handled below.
 
@@ -805,7 +806,7 @@ The empirical correlation (i) enters the model in form of the Cholesky matrix ca
 To get inferred correlation (ii), I instead initialize the \texttt{MvStudentT} with a so-called LKJ Prior \citep{LKJ2009}, which allows me to quantify the posterior correlation.
 Finally, uncorrelated posterior (iii) do not need an \texttt{MvStudentT}, but go with independent \texttt{StudentT}'s; the system can sample multiple observables at once.
 
-Note that multivariate blocks will also be relevant on the predictor side (see below).
+Note that multivariate blocks will also be relevant on the predictor side.
 The only difference between observables and predictors in modeling is the somewhat arbitrary choice of which variables we define as ``dependent'', and which as ``independent''.
 After all, they are all just distributions, as probabilistic modeling is about juggling distributions.
 Tricky detail: a multivariate predictor block must be initialized with inferred correlation (LKJ), because this block contains inferred slopes and no observed data, and thus the correlation is that of the slopes, and not of the data.
@@ -815,11 +816,11 @@ Tricky detail: a multivariate predictor block must be initialized with inferred 
 \caption{\label{tab:proportions_empiricalcorrelation}Body proportions: empirical cross correlation. Asterisk indicates parameter pairs in which the Pearson Correlation \(p\)-value is less than \(0.05\).}
 \centering
 \begin{tabular}{l|lll}
- & log body mass (kg) & log leg length (m) & log bmi (kg/m)\\[0pt]
+ & log( body mass (kg)) & log( leg length (m)) & log (bmi (kg/m))\\[0pt]
 \hline
-log body mass (kg) & \(1\) & \(+0.97\) * & \(+1.00\) *\\[0pt]
-log leg length (m) & \(+0.97\) * & \(1\) & \(+0.94\) *\\[0pt]
-log bmi (kg/m) & \(+1.00\) * & \(+0.94\) * & \(1\)\\[0pt]
+\chng{log (body mass (kg))} & \(1\) & \(+0.97\) * & \(+1.00\) *\\[0pt]
+log (leg length (m)) & \(+0.97\) * & \(1\) & \(+0.94\) *\\[0pt]
+log (bmi (kg/m)) & \(+1.00\) * & \(+0.94\) * & \(1\)\\[0pt]
 \end{tabular}
 \end{table}
 
@@ -827,11 +828,11 @@ log bmi (kg/m) & \(+1.00\) * & \(+0.94\) * & \(1\)\\[0pt]
 \caption{\label{tab:proportions_correlation}Body proportions: inferred cross correlation. Asterisk indicates values for which the HDI does not include zero.}
 \centering
 \begin{tabular}{l|lll}
- & log body mass (kg) & log leg length (m) & log bmi (kg/m)\\[0pt]
+ & log (body mass (kg)) & log (leg length (m)) & log (bmi (kg/m))\\[0pt]
 \hline
-log body mass (kg) & \(1\) & \(+0.49\) * & \(+0.92\) *\\[0pt]
-log leg length (m) & \(+0.49\) * & \(1\) & \(+0.18\)\\[0pt]
-log bmi (kg/m) & \(+0.92\) * & \(+0.18\) & \(1\)\\[0pt]
+\chng{log (body mass (kg))} & \(1\) & \(+0.49\) * & \(+0.92\) *\\[0pt]
+log (leg length (m)) & \(+0.49\) * & \(1\) & \(+0.18\)\\[0pt]
+log (bmi (kg/m)) & \(+0.92\) * & \(+0.18\) & \(1\)\\[0pt]
 \end{tabular}
 \end{table}
 
@@ -843,9 +844,9 @@ log bmi (kg/m) & \(+0.92\) * & \(+0.18\) & \(1\)\\[0pt]
  & intercept & female  & adult  & adult  & \(\epsilon\)\\[0pt]
  & & \(\rightarrow\) male & \(\rightarrow\) adolescent & \(\rightarrow\) infant & \\[0pt]
 \hline
-log body mass (kg) & \(+2.51\) & \(+0.05\) & \(-0.21\) & \(-1.44\) * & \(\pm 0.19\)\\[0pt]
-log leg length (m) & \(-0.87\) & \(+0.03\) & \(-0.03\) & \(-0.46\) * & \(\pm 0.08\)\\[0pt]
-log bmi (kg/m) & \(+2.60\) & \(+0.02\) & \(-0.18\) & \(-1.01\) * & \(\pm 0.16\)\\[0pt]
+\chng{log (body mass (kg))} & \(+2.51\) & \(+0.05\) & \(-0.21\) & \(-1.44\) * & \(\pm 0.19\)\\[0pt]
+log (leg length (m)) & \(-0.87\) & \(+0.03\) & \(-0.03\) & \(-0.46\) * & \(\pm 0.08\)\\[0pt]
+log (bmi (kg/m)) & \(+2.60\) & \(+0.02\) & \(-0.18\) & \(-1.01\) * & \(\pm 0.16\)\\[0pt]
 \hline
 \end{tabular}
 \end{table}
@@ -916,6 +917,26 @@ The ``diml.'' indication refers to ``dimensionless'', which means that the param
 Just as bodymass and its relation to the other subject parameters was the focus of the previous chapter, we now move spatiotemporal gait variables to the ``left handside'' of the equation, i.e. they are observables, and we guess that they will be in part predicted by subject parameters.
 
 
+TODO
+\begin{table}[p]
+\caption{\label{tab:spatiotemporals}\chng{Observed spatiotemporal gait parameter value ranges.}}
+\centering
+\begin{footnotesize}
+\begin{tabular}{l|llllll}
+\textbf{gait variable} & \textbf{units}  & \textbf{mean} & \textbf{standard deviation} \\[0pt]
+\hline
+clearance              & \(\%\)          & \(\) & \(\) \\[0pt]
+stride distance        & \(m\)           & \(\) & \(\) \\[0pt]
+dutyfactor             & \(1\)           & \(\) & \(\) \\[0pt]
+stride frequency       & \(Hz\)          & \(\) & \(\) \\[0pt]
+speed                  & \(\frac{m}{s}\) & \(\) & \(\) \\[0pt]
+trunk angle            & \(rad\)         & \(\) & \(\) \\[0pt]
+\end{tabular}
+\end{footnotesize}
+\end{table}
+
+
+
 
 \subsubsection{Model Design}
 \label{sec:org554cfcf}
@@ -929,24 +950,25 @@ This can have trivial reasons, such as their definition (e.g. speed is the produ
 In other cases, it is at least physically and physiologically plausible (e.g. lower dutyfactor at higher speeds).
 These correlations must be quantified, which can be part of the sampling procedure.
 As with moving from bodymass to a set of body proportions, we will have a connected set of observables.
-This can also be incorporated in the mathematical descriptions (see below).
+This can also be incorporated in the mathematical descriptions.
+
 
 The favored model in this case was one which got programmed on the \emph{empirical} correlation of spatiotemporal gait variables (Tab. \ref{tab:stridecorrelation}).
 The speed parameter correlation can elucidate how animals reach higher speeds: they walk at increased stride frequency and cover a larger distance, whereby the dutyfactor tends to reduce.
 This, however, implies no consistent change in clearance, nor does it depend on mean trunk angle.
 
 \begin{table}[p]
-\caption{\label{tab:stridecorrelation}Empirical Cross Correlation of Spatiotemporal Gait Variables. Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. \emph{d.s.}: ``dimensionless stride'' parameter.}
+\caption{\label{tab:stridecorrelation}Empirical Cross Correlation of Spatiotemporal Gait Variables. Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. \emph{d./d.s.}: ``dimensionless (stride)'' parameter.}
 \centering
 \begin{footnotesize}
 \begin{tabular}{l|llllll}
- & clearance & d.s. distance & dutyfactor & d.s. frequency & d.s. speed & trunk angle\\[0pt]
+ & clearance & d.s. distance & dutyfactor & d.s. frequency & d. speed & trunk angle\\[0pt]
 \hline
 clearance & \(1\) & \(+0.32\) * & \(-0.42\) * & \(-0.01\) & \(+0.15\) & \(+0.38\) *\\[0pt]
 d.s. distance & \(+0.32\) * & \(1\) & \(-0.57\) * & \(+0.09\) & \(+0.52\) * & \(-0.12\)\\[0pt]
 dutyfactor & \(-0.42\) * & \(-0.57\) * & \(1\) & \(-0.52\) * & \(-0.72\) * & \(-0.27\)\\[0pt]
 d.s. frequency & \(-0.01\) & \(+0.09\) & \(-0.52\) * & \(1\) & \(+0.89\) * & \(+0.12\)\\[0pt]
-d.s. speed & \(+0.15\) & \(+0.52\) * & \(-0.72\) * & \(+0.89\) * & \(1\) & \(+0.07\)\\[0pt]
+d. speed & \(+0.15\) & \(+0.52\) * & \(-0.72\) * & \(+0.89\) * & \(1\) & \(+0.07\)\\[0pt]
 trunk angle & \(+0.38\) * & \(-0.12\) & \(-0.27\) & \(+0.12\) & \(+0.07\) & \(1\)\\[0pt]
 \end{tabular}
 \end{footnotesize}
@@ -990,7 +1012,7 @@ Groupwise centering affects the data vector, however the bodymass slope is not a
 \label{sec:orgffbfe48}
 A Normal distribution was used for all the slopes, a multivariate Student's T for the observables.
 Informative priors (global mean and standard deviation) are used, which is a good heuristic to improve sampling without biasing the sampler.
-The multivariate block of observables is initialized with the empirical correlation, which facilitates the work of the sampler (yet all three options of multivariate posterior were applied and compared, see below).
+The multivariate block of observables is initialized with the empirical correlation, which facilitates the work of the sampler (yet all three options of multivariate posterior were applied and compared).
 \end{enumerate}
 
 
@@ -1001,7 +1023,7 @@ The model of spatiotemporal gait variables quantifies how stride (or gait) chara
 Clearance is highest in adult males of low bodymass (though we did not actually observe those; the effects are separately determined for age class, sex, and bodymass).
 Females and subadults lift their feet less during the swing, as do animals of comparatively higher bodymass.
 Dutyfactor is higher in infants: they are in ground contact for a longer portion of the stride.
-All of the three speed-related parameters (i.e. distance, frequency, speed; all dimensionless) are affected by bodymass, though the effect is only ``significant'' for frequency.
+All of the three speed-related parameters (i.e. distance, frequency, speed; all dimensionless) are affected by bodymass, though the effect is \chng{clearly different from zero} only for frequency.
 Animals of higher bodymass tend to take shorter steps of higher frequency, which seems to overcompensate in terms of speed.
 Infants cover lower relative distance at lower frequency, which adds up in terms of relative speed.
 The results on trunk angle show that males hold their upper body less upright than females (i.e. at a higher trunk angle; though as with any sex effect this might be due to few, influential observations).
@@ -1012,7 +1034,7 @@ It is high (\(\nu = 54.2\)), indicating that the posterior distribution has hard
 
 
 \begin{table}[p]
-\caption{\label{tab:strideresults}Effects of Subject Characteristics on Spatiotemporal Gait Variables. Significant values (i.e. values with zero not in HDI) are indicated by an asterisk.}
+\caption{\label{tab:strideresults}Effects of Subject Characteristics on Spatiotemporal Gait Variables. \chng{Values which do not contain zero in their HDI} are indicated by an asterisk.}
 \centering
 \begin{small}
 \begin{tabular}{|l|l|l|l|l|l|l|}
@@ -1114,7 +1136,7 @@ Additionally, the correlation structure of the observables (``empirical'' per de
 
 The outcome of this particular comparison method (Tab. \ref{tab:stridemodelcomparison}) are ``LOO'' values (``Leave One Out'') as a quantification for the model performance/complexity tradeoff.
 As mentioned, there are alternative quantifiers (e.g. WAIC), but experience shows that rankings from different information criteria are often similar.
-Given relatively little difference and wide standard error ranges in the LOO estimate, we can conclude that almost all of the tested models yield some plausible descriptions of the data (in other words: most models do not perform significantly better or worse than the reference).
+Given relatively little difference and wide standard error ranges in the LOO estimate, we can conclude that almost all of the tested models yield some plausible descriptions of the data (in other words: most models do not perform \chng{clearly} better or worse than the reference).
 In fact, the reference model is not the highest on the list: for example, choosing a Normal distribution instead of a Student's T for the observables would be better, which is consistent with the inferred high value for \(\nu\).
 This switch in this case would be little more than cosmetics, since that extra parameter does not affect the results presented above.
 
@@ -1123,7 +1145,7 @@ Most of them are still within the range of the reference LOO, so it would be jus
 The only outlier is the model with ``spatiotemporals in SI units'', i.e. where distance, frequency, and speed are measured in absolute values.
 Those values are less well explained by a linear model with the given priors and structure.
 This does not mean that model is wrong: most likely, they are just less normally distributed.
-Yet for the sake of constructing a cascade of models (from subject-, via stride-, to coordination parameters; see below), it seems better to choose the dimensionless parameter set.
+Yet for the sake of constructing a cascade of models (from subject-, via stride-, to coordination parameters), it seems better to choose the dimensionless parameter set.
 
 
 On the other hand, comparison would favor an ageclass dependend (hierarchical) bodymass, or the inclusion of another body proportion proxy (leg length or BMI).
@@ -1172,8 +1194,8 @@ Its purpose is to round off the baboon story and provide the basis for further d
 
 \subsubsection{Quantifying Posture and Coordination}
 \label{sec:orgb18a99b}
-Among the most relevant outcomes of digitized videos and kinematics are joint angles.
-Their temporal profiles, i.e. the angle over time, and how they change for different settings or subjects, can yield insights on coordination and motor control.
+Among the most relevant outcomes of \chng{video-derived data} and kinematics are joint angles.
+Their temporal profiles, i.e. the \chng{joint} angle over time, and how they change for different settings or subjects, can yield insights on coordination and motor control.
 In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[\emph{cf.}][]{Mielke2019}.
 This operation is simply a reversible transformation, and no information is lost in the process.
 Temporal profiles can thereby be investigated in the frequency domain, which involves a complex (math.) quantification of a given number of harmonics (this is often called the ``spectrum'' of a signal).
@@ -1200,7 +1222,7 @@ Lastly, if mean, amplitude, and phase are subtracted or normalized, the (non-aff
 This removal of affine signal components is achieved by the method of Fourier Coefficient Affine Superimposition (FCAS, Ch. \ref{cpt:fcas}).
 More precisely, the purpose of FCAS is to separate mean, amplitude, phase and the non-affine remainder, and use them in reasonable ways.
 In the present analysis, I used it to disassemble hip, knee, and ankle joint angle profiles and extract \textbf{posture} (mean joint angle and range of motion) and \textbf{coordination} (the remainder, including phase differences).
-Phase was not isolated for the different joints; however, a ``global phase alignment'' was performed by temporally aligning all angle profiles so that the phase difference of the \emph{whole limb} (head-hip-toe angle) is zero.
+Phase was not isolated for the different joints; however, a ``global phase alignment'' was performed by temporally aligning all \chng{joint} angle profiles so that the phase difference of the \emph{whole limb} (head-hip-toe angle) is zero.
 I find this mathematically more convenient than the conventional alignment to toe touch down, which in my opinion over-emphasizes a single time point and has problems with all-too-variable dutyfactors.
 
 A minor practical complication is that there are immensely many parameters in the ``coordination'' category (number of harmonics retained times number of joints times two for real and imaginary part).
@@ -1221,18 +1243,18 @@ In contrast, the posture parameters correlate in a characteristic way (Tab. \ref
 Therefore, posture and coordination were handled by two separate models with similar general structure.
 
 \begin{table}[p]
-\caption{\label{tab:posturecorrelation}Sampled Cross Correlation of Posture Parameters. Significant correlations (as per HDI) are marked by asterisks. ``Angle'' refers to the temporal mean of the joint angle profile, whereas ``amplitude'' is related to range of motion at that joint.}
+\caption{\label{tab:posturecorrelation}Sampled Cross Correlation of Posture Parameters. \chng{Values of which the HDI excludes zero} are marked by asterisks. \chng{``Mean''} refers to the temporal mean of the joint angle profile, whereas ``amplitude'' is related to range of motion at that joint.}
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
  & hip & hip & knee & knee & ankle & ankle \\[0pt]
- & angle & amplitude & angle & amplitude & angle & amplitude\\[0pt]
+ & \chng{mean} & amplitude & \chng{mean} & amplitude & \chng{mean} & amplitude\\[0pt]
 \hline
-hip angle & \(1\) & \(+0.53\) * & \(-0.57\) * & \(-0.07\) & \(+0.07\) & \(-0.26\)\\[0pt]
+hip \chng{mean angle} & \(1\) & \(+0.53\) * & \(-0.57\) * & \(-0.07\) & \(+0.07\) & \(-0.26\)\\[0pt]
 hip amplitude & \(+0.53\) * & \(1\) & \(-0.12\) & \(-0.30\) & \(-0.08\) & \(-0.01\)\\[0pt]
-knee angle & \(-0.57\) * & \(-0.12\) & \(1\) & \(-0.11\) & \(-0.38\) * & \(+0.25\)\\[0pt]
+knee \chng{mean angle} & \(-0.57\) * & \(-0.12\) & \(1\) & \(-0.11\) & \(-0.38\) * & \(+0.25\)\\[0pt]
 knee amplitude & \(-0.07\) & \(-0.30\) & \(-0.11\) & \(1\) & \(+0.03\) & \(+0.05\)\\[0pt]
-ankle angle & \(+0.07\) & \(-0.08\) & \(-0.38\) * & \(+0.03\) & \(1\) & \(-0.31\) *\\[0pt]
+ankle \chng{mean angle} & \(+0.07\) & \(-0.08\) & \(-0.38\) * & \(+0.03\) & \(1\) & \(-0.31\) *\\[0pt]
 ankle amplitude & \(-0.26\) & \(-0.01\) & \(+0.25\) & \(+0.05\) & \(-0.31\) * & \(1\)\\[0pt]
 \hline
 \end{tabular}
@@ -1326,7 +1348,7 @@ Furthermore, the edges of the cordination space can be sampled and re-transforme
 
 
 The role of dutyfactor deserves special attention to illustrate what level of detail is contained in these figures.
-Although non significant (probably I should have log transformed it, or given it a Beta distribution), some dutyfactor slopes are higher than others (Tab. \ref{tab:postureresults}).
+Although \chng{zero difference is not excluded by the HDI} (probably I should have log transformed it, or given it a Beta distribution), some dutyfactor slopes are higher than others (Tab. \ref{tab:postureresults}).
 We can learn from this that hip and knee angle are affected (hip: more flexed, knee: more extended on average) and that the knee range of motion increases with dutyfactor.
 Dutyfactor also has the biggest effect on coordination, being the highest slope value on PC1 (Tab. \ref{tab:coordinationresults}).
 
@@ -1337,23 +1359,23 @@ The final cherry on this cake (Fig. \ref{fig:japprediction}) is thus a promising
 
 \begin{landscape}\clearpage
 \begin{table}[t!]
-\caption{\label{tab:postureresults}Results of the Posture Model. Significant values are indicated by an asterisk.}
+\caption{\label{tab:postureresults}Results of the Posture Model. \chng{Values different from zero (per HDI)} are indicated by an asterisk.}
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
  & intercept & female \(\rightarrow\) male & adlt \(\rightarrow\) adol & adlt \(\rightarrow\) inft & c.log.bodymass & clearance & dutyfactor & trunk angle & stride PC1 & stride PC2 & \(\epsilon\)\\[0pt]
 \hline
-hip angle & \(+2.48\) & \(-0.06\) & \(+0.02\) & \(+0.06\) & \(+0.18\) & \(-0.87\) * & \(+0.26\) & \(-1.33\) * & \(-0.04\) * & \(-0.04\) & \(\pm 0.11\)\\[0pt]
+hip angle \chng{mean} & \(+2.48\) & \(-0.06\) & \(+0.02\) & \(+0.06\) & \(+0.18\) & \(-0.87\) * & \(+0.26\) & \(-1.33\) * & \(-0.04\) * & \(-0.04\) & \(\pm 0.11\)\\[0pt]
 hip amplitude & \(+0.40\) & \(-0.04\) & \(+0.02\) & \(+0.11\) * & \(-0.09\) & \(-0.03\) & \(+0.03\) & \(-0.02\) & \(-0.01\) & \(-0.04\) * & \(\pm 0.07\)\\[0pt]
-knee angle & \(-1.55\) & \(+0.12\) * & \(-0.07\) & \(-0.07\) & \(-0.34\) * & \(+0.35\) & \(-0.31\) & \(+0.18\) & \(+0.04\) * & \(+0.06\) * & \(\pm 0.12\)\\[0pt]
+knee angle \chng{mean} & \(-1.55\) & \(+0.12\) * & \(-0.07\) & \(-0.07\) & \(-0.34\) * & \(+0.35\) & \(-0.31\) & \(+0.18\) & \(+0.04\) * & \(+0.06\) * & \(\pm 0.12\)\\[0pt]
 knee amplitude & \(+0.94\) & \(-0.05\) & \(-0.02\) & \(-0.09\) * & \(-0.03\) & \(+0.26\) & \(-0.21\) & \(+0.05\) & \(+0.00\) & \(-0.05\) * & \(\pm 0.07\)\\[0pt]
-ankle angle & \(+1.45\) & \(-0.03\) & \(+0.04\) & \(+0.01\) & \(+0.09\) & \(+0.08\) & \(+0.03\) & \(+0.01\) & \(-0.04\) * & \(-0.06\) * & \(\pm 0.09\)\\[0pt]
+ankle angle \chng{mean} & \(+1.45\) & \(-0.03\) & \(+0.04\) & \(+0.01\) & \(+0.09\) & \(+0.08\) & \(+0.03\) & \(+0.01\) & \(-0.04\) * & \(-0.06\) * & \(\pm 0.09\)\\[0pt]
 ankle amplitude & \(+0.68\) & \(-0.07\) & \(-0.04\) & \(+0.05\) & \(+0.10\) & \(+0.24\) & \(+0.07\) & \(-0.14\) & \(-0.03\) & \(-0.08\) * & \(\pm 0.11\)\\[0pt]
 \end{tabular}
 \end{table}
 
 \begin{table}[b!]
-\caption{\label{tab:coordinationresults}Results of the Coordination Model. Significant values are indicated by an asterisk.}
+\caption{\label{tab:coordinationresults}Results of the Coordination Model. \chng{Values which do not contain zero in their HDI} are indicated by an asterisk.}
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
@@ -1375,7 +1397,7 @@ PC8 & \(-0.01\) & \(+0.03\) & \(+0.01\) & \(+0.01\) & \(-0.06\) & \(+0.01\) & \(
 \begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/posture_means_predictions.pdf}
-\caption{\label{fig:posture1}Posture model predictions. Part 1: mean angles.}
+\caption{\label{fig:posture1}Posture model predictions. Part 1: mean \chng{joint} angles.}
 \end{figure}
 
 \begin{figure}[h!]
@@ -1433,7 +1455,7 @@ So let us ask the model what the effect of dutyfactor is, specifically for adult
 The prediction (Fig. \ref{fig:dutyquantileprediction}) depicts the exact temporal coordination of joint angles within the specified group.
 Changing from LDS to HDS, the hip mean angle increases (more flexed), which indicates that a prerequisite for quicker strides is a somewhat extended posture.
 The knee is affected in terms of amplitude.
-Curiously, the ankle joint profile is hardly altered during the swing phase (phases not indicated in figure, but it is the latter part of the cycle progress and can be guessed from the ankle) except that obviously the ``second trough'' in the trace starts later; the stance phase again is altered in terms of mean angle.
+Curiously, the ankle joint profile is hardly altered during the swing phase (phases not indicated in figure, but it is the latter part of the cycle progress and can be guessed from the ankle) except that obviously the ``second trough'' in the trace starts later; the stance phase again is altered in terms of mean \chng{joint} angle.
 As a bonus, we can see the variance in the strides (as shaded traces in the background), though that variance might be an over-estimation due to low data sample size (partially influenced by wide priors).
 Remember that dutyfactor cross-influences other spatiotemporal gait variables (Tab. \ref{tab:stridecorrelation}).
 Luckily, it is easily possible and might be worth comparing the speed etc. of the selected, predicted strides.

@@ -68,7 +68,7 @@ Light are photons, "elementary particles which are the quantum of the electromag
 Filters let through some of them, while prohibiting others from passing.
 The same principle holds for party lights or colored window sheets: a light source is placed behind one or more filter sheets which block most colors and let through certain others.
 On the military flashlight, the "white" setting is general purpose, unfiltered, which will let pass the maximum number of photons you can expect from a given bulb.
-"Lights" (i.e. the item) are devices which constantly emit photons of a specific variety of wavelengths (colors); we call this variety the "spectrum" (see below).
+"Lights" (i.e. the item) are devices which constantly emit photons of a specific variety of wavelengths (colors); we call this variety the "spectrum".
 Put simply, applying a red-pass filter sheet will change the composition of the passing light by blocking the majority of "non-red" photons.
 Because relatively more red photons pass the filter, the filtered spectrum will be predominantly red, and appear red to our visual perceptive system.
 
@@ -270,7 +270,7 @@ As discussed in the previous chapter, the goal of inverse dynamics is to calcula
 The unit of calculation is therefore a segment.
 In a reductionist approach, the purpose of this experiment is to perform all procedures and calculations on one extracted rigid part of a segment.
 
-For this purpose, a femur was excised from a piglet specimen which had been used previously in XROMM\footnote{X-ray Reconstruction Of Moving Morphology, Brainerd et al., 2010} experiments (see below). \nocite{Brainerd2010}
+For this purpose, a femur was excised from a piglet specimen which had been used previously in XROMM\footnote{X-ray Reconstruction Of Moving Morphology, Brainerd et al., 2010} experiments. \nocite{Brainerd2010}
 The animal was euthanized after succesful completion of the experiment.
 Procedures have been approved /a priori/ by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium (approval number 2017–25).
 The femur was extracted by carefully disarticulating the parts of the right hindlimb of the piglet, isolating the femur, and removing surrounding soft tissue.
@@ -282,7 +282,7 @@ The femur was extracted by carefully disarticulating the parts of the right hind
 
 
 The extracted bone underwent the full XROMM and inverse dynamic modelling procedure (Fig. \ref{fig:flying_femur_fotos}).
-Metal bead markers, \(0.5\ mm\) standard soldering balls made out of a lead-tin alloy (\(Sn_{63}Pb_{37}\)), were glued to the extracted bone to simulate the typical XROMM necessity of marked bones and facilitate video digitization.
+Metal bead markers, \(0.5\ mm\) standard soldering balls made out of a lead-tin alloy (\(Sn_{63}Pb_{37}\)), were glued to the extracted bone to simulate the typical XROMM necessity of marked bones and facilitate \chng{landmark tracking on videos}.
 Biplanar x-ray video recordings were performed on the [[https://www.uantwerpen.be/3d2ymox][University of Antwerp's 3D²YMOX system]] citep:Nguyen2021,Sanctorum2020, with two experimental settings.
 In one setting, the femur hung on a long, thin wire pendulum (appearing on camera to be "flying").
 In a second setting, the bone was rotated to mimic in vivo motion by a motor to which it was attached with a radiotranslucent, custom-made plastic clamp.
@@ -312,7 +312,7 @@ Those were not calibrated with the full array of plastic debris; they contained 
 One of the piglet scans was chosen for the validation of the density acquisition method by comparing known segment- and total weight to the outcome of the CT method.
 For this purpose, the animal was dissected both physically and virtually (segmentation, Fig. \ref{fig:piglet_segmentation}) and the results compared.
 Segments were weighted individually on a precision scale.
-Virtual segments were processed with the density regression procedure (see below) to compute segment-wise mass estimates.
+Virtual segments were processed with the density regression procedure to compute segment-wise mass estimates.
 
 #+CAPTION: Virtual dissection (segmentation) of a piglet CT scan. Example virtual slice.
 #+LABEL: fig:piglet_segmentation
@@ -384,7 +384,7 @@ Summing up all volume elements will give the total mass of the object:
 \end{equation}
 #+end_src
 
-The crucial part here is to get \(\rho_{i}\), the density per voxel, which we attempt via a regression (see below).
+The crucial part here is to get \(\rho_{i}\), the density per voxel, which we attempt via a regression.
 
 
 *** Center of Mass

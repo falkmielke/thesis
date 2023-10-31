@@ -26,7 +26,7 @@ The rich spectrum of Fourier-based methods comprises versatile techniques which 
 
 * Fourier Series
 
-#+CAPTION: *Kinematic data generation workflow.* (A) Videos of animals are taken, here a baboon walking bipedally from left to right. The frames captured at touch-down, mid-stance, lift-off, mid-swing, and consecutive touch-down are shown. (B) Points of interests, e.g. joints, are digitized, which yields their pixel position over time. In this case the knee \(x\) and \(y\) positions are shown relative to their first value. Vertical bars indicate timing of the frames from the upper panel. (C) Joint angles are calculated from groups of three of those points of interest. Their change over time is a joint angle profile. I herein define joint angles to be zero at a fully extended (straight) joint, and positive for joint flexion. Per definition of "steady state locomotion", joint angles in steady state movement will return to approximately their start value over a cycle (indicated by the horizontal line, discussed below). Mathematically, this is called "periodicity", the joint angle profiles in steady state locomotion are thus "cyclic".
+#+CAPTION: *Kinematic data generation workflow.* (A) Videos of animals are taken, here a baboon walking bipedally from left to right. The frames captured at touch-down, mid-stance, lift-off, mid-swing, and consecutive touch-down are shown. (B) Points of interests, e.g. joints, are tracked, which yields their pixel position over time. In this case the knee \(x\) and \(y\) positions are shown relative to their first value. Vertical bars indicate timing of the frames from the upper panel. (C) Joint angles are calculated from groups of three of those points of interest. Their change over time is a joint angle profile. I herein define joint angles to be zero at a fully extended (straight) joint, and positive for joint flexion. Per definition of "steady state locomotion", joint angles in steady state movement will return to approximately their start value over a cycle (indicated by the horizontal line). Mathematically, this is called "periodicity", the joint angle profiles in steady state locomotion are thus "cyclic".
 #+ATTR_LATEX: :placement [pt] :width 16cm
 #+LABEL: fig:jointangle
 [[./figures/f1_jointangle.pdf]]
@@ -49,9 +49,9 @@ The change of a joint angle over time is called a "joint angle profile".
 
 One could quantitatively capture joint angle profiles in different ways (Fig. \ref{fig:domains}).
 The most intuitive, and by far most prevalent way is the time domain representation (Fig. \ref{fig:domains}, left column).
-It stems directly from the technical method by which kinematic data is usually extracted: videos of the walking animals are digitized frame-by-frame @@latex:\citep[\textit{cf.} Appendix \ref{cpt:digitization} and][]{MMielke2020}@@.
-The outcome are two columns of numbers: a "time", capturing the seconds at which a frame was captured, and then the "angle" measurement itself, usually assessed from three landmark positions (Fig. \ref{fig:domains}, lower left)
-The more temporal sampling points, the better the temporal resolution, but the higher the digitization workload and storage requirement.
+It stems directly from the technical method by which kinematic data is usually extracted: \chng{landmarks} on videos of the walking animals are \chng{tracked} frame-by-frame @@latex:\citep[\textit{cf.} Appendix \ref{cpt:digitization} and][]{MMielke2020}@@.
+The outcome are two columns of numbers: a "time", capturing the seconds at which a frame was captured, and then the "\chng{joint} angle" measurement itself, usually assessed from three landmark positions (Fig. \ref{fig:domains}, lower left)
+The more temporal sampling points, the better the temporal resolution, but the higher the \chng{landmark tracking} workload and storage requirement.
 
 
 One assumption above is that the stride was recurrent, or cyclical, i.e. periodic.
@@ -66,7 +66,7 @@ This is called the *"frequency domain"*, i.e. the representation of a cyclical s
 Any periodic, continuous signal, and thus also any cyclical joint angle profile, can be described like this, just as any tone the guitar string makes can be described as a sum of harmonics.
 It might theoretically take infinitely many harmonics to exactly represent the signal (e.g. in case of non-smooth signals).
 However, in practice, the effects which would cause this are usually considered to be measurement noise.
-Physiological, "real" signals normally require few harmonics to be appropriately captured (discussed below).
+Physiological, "real" signals normally require few harmonics to be appropriately captured.
 
 
 
@@ -82,21 +82,21 @@ The capital sigma tells mathematicians that this is a series, and thus the equat
 
 
 At first, the analytical formula might seem quite complex for everyday application, and computer code might be more usable.
-In supplement \ref{appendix:code} and online (\url{https://git.sr.ht/~falk/fcas_code}), I provide code for Python, R and Matlab which can just be copied and used\footnote{The ``order'' parameter in the decomposition is the number of coefficients to retain, which will be discussed in detail below.}:
+In supplement \ref{appendix:code} and online (\url{https://git.sr.ht/~falk/fcas_code}), I provide code for Python, R and Matlab which can just be copied and used\footnote{The ``order'' parameter in the decomposition is the number of coefficients to retain.}:
 #+BEGIN_EXPORT latex
 \begin{lstlisting}
 coefficients = FourierSeriesDecomposition(time, signal, order)
 \end{lstlisting}
 #+END_EXPORT
 
-It can be inverted (just as the analytical formula, see below):
+It can be inverted (just as the analytical formula):
 #+BEGIN_EXPORT latex
 \begin{lstlisting}
 signal = FourierSeriesRecomposition(coefficients, time)
 \end{lstlisting}
 #+END_EXPORT
 
-Knowing the assumptions and limitations (see below) and paying attention to the data types and formats, these functions can be simply applied to transform between the time- and frequency domain.
+Knowing the assumptions and limitations, and paying attention to the data types and formats, these functions can be simply applied to transform between the time- and frequency domain.
 
 
 \bigskip
@@ -104,14 +104,14 @@ There are numerous morphotypes of the Fourier theorem.
 Equation \eqref{eqn:fourier_coefficients1} is the exponential form of the Fourier Series.
 The formula exists in other variants (which are equivalent by Euler's formula): the rare but useful "amplitude-phase" form, and the more abundant "sine-cosine" representation.
 Historically, trigonometric functions are more convenient to handle, whereas modern computer implementations easily capture complex numbers, whereas humans have most intuition for amplitude and phase.
-The Fourier Series is related to, but slightly different from, Fourier Transform, a relation which will be discussed in detail below (Ch. \ref{properties:transform}).
+The Fourier Series is related to, but slightly different from, Fourier Transform, a relation which will be discussed in detail (Ch. \ref{properties:transform}).
 Applying the Fourier Series is a decomposition of a signal into its harmonic components, hence I will use the term *Fourier Series Decomposition (FSD)* herein.
 "Discrete Fourier Transform" (DFT) can be considered synonymous to "Fourier Transform", emphasizing the "discrete" nature of sampled data; "Fast Fourier Transform" (FFT) is an efficient algorithm to implement Fourier Transform.
 DFT/FFT work on any signal and typically involve windowing, whereas FSD demands a periodic input signal.
 FSD returns a single row of numbers (*"spectrum"*, i.e. harmonic contributions) for that signal, and that spectrum is discrete.
 FFT natively also returns a spectrum citep:Welch1967, but a continuous one.
 However, in practice, Fourier Transform is often applied in shifted windows and returns a "spectrogram" (i.e. frequency content over time).
-Finally, a Fourier Series can be applied to a single angle ("1D"), or to multiple signals at the same time (e.g. on phase plots).
+Finally, a Fourier Series can be applied to a single \chng{joint} angle ("1D"), or to multiple signals at the same time (e.g. on phase plots).
 All of these (and other) variants of the method have been applied in the research of locomotor kinematics.
 
 It is therefore worthwile to review the historic use of related methods in studies on locomotor kinematics, and look for some common patterns and strategies.

@@ -1,4 +1,4 @@
-#+title: Video Digitization
+#+title: Video Landmark Tracking
 
 #+SETUPFILE: latex_header.org
 #+EXPORT_FILE_NAME: digitization
@@ -12,6 +12,7 @@
 
 To perform any kinematic analysis, one has to extract kinematic data.
 Therefore, one has to "track" the trajectory of points of interest on a digital video.
+\chng{(Note: the term "point digitization" is common, but inappropriate, stemming from times when analogue videos were acquired.)}
 
 The standard way to do this has changed dramatically during the course of this PhD project:
 whereas the gold standard used to be having a student assistent to click points frame-wise on the videos ("video tracking" of points), there are now deep learning algorithms to replace those students ("pose estimation" of whole animals).
