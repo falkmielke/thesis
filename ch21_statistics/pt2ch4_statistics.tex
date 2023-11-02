@@ -903,7 +903,7 @@ All this was more a playground to rehearse and apply some basic modeling concept
 \FloatBarrier\clearpage
 \subsection{Spatiotemporal Gait Variables}
 \label{sec:org69bec74}
-With this knowledge about the subject parameteres, I will proceed to the next parameter category: the spatiotemporal gait variables, also called gait variables, spatiotemporals, or stride cycle parameters. Those are:
+With this knowledge about the subject parameteres, I will proceed to the next parameter category: the spatiotemporal gait variables, also called gait variables, spatiotemporals, or stride cycle parameters \chng{(Tab. \ref{tab:spatiotemporals})}. Those are:
 \begin{itemize}
 \item dutyfactor
 \item diml. stride distance (relative to lower leg length)
@@ -913,28 +913,30 @@ With this knowledge about the subject parameteres, I will proceed to the next pa
 \item trunk angle
 \end{itemize}
 
-The ``diml.'' indication refers to ``dimensionless'', which means that the parameter was subject to spatiotemporal normalization (see Ch. \ref{prep:dimensionless}).
-Just as bodymass and its relation to the other subject parameters was the focus of the previous chapter, we now move spatiotemporal gait variables to the ``left handside'' of the equation, i.e. they are observables, and we guess that they will be in part predicted by subject parameters.
 
-
-TODO
 \begin{table}[p]
-\caption{\label{tab:spatiotemporals}\chng{Observed spatiotemporal gait parameter value ranges.}}
+\begin{change}
+\caption{\label{tab:spatiotemporals}Observed spatiotemporal gait parameter value ranges.}
 \centering
 \begin{footnotesize}
 \begin{tabular}{l|llllll}
 \textbf{gait variable} & \textbf{units}  & \textbf{mean} & \textbf{standard deviation} \\[0pt]
 \hline
-clearance              & \(\%\)          & \(\) & \(\) \\[0pt]
-stride distance        & \(m\)           & \(\) & \(\) \\[0pt]
-dutyfactor             & \(1\)           & \(\) & \(\) \\[0pt]
-stride frequency       & \(Hz\)          & \(\) & \(\) \\[0pt]
-speed                  & \(\frac{m}{s}\) & \(\) & \(\) \\[0pt]
-trunk angle            & \(rad\)         & \(\) & \(\) \\[0pt]
+clearance              & \(\%\)          & \(0.35\) & \(0.05\) \\[0pt]
+stride distance        & \(m\)           & \(0.57\) & \(0.16\) \\[0pt]
+stride duration        & \(s\)           & \(0.56\) & \(0.14\) \\[0pt]
+dutyfactor             & \(1\)           & \(0.63\) & \(0.07\) \\[0pt]
+stride frequency       & \(Hz\)          & \(1.92\) & \(0.55\) \\[0pt]
+speed                  & \(\frac{m}{s}\) & \(1.10\) & \(0.41\) \\[0pt]
+trunk angle            & \(rad\)         & \(0.57\) & \(0.18\) \\[0pt]
 \end{tabular}
 \end{footnotesize}
+\end{change}
 \end{table}
 
+
+The ``diml.'' indication refers to ``dimensionless'', which means that the spatiotemporal parameter \chng{can be normalized, according to the concept of dynamic similarity} \citep[see Ch. \ref{prep:dimensionless};][]{Hof1996,Alexander1983}.
+Just as bodymass and its relation to the other subject parameters was the focus of the previous chapter, we now move spatiotemporal gait variables to the ``left handside'' of the equation, i.e. they are observables, and we guess that they will be in part predicted by subject parameters.
 
 
 
