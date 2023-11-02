@@ -154,7 +154,7 @@ Hence, we get a more or less familiar equation for the Force \(\vec{F}\), which 
 
 ** Moments
 
-#+CAPTION: Force and Moment. A force applied further away from the hinge \(\vec{P}\) (situation A) will generate a larger momentum than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector.
+#+CAPTION: Force and Moment. A force applied further away from the hinge \(\vec{P}\) (situation A) will generate a larger \chng{moment} than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector. \chng{Furthermore, because the change in angular momentum is related to that moment, the door will gain a higher momentum (and will therefore "hit harder").}
 #+LABEL: fig:slamming_moment
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_shift.pdf]]
@@ -288,7 +288,7 @@ Wrenches can be added up, for example the dynamic wrench can be easily shifted (
 
 The \(\vec{x}\) and \(\theta\) in the dynamic wrench refer to the movement of the rigid body itself and are immediately derived from the object's kinematics.
 The inertial properties \(m\) and \(I\) have to be measured or approximated separately.
-The dynamic wrench expresses the total change of momentum of an object.
+The dynamic wrench expresses the \chng{rate of change} of momentum of an object.
 
 
 On the other handside of the equation, we have any *external wrenches* acting on the object.
@@ -318,7 +318,7 @@ Equations \eqref{eqn:dynamic_wrench} and \eqref{eqn:external_wrench} constitute 
 
 In other words:
 #+begin_center
-The change of [linear;angular] momentum of a rigid body is equal to the sum of external wrenches acting on it.
+The \chng{rate of} change of [linear;angular] momentum of a rigid body is equal to the sum of external wrenches acting on it.
 #+end_center
 
 
@@ -334,12 +334,19 @@ Interested readers may refer to a practical guide by the author citep:Mielke2020
 
 
 ** Quaternions
+\begin{change}
+#+CAPTION: Spatial rotation with *Quaternions*. A point \(\vec{D}\) (blue) can be rotated by an angle \(\theta\) around an axis \((x; y; z)\). The higher the rotation angle value, the further the rotation. A quaternion (large black arrow) can encode both the axis and the angle in a 4D vector, in a manner which conveniently enables the execution of the rotation by simple vector multiplication.
+#+LABEL: fig:quaternion
+#+ATTR_LATEX: :placement [p] :width 17cm
+[[./figures/quaternions.pdf]]
+\end{change}
+
 On top of the force/moment complexity comes the issue of quantifying rotation in space.
 Angular momentum depends on angular acceleration \(\ddot\theta\), which is the second temporal derivative of "angle".
 But getting that angle in 3D is not exactly trivial, and there are several complementary notations.
 
 
-When we think about rotation in space, we might think about an axis and an angle.
+When we think about rotation in space, we might think about an axis and an angle \chng{(Fig. \ref{fig:quaternion})}.
 And that is a good point to start.
 
 #+begin_center
