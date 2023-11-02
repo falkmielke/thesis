@@ -126,7 +126,7 @@ The bottom line is that, in steady state locomotion, the *periodicity assumption
 Some data operations can be undone (math.: invertible, i.e. reversible), others not.
 For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
 Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
-Information is lost in the transfromation from a three-dimensional vector to a single number representing its length.
+Information is lost in the transformation from a three-dimensional vector to a single number representing its length.
 
 Other operations are invertible: consider again a series of velocity vectors of a physical object moving in space.
 One can freely change the reference coordinate system.

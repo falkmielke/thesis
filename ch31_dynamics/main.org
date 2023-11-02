@@ -27,7 +27,7 @@ The retrospective inference of reasons for momentum change is often labeled "inv
 
 The field of (inverse) dynamics is subject to various conventions and some methodological flexibility.
 The purpose of this chapter is to set the table and clarify conventions used further on in this thesis.
-The physical fundamentals and general algorithms applied in inverse dynamics calculations are presented, as well as elegant mathematical tools to implement them (wrenches, quaternions).
+The physical fundamentals and general algorithms applied in inverse dynamic calculations are presented, as well as elegant mathematical tools to implement them (wrenches, quaternions).
 To illustrate the basic principles of physics which come to play in this chapter, a hypothetical collision experiment is discussed.
 It turns out that, whereas most quantities in inverse dynamic calculations can be accurately measured, the inertial properties of segments are the achilles heel of accurate dynamic modeling.
 

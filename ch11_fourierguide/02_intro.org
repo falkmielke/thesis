@@ -57,7 +57,7 @@ The more temporal sampling points, the better the temporal resolution, but the h
 One assumption above is that the stride was recurrent, or cyclical, i.e. periodic.
 This means that an almost (but not perfectly) identical stride will precede and follow the one of interest.
 This is also called the "steady state assumption", i.e. the requirement that the observed behavior is regular (and thereby comparable to other observations).
-Iff that assumption is met, the joint angle profile will start and end at approximately the same value, i.e. the hip angle at each limb touchdown will be almost the same.
+If (and only if) that assumption is met, the joint angle profile will start and end at approximately the same value, i.e. the hip angle at each limb touchdown will be almost the same.
 Plotting this as angle against time will show a line with ends fixed on the left and right y-axes.
 This is metaphorically the same situation as in a guitar string, which is fixed at both ends and performs some excursions from the zero line at positions in between.
 To further stress this analogy, the hip joint angle profile can be described as the combination of a "base tone" and a number of "harmonics" (or "overtones").
