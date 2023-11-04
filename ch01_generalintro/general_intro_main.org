@@ -47,14 +47,16 @@ Does that change your opinion about it?
 [[./figures/bing_precociality_limerick.png]]
 
 
-This thesis set out to investigate in detail the putative deficits of piglets with lower-than-normal birth weight in locomotor development.
+This thesis project set out to investigate in detail the putative deficits of piglets with lower-than-normal birth weight in locomotor development.
 Locomotion is a highly complex phenomenon by itself, and the quick perinatal maturation of precocial animals turns out to be a methodologically challenging topic.
-Which makes it even more interesting, but also challenging to present to a broad public.
+The backbone of this thesis is computational methodology, applied in a novel context.
+Just as with the novel AI capabilities which currently invade our everyday life, it is important to stay sceptical of the purpose and usefulness of the exapted algorithms.
 Computational techniques can be abstract, and sometimes their purpose only becomes clear on second application.
+This can be challenging to present to a broad public.
 It might help if, on the way, we make sure not to loose sight of the acutal phenomenon under study.
 I, the author, personally think that the birth and maturation of a piglet (or any creature) are beautiful and fascinating processes, and I appreciate the opportunity to study them in detail.
 Nevertheless, herein, I will not ponder further upon the emotional or artistic aspects of the beauty of nature.
-The purpose of this thesis is to assemble, extend, and scientifically evaluate the different facets of current research around locomotor development.
+The core purpose of this thesis is to assemble, extend, and scientifically evaluate the different facets of current research methods around locomotor development.
 
 
 #+CAPTION: "A newborn steampunk piglet galloping on a farm with the sow in the background. (futuristic-biomechanical)", created by [[https://stablediffusionweb.com][the "stable diffusion" AI image generator (https://stablediffusionweb.com)]] on November 3rd, 2023. Impressive as is, this generated image has no deeper meaning or connection to real life, and its only fascinating aspect might be how it was generated. But enough of AI at this point.
