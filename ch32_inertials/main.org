@@ -65,18 +65,18 @@ To illustrate what is happening with x-ray light during a CT measurement, I will
 
 
 Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyll, which absorbs some non-green (e.g. red) wavelengths of light very well (Fig. \ref{fig:spectrum}, green curve).
-\begin{change}
+@@latex:\begin{change}@@
 Light are photons, "elementary particles which are the quantum of the electromagnetic field" ([[https://en.wikipedia.org/wiki/Photon][wikipedia: photon]]).
 Filters let through some of them, while prohibiting others from passing.
 Think of party lights or colored window sheets: a light source is placed behind one or more filter sheets which block most colors and let through certain others.
 In case of a green filter sheet, relatively more green photons pass the filter, the filtered spectrum will appear green to our visual perceptive system.
 In plants, the ensemble of non-absorbed photons also appears green to us, which is why leaves generally appear green to our view.
-\end{change}
+@@latex:\end{change}@@
 But leaves only appear green if there is a green content in the incident light!
 Green leaves will look red under red light (and "darker", i.e. lower number of reflected photons than for an equal input intensity of green light).
-\begin{change}
+@@latex:\begin{change}@@
 If you want to reduce the chance being seen while looking for something in a dark forest, better use a red flashlight.
-\end{change}
+@@latex:\end{change}@@
 
 
 #+CAPTION: Spectra. The horizontal axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case the range of visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (units: \(Hz\)) and photon energy (units: \(eV\)). The vertical axis shows photon occurrence probability, or normalized intensity \(I\), or the intensity difference \(\Delta I\) for the absorption spectrum. Black curve: emission spectrum of a white LED \citep{Tanabe2005}. Green curve: the approximate absorption spectrum of chlorophyll A \citep{Zscheile1934}. The chlorophyll will hardly get excited by the LED, yet the plant will look bright and green.
@@ -103,12 +103,12 @@ A (differential) spectrum is a way to depict a wavelength dependence.
 #+ATTR_LATEX: :placement [p] :width 10cm
 [[./figures/Berger2018.png]]
 
-\begin{change}
+@@latex:\begin{change}@@
 Crucially, the interaction of x-rays (i.e. high-energy, low wavelength photons) with matter differs from that of visible light and matter.
 Hence, the analogy between visible light and x-rays only partly holds.
 X-rays citep:Berger2018,Buzug2008 are also photons, just at a different wavelength (range \(10\ pm\) to \(10\ nm\)).
 An x-ray detector is a complex sensor device, similar in function to digital camera sensors, which will detect any light which is not absorbed or scattered by the sample or air on its way through the scanner chamber.
-\end{change}
+@@latex:\end{change}@@
 X-ray sources are "targets", i.e. anodes made of certain metals (Tungsten, Molybdenum, ...), shot at with an electron beam which is evoked by applying voltage (e.g. \(60\ kV\)) to the warmed-up anode and cathode.
 When hit by electrons, the target will emit x-ray photons of a specific composition of energies (spectrum, Fig. \ref{fig:xray_emission}).
 The source emission is generally *polychromatic*, i.e. consisting of multiple colors/energies (just as the spectra in Figs. \ref{fig:spectrum} and \ref{fig:xray_emission}).
@@ -119,11 +119,11 @@ They integrate intensities over a wide range of wavelengths (in a specific way t
 There is ongoing development on the frontier of "spectral CT" citep:Liu2023, yet resolution (spectral and spatial) are currently still below par (whereas price is not).
 
 
-\begin{change}
+@@latex:\begin{change}@@
 Once set on their path from within the x-ray source, x-ray photons interact stochastically with matter they encounter on their trajectory (photoelectric effect, Compton scattering).
 *"Attenuation"* is the term to describe that not all photons reach the detector, i.e. the detected x-ray intensity is lower than the incident intensity.
 The probability of either of the possible interactions depends on (i) the wavelength (photon energy), (ii) the elementary composition of the material (absorption spectrum, K-edges), and (iii) the trajectory of the photon (thickness of the material, angle of incidence).
-\end{change}
+@@latex:\end{change}@@
 
 The varying degrees of attenuation, when measured from multiple incident angles for 3D view, is what enables the extraction of structural information (Lambert-Beer's Law).
 If children place their hands inside a conical light beam, an animal-shaped shadow will be projected onto the wall.
@@ -425,7 +425,7 @@ The reference point of \(I\) can be changed by the generalized parallel axis / S
 ... with \(\vec{s}\) being the shift vector connecting the original and target points.
 
 
-It is difficult to get an intuition about Mass Moment of Inertia, but classroom demos can illustrate \chng{how} this measure \chng{depends on the geometric distribution of mass of an object citep:Lewin801L19,LewinMOI,Lewin801L24}.
+It is difficult to get an intuition about Mass Moment of Inertia, but classroom demos can illustrate \chng{how} this measure \chng{depends on the geometric distribution of mass of an object} citep:Lewin801L19,LewinMOI,Lewin801L24.
 #+begin_comment
 This is also apparent from equation \eqref{eqn:mmoi} above.
 For symmetrical objects \chng{which rotate around the center of symmetry, \(I\)} is independent of the total mass.
@@ -486,7 +486,7 @@ To quantify the amount of cupping, the cylinder was transformed to cylinder coor
  \mathcal{I} = a+b\cdot e^{k\cdot r}
 \end{equation}
 #+end_src
-By using an exponential regression \eqref{eqn:expfit} to the exponential part of that cylinder's \chng{intensity profile \(\mathcal{I}\)}, one can extract a parameter \(k\) which quantifies the amount of cupping (\(k\) as in the Dutch word "kopje").
+By using an exponential regression \eqref{eqn:expfit} to the exponential part of that cylinder's \chng{intensity profile} \(\mathcal{I}\), one can extract a parameter \(k\) which quantifies the amount of cupping (\(k\) as in the Dutch word "kopje").
 With that \(k\) known, one can rectify the gray values of the scan by applying a correction factor which would push up the exponential line to a flat constant (obviously not applicable for irregularly shaped objects).
 
 Similarly, one can multiply the intensity values of each voxel in the original volume with an exponential of its distance to the center point.
@@ -512,11 +512,11 @@ To evaluate this, one has to consider error propagation citep:Hughes2010,Arroyav
 The variable \(I\) only enters the balance equations through the dynamic wrench, \(\vec{M} = I \ddot\theta\).
 This function is linear in \(I\), so error propagation is quite simple\footnote{It should not be assumed that the error in measuring \(\ddot \theta\) is zero, but I will here focus only on the \(I\) component.} citep:Normann2016:
 #+begin_src latex
-\begin{change}
+@@latex:\begin{change}@@
 \begin{equation}\label{eqn:moment_error}
 \Delta \vec{M} = \sqrt{\left(\frac{d \vec{M}}{d I}\Delta I\right)^2 + \underbrace{\left(\frac{d \vec{M}}{d \ddot \theta}\Delta \ddot \theta\right)^2}_{=0} } = \Delta I \ddot\theta
 \end{equation}
-\end{change}
+@@latex:\end{change}@@
 #+end_src
 
 
@@ -524,15 +524,15 @@ Sensitivity is linear at this level: any percentage of measurement inaccuracy in
 
 
 Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, by inaccuracy in the mass itself (regression), and by unceretainty in the \(\vec{COM}\) position and therefore the position vectors \(\vec{r}_{i}\) of each mass element.
-\begin{change}
+@@latex:\begin{change}@@
 \[ \Delta I = \left. \Delta I \right|_{m_i} + \left. \Delta I \right|_{\vec{r}_i} = \sqrt{ \sum_{i} \left[ \left(\frac{d I}{d m_{i}} \Delta m_{i} \right)^2 + \left(\frac{d I}{d \vec{r}_{i}} \Delta \vec{r}_{i}\right)^2 \right] }\]
-\end{change}
+@@latex:\end{change}@@
 
 
 The direct dependence on mass is visible in equation \eqref{eqn:mmoi}, uncertainty of the mass elements contribute linearly but are added up; errors in the mass of further away mass elements contribute more to the total error of the moment of inertia.
-\begin{change}
+@@latex:\begin{change}@@
 \[ \Delta I \mid_{m_i} = \sqrt{\sum\limits_{i}\left(\left( \lVert \vec{r}_{i} \rVert ^2 E_3 - \vec{r}_{i} \otimes \vec{r}_{i} \right)\right)^2 \cdot \Delta m_{i} }\]
-\end{change}
+@@latex:\end{change}@@
 
 
 The partial derivative with respect to \(\vec{r}_{i}\) must be added, because \(I\) is taken relative to the \(\vec{COM}\) (hence, \(\Delta \vec{r}_i = \Delta \vec{COM}\)).
@@ -669,17 +669,14 @@ The contradicting results highlights how erratic the digital density approximati
 ** TODO Issue 1: Beam Hardening
 
 # /data/04_dynamics/21_flying_femur_revival/11_cupping/05_PlotPTFEInertia.py
-\begin{change}
-#+CAPTION: Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder. (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B-C) Calculated mass moments of inertia, unscaled (B) and scaled (C); scaling was optional to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text). In this cylinder, \(I_z\) is always larger than \(I_x = I_y\). Calculated values were normalized by the theoretical inertia of the PTFE cylinder, hence a correct calculation would yield values of \(1.0\). The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the expected values. However, this is only true for the unscaled curves; when scaling, the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening.
+#+CAPTION: \chng{Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder.} (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B-C) Calculated mass moments of inertia, unscaled (B) and scaled (C); scaling was optional to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text). In this cylinder, \(I_z\) is always larger than \(I_x = I_y\). Calculated values were normalized by the theoretical inertia of the PTFE cylinder, hence a correct calculation would yield values of \(1.0\). The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the expected values. However, this is only true for the unscaled curves; when scaling, the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening.
 #+LABEL: fig:cupping_results
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/cupping_results.pdf]]
 # (\(\times\))(\(\circ\))
-\end{change}
 
 
 To evaluate what effect beam hardening has on the calculated mass moment of inertia, I simulated beam hardening on a well described PTFE cylinder within the scan volume.
-CONTINUE
 
 The only reliable recovery of the true mass moment of inertia (Fig. \ref{fig:cupping_results}B, horizontal lines) is found to be if there is exactly zero cupping.
 This generally holds for homogeneous objects: moment of inertia is determined by the geometric distribution of mass elements around the \(\vec{COM}\); if (and only if) the relative mass of all mass elements is well approximated by the density regression (which is only and exclusively the case in homogeneous objects), and only if cupping is negligible, then one can calculate appropriate \(I\) values.
