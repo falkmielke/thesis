@@ -33,7 +33,7 @@ It turns out that, whereas most quantities in inverse dynamic calculations can b
 
 
 
-#+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup. \(\vec{P}\): hinge point/axis of the door, \(\vec{v}\): velocity of the subject, \(\dot\theta\): angular velocity of the door, \(\vec{F}\): force applied to the door by the experimentor.
+#+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup. \(\vec{P}\): hinge point/axis of the door, \(\vec{v}\): velocity of the subject, \(\dot\theta = \frac{d\theta}{dt}\): angular velocity of the door, \(\vec{F}\): force applied to the door by the experimentor.
 #+LABEL: fig:slamming
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_door.pdf]]
@@ -120,35 +120,35 @@ I will approach forces and moments separately, before joining them in a common f
 
 
 ** Forces
-Forces are the product of mass and an acceleration, \(\vec{F}=m\ddot \vec{x}\) (or, more familiar to most, \(\vec{F}=m\vec{a}\)), which is one of Newton's laws of motion citep:Newton1687,Tipler2007.
+Forces are the product of mass and an acceleration, \(\vec{F}=m\frac{d^2\vec{x}}{dt^2}\) (or, more familiar to most, \(\vec{F}=m\vec{a}\)), which is one of Newton's laws of motion citep:Newton1687,Tipler2007.
 In fact, force is better expressed as the derivative of linear momentum \(\vec{p}\) with respect to time, hence \(\vec{F}=\frac{d \vec{p}}{d t}\) (total derivative).
 They are vector quantities (magnitude, direction) and can occasionally cancel out (superposition).
-Linear momentum is defined as follows: \(\vec{p}=m\dot \vec{x}\), with \(m\) the mass and \(\dot \vec{x}\) the linear velocity (change of position over time).
+Linear momentum is defined as follows: \(\vec{p}=m\frac{\vec{x}}{dt}\), with \(m\) the mass and \(\frac{d\vec{x}}{dt}\) the linear velocity (change of position over time).
 
 Combining these equations and applying the total derivative:
-\begin{change}
-\[\frac{d\vec{p}}{dt} = m \cdot \frac{d\dot \vec{x}}{d t} + \frac{d m}{d t} \cdot \dot \vec{x}\]
-\end{change}
+@@latex:\begin{change}@@
+\[\frac{d\vec{p}}{dt} = m \cdot \frac{d^2 \vec{x}}{d t^2} + \frac{d m}{d t} \cdot \frac{d\vec{x}}{dt}\]
+@@latex:\end{change}@@
 
 One can apply the inverted version of the mathematical "chain rule" (hence: "unchain rule"):
-\begin{change}
+@@latex:\begin{change}@@
 \[\frac{d m}{d t} = \frac{d m}{d \vec{x}} \cdot \frac{d \vec{x}}{d t} \]
-\end{change}
+@@latex:\end{change}@@
 
 Which, plugged back into the derivative of linear momentum, gives the complete force formula (here in the scalar form).
 #+begin_src latex
 \begin{equation}\label{eqn:force}
-\vec{F} = m \cdot \ddot \vec{x} + \frac{d m}{d \vec{x}} \cdot \dot \vec{x} \dot \vec{x}
+\vec{F} = m \cdot \frac{d^2 \vec{x}}{d t^2} + \frac{d m}{d \vec{x}} \cdot \left(\frac{d\vec{x}}{dt}\right)^2
 \end{equation}
 #+end_src
 
 
 
-Because \(\vec{a}=\ddot \vec{x}\), the first part of the right handside expression in equation @@latex:\eqref{eqn:force}@@ is the familiar \(\vec{F}=m\vec{a}\).
+Because \(\vec{a}=\frac{d^2\vec{x}}{dt^2}\), the first part of the right handside expression in equation @@latex:\eqref{eqn:force}@@ is the familiar \(\vec{F}=m\vec{a}\).
 The second part is more enigmatic: those are "velocity product terms", which involve partial derivatives of the mass matrix@@latex:\footnote{Mass is often taught as a scalar quantity, yet in more complex problems of composite systems, which have a mass distribution, it can be more useful to represent mass by a matrix/tensor. This is analogous to the mass moment of inertia.}@@, thereby accounting e.g. for configuration changes of a chain of segments, deformations or mass shifts (e.g. muscles, blood flow, ...).
 Assuming here that mass distribution of single segments is constant or changes are comparatively small (which is generally an inaccurate simplifying assumption), this part is usually set to zero.
 
-Hence, we get a more or less familiar equation for the Force \(\vec{F}\), which tells us that the acceleration of a mass (\(m\ddot \vec{x}\)), i.e. a change in linear momentum, must be equal to an external force.
+Hence, we get a more or less familiar equation for the Force \(\vec{F}\), which tells us that the acceleration of a mass (\(m \frac{d^2\vec{x}}{dt^2}\)), i.e. a change in linear momentum, must be equal to an external force.
 \(\vec{F}\) is a three element vector.
 
 
@@ -170,8 +170,8 @@ Otherwise, the calculation of angular quantities is largely analogous to the lin
 Mass, in the force equation, is the resistance of an object to linear acceleration, i.e. to change of linear momentum \(\vec{p}\).
 Analogously, Mass Moment of Inertia@@latex:\footnote{Note that \(I\) is a matrix, usually 3-by-3; this is analogous to mass, which in its general form for complex objects is also a matrix \citep{Lynch2017}.}@@ (\(I\)) is the resistance of an object to rotational acceleration, which induces a change in angular momentum \(\vec{L}\).
 From experience, one can tell that lifting a door out of its hinge is a different process than conventionally rotating it, thought few have carried out this comparison in the absence of gravitation and friction.
-And so, the series of equations above can be applied analogously to angular momentum \(\vec{L}\) (with angular velocity \(\dot \theta\)).
-\[\vec{L} = I \dot \theta\]
+And so, the series of equations above can be applied analogously to angular momentum \(\vec{L}\) (with angular velocity \(\frac{d\theta}{dt}\)).
+\[\vec{L} = I \frac{d\theta}{dt}\]
 
 #+CAPTION: Derivation of Newton-Euler equation of rotational motion.
 #+LABEL: fig:miracle
@@ -181,14 +181,14 @@ And so, the series of equations above can be applied analogously to angular mome
 
 
 The time derivative is as follows.
-\begin{change}
-\[\frac{d\vec{L}}{dt} = I \cdot \frac{d \dot \theta}{d t} + \frac{d I}{d t} \cdot \dot \theta\]
-\end{change}
+@@latex:\begin{change}@@
+\[\frac{d\vec{L}}{dt} = I \cdot \frac{d^2 \theta}{d t^2} + \frac{d I}{d t} \cdot \frac{d\theta}{dt}\]
+@@latex:\end{change}@@
 
 The time derivative of angular momentum is called moment (\(\vec{M}\); see also: citet:WikipediaNewtonEuler,WikipediaTorque), and with further manipulation @@latex:\citep[details in][p. 242, eqn. 8.23; otherwise see Fig. \ref{fig:miracle}]{Lynch2017}@@ yields:
 #+begin_src latex
 \begin{equation}\label{eqn:moment}
-\vec{M} = I \ddot\theta + \dot\theta \times I\dot\theta
+\vec{M} = I \frac{d^2\theta}{dt^2} + \frac{d\theta}{dt} \times I\frac{d\theta}{dt}
 \end{equation}
 #+end_src
 
@@ -206,10 +206,10 @@ There is another extra step compared to the linear momentum: calculation of the 
 The calculated angular momentum actually changes depending on which reference point is chosen.
 Returning to the example of the door, rotating on a hinge (Fig. \ref{fig:slamming_momentum}).
 We are free to approximate the door by a point mass in point \(\vec{D}\), to see in which way the results deviate from common experience.
-Angular momentum \(\vec{L}\) relative to point \(\vec{P}\), which we denote \(\vec{L}_\vec{P}\), is calculated by using the cross product of the vector from point \(\vec{P}\) to \(\vec{D}\) (\(\vec{r}_{\vec{PD}}\)) and the linear momentum \(\vec{p}=m\vec{v}\):
-\begin{change}
+Angular momentum \(\vec{L}\) relative to point \(\vec{P}\), which we denote \(\vec{L}_{\vec{P}}\), is calculated by using the cross product of the vector from point \(\vec{P}\) to \(\vec{D}\) (\(\vec{r}_{\vec{PD}}\)) and the linear momentum \(\vec{p}=m\vec{v}\):
+@@latex:\begin{change}@@
 \[\vec{L}_{\vec{P}} = \vec{r}_{\vec{PD}} \times \vec{p} = m \vec{r}_{\vec{PD}} \times \vec{v} \]
-\end{change}
+@@latex:\end{change}@@
 
 From cross product properties, we see that the direction of \(\vec{L}\) does not change during the slamming (stays parallel to the hinge axis), and the magnitude stays constant and greater than zero if velocity is greater than zero.
 
@@ -268,10 +268,10 @@ This can be achieved by, again, vertically concatenating force and moment balanc
 
 
 For one, we get a "dynamic wrench" on the left handside of the balance.
-Plugging in the non-zero part of equations \eqref{eqn:force} and \eqref{eqn:moment} from above, we get an expression for what can be referred to as the *dynamic wrench* (defined at the \vec{COM}):
+Plugging in the non-zero part of equations \eqref{eqn:force} and \eqref{eqn:moment} from above, we get an expression for what can be referred to as the *dynamic wrench* (defined at the \(\vec{COM}\)):
 #+begin_src latex
 \begin{equation}\label{eqn:dynamic_wrench}
-\vec{W}_{dyn} = \left[ m\ddot \vec{x}; I\ddot \theta \right]
+\vec{W}_{dyn} = \left[ m\frac{d^2\vec{x}}{dt^2}; I\frac{d^2\theta}{dt^2} \right]
 \end{equation}
 #+end_src
 
@@ -279,7 +279,7 @@ Wrenches can be added up, for example the dynamic wrench can be easily shifted (
 #+begin_src latex
 \begin{change}
 \begin{equation}\label{eqn:shift_wrench}
-\bar \vec{W}_{dyn} = \vec{W}_{dyn} + [ \vec{0}; \vec{s} \times \underbrace{(m\ddot \vec{x})}_{\vec{F}} ]
+\vec{W}_{dyn}^{*} = \vec{W}_{dyn} + [ \vec{0}; \vec{s} \times \underbrace{(m\frac{d^2\vec{x}}{dt^2})}_{\vec{F}} ]
 \end{equation}
 \end{change}
 #+end_src
@@ -306,7 +306,7 @@ We can sum up all external wrenches to get a total external wrench \(\vec{W}_{ex
 \end{change}
 #+end_src
 
-Any other known external forces and moments should be added in wrench form, keeping in mind that correct addition requires shift to the same reference point (usually the \vec{COM}).
+Any other known external forces and moments should be added in wrench form, keeping in mind that correct addition requires shift to the same reference point (usually the \(\vec{COM}\)).
 
 
 Equations \eqref{eqn:dynamic_wrench} and \eqref{eqn:external_wrench} constitute the *Balance of Wrenches*:
@@ -316,6 +316,8 @@ Equations \eqref{eqn:dynamic_wrench} and \eqref{eqn:external_wrench} constitute 
 \end{equation}
 #+end_src
 
+
+\newpage
 In other words:
 #+begin_center
 The \chng{rate of} change of [linear;angular] momentum of a rigid body is equal to the sum of external wrenches acting on it.
@@ -334,19 +336,17 @@ Interested readers may refer to a practical guide by the author citep:Mielke2020
 
 
 ** Quaternions
-\begin{change}
-#+CAPTION: Spatial rotation with *Quaternions*. A point \(\vec{D}\) (blue) can be rotated by an angle \(\theta\) around an axis \((x; y; z)\). The higher the rotation angle value, the further the rotation. A quaternion (large black arrow) can encode both the axis and the angle in a 4D vector, in a manner which conveniently enables the execution of the rotation by simple vector multiplication.
+#+CAPTION: @@latex:\chng{Spatial rotation with \textbf{Quaternions}. A point \(\vec{D}\) (blue, with gray dashed position vector) can be rotated by an angle \(\theta\) around an axis \((x; y; z)\) to position \(\vec{D}_{rot}\). The higher the rotation angle value (indicated by the orange area), the further the rotation. A quaternion (large black arrow) can encode both the axis and the angle in a 4D vector, in a manner which conveniently enables the execution of the rotation by simple vector multiplication.}@@
 #+LABEL: fig:quaternion
-#+ATTR_LATEX: :placement [p] :width 17cm
+#+ATTR_LATEX: :placement [b] :width 17cm
 [[./figures/quaternions.pdf]]
-\end{change}
 
 On top of the force/moment complexity comes the issue of quantifying rotation in space.
-Angular momentum depends on angular acceleration \(\ddot\theta\), which is the second temporal derivative of "angle".
+Angular momentum depends on angular acceleration \(\frac{d^2\theta}{dt^2}\), which is the second temporal derivative of "angle".
 But getting that angle in 3D is not exactly trivial, and there are several complementary notations.
 
 
-When we think about rotation in space, we might think about an axis and an angle \chng{(Fig. \ref{fig:quaternion})}.
+When we think about rotation in space, we might think about an axis and an angle @@latex:\chng{(Fig. \ref{fig:quaternion})}@@.
 And that is a good point to start.
 
 #+begin_center
@@ -375,8 +375,8 @@ The dot "\(\cdot\)" is just vector multiplication, and computational tools can h
 Better yet, one can stack quaternions by (non-commutatively) multiplying them:
 \[ \vec{q}_2 \cdot \left( \vec{q}_1\cdot \vec{P}\cdot \vec{q}_1^{-1}\right) \cdot \vec{q}_2^{-1} = (\vec{q}_2\cdot \vec{q}_1) \vec{P} (\vec{q}_2\cdot \vec{q}_1)^{-1} \]
 
-Working with time series of quaternions (\(\vec{q}(t)\), i.e. the angular position of an object changing over time), there is a formula for getting the angular velocity \(\dot \theta\) from the time differences \(d\vec{q}/dt\) which fortunately even works with numeric differentials \(\frac{\Delta \vec{q}}{\Delta t}\) of real measurements citep:Baker1999.
-\[\dot \theta = 2 \frac{\Delta \vec{q}}{\Delta t} \cdot \vec{q}^{-1} \]
+Working with time series of quaternions (\(\vec{q}(t)\), i.e. the angular position of an object changing over time), there is a formula for getting the angular velocity \(\frac{d\theta}{dt}\) from the time differences \(d\vec{q}/dt\) which fortunately even works with numeric differentials \(\frac{\Delta \vec{q}}{\Delta t}\) of real measurements citep:Baker1999.
+\[\frac{d\theta}{dt} = 2 \frac{\Delta \vec{q}}{\Delta t} \cdot \vec{q}^{-1} \]
 
 A quaternion variant for the Kabsch algorithm exists citep:Kabsch1976,Lawrence2019,Kneller1991.
 This algorithm is useful to find the rotational difference between rigid bodies, including the change of rotation of a rigid body between two measurement times or the position of a segment relative to another.
@@ -397,6 +397,7 @@ And if anatomically relevant axes are required for communication, they can easil
 This does not imply that inverse dynamic calculations are impossible with Euler Angles.
 Yet in most applications, quaternions are mathematically elegant and efficient.
 
+\FloatBarrier
 * Dynamics: Application
 
 ** Generic Approach

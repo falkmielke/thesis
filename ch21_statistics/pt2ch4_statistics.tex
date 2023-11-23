@@ -84,7 +84,8 @@ Hence, we should distinguish the type of question (hypothesis / quantitative est
 
 All these ``strains'' of statistics have historically developed different terminologies, sometimes even different meaning to the same terminologies, which can be confusing and even misleading (e.g. try to find out about the term ``likelihood'', cf. ``Bayesian Statistics without Frequentist Language'' by Richard McElreath, 2017, \url{https://www.youtube.com/watch?v=yakg94HyWdE}).
 In particular, there is a lot of confusion and ongoing discussion about the distinction and proper presentation of \emph{confidence intervals} and \emph{credible intervals}.
-Please excuse that for the purpose of this chapter, I calculated, but will not always report, credible intervals\footnote{I herein take the $\left[3\ \%,97\ \%\right]\ HDI$, i.e. Highest Density Interval, which is the smallest value range that covers $94\ \%$ of the posterior probability distribution.}.
+\chng{A credible interval is an interval in which the true value of a model parameter is expected to be found, with a given likelihood.}
+\chng{For} the purpose of this chapter, I calculated, but will not always report, credible intervals\footnote{I herein take the $\left[3\ \%,97\ \%\right]\ HDI$, i.e. Highest Density Interval, which is the smallest value range that covers $94\ \%$ of the posterior probability distribution.}.
 I will occasionally explain conventions on the way, but leave it up to the interested reader to dig deeper or ask back.
 You might notice that my way of tackling statistics with inclusive models were heavily primed by the book \href{https://xcelab.net/rm/statistical-rethinking/}{``Statistical Rethinking'' by Richard McElreath} \citep{McElreath2018}, and there is an infrequently updated, highly recommendable lecture series by that author available on youtube.
 
@@ -718,7 +719,7 @@ Therefore, the body parameters presented here were transformed with the natural 
 \(\nu\) & \(+52.1\) & \(\left(+15.1, +94.0\right)\) & \\[0pt]
 \hline
 \end{tabular}
-\textit{\chng{Asterisk in the ``cred.'' column indicates model parameters for which the credible interval does not include zero.}}
+\\\textit{\chng{Asterisk in the ``cred.'' column indicates model parameters for which the credible interval does not include zero.}}
 \end{table}
 
 
@@ -915,12 +916,10 @@ With this knowledge about the subject parameteres, I will proceed to the next pa
 
 
 \begin{table}[p]
-\begin{change}
-\caption{\label{tab:spatiotemporals}Observed spatiotemporal gait parameter value ranges.}
+\caption{\label{tab:spatiotemporals}\chng{Observed spatiotemporal gait parameter value ranges. \textit{stdev} = standard deviation.}}
 \centering
-\begin{footnotesize}
 \begin{tabular}{l|llllll}
-\textbf{gait variable} & \textbf{units}  & \textbf{mean} & \textbf{standard deviation} \\[0pt]
+\textbf{gait variable} & \textbf{units}  & \textbf{mean} & \textbf{stdev.} \\[0pt]
 \hline
 clearance              & \(\%\)          & \(0.35\) & \(0.05\) \\[0pt]
 stride distance        & \(m\)           & \(0.57\) & \(0.16\) \\[0pt]
@@ -930,8 +929,6 @@ stride frequency       & \(Hz\)          & \(1.92\) & \(0.55\) \\[0pt]
 speed                  & \(\frac{m}{s}\) & \(1.10\) & \(0.41\) \\[0pt]
 trunk angle            & \(rad\)         & \(0.57\) & \(0.18\) \\[0pt]
 \end{tabular}
-\end{footnotesize}
-\end{change}
 \end{table}
 
 

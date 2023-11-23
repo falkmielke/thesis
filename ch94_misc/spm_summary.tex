@@ -8,24 +8,25 @@ This is a well-known property.
 Naïvely, one might choose to overcome this by selecting key points in the joint angle profile (e.g. the peak flexion) and compare those events between study groups.
 However, this immediately raises questions about the number and choice/relevance of key points.
 Choice and relevance are rather philosophical questions; potentially they are motivated by a desired outcome (focusing points that differ).
-The number of key points has effects on significance thresholds (multiple testing), and it has been shown that comparing key points will increase the chance of false positives in difference detection (due to true measurement randomnes).
+The number of key points has effects on significance thresholds (multiple testing), and it has been shown that comparing key points will increase the chance of false positives in difference detection (due to true measurement uncertainty).
+
 
 Instead of points, one might look at intervals, yet again it would be desirable to have a non-subjective, automatic criterium of how to choose those.
-This can be provided by random field theory citep:Brett2003,Kemeny1976.
+This can be provided by random field theory \citep{Brett2003,Kemeny1976}.
 In random field theory, the interdependence of measurement samples can be quantified by measuring how random changes between samples are.
-Randomness and smoothness are on two sides of a continuum, and the less random the changes between samples are, the "wider" the range of dependent data points can be considered.
-This concept has found its way into the framework of "Statistical Parametric Mapping" (SPM), which originates in neuroscience and functional imaging of the brain citep:Friston1994,Friston2003,Friston2008,Worsley2004, and was adapted for biomechanic research citep:Pataky2008,Pataky2010,Pataky2013.
+Randomness and smoothness are on two sides of a continuum, and the less random the changes between samples are, the ``wider'' the range of dependent data points can be considered.
+This concept has found its way into the framework of ``Statistical Parametric Mapping'' (SPM), which originates in neuroscience and functional imaging of the brain \citep{Friston1994,Friston2003,Friston2008,Worsley2004}, and was adapted for biomechanic research \citep{Pataky2008,Pataky2010,Pataky2013}.
 
 With some limitations, one can say that SPM enables the hypothesis-bases statistical comparison of joint angle profiles.
 Some of the limitations are the sensitivity to registration (especially non-linear registration techniques), to processing (e.g. smoothing), and the normality assumption.
 It retains all the limitations of the chosen hypothesis tests (e.g. normality assumption often not confirmed).
 It must be added that SPM does not generally account for the cyclicity of joint angle profiles (edge effects), though this can certainly be overcome.
-As the authors of the method put it citep:Pataky2020, the only purpose of SPM is the transfer of statistical methods to a multidimensional, interdependent data situation.
+As the authors of the method put it \citep{Pataky2020}, the only purpose of SPM is the transfer of statistical methods to a multidimensional, interdependent data situation.
 
 
 This relates to FCAS on several flanks.
 FCAS can be used for spatiotemporal alignment (removing the phase differences), thereby reducing the dependency on more or less arbitrarily chosen key points in the joint angles.
 FCAS quantifies the temporal interrelation of sample points by translating it to harmonic components.
-However, FCAS is a transformation, whereas SPM is an analysis method: in fact, SPM can be used to compare the "coordination" residuals of superimposed joint angle profiles, or to compare relative angle profiles.
+However, FCAS is a transformation, whereas SPM is an analysis method: in fact, SPM can be used to compare the ``coordination'' residuals of superimposed joint angle profiles, or to compare relative angle profiles.
 In that regard, they are complementary.
 \end{change}

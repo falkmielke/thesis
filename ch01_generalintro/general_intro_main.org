@@ -8,7 +8,7 @@
       '("literature.bib"))
 #+END_SRC
 
-\begin{center}
+@@latex:\begin{center}@@
 #+begin_quote
 The birth of a precocial creature
 Is a wonder of nature, a feature
@@ -16,22 +16,24 @@ Of life that's so strong
 It can't help but belong
 To the world, a miracle, a teacher.
 #+end_quote
-\end{center}
+@@latex:\end{center}@@
 
 \clearpage
 * \chng{Perinatal Locomotor Development}
-** Artistic Motivation
+** \chng{Artistic Motivation}
 # In this thesis, I will draw upon data from two model species: piglets and baboons.
 # You may validly ask, "why"?
-\begin{change}
+@@latex:\begin{change}@@
 
 Modern-day computational and scientific tools have led to a deep understanding of life and its processes.
-We can witness the birth of another creature.
+We can witness the birth of another living being, measure and compare parameters around.
 We can feel emotionally stirred by that encounter, empathize with the mother or the offspring, feel delight and astonishment.
 We can be amazed by how little (or how much) time it takes for a little one to stand and walk, to /live/ independently.
+And we can attempt to quantify which environmental effects have influenced the process.
+
 
 We of course know about evolution, and that the variable processes around birth are strongly correlated to a species' survival.
-This strong correlation is called "selection", a concept to which we owe some of the most puzzling and fascinating phenomena in nature.
+In cases of strong correlation, we speak of "selection", a concept to which we ascribe some of the most puzzling and fascinating phenomena in nature.
 Through the workings of evolution, birth and perinatal development have evolved to be the astonishingly complex processes we observe.
 Complexity triggers fascination, triggers emotions - both when things go right, and when things go a bit differently.
 Thanks to sophisticated analytical tools, we can understand to an ever-growing extent what exactly is going on during the propagation of life.
@@ -41,7 +43,14 @@ Does knowing the workings of a "wonder" make it less wonderful?
 The limerick above might be considered poetic, you might find it beautiful, but on close read you will find that it is definitely not "art", and [[https://callingbullshit.org][ultimately it is AI-generated bullshit]] (Fig. \ref{fig:limerick}).
 Does that change your opinion about it?
 
-#+CAPTION: The "bing chat" prompt which lead to the limerick above (Nov 3rd, 2023). Besides the use of "DeepLabCut" for landmark tracking, this poem and the steampunk figura below are the only AI contributions to my thesis.
+
+#+CAPTION: "A newborn steampunk piglet galloping on a farm with the sow in the background. (futuristic-biomechanical)", created by [[https://stablediffusionweb.com][the "stable diffusion" AI image generator (https://stablediffusionweb.com)]] on November 3rd, 2023. Impressive as is, this generated image has no deeper meaning or connection to real life, and its only fascinating aspect might be how it was generated.
+#+ATTR_LATEX: :placement [p] :width 16cm
+#+LABEL: fig:steampunk
+[[./figures/stablediffusion_steampunk_piglet.png]]
+
+
+#+CAPTION: The "bing chat" prompt which lead to the limerick above (Nov 3rd, 2023). Besides the use of "DeepLabCut" for landmark tracking, this poem and the steampunk figure above are the only AI contributions to my thesis.
 #+ATTR_LATEX: :placement [p] :width 16cm
 #+LABEL: fig:limerick
 [[./figures/bing_precociality_limerick.png]]
@@ -58,13 +67,7 @@ I, the author, personally think that the birth and maturation of a piglet (or an
 Nevertheless, herein, I will not ponder further upon the emotional or artistic aspects of the beauty of nature.
 The core purpose of this thesis is to assemble, extend, and scientifically evaluate the different facets of current research methods around locomotor development.
 
-
-#+CAPTION: "A newborn steampunk piglet galloping on a farm with the sow in the background. (futuristic-biomechanical)", created by [[https://stablediffusionweb.com][the "stable diffusion" AI image generator (https://stablediffusionweb.com)]] on November 3rd, 2023. Impressive as is, this generated image has no deeper meaning or connection to real life, and its only fascinating aspect might be how it was generated. But enough of AI at this point.
-#+ATTR_LATEX: :placement [p] :width 16cm
-#+LABEL: fig:steampunk
-[[./figures/stablediffusion_steampunk_piglet.png]]
-
-\end{change}
+@@latex:\end{change}@@
 
 ** Piglets
 \chng{Any creature's birth can be fascinating and its study insightful.}
@@ -146,10 +149,10 @@ The fact that there are hyperprolific sows, increased litter sizes, and an incre
 But how to approach the potential lack of an effect?
 To set the frontier right from the start, I will insist to apply good scientific methods citep:Chamberlin1890,Platt1964,Popper2002.
 If we /searched for/ differences in piglet locomotion, just search hard enough, we would surely find them.
-\begin{change}
+@@latex:\begin{change}@@
 The null hypothesis in statistical testing is that there are no differences between the study groups, which is why researchers tend to actively search for and find differences.
 However, with so many variables influencing locomotion (multiple testing), it is inevitable that some variables will differ, yet it cannot be presumed that these differences generalize to the population from which we sampled.
-\end{change}
+@@latex:\end{change}@@
 Instead, our attempts must be to *falsify the hypothesis that there are birth-weight dependent differences in piglet locomotion*.
 If we fail, we learned something.
 
@@ -163,11 +166,11 @@ If we fail, we learned something.
 Common methods of studying locomotion fall short in their falsification capacity.
 First, some methods \chng{miss or} loose information in processing.
 For example, imagine we measured two maximally dissimilar animals, a stork and an elephant.
-\begin{change}
+@@latex:\begin{change}@@
 The stork will use high clearance, high flexion, being adapted to cluttered terrain and swampy underground, whereas the elephant is large, "graviportal", and usually walks with minimal joint flexion along the limb.
-\end{change}
+@@latex:\end{change}@@
 We could observe these animals while \chng{they are} co-incidentally running at dynamically similar speed;
-\change{assume that we} measure exactly the same (normalized) speed.
+@@latex:\chng{assume that we}@@ measure exactly the same (normalized) speed.
 If we do not see differences in that measure, we cannot exclude that the subjects (likely) differ in the way they move their limbs (coordination).
 Second, methods might have trouble handling variation.
 One subject animal was observed to be slower in one trial, but does that mean it /cannot/ /ever/ go faster as well?
@@ -187,7 +190,7 @@ Yet whether or not domestic piglets are a good model species, specifically for h
 
 
 ** Limitations of Piglet Locomotor Research
-\begin{change}
+@@latex:\begin{change}@@
 Part of the natural fate of this (and any) thesis is that others have done research on the topic before.
 Existing research specifically on piglet neonate locomotion is diverse.
 It covers activity and welfare citep:Kashiha2014,Beattie2000, muscle workings and general motor function citep:Alvarenga2013,Andersen2016,
@@ -203,7 +206,7 @@ Few studies dig deep into *intra-limb coordination*, i.e. the temporal successio
 
 
 The compensation strategies I attempt in this thesis are methodological development, and the move to a model species (baboons, facultative bipeds) which can be considered "intermediate".
-\end{change}
+@@latex:\end{change}@@
 
 
 * Limited Transferability: Methodological Prior Knowledge
@@ -239,10 +242,10 @@ Piglets are a putative model species, but require some transfer work to draw rel
 On the downside, baboons are less readily available, also for dynamic measurements (e.g. XROMM, part \ref{pt:3}).
 Hence it is good to keep both model species in the loop.
 
-\begin{change}
+@@latex:\begin{change}@@
 Having a biped on board makes trunsferability more likely, but is no guarantee: it might be hard to transfer findings to human infants, since there is still morphological and behavioral discrepancy.
-To fundamentally solve this issue, it is important to take one step back, explore what locomotion is /technically/, and see which analytical methods are available.
-\end{change}
+To work towards solving this issue, it might be useful to take one step back, explore what locomotion is /technically/, and see which analytical methods are available.
+@@latex:\end{change}@@
 
 
 ** \chng{What is Locomotion?}
@@ -259,13 +262,13 @@ We should expect chaos on this system.
 But chaos is not what we observe, quite the contrary.
 Locomotor movements are highly targeted, i.e. pseudo-deterministic, often repetetive.
 Variations (though ubiquitous) are minimized by training.
-\begin{change}
+@@latex:\begin{change}@@
 This observation is due to *coordination*: coordination is henceforth understood as the non-random temopral pattern of movement which manifests in a specific succession of movements of different joints within a limb (intra-limb coordination) or between limbs (inter-limb coordination).
-\end{change}
+@@latex:\end{change}@@
 Coordination is achieved by (neuro-)motor control.
-\begin{change}
+@@latex:\begin{change}@@
 Control in the scope of this thesis is achieved by the central or peripheral nervous structure which establishes coordination.
-\end{change}
+@@latex:\end{change}@@
 The study of neuromechanics attempts to relate the central and peripheral control mechanisms to the observed motor outcome produced by the musculoskeletal system, i.e. coordination citep:Nishikawa2007,Full1999.
 Of course, the control "facilities" of each individual are bespoke for the precise anatomy of that individual: each brain is tuned to the layout of segments and motors of each individual.
 We do not know the exact "wiring" of each animal, though remarkably we observe "functioning" individuals time and time again, which are the less interesting cases in which the nervous system does a great job in steering its muscles.
@@ -321,16 +324,16 @@ People have certainly /tried/ to complement the conventional measurements with m
 I think it is flawed, in a sense that it biases the data for high correlation just to find out that it is highly correlated.
 Throughout the chapters of this thesis, you will find subtle and polite rants about the planar covariation technique, so I will not go into detail at this point.
 
-\begin{change}
+@@latex:\begin{change}@@
 Another, potentially useful method is Statistical Parametric Mapping citep:Friston1994,Friston2008,Worsley2004,Pataky2008,Pataky2020.
 It is designed to test one-dimensional (e.g. time-varying) data, such as kinematic profiles, for the statistical evaluation of group differences.
 "Statistical evaluation" refers to classical hypothesis testing, which is normally complicated by the non-independence of continuous temporal measurements.
 SPM implements various hypothesis tests for continuous data by a clever adaptation of random field theory citep:Brett2003,Kemeny1976.
 The method first and foremost tackles the temporal interdependence of measurement points citep:Pataky2020.
 It does not overcome the limitations mentioned above, transferability of kinematics and the quantification of intra-limb coordination.
-And it is bound to classical, frequentist statistics, with all its assumptions and pitfalls.
+And its current implementations are restricted to classical, frequentist statistics, with all its assumptions and pitfalls.
 For these reasons, I have not applied SPM in my research, nevertheless appended a brief summary of that method for interested readers (Ch. \ref{cpt:spm1d}; cf. [[https://spm1d.org]]).
-\end{change}
+@@latex:\end{change}@@
 
 
 ** \chng{An Overlooked Transformation}
@@ -345,17 +348,17 @@ And there is a group of authors who have translated, popularized, and advanced t
 However, given the usefulness of the transformation, I find that +there are+ google scholar returns astonishingly few studies to date who have applied Fourier Analysis to locomotor data.
 
 
-\begin{change}
+@@latex:\begin{change}@@
 Venturing along this path, implementing and improving the Fourier analysis method, has partially led this thesis away from its original study subject, neonate piglets.
 In the end, my work has taken a methodological focus much stronger than anticipated.
 Yet this is justified in the preliminary observation that differences in low- and normal birth weight are on the subtle side of the possible effect magnitude spectrum (possibly more visible on intra-limb coordination), and in consequence only the finest tools would be capable of detecting them.
 Furthermore, as I will demonstrate in the individual chapters of this thesis, transformation to the frequency domain can help to partly overcome one of the major limitations posed above: the transferability of kinematic data.
 In the frequency domain, some aspects of locomotion are easily and logically separated (namely: posture, effective range of motion, and intralimb coordination).
 Apparent differences in either of these separated measures can be related to subject characteristics, such as morphology.
-Because it is an information-preserving method, morphology becomes a well-controlled model parameter.
+
 
 This opens up the path to more refined answers to long-standing comparative and evolutionary research questions.
-\end{change}
+@@latex:\end{change}@@
 
 
 *To summarize,* there are a lot of computational tools at hand to study locomotion.
