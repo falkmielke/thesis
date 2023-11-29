@@ -79,18 +79,18 @@ Are African and Asian elephants really identical in their intralimb coordination
 
 \bigskip
 A particularly well studied species are humans, yet inference about our ancestors is tricky citep:Polk2004,Cazenave2023,Stamos2023.
-\begin{change}
+@@latex:\begin{change}@@
 Available techniques rely on morphological information and inverse kinematics, i.e. the inference of kinematics from output patterns such as fossilized footprints, and dynamic constraints such as stability citep:Pronost2006,Nicolas2006,Nicolas2007,Hatala2016.
-\end{change}
+@@latex:\end{change}@@
 Interesting debates are ongoing with regard to the bipedality and arboreality of particular fossil specimens.
 Note that the methodological advances presented in this thesis could be used for quantitative predictions of hominid (or any other animals') locomotion.
 Trained with locomotor data of e.g. extant humans and chimpanzees (phylogenetic bracket), a probabilistic model which relates antomical, morphological, and developmental traits to joint angle profiles could be tuned to predict stride cycles of intermediate forms (Ch. \ref{cpt:statistics}).
 The emphasis is on "stride cycles": this refers to predicting complete joint angle profiles, from which all corresponding joint positions can be recovered (information retention of the Fourier Series, Ch. \ref{cpt:fcas}).
 These predictions could be turned into dynamic simulations and virtual animations of the complete behavior, and matched to trace fossils @@latex:\citep[as in][but with less manual work]{Nyakatura2019}@@.
 Adding qualified estimates of inertial properties (Ch. \ref{cpt:inertials}) to the probabilistically predicted strides would enable forward dynamic modeling, and an estimation of the plausibility of certain hypothesized gaits (e.g. by comparing energy efficiency).
-\begin{change}
+@@latex:\begin{change}@@
 The possibility of computing independent parameter spaces for posture, range of motion, and coordination (Fig. \ref{fig:transferability}) enables a more fine-grained exploration of possible ancestral locomotor modes.
-\end{change}
+@@latex:\end{change}@@
 
 \bigskip
 These two examples illustrate how the methodological advances presented herein could extend our knowledge about terrestrial locomotion, with datasets which already exist.
@@ -100,12 +100,12 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 
 * Transferability
 
-\begin{change}
+@@latex:\begin{change}@@
 #+CAPTION: FCAS facilitates transferability of kinematic data. A hypothetical, non-isometric evolution of morphology must be compensated by changes in (i) posture, (ii) effective range of motion, and (iii) coordination. By separating these effects in kinematic measurements, evolutionary hypotheses can be tested, and the transfer of coordination patterns from one species to another is improved.
 #+LABEL: fig:transferability
 #+ATTR_LATEX: :placement [p] :width 18cm
 [[./figures/Transferability_Evolution.pdf]]
-\end{change}
+@@latex:\end{change}@@
 
 
 Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the joints, e.g. measuring the (joint) angles between segments.
@@ -138,7 +138,7 @@ Furthermore, the evolution-like optimization of behavioral tasks: there is littl
 In the many cases which show repetetive or recurrent behavior, Fourier analysis is the natural first choice for transformation.
 
 * \chng{Methodological Advances}
-\begin{change}
+@@latex:\begin{change}@@
 To summarize: the Fourier method presented herein complements existing analysis strategies for locomotor kinematics by transforming the data to the frequency domain.
 This enables the isolation of affine components, which quantify the dynamic posture, effective range of motion, and the coordination of segments.
 Though these components could in principle be extracted from raw profiles, the transformation yields them directly.
@@ -169,7 +169,7 @@ I anticipate that frequency domain considerations hold some unexplored potential
 Finally, there is some benefit in using probabilistic frameworks when modeling locomotion.
 The motor output of biological systems is intrinsically variable, and an animal which is stable on one stride can tumble on the next one.
 Working with likelihoods and probabilities of kinematic patterns seems to better reflect the nature of the process.
-\end{change}
+@@latex:\end{change}@@
 
 
 * How and Why Piglets Move

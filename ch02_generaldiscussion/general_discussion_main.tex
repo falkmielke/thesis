@@ -1,5 +1,5 @@
 \section{First Principles}
-\label{sec:orgac26e75}
+\label{sec:org85dd609}
 The three parts of this thesis each had a slightly different focus, spanning the range of methodologies which is characteristic for biomechanical research (kinematics, dynamics, statistics).
 They follow a common scheme:
 each of the parts took a basic principle of physics research and applied it to the study of biomechanics.
@@ -35,7 +35,7 @@ There are certainly more examples of basic principles in physics which would des
 
 
 \section{\chng{Predictive Power}}
-\label{sec:org82254b3}
+\label{sec:orged93bfc}
 Yet are these adaptations from the physical sciences inevitable?
 Why/when should conventional methods be questioned and compared to the yet uncommon methods suggested in this thesis?
 
@@ -70,7 +70,7 @@ Are African and Asian elephants really identical in their intralimb coordination
 \bigskip
 A particularly well studied species are humans, yet inference about our ancestors is tricky \citep{Polk2004,Cazenave2023,Stamos2023}.
 \begin{change}
-Available techniques rely on morphological information and inverse kinematics, i.e. the inference of kinematics from output patterns such as fossilized footprints, and dynamic constraints such as stability citep:Pronost2006,Nicolas2006,Nicolas2007,Hatala2016.
+Available techniques rely on morphological information and inverse kinematics, i.e. the inference of kinematics from output patterns such as fossilized footprints, and dynamic constraints such as stability \citep{Pronost2006,Nicolas2006,Nicolas2007,Hatala2016}.
 \end{change}
 Interesting debates are ongoing with regard to the bipedality and arboreality of particular fossil specimens.
 Note that the methodological advances presented in this thesis could be used for quantitative predictions of hominid (or any other animals') locomotion.
@@ -89,13 +89,14 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 
 
 \section{Transferability}
-\label{sec:org6eba5f2}
+\label{sec:orgc914ebc}
 
 \begin{change}
-#+CAPTION: FCAS facilitates transferability of kinematic data. A hypothetical, non-isometric evolution of morphology must be compensated by changes in (i) posture, (ii) effective range of motion, and (iii) coordination. By separating these effects in kinematic measurements, evolutionary hypotheses can be tested, and the transfer of coordination patterns from one species to another is improved.
-#+LABEL: fig:transferability
-#+ATTR_LATEX: :placement [p] :width 18cm
-[[./figures/Transferability_Evolution.pdf]]
+\begin{figure}[p]
+\centering
+\includegraphics[width=18cm]{./figures/Transferability_Evolution.pdf}
+\caption{\label{fig:transferability}FCAS facilitates transferability of kinematic data. A hypothetical, non-isometric evolution of morphology must be compensated by changes in (i) posture, (ii) effective range of motion, and (iii) coordination. By separating these effects in kinematic measurements, evolutionary hypotheses can be tested, and the transfer of coordination patterns from one species to another is improved.}
+\end{figure}
 \end{change}
 
 
@@ -129,18 +130,20 @@ Furthermore, the evolution-like optimization of behavioral tasks: there is littl
 In the many cases which show repetetive or recurrent behavior, Fourier analysis is the natural first choice for transformation.
 
 \section{\chng{Methodological Advances}}
-\label{sec:orge797a53}
+\label{sec:orgc56cc32}
 \begin{change}
 To summarize: the Fourier method presented herein complements existing analysis strategies for locomotor kinematics by transforming the data to the frequency domain.
 This enables the isolation of affine components, which quantify the dynamic posture, effective range of motion, and the coordination of segments.
 Though these components could in principle be extracted from raw profiles, the transformation yields them directly.
 The advantages are the following.
-+ The transformation changes the *data structure*. Fourier coefficients are more accessible to multivariate statistics, such as PCA and statistical modeling (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}).
-+ *Information retention:* FSD conserves information and is reversible, which means that any model interpolations or predictions can be converted back to kinematic data, which enable dynamic simulations (e.g. to test for stability).
-+ FCAS enables *motion transfer within* a sequence of joints: some or all affine components can be transfered to adjacent joints (Ch. \ref{cpt:fcas}), leaving the residual, relative movement, i.e. coordination.
-+ The method is *complementary* with existing analysis strategies: for example, one can revert the "coordination" residual of an FCAS to temporal profiles and perform statistical parametric mapping (appendix \ref{cpt:spm1d}).
-+ *Motion transfer among* study groups: because of the separation of affines and the altered data structure, one can study and test evolutionary trajectories (again, via simulation).
-+ Fourier Series and its inversion are trivial to apply, they are *deterministic transformations*, and code is readily available or easy to obtain in any common programming language (Ch. \ref{appendix:code}).
+\begin{itemize}
+\item The transformation changes the \textbf{data structure}. Fourier coefficients are more accessible to multivariate statistics, such as PCA and statistical modeling (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}).
+\item \textbf{Information retention:} FSD conserves information and is reversible, which means that any model interpolations or predictions can be converted back to kinematic data, which enable dynamic simulations (e.g. to test for stability).
+\item FCAS enables \textbf{motion transfer within} a sequence of joints: some or all affine components can be transfered to adjacent joints (Ch. \ref{cpt:fcas}), leaving the residual, relative movement, i.e. coordination.
+\item The method is \textbf{complementary} with existing analysis strategies: for example, one can revert the ``coordination'' residual of an FCAS to temporal profiles and perform statistical parametric mapping (appendix \ref{cpt:spm1d}).
+\item \textbf{Motion transfer among} study groups: because of the separation of affines and the altered data structure, one can study and test evolutionary trajectories (again, via simulation).
+\item Fourier Series and its inversion are trivial to apply, they are \textbf{deterministic transformations}, and code is readily available or easy to obtain in any common programming language (Ch. \ref{appendix:code}).
+\end{itemize}
 
 
 These new possibilities come with a major limitation: Fourier Series decomposition demands temporal periodicity.
@@ -165,7 +168,7 @@ Working with likelihoods and probabilities of kinematic patterns seems to better
 
 
 \section{How and Why Piglets Move}
-\label{sec:org92298c2}
+\label{sec:org494f60e}
 The primary goal of this thesis was to falsify the hypothesis that there are differences in locomotion of low- and normal birth weight piglets (LBW and NBW, Ch. \ref{cpt:generalintro}).
 There are two main aspects in which the study groups could differ: in kinematics (\emph{how} animal limb segments move) and dynamics (\emph{why} animal limb segments move as observed).
 And there are putatively confounding effects: locomotor maturation (i.e. age), size and weight of the animals \citep[i.e. physical appearance, cf.][]{Aerts2023}, and the variability of locomotor behavior.
@@ -240,7 +243,7 @@ Though differences in \emph{why} segments move in a particular way are unlikely 
 
 
 \section{Piglets, Baboons, and Humans}
-\label{sec:orgeabb38a}
+\label{sec:orgf643d12}
 An important premise of this project was that piglets are a valid model species for humans, in terms of locomotion.
 This premise demands constant revision.
 
@@ -297,7 +300,7 @@ Yet in the light of the present thesis, it seems more worthwile to strive for ap
 
 
 \section{Conclusion}
-\label{sec:org377eb36}
+\label{sec:orgf0a6da4}
 Independent of the choice of model species, this thesis presented a number of advances in developmental or general studies of locomotor behavior.
 
 \bigskip

@@ -666,10 +666,10 @@ The contradicting results highlights how erratic the digital density approximati
 #+TBLFM: @3$4..@-2$4=100*($2-$3)/$3;%+.0f%%
 
 
-** TODO Issue 1: Beam Hardening
+** Issue 1: Beam Hardening
 
 # /data/04_dynamics/21_flying_femur_revival/11_cupping/05_PlotPTFEInertia.py
-#+CAPTION: \chng{Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder.} (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B-C) Calculated mass moments of inertia, unscaled (B) and scaled (C); scaling was optional to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text). In this cylinder, \(I_z\) is always larger than \(I_x = I_y\). Calculated values were normalized by the theoretical inertia of the PTFE cylinder, hence a correct calculation would yield values of \(1.0\). The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the expected values. However, this is only true for the unscaled curves; when scaling, the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening.
+#+CAPTION: \chng{Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder.} (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B) Calculated mass moments of inertia, unscaled (blue) and scaled (gray); scaling was optional to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text). In this cylinder, \(I_z\) is always larger than \(I_x = I_y\). Calculated values were normalized by the theoretical inertia of the PTFE cylinder (\(I/I_{true}\); with \(I_z = 4.6\times10^{-7}\) and \(I_x = 3.3\times10^{-7}\)), hence a correct calculation would yield values of \(1.0\). The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the expected values. However, this is only true for the unscaled curves; when scaling, the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening.
 #+LABEL: fig:cupping_results
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/cupping_results.pdf]]
