@@ -35,7 +35,7 @@ To the world, a miracle, a teacher.
 
 Modern-day computational and scientific tools have led to a deep understanding of life and its processes.
 We can witness the birth of another living being, and measure and compare parameters to quantify the miracle.
-We can feel emotionally stirred by that encounter, empathize with the mother or the offspring, feel delight and astonishment, and analyze the physiological improbability of the event.
+We can feel emotionally stirred by that encounter, empathize with the mother or the offspring, feel delight and astonishment, and calculate the physiological improbability of the event.
 We can be amazed by how little (or how much) time it takes for a little one to stand and walk, to /live/ independently, by measuring it with a digital stop watch.
 We can feel sad for individuals initiated with disadvantageous traits, and we can screen which environmental effects have influenced development.
 \smallskip
@@ -61,20 +61,11 @@ Does that change your opinion about it?
 [[./figures/bing_precociality_limerick.png]]
 
 
-Reproduction is a process under particularly strong evolutionary control, and therefore it is complex.
-The variable processes around birth are strongly correlated to a species' survival.
-In cases of strong correlation, we speak of "selection", a concept to which we ascribe some of the most puzzling and fascinating phenomena in nature.
-Any deviations in reproductive or developmental processes can have direct, positive or negative consequences for the survival of the offspring.
-For example, if a parental organism manages to provide its offspring with extra resources, potentially at its own disadvantage, then the lineage will have an advantage @@latex:\citep[but see][]{Trivers1974}@@.
-On the other hand, if development of the offspring deviates from the norm, it may easily be fatal.
-Accordingly, the number and size of offspring has to strike a certain balance citep:Smith1974,Andersen2011.
-Through the workings of evolution, birth and perinatal development have evolved to be the astonishingly complex processes we observe.
+One core aspect of an animals existence is locomotion.
+Initially, the primary goal of this project was to analyze the locomotion and locomotor development of newborns.
 
+TODO
 
-Locomotion is a highly complex phenomenon by itself, for the same reasons: in the "struggle for existence", a wrong step might be fatal.
-We have some ... # TODO
-To summarize, perinatal development is complex, analyzing locomotion is non-trivial, and thus it is no surprise that the quick perinatal locomotor maturation of precocial animals turns out to be a methodologically challenging topic.
-\bigskip
 
 This thesis project set out to investigate in detail the putative deficits of piglets with lower-than-normal birth weight in locomotor development.
 While the heart of this thesis are newborn piglets learning to walk, its backbone is computational methodology, applied in a novel context.
@@ -415,6 +406,28 @@ The thesis closes with a general discussion to round up and project the presente
 Enjoy reading!
 
 
+
 #+begin_comment
+
+Reproduction is a process under particularly strong evolutionary control, and therefore it is complex.
+The variable processes around birth are strongly correlated to a species' survival.
+In cases of strong correlation, we speak of "selection", a concept to which we ascribe some of the most puzzling and fascinating phenomena in nature.
+Any deviations in reproductive or developmental processes can have direct, positive or negative consequences for the survival of the offspring.
+For example, if a parental organism manages to provide its offspring with extra resources, potentially at its own disadvantage, then the lineage will have an advantage @@latex:\citep[but see][]{Trivers1974}@@.
+On the other hand, if development of the offspring deviates from the norm, it may easily be fatal;
+accordingly, the number and size of offspring has to strike a certain balance citep:Smith1974,Andersen2011.
+Due to the intricate link between evolution and development, birth and perinatal development have evolved to be the astonishingly complex processes we observe.
+
+
+Locomotion is a highly complex phenomenon by itself, for the same reasons: in the "struggle for existence", a wrong step might be fatal.
+
+# We have some ... # TODO
+
+
+Such an intricate (complex, volatile) process is more likely to fail than to succeed. Nevertheless, every single ancestor in the lineage of any organism which walks the surface of this planet has succeeded.
+
+
+To summarize, perinatal locomotor development is complex, analyzing locomotion is non-trivial, and thus it is no surprise that the quick perinatal locomotor maturation of precocial animals turns out to be a methodologically challenging topic.
+\bigskip
 
 #+end_comment
