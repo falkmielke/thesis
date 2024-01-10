@@ -27,3 +27,4 @@ ch*/*.bbl
 *.pyc
 /new_figures/*.png
 /new_figures/bing_precociality_limerick.svg
+/ch94_misc/show/

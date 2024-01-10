@@ -1,0 +1,148 @@
+#+title: Blog Linear Models
+#+subtitle: Insights on the complexity of simple models.
+
+
+* Problem
+Last year, I [[https://doi.org/10.3389/fvets.2023.1111140][published]] one of the major findings of my PhD project.
+It involved a more or less complicated, but linear model with a reversed modeling approach which relied on predictive sampling.
+
+
+The manuscript passed the reviewers' critical assessment, but an adapted version has now faced another jury evaluation as a chapter of [[https://doi.org/10.31237/osf.io/dejkg][my PhD thesis]].
+One big question arose (which I am honestly happy about): the model is trained on data from one group of piglets, and then applied to a different group.
+
+#+begin_quote
+Would [I, the author] expect to be able to predict something the model is not trained for?
+#+end_quote
+
+In other words: does predictive sampling have a bias towards the training outcome?
+(This might read a bit cryptic, but I will get to the background below.)
+
+
+This concern is valid, fundamental, and I could not immediately give a conclusive answer.
+Working on an appropriate response in revision of my thesis led me back to the inner workings of the linear models which I implemented.
+Below, I will summarize some of my considerations, which are too basic, or too general, and therefore too extensive for the thesis chapter.
+
+* Abstract / TL;DR
+Whether or not out-of-sample prediction can elucidate group differences depends on multiple input factors.
++ difference of the training- and test distribution
++ slope magnitude (steepness)
++ model complexity/size, i.e. number of slopes
++ residual variation / noise
+
+These became apparant by creating a simulation environment which emulates various model structures in the statistics toolbox I used.
+Bivariate distribution plots are particularly valuable for analyzing the outcome.
+
+
+* Introduction & Methods
+** Linear Models Basics
+Acknowledged, this might be too basic; yet I find it good practice to clarify my terminology.
+
+
+I use a probabilistic framework to implement my models, namely `PyMC` (version 5.10.2, https://docs.pymc.io).
+Regardless of framework, any linear model has a general structure.
+It tries to capture the relation of an *outcome variable* \(y\) to one or multiple *input variables* \(x_i\).
+Because the relationship is approximately linear, i.e. proportional, i.e. \(y \sim x\), the model also contains a *slope* \(b_i\) and an *intercept* \(a\).
+Finally, there is a model residual, \(\epsilon\), which is needed to ensure that the "equals" sign holds for each observation in the following (vectorial) model equation:
+
+\[y = a + b \cdot x + \epsilon\]
+
+Which is a compact way to write:
+\[\begin{pmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix} = a + b \cdot \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{pmatrix} + \begin{pmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n \end{pmatrix}\]
+
+
+The variables \(x\) and \(y\) are our observed, putatively related data columns ("observables").
+The choice of which is "input" and which "outcome" is arbitrary, but usually logically constrained.
+We tend to call \(x\) on the RHS a "predictor", because it is the variable which predicts \(y\).
+There are a total of \(n\) observations.
+Parameters \(a\) and \(b\) are the model parameters, to be adjusted in the modeling procedure (e.g. by regression optimization, or in my case MCMC sampling).
+The residual \(\epsilon\) is the difference between the (modeled) \(a+b\cdot x\) and the actual \(y\).
+This problem is effectively two-dimensional: one dimension is \(x\), the other \(y\); all the other numbers are a fixed description of their relation.
+
+
+One additional level of complexity: we may use multiple predictors and slopes.
+\[y = a + b_1 \cdot x_1 + b_2 \cdot x_2 + \ldots + b_i \cdot x_i + \epsilon = a + \sum\limits_i b_i \cdot x_i + \epsilon\]
+
+This problem is effectively multi-dimensional (\(i+1\)-dimensional); the \(y\) is chosen to be special by describing it as a function of the other observables.
+
+
+Predictive modeling, in a nutshell, uses parameter distributions instead of "single numbers" for model parameters.
+Take the intercept, for example: it must be a number, we might never know what it exactly is, but we can estimate how likely the "true" intercept will have been a certain number (given the observed data).
+Technically, the trick is elegant: we just add another (hidden, tensor) dimension, and let the computer /try/ a multitude of values to see which give better outcomes (MCMC sampling).
+The algorithm gradually narrows an initially wide, "uninformed" distribution to something that makes the model fit the data quite well.
+
+
+** Limited Visualization: Bivariate Distribution Plots
+A great way to illustrate the linear model is a [[https://seaborn.pydata.org/tutorial/distributions.html#plotting-joint-and-marginal-distributions][bivariate distribution plot]].
+They visualize the two observables (or: two of the many observables), both their relation as the scatter plot, and the distribution of values on the margins.
+
+Here an example:
+#+attr_html: :width 80%
+[[./show/bivariate_distribution.png]]
+
+You see some fake data: one "predictor" (\(x\)) shown on the horizontal axis, and the "outcome" variable on the vertical axis.
+Gray scatter dots are the observations.
+The black line is the (conventional) regression model.
+Distributions are depicted as histograms on the margins.
+
+
+You can think of this linear model in an "input-output" way: data comes in from within the range of the horizontal axis, and is projected to the vertical axis by the black line.
+Think of raindrops, falling down from the gray histogram atop, and being diverted by exactly \(\frac{\pi}{2}\) at the point where they reach the black line.
+
+
+The code for this particular plot is as follows, with the toolbox [[http://mielke-bio.info/falk/code/LinearModelSimulation.py?download&target=_blank][available here]].
+
+#+begin_src python
+
+import LinearModelSimulation as LMS
+import scipy.stats as STATS
+
+# provide simulation data, with slope 0.2 and intercept 0.1
+sim = LMS.Simulation(slopes = [0.2] \
+                        , intercept = 0.1 \
+                        , x_range = [-0.5, 0.5] \
+           )
+
+# plot the simulated data
+fig, ax_dict = LMS.MakePlot()
+LMS.PlotData(ax_dict, sim, color = '0.5', label = None, zorder = 0)
+
+# add a regression line
+regression = sim.LinearRegression()
+ax = ax_dict['ax']
+reg_x = LMS.NP.array(sim.settings['x_range'])
+reg_y = regression.intercept + regression.slope * reg_x
+ax.plot(reg_x, reg_y, 'k-', label = f'regression: y = {regression.intercept:.2f} + {regression.slope:.2f} x')
+
+ax.set_xlabel('x'); ax.set_ylabel('y')
+
+# save the outcome
+fig.savefig(f"""./show/bivariate_distribution.png""", dpi = LMS.dpi)
+LMS.PLT.close()
+#+end_src
+
+
+
+** data segmentation: training, validation, test
+
+** methodology: predictive sampling
+
+
+
+* Results
+
+** difference of the training- and test distribution
+In other words, if the training and test data are (probabilistically) identical, the prediction must match the input.
+This is the case, for example, with the validation set: it is a random subset of the training data, therefore identical in data range and distribution.
+(Validation is useful nonetheless, because we compare the predicted outcome of each individual data point to the actual observation.)
+
+** slope magnitude
+Near-zero slopes make the model indifferent to differences; the model will turn blind to differences on a zero-slope dimension.
+Zero-slopes can never cause predictive deviations, even if the test distribution is totally different from the data it was trained on.
+
+** residual variation / noise
+
+** number of slopes
+
+* Discussion
+# how each of the effects influence my interpretation
+# might be integrated with results
