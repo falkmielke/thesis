@@ -1,4 +1,4 @@
-#+title: Methodological Advances in Studying Piglet Postnatal Locomotor Development
+#+title: Methodological Advances in Studying Postnatal Locomotor Development
 
 #+SETUPFILE: latex_header.org
 
@@ -37,7 +37,7 @@ Modern-day computational and scientific tools have led to a deep understanding o
 We can witness the birth of another living being, and measure and compare parameters to quantify the miracle.
 We can feel emotionally stirred by that encounter, empathize with the mother or the offspring, feel delight and astonishment, and calculate the physiological improbability of the event.
 We can be amazed by how little (or how much) time it takes for a little one to stand and walk, to /live/ independently, by measuring it with a digital stop watch.
-We can feel sad for individuals initiated with disadvantageous traits, and we can screen which environmental effects have influenced development.
+We can feel sad for individuals initiated with disadvantageous traits, and we can screen which environmental effects have influenced development, and how.
 \smallskip
 
 Thanks to sophisticated analytical tools, we can understand to an ever-growing extent what exactly is going on during the propagation of life.
@@ -45,7 +45,8 @@ Does analyzing and understanding the wonder make it less beautiful?
 Does knowing the workings of a "wonder" make it less wonderful?
 \smallskip
 
-The limerick above might be considered poetic, you might find it beautiful, but on close read you will find that it is definitely not "art", and [[https://callingbullshit.org][ultimately it is AI-generated nonsense]] (Fig. \ref{fig:limerick}).
+The limerick above might be considered poetic, you might find it beautiful.
+But on close read you will find that it is definitely not "art", and [[https://callingbullshit.org][ultimately it is AI-generated nonsense]] (Fig. \ref{fig:limerick}).
 Does that change your opinion about it?
 
 
@@ -55,23 +56,23 @@ Does that change your opinion about it?
 [[./figures/stablediffusion_steampunk_piglet.png]]
 
 
-#+CAPTION: The "bing chat" prompt which lead to the limerick above (Nov 3rd, 2023). Besides the use of "DeepLabCut" for landmark tracking, this poem and the steampunk figure above are the only AI contributions to my thesis.
+#+CAPTION: The "bing chat" prompt which lead to the introductory limerick (Nov 3rd, 2023). Besides the use of "DeepLabCut" for landmark tracking, this poem and the steampunk figure above are the only AI contributions to my thesis.
 #+ATTR_LATEX: :placement [p] :width 16cm
 #+LABEL: fig:limerick
 [[./figures/bing_precociality_limerick.png]]
 
 
+The duality of research method and research subject, i.e. methodological and biological aspects of research, is also apparent in this thesis.
 One core aspect of an animals existence is locomotion.
 Initially, the primary goal of this project was to analyze the locomotion and locomotor development of newborns.
-
-TODO
-
-
-This thesis project set out to investigate in detail the putative deficits of piglets with lower-than-normal birth weight in locomotor development.
+More specifically, this thesis project set out to investigate in detail the putative deficits of piglets with lower-than-normal birth weight in locomotor development.
 While the heart of this thesis are newborn piglets learning to walk, its backbone is computational methodology, applied in a novel context.
-Just as with the novel AI capabilities which currently invade our everyday life, it is important to stay sceptical of the purpose and usefulness of the exapted algorithms.
+This is a given necessity, because the differences and putative deficits turn out to be most subtle.
+Because of this, we require highly capable and precise statistical tools to quantify them, just as you would need precision tools to carve the most detailed wooden figures.
+Yet just as with the novel AI capabilities which currently invade our everyday life, it is important to stay sceptical of the purpose and usefulness of the exapted algorithms.
 Computational techniques can be abstract, and sometimes their purpose only becomes clear on second application.
-This can be challenging to present to a broad public.
+For this reason, a considerable fraction of the chapters herein branch off to related, but different biological questions (e.g. locomotion of ungulates in general, or locomotor development of bipedal baboons).
+# This can be challenging to present to a broad public, e.g. in a thesis.
 It might help if, on the way, we make sure not to loose sight of the acutal phenomenon under study.
 I, the author, personally think that the birth and maturation of a piglet (or any creature) are beautiful and fascinating processes, and I appreciate the opportunity to study them in detail.
 Nevertheless, herein, I will not ponder further upon the emotional or artistic aspects of the beauty of nature and life.
@@ -79,8 +80,9 @@ The core purpose of this thesis is to assemble, extend, and scientifically evalu
 
 @@latex:\end{change}@@
 
+
 ** Piglets
-\chng{Any creature's birth can be fascinating and its study insightful.}
+@@latex:\chng{\textit{Any} creature's birth can be fascinating, and studying it can be insightful.}@@
 Why do we study piglets?
 
 The first is the trivial reason: *because we can*.
@@ -421,7 +423,7 @@ Due to the intricate link between evolution and development, birth and perinatal
 
 Locomotion is a highly complex phenomenon by itself, for the same reasons: in the "struggle for existence", a wrong step might be fatal.
 
-# We have some ... # TODO
+# We have some ... # TODO or not TODO...
 
 
 Such an intricate (complex, volatile) process is more likely to fail than to succeed. Nevertheless, every single ancestor in the lineage of any organism which walks the surface of this planet has succeeded.
