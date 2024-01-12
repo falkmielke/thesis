@@ -22,7 +22,7 @@ class Settings(dict):
         self['n_slopes'] = 1
         self['intercept'] = 0.
         self['noise_level'] = 0.01
-        self['n_observations'] = 2**10
+        self['n_observations'] = 2**9
         self['x_range'] = [-0.4, 0.4]
         #self['slopes'] = [0.5, -0.3, 0.1]
 
@@ -45,7 +45,7 @@ def SimulateData(settings = None):
     settings['slopes'] = NP.array(settings['slopes']).reshape(-1,1)
 
     # set number of observations
-    settings['n_observations'] = int(2**9)
+    # settings['n_observations'] = int(2**9)
     settings['n_samples'] = settings['n_observations']
     # settings['n_samples'] = int(NP.power(settings['n_observations'], 1/settings['n_slopes'])//1)
     # settings['n_observations'] = int(settings['n_samples']**settings['n_slopes'])
