@@ -1,5 +1,15 @@
 #+title: Acknowledgements
 
+"""
+#+begin_quote
+Sie war'n alle immer da für mich
+bis wir uns nicht mehr so oft sah'n.
+Ich trug ihr Bild von dieser Welt im Kopf
+als ich begann, meines zu mal'n.
+#+end_quote
+Max Prosa (2018): "Erinnerungen", Heimkehr
+
+
 I am grateful for my time at Campus Drie Eiken, and wholeheartedly enjoyed being around for so long.
 In all the groups which accomodated me, I was welcomed with a supportive, friendly, collaborative, and creative atmosphere, which is all due to the great people I met there.
 
