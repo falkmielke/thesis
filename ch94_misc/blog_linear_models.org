@@ -5,7 +5,7 @@
 
 
 * Problem
-Last year, I [[https://doi.org/10.3389/fvets.2023.1111140][published]] one of the major findings of my PhD project.
+Last year, I [[https://doi.org/10.3389/fvets.2023.1111140][published]] one of the major findings of my PhD project [1].
 It involved a more or less complicated, yet linear model with a reversed modeling approach which relied on predictive sampling.
 
 
@@ -358,7 +358,8 @@ In other words: differences in the data subsets can be blurred out by an overly 
 Two levers which can be easily tested with [[http://mielke-bio.info/falk/code/LinearModelSimulation.py?download&target=_blank][the simulation example I presented here]], yet they are well known and I will skip their confirmation.
 
 The first is *residual variation*: the more "noise", the harder to distinguish two potentially different subgroups based on posterior predictive distributions.
-The second is *sample size*: all the factors discussed above depend on dense and repeated sampling of the parameter space, which is by no means self-evident in actual animal experiments.
+The second is *sample size*: all the factors discussed above were identified in a setting with dense and repeated sampling of the parameter space, which is by no means self-evident in actual animal experiments.
+Sample size is a known prerequisite for accurate predictions; inaccuracy in probabilistic terms translates back to more noise in the predictive samples.
 
 
 * Discussion
@@ -389,7 +390,9 @@ This is a natural question in livestock [1]: prediction is diagnostics; can we i
 Yet caution is warranted, whereas enthusiasm about predictive strategies is not.
 From the considerations I discussed above, my takeaway message is that *(linear) predictive modeling is biased towards positive findings.*
 This is somewhat analogous to classical hypothesis testing: we can never confirm the null hypothesis, but quantify the chance of erroneously rejecting it (p-value), which is actually based on the comparison of distributions.
-Curiously, whereas modeling approaches are generally about the quantification of effect size, /predictive/ modeling might link back to difference tests.
+Curiously, whereas modeling approaches are generally about the quantification of effect size, my interpretation of /predictive/ modeling might link back to difference tests.
+
+Maybe this is no co-incidence: after all, I compared the /actual/ distribution of outcome values to their /predicted/ distribution.
 
 
 
