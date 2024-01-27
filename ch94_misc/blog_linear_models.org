@@ -3,6 +3,22 @@
 #+author: Falk Mielke
 #+date: 2024/01
 
+#+OPTIONS: toc:nil
+
+#+begin_export html
+---
+title: "Linear Models"
+description: "Can out-of-sample prediction yield novel results?"
+author: Falk Mielke
+date: 2024-01-27
+tags: ["statistics", "modeling", "thesis"]
+mathjax: true
+highlight:
+    enabled: true
+    theme: tomorrow
+---
+#+end_export
+
 
 * Problem
 Last year, I [[https://doi.org/10.3389/fvets.2023.1111140][published]] one of the major findings of my PhD project [1].
