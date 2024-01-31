@@ -764,7 +764,7 @@ These simulations confirm that moment of inertia crucially depends on the mass a
 \bigskip
 To also get an estimate how variable the actual gray value observations were, a probabilistic linear regression was applied (Fig. \ref{fig:probabilistic_density}).
 
-The intercept was sampled at \(0.173\pm 10^{-4}\), and the slope was \(1.6\times 10^{-4} \pm 10^{-7}\), both consistent with the least squares regression.
+The intercept was sampled at \(0.1734\pm 10^{-4}\), and the slope was \(1.6052\times 10^{-4} \pm 10^{-7}\), both consistent with the least squares regression.
 The result for the model residual \(\varepsilon\) is \(0.024 \pm 0.008\), which is \(14 \%\) of the intercept.
 Note that reference to the intercept here is in line with using a percent adjustment of the regression parameters above; a more realistic estimate for "percent mass change" would be the average gray value of the femur (\(0.39 \longrightarrow 6.3\%\)); that value is also in the range of the mass adjustment simulated above.
 Furthermore, the material-wise residuals \(\varepsilon_{j}\) turn out to increase with increasing density, yet that overall trend is not systematic for each material.

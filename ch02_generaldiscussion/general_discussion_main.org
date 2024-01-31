@@ -103,7 +103,7 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 @@latex:\begin{change}@@
 #+CAPTION: FCAS facilitates transferability of kinematic data. A hypothetical, non-isometric evolution of morphology must be compensated by changes in (i) posture, (ii) effective range of motion, and (iii) coordination. By separating these effects in kinematic measurements, evolutionary hypotheses can be tested, and the transfer of coordination patterns from one species to another is improved.
 #+LABEL: fig:transferability
-#+ATTR_LATEX: :placement [p] :width 18cm
+#+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/Transferability_Evolution.pdf]]
 @@latex:\end{change}@@
 
