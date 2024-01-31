@@ -405,80 +405,24 @@ The underestimation of those strides quantified to just below five hours.
 
 In summary, the NBW-trained model ``guesses'' the size and mass of the animals producing LBW strides to be ``normal'' (although they are not), which indicates that these defining features of LBW do not reflect in altered kinematics.
 However, age inference is non-normal, i.e. some strides are classified as typical for animals of younger than actual age.
-
+\bigskip
 
 \begin{change}
-These findings are based on an analysis which uses the statistical model of one subset of the data for predictive inference on another subset, which is a strategy that demands justification.
-\begin{itemize}
-\item Is the model actually \textit{capable} of finding differences?
-\item Under which circumstances will group differences arise?
-\item Is there a bias in the modeling procedure, for example to not find all differences?
-\begin{itemize}
-Answering these questions requires a rather technical analysis of the model outcome.
-
-One important constraint is that the model is linear, i.e. of the form
-\[y = a + b_1 \cdot x_1 + b_2 \cdot x_2 + \ldots + b_m \cdot x_m + \epsilon = a + \sum\limits_k b_k \cdot x_k + \epsilon\]
-
-Herein, \(y\) is one of the outcome variables (observed; age, size, or mass), \(a\) is the intercept, \(b_i\) are the slopes, \(x_i\) are the different input parameters (observed; spatiotemporal gait variables, dynamic posture, and coordination measures), and finally \(\epsilon\) is the model residual (unexplained variation).
-As I have demonstrated \href{http://mielke-bio.info/falk/posts/33.linearmodels}{elsewhere} \citep{Mielke2024lm}, there are some conditions which are necessary (but not sufficient by themselves) to find a difference.
-If there is a...
-\begin{enumearate}
-\item significant difference between the study groups in the distributions of input variables
-\item high enough slope magnitude (``steepness'')
-\item small enough model complexity/size, i.e. limited number of (other) slopes
-\item low residual variation or noise
-\item sufficient sample size
-\begin{enumearate}
-
-... then we can find differences as in the example of age, above.
-In case one of these conditions is not met, a difference between the study groups might be obscured (yet note that there is a continuum, and effects may cancel).
-Note that, from theoretical considerations alone, this situation is biased.
-Differences in out-of-sample prediction (e.g. in case of the age model) must have passed the criteria above, and are therefore robust.
-On the other hand, \textit{"the absence of evidence is not the evidence of absence"}: if for example the sample size is low, or the residual variation is high, the model's prediction might have missed an actual effect.
-This situation is somewhat analogous to classical hypothesis testing.
-
-\begin{figure}[p!]
-\centering
-\includegraphics[width=16cm]{./figures/input_distribution_differences.pdf}
-\caption{\label{fig:input_distributions}Observed model parameter input distributions. Observations are indicated for each model parameter (rows) by tick marks for the two study groups (NBW: gray, LBW: orange). Values were standardized (mean-centered and scaled by standard deviation). Significance between the distributions (indicated by asterisk) was determined by a two-sample ranksum test.}
-\end{figure}
-
-\begin{figure}[p!]
-\centering
-\includegraphics[width=16cm]{./figures/output_effectsize.pdf}
-\caption{\label{fig:output_effects}Effects of each input parameter on the model output. Effect size is calculated as the data range (difference between \(2.5\%\) and \(97.5\%\) data quantiles) multiplied by the slope distributions (from model sampling). Effect magnitude is visualized by red shading, effects which are different from zero (\(95\%\) HDI) are also indicated by an asterisk. Residual is determined as the difference of the actual parameter observation and the model result.}
-\end{figure}
+To assess whether out-of-sample prediction is a valid and unbiased method to infer group differences, we extracted additional indicator quantities from the linear models.
+An in-depth analysis can be found at the end of this chapter (Ch. \ref{supp:linearmodels}).
+Theoretical considerations identify several criteria which, if not met, can obscure an actual group difference (which consequently does not emerge in the prediction output).
+These criteria are differences in the input parameter distribution, slope magnitude, and low residual variability; in addition, model complexity and a limited sample size can be prohibitive.
+For the age model, our considerations confirm that a predicted difference is robust, and we were able to evaluate which of the model parameters might cause the underestimation of some strides (namely hindlimb clearance and hip angle).
+In the models of size and body mass, some of the criteria are not met.
+Model complexity and sample size might restrict clarity of both models' outcomes to an uncertain degree.
+In the body mass model, the residual variability is high, which blurs potential differences in the predictions (Ch. \ref{supp:linearmodels}, Fig. \ref{fig:output_effects}).
+In the size model, there are some positive and some negative effects which seem cancel out (which might be evidence for size-dependent anternative locomotor strategies; Figs. \ref{fig:input_distributions}, \ref{fig:output_effects}).
+We observed few significant effects related to the coordination parameters, indicating that coordination patterns are for the most part indifferent to age, size, and mass.
 
 
-The available modeling framework enables some extra insights on why the prediction appeared as it did.
-Firstly, we can compare the input distributions (point 1) of the observational groups (Fig. \ref{fig:input_distributions}), to identify those model parameters which acutally influence the predictions.
-Secondly, we can calculate the absolute effect of each parameter onto the predicted outcome (slope magnitude, point 2), by multiplying the parameter magnitude with the according slope (Fig. \ref{fig:output_effects}; this works because \(\Delta y \sim b_i \cdot \Delta x_i\)).
-Thirdly, we can quantify the model residual (point 4; Fig. \ref{output_effects}).
-The other points above (model complexity and sample size) are fixed in our application, and could have an influence which here remains undetermined.
-
-For the \textbf{age model}, we observe a low residual variance, and there are two parameters which are significantly different between NBW / LBW \textit{and} have a high slope (those are hindlimb clearance and hip angle).
-Notably, there is hardly any difference in the observed coordination parameters.
-For the model of \textbf{body mass}, the same parameters seem to have relevant slopes, yet the model residual is much higher and will likely prohibit conclusive differences in the probabilistic prediction.
-Other slopes seem to have significant effect in the NBW group (hip and tarsal eROM), yet the input distributions (i.e. NBW and LBW observations) do not differ, and so their effect is irrelevant for prediction of mass.
-For the \textbf{size model}, we find some slopes with a negative effect on the output (hindlimb clearance, head angle, hip angle), yet others with a positive effect (knee angle, tarsal eROM) possibly cancel this out for the overall prediction.
-This model also contains significant slopes with nonetheless no difference in the input distribution.
-We also compared the relative widths of effect size distributions, and found that "dimensionless (relative) speed" is most variable among trials: all animals use a variety of speeds, and this can not be systematically associated with age, size, or mass.
-It must be re-iterated that "significance" in these analyses merely provides a hint to guide the eye: the combination of a minor (non-significant) difference in an input parameter with a notable, only "almost-significant" effect size might still affect the probabilistic prediction.
-Finally, the input distributions (Fig. \ref{fig:input_distributions}) are insightful by themselves for NBW / LBW comparison.
-We observe most differences in spatiotemporals (predominantly hindlimb-related), as well as in measures of dynamic posture and range of motion.
-However, there are few significant effects of coordination parameters, and the remaining ones are canceled out by a lack of difference in the observed coordination of LBW and NBW.
-
-
-To summarize, we show that a detailed inspection of on the one hand the observed model input parameters, and on the other hand the effect "lever" of each parameter slope, warrants some caution about non-different predictions (as in the models of size and mass).
-In those models, we cannot rule out that a larger sample size or an adjusted, potentially more selective model design might elucidate quantitative NBW/LBW differences.
-On the other hand, inspection of the predictive age model confirms that finding differences by out-of-sample prediction is possible, and we could even relate those findings to specific model parameters.
+This lends some support to the outcome of the age model, and points towards the limiting factors in case of the other two models.
 
 \end{change}
-
-
-
-
-
 \bigskip
 
 
@@ -582,17 +526,17 @@ Finally, with only eight LBW individuals, we cannot exclude coincidence in which
 Neither of these technical explanations puts doubt on the clarity of the initial finding: a subset of the low birth weight individuals produced locomotor behavior which is quantitatively similar to that of younger individuals.
 
 
-
 A corollary question is which patterns in the kinematic variables cause the different age inferences.
-We report high magnitude (but also highly variable, i.e. ``non-significant'') slopes inferred from the age model (Tab. \ref{tab:modelresults}).
+We report high magnitude (but also highly variable, i.e. ``non-significant'') slopes inferred from the age model (Tab. \ref{tab:modelresults} \chng{and Fig. \ref{fig:output_effects}}).
 Note that these slopes solely reflect effects within the NBW data subset.
 We also observed slight differences in the average hindlimb dynamic posture (Fig. \ref{fig:raw_data}).
 In fact, a more flexed hindlimb is typical for the youngest animals of both birth weight categories.
+\chng{This is further supported by the observation that hindlimb clearance and mean hip angle have a significant effect in the age model (Fig. \ref{fig:output_effects}).}
 We emphasized potential differences in group composition to explain that (e.g. sex effect in the ``size'' model), and different age per group might be a proximal explanation for the non-normal age inference in LBW.
 However, the average age of LBW animals (\(5.3 h\)) in our data set is nominally above that of NBW (\(3.8 h\)), which is a discrepancy with the age underestimation.
 Yet if we assume that the hypothesis of delayed locomotor development is correct, the nominal age would be misleading, and LBW effectively behave similar to younger animals.
 This can explain the apparent discrepancy in age group composition and age predictions from kinematics.
-It also suggests that dynamic posture might be the major proxy for perinatal maturation, though many other parameters also entered the probabilistic model and influenced the model outcome.
+Though many other parameters also entered the probabilistic model and influenced the model outcome, \chng{our data suggests that dynamic posture, especially of the hindlimb, might be the major proxy for perinatal maturation (Fig. \ref{fig:output_effects})}
 
 
 \bigskip
@@ -600,8 +544,9 @@ It also suggests that dynamic posture might be the major proxy for perinatal mat
 The findings discussed above are enabled by ``inverse'' modeling of subject characteristics as a function of kinematic parameters, using probabilistic models.
 The models do reveal various parameter associations, yet the top down (repeated) testing with the chosen model structure complicates drawing definite conclusions \citep[e.g. we observed a sex effect on size, but opposite of what other studies have reported,][we conclude males in our study were just smaller by chance]{Baxter2012}.
 Instead, the demonstrated predictive modeling strategy \citep{Shmueli2010} leverages the potential of probabilistic models to perform out-of-sample prediction (via separation of the LBW test group).
+\chng{However, this strategy is limited by a major asymmetry: in case the prediction shows differences, they are most likely robust, yet ``non-effects'' could be caused by unfavorable dataset characteristics (Ch. \ref{supp:linearmodels}).}
 Non-probabilistic modeling could equally serve to predict values, but it cannot generate parameter distributions (as in the bimodal age predictions, Fig. \ref{fig:predictions}).
-Our probabilistic models implicitly regard ``non-significant'' parameter slopes, which are usually neglected in standard hypothesis testing (such as the high magnitude, highly variable joint ROM quantities, which might nevertheless have relevance for age prediction in case they are correlated and add up).
+Our probabilistic models implicitly regard ``non-significant'' parameter slopes \chng{(Fig. \ref{fig:output_effects})}, which are usually neglected in standard hypothesis testing (such as the high magnitude, highly variable joint ROM quantities, which might nevertheless have relevance for age prediction in case they are correlated and add up).
 The data transformations and predictive modeling strategy we applied herein hold further potential for inferring kinematics, for example by morphometric bracketing of extinct taxa.
 For that purpose, one would train a model to infer dynamic posture and coordination from a given range of morphometrics, predict samples for specific morphometrics in that range, and convert the samples back to (3D) joint angle profiles which could be animated.
 
@@ -619,6 +564,94 @@ And even under ideal circumstances: chances are that such models would yield \em
 In contrast, the strategy applied herein is related to the question: ``given the complete kinematic output of a behavior, can we infer subject characteristics of the animal producing it?''
 We used probabilistic, predictive models, which are able to capture intrinsic variability of the process, and addressed specific categorical questions (NBW/LBW differences) by out-of-sample predictions.
 We demonstrated that, in the first ten hours of piglet life, (1) kinematics seem to be indifferent to low body mass and size, and (2) locomotion of some LBW individuals could be explained by a delay in locomotor maturation which is initiated \emph{post partum}.
+
+
+\clearpage
+\section{Supplementary Analysis}\label{supp:linearmodels}
+\begin{change}
+The key findings in this chapter are based on an analysis which uses the statistical model of one subset of the data for predictive inference on another subset, a strategy which demands justification.
+\begin{itemize}
+\item Is the model actually \textit{capable} of finding differences?
+\item Under which circumstances will group differences arise?
+\item Is there a bias in the modeling procedure, for example to not find all differences?
+\end{itemize}
+Answering these questions requires a rather technical, in-depth analysis of the model outcome.
+
+One important constraint is that the model is linear, i.e. of the form
+\[y = a + b_1 \cdot x_1 + b_2 \cdot x_2 + \ldots + b_m \cdot x_m + \epsilon = a + \sum\limits_k b_k \cdot x_k + \epsilon\]
+
+Herein, \(y\) is one of the outcome variables (observed; age, size, or mass), \(a\) is the intercept, \(b_i\) are the slopes, \(x_i\) are the different input parameters (observed; spatiotemporal gait variables, dynamic posture, and coordination measures), and finally \(\epsilon\) is the model residual (unexplained variation).
+As I have demonstrated \href{http://mielke-bio.info/falk/posts/33.linearmodels}{elsewhere} \citep{Mielke2024lm}, there are some \textbf{criteria} which are necessary (but not sufficient by themselves) for the model to predict a difference.
+Given there is a...
+\begin{enumerate}
+\item significant difference between the study groups in the distributions of input variables
+\item high enough slope magnitude (``steepness'')
+\item limited model complexity/size, i.e. moderate number of (other) slopes
+\item low residual variation
+\item sufficient sample size
+\end{enumerate}
+
+... then we can find differences.
+An example where all these conditions are met is the age model, above.
+In case one of these conditions is not met, a difference between the study groups might be obscured (yet note that the criteria are on a continuum, some cases might not be clear-cut).
+From theoretical considerations alone, this situation is biased.
+Differences in out-of-sample prediction must have passed the criteria above, and are therefore robust.
+Yet on the other hand, \textit{"the absence of evidence is not the evidence of absence"}: if for example the sample size is low, or the residual variation is high, the model's prediction might miss an actual effect.
+This situation is somewhat analogous to classical hypothesis testing, where we quantify the chance of falsely rejecting a null hypothesis such as ``groups were sampled from the same distribution''.
+
+\begin{figure}[p]
+  \caption{ Observed model parameter input distributions (\textit{next page}).
+For each model parameter (rows), observations are indicated by tick marks for the two study groups (NBW: gray, LBW: orange). Values were standardized on population level (i.e. mean-centered and scaled by standard deviation). Significance between the distributions (indicated by asterisk) was determined by a two-sample ranksum test. }
+\end{figure}
+
+\addtocounter{figure}{-1}
+\begin{figure}[p!]
+\centering
+\includegraphics[width=16cm]{./figures/input_distribution_differences.pdf}
+\caption{\label{fig:input_distributions}Observed model parameter input distributions. \textit{See previous page.}}
+\end{figure}
+
+
+
+\begin{figure}[p!]
+\centering
+\includegraphics[width=16cm]{./figures/output_effectsize.pdf}
+\caption{\label{fig:output_effects}Effects of each input parameter on the model output. \textit{See next page.} }
+\end{figure}
+\addtocounter{figure}{-1}
+\begin{figure}[p]
+  \caption{ Effects of each input parameter on the model output (\textit{previous page}).
+Effect size is calculated as the data range (difference between \(2.5\%\) and \(97.5\%\) data quantiles) multiplied by the slope distributions (from model sampling). Effect magnitude and therefore relevance is visualized by red shading, effects which are different from zero (\(95\%\) HDI) are also marked by an asterisk. The residual (last row) is determined as the difference of the actual parameter observations and the model result. }
+\end{figure}
+
+
+
+The available modeling framework enables some extra insights on why the prediction appeared as it did.
+Firstly, we can compare the input distributions (criterium 1, above) of the observational groups (Fig. \ref{fig:input_distributions}), to identify those model parameters which acutally influence the predictions.
+Secondly, we can calculate the absolute effect of each parameter onto the predicted outcome (slope magnitude, criterium 2), by multiplying the parameter magnitude with the according slope (Fig. \ref{fig:output_effects}; this works because \(\Delta y \sim b_i \cdot \Delta x_i\)).
+Thirdly, we can quantify the model residual (criterium 4; Fig. \ref{output_effects}).
+The other criteria (model complexity and sample size) are predetermined in this modeling application, and have an unknown influence on the outcome.
+
+For the \textbf{age model}, we observe a low residual variance, and there are two parameters which are significantly different between NBW / LBW \textit{and} have a high slope (those are hindlimb clearance and hip angle).
+Notably, there is hardly any difference in the observed coordination parameters.
+For the model of \textbf{body mass}, the same parameters seem to have relevant slopes, yet the model residual is much higher and will likely prohibit conclusive differences in the probabilistic prediction.
+Other slopes seem to have significant effect in the NBW group (hip and tarsal eROM), yet the input distributions (i.e. NBW and LBW observations) do not differ, and so their effect is irrelevant for prediction of mass.
+For the \textbf{size model}, we find some slopes with a negative effect on the output (hindlimb clearance, head angle, hip angle), yet others with a positive effect (knee angle, tarsal eROM) possibly cancel this out for the overall prediction.
+This model also contains significant slopes with nonetheless no difference in the input distribution.
+We also compared the relative widths of effect size distributions, and found that "dimensionless (relative) speed" is most variable among trials: all animals use a variety of speeds, and this can not be systematically associated with age, size, or mass.
+It must be re-iterated that "significance" in these analyses merely provides a hint to guide the eye: the combination of a minor (non-significant) difference in an input parameter with a notable, only "almost-significant" effect size might still affect the probabilistic prediction.
+Finally, the input distributions (Fig. \ref{fig:input_distributions}) are insightful by themselves for NBW / LBW comparison.
+We observe most differences in spatiotemporals (predominantly hindlimb-related), as well as in measures of dynamic posture and range of motion.
+However, there are few significant effects of coordination parameters, and the remaining ones are cancelled out by a lack of difference in the observed coordination of LBW and NBW.
+
+
+To summarize, we show that a detailed inspection of on the one hand the observed model input parameters, and on the other hand the effect "lever" of each parameter slope, warrants some caution about non-different predictions (as in the models of size and mass).
+In those models, we cannot rule out that a larger sample size or an adjusted, potentially more selective model design might elucidate quantitative NBW/LBW differences.
+On the other hand, inspection of the predictive age model confirms that finding differences by out-of-sample prediction is possible, and we could even relate those findings to specific model parameters.
+
+\end{change}
+
+
 
 
 
