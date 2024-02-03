@@ -11,7 +11,7 @@ Bernstein suggested and applied a trigonometrical sum, which consisted only of s
 
 In his later work, Bernstein advocated a hierarchical organization of motor control @@latex:\citep[\textit{cf.}][]{Bongaardt2000}@@.
 This topic was taken up by studies in the field of motor learning, which would find evidence of higher order harmonics being affected by locomotor learning citep:Gallistel1982,Marteniuk1983.
-Their methodology is overeall similar to that of Bernstein, yet improved by heuristics and standardization citep:Jackson1979,Porges1980.
+Their methodology is overall similar to that of Bernstein, yet improved by heuristics and standardization citep:Jackson1979,Porges1980.
 The use of Fourier methods for asserting gait symmetry and variability were recognized citep:Soudan1982.
 
 
@@ -32,7 +32,7 @@ Thereby, the article has outstanding educational value for those attempting to f
 
 With the rise of computational approaches, inverse dynamic modelling of human gait was facilitated by transforming to the frequency domain citep:Ren2007; pattern recognition and classification methods were applied @@latex:\citep[e.g.][]{Mostayed2008}@@.
 Along these lines, Fourier Series was used to get a frequency spectrum and compute development- and pathology related change in overall locomotor frequency @@latex:\citep[e.g.][]{Kurz2011}@@.
-Multi-Dimensional variants of Fourier analysis for two \chng{joint} angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D \chng{joint} angles using Quaternions citep:Kenwright2015 point at promising future directions.
+Multi-Dimensional variants of Fourier analysis for two \chng{joint} angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D \chng{joint} angles using quaternions citep:Kenwright2015 point at promising future directions.
 
 
 Finally, recent work by the author (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}) has expanded on the aspect of multi-variate analysis and favorable data properties in the frequency domain citep:Mielke2019,Mielke2023.
@@ -51,4 +51,4 @@ To summarize, variability in the use of Fourier Series arises from the following
 + How many coefficients to retain? (order)
 + The possibility of inverting FSD has been neglected, maybe in consequence of the above.
 
-All these questions are the purpose of this review, and will be adressed in the next sections.
+All these questions are the purpose of this review, and will be addressed in the next sections.

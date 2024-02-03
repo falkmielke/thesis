@@ -37,7 +37,7 @@ If an animal walks, the distal part of its limb would touch the ground at a posi
 Our example joint of interest, the hip, would then usually be highly flexed.
 During stance phase, i.e. while the limb is in contact with the ground, the hip gradually extends, maybe reaching the lowest angle around the initiation of the swing phase.
 While the limb swings forward to reach another touchdown, the hip joint flexes again.
-Because the limb is a system of rigid bodies with a given mass (/cf./ Ch. \ref{cpt:dynamics_workflow}), accelerations would never be abrupt, and the hip angle plotted over time might be described as a "smooth sawtooth curve", or even resemble a sine wave (Fig. \ref{fig:jointangle} C).
+Because the limb is a system of rigid bodies with a given mass (/cf./ Ch. \ref{cpt:dynamics_workflow}), accelerations would never be abrupt, and the hip angle plotted over time might be described as a "smooth saw-tooth curve", or even resemble a sine wave (Fig. \ref{fig:jointangle} C).
 The change of a joint angle over time is called a "joint angle profile".
 
 
@@ -114,4 +114,4 @@ However, in practice, Fourier Transform is often applied in shifted windows and 
 Finally, a Fourier Series can be applied to a single \chng{joint} angle ("1D"), or to multiple signals at the same time (e.g. on phase plots).
 All of these (and other) variants of the method have been applied in the research of locomotor kinematics.
 
-It is therefore worthwile to review the historic use of related methods in studies on locomotor kinematics, and look for some common patterns and strategies.
+It is therefore worthwhile to review the historic use of related methods in studies on locomotor kinematics, and look for some common patterns and strategies.

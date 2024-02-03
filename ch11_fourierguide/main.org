@@ -9,7 +9,7 @@
 #+EXPORT_FILE_NAME: pt1ch2_fourieranalysis
 #+OPTIONS: toc:nil
 
-#+STARTUP: noinlineimges showeverything entitiespretty
+#+STARTUP: noinlineimages showeverything entitiespretty
 #+ODT: <text:p text:style-name="PageBreak"/>
 
 #+BEGIN_SRC emacs-lisp :exports none :results silent :tangle no
@@ -23,7 +23,7 @@
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
 They would be particularly useful in the analysis of locomotor kinematics, where movements can usually be broken down into repetitive cycles.
 I herein repeat the basics of Fourier analysis and transformation to the frequency domain by reviewing previous studies which applied it in some form in the field of locomotor biomechanics.
-I then discuss terminological and methodological heterogeneity among these studies, and point out some relevant properies of the method which have received relatively little attention.
+I then discuss terminological and methodological heterogeneity among these studies, and point out some relevant properties of the method which have received relatively little attention.
 One of the under-appreciated capabilities is that the transformation enables a diversity of multivariate analysis and modeling methods.
 I demonstrate this by applying Fourier Series Decomposition, multivariate analysis and probabilistic modeling to a previously analyzed data set of bipedal walking kinematics in baboons.
 The results are complementary to the prior analysis, and the capability to predict actual kinematic data for unobserved character combinations is of particular interest for future kinematics research.

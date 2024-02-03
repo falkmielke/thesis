@@ -15,7 +15,7 @@ Therefore, one has to "track" the trajectory of points of interest on a digital 
 \chng{(Note: the term "point digitization" is common, but inappropriate, stemming from times when analogue videos were acquired.)}
 
 The standard way to do this has changed dramatically during the course of this PhD project:
-whereas the gold standard used to be having a student assistent to click points frame-wise on the videos ("video tracking" of points), there are now deep learning algorithms to replace those students ("pose estimation" of whole animals).
+whereas the gold standard used to be having a student assistant to click points frame-wise on the videos ("video tracking" of points), there are now deep learning algorithms to replace those students ("pose estimation" of whole animals).
 Some relevant publications are listed here for the interested reader.
 More details can be found in the articles marked as "review".
 The author was involved in one of the studies citep:MMielke2020.

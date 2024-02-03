@@ -1,10 +1,10 @@
 \clearpage
 \section{Abstract}
-\label{sec:org08b73fd}
+\label{sec:org7ce34ba}
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
 They would be particularly useful in the analysis of locomotor kinematics, where movements can usually be broken down into repetitive cycles.
 I herein repeat the basics of Fourier analysis and transformation to the frequency domain by reviewing previous studies which applied it in some form in the field of locomotor biomechanics.
-I then discuss terminological and methodological heterogeneity among these studies, and point out some relevant properies of the method which have received relatively little attention.
+I then discuss terminological and methodological heterogeneity among these studies, and point out some relevant properties of the method which have received relatively little attention.
 One of the under-appreciated capabilities is that the transformation enables a diversity of multivariate analysis and modeling methods.
 I demonstrate this by applying Fourier Series Decomposition, multivariate analysis and probabilistic modeling to a previously analyzed data set of bipedal walking kinematics in baboons.
 The results are complementary to the prior analysis, and the capability to predict actual kinematic data for unobserved character combinations is of particular interest for future kinematics research.
@@ -13,9 +13,8 @@ The results are complementary to the prior analysis, and the capability to predi
 \FloatBarrier\clearpage
 \section{Introduction}
 \label{intro12}
-
 \subsection{Recurring Solutions}
-\label{sec:org4e4c9ec}
+\label{sec:orge0ccbc6}
 In 1822, a French mathematician initiated the remarkable discovery that any continuous signal, no matter how complex, can be represented by a sum of relatively simple trigonometric functions \citep{Fourier1822}.
 Despite some initial limitations which were mended by scientists to follow, Fourier's work opened the door to the frequency domain.
 Fourier analysis has become a widely-used tool in physics and engineering, whereas biologists have only occasionally made the transformation.
@@ -32,10 +31,8 @@ This article is not targeted at a mathematically rigorous audience, who will cer
 Instead, I aim at facilitating the entry to the topic for applied biologists, especially in biomechanics.
 Fourier Theory is well studied and widely applied, and numerous textbooks exist for all levels and fields \citep[\textit{cf.}][]{Bracewell2000,Osgood2019}.
 The rich spectrum of Fourier-based methods comprises versatile techniques which would certainly facilitate the work on many relevant research questions in biomechanics.
-
-
 \subsection{Fourier Series}
-\label{sec:orgd8b78ef}
+\label{sec:org0c25e22}
 
 \begin{figure}[pt]
 \centering
@@ -49,14 +46,14 @@ If an animal walks, the distal part of its limb would touch the ground at a posi
 Our example joint of interest, the hip, would then usually be highly flexed.
 During stance phase, i.e. while the limb is in contact with the ground, the hip gradually extends, maybe reaching the lowest angle around the initiation of the swing phase.
 While the limb swings forward to reach another touchdown, the hip joint flexes again.
-Because the limb is a system of rigid bodies with a given mass (\emph{cf.} Ch. \ref{cpt:dynamics_workflow}), accelerations would never be abrupt, and the hip angle plotted over time might be described as a ``smooth sawtooth curve'', or even resemble a sine wave (Fig. \ref{fig:jointangle} C).
+Because the limb is a system of rigid bodies with a given mass (\emph{cf.} Ch. \ref{cpt:dynamics_workflow}), accelerations would never be abrupt, and the hip angle plotted over time might be described as a ``smooth saw-tooth curve'', or even resemble a sine wave (Fig. \ref{fig:jointangle} C).
 The change of a joint angle over time is called a ``joint angle profile''.
 
 
 \begin{figure}[pb]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/f2_domains.pdf}
-\caption{\label{fig:domains}\textbf{The Frequency Domain.} Hip joint angle profile of bipedal locomotion in baboons. A visual representation (upper panels) contains exactly the same information as a numeric representation (tables / lower panels). Similarly, the information contained in frequency domain representation (right panels) is identical to that in the time domain (left panels). With the methods described below, one can transform from the time- to the frequency domain representation or back without loss of information. The frequency domain, which is accessible through Fourier Analysis formulas, is just a different representation of the data, and the transformation procedure is analogous to ``plotting'' (i.e. deterministic, reversible, favorable in some circumstances).}
+\caption{\label{fig:domains}\textbf{\chng{The Frequency Domain.}} (Upper Left) Hip joint angle profiles of bipedal locomotion in baboons, as conventionally displayed (gray traces: repeated observation; black trace: average profile; dotted line: mean angle). The joint angle profile shows the measured angles over the course of a stride cycle. (Lower Left) The very same information can be stored in an excel list, here shown as a screenshot, consisting of an indefinite number of value pairs of time and angle. (Lower Right) By using Fourier methods, traces can be converted to a list of relatively few coefficients, without loss of information. (Upper Right) These coefficients have a real and imaginary part, which could be plotted in the complex plane. (All) All these displays capture identical data. A visual representation (upper panels) contains exactly the same information as a numeric representation (tables / lower panels). Similarly, the information contained in frequency domain representation (right panels) is identical to that in the time domain (left panels). With the methods described below, one can transform from the time- to the frequency domain representation or back without loss of information. The frequency domain, which is accessible through Fourier Analysis formulas, is just a different representation of the data, and the transformation procedure is analogous to ``plotting'' (i.e. deterministic, reversible, favorable in some circumstances).}
 \end{figure}
 
 
@@ -121,7 +118,7 @@ However, in practice, Fourier Transform is often applied in shifted windows and 
 Finally, a Fourier Series can be applied to a single \chng{joint} angle (``1D''), or to multiple signals at the same time (e.g. on phase plots).
 All of these (and other) variants of the method have been applied in the research of locomotor kinematics.
 
-It is therefore worthwile to review the historic use of related methods in studies on locomotor kinematics, and look for some common patterns and strategies.
+It is therefore worthwhile to review the historic use of related methods in studies on locomotor kinematics, and look for some common patterns and strategies.
 
 \FloatBarrier\clearpage
 \section{Fourier Series in Locomotor Research}
@@ -132,7 +129,7 @@ Bernstein suggested and applied a trigonometrical sum, which consisted only of s
 
 In his later work, Bernstein advocated a hierarchical organization of motor control \citep[\textit{cf.}][]{Bongaardt2000}.
 This topic was taken up by studies in the field of motor learning, which would find evidence of higher order harmonics being affected by locomotor learning \citep{Gallistel1982,Marteniuk1983}.
-Their methodology is overeall similar to that of Bernstein, yet improved by heuristics and standardization \citep{Jackson1979,Porges1980}.
+Their methodology is overall similar to that of Bernstein, yet improved by heuristics and standardization \citep{Jackson1979,Porges1980}.
 The use of Fourier methods for asserting gait symmetry and variability were recognized \citep{Soudan1982}.
 
 
@@ -153,7 +150,7 @@ Thereby, the article has outstanding educational value for those attempting to f
 
 With the rise of computational approaches, inverse dynamic modelling of human gait was facilitated by transforming to the frequency domain \citep{Ren2007}; pattern recognition and classification methods were applied \citep[e.g.][]{Mostayed2008}.
 Along these lines, Fourier Series was used to get a frequency spectrum and compute development- and pathology related change in overall locomotor frequency \citep[e.g.][]{Kurz2011}.
-Multi-Dimensional variants of Fourier analysis for two \chng{joint} angles in phase plots or ``cyclograms'' \citep{DiBerardinoIII2010} or for 3D \chng{joint} angles using Quaternions \citep{Kenwright2015} point at promising future directions.
+Multi-Dimensional variants of Fourier analysis for two \chng{joint} angles in phase plots or ``cyclograms'' \citep{DiBerardinoIII2010} or for 3D \chng{joint} angles using quaternions \citep{Kenwright2015} point at promising future directions.
 
 
 Finally, recent work by the author (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}) has expanded on the aspect of multi-variate analysis and favorable data properties in the frequency domain \citep{Mielke2019,Mielke2023}.
@@ -174,17 +171,15 @@ To summarize, variability in the use of Fourier Series arises from the following
 \item The possibility of inverting FSD has been neglected, maybe in consequence of the above.
 \end{itemize}
 
-All these questions are the purpose of this review, and will be adressed in the next sections.
+All these questions are the purpose of this review, and will be addressed in the next sections.
 
 \FloatBarrier\clearpage
 \section{Properties of the Fourier Series}
 \label{properties}
 A lot of the text below is written from the applied perspective of a biologist, who used the transformation and its inverse to actual data.
 Not all of the reported properties of Fourier methods are directly linked to literature references, but most general courses and textbooks cover these concepts \citep[e.g.][]{Bracewell2000,Osgood2007,Osgood2019}.
-
-
 \subsection{Not a Regression}
-\label{sec:orga14c464}
+\label{sec:orgbdc3aa3}
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
 A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever update rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
@@ -198,8 +193,6 @@ Determining the ``parameters'', i.e. Fourier coefficients, works by eqn. \eqref{
 The procedure is deterministic, exact, and reversible; no start values are required.
 The trigonometric formulas provided in many publications resemble regression models, but applying a regression procedure is not necessary.
 I will demonstrate the overall procedure and provide code for some relevant scientific scripting languages as proof of concept.
-
-
 \subsection{Relation to Fourier Transform}
 \label{properties:transform}
 As discussed above, Fourier Series Decomposition (FSD) requires a signal of finite length which starts and ends at the same value (periodicity).
@@ -219,10 +212,8 @@ Therefore, the outcome of FSD is usually a much shorter array of numbers (Fourie
 The FSD formula involves a normalization for the signal period (i.e. stride cycle duration), and thus strides of different duration can be directly compared.
 FSD also avoids problems of FFT which are due to windowing.
 Though both procedures could be applied to stride cycle kinematics, \textbf{FSD is favorable if the periodicity/cyclicity assumption holds}.
-
-
 \subsection{Time Scale Independence}
-\label{sec:orgf6dc676}
+\label{sec:orgc851757}
 Another favorable property follows from the cyclicity: \textbf{Fourier coefficients are independent of temporal scale or sampling}.
 Due to the normalization mentioned above, the FSD of the signal does not contain any information about the original duration of the signal (e.g. stride duration), nor does it matter much where the cycle started.
 On the inverse FSD, a new time frame and temporal sampling must be chosen.
@@ -237,8 +228,6 @@ The same holds for speed and other spatiotemporal gait variables which are relat
 It follows that \textbf{Fourier coefficients do not replace spatiotemporal gait variables (e.g. duration, speed), but complement them}.
 In case of joint angle profiles, Fourier coefficients capture the kinematics, while gait variables quantify the system outcome as a whole.
 Both are related by morphology (i.e. limb segment dimensions), which is another relevant class of variables that can and should be associated with kinematics in modeling approaches (\emph{cf.} Ch. \ref{cpt:statistics}).
-
-
 \subsection{Approximate Periodicity}
 \label{properties:endstart}
 How ``flexible'' is the periodicity assumption?
@@ -251,29 +240,29 @@ There are a few common strategies to accomplish this if it is not given, and it 
 Firstly, one could ignore a start-end-difference, and bluntly apply FSD.
 The algorithm assumes periodicity, but the formula has no means to check this assumption, and will hence ``connect'' the last and first sample.
 This would lead to an abrupt change, which demands high order harmonics, which will show in the spectrum.
-However, abrubt changes from discontinuities are not physiological, so those values can be considered an artifact.
+However, abrupt changes from discontinuities are not physiological, so those values can be considered an artifact.
 
 
 As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and concatenate it to the end of the original signal.
-This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes cumulating to zero, and the ``double'' signal ending where it started.
+This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes accumulating to zero, and the ``double'' signal ending where it started.
 This method is common in the Fourier analysis of ground reaction force measurements \citep{Schneider1983,Alexander1980}, where data usually starts and ends at zero.
 
 The procedure shifts harmonics up by one due to period doubling.
-The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant infromation of the signal.
+The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant information of the signal.
 
 
 A third method to mend end-start differences is to simply spread them over the whole period of the signal \citep{Mielke2019}.
 This can be achieved in a computationally efficient way by subtracting an array of numbers from the signal which is linearly increasing from zero to the end-start difference, and which has the same number of samples as the signal (pseudo-algorithm: \texttt{signal -= linspace(0, end-start, number\_of\_samples)}).
 For this to be valid, it must be ensured that the end-start-difference is negligible in magnitude, non-physiological, and non-systematic.
 If those are givens, spreading the difference over the cycle is least invasive with regard to the outcome coefficients.
-As with the previous method, this smoothes the signal and reduces higher order coefficients, yet without the caveat of altering the relation of relevant harmonics.
+As with the previous method, this smooths the signal and reduces higher order coefficients, yet without the caveat of altering the relation of relevant harmonics.
 
 
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/f3_endstart_Procrustes.pdf}
-\caption{\label{fig:endstart}\textbf{Stride cycle end-start matching.} A stride cycle can be defined as the time interval between two frames which have the highest similarity in joint configuration and enclose exactly one swing and stance phase. (A) Putative start and end frame configurations, superimposed onto the original video frames. Several frames are candidates for cycle end, indicated by the series of cross markers. (B) Superimposition of end frame candidates onto the reference start frame, using Procrustes Superimposition. Only the axial line points (head to toe) are used for superimposition. (C) Configuration difference (measured as Procrustes distance \(pd\), shifted by the arbitrary formula \(log\left(pd*10^3+2\right)\) for visualization) over the whole stride cycle for different candidate start frames. (D) A heatmap of configuration difference can identify mathematically optimal stride cycle intervals. Dashed black crosshair: cycle start and end, conventionally determined by limb touch down. Blue crosshair: start and end frame with maximal configuration similarity, i.e. minimal Procrusted distance of the configurations at candidate frames.}
+\caption{\label{fig:endstart}\textbf{Stride cycle end-start matching.} A stride cycle can be defined as the time interval between two frames which have the highest similarity in joint configuration and enclose exactly one swing and stance phase. (A) Putative start and end frame configurations, superimposed onto the original video frames. Several frames are candidates for cycle end, indicated by the series of cross markers. (B) Superimposition of end frame candidates onto the reference start frame, using Procrustes Superimposition. Only the axial line points (head to toe) are used for superimposition. (C) Configuration difference (measured as Procrustes distance \(pd\), shifted by the arbitrary formula \(log\left(pd*10^3+2\right)\) for visualization) over the whole stride cycle for different candidate start frames. (D) A heat-map of configuration difference can identify mathematically optimal stride cycle intervals. Dashed black crosshair: cycle start and end, conventionally determined by limb touch down. Blue crosshair: start and end frame with maximal configuration similarity, i.e. minimal Procrustes distance of the configurations at candidate frames.}
 \end{figure}
 
 If used with caution, the third method is the favorable one for applications on locomotor kinematics.
@@ -291,11 +280,8 @@ Conversely, whether or not there are two such frames with a sub-threshold Procru
 
 All these are technical tricks which usually improve the data set quality and consistency.
 The bottom line is that, in steady state locomotion, the \textbf{periodicity assumption is usually met}, and there exist minimally invasive adjustments to ensure that the data strictly meets the mathematical requirements of FSD.
-
-
-
 \subsection{Reversibility}
-\label{sec:orgb582c06}
+\label{sec:org93e1681}
 Some data operations can be undone (math.: invertible, i.e. reversible), others not.
 For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
 Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
@@ -337,9 +323,8 @@ However, in cases where this filtering effect is negligible or even favorable, F
 Repeated back- and forward transformation does not discard further information.
 When implementing a version of the equations above in computer code, a good check is whether values are unchanged after applying FSD and its inversion in series.
 And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often \textbf{efficient to store} kinematic data in the form of FSD coefficients.
-
 \subsection{Choice of Order}
-\label{sec:org888782f}
+\label{sec:org3f23ad3}
 How to decide how many coefficients should be retained?
 That number is the ``order'' of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
@@ -354,10 +339,8 @@ This is physically plausible, because the elements of limbs are rigid bodies wit
 Such elements cannot perform too abrupt accelerations, and in consequence, the profiles are smooth.
 Furthermore, in the case of steady-state locomotion, the ensemble of rigid body elements produces the behavior, and it is unlikely that any single element can oscillate an order of magnitude quicker than the whole limb.
 The stride cycle is the defining time interval, and normally all elements move in relative unison, which limits amplitude in the higher order coefficients.
-
-
 \subsection{Affine Components}
-\label{sec:org2508621}
+\label{sec:org1030ce8}
 Some attributes of a signal are emphasized by Fourier methods.
 Those can be summarized intuitively as those attributes of the signal which can be changed without altering the ``perceived shape'' of the signal when plotted.
 
@@ -386,9 +369,8 @@ They can even be standardized (mean: zero, amplitude: one, phase: zero).
 They can be associated with biological meaning: the mean quantifies dynamic posture, the amplitude is related to effective range of motion, the phase quantifies relative timing of joint movements.
 What remains after standardization, i.e. after isolation of the affine components, is in a way the essence of a signal, its ``shape'', which is defined by the temporal (or frequential) structure of the behavior.
 In the case of joint angle profiles, this remainder can be considered coordination \emph{sensu strictu} \citep{Mielke2019,Mielke2023}.
-
 \subsection{Multivariate Analysis}
-\label{sec:org0033aff}
+\label{sec:orgf0f0dfe}
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
 Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
 Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
@@ -400,7 +382,7 @@ It seems clear that Fourier coefficients of a single joint angle profile are int
 However, it is not obvious whether that holds any advantages for PCA, because the phase rotation does not cause linear correlation.
 On the other hand, higher coefficients are usually of lower amplitude than the main coefficients, and thus their putatively relevant variability might be lost in a PCA-based dimensionality reduction.
 Thus, PCA does not generally hold benefits for the analysis of single joint FSD in its complex exponential formulation.
-It might be different in the apmlitude-phase formulation, which should be explored in future research.
+It might be different in the amplitude-phase formulation, which should be explored in future research.
 
 
 If more than one joint is of interest, coefficient number is multiplied, but the situation for multivariate analysis changes.
@@ -408,11 +390,11 @@ Different joints are often interrelated through adjacency along their linking se
 Biarticular muscles and tendons can cause correlated movements, which makes top-down sense, because a typical vertebrate limb during swing phase tends to be extended and flexed altogether \citep{Fischer2006}.
 This situation is favorable for PCA, in a sense that dimensionality reduction can often be achived with relatively little information loss.
 Note, however, that PCA must be adjusted in a way that accounts for the FSD properties as follows.
-It is common practice and often advisible to standardize input variables prior to PCA, so that their value ranges are comparable (usually done by subtraction of the mean and division of a variability measure).
+It is common practice and often advisable to standardize input variables prior to PCA, so that their value ranges are comparable (usually done by subtraction of the mean and division of a variability measure).
 Such a standardization would disrupt the temporal structure of the signal, and emphasize nuisance variability in higher order coefficients.
 A better strategy for multi-joint analyses is the standardization by \chng{extraction and isolation} of affine FSD components.
 As mentioned above, mean joint angle and joint amplitude can be standardized, and phase differences of all observations can be minimized by temporal alignment.
-With such preprocessing, the outcome of a PCA will equally represent each joint of interest, without disrupting the temporal structure of the joint angle profiles, and benefitting from intrinsic correlations of movements of the limb elements.
+With such preprocessing, the outcome of a PCA will equally represent each joint of interest, without disrupting the temporal structure of the joint angle profiles, and benefiting from intrinsic correlations of movements of the limb elements.
 PCA is invertible, and any downstream modeling outcomes can be related back to the original joint angle profiles.
 
 \FloatBarrier\clearpage
@@ -428,7 +410,6 @@ For illustration, I \chng{applied the method} to a previously analyzed data set 
 \includegraphics[width=.9\linewidth]{./figures/f8_flowchart.pdf}
 \caption{\label{fig:procedure}\textbf{Analysis and Modeling Procedure.} Workflow overview of the preparation, transformation and analysis steps involved in the data analysis on baboon bipedal walking as described in the text, from raw observation (top) to statistical inference and multivariate analysis (bottom). At each point of the procedure, transformation between the domains is possible and quality checks should be performed.}
 \end{figure}
-
 \subsection{Data Preparation}
 \label{casestudy:dataprep}
 After data acquisition is complete and hard drives are filled with videos, the individual stride episodes which were captured on video must be annotated and extracted.
@@ -457,7 +438,7 @@ Care should be taken that joint angles do not show jumps at any time point of th
 Such jumps would lead to a wrong FSD, because that procedure does not natively consider angular value ranges or interval wrapping and thus treats the jump as if it were an actual discontinuity.
 The joint angle definition chosen herein, with fully extended limb corresponding to a joint angle of zero, and ranging from \(-\pi\) to \(+\pi\), usually avoids such discontinuities.
 
-In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an \texttt{arctan} formula.
+In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an \texttt{=arctan=} formula.
 When working in three dimensions, the question is whether sufficient anatomical reference points can be \chng{tracked} to calculate actual anatomical joint angles.
 If not, it must be sufficient to calculate a single \chng{joint} angle between the segment vectors, though that does not necessarily correspond to anatomical degrees of freedom.
 If instead there are sufficient reference points, multiple \chng{joint} rotation axes and angles per joint can be used and integrated just as in a multi-joint analysis.
@@ -480,9 +461,8 @@ The transformation should be inverted, and original and re-transformed joint ang
 \includegraphics[width=.9\linewidth]{./figures/f6_residuals.pdf}
 \caption{\label{fig:residuals}\textbf{Retransformation Residuals,} (A) after performing FSD only with a given order (i.e. number of coefficients, x-axis), (B) after FSD (9 coefficients) and PCA with a given number of retained components. Residuals \(\epsilon\) (y-axis) as defined above. Joint angle profiles of all observed baboon strides are included, the distribution of residuals is indicated by grey ``violins''. Relatively low numbers of coefficients and components are sufficient to get close to the asymptotic accuracy. The absolute residual is joint-dependent (compare hip and knee, for example), an effect which is primarily determined by \chng{landmark tracking} accuracy and measurement noise. The data point for ``full'' PCA dimension is the reference value with just the FSD.}
 \end{figure}
-
 \subsection{Multivariate analysis}
-\label{sec:org25dc6b8}
+\label{sec:org9c9d78e}
 Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
 The conventional next step is to analyze their relation to each other.
 
@@ -504,14 +484,12 @@ Apart from the residual variance not covered by the retained principal component
 Most often, PCA is just used to prepare the data for subsequent multivariate methods (e.g. factor analysis).
 
 
-To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from raw video dititizations.
+To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from raw video digitization.
 Joint angles were calculated and submitted to two transformation procedures: FSD and PCA.
 All procedures to this point can be performed without loss of information: any of the resultant data rows could be converted back to an animation of moving points.
 Thus, the PCA outcome essentially contains the whole of what was captured by the original kinematic data: the spatiotemporal coordination of the moving body appendages of interest.
-
-
 \subsection{Statistics and Modeling}
-\label{sec:orgda7ff02}
+\label{sec:org16938ed}
 Despite the direct link to the raw data, the data table resulting from PCA might seem abstract.
 Nevertheless, those values are useful, because they are much more compact than the original two-dimensional time series of varying length.
 And this compactness is crucial for statistical testing and modeling, for which computational complexity can be restrictive.
@@ -548,7 +526,7 @@ I applied a stepwise modeling approach, modeling the PCA-transformed Fourier coe
 
 In the case of the baboon data set, I was able to successfully train this complex model despite limited sample size.
 I then confirmed model convergence and ensured that the model is favorable over alternative models with more or less parameters.
-The implementation in PyMC (a Pyhton library, \url{https://www.pymc.io}) has the capability of posterior predictive sampling: the trained model can be used to generate an arbitrarily high number of virtual data points, which underly the same variability as the original data.
+The implementation in PyMC (a Python library, \url{https://www.pymc.io}) has the capability of posterior predictive sampling: the trained model can be used to generate an arbitrarily high number of virtual data points, which underlie the same variability as the original data.
 Most notably, this includes predicting ``out-of-sample'', i.e. parameter combinations which were not directly observed (in this case, male adult baboons were not included in the data, but could be predicted; Fig. \ref{fig:modelprediction}).
 Though the model infers abstract PCA values, the much emphasized reversibility of the method enables the computation of joint angle profiles from the predicted values.
 All data and documented code for all the steps described above are available online (\url{https://git.sr.ht/\~falk/papio\_fcas}).
@@ -651,7 +629,7 @@ def FourierSeriesRecomposition(coefficients, output_time):
     # the exponential used in this formula
     FourierSummand = lambda t, T, cn, n: cn*numpy.exp(1j*2*numpy.pi*n*t/T)
 
-    # the fourier function at a single time point
+    # the Fourier function at a single time point
     FourierFunctionT = lambda t, T, coefficients: numpy.sum(numpy.array([ FourierSummand(t, T, cn, n) \
                                                                for n,cn in enumerate(coefficients) \
                                                               ]))

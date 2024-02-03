@@ -3,7 +3,7 @@
 
 \section{Preface}
 \label{sec:orgcfa10a1}
-The text of this chapter originally served as a memorandum, for internal documentation and knowledge transfer, distributed on October 16th, 2021 under the original title ``A Tiny Textbook About a Fraction of Statistical Methodology'' .
+The text of this chapter originally served as a memorandum, for internal documentation and knowledge transfer, distributed on October \(16^{th}\), 2021 under the original title ``A Tiny Textbook About a Fraction of Statistical Methodology''.
 It applies probabilistic, predictive modeling to a previously analyzed data set, which was kindly provided by François Druelle \citep[][]{Druelle2021}.
 The prior analysis, which focused on the comparison of spatiotemporal variables, is herein extended to questions of \emph{posture} and \emph{coordination}.
 To tackle these additional research questions, a sophisticated statistical modeling procedure is required.
@@ -21,7 +21,7 @@ In a nutshell:
 \end{itemize}
 
 In accordance with the originally internal target audience, this chapter takes a more colloquial tone than actual publications.
-As a compensation, I provide practical tipps and trial-and-error-based experiences for readers interested in implementing their own models.
+As a compensation, I provide practical tips and trial-and-error-based experiences for readers interested in implementing their own models.
 
 The document also lacks a conventional introduction.
 If the relevance and importance of statistical modeling is not immediately obvious to the reader, I kindly refer them to the applied chapter to follow (Ch. \ref{cpt:piglets}), which contains extensive elaboration on the topic.
@@ -46,7 +46,7 @@ Finally, one must set an \emph{a priori} threshold above which the rejection of 
 A proper hypothesis to test must relate to the data, contain rejectable predictions and (ideally exclusive) alternatives, and finally must be linked to a confidence threshold \citep{Chamberlin1890,Platt1964,Popper2002}.
 
 Yet there is a caveat: the metrics generated from conventional hypothesis testing do not yield a quantitative assessment of effect size.
-In other words: a low \emph{p-value} does not indicate a large speed change with age, it just indicates that the change (i.e. rejection of the null hypothesis ``speed does not depend on ageclass'') is more likely to be true.
+In other words: a low \emph{p-value} does not indicate a large speed change with age, it just indicates that the change (i.e. rejection of the null hypothesis ``speed does not depend on age class'') is more likely to be true.
 Also, there must be an assumption of \emph{how} speed changes with age: is it increasing linearly or is it low for young, high for middle, and low again for high-aged individuals?
 The reason is that all tests explicitly require a set of mathematical assumptions to be met (e.g. ``Normal distribution'' of the data, one- or two-sided comparison).
 And because of this, there exists a whole zoo of different test for different assumption situations, the choice of which is a science by itself.
@@ -87,7 +87,7 @@ In particular, there is a lot of confusion and ongoing discussion about the dist
 \chng{A credible interval is an interval in which the true value of a model parameter is expected to be found, with a given likelihood.}
 \chng{For} the purpose of this chapter, I calculated, but will not always report, credible intervals\footnote{I herein take the $\left[3\ \%,97\ \%\right]\ HDI$, i.e. Highest Density Interval, which is the smallest value range that covers $94\ \%$ of the posterior probability distribution.}.
 I will occasionally explain conventions on the way, but leave it up to the interested reader to dig deeper or ask back.
-You might notice that my way of tackling statistics with inclusive models were heavily primed by the book \href{https://xcelab.net/rm/statistical-rethinking/}{``Statistical Rethinking'' by Richard McElreath} \citep{McElreath2018}, and there is an infrequently updated, highly recommendable lecture series by that author available on youtube.
+You might notice that my way of tackling statistics with inclusive models were heavily primed by the book \href{https://xcelab.net/rm/statistical-rethinking/}{``Statistical Rethinking'' by Richard McElreath} \citep{McElreath2018}, and there is an infrequently updated, highly recommendable lecture series by that author available on YouTube.
 
 
 The main approach presented in this document is \textbf{probabilistic modeling}.
@@ -124,8 +124,8 @@ In fact, they are often repeated iteratively.
 \subsubsection{Data Simulation}
 \label{sec:org2c774e4}
 Before going to the actual data, I prepare a simulated data set which roughly incorporates parameters and parameter relations.
-These realations are comparable to those I intend to model later.
-For example, imagine I hope to find an age-dependent bodymass slope, i.e. I expect that one of my variables (``\texttt{obs1}'') depends on bodymass (\texttt{bm}), but the strength of this dependence is different for each ageclass.
+These relations are comparable to those I intend to model later.
+For example, imagine I hope to find an age-dependent body mass slope, i.e. I expect that one of my variables (``\texttt{obs1}'') depends on body mass (\texttt{bm}), but the strength of this dependence is different for each age class.
 Then I will generate a fake data set which follows exactly this desired relation: starting with a white noise data column for \texttt{obs1}, I add a known \texttt{intercept}.
 I randomly assign an age group to each of the data rows.
 Then, for each of the entries, I add \texttt{bm*slope(age)}, i.e. an age-group dependent component which represents the \texttt{obs1} / \texttt{bm} relation.
@@ -137,11 +137,11 @@ For example, one could use:
 
 This is our first model equation, and we will encounter and explain more below.
 Model equations are an abstract formulation of the model, which helps communicating the content and keeping track of model alterations.
-Centering the bodymass could happen per group, i.e. for each subset of the data which has a certain age group, I would substract the group mean bodymass from the actual bodymass values.
+Centering the body mass could happen per group, i.e. for each subset of the data which has a certain age group, I would subtract the group mean body mass from the actual body mass values.
 Or one could center for the whole data set.
-I can ``simulate'' all of these structures by simple numeric calculation: a slope based on absolute bodymass, one based on centered bodymass, and finally one based on groupwise centered data.
+I can ``simulate'' all of these structures by simple numeric calculation: a slope based on absolute body mass, one based on centered body mass, and finally one based on group-wise centered data.
 And then I cross compare and see how the wrong model captures the simulated data and whether I can distinguish.
-With the shere amount of parameter combinations, this can be time consuming.
+With the sheer amount of parameter combinations, this can be time consuming.
 Is simulation worth it? Or, in another word:
 
 \textbf{Why?!} You might feel the urge to ask: why this extra step of using fake data to apply a fake model?
@@ -152,7 +152,7 @@ But I can also apply simplified models and observe how they fail, which helps to
 This might seem trivial for simple, linear models.
 However, when going to multi-level, multivariate models\footnote{If you are unfamiliar with the terms ``multi-level'' or ``multivariate'', I would like to ask some patience: they will get clearer below, and in fact you might already have encountered them under alternative names.}, things get complex, and model structures are neither straight forward, nor intuitive.
 Recovering the artificial parameters which I put into the data gives me some confidence that the model structure is as intended (which is not to say that the model is a good one for my real data set).
-Critically, some models are inherently ambiguous (e.g. think of a toy model as the one above which instead has age as an explicit parameter \emph{and} as a level for bodymass).
+Critically, some models are inherently ambiguous (e.g. think of a toy model as the one above which instead has age as an explicit parameter \emph{and} as a level for body mass).
 By playing around with the parameters which generate the simulated data set, and then checking how the model changes, one can learn which effects end up where and how unique, and how sensitive, the model components are.
 Likewise, it is possible to simulate varying sample- and effect sizes, to see how much data is needed to reliably recover a given effect.
 
@@ -230,11 +230,11 @@ Furthermore, the system really ``flies'' with the highly iterative quest of find
 \subsubsection{Modeling Design Choices}
 \label{workflow:design:philosophy}
 When it comes to the actual components of a model, there are always multiple options of how to include a parameter.
-This refers to questions of inclusion/exclusion, mathematical choices, and the hierarchical and covariable structure of individual model components (i.e. how parameters are interrelated):
+This refers to questions of inclusion/exclusion, mathematical choices, and the hierarchical and co-variable structure of individual model components (i.e. how parameters are interrelated):
 \begin{itemize}
 \item ``inclusiveness'': whether or not to include nuisance parameters (e.g. the effect of moon phase on animal locomotion)
-\item whether to include it explicitly, or in a random intercept (e.g. ``sex'' male/female can be a model component, or shedded by a subject-level intercept)
-\item the hierarchical structure of components (e.g. whether bodymass slope is universal, or different for each ageclass; most familiar are ``random slope'' and ``random intercept'')
+\item whether to include it explicitly, or in a random intercept (e.g. ``sex'' male/female can be a model component, or obscured by a subject-level intercept)
+\item the hierarchical structure of components (e.g. whether body mass slope is universal, or different for each age class; most familiar are ``random slope'' and ``random intercept'')
 \item whether/how to include the covariance of outcome variables (e.g. speed, stride frequency and stride length are interrelated)
 \item whether/how to include the covariance of slopes
 \item mathematical detail which can affect the sampling (e.g. the so-called ``parametrization'': multi-level components can be modeled by ``sampling'' from a hyper-prior or as ``offset'' from a population slope)
@@ -269,7 +269,7 @@ There are technical tricks to increase the chance that the most attractive local
 There are many different update rules and algorithms (``Metropolis'', ``NUTS'', ``Hamiltonian Monte Carlo'', \ldots{}) all well explained on Wikipedia.
 
 A defining difference to conventional regression is that the matter and outcome of parameter optimization are distributions of model parameter values (as opposed to point estimates).
-I tend to think of the sampling as a procedure that attempts to ``deform'' the shape of the initially set distribution (e.g. a Normal \(\mathcal{{N}}\left(\mu = 0.0,\ \sigma = 1.0\right)\)) to reach optimal agreement with the data distribution (e.g. a slightly narrower, shifted Normal \(\mathcal{{N}}\left(0.6,\ 0.1\right)\) for a hypothetical set of dutyfactors) by adjusting the model parameters.
+I tend to think of the sampling as a procedure that attempts to ``deform'' the shape of the initially set distribution (e.g. a Normal \(\mathcal{{N}}\left(\mu = 0.0,\ \sigma = 1.0\right)\)) to reach optimal agreement with the data distribution (e.g. a slightly narrower, shifted Normal \(\mathcal{{N}}\left(0.6,\ 0.1\right)\) for a hypothetical set of duty factors) by adjusting the model parameters.
 A bit like pressing a blob of pudding into an animal-shaped form.
 Note that what I write above (except maybe the pudding metaphor) is not an exact description, e.g. a starting point should more exactly be called an initial distribution shape, or ``prior''.
 
@@ -289,14 +289,14 @@ And, acknowledged, well-made spreadsheet files are often designed to accomplish 
 Let's call this one-task-one-spreadsheet strategy \emph{``task-boxing''} (``boxing'' as in ``unboxing'', not like the sports), because steps of a larger procedure are solved by individual black box spreadsheets.
 
 When advancing to scripting languages like Python, Matlab, or R, one learns to process spreadsheets and other database-like data sources in programming.
-Noteworthy in this regard are ``data frames'' (\emph{cf.} R: \texttt{dplyr}, Python: \texttt{pandas}, Matlab: \texttt{table}), as the programming analogon to a single spreadsheet.
+Noteworthy in this regard are ``data frames'' (\emph{cf.} R: \texttt{dplyr}, Python: \texttt{pandas}, Matlab: \texttt{table}), as the programming analogy to a single spreadsheet.
 For experienced readers: the multidimensional variant of those are worth exploring (e.g. Python \texttt{xarray}).
 Scripting can handle many data tables at once, easily.
 But then, one might be tempted to write long scripts which perform the whole analysis procedure in one go, in a \emph{serial} fashion.
 This temptation is fostered by notebook-like programming interfaces, such as RStudio/RMarkdown, Jupyter, or the Matlab interface.
 I call this extreme strategy \emph{``serialization''}.
 The problem is that complex scripts are hard to generalize and maintain.
-Complexity should be avoided; good documentation is indispensible.
+Complexity should be avoided; good documentation is indispensable.
 
 \textbf{Is there an intermediate way?}
 It would be good to break the complex scripts and spreadsheets down to meaningful unit tasks, but what is a good unit?
@@ -319,7 +319,7 @@ In particular, when it comes to \hyperref[workflow:prediction]{prediction (Ch. \
 Obviously, the association of model settings, structure, and outcome, must be maintained at all time, e.g. by ``settings'' log files.
 
 
-I found all my personal requirements met in the library \texttt{pymc} for Pyhton \citep{Salvatier2016}.
+I found all my personal requirements met in the library \texttt{PyMC} for Python \citep{Salvatier2016}.
 % In fact, I started it shortly after I began learning to program in Python.
 Compatible choices exist in the \texttt{R} programming language, or language-independent (\texttt{STAN}).
 % I would love to learn those latter ones, but never found the time and urge, which is why I got stuck on Python.
@@ -341,7 +341,7 @@ The comparison problem has two balancing effects:
 
 To illustrate this, try to mentally fit a fifth-order polynomial to a short segment of a quadratic curve: the match might be perfect in the observed area.
 However, there are far too many degrees of freedom in the equation which might end up at values that produce weird wiggly curves outside of the data range.
-To get around this, modern information criteria are designed to find the best tradeoff between model fit and complexity by quantifying and penalizing overfitting tendencies appropriately.
+To get around this, modern information criteria are designed to find the best trade-off between model fit and complexity by quantifying and penalizing overfitting tendencies appropriately.
 
 Model comparison is one of the most powerful aspects of the modeling procedure, because it enables statisticians to make an informed choice about what is going on in the data.
 If, in direct comparison, a model including a certain parameter receives less ``support'' than the model lacking it, then it is valid to accept the null hypothesis that the parameter in question is of no relevance for the data.
@@ -353,7 +353,7 @@ The other extraordinarily powerful tool in the modeling workflow is ``prediction
 This feature can serve two relevant purposes, which are technically almost identical.
 
 \begin{enumerate}
-\item \textbf{In-Sample Predicition.}
+\item \textbf{In-Sample Prediction.}
 \label{sec:org369b808}
 Or: \textbf{Did my model shot hit the data?}
 After two weeks of exhaustive sampling (not uncommon in probabilistic statistics), one might get a ``trace'' of sampling values for a particular model.
@@ -408,7 +408,7 @@ As I put it above, this feature is one of the biggest advantages of probabilisti
 
 \subsubsection{Model Hygiene}
 \label{workflow:hygiene}
-Having gone through the tideous procedures of acquiring a data set, designing a model, and getting a sampler to run, one might easily be tempted to jump for joy when finally retrieving the first MCMC trace (i.e. a fit model).
+Having gone through the tedious procedures of acquiring a data set, designing a model, and getting a sampler to run, one might easily be tempted to jump for joy when finally retrieving the first MCMC trace (i.e. a fit model).
 However, sampling does not always succeed.
 It can fail bluntly (with an explicit error message), but with a trace you are already past that hurdle.
 Worse, it can also fail in numerous non-obvious regards, and it is crucial to diagnose whether this happened.
@@ -469,13 +469,13 @@ Highlighted above are the different categories of data (see Tab. \ref{tab:parame
 \hline
 subject & subject & - & names of the subjects\\[0pt]
 (subject) & age & years & time since birth\\[0pt]
-subject & ageclass & \{infant, adolescent, adult\} & three disjunct ageclasses\\[0pt]
+subject & age class & \{infant, adolescent, adult\} & three disjunct age classes\\[0pt]
 subject & sex & \{female, male\} & sex of the animal\\[0pt]
-(subject) & bodymass & kg & weight at recording\\[0pt]
+(subject) & body mass & kg & weight at recording\\[0pt]
 (subject) & leg length & m & leg length\\[0pt]
-(subject) & bmi & kg/m & bodymass divided by body length\\[0pt]
+(subject) & bmi & kg/m & body mass divided by body length\\[0pt]
 \hline
-stride & dutyfactor & 1. & fraction of stride in ground contact\\[0pt]
+stride & duty factor & 1. & fraction of stride in ground contact\\[0pt]
 stride & distance & relative & distance covered by stride (m),\\[0pt]
  &  &  & normalized by reference segment length (m)\\[0pt]
 stride & frequency & \(Hz = s^{-1}\) & reciprocal stride duration\\[0pt]
@@ -506,7 +506,7 @@ This has to regard their implicit hierarchical structure (\emph{subject} \(\righ
 \label{sec:orgd5b5698}
 In the parameter overview table, several angles are listed.
 Firstly, there is the trunk angle, which is a \textbf{segment angle}.
-A segment is a more or less rigid subunit of a body which lies between two joints, normally it is associated with a bone or skeletal unit.
+A segment is a more or less rigid sub-unit of a body which lies between two joints, normally it is associated with a bone or skeletal unit.
 Segment angles (here: in two spatial dimensions) are calculated as the angle of a segment relative to the global reference frame.
 For example, the trunk angle is herein defined as the angle between the head-hip vector and the vector parallel, but opposite in direction to the gravitational acceleration vector (i.e. pointing upwards; approximated from the video y-direction).
 By this definition, if you sit straight on a chair right now, your trunk angle would be zero; if you lean back, it becomes negative, and if you lean forward to tie your lace it gets positive.
@@ -556,7 +556,7 @@ This is intuitive in the case of stride length: a stride of a given distance (e.
 When normalized with a meaningful morphological reference, comparison of the observations is at least a bit more fair (with regard to the animal's energy investment).
 
 Note that there is no pressing reason to perform this normalization, and it is by no means clear whether models improve with it.
-The dimensionless parameters are most likely correlated to their unnormalized counterparts.
+The dimensionless parameters are most likely correlated to their non-normalized counterparts.
 And repeating the actual calculation with the raw spatiotemporal parameters showed that the outcomes are not all too different from those presented below.
 On the other hand, interpretation of the outcome is facilitated by the normalization, because all effects due to morphological differences are supposedly summarized on the body proportion predictor(s).
 
@@ -595,37 +595,37 @@ The purpose of this section is to find out how they interrelate.
 
 Within this group of parameters, \emph{sex} stays constant for a given subject.
 Of the \(17\) subjects included, \(5\) were male.
-By study design, \emph{ageclass} was also constant over recordings for all subjects in the data set (subjects might be measured at slightly different ages, however recording periods were narrow, and no subjects of transitional ages were considered).
+By study design, \emph{age class} was also constant over recordings for all subjects in the data set (subjects might be measured at slightly different ages, however recording periods were narrow, and no subjects of transitional ages were considered).
 A total of
 \(4\) adults (\(4/0\) females and males, respectively),
 \(6\) (\(4/2\)) adolescent
 and \(7\) (\(4/3\)) infant
 \emph{Papio anubis} entered the final data set.
-Subjects were intentionally selected so that the ages of the classes do not overlap, i.e. to have disjunct ageclasses.
-Note that, in principle, ageclass and sex can be interrelated, e.g. if there is a bias in the experimentally selected sex ratios per age group.
+Subjects were intentionally selected so that the ages of the classes do not overlap, i.e. to have disjunct age classes.
+Note that, in principle, age class and sex can be interrelated, e.g. if there is a bias in the experimentally selected sex ratios per age group.
 This is indeed the case in our data set: in the ``adult'' class, only females were measured.
 However, this bias is neither coincidental nor intentional, but owes to the group structure and social habits of baboons.
 It forces us to assume that locomotion of adult \emph{Papio anubis} is indifferent to sex, or that the sex difference in adults can be inferred from the observed difference in subadults.
 More on this case below.
 
 
-The \emph{bodymass} of the animals was determined for each recording (averages for infant/adolescent/adult individuals: \(3.0/10.2/13.1\ kg\)).
-This means that different strides of the same subject would associate with slightly different bodymasses if bodymass changed within the narrow time period of recording.
-Furthermore, bodymass can be associated with the other subject parameters (e.g. trivially with age, because individuals grow).
+The \emph{body mass} of the animals was determined for each recording (averages for infant/adolescent/adult individuals: \(3.0/10.2/13.1\ kg\)).
+This means that different strides of the same subject would associate with slightly different body masses if body mass changed within the narrow time period of recording.
+Furthermore, body mass can be associated with the other subject parameters (e.g. trivially with age, because individuals grow).
 For the subsequent analyses, this interrelation of subject characteristics needs to be taken into account.
 
-The two leg long bone segments (hip-knee-ankle) were chosen as a size reference for normalization of distance values. They measured \(0.27/0.41/0.43\ m\) (inft./adol./adult) per ageclass on average.
-Adding the length of the torso segment (head-hip), we retrieved a total body length proxy, which was used to calculate a ``body mass index'' (BMI, averages \(5.0/11.4/14.1\ kg/m\) for the respective ageclasses).
+The two leg long bone segments (hip-knee-ankle) were chosen as a size reference for normalization of distance values. They measured \(0.27/0.41/0.43\ m\) (inft./adol./adult) per age class on average.
+Adding the length of the torso segment (head-hip), we retrieved a total body length proxy, which was used to calculate a ``body mass index'' (BMI, averages \(5.0/11.4/14.1\ kg/m\) for the respective age classes).
 This is no proper scientific BMI, but one solely for demonstration purposes in this document.
 \medskip
 
-To prepare the decision on how to include bodymass, leg length and BMI in the subsequent models, behold the first \textbf{probabilistic model}.
-It is a rather simple one, modeling bodymass as a function of ageclass and sex.
+To prepare the decision on how to include body mass, leg length and BMI in the subsequent models, behold the first \textbf{probabilistic model}.
+It is a rather simple one, modeling body mass as a function of age class and sex.
 I will use it to settle some fundamentals about how I apply the modeling procedure herein.
 
-\subsubsection{The Bodymass Model}
+\subsubsection{The Body Mass Model}
 \label{sec:orge4d1e9b}
-Take the following linear model for bodymass, with bodymass \(\theta\), intercept \(\alpha\), data vectors \(v\), slopes \(\beta\) and residuals \(\epsilon\):
+Take the following linear model for body mass, with body mass \(\theta\), intercept \(\alpha\), data vectors \(v\), slopes \(\beta\) and residuals \(\epsilon\):
 
 \begin{equation} \theta \sim v_{1}\cdot\alpha + v_{male}\cdot\beta_{male} + v_{adol}\cdot\beta_{adol} + v_{inft}\cdot\beta_{inft} + \epsilon \label{eq:proportions} \end{equation}
 
@@ -634,8 +634,8 @@ This way, the decisive slopes are only added to the data rows which match a give
 
 A brief recap to homogenize vocabulary:
 \begin{itemize}
-\item The ``left handside'', ``independent'', or ``outcome'' variables (often called \(\theta_{i}\)) are termed \emph{observables} in this text. Acknowledged, all parameters are ``observed'' (or ``dependent'', or ``outcome''\ldots{}), but observables are the ones in focus of a given chapter.
-\item The ``right handside'', ``dependent'', or ``input'' variables are usually described as \emph{predictors}. Again, this label is my arbitrarily changing choice.
+\item The ``left hand side'', ``independent'', or ``outcome'' variables (often called \(\theta_{i}\)) are termed \emph{observables} in this text. Acknowledged, all parameters are ``observed'' (or ``dependent'', or ``outcome''\ldots{}), but observables are the ones in focus of a given chapter.
+\item The ``right hand side'', ``dependent'', or ``input'' variables are usually described as \emph{predictors}. Again, this label is my arbitrarily changing choice.
 \item Model components which do not stem from the data table are called \emph{(model) parameters}; in the case of linear models these are intercepts, slopes and the residual.
 \end{itemize}
 
@@ -647,16 +647,16 @@ I will explain all components in detail in the following paragraphs.
 Each model ``starts'' with an intercept (though it wouldn't need to, or the intercept could be implicit).
 For continuous variables, the intercept is intuitive to understand: it is the observable value when the predictor is zero.
 With categorical variables, the intercept value is the value observed for a given ``reference'' set/selection of parameter values.
-For example, in the bodymass model below, the intercept is approximately corresponding to the average bodymass of adult, female animals.
+For example, in the body mass model below, the intercept is approximately corresponding to the average body mass of adult, female animals.
 The choice of reference is done by the statistician, it is an arbitrary one, and sometimes only visible by the category changes associated with slopes.
 
 \item \textbf{Slopes \(\beta\):}
 \label{sec:org2c291e4}
-Slopes quantify the change in the value of the modeled observable (e.g. bodymass) when changing along a parameter axis (e.g. sex from female to male).
+Slopes quantify the change in the value of the modeled observable (e.g. body mass) when changing along a parameter axis (e.g. sex from female to male).
 Some mathematical explanation:
 \begin{itemize}
-\item For binary categorical values, such as sex, this is simple: set the corresponding value for ``female'' to \(0.0\) and that for male to \(1.0\) and the slope (``female \(\rightarrow\) male'', or just ``male'') will be their modeled difference in bodymass.
-\item For multi-categorical values (e.g. ageclass, three possible categories), one reference category is chosen (e.g. adults), and separate slopes are modeled for each of the other groups (i.e. ``adlt \(\rightarrow\) adol'' and ``adlt \(\rightarrow\) inft''). Because for each slope, only the target category is associated with \(1.\) and all others with \(0.\), the slopes determine the pairwise distance of the target categories and the reference (the category associated with the intercept). No animal is infant and adolescent for a single observation (categories are mutually exclusive), hence no observation will get associated with both slopes.
+\item For binary categorical values, such as sex, this is simple: set the corresponding value for ``female'' to \(0.0\) and that for male to \(1.0\) and the slope (``female \(\rightarrow\) male'', or just ``male'') will be their modeled difference in body mass.
+\item For multi-categorical values (e.g. age class, three possible categories), one reference category is chosen (e.g. adults), and separate slopes are modeled for each of the other groups (i.e. ``adlt \(\rightarrow\) adol'' and ``adlt \(\rightarrow\) inft''). Because for each slope, only the target category is associated with \(1.\) and all others with \(0.\), the slopes determine the pairwise distance of the target categories and the reference (the category associated with the intercept). No animal is infant and adolescent for a single observation (categories are mutually exclusive), hence no observation will get associated with both slopes.
 \item For continuous values (e.g. age), the slope is related to the numerical values in that parameter. Parameter ranges must be considered when evaluating effect size. It usually makes sense to center or even normalize the parameter to make slopes comparable.
 \end{itemize}
 
@@ -669,7 +669,7 @@ The terms ``residual'', ``epsilon'', and ``standard deviation'' (in model contex
 
 \item \textbf{Prior Choice and Sampling:}
 \label{sec:orgf31f4ce}
-Because I use a probabilistic modeling framework (the python library \texttt{pymc}), the actual values of the model parameters are determined in MCMC sampling (see Ch. \ref{workflow:sampling}).
+Because I use a probabilistic modeling framework (the python library \texttt{PyMC}), the actual values of the model parameters are determined in MCMC sampling (see Ch. \ref{workflow:sampling}).
 This procedure requires start values (``priors''), for which I usually take the mean and standard deviation of the observed values (because the sampled model values should certainly fall in that range).
 Also, there is a whole lot of voodoo about setting the correct distribution type for a given parameter.
 Usually (with the sample size encountered in this data set), it is hard to falsify the assumption that model values, logarithmized in obvious cases, are approximately normally distributed \citep{Downey2013}.
@@ -682,18 +682,18 @@ I chose something close to industry standard (No U-Turn Sampler ``NUTS''; suffic
 I skip this here for clarity.
 Usually, one would have to argue why the chosen model is the most appropriate one (though of course limited by availability of parameters).
 More on it when we get to spatiotemporal gait variables.
-For bodymass, the model choice is rather trivial, there is not many options but to use the other subject parameters as predictors.
-I do not use leg length and BMI as predictors for bodymass, because they share a hierarchy level, are correlated, and thus the idea of one predicting the other might falsely imply causality.
+For body mass, the model choice is rather trivial, there is not many options but to use the other subject parameters as predictors.
+I do not use leg length and BMI as predictors for body mass, because they share a hierarchy level, are correlated, and thus the idea of one predicting the other might falsely imply causality.
 
 \item \textbf{Data:}
 \label{sec:org71ae22a}
-Because there is usually only one bodymass per subject animal in our data set, the data set onto which I apply the bodymass model is reduced (\(17\) observations).
-For one animal which was measured at two bodymasses, the average value was used.
+Because there is usually only one body mass per subject animal in our data set, the data set onto which I apply the body mass model is reduced (\(17\) observations).
+For one animal which was measured at two body masses, the average value was used.
 
 \item \textbf{Transformations:}
 \label{sec:org1dc49e0}
-As an additional technical complication, bodymass (and the other body proportions) have to be transformed.
-For most body measures, negative values are implausible, e.g. a negative bodymass does not exist.
+As an additional technical complication, body mass (and the other body proportions) have to be transformed.
+For most body measures, negative values are implausible, e.g. a negative body mass does not exist.
 Also, one can usually observe that the Normality assumption, or in our case a Normal prior distribution, is better met when log-transforming the values.
 In consequence, predictions become more accurate for models of logarithmized measures.
 This was also the case for the current data set.
@@ -702,10 +702,10 @@ Therefore, the body parameters presented here were transformed with the natural 
 
 
 \FloatBarrier
-\subsubsection{Bodymass is Age-Dependent (Surprise!)}
+\subsubsection{Body Mass is Age-Dependent (Surprise!)}
 \label{bodymass:results}
 \begin{table}[p]
-\caption{\label{tab:bodyproportions}Results of the Bodymass Model.}
+\caption{\label{tab:bodyproportions}Results of the Body Mass Model.}
 \centering
 \begin{tabular}{|l|r|c|c|}
 \hline
@@ -723,7 +723,7 @@ Therefore, the body parameters presented here were transformed with the natural 
 \end{table}
 
 
-As expected, bodymass and ageclass are associated (Tab. \ref{tab:bodyproportions}).
+As expected, body mass and age class are associated (Tab. \ref{tab:bodyproportions}).
 But how much?
 On average, adolescents are \(2.4\ kg\) and infants are \(9.4\ kg\) lighter than adult individuals.
 The effect of an animal being infant is deemed relevant because the credible interval does not include zero.
@@ -732,10 +732,10 @@ That interval is comparable to the ``standard error of the mean'' of a given slo
 The difference for the adolescent group exemplifies this: it is in the order of the \(\epsilon\), and the HDI contains zero.
 Although we know that adolescents weigh less than adults, the data set is insufficient and effect size too low to give waterproof statistics.
 
-In contrast to age, sex seems to have no effect on bodymass (keeping in mind that there are generally few and no adult males in the sample; slope: \(+0.6\ [-1.9, +3.7]\ kg\) ).
+In contrast to age, sex seems to have no effect on body mass (keeping in mind that there are generally few and no adult males in the sample; slope: \(+0.6\ [-1.9, +3.7]\ kg\) ).
 
 Finally, the parameter \(\nu\) (``nu'') deserves some explanation, to demonstrate another neat modeling trick \citep{Wiecki2013}.
-An often disputed, but indispensible assumption in conventional statistics is the Normality assumption (i.e. that values of a variable are normally distributed).
+An often disputed, but indispensable assumption in conventional statistics is the Normality assumption (i.e. that values of a variable are normally distributed).
 Likewise, in probabilistic modeling, one can choose the distribution \emph{type} (e.g. Normal) of a model parameter, which together with the distribution \emph{properties} (e.g. \(\mu = 0\), \(\sigma = 1\)) is the \textbf{prior} for that parameter.
 Distribution properties are adjusted in MCMC sampling, and the prior only influences the result when sample size is very small.
 In contrast, the distribution type stays fixed and has major influence on the outcome.
@@ -744,29 +744,29 @@ Part of that justification comes from model comparison (see Ch. \ref{workflow:co
 But in case of the Normal distribution, we can use a more general distribution (Student's T) to actually measure how ``Normal'' our data is.
 Student's T has an extra parameter, which is \(\nu\) or the ``degree of freedom''.
 The larger \(\nu\), the higher the resemblance to a Normal distribution.
-In contrast, on lower \(\nu\) values, Student's T has more ``weight in the tails'', accounting for ``outliers'' which are unnormally far from the mean.
-For our bodymass model, the sampler converged at \(\nu = 52.1\).
-This is a relatively high value, confirming that bodymass is approximately normally distributed.
+In contrast, on lower \(\nu\) values, Student's T has more ``weight in the tails'', accounting for ``outliers'' which are non-normally far from the mean.
+For our body mass model, the sampler converged at \(\nu = 52.1\).
+This is a relatively high value, confirming that body mass is approximately normally distributed.
 Usually, model comparison favors the use of a Normal posterior in such cases.
 
 
 \FloatBarrier
 \subsubsection{Multi-Level Modeling}
 \label{sec:org25b6e1a}
-For all following models, there is the option to include the bodymass parameter as a hierarchical (better: multi-level) parameter.
-This means that, when we have a model which includes a slope for (centered) bodymass, we actually make it three slopes (one for each ageclass). I will note this as \(\beta_{bm\mid age}\).
+For all following models, there is the option to include the body mass parameter as a hierarchical (better: multi-level) parameter.
+This means that, when we have a model which includes a slope for (centered) body mass, we actually make it three slopes (one for each age class). I will note this as \(\beta_{bm\mid age}\).
 
-As mentioned above, groupwise centering bodymass (\(cbm_a = bm_a - mean(bm_a)\quad \forall a = {ageclasses}\)) can be useful to facilitate interpretation of the model outcome.
+As mentioned above, group-wise centering body mass (\(cbm_a = bm_a - mean(bm_a)\quad \forall a = {ageclasses}\)) can be useful to facilitate interpretation of the model outcome.
 If data values are centered, the slopes are relative to a mean, and the intercept will give a value at the average of all continuous parameters (in this case: at average body weight).
-And because age has such a high impact on body weight, it makes sense to center the groups individually, to get relatively lighter or heavier individuals per ageclass separated.
+And because age has such a high impact on body weight, it makes sense to center the groups individually, to get relatively lighter or heavier individuals per age class separated.
 
 The complexity of this matter is not to be underestimated.
-Just to review our options to model bodymass:
+Just to review our options to model body mass:
 \begin{itemize}
 \item inclusion or exclusion
 \item log-transform or not
-\item not centering or centering to population mean or to ageclass mean
-\item multi-level: one slope for the whole population or slope for each of the ageclasses
+\item not centering or centering to population mean or to age class mean
+\item multi-level: one slope for the whole population or slope for each of the age classes
 \end{itemize}
 
 All of these choices in combination affect the model, and need to be compared.
@@ -777,7 +777,7 @@ These will be handled below.
 
 \subsubsection{Multivariate Posterior Structures: Mor(e)phometrics}
 \label{sec:orgf2c37c2}
-Together with bodymass, I modeled leg length (ankle-knee-hip distance, cumulated) and body mass index (BMI, bodymass divided by ankle-knee-hip-head distance).
+Together with body mass, I modeled leg length (ankle-knee-hip distance, accumulated) and body mass index (BMI, body mass divided by ankle-knee-hip-head distance).
 The model formula from above remains unchanged, except for the left side.
 But that, namely ``multiple parameters on the left side'', is a concept on its own.
 The solution is a \textbf{Multivariate Posterior}.
@@ -785,19 +785,19 @@ I imagine this as multiple models, sampled in parallel, but cross-connected thro
 In an unconnected model, the MCMC sampler would explore the parameter space randomly, and might be ``at different ends'' for two variables at a given time.
 In contrast, when they are connected by a multivariate posterior, the sampler path is also connected, and therefore a positive correlation of two parameters reflects in the values the sampler sees simultaneously.
 The connection can be either fixed (empirical correlation, based on the data) or inferred.
-The correlation is crucial for predictive sampling to avoid unplausible parameter combinations.
+The correlation is crucial for predictive sampling to avoid implausible parameter combinations.
 
 
 Let us rehearse this concept on the body proportions, where it is rather intuitive.
-Body proportions (including bodymass) are highly correlated.
+Body proportions (including body mass) are highly correlated.
 For BMI, this is trivial: it is defined as the quotient of two other measures.
 
 We can simply calculate the correlation of the three present observables from the raw data.
 This would be the \emph{empirical} correlation.
-However, according to our statistical theory, the data we acquied is just a sample from the true, underlying distributions of the observables.
+However, according to our statistical theory, the data we acquired is just a sample from the true, underlying distributions of the observables.
 So the correlation might be incomplete or inexact.
 Probabilistic statistics is the attempt to infer that true underlying distribution, and when it is known, one can calculate a potentially more exact correlation (\emph{inferred} correlation).
-The inferred correlation is not \emph{per se} more exact; imagine a situation where correaltion is close to \(\pm 1\) and the sampler might have problem with parameter bounds.
+The inferred correlation is not \emph{per se} more exact; imagine a situation where correlation is close to \(\pm 1\) and the sampler might have problem with parameter bounds.
 It depends on the data which one works best (yay, more model comparison!).
 
 
@@ -854,18 +854,18 @@ log (bmi (kg/m)) & \(+2.60\) & \(+0.02\) & \(-0.18\) & \(-1.01\) * & \(\pm 0.16\
 
 
 In the case of our group of body proportions, the empirical correlation is close to unity (Tab. \ref{tab:proportions_empiricalcorrelation}).
-It is less strong with the inferred posterior correlation (Tab. \ref{tab:proportions_correlation}): bodymass is highly correlated with both leg length and BMI, but the latter are not correlated to each other.
+It is less strong with the inferred posterior correlation (Tab. \ref{tab:proportions_correlation}): body mass is highly correlated with both leg length and BMI, but the latter are not correlated to each other.
 
 
-The multivariate model also infers the relation to the primary subject parameters (sex and ageclass, \emph{cf.} Tab. \ref{tab:proportions_predictors}).
-The values for bodymass are identical to those reported above (Tab. \ref{tab:bodyproportions}), but here the outcome is shown for the log-transformed observables.
-The results for the additional quantities are consistent with those from bodymass, except that we see that leg length of adolescents is almost identical to that of adults (whereas in bodymass, the difference is more pronounced).
+The multivariate model also infers the relation to the primary subject parameters (sex and age class, \emph{cf.} Tab. \ref{tab:proportions_predictors}).
+The values for body mass are identical to those reported above (Tab. \ref{tab:bodyproportions}), but here the outcome is shown for the log-transformed observables.
+The results for the additional quantities are consistent with those from body mass, except that we see that leg length of adolescents is almost identical to that of adults (whereas in body mass, the difference is more pronounced).
 
 And there are many more body size measures (broad category: morphometrics) which could be measured and included.
 (There is \emph{always} another parameter which one could include in the model.)
 BMI was intentionally introduced as a redundant parameter and will not be included in subsequent models.
-Bodymass and leg length are highly correlated, and if both are part of another model (e.g. a model on coordination), it might be hard to distinguish which of them is causally responsible for an observed effect.
-On the other hand, I demonstrated that bodymass and leg length are slightly different with regard to the adolescent individuals.
+Body mass and leg length are highly correlated, and if both are part of another model (e.g. a model on coordination), it might be hard to distinguish which of them is causally responsible for an observed effect.
+On the other hand, I demonstrated that body mass and leg length are slightly different with regard to the adolescent individuals.
 Hence, the question whether or not to include either, both, or none of these two parameters in the more complex models to come remains to be evaluated.
 
 \subsubsection{Posterior Predictive Sampling}
@@ -892,10 +892,10 @@ For subsequent models, such plots are equally valuable, yet the occurrence of co
 
 \subsubsection{Summary: Subject Parameters}
 \label{sec:orge0c65f9}
-The example of a bodymass model has already taken us deep into the modeling world.
-We explored simple relations (bodymass as a function of ageclass and sex, and the body proportion cross correlations).
+The example of a body mass model has already taken us deep into the modeling world.
+We explored simple relations (body mass as a function of age class and sex, and the body proportion cross correlations).
 This involved a linear model with rather few components.
-It is a trivial finding that bodymass depends on the ageclass of our subject, and we will see how that can be incorporated in subsequent models.
+It is a trivial finding that body mass depends on the age class of our subject, and we will see how that can be incorporated in subsequent models.
 With regard to the interrelations of our body proportion quantities, we encountered multivariate posteriors and saw how they can serve to infer correlations among the observables.
 Visual comparison of raw data and model predictions confirmed that the model converged to plausible results.
 
@@ -904,9 +904,9 @@ All this was more a playground to rehearse and apply some basic modeling concept
 \FloatBarrier\clearpage
 \subsection{Spatiotemporal Gait Variables}
 \label{sec:org69bec74}
-With this knowledge about the subject parameteres, I will proceed to the next parameter category: the spatiotemporal gait variables, also called gait variables, spatiotemporals, or stride cycle parameters \chng{(Tab. \ref{tab:spatiotemporals})}. Those are:
+With this knowledge about the subject parameters, I will proceed to the next parameter category: the spatiotemporal gait variables, also called gait variables, spatiotemporals, or stride cycle parameters \chng{(Tab. \ref{tab:spatiotemporals})}. Those are:
 \begin{itemize}
-\item dutyfactor
+\item duty factor
 \item diml. stride distance (relative to lower leg length)
 \item diml. stride frequency
 \item diml. speed
@@ -924,7 +924,7 @@ With this knowledge about the subject parameteres, I will proceed to the next pa
 clearance              & \(\%\)          & \(0.35\) & \(0.05\) \\[0pt]
 stride distance        & \(m\)           & \(0.57\) & \(0.16\) \\[0pt]
 stride duration        & \(s\)           & \(0.56\) & \(0.14\) \\[0pt]
-dutyfactor             & \(1\)           & \(0.63\) & \(0.07\) \\[0pt]
+duty factor             & \(1\)           & \(0.63\) & \(0.07\) \\[0pt]
 stride frequency       & \(Hz\)          & \(1.92\) & \(0.55\) \\[0pt]
 speed                  & \(\frac{m}{s}\) & \(1.10\) & \(0.41\) \\[0pt]
 trunk angle            & \(rad\)         & \(0.57\) & \(0.18\) \\[0pt]
@@ -933,7 +933,7 @@ trunk angle            & \(rad\)         & \(0.57\) & \(0.18\) \\[0pt]
 
 
 The ``diml.'' indication refers to ``dimensionless'', which means that the spatiotemporal parameter \chng{can be normalized, according to the concept of dynamic similarity} \citep[see Ch. \ref{prep:dimensionless};][]{Hof1996,Alexander1983}.
-Just as bodymass and its relation to the other subject parameters was the focus of the previous chapter, we now move spatiotemporal gait variables to the ``left handside'' of the equation, i.e. they are observables, and we guess that they will be in part predicted by subject parameters.
+Just as body mass and its relation to the other subject parameters was the focus of the previous chapter, we now move spatiotemporal gait variables to the ``left hand side'' of the equation, i.e. they are observables, and we guess that they will be in part predicted by subject parameters.
 
 
 
@@ -946,14 +946,14 @@ As before, some design decisions should be justified.
 \label{sec:orgccc0e5d}
 The spatiotemporal gait variables are intrinsically correlated.
 This can have trivial reasons, such as their definition (e.g. speed is the product of distance and frequency).
-In other cases, it is at least physically and physiologically plausible (e.g. lower dutyfactor at higher speeds).
+In other cases, it is at least physically and physiologically plausible (e.g. lower duty factor at higher speeds).
 These correlations must be quantified, which can be part of the sampling procedure.
-As with moving from bodymass to a set of body proportions, we will have a connected set of observables.
+As with moving from body mass to a set of body proportions, we will have a connected set of observables.
 This can also be incorporated in the mathematical descriptions.
 
 
 The favored model in this case was one which got programmed on the \emph{empirical} correlation of spatiotemporal gait variables (Tab. \ref{tab:stridecorrelation}).
-The speed parameter correlation can elucidate how animals reach higher speeds: they walk at increased stride frequency and cover a larger distance, whereby the dutyfactor tends to reduce.
+The speed parameter correlation can elucidate how animals reach higher speeds: they walk at increased stride frequency and cover a larger distance, whereby the duty factor tends to reduce.
 This, however, implies no consistent change in clearance, nor does it depend on mean trunk angle.
 
 \begin{table}[p]
@@ -961,11 +961,11 @@ This, however, implies no consistent change in clearance, nor does it depend on 
 \centering
 \begin{footnotesize}
 \begin{tabular}{l|llllll}
- & clearance & d.s. distance & dutyfactor & d.s. frequency & d. speed & trunk angle\\[0pt]
+ & clearance & d.s. distance & duty factor & d.s. frequency & d. speed & trunk angle\\[0pt]
 \hline
 clearance & \(1\) & \(+0.32\) * & \(-0.42\) * & \(-0.01\) & \(+0.15\) & \(+0.38\) *\\[0pt]
 d.s. distance & \(+0.32\) * & \(1\) & \(-0.57\) * & \(+0.09\) & \(+0.52\) * & \(-0.12\)\\[0pt]
-dutyfactor & \(-0.42\) * & \(-0.57\) * & \(1\) & \(-0.52\) * & \(-0.72\) * & \(-0.27\)\\[0pt]
+duty factor & \(-0.42\) * & \(-0.57\) * & \(1\) & \(-0.52\) * & \(-0.72\) * & \(-0.27\)\\[0pt]
 d.s. frequency & \(-0.01\) & \(+0.09\) & \(-0.52\) * & \(1\) & \(+0.89\) * & \(+0.12\)\\[0pt]
 d. speed & \(+0.15\) & \(+0.52\) * & \(-0.72\) * & \(+0.89\) * & \(1\) & \(+0.07\)\\[0pt]
 trunk angle & \(+0.38\) * & \(-0.12\) & \(-0.27\) & \(+0.12\) & \(+0.07\) & \(1\)\\[0pt]
@@ -977,7 +977,7 @@ trunk angle & \(+0.38\) * & \(-0.12\) & \(-0.27\) & \(+0.12\) & \(+0.07\) & \(1\
 
 \item \textbf{Reference Model:}
 \label{sec:orge7f3220}
-I will model the spatiotemporal gait variables as a function of sex, age and bodymass, i.e. all the relevant subject parameters.
+I will model the spatiotemporal gait variables as a function of sex, age and body mass, i.e. all the relevant subject parameters.
 The goal is to find out how strides of a given subject are characterized, e.g. whether certain aspects of the subject lead to difference in their gait characteristics.
 
 There are two basic strategies to identify the final model.
@@ -1003,8 +1003,8 @@ Therein, \(i\) is one of the spatiotemporal gait variables, which are all sample
 The intercept vector \(v_{1}\) is simply a column vector of ones.
 The boolean \(v_{male}\) holds values one for every stride for a male subject, and zero for females.
 Similarly for \(v_{adol}\) and \(v_{inft}\), which are mutually exclusive in the equation (i.e. animal is either adolescent, or infant, or neither, but never two of those options).
-In contrast, \(v_{cbm}\) for centered log bodymass contains continuous values; the centering was done per ageclass, and after log transformation.
-Groupwise centering affects the data vector, however the bodymass slope is not affected by ageclass (a model with \(\beta_{bm\mid ageclass}\) was also included in model comparison).
+In contrast, \(v_{cbm}\) for centered log body mass contains continuous values; the centering was done per age class, and after log transformation.
+Group-wise centering affects the data vector, however the body mass slope is not affected by age class (a model with \(\beta_{bm\mid ageclass}\) was also included in model comparison).
 
 
 \item \textbf{Prior Choice:}
@@ -1019,11 +1019,11 @@ The multivariate block of observables is initialized with the empirical correlat
 \label{sec:orge85b957}
 The model of spatiotemporal gait variables quantifies how stride (or gait) characteristics in bipedal baboon walking are affected by subject parameters (Tab. \ref{tab:strideresults}).
 
-Clearance is highest in adult males of low bodymass (though we did not actually observe those; the effects are separately determined for age class, sex, and bodymass).
-Females and subadults lift their feet less during the swing, as do animals of comparatively higher bodymass.
-Dutyfactor is higher in infants: they are in ground contact for a longer portion of the stride.
-All of the three speed-related parameters (i.e. distance, frequency, speed; all dimensionless) are affected by bodymass, though the effect is \chng{clearly different from zero} only for frequency.
-Animals of higher bodymass tend to take shorter steps of higher frequency, which seems to overcompensate in terms of speed.
+Clearance is highest in adult males of low body mass (though we did not actually observe those; the effects are separately determined for age class, sex, and body mass).
+Females and subadults lift their feet less during the swing, as do animals of comparatively higher body mass.
+Duty factor is higher in infants: they are in ground contact for a longer portion of the stride.
+All of the three speed-related parameters (i.e. distance, frequency, speed; all dimensionless) are affected by body mass, though the effect is \chng{clearly different from zero} only for frequency.
+Animals of higher body mass tend to take shorter steps of higher frequency, which seems to overcompensate in terms of speed.
 Infants cover lower relative distance at lower frequency, which adds up in terms of relative speed.
 The results on trunk angle show that males hold their upper body less upright than females (i.e. at a higher trunk angle; though as with any sex effect this might be due to few, influential observations).
 Although this inference can only stem from the subadult classes, it is separate from (and in opposing direction of) an age effect: adults seem to walk more crouched than infants (i.e. infants walk with a lower trunk angle, more upright).
@@ -1038,12 +1038,12 @@ It is high (\(\nu = 54.2\)), indicating that the posterior distribution has hard
 \begin{small}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
- & intercept & female  & adult  & adult  & c.log.bodymass & \(\epsilon\)\\[0pt]
+ & intercept & female  & adult  & adult  & c.log. body mass & \(\epsilon\)\\[0pt]
  &  & \(\rightarrow\) male & \(\rightarrow\) adol. & \(\rightarrow\) infant &  & \\[0pt]
 \hline
 clearance & \(+0.39\) & \(+0.05\) * & \(-0.05\) * & \(-0.06\) * & \(-0.12\) * & \(\pm 0.05\)\\[0pt]
 d.s. distance & \(+1.72\) & \(+0.16\) & \(-0.06\) & \(-0.13\) & \(-0.38\) & \(\pm 0.25\)\\[0pt]
-dutyfactor & \(+0.58\) & \(-0.05\) & \(+0.01\) & \(+0.10\) * & \(-0.03\) & \(\pm 0.07\)\\[0pt]
+duty factor & \(+0.58\) & \(-0.05\) & \(+0.01\) & \(+0.10\) * & \(-0.03\) & \(\pm 0.07\)\\[0pt]
 d.s. frequency & \(+0.39\) & \(-0.02\) & \(-0.02\) & \(-0.06\) & \(+0.21\) * & \(\pm 0.10\)\\[0pt]
 d.s. speed & \(+0.68\) & \(+0.04\) & \(-0.06\) & \(-0.16\) * & \(+0.21\) & \(\pm 0.20\)\\[0pt]
 trunk angle & \(+0.67\) & \(+0.14\) * & \(-0.12\) & \(-0.20\) * & \(+0.10\) & \(\pm 0.18\)\\[0pt]
@@ -1053,21 +1053,21 @@ trunk angle & \(+0.67\) & \(+0.14\) * & \(-0.12\) & \(-0.20\) * & \(+0.10\) & \(
 \end{table}
 
 
-\subsubsection{Gait Variable Two Step Predicton}
+\subsubsection{Gait Variable Two Step Prediction}
 \label{sec:org3879560}
-The posterior prediction of spatiotemporal gait variables holds an additional complication: as shown in the body proportion model, we now have interdependent predictors (i.e. bodymass might depend on age and sex, though note that it is groupwise centered).
-Therefore, two consecutive steps of posterior prediction are necessary: first predict a number (e.g. \texttt{n = 1000}) of bodymasses, then based on those samples predict spatiotemporal gait variables.
-For a given setting for sex and ageclass, the workflow is as follows.
+The posterior prediction of spatiotemporal gait variables holds an additional complication: as shown in the body proportion model, we now have interdependent predictors (i.e. body mass might depend on age and sex, though note that it is group-wise centered).
+Therefore, two consecutive steps of posterior prediction are necessary: first predict a number (e.g. \texttt{n = 1000}) of body masses, then based on those samples predict spatiotemporal gait variables.
+For a given setting for sex and age class, the workflow is as follows.
 \begin{enumerate}
-\item draw posterior predictive samples from the body proportion model, to get \texttt{n} bodymass samples
-\item convert these samples (i.e. log transform, ageclass-wise centering with the means from actual data)
+\item draw posterior predictive samples from the body proportion model, to get \texttt{n} body mass samples
+\item convert these samples (i.e. log transform, age class-wise centering with the means from actual data)
 \item replace the data in the spatiotemporal gait variable model with these samples
 \item then draw (i.e. predict) \texttt{n} spatiotemporal gait variable samples.
 \end{enumerate}
 
 Step 3 in this workflow might seem odd, but it is exactly the same procedure we get when choosing a setting for age and sex.
 The only difference is that we do not set \texttt{n} boolean values, but \texttt{n} values which are drawn from a continuous distribution.
-Although one should in theory sample multiple spatiotemporal gait variable values for each sample of bodymass, it is sufficient (and technically convenient) to keep the \texttt{n} constant throughout the procedure and compansate by a large number of samples.
+Although one should in theory sample multiple spatiotemporal gait variable values for each sample of body mass, it is sufficient (and technically convenient) to keep the \texttt{n} constant throughout the procedure and compensate by a large number of samples.
 
 
 As with the subject parameters, we can compare the observed values with the predictions of the model (Figs. \ref{fig:stride1} and \ref{fig:stride2}).
@@ -1107,9 +1107,9 @@ One of the great features of quantitative models is the ability to perform model
 An arsenal of ``information criteria'' is available to compare models and choose which one succeeds best in capturing the effects present in the data, without being over-complex.
 
 In addition to the reference model above, many other models were sampled for comparison.
-Those are similar to the reference, but individual parameters are removed in turn, or their hierarchical structure is altered (in the case of bodymass).
+Those are similar to the reference, but individual parameters are removed in turn, or their hierarchical structure is altered (in the case of body mass).
 In other test models, parameters were added (e.g. leg length).
-The centering of bodymass was optionally omitted.
+The centering of body mass was optionally omitted.
 Additionally, the correlation structure of the observables (``empirical'' per default) can be changed to ``inferred''.
 
 \begin{table}[p]
@@ -1121,11 +1121,11 @@ Additionally, the correlation structure of the observables (``empirical'' per de
 0 & 286.5 & 0.0 & 9.7 & additional predictor- leg length\\[0pt]
 1 & 286.4 & 0.0 & 9.8 & additional predictor- BMI\\[0pt]
 2 & 285.9 & 0.6 & 10.1 & Normal distribution in posterior\\[0pt]
-3 & 285.7 & 0.7 & 9.6 & bodymass/ageclass level\\[0pt]
+3 & 285.7 & 0.7 & 9.6 & body mass/age class level\\[0pt]
 4 & 285.6 & 0.9 & 10.1 & \textbf{reference model}\\[0pt]
-5 & 284.9 & 1.5 & 9.8 & non-centered bodymass\\[0pt]
+5 & 284.9 & 1.5 & 9.8 & non-centered body mass\\[0pt]
 6 & 284.6 & 1.9 & 9.8 & no sex slope modeled\\[0pt]
-7 & 280.3 & 6.2 & 10.1 & bodymass excluded entirely\\[0pt]
+7 & 280.3 & 6.2 & 10.1 & body mass excluded entirely\\[0pt]
 8 & 280.1 & 6.4 & 10.4 & age class slopes excluded\\[0pt]
 9 & 276.9 & 9.6 & 16.8 & sampled observable covariance\\[0pt]
 10 & 208.4 & 78.1 & 11.8 & spatiotemporals in SI units\\[0pt]
@@ -1133,7 +1133,7 @@ Additionally, the correlation structure of the observables (``empirical'' per de
 \end{table}
 
 
-The outcome of this particular comparison method (Tab. \ref{tab:stridemodelcomparison}) are ``LOO'' values (``Leave One Out'') as a quantification for the model performance/complexity tradeoff.
+The outcome of this particular comparison method (Tab. \ref{tab:stridemodelcomparison}) are ``LOO'' values (``Leave One Out'') as a quantification for the model performance/complexity trade-off.
 As mentioned, there are alternative quantifiers (e.g. WAIC), but experience shows that rankings from different information criteria are often similar.
 Given relatively little difference and wide standard error ranges in the LOO estimate, we can conclude that almost all of the tested models yield some plausible descriptions of the data (in other words: most models do not perform \chng{clearly} better or worse than the reference).
 In fact, the reference model is not the highest on the list: for example, choosing a Normal distribution instead of a Student's T for the observables would be better, which is consistent with the inferred high value for \(\nu\).
@@ -1147,13 +1147,13 @@ This does not mean that model is wrong: most likely, they are just less normally
 Yet for the sake of constructing a cascade of models (from subject-, via stride-, to coordination parameters), it seems better to choose the dimensionless parameter set.
 
 
-On the other hand, comparison would favor an ageclass dependend (hierarchical) bodymass, or the inclusion of another body proportion proxy (leg length or BMI).
+On the other hand, comparison would favor an age class dependent (hierarchical) body mass, or the inclusion of another body proportion proxy (leg length or BMI).
 However, this ranking appeared only after I made a final, last-minute (and presumably minor) adjustment to the data.
 Any extra data could tip the balance back towards the current structure - or not.
 This exemplifies the finite sharpness of model comparison.
 It guides model design, and some designs can be clearly excluded (falsification!).
 Yet it should by no means be interpreted as carved in stone ultimate wisdom.
-A problematic corollary of this is the need to re-sample a high number of models after even the tinyest change in the data.
+A problematic corollary of this is the need to re-sample a high number of models after even the tiniest change in the data.
 Combined with the long duration of MCMC sampling, this can be prohibitive, but partially alleviated with an efficient sampling toolbox (see Ch. \ref{workflow:framework}).
 
 
@@ -1176,7 +1176,7 @@ Note that this sampling problem would not become apparent in least squares model
 
 \subsubsection{Summary: Spatiotemporal Gait Variables}
 \label{sec:org0d94e4f}
-The presented findings on spatiotemporal gait variables are substantial insights into the way in which spatiotemporal characteristics of gait in \emph{Papio anubis} are affected by sex, ageclass and bodymass.
+The presented findings on spatiotemporal gait variables are substantial insights into the way in which spatiotemporal characteristics of gait in \emph{Papio anubis} are affected by sex, age class and body mass.
 These findings are interesting by themselves and were part of the prior research on the data set \citep[][]{Druelle2021}.
 They are re-iterated here with a different modeling framework and serve to exemplify important statistical concepts, most importantly (two-step) posterior predictive sampling and model comparison.
 
@@ -1198,12 +1198,12 @@ Their temporal profiles, i.e. the \chng{joint} angle over time, and how they cha
 In cases were we have steady state locomotion, one can exploit the fact that joint angle profiles are cyclic and submit them to a Fourier Series Decomposition \citep[\emph{cf.}][]{Mielke2019}.
 This operation is simply a reversible transformation, and no information is lost in the process.
 Temporal profiles can thereby be investigated in the frequency domain, which involves a complex (math.) quantification of a given number of harmonics (this is often called the ``spectrum'' of a signal).
-This is perfectly analogous to harmonics on a guitar string, and because one can tune models of Fourier Coefficients with MCMC sampling (see above), guitars are now oficially my favorite metaphor in explaining statistics.
+This is perfectly analogous to harmonics on a guitar string, and because one can tune models of Fourier Coefficients with MCMC sampling (see above), guitars are now officially my favorite metaphor in explaining statistics.
 
 Some characteristics are particularly prominent in the frequency domain/spectrum:
 \begin{itemize}
 \item The temporal \emph{mean} value of a joint angle appears as the zero'th Fourier coefficient (i.e. where the string is ``hung up'').
-\item The magnitude of the coefficient values corresponds to the \emph{amplitude} (i.e. loudness, per coefficient or cumulated).
+\item The magnitude of the coefficient values corresponds to the \emph{amplitude} (i.e. loudness, per coefficient or accumulated).
 \item Fourier coefficients rotate in the complex plane depending on their \emph{phase} (rarely perceived in music, except in directional hearing).
 \end{itemize}
 
@@ -1222,7 +1222,7 @@ This removal of affine signal components is achieved by the method of Fourier Co
 More precisely, the purpose of FCAS is to separate mean, amplitude, phase and the non-affine remainder, and use them in reasonable ways.
 In the present analysis, I used it to disassemble hip, knee, and ankle joint angle profiles and extract \textbf{posture} (mean joint angle and range of motion) and \textbf{coordination} (the remainder, including phase differences).
 Phase was not isolated for the different joints; however, a ``global phase alignment'' was performed by temporally aligning all \chng{joint} angle profiles so that the phase difference of the \emph{whole limb} (head-hip-toe angle) is zero.
-I find this mathematically more convenient than the conventional alignment to toe touch down, which in my opinion over-emphasizes a single time point and has problems with all-too-variable dutyfactors.
+I find this mathematically more convenient than the conventional alignment to toe touch down, which in my opinion over-emphasizes a single time point and has problems with all-too-variable duty factors.
 
 A minor practical complication is that there are immensely many parameters in the ``coordination'' category (number of harmonics retained times number of joints times two for real and imaginary part).
 The often misused bread-and-butter method for dimensionality reduction is PCA.
@@ -1260,10 +1260,10 @@ ankle amplitude & \(-0.26\) & \(-0.01\) & \(+0.25\) & \(+0.05\) & \(-0.31\) * & 
 \end{table}
 
 
-In addition to the predictors used to infer spatiotemporal gait variables, the models now include the gait variables themselves on the right handside.
+In addition to the predictors used to infer spatiotemporal gait variables, the models now include the gait variables themselves on the right hand side.
 Since the number of observations has not changed, but the number of predictors increases, modeling gets challenging.
 As it turns out, a multivariate block of gait variables was too complex to be included, and consequently sampling was unsuccessful.
-At the same time, interdependency of speed-related parameters should not be disregarded.
+At the same time, interdependence of speed-related parameters should not be disregarded.
 I solved both problems by using another PCA, in this case for the gait variables (see Ch. \ref{prep:stridepca}).
 Although this reduces the number of predictors by just one, it enables successful sampling.
 
@@ -1278,7 +1278,7 @@ The reference model for posture and coordination is as follows:
  \label{eq:posturemodel} \end{equation}
 
 In equation \eqref{eq:posturemodel}, the lines correspond to the four predictor parts (intercept, subject parameters, spatiotemporal gait variables, residual).
-Abbreviations are as above, plus \texttt{clr}: clearance, \texttt{df}: dutyfactor, \texttt{trnk}: trunk angle, \texttt{str1} / \texttt{str2}: stride PCs.
+Abbreviations are as above, plus \texttt{clr}: clearance, \texttt{df}: duty factor, \texttt{trnk}: trunk angle, \texttt{str1} / \texttt{str2}: stride PCs.
 
 
 
@@ -1297,11 +1297,11 @@ Interesting results are anticipated by the comparison: for example, the trunk an
 2 & 231.3 & 3.8 & 14.0 & additional predictor- leg length\\[0pt]
 3 & 229.9 & 5.1 & 14.8 & \textbf{reference model}\\[0pt]
 4 & 229.9 & 5.1 & 14.4 & Normal distribution in posterior\\[0pt]
-5 & 229.4 & 5.6 & 13.3 & bodymass excluded entirely\\[0pt]
-6 & 229.3 & 5.7 & 14.8 & bodymass/ageclass level\\[0pt]
+5 & 229.4 & 5.6 & 13.3 & body mass excluded entirely\\[0pt]
+6 & 229.3 & 5.7 & 14.8 & body mass/age class level\\[0pt]
 7 & 229.1 & 5.9 & 14.9 & additional predictor- BMI\\[0pt]
 8 & 228.2 & 6.8 & 15.0 & duty factor slope excluded\\[0pt]
-9 & 226.7 & 8.3 & 14.8 & non-centered bodymass\\[0pt]
+9 & 226.7 & 8.3 & 14.8 & non-centered body mass\\[0pt]
 10 & 224.8 & 10.2 & 14.3 & stride PC1 slope excluded\\[0pt]
 11 & 222.7 & 12.3 & 15.2 & clearance slope excluded\\[0pt]
 12 & 212.5 & 22.5 & 15.1 & stride PC2 slope excluded\\[0pt]
@@ -1317,7 +1317,7 @@ Interesting results are anticipated by the comparison: for example, the trunk an
 \textbf{rank} & \textbf{loo} & \textbf{delta} & \textbf{std err} & \textbf{description}\\[0pt]
 \hline
 0 & 337.3 & 0.0 & 15.3 & age class slopes excluded\\[0pt]
-1 & 332.8 & 4.5 & 14.3 & bodymass excluded entirely\\[0pt]
+1 & 332.8 & 4.5 & 14.3 & body mass excluded entirely\\[0pt]
 2 & 332.0 & 5.3 & 14.8 & additional predictor- leg length\\[0pt]
 3 & 330.7 & 6.6 & 14.7 & additional predictor- BMI\\[0pt]
 4 & 330.6 & 6.7 & 14.8 & \textbf{reference model}\\[0pt]
@@ -1325,9 +1325,9 @@ Interesting results are anticipated by the comparison: for example, the trunk an
 6 & 330.2 & 7.1 & 15.2 & no sex slope modeled\\[0pt]
 7 & 329.7 & 7.7 & 14.8 & trunk angle slope excluded\\[0pt]
 8 & 329.4 & 7.9 & 14.2 & stride PC2 slope excluded\\[0pt]
-9 & 329.2 & 8.1 & 14.5 & non-centered bodymass\\[0pt]
+9 & 329.2 & 8.1 & 14.5 & non-centered body mass\\[0pt]
 10 & 328.5 & 8.8 & 15.2 & stride PC1 slope excluded\\[0pt]
-11 & 327.3 & 10.0 & 14.6 & bodymass/ageclass level\\[0pt]
+11 & 327.3 & 10.0 & 14.6 & body mass/age class level\\[0pt]
 12 & 327.3 & 10.0 & 14.8 & clearance slope excluded\\[0pt]
 13 & 326.6 & 10.8 & 14.9 & duty factor slope excluded\\[0pt]
 \end{tabular}
@@ -1341,15 +1341,15 @@ The ``statistics tutorial'' part of this journey ends here, where the biological
 Following below is a series of figures and tables which I will leave uncommented, to open a discussion on baboon kinematics, if you like.
 
 Whereas posture parameters have an intuitive meaning (mean joint angles and eROM), it seems futile to interpret the outcome of the coordination model (Tab. \ref{tab:coordinationresults}, Figs. \ref{fig:coordination1} and \ref{fig:coordination2}) directly.
-The observables are principal components of Fourier coefficient nonaffine residuals -- even Fourier himself could not make sense of such numbers.
+The observables are principal components of Fourier coefficient non-affine residuals -- even Fourier himself could not make sense of such numbers.
 However, it should be pointed out that PCs are ordered by the variance they cover, hence the first ones capture the larger effects.
-Furthermore, the edges of the cordination space can be sampled and re-transformed to joint angle profiles, which I demonstrated elsewhere (e.g. Fig. \ref{fig:pca} in Ch. \ref{cpt:fcas}).
+Furthermore, the edges of the coordination space can be sampled and re-transformed to joint angle profiles, which I demonstrated elsewhere (e.g. Fig. \ref{fig:pca} in Ch. \ref{cpt:fcas}).
 
 
-The role of dutyfactor deserves special attention to illustrate what level of detail is contained in these figures.
-Although \chng{zero difference is not excluded by the HDI} (probably I should have log transformed it, or given it a Beta distribution), some dutyfactor slopes are higher than others (Tab. \ref{tab:postureresults}).
-We can learn from this that hip and knee angle are affected (hip: more flexed, knee: more extended on average) and that the knee range of motion increases with dutyfactor.
-Dutyfactor also has the biggest effect on coordination, being the highest slope value on PC1 (Tab. \ref{tab:coordinationresults}).
+The role of duty factor deserves special attention to illustrate what level of detail is contained in these figures.
+Although \chng{zero difference is not excluded by the HDI} (probably I should have log transformed it, or given it a Beta distribution), some duty factor slopes are higher than others (Tab. \ref{tab:postureresults}).
+We can learn from this that hip and knee angle are affected (hip: more flexed, knee: more extended on average) and that the knee range of motion increases with duty factor.
+Duty factor also has the biggest effect on coordination, being the highest slope value on PC1 (Tab. \ref{tab:coordinationresults}).
 
 
 In combination, posture and coordination values can be translated back into joint angle profiles.
@@ -1362,7 +1362,7 @@ The final cherry on this cake (Fig. \ref{fig:japprediction}) is thus a promising
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
- & intercept & female \(\rightarrow\) male & adlt \(\rightarrow\) adol & adlt \(\rightarrow\) inft & c.log.bodymass & clearance & dutyfactor & trunk angle & stride PC1 & stride PC2 & \(\epsilon\)\\[0pt]
+ & intercept & female \(\rightarrow\) male & adlt \(\rightarrow\) adol & adlt \(\rightarrow\) inft & c.log.bodymass & clearance & duty factor & trunk angle & stride PC1 & stride PC2 & \(\epsilon\)\\[0pt]
 \hline
 hip angle \chng{mean} & \(+2.48\) & \(-0.06\) & \(+0.02\) & \(+0.06\) & \(+0.18\) & \(-0.87\) * & \(+0.26\) & \(-1.33\) * & \(-0.04\) * & \(-0.04\) & \(\pm 0.11\)\\[0pt]
 hip amplitude & \(+0.40\) & \(-0.04\) & \(+0.02\) & \(+0.11\) * & \(-0.09\) & \(-0.03\) & \(+0.03\) & \(-0.02\) & \(-0.01\) & \(-0.04\) * & \(\pm 0.07\)\\[0pt]
@@ -1378,7 +1378,7 @@ ankle amplitude & \(+0.68\) & \(-0.07\) & \(-0.04\) & \(+0.05\) & \(+0.10\) & \(
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
- & intercept & female \(\rightarrow\) male & adlt \(\rightarrow\) adol & adlt \(\rightarrow\) inft & c.log.bodymass & clearance & dutyfactor & trunk angle & stride PC1 & stride PC2 & \(\epsilon\)\\[0pt]
+ & intercept & female \(\rightarrow\) male & adlt \(\rightarrow\) adol & adlt \(\rightarrow\) inft & c.log.bodymass & clearance & duty factor & trunk angle & stride PC1 & stride PC2 & \(\epsilon\)\\[0pt]
 \hline
 PC1 & \(+0.34\) & \(+0.09\) & \(-0.11\) & \(-0.23\) * & \(-0.01\) & \(+0.35\) & \(-0.52\) & \(-0.01\) & \(-0.01\) & \(-0.03\) & \(\pm 0.18\)\\[0pt]
 PC2 & \(-0.06\) & \(+0.07\) & \(-0.06\) & \(-0.05\) & \(-0.12\) & \(+0.07\) & \(+0.00\) & \(+0.10\) & \(+0.04\) * & \(+0.05\) & \(\pm 0.14\)\\[0pt]
@@ -1433,13 +1433,13 @@ But this capability also opens up a whole set of questions for which the origina
 Here is one example.
 
 
-I touched above on the influence of dutyfactor.
+I touched above on the influence of duty factor.
 One might want to ask:
-\textbf{How do joint angle profiles in bipedally walking baboons change with dutyfactor?}
-This parameter changes with ageclass and potentially also with sex (Tab. \ref{tab:strideresults}).
-Hence, plotting all joint angle profiles of low dutyfactor strides (LDS) and comparing them to high dutyfactor strides (HDS) will probably be confounded with a comparison of juveniles and adults and unbalanced sex ratios in these groups.
+\textbf{How do joint angle profiles in bipedally walking baboons change with duty factor?}
+This parameter changes with age class and potentially also with sex (Tab. \ref{tab:strideresults}).
+Hence, plotting all joint angle profiles of low duty factor strides (LDS) and comparing them to high duty factor strides (HDS) will probably be confounded with a comparison of juveniles and adults and unbalanced sex ratios in these groups.
 Sample sizes are low due to data fragmentation, thus filtering for adult females (8 strides) does not retain enough data to derive statistically relevant conclusions.
-In fact, to answer the dutyfactor question above, one would like to use information from within-ageclass comparisons and from both sexes, because each of these classes contribute their own bit to our knowledge of dutyfactor-related changes in kinematics.
+In fact, to answer the duty factor question above, one would like to use information from within-age class comparisons and from both sexes, because each of these classes contribute their own bit to our knowledge of duty factor-related changes in kinematics.
 This is what the probabilistic model did: it separated effects of the subject and spatiotemporal gait variables.
 Ideally, the model has learned the concerted influence of these parameters on the outcome parameters.
 
@@ -1447,16 +1447,16 @@ Ideally, the model has learned the concerted influence of these parameters on th
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/trace_quantiles_dutyfactor_0.png}
-\caption{\label{fig:dutyquantileprediction}Joint angle profile predictions for dutyfactor quantiles, for adult females. Thick lines: averages; thin lines: individual predictive samples. Caution: to emphasize differences, the range of y-values varies on the three panels.}
+\caption{\label{fig:dutyquantileprediction}Joint angle profile predictions for duty factor quantiles, for adult females. Thick lines: averages; thin lines: individual predictive samples. Caution: to emphasize differences, the range of y-values varies on the three panels.}
 \end{figure}
 
-So let us ask the model what the effect of dutyfactor is, specifically for adult females!
+So let us ask the model what the effect of duty factor is, specifically for adult females!
 The prediction (Fig. \ref{fig:dutyquantileprediction}) depicts the exact temporal coordination of joint angles within the specified group.
 Changing from LDS to HDS, the hip mean angle increases (more flexed), which indicates that a prerequisite for quicker strides is a somewhat extended posture.
 The knee is affected in terms of amplitude.
 Curiously, the ankle joint profile is hardly altered during the swing phase (phases not indicated in figure, but it is the latter part of the cycle progress and can be guessed from the ankle) except that obviously the ``second trough'' in the trace starts later; the stance phase again is altered in terms of mean \chng{joint} angle.
 As a bonus, we can see the variance in the strides (as shaded traces in the background), though that variance might be an over-estimation due to low data sample size (partially influenced by wide priors).
-Remember that dutyfactor cross-influences other spatiotemporal gait variables (Tab. \ref{tab:stridecorrelation}).
+Remember that duty factor cross-influences other spatiotemporal gait variables (Tab. \ref{tab:stridecorrelation}).
 Luckily, it is easily possible and might be worth comparing the speed etc. of the selected, predicted strides.
 
 

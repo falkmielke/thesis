@@ -15,7 +15,7 @@
 #+OPTIONS: toc:t
 
 
-#+STARTUP: noinlineimges showeverything entitiespretty
+#+STARTUP: noinlineimages showeverything entitiespretty
 @@latex:\clearpage@@
 #+ODT: <text:p text:style-name="PageBreak"/>
 
@@ -48,11 +48,11 @@ However, researchers have been struggling with the quantitative extraction of ma
 The material property of primary interest is physical density; from a given density distribution, other relevant inertial properties can be calculated.
 
 
-Reseachers suggested early on to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet it was immediately noted that the relation is nothing more than a correlation which only holds under specific circumstances.
+Researchers suggested early on to relate the gray value of CT images to density citep:Mull1984,Phelps1975, yet it was immediately noted that the relation is nothing more than a correlation which only holds under specific circumstances.
 Even these pioneer works acknowledge that there must be discrepancies between real and x-ray-derived densities, which are often associated with (i) the polychromatic character (source spectrum) of the used radiation, (ii) chemical composition (absorption spectrum), and (iii) scan artifacts.
 # scattering types,
 These issues demand a detailed explanation, below.
-Notwithstanding this list of known problems, people have repeatedly attempted to extract density and inertial propertes from CT scans @@latex: \citep[][as well as the present study]{Phillips1997,DuPlessis2013,Durston2022}@@.
+Notwithstanding this list of known problems, people have repeatedly attempted to extract density and inertial properties from CT scans @@latex: \citep[][as well as the present study]{Phillips1997,DuPlessis2013,Durston2022}@@.
 The purpose of this chapter is to explore whether or not (or under which circumstances) CT gray values can be used to estimate density distributions, and thereby mass and other derived inertial properties.
 I will start by giving a brief intro to crucial aspects of CT scanning technology, before reviewing similar attempts by others, then introducing a simple experimental setup to measure dynamics of an excised piglet femur, and with that re-attempting the extraction of inertial properties.
 
@@ -66,7 +66,7 @@ To illustrate what is happening with x-ray light during a CT measurement, I will
 
 Most plants have evolved to be green; their cells hold organelles with the green pigment chlorophyll, which absorbs some non-green (e.g. red) wavelengths of light very well (Fig. \ref{fig:spectrum}, green curve).
 @@latex:\begin{change}@@
-Light are photons, "elementary particles which are the quantum of the electromagnetic field" ([[https://en.wikipedia.org/wiki/Photon][wikipedia: photon]]).
+Light are photons, "elementary particles which are the quantum of the electromagnetic field" ([[https://en.wikipedia.org/wiki/Photon][Wikipedia: photon]]).
 Filters let through some of them, while prohibiting others from passing.
 Think of party lights or colored window sheets: a light source is placed behind one or more filter sheets which block most colors and let through certain others.
 In case of a green filter sheet, relatively more green photons pass the filter, the filtered spectrum will appear green to our visual perceptive system.
@@ -199,7 +199,7 @@ Nevertheless, comparing the calibration line and the DECT ratio results, the put
 
 For a toy pig of unknown plastic material, citet:DuPlessis2013 retrieve higher than actual mass estimates; they identify chlorine and calcium content as the cause.
 On another unknown sample which is assessed to be "similar enough" in chemical composition, they retrieve an accurate prediction.
-The authors do not quantify or report measurement uncertainty which manifests in gray value distributions, suboptimal regression goodness of fit and potentially high regression sensitivity (PTFE), or other sources of variability citep:Macaulay2017.
+The authors do not quantify or report measurement uncertainty which manifests in gray value distributions, sub-optimal regression goodness of fit and potentially high regression sensitivity (PTFE), or other sources of variability citep:Macaulay2017.
 Finally, they destroy a toy pig for the study, which cannot be excused.
 
 In a nutshell, citet:DuPlessis2013 attempt density prediction in a particular use case (homogeneous, chemically identical objects) and suggest a DECT ratio to assess chemical composition.
@@ -219,7 +219,7 @@ There is also a validation of the pendulum method, by applying it to manufacture
 
 Overall, results of the citet:Durston2022 study remain superficial considering the author's valuable efforts on this project.
 They juxtapose pie charts of segment masses to verify mass distribution, which is far too inaccurate.
-They compare the virtually and physically derived dorsoventral axis of the moment of inertia, and present what must be a clear mismatch, considering the lack of meaningful error margins.
+They compare the virtually and physically derived dorso-ventral axis of the moment of inertia, and present what must be a clear mismatch, considering the lack of meaningful error margins.
 They discuss the influence of partial volume effects on density (which, agreeably, could be a problem with feathers), however that is irrelevant for mass and moment of inertia because volume and density both change if a voxel contains air and tissue.
 They present "moment of inertia distributions" in various ways, i.e. the contribution of each voxel to a \(\vec{COM}\)-centered \(I\) for an entire articulated skeletal system, which is of little practical relevance (which they confirm themselves, by comparing extended and retracted wing configuration).
 It is a good reproducibility control that their data confirms previous findings of segment masses of some bird species.
@@ -273,9 +273,9 @@ The unit of calculation is therefore a segment.
 In a reductionist approach, the purpose of this experiment is to perform all procedures and calculations on one extracted rigid part of a segment.
 
 For this purpose, a femur was excised from a piglet specimen which had been used previously in XROMM\footnote{X-ray Reconstruction Of Moving Morphology, Brainerd et al., 2010} experiments. \nocite{Brainerd2010}
-The animal was euthanized after succesful completion of the experiment.
+The animal was euthanized after successful completion of the experiment.
 Procedures have been approved /a priori/ by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium (approval number 2017–25).
-The femur was extracted by carefully disarticulating the parts of the right hindlimb of the piglet, isolating the femur, and removing surrounding soft tissue.
+The femur was extracted by carefully dis-articulating the parts of the right hindlimb of the piglet, isolating the femur, and removing surrounding soft tissue.
 
 #+CAPTION: The "flying femur" experiment: an excised piglet femur used in XROMM experiments as an allegory of reductionism. Left: the femur oscillating on a pendulum. Right: installation with a motor capable of moving the femur in a realistic way.
 #+LABEL: fig:flying_femur_fotos
@@ -287,7 +287,7 @@ The extracted bone underwent the full XROMM and inverse dynamic modelling proced
 Metal bead markers, \(0.5\ mm\) standard soldering balls made out of a lead-tin alloy (\(Sn_{63}Pb_{37}\)), were glued to the extracted bone to simulate the typical XROMM necessity of marked bones and facilitate \chng{landmark tracking on videos}.
 Biplanar x-ray video recordings were performed on the [[https://www.uantwerpen.be/3d2ymox][University of Antwerp's 3D²YMOX system]] citep:Nguyen2021,Sanctorum2020, with two experimental settings.
 In one setting, the femur hung on a long, thin wire pendulum (appearing on camera to be "flying").
-In a second setting, the bone was rotated to mimic in vivo motion by a motor to which it was attached with a radiotranslucent, custom-made plastic clamp.
+In a second setting, the bone was rotated to mimic in vivo motion by a motor to which it was attached with a radio-translucent, custom-made plastic clamp.
 
 After the experiment, the femur was subjected to a calibrated scan at a local micro-CT facility (FleXCT, imec-VisionLab, University of Antwerp, Belgium).
 Plastic parts for calibration were donated by the mechanical workshop of the university, covering a range of physical density from polypropylene (PP, \(916\ \frac{kg}{m^3}\)) to Polytetrafluoroethylene (PTFE, \(2210\ \frac{kg}{m^3}\)).
@@ -523,7 +523,7 @@ This function is linear in \(I\), so error propagation is quite simple\footnote{
 Sensitivity is linear at this level: any percentage of measurement inaccuracy in \(I\) will directly propagate to the joint moment calculation.
 
 
-Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, by inaccuracy in the mass itself (regression), and by unceretainty in the \(\vec{COM}\) position and therefore the position vectors \(\vec{r}_{i}\) of each mass element.
+Yet the situation is more involved: calculating \(I\) via equation \eqref{eqn:mmoi} is itself subject to errors, by inaccuracy in the mass itself (regression), and by uncertainty in the \(\vec{COM}\) position and therefore the position vectors \(\vec{r}_{i}\) of each mass element.
 @@latex:\begin{change}@@
 \[ \Delta I = \left. \Delta I \right|_{m_i} + \left. \Delta I \right|_{\vec{r}_i} = \sqrt{ \sum_{i} \left[ \left(\frac{d I}{d m_{i}} \Delta m_{i} \right)^2 + \left(\frac{d I}{d \vec{r}_{i}} \Delta \vec{r}_{i}\right)^2 \right] }\]
 @@latex:\end{change}@@
@@ -573,7 +573,7 @@ Hence, this regression serves three purposes:
 + identify potential slope uncertainties (\(\varepsilon_{j}\))
 
 
-All parameters were approximated by Normal distributions, except for the \(\varepsilon_{j}\) (HalfNormal, i.e. bound to be \(>0\)).
+All parameters were approximated by Normal distributions, except for the \(\varepsilon_{j}\) (=HalfNormal=, i.e. bound to be \(>0\)).
 Results from the conventional regression and wide enough standard deviations were used as priors to initialize the sampling.
 The posterior distributions were calculated from the last \(4\cdot 2^{12}\) samples (after sufficient tuning of the NUTS sampler, see Ch. \ref{cpt:statistics}).
 Gelman-Rubin statistics and trace plots indicated convergence and well-behaved sampling.
@@ -644,19 +644,19 @@ The contradicting results highlights how erratic the digital density approximati
 | head           |           0.247 |      0.230 |        +7% |
 | torso+trunk    |           0.666 |      0.580 |       +15% |
 | LF humerus     |           0.033 |      0.027 |       +22% |
-| LF radioulna   |           0.016 |      0.014 |       +14% |
+| LF radio-ulna   |           0.016 |      0.014 |       +14% |
 | LF metacarpal  |           0.009 |      0.006 |       +50% |
 | LF hoof        |           0.006 |      0.005 |       +20% |
 | LH femur       |           0.052 |      0.050 |        +4% |
-| LH tibiafibula |           0.027 |      0.020 |       +35% |
+| LH tibia-fibula |           0.027 |      0.020 |       +35% |
 | LH metatarsal  |           0.012 |      0.010 |       +20% |
 | LH hoof        |           0.004 |      0.004 |        +0% |
 | RF humerus     |           0.031 |      0.031 |        +0% |
-| RF radioulna   |           0.019 |      0.015 |       +27% |
+| RF radio-ulna   |           0.019 |      0.015 |       +27% |
 | RF metacarpal  |           0.008 |      0.006 |       +33% |
 | RF hoof        |           0.005 |      0.005 |        +0% |
 | RH femur       |           0.050 |      0.053 |        -6% |
-| RH tibiafibula |           0.023 |      0.021 |       +10% |
+| RH tibia-fibula |           0.023 |      0.021 |       +10% |
 | RH metatarsal  |           0.013 |      0.011 |       +18% |
 | RH hoof        |           0.005 |      0.003 |       +67% |
 |----------------+-----------------+------------+------------|
@@ -701,7 +701,7 @@ I conclude that the chance of getting an accurate measurement for mass moment of
 
 Another typical kind of artifacts in CT scans appear around metal beads (Fig. \ref{fig:metal_artifacts}).
 
-Metals are chemical elements with overproportionally higher x-ray attenuation than carbohydrate compounds.
+Metals are chemical elements with over-proportionally higher x-ray attenuation than carbohydrate compounds.
 They absorb a large fraction of the incoming radiation, demanding the use of higher energy for sufficient penetration to avoid shadows arising from missing information in the projections; yet higher energy can be detrimental to contrast on softer tissue.
 The shadows appear as "streaks" or "starbursts" on CT scans, they complicate segmentation, and are unwanted in XROMM visualizations citep:Brainerd2010.
 As with other artifacts, metal bead artifacts have their source in limitations of the tomographic method (limited dynamic range, rotationally symmetric scan geometry), and might be corrected by appropriate counter-measures.
@@ -709,7 +709,7 @@ Beam hardening reduction by using metal filter plates can improve dynamic range 
 The use of a helical scan geometry in a cone-beam CT should reduce the length and contrast of streaks, because projections from above or below the bead elevation level will project through the tissue immediately behind the bead.
 
 Though it is pronounced on metal beads due to their spatial confinement, the problem is not restricted to metal.
-Streak artifacts also appear between multiple regions of dense bone or strongly absorbant solute (i.e. water), especially if two such regions align along the beam trajectory in the projection geometry.
+Streak artifacts also appear between multiple regions of dense bone or strongly absorbent solute (i.e. water), especially if two such regions align along the beam trajectory in the projection geometry.
 
 
 Bead artifacts are a kind of "beam hardening", taken to the extreme: the spectrum of the photon ensemble changes along the projection trajectory, and much more so if x-ray interactions with matter are more numerous.
@@ -756,7 +756,7 @@ Finally, the exponential regression leads to a moderate shift in \(\vec{COM}\) (
 These simulations confirm that moment of inertia crucially depends on the mass and position assigned to each voxel in the CT data set; the relative error in the outcome will exceed the input inaccuracy.
 
 
-#+CAPTION: Probabilistic density regression result. Traceplot showing the posterior distributions of model parameters (left) and sampling traces (right). The "uncertainty" (\(\varepsilon\)) quantifies the hierarchical model residual, i.e. the total uncertainty remaining after convergence. The colored distributions for "sigma" are the material-wise uncertainties in the gray values (\(\varepsilon_{i}\)).
+#+CAPTION: Probabilistic density regression result. "Traceplot" showing the posterior distributions of model parameters (left) and sampling traces (right). The "uncertainty" (\(\varepsilon\)) quantifies the hierarchical model residual, i.e. the total uncertainty remaining after convergence. The colored distributions for "sigma" are the material-wise uncertainties in the gray values (\(\varepsilon_{i}\)).
 #+LABEL: fig:probabilistic_density
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/probabilistic_regression.png]]
@@ -835,7 +835,7 @@ The majority of observed femur gray values were not far off the exponential regr
 Nevertheless, the calculated moment of inertia was about \(30 \%\) off the reference.
 Note that this error is the sum of both an over-estimation in the linear reference regression, and an under-estimation of \(I\) in the exponential attempt.
 Also, the high percentage difference is explained by the fact that moment of inertia values are relatively small in baseline magnitude.
-A shortcoming of the present study is that I am unable to determine a "ground truth" inertia for the test object, lacking sufficiently accurate physical measurement apperature and expertise.
+A shortcoming of the present study is that I am unable to determine a "ground truth" inertia for the test object, lacking sufficiently accurate physical measurement apparatus and expertise.
 
 
 Nevertheless, the presented findings have practical application.
@@ -877,10 +877,10 @@ This is practically hard to capture for most dynamical behaviors (though it migh
 
 Another factor is the preservation of the specimen (frozen in this case; formol, alcohol, staining, ...) which has an influence on the chemical composition and inertial properties (not assessed herein).
 Finally, in vivo movements are often restricted to one or few axes.
-If a femur swings forward during walking, it will mostly rotate around the mediolateral axis.
+If a femur swings forward during walking, it will mostly rotate around the medio-lateral axis.
 In that case, the moment of inertia around that axis is relevant.
 The segment might slightly rotate around its long axis, but long axis rotation will hardly affect total momentum due to a low \(I\) on that axis.
-Thus, in this case, the (uncertainty of the) mediolateral inertial component demands special attention.
+Thus, in this case, the (uncertainty of the) medio-lateral inertial component demands special attention.
 
 
 ** Lack of Alternatives
@@ -897,7 +897,7 @@ The mass can be measured accurately with sufficiently fine scales, yet dissectio
 Center of mass can be estimated by pendulum methods, yet in addition to the dissection issues, the problem of accurately relating the \(\vec{COM}\) to an anatomical reference frame arises.
 The conventional instrument to measure moment of inertia is the trifilar pendulum citep:Korr1962,Wells1987,Schedlinski2001.
 As citet:Durston2022 have demonstrated, this method is far from trivial, requires a well-prepared setup, and still suffers from limitations (e.g. that all axes have to be measured separately, and then transformed to an anatomical reference frame).
-Pendular methods usually rely on negligibility of the instruments' masses and on the small angle approximation.
+Pendulum methods usually rely on negligibility of the instruments' masses and on the small angle approximation.
 Hence, the accuracy of these methods remains hard to estimate.
 
 
@@ -906,7 +906,7 @@ This approach could be termed the "indirect CT-based" method: volumetric images 
 Full CAD models might be assembled, and to a certain extent these might even incorporate dynamic mass redistribution during locomotion.
 The method requires good soft tissue contrast of the scans, e.g. by applying staining protocols.
 Since tissue is not homogeneous, but continuous transitions can occur (e.g. muscle-tendon), a validation and error estimate of this approach would be required.
-The main challenges of this approach are the workload of segmentation, and again transferrability to /in vivo/ measurements
+The main challenges of this approach are the workload of segmentation, and again transferability to /in vivo/ measurements
 
 
 Finally, an alternatives to CT scans for the present purpose might be /better/ CT scans.
@@ -916,7 +916,7 @@ All those are promising developments that would certainly impact the accuracy of
 
 
 
-Neither of these options currently yields quick, transferrable, generalizable results, which might seem like CT gray value regression should be the method of choice, despite considerable error.
+Neither of these options currently yields quick, transferable, generalizable results, which might seem like CT gray value regression should be the method of choice, despite considerable error.
 However, conceptual and practical issues from CT gray value conversion uncovered in this study demand caution and careful evaluation of the limited circumstances in which CT scans may yield usable inertial approximations.
 Doubts about measurement accuracy must count as an obstacle in the ethical evaluation of planned experiments.
 It must be stated that there currently is no validated method to reliable and efficiently measure dynamic inertials.
@@ -948,10 +948,10 @@ Under this condition, the calculated inertials might be a just sufficiently accu
 \clearpage
 * Acknowledgements
 A significant part of this project was supported by the following fabulous people.
-A lot of the personal insights about x-ray theorety herein have been made possible by my time at the FleXCT (2022-2023). Thanks to Jan and Jan for this opportunity, and special thanks to the colleagues at the VisionLab, especially Joaquim, for the great discussions!
-Jonathan Brecko (naturalscience museum Brussels) and Björn De Samber (FleXCT) were the operators performing the CT scans.
+A lot of the personal insights about x-ray theory herein have been made possible by my time at the FleXCT (2022-2023). Thanks to Jan and Jan for this opportunity, and special thanks to the colleagues at the VisionLab, especially Joaquim, for the great discussions!
+Jonathan Brecko ("naturalscience" museum Brussels) and Björn De Samber (FleXCT) were the operators performing the CT scans.
 Thank you to Chris Van Ginneken for the most accurate piglet dissection possible (which I was allowed to assist).
-Jan Scholliers designed and printed the most ingenious radiotranslucent clamp-on-a-motor construction possible, thank you also for the great support on all the parts of this project!
+Jan Scholliers designed and printed the most ingenious radio-translucent clamp-on-a-motor construction possible, thank you also for the great support on all the parts of this project!
 Maja Mielke, Joaquim Sanctorum, Peter Aerts and Chris Van Ginneken provided helpful comments on an earlier version of this manuscript.
 
 

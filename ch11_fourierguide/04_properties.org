@@ -80,26 +80,26 @@ There are a few common strategies to accomplish this if it is not given, and it 
 Firstly, one could ignore a start-end-difference, and bluntly apply FSD.
 The algorithm assumes periodicity, but the formula has no means to check this assumption, and will hence "connect" the last and first sample.
 This would lead to an abrupt change, which demands high order harmonics, which will show in the spectrum.
-However, abrubt changes from discontinuities are not physiological, so those values can be considered an artifact.
+However, abrupt changes from discontinuities are not physiological, so those values can be considered an artifact.
 
 
 As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and concatenate it to the end of the original signal.
-This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes cumulating to zero, and the "double" signal ending where it started.
+This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes accumulating to zero, and the "double" signal ending where it started.
 This method is common in the Fourier analysis of ground reaction force measurements citep:Schneider1983,Alexander1980, where data usually starts and ends at zero.
-# It nihilates the signal mean (zero'th coefficient) and
+# It annihilates the signal mean (zero'th coefficient) and
 The procedure shifts harmonics up by one due to period doubling.
-The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant infromation of the signal.
+The rationale of using this method is that it generates symmetry and smoothness, which generally reduces the order (i.e. number of harmonics) required to retain all relevant information of the signal.
 
 
 A third method to mend end-start differences is to simply spread them over the whole period of the signal citep:Mielke2019.
 This can be achieved in a computationally efficient way by subtracting an array of numbers from the signal which is linearly increasing from zero to the end-start difference, and which has the same number of samples as the signal (pseudo-algorithm: ~signal -= linspace(0, end-start, number_of_samples)~).
 For this to be valid, it must be ensured that the end-start-difference is negligible in magnitude, non-physiological, and non-systematic.
 If those are givens, spreading the difference over the cycle is least invasive with regard to the outcome coefficients.
-As with the previous method, this smoothes the signal and reduces higher order coefficients, yet without the caveat of altering the relation of relevant harmonics.
+As with the previous method, this smooths the signal and reduces higher order coefficients, yet without the caveat of altering the relation of relevant harmonics.
 
 
 
-#+CAPTION: *Stride cycle end-start matching.* A stride cycle can be defined as the time interval between two frames which have the highest similarity in joint configuration and enclose exactly one swing and stance phase. (A) Putative start and end frame configurations, superimposed onto the original video frames. Several frames are candidates for cycle end, indicated by the series of cross markers. (B) Superimposition of end frame candidates onto the reference start frame, using Procrustes Superimposition. Only the axial line points (head to toe) are used for superimposition. (C) Configuration difference (measured as Procrustes distance \(pd\), shifted by the arbitrary formula \(log\left(pd*10^3+2\right)\) for visualization) over the whole stride cycle for different candidate start frames. (D) A heatmap of configuration difference can identify mathematically optimal stride cycle intervals. Dashed black crosshair: cycle start and end, conventionally determined by limb touch down. Blue crosshair: start and end frame with maximal configuration similarity, i.e. minimal Procrusted distance of the configurations at candidate frames.
+#+CAPTION: *Stride cycle end-start matching.* A stride cycle can be defined as the time interval between two frames which have the highest similarity in joint configuration and enclose exactly one swing and stance phase. (A) Putative start and end frame configurations, superimposed onto the original video frames. Several frames are candidates for cycle end, indicated by the series of cross markers. (B) Superimposition of end frame candidates onto the reference start frame, using Procrustes Superimposition. Only the axial line points (head to toe) are used for superimposition. (C) Configuration difference (measured as Procrustes distance \(pd\), shifted by the arbitrary formula \(log\left(pd*10^3+2\right)\) for visualization) over the whole stride cycle for different candidate start frames. (D) A heat-map of configuration difference can identify mathematically optimal stride cycle intervals. Dashed black crosshair: cycle start and end, conventionally determined by limb touch down. Blue crosshair: start and end frame with maximal configuration similarity, i.e. minimal Procrustes distance of the configurations at candidate frames.
 #+ATTR_LATEX: :placement [p]
 #+LABEL: fig:endstart
 [[file:./figures/f3_endstart_Procrustes.pdf]]
@@ -224,7 +224,7 @@ It seems clear that Fourier coefficients of a single joint angle profile are int
 However, it is not obvious whether that holds any advantages for PCA, because the phase rotation does not cause linear correlation.
 On the other hand, higher coefficients are usually of lower amplitude than the main coefficients, and thus their putatively relevant variability might be lost in a PCA-based dimensionality reduction.
 Thus, PCA does not generally hold benefits for the analysis of single joint FSD in its complex exponential formulation.
-It might be different in the apmlitude-phase formulation, which should be explored in future research.
+It might be different in the amplitude-phase formulation, which should be explored in future research.
 
 
 If more than one joint is of interest, coefficient number is multiplied, but the situation for multivariate analysis changes.
@@ -232,9 +232,9 @@ Different joints are often interrelated through adjacency along their linking se
 Biarticular muscles and tendons can cause correlated movements, which makes top-down sense, because a typical vertebrate limb during swing phase tends to be extended and flexed altogether citep:Fischer2006.
 This situation is favorable for PCA, in a sense that dimensionality reduction can often be achived with relatively little information loss.
 Note, however, that PCA must be adjusted in a way that accounts for the FSD properties as follows.
-It is common practice and often advisible to standardize input variables prior to PCA, so that their value ranges are comparable (usually done by subtraction of the mean and division of a variability measure).
+It is common practice and often advisable to standardize input variables prior to PCA, so that their value ranges are comparable (usually done by subtraction of the mean and division of a variability measure).
 Such a standardization would disrupt the temporal structure of the signal, and emphasize nuisance variability in higher order coefficients.
 A better strategy for multi-joint analyses is the standardization by \chng{extraction and isolation} of affine FSD components.
 As mentioned above, mean joint angle and joint amplitude can be standardized, and phase differences of all observations can be minimized by temporal alignment.
-With such preprocessing, the outcome of a PCA will equally represent each joint of interest, without disrupting the temporal structure of the joint angle profiles, and benefitting from intrinsic correlations of movements of the limb elements.
+With such preprocessing, the outcome of a PCA will equally represent each joint of interest, without disrupting the temporal structure of the joint angle profiles, and benefiting from intrinsic correlations of movements of the limb elements.
 PCA is invertible, and any downstream modeling outcomes can be related back to the original joint angle profiles.

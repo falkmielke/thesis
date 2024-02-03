@@ -56,7 +56,7 @@ Thus, locomotor capabilities are crucial for piglet survival, and delayed develo
 Previous studies from our group \citep{VandenHole2017,VandenHole2021} raised the hypothesis that the apparent difference in LBW and NBW individuals can be attributed to delayed development.
 They measured spatiotemporal gait variables (e.g. stride frequency and distance, speed, duty factor), which are collective variables of the actual kinematics \citep[\textit{cf.}][]{Newell2021,Nishikawa2007,Aerts2000}.
 This strategy has the advantage that it requires only five landmarks (four limbs, one reference) to be \chng{tracked}, which used to be a crucial trade-off to handle large data sets.
-However, the the collective variables cannot capture full information on intra-limb coordination (i.e. the relative timing of segmental movements within a limb; as opposed to inter-limb coordination, i.e. the relative timing of the cyling of the different limbs).
+However, the the collective variables cannot capture full information on intra-limb coordination (i.e. the relative timing of segmental movements within a limb; as opposed to inter-limb coordination, i.e. the relative timing of the cycling of the different limbs).
 This complicates disentangling effects such as those of size, age, (birth) weight, and disease.
 It is expected that animals adapt their gait to the physical constraints of motor behavior, which are depending on the weight and other characteristics of the subject.
 However, the changes to kinematics might be more subtle, and collective variables might not be altered in a distinct way.
@@ -71,7 +71,7 @@ The common solution is to reduce the dimensionality with an appropriate transfor
 To choose a transformation, it can be exploited that common analysis procedures in locomotor biomechanics require steady state locomotion.
 ``Steady state'' implies that the behavior consists of repetitive blocks of kinematics, i.e. stride cycles.
 And one of the most common sets of techniques in physics and engineering to handle cyclic data is Fourier Analysis, or more specifically Fourier Series Decomposition \citep[FSD;][]{Mielke2019,Webb2007,Fourier1822,Bracewell2000,Gray1995,Pike2002}.
-With FSD, joint angle profiles are transformend into their representation in the frequency domain, i.e. an array of harmonics.
+With FSD, joint angle profiles are transformed into their representation in the frequency domain, i.e. an array of harmonics.
 Some of the characteristics of the profiles (namely mean \chng{joint} angle, amplitude, and phase) are more readily captured by those harmonics and can optionally be removed.
 This is most intuitive in the case of phase: removing phase differences enables a mathematically optimal temporal alignment of the profiles.
 By isolating the other characteristics, mean and amplitude, the joint angle profiles can be transformed to meaningful quantities such as dynamic posture (mean joint angle and effective range of motion), and coordination \emph{sensu stricto} \citep[relative phase/joint timing and residual kinematics, \textit{cf.}][and Ch. \ref{cpt:fourier_review}]{Mielke2019}.
@@ -119,7 +119,7 @@ At variable time points afterwards (ages \(1 - 10\) hours), piglets were briefly
 Animals were recorded in pairs \citep[as in][]{Mielke2018}, which drastically reduced anxiety and increased their motivation to cooperate.
 A few animals were recorded repeatedly, usually with a changing partner.
 Animals were ear-tagged and followed up: recording was repeated at approximately 4 and 10 days of age.
-That data was part of the \chng{landmark tracking} procedure (i.e. ``deeplabcut'' network training), but excluded from further analysis (i.e. probabilistic modeling).
+That data was part of the \chng{landmark tracking} procedure (i.e. ``DeepLabCut'' network training), but excluded from further analysis (i.e. probabilistic modeling).
 The subject characteristics documented for analysis are birth weight (continuous, and categories ``LBW''/``NBW''), mass at recording, age at recording (i.e. hours since farrowing), sex, and size.
 The size of the animal was approximated by a Principal Component Analysis (PCA) of landmark distances along all segments (``size PCA'', only first PC used,
 \(93 \%\)
@@ -178,7 +178,7 @@ Duty factor is available for fore- and hindlimb, and measures the fraction of st
 Clearance is approximated by quantifying the ratio of flexion of each limb (one minus the quotient of minimum and maximum absolute hip-toe-distance during the stride).
 Head and torso angle are the stride-average angles of the snout-ear or withers-croup lines with respect to the coordinate system.
 Hindlimb phase measures the time between hind- and forehoof touchdown, divided by the stride cycle duration.
-Where applicable, spatiotemporal gait variables were prepared for analysis by converting them to dimensionless values \citep{Hof1996,Alexander1983} using the cumulated distance of landmarks along the snout-to-tailbase line of the animal as reference, extracted as stride average from the \chng{tracked} landmarks.
+Where applicable, spatiotemporal gait variables were prepared for analysis by converting them to dimensionless values \citep{Hof1996,Alexander1983} using the accumulated distance of landmarks along the snout-to-tailbase line of the animal as reference, extracted as stride average from the \chng{tracked} landmarks.
 Only strides with plausible values (i.e. those which lie within the theoretical distribution of each parameter; \(1862\) cycles) where processed.
 Manual inspection further boiled down the data set to 897 stride cycles (the others excluded for \chng{tracking} errors, multi-animal confusion, non-walking gait, intermittent or sidewards locomotion, or incompleteness).
 
@@ -221,7 +221,7 @@ Though we used a 2D dataset herein, the procedure could be applied equally well 
 
 
 Furthermore, all transformations are reversible, hence any analysis outcome can be translated back to kinematics with high accuracy.
-Reversibility bares a lot of herein unused potential, for example for interpolating unobserved subject states or for inferring kinematics of fossile species by phylogenetic and morphometric bracketing.
+Reversibility bares a lot of herein unused potential, for example for interpolating unobserved subject states or for inferring kinematics of fossil species by phylogenetic and morphometric bracketing.
 Reversibility can also be of use when presenting raw joint angle profiles and their averages, as follows.
 One crucial aspect of the FCAS procedure is temporal alignment of the joint angle profiles in the frequency domain.
 In conventional temporal alignment, a single characteristic point in the stride cycle is chosen as a reference, wherein this is only ``characteristic'' for a certain part of one limb (e.g. left hindlimb hoof touchdown).
@@ -232,7 +232,7 @@ The problem is not restricted to pronounced peaks, but generally occurs if the t
 Using FCAS, it is possible to get a more representative average of the raw traces which has its amplitude conserved, but phase and mean \chng{joint} angle averaged.
 This is enabled by transformation to the frequency domain, separation of affine components, removal of phase differences by shifting to average phase, profile averaging, followed by inverse transformation back to the time domain.
 Because a set of profiles and phases may be calculated for each \chng{joint} angle individually, and because phase relations can differ between joints, there are the options to align based on one reference angle (e.g. the whole forelimb, as done herein) or minimize all phase differences across all joints.
-Chosing the first option herein has implications: when plotting hindlimb joints aligned by a forelimb reference (as in Fig. \ref{fig:raw_data}, lower half), phases still differ, and the ``destructive interference'' problem might hamper averaging.
+Choosing the first option herein has implications: when plotting hindlimb joints aligned by a forelimb reference (as in Fig. \ref{fig:raw_data}, lower half), phases still differ, and the ``destructive interference'' problem might hamper averaging.
 In such cases it is possible to apply an extra, joint-wise FCAS alignment for the sole purpose of generating meaningful averages.
 
 
@@ -310,7 +310,7 @@ The key purpose of the model is posterior predictive sampling of the LBW strides
 \end{figure}
 
 To assess whether there are qualitative differences between the birth weight categories, one can compare the joint angle profiles (i.e. raw, angular kinematics) on which the present analysis was performed (Fig. \ref{fig:raw_data}).
-The intra-group variablility clearly exceeds the differences between groups, although it must be emphasized that groups are inhomogeneous (with regard to age, speed, etc.), which might lead to a bias if composition of LBW and NBW data differs.
+The intra-group variability clearly exceeds the differences between groups, although it must be emphasized that groups are heterogeneous (with regard to age, speed, etc.), which might lead to a bias if composition of LBW and NBW data differs.
 LBW walk with a more flexed hindlimb posture, as indicated by the parallelly offset average hip, stifle, and tarsal profiles.
 Additionally, NBW individuals on average seem to set the shoulder at a more extended \chng{joint} angle.
 No differences in coordination are apparent (which would manifest in altered temporal structure of the profiles).
@@ -379,7 +379,7 @@ Mass was also associated with changes in the dynamic posture of the hip and tars
 For size, the model inferred associations with head angle, hindlimb duty factor and clearance, and one coordination component (CC3), as well as changes in the fore- and hindlimb posture and an effect of sex.
 Finally, age was associated with an increase in forelimb clearance, potential changes at the stifle and carpal, and several coordination components (CC9, CC11).
 Some eROM slope distributions for age were high in average magnitude, but variable (the ``credible interval'' contained zero).
-These model results provide detailed insight into parameter interrelations in the present data set and indicate which of the parameters are the relevent ones to infer a given subject attribute in predictive sampling.
+These model results provide detailed insight into parameter interrelations in the present data set and indicate which of the parameters are the relevant ones to infer a given subject attribute in predictive sampling.
 
 
 
@@ -416,7 +416,7 @@ For the age model, our considerations confirm that a predicted difference is rob
 In the models of size and body mass, some of the criteria are not met.
 Model complexity and sample size might restrict clarity of both models' outcomes to an uncertain degree.
 In the body mass model, the residual variability is high, which blurs potential differences in the predictions (Ch. \ref{supp:linearmodels}, Fig. \ref{fig:output_effects}).
-In the size model, there are some positive and some negative effects which seem cancel out (which might be evidence for size-dependent anternative locomotor strategies; Figs. \ref{fig:input_distributions}, \ref{fig:output_effects}).
+In the size model, there are some positive and some negative effects which seem cancel out (which might be evidence for size-dependent alternative locomotor strategies; Figs. \ref{fig:input_distributions}, \ref{fig:output_effects}).
 We observed few significant effects related to the coordination parameters, indicating that coordination patterns are for the most part indifferent to age, size, and mass.
 
 
@@ -482,7 +482,7 @@ The overarching question is whether low or critically low birth weight can be qu
 
 
 However, we observe little qualitative difference in LBW and NBW kinematics (Fig. \ref{fig:raw_data}).
-There is a small difference when averaging hindlimb posture, which might be trivially explained by inhomogeneous group composition (but see below).
+There is a small difference when averaging hindlimb posture, which might be trivially explained by heterogeneous group composition (but see below).
 This is further supported by the fact that our models were unable to correctly retro-infer either mass or size from blindly provided kinematic parameters, including coordination.
 Strides from LBW animals were estimated to come from an animal with a ``normal'' mass and size (Fig. \ref{fig:predictions}).
 This suggests that low body mass or small size can not be causal for altered 2D kinematics, and it raises doubts whether there are any deficits in coordination and control.
@@ -499,7 +499,7 @@ The resulting share is equal in our training set for video \chng{tracking}, and 
 The minority of LBW training videos might lead to an under-learning of those animals, reduced \chng{landmark tracking} quality and therefore an exclusion bias for ``non-normal'' individuals.
 Though it seems unlikely, we cannot rule out reduced locomotor endurance in LBWs, because the present data set is unsuited to count the occurrence of locomotor behavior.
 On the other hand, the strict stride filtering criteria for ``good'' kinematics may have involuntarily filtered out deficient individuals.
-Our conclusion that low birth weight individuals are non-deficient is strictly tied to the definition of the low birth weight category, which is herein based on weight criteria and did not regard phenotypical indicators of intra-uterine growth restriction \citep[which we did not record, \textit{cf.}][]{Amdi2013}.
+Our conclusion that low birth weight individuals are non-deficient is strictly tied to the definition of the low birth weight category, which is herein based on weight criteria and did not regard phenotypic indicators of intra-uterine growth restriction \citep[which we did not record, \textit{cf.}][]{Amdi2013}.
 
 
 A second difference of LBW locomotion is that the age is underestimated for strides of some, but not all individuals.
@@ -557,7 +557,7 @@ But maturation and age might also influence the speed without changing dynamic p
 Age might also affect dynamic posture and coordination directly, for example if dimensionless speed stays constant but clearance changes with age.
 Reducing clearance can increase speed (less unnecessary hoof lifting) or reduce it (higher duty factor), which can be distinguished by the other parameters.
 This complex interrelation of spatiotemporal quantities complicates the intuitive modeling strategy, which involves using subject characteristics as a factor to predict a multivariate block of spatiotemporal gait variables and kinematics.
-In our experience, model residuals in such models are high, multiple testing can yield putatively coincidental significances, cross-dependencies within the multivariate data set might be underestimated, and sample size requirements are high.
+In our experience, model residuals in such models are high, multiple testing can yield putatively co-incidental significances, cross-dependencies within the multivariate data set might be underestimated, and sample size requirements are high.
 And even under ideal circumstances: chances are that such models would yield \emph{some} age effect, even with random data.
 
 \medskip
@@ -601,7 +601,7 @@ This situation is somewhat analogous to classical hypothesis testing, where we q
 
 \begin{figure}[p]
   \caption{ Observed model parameter input distributions (\textit{next page}).
-For each model parameter (rows), observations are indicated by tick marks for the two study groups (NBW: gray, LBW: orange). Values were standardized on population level (i.e. mean-centered and scaled by standard deviation). Significance between the distributions (indicated by asterisk) was determined by a two-sample ranksum test. }
+For each model parameter (rows), observations are indicated by tick marks for the two study groups (NBW: gray, LBW: orange). Values were standardized on population level (i.e. mean-centered and scaled by standard deviation). Significance between the distributions (indicated by asterisk) was determined by a two-sample rank sum test. }
 \end{figure}
 
 \addtocounter{figure}{-1}
@@ -627,9 +627,9 @@ Effect size is calculated as the data range (difference between \(2.5\%\) and \(
 
 
 The available modeling framework enables some extra insights on why the prediction appeared as it did.
-Firstly, we can compare the input distributions (criterium 1, above) of the observational groups (Fig. \ref{fig:input_distributions}), to identify those model parameters which acutally influence the predictions.
-Secondly, we can calculate the absolute effect of each parameter onto the predicted outcome (slope magnitude, criterium 2), by multiplying the parameter magnitude with the according slope (Fig. \ref{fig:output_effects}; this works because \(\Delta y \sim b_i \cdot \Delta x_i\)).
-Thirdly, we can quantify the model residual (criterium 4; Fig. \ref{output_effects}).
+Firstly, we can compare the input distributions (criterion 1, above) of the observational groups (Fig. \ref{fig:input_distributions}), to identify those model parameters which actually influence the predictions.
+Secondly, we can calculate the absolute effect of each parameter onto the predicted outcome (slope magnitude, criterion 2), by multiplying the parameter magnitude with the according slope (Fig. \ref{fig:output_effects}; this works because \(\Delta y \sim b_i \cdot \Delta x_i\)).
+Thirdly, we can quantify the model residual (criterion 4; Fig. \ref{output_effects}).
 The other criteria (model complexity and sample size) are predetermined in this modeling application, and have an unknown influence on the outcome.
 
 For the \textbf{age model}, we observe a low residual variance, and there are two parameters which are significantly different between NBW / LBW \textit{and} have a high slope (those are hindlimb clearance and hip angle).

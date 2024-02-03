@@ -1,4 +1,4 @@
-#+title: Spm Summary
+#+title: SPM Summary
 #+author: Falk Mielke
 #+date: 20231031
 
@@ -16,7 +16,7 @@ Choice and relevance are rather philosophical questions; potentially they are mo
 The number of key points has effects on significance thresholds (multiple testing), and it has been shown that comparing key points will increase the chance of false positives in difference detection (due to true measurement uncertainty).
 
 
-Instead of points, one might look at intervals, yet again it would be desirable to have a non-subjective, automatic criterium of how to choose those.
+Instead of points, one might look at intervals, yet again it would be desirable to have a non-subjective, automatic criterion of how to choose those.
 This can be provided by random field theory citep:Brett2003,Kemeny1976.
 In random field theory, the interdependence of measurement samples can be quantified by measuring how random changes between samples are.
 Randomness and smoothness are on two sides of a continuum, and the less random the changes between samples are, the "wider" the range of dependent data points can be considered.

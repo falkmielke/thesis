@@ -46,7 +46,7 @@ Care should be taken that joint angles do not show jumps at any time point of th
 Such jumps would lead to a wrong FSD, because that procedure does not natively consider angular value ranges or interval wrapping and thus treats the jump as if it were an actual discontinuity.
 The joint angle definition chosen herein, with fully extended limb corresponding to a joint angle of zero, and ranging from \(-\pi\) to \(+\pi\), usually avoids such discontinuities.
 
-In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an =arctan= formula.
+In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an ==arctan== formula.
 When working in three dimensions, the question is whether sufficient anatomical reference points can be \chng{tracked} to calculate actual anatomical joint angles.
 If not, it must be sufficient to calculate a single \chng{joint} angle between the segment vectors, though that does not necessarily correspond to anatomical degrees of freedom.
 If instead there are sufficient reference points, multiple \chng{joint} rotation axes and angles per joint can be used and integrated just as in a multi-joint analysis.
@@ -90,7 +90,7 @@ Apart from the residual variance not covered by the retained principal component
 Most often, PCA is just used to prepare the data for subsequent multivariate methods (e.g. factor analysis).
 
 
-To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from raw video dititizations.
+To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from raw video digitization.
 Joint angles were calculated and submitted to two transformation procedures: FSD and PCA.
 All procedures to this point can be performed without loss of information: any of the resultant data rows could be converted back to an animation of moving points.
 Thus, the PCA outcome essentially contains the whole of what was captured by the original kinematic data: the spatiotemporal coordination of the moving body appendages of interest.
@@ -131,7 +131,7 @@ I applied a stepwise modeling approach, modeling the PCA-transformed Fourier coe
 
 In the case of the baboon data set, I was able to successfully train this complex model despite limited sample size.
 I then confirmed model convergence and ensured that the model is favorable over alternative models with more or less parameters.
-The implementation in PyMC (a Pyhton library, https://www.pymc.io) has the capability of posterior predictive sampling: the trained model can be used to generate an arbitrarily high number of virtual data points, which underly the same variability as the original data.
+The implementation in PyMC (a Python library, https://www.pymc.io) has the capability of posterior predictive sampling: the trained model can be used to generate an arbitrarily high number of virtual data points, which underlie the same variability as the original data.
 Most notably, this includes predicting "out-of-sample", i.e. parameter combinations which were not directly observed (in this case, male adult baboons were not included in the data, but could be predicted; Fig. \ref{fig:modelprediction}).
 Though the model infers abstract PCA values, the much emphasized reversibility of the method enables the computation of joint angle profiles from the predicted values.
 All data and documented code for all the steps described above are available online (https://git.sr.ht/~falk/papio_fcas).

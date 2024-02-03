@@ -73,7 +73,7 @@ Yet just as with the novel AI capabilities which currently invade our everyday l
 Computational techniques can be abstract, and sometimes their purpose only becomes clear on second application.
 For this reason, a considerable fraction of the chapters herein branch off to related, but different biological questions (e.g. locomotion of ungulates in general, or locomotor development of bipedal baboons).
 # This can be challenging to present to a broad public, e.g. in a thesis.
-It might help if, on the way, we make sure not to loose sight of the acutal phenomenon under study.
+It might help if, on the way, we make sure not to loose sight of the actual phenomenon under study.
 I, the author, personally think that the birth and maturation of a piglet (or any creature) are beautiful and fascinating processes, and I appreciate the opportunity to study them in detail.
 Nevertheless, herein, I will not ponder further upon the emotional or artistic aspects of the beauty of nature and life.
 The core purpose of this thesis is to assemble, extend, and scientifically evaluate some relevant facets of current research methods around locomotor development.
@@ -90,7 +90,7 @@ Our institute at the University of Antwerp has phenomenal equipment.
 We have incubator-like rearing containers in the "Ark" (a teaching stable in our Veterinary Science department), which can be a cozy warm home to newborn piglets.
 We have the \(3D^2YMOX\) ([[https://www.uantwerpen.be/en/research-groups/3d2ymox][3-Dimensional DYnamic MOrphology using X-rays]]) facility to measure moving animals from hoof to head in light and x-ray vision.
 The [[https://www.uantwerpen.be/flexct][FleXCT scanning facility]] is just around the block, and the friendly, but expensive technicians there will scan anything you bring them.
-We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab and Biomedical Physics (Bimef), and not least bioligists at FunMorph (Functional Morphology).
+We have great interdisciplinary collaboration of teams: veterinarians of CoPeD (Comparative Perinatal Development), physicists from the imec-Visionlab and Biomedical Physics (Bimef), and not least biologists at FunMorph (Functional Morphology).
 The settings could not have been better, and I cannot overstate my praise of all the fantastic people who helped with the projects herein, and all those who previously managed to acquire funding for what enabled my work.
 # TODO (see acknowledgements, Ch. \ref{acknowledgements})
 Thank you!
@@ -116,7 +116,7 @@ Have you actually /seen/ one?
 
 Yet, back to our cute, pink subject animals.
 We could have studied any animal; if fact, some of us might have certainly preferred flamingos or boxfish.
-This is why, at this point and below, I will have to apply a common human stategy: /ex post/ rationalization.
+This is why, at this point and below, I will have to apply a common human strategy: /ex post/ rationalization.
 Walking piglets are graceful in their simplicity.
 And "graceful", just like in (human) sports or in playing musical instruments, often describes something which is complex and complicated but performed to look simple.
 Well, sports and music requires training, and the most adept athletes or musicians seem to us as if they have never done anything else in their lives.
@@ -137,7 +137,7 @@ Emphasis on "/to a certain degree/" - are they, really?
 \chng{I will get back to this at the end of the thesis (Ch. \ref{cpt:generaldiscussion})}
 Domestic pigs are maybe the only species in the world that is more degenerate than our own (or maybe not).
 They are sedentary, comparatively hairless, highly social, omnivorous (which means they can live of the crap humans feed them), training them to work takes considerable efforts.
-They have probably gone through a couple of founder situations in their evolution, yet are far more proliferous than is good for themselves and the planet.
+They have probably gone through a couple of founder situations in their evolution, yet are far more prolific than is good for themselves and the planet.
 That is already quite a lot to have in common.
 And indeed, many researchers rightfully argue that we can draw conclusions about humans from studying piglets - for some aspects of our humble, shared existence.
 For example, highly relevant research about infant gut function was achieved by the group of Prof. Per Sangild citep:Muk2023,Che2010,Cilieborg2011,Sangild2006.
@@ -197,7 +197,7 @@ We better have a potent modeling framework to incorporate all that data: if we d
 The falsification approach is a unifying aspect of all the chapters herein.
 
 
-*To summarize*, there \chng{are some genuine reasons for studying suid ontogeny, and there are some methodological challenges which we need to adress.}
+*To summarize*, there \chng{are some genuine reasons for studying suid ontogeny, and there are some methodological challenges which we need to address.}
 Yet whether or not domestic piglets are a good model species, specifically for human locomotor development, is up for debate, \chng{and I will return to it in the general discussion (Ch. \ref{cpt:generaldiscussion})}.
 
 
@@ -230,7 +230,7 @@ This gives us about twice the number of joints to analyze when studying grounded
 Not trivial to handle, but feasible, as I show below.
 
 
-It came as a great coincidence that, during SEB conference 2021, I watched my colleage François Druelle presenting a data set acquired from bipedally walking baboons (/Papio anubis/).
+It came as a great coincidence that, during SEB conference 2021, I watched my colleague François Druelle presenting a data set acquired from bipedally walking baboons (/Papio anubis/).
 The rationale to study these animals can be directly transferred to this thesis: they are facultatively bipedal, i.e. they occasionally walk on their hind limbs, just like humans often do citep:Aerts2023b.
 Prof. Druelle and colleagues thus analyzed a developmental series of baboons: infant, adolescent, and adult individuals citep:Druelle2021.
 Their intention is to find out if and how the use of a bipedal gait changes with age.
@@ -255,7 +255,7 @@ On the downside, baboons are less readily available, also for dynamic measuremen
 Hence it is good to keep both model species in the loop.
 
 @@latex:\begin{change}@@
-Having a biped on board makes trunsferability more likely, but is no guarantee: it might be hard to transfer findings to human infants, since there is still morphological and behavioral discrepancy.
+Having a biped on board makes transferability more likely, but is no guarantee: it might be hard to transfer findings to human infants, since there is still morphological and behavioral discrepancy.
 To work towards solving this issue, it might be useful to take one step back, explore what locomotion is /technically/, and see which analytical methods are available.
 @@latex:\end{change}@@
 
@@ -266,16 +266,16 @@ This is a simple oscillator, a "physical pendulum", which physics professors enj
 Now add a second such element, another cylindrical joint and metal rod.
 Something astonishing happens: we get chaos citep:2021Chaos.
 Even more fun to calculate.
-Due to miniscule variations in the initial conditions of this system, it cannot be solved deterministically any more.
+Due to minuscule variations in the initial conditions of this system, it cannot be solved deterministically any more.
 
 
 Animal limbs resemble the physical pendulum: they have more restrictive joints, yet usually even more segments.
 We should expect chaos on this system.
 But chaos is not what we observe, quite the contrary.
-Locomotor movements are highly targeted, i.e. pseudo-deterministic, often repetetive.
+Locomotor movements are highly targeted, i.e. pseudo-deterministic, often repetitive.
 Variations (though ubiquitous) are minimized by training.
 @@latex:\begin{change}@@
-This observation is due to *coordination*: coordination is henceforth understood as the non-random temopral pattern of movement which manifests in a specific succession of movements of different joints within a limb (intra-limb coordination) or between limbs (inter-limb coordination).
+This observation is due to *coordination*: coordination is henceforth understood as the non-random temporal pattern of movement which manifests in a specific succession of movements of different joints within a limb (intra-limb coordination) or between limbs (inter-limb coordination).
 @@latex:\end{change}@@
 Coordination is achieved by (neuro-)motor control.
 @@latex:\begin{change}@@
@@ -326,7 +326,7 @@ And, after all, that video data might be the most relevant data of this PhD cite
 Acquiring videos is just the first step: as always in science, we need numbers and statistics to get reliable results.
 Where are we at the analysis side?
 You might be underwhelmed.
-We are in the year 2023, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns citep:Hildebrand1989, their spatiotemporal derivates (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles citep:Ekhator2023,Plocek2023,Young2023,Jones2023.
+We are in the year +2022+ +2023+ 2024, and (as if agnostic to the rise of computers) people still essentially rely on footfall patterns citep:Hildebrand1989, spatiotemporal gait parameters (stride frequency, speed, duty factor, etc.), and visually comparing angular profiles citep:Ekhator2023,Plocek2023,Young2023,Jones2023.
 Those are doubtlessly great methods to get an overview, and they remain the go-to first analysis for any kinematic data set.
 Yet as I will argue in the chapters to follow, they only capture limited information and are therefore insufficient for a falsification approach, as illustrated with the stork and elephant example above.
 
@@ -354,7 +354,7 @@ It was advanced by Nikolai A. Bernstein, and I have dedicated a whole chapter to
 His group excelled in at least two ways citep:Bongaardt2000,Bernstein1935.
 They used clever engineering to get continuous measures of joint positions citep:Bernstein1927b and applied angular transformations (i.e. Fourier Series) to analyze the data citep:Bernstein1927a.
 These early works are remarkable, and the day I first read through it and realized their importance was maybe one of the happiest days of my PhD.
-Essentially, what I did in the work summarized herein, is transferring Bernstein's ideas to a computer framework, and extending them with moderen statistical models.
+Essentially, what I did in the work summarized herein, is transferring Bernstein's ideas to a computer framework, and extending them with modern statistical models.
 I acknowledge that I am not the first one to take this route citep:Pike2002,Webb2007.
 And there is a group of authors who have translated, popularized, and advanced the "Bernstein school" citep:Latash2010,Latash2008,Latash1998,Laczko2016.
 However, given the usefulness of the transformation, I find that +there are+ google scholar returns astonishingly few studies to date who have applied Fourier Analysis to locomotor data.

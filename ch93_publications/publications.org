@@ -70,7 +70,7 @@ All listed posts are self-published and can be found on the website [[http://mie
 
 *** Inverse Dynamics
 + wrenches\newline http://mielke-bio.info/falk/posts/10.id_lmx0a_wrenches
-+ ficticious forces - overview\newline http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces
++ fictitious forces - overview\newline http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces
 + Euler force\newline http://mielke-bio.info/falk/posts/12.id_lmx1_stutter
 + Centrifugal force\newline http://mielke-bio.info/falk/posts/13.id_lmx2_vinyl
 + Coriolis force\newline http://mielke-bio.info/falk/posts/14.id_lmx3_slider

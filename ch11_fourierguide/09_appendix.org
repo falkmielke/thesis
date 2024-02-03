@@ -50,7 +50,7 @@ def FourierSeriesRecomposition(coefficients, output_time):
     # the exponential used in this formula
     FourierSummand = lambda t, T, cn, n: cn*numpy.exp(1j*2*numpy.pi*n*t/T)
 
-    # the fourier function at a single time point
+    # the Fourier function at a single time point
     FourierFunctionT = lambda t, T, coefficients: numpy.sum(numpy.array([ FourierSummand(t, T, cn, n) \
                                                                for n,cn in enumerate(coefficients) \
                                                               ]))
