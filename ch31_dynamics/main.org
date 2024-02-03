@@ -193,12 +193,6 @@ The time derivative of angular momentum is called moment (\(\vec{M}\); see also:
 #+end_src
 
 
-
-#+CAPTION: \textbf{The slamming door, isolated sketch.}
-#+LABEL: fig:slamming_momentum
-#+ATTR_LATEX: :placement [p] :width 12cm
-[[./figures/slamming_momentum.pdf]]
-
 Again, there is an (angular) velocity product term which we hope to sufficiently well approximate by setting it to zero (rigid body assumption, i.e. no or negligible change of \(I\)).
 Just as in the linear case, we identify a cause for any change in angular momentum, and call it the moment \(\vec{M}\) (others may call it torque \(\vec{\tau}\)).
 In this case, I used the vector formula \chng{notation} (explicit by the cross product; this could analogously be done for the force, equation \eqref{eqn:force}, above).
@@ -221,6 +215,13 @@ In that special case, we speak of "spin angular momentum", which is an intrinsic
 
 
 But the general idea is that one needs to keep track of a reference point for angular momentum, and thus also for all calculations regarding angular momentum or mass moment of inertia.
+
+
+#+CAPTION: \textbf{The slamming door, isolated sketch.}
+#+LABEL: fig:slamming_momentum
+#+ATTR_LATEX: :placement [b!] :width 12cm
+[[./figures/slamming_momentum.pdf]]
+
 
 
 \FloatBarrier

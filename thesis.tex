@@ -47,6 +47,10 @@
 \usepackage{color}
 \usepackage{xcolor}
 
+\usepackage{pdflscape}
+\makeatletter
+\renewcommand\PLS@Rotate[1]{}
+\makeatother % https://tex.stackexchange.com/questions/267595/what-causes-rotation-of-landscape-page-while-lscape-in-use
 
 
 
@@ -153,7 +157,7 @@
 
 \title{Methodological Advances \linebreak in \linebreak Studying Postnatal Locomotor Development}
 \author{Falk Mielke}
-\date{2024-01-31}
+\date{2024-02-03}
 
 % https://tex.stackexchange.com/questions/11707/how-to-force-output-to-a-left-or-right-page
 \newcommand\cleartoleftpage{%
@@ -166,7 +170,7 @@
 \hbox{}
 }
 
-\definecolor{darkgreen}{rgb}{0,0.3,0}
+\definecolor{darkgreen}{rgb}{0,0.4,0}
 % \newenvironment{change}[1]{
   % {\color{darkgreen}
     % #1
@@ -206,7 +210,7 @@
 \onehalfspacing
 \newpage
 \setcounter{tocdepth}{1}
-\begin{spacing}{1.1}
+\begin{spacing}{1.05}
 \tableofcontents
 \end{spacing}
 

@@ -1,6 +1,6 @@
 \clearpage
 \section{Abstract}
-\label{sec:org7ce34ba}
+\label{sec:org26cd42b}
 Analysis workflows which are based on the Fourier theorem are abundant in physics and engineering, yet rarely found in the biological literature.
 They would be particularly useful in the analysis of locomotor kinematics, where movements can usually be broken down into repetitive cycles.
 I herein repeat the basics of Fourier analysis and transformation to the frequency domain by reviewing previous studies which applied it in some form in the field of locomotor biomechanics.
@@ -14,7 +14,7 @@ The results are complementary to the prior analysis, and the capability to predi
 \section{Introduction}
 \label{intro12}
 \subsection{Recurring Solutions}
-\label{sec:orge0ccbc6}
+\label{sec:orgee14955}
 In 1822, a French mathematician initiated the remarkable discovery that any continuous signal, no matter how complex, can be represented by a sum of relatively simple trigonometric functions \citep{Fourier1822}.
 Despite some initial limitations which were mended by scientists to follow, Fourier's work opened the door to the frequency domain.
 Fourier analysis has become a widely-used tool in physics and engineering, whereas biologists have only occasionally made the transformation.
@@ -32,7 +32,7 @@ Instead, I aim at facilitating the entry to the topic for applied biologists, es
 Fourier Theory is well studied and widely applied, and numerous textbooks exist for all levels and fields \citep[\textit{cf.}][]{Bracewell2000,Osgood2019}.
 The rich spectrum of Fourier-based methods comprises versatile techniques which would certainly facilitate the work on many relevant research questions in biomechanics.
 \subsection{Fourier Series}
-\label{sec:org0c25e22}
+\label{sec:orgad4b1be}
 
 \begin{figure}[pt]
 \centering
@@ -53,7 +53,7 @@ The change of a joint angle over time is called a ``joint angle profile''.
 \begin{figure}[pb]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/f2_domains.pdf}
-\caption{\label{fig:domains}\textbf{\chng{The Frequency Domain.}} (Upper Left) Hip joint angle profiles of bipedal locomotion in baboons, as conventionally displayed (gray traces: repeated observation; black trace: average profile; dotted line: mean angle). The joint angle profile shows the measured angles over the course of a stride cycle. (Lower Left) The very same information can be stored in an excel list, here shown as a screenshot, consisting of an indefinite number of value pairs of time and angle. (Lower Right) By using Fourier methods, traces can be converted to a list of relatively few coefficients, without loss of information. (Upper Right) These coefficients have a real and imaginary part, which could be plotted in the complex plane. (All) All these displays capture identical data. A visual representation (upper panels) contains exactly the same information as a numeric representation (tables / lower panels). Similarly, the information contained in frequency domain representation (right panels) is identical to that in the time domain (left panels). With the methods described below, one can transform from the time- to the frequency domain representation or back without loss of information. The frequency domain, which is accessible through Fourier Analysis formulas, is just a different representation of the data, and the transformation procedure is analogous to ``plotting'' (i.e. deterministic, reversible, favorable in some circumstances).}
+\caption{\label{fig:domains}\textbf{\chng{The frequency domain.}} (Upper Left) Hip joint angle profiles of bipedal locomotion in baboons, as conventionally displayed (gray traces: repeated observation; black trace: average profile; dotted line: mean angle). The joint angle profile shows the measured angles over the course of a stride cycle. (Lower Left) The very same information can be stored in an excel list, here shown as a screenshot, consisting of an indefinite number of value pairs of time and angle. (Lower Right) By using Fourier methods, traces can be converted to a list of relatively few coefficients, without loss of information. (Upper Right) These coefficients have a real and imaginary part, which could be plotted in the complex plane. (All) All these displays capture identical data. A visual representation (upper panels) contains exactly the same information as a numeric representation (tables / lower panels). Similarly, the information contained in frequency domain representation (right panels) is identical to that in the time domain (left panels). With the methods described below, one can transform from the time- to the frequency domain representation or back without loss of information. The frequency domain, which is accessible through Fourier Analysis formulas, is just a different representation of the data, and the transformation procedure is analogous to ``plotting'' (i.e. deterministic, reversible, favorable in some circumstances).}
 \end{figure}
 
 
@@ -179,7 +179,7 @@ All these questions are the purpose of this review, and will be addressed in the
 A lot of the text below is written from the applied perspective of a biologist, who used the transformation and its inverse to actual data.
 Not all of the reported properties of Fourier methods are directly linked to literature references, but most general courses and textbooks cover these concepts \citep[e.g.][]{Bracewell2000,Osgood2007,Osgood2019}.
 \subsection{Not a Regression}
-\label{sec:orgbdc3aa3}
+\label{sec:org079a341}
 As pointed out above, some researchers have applied regression algorithms to extract the weights of the harmonics contributing to the signal of interest.
 A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever update rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
@@ -213,7 +213,7 @@ The FSD formula involves a normalization for the signal period (i.e. stride cycl
 FSD also avoids problems of FFT which are due to windowing.
 Though both procedures could be applied to stride cycle kinematics, \textbf{FSD is favorable if the periodicity/cyclicity assumption holds}.
 \subsection{Time Scale Independence}
-\label{sec:orgc851757}
+\label{sec:orgef2f8af}
 Another favorable property follows from the cyclicity: \textbf{Fourier coefficients are independent of temporal scale or sampling}.
 Due to the normalization mentioned above, the FSD of the signal does not contain any information about the original duration of the signal (e.g. stride duration), nor does it matter much where the cycle started.
 On the inverse FSD, a new time frame and temporal sampling must be chosen.
@@ -281,7 +281,7 @@ Conversely, whether or not there are two such frames with a sub-threshold Procru
 All these are technical tricks which usually improve the data set quality and consistency.
 The bottom line is that, in steady state locomotion, the \textbf{periodicity assumption is usually met}, and there exist minimally invasive adjustments to ensure that the data strictly meets the mathematical requirements of FSD.
 \subsection{Reversibility}
-\label{sec:org93e1681}
+\label{sec:orga13a7c6}
 Some data operations can be undone (math.: invertible, i.e. reversible), others not.
 For example, consider the Euclidean vector norm of a temporal series of velocity vector measurements: the resulting number (speed) can quantify the magnitude of the original velocity vector, but not its direction.
 Conversely, when modeling speeds depending on some other parameter and predicting magnitudes, or when averaging speeds, one could not infer a direction.
@@ -324,7 +324,7 @@ Repeated back- and forward transformation does not discard further information.
 When implementing a version of the equations above in computer code, a good check is whether values are unchanged after applying FSD and its inversion in series.
 And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often \textbf{efficient to store} kinematic data in the form of FSD coefficients.
 \subsection{Choice of Order}
-\label{sec:org3f23ad3}
+\label{sec:org16b3238}
 How to decide how many coefficients should be retained?
 That number is the ``order'' of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
@@ -340,7 +340,7 @@ Such elements cannot perform too abrupt accelerations, and in consequence, the p
 Furthermore, in the case of steady-state locomotion, the ensemble of rigid body elements produces the behavior, and it is unlikely that any single element can oscillate an order of magnitude quicker than the whole limb.
 The stride cycle is the defining time interval, and normally all elements move in relative unison, which limits amplitude in the higher order coefficients.
 \subsection{Affine Components}
-\label{sec:org1030ce8}
+\label{sec:org8036d2b}
 Some attributes of a signal are emphasized by Fourier methods.
 Those can be summarized intuitively as those attributes of the signal which can be changed without altering the ``perceived shape'' of the signal when plotted.
 
@@ -370,7 +370,7 @@ They can be associated with biological meaning: the mean quantifies dynamic post
 What remains after standardization, i.e. after isolation of the affine components, is in a way the essence of a signal, its ``shape'', which is defined by the temporal (or frequential) structure of the behavior.
 In the case of joint angle profiles, this remainder can be considered coordination \emph{sensu strictu} \citep{Mielke2019,Mielke2023}.
 \subsection{Multivariate Analysis}
-\label{sec:orgf0f0dfe}
+\label{sec:org8e439b2}
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
 Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
 Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
@@ -408,7 +408,7 @@ For illustration, I \chng{applied the method} to a previously analyzed data set 
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/f8_flowchart.pdf}
-\caption{\label{fig:procedure}\textbf{Analysis and Modeling Procedure.} Workflow overview of the preparation, transformation and analysis steps involved in the data analysis on baboon bipedal walking as described in the text, from raw observation (top) to statistical inference and multivariate analysis (bottom). At each point of the procedure, transformation between the domains is possible and quality checks should be performed.}
+\caption{\label{fig:procedure}\textbf{Analysis and modeling procedure.} Workflow overview of the preparation, transformation and analysis steps involved in the data analysis on baboon bipedal walking as described in the text, from raw observation (top) to statistical inference and multivariate analysis (bottom). At each point of the procedure, transformation between the domains is possible and quality checks should be performed.}
 \end{figure}
 \subsection{Data Preparation}
 \label{casestudy:dataprep}
@@ -418,7 +418,7 @@ As a good approximation, one can use the conventional touch down timepoints (tho
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/f4_raw_inspection.pdf}
-\caption{\label{fig:raw_inspection}\textbf{Raw Data Inspection.} (A) Plotting a series of stride cycles in the camera reference frame can aid the identification of data discontinuities (visible here in the distal limb markers). The animal is moving from left to right. A stick figure displayed for the last frame facilitates landmark attribution (torso, tail, hind- and forelimb are shown, similar to Fig. \ref{fig:endstart}). (B) Plotting one stride in the moving reference frame of the subject (zoomed in on the limbs) can confirm cyclic/steady state movement.}
+\caption{\label{fig:raw_inspection}\textbf{Raw data inspection.} (A) Plotting a series of stride cycles in the camera reference frame can aid the identification of data discontinuities (visible here in the distal limb markers). The animal is moving from left to right. A stick figure displayed for the last frame facilitates landmark attribution (torso, tail, hind- and forelimb are shown, similar to Fig. \ref{fig:endstart}). (B) Plotting one stride in the moving reference frame of the subject (zoomed in on the limbs) can confirm cyclic/steady state movement.}
 \end{figure}
 
 
@@ -459,10 +459,10 @@ The transformation should be inverted, and original and re-transformed joint ang
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/f6_residuals.pdf}
-\caption{\label{fig:residuals}\textbf{Retransformation Residuals,} (A) after performing FSD only with a given order (i.e. number of coefficients, x-axis), (B) after FSD (9 coefficients) and PCA with a given number of retained components. Residuals \(\epsilon\) (y-axis) as defined above. Joint angle profiles of all observed baboon strides are included, the distribution of residuals is indicated by grey ``violins''. Relatively low numbers of coefficients and components are sufficient to get close to the asymptotic accuracy. The absolute residual is joint-dependent (compare hip and knee, for example), an effect which is primarily determined by \chng{landmark tracking} accuracy and measurement noise. The data point for ``full'' PCA dimension is the reference value with just the FSD.}
+\caption{\label{fig:residuals}\textbf{Retransformation residuals,} (A) after performing FSD only with a given order (i.e. number of coefficients, x-axis), (B) after FSD (9 coefficients) and PCA with a given number of retained components. Residuals \(\epsilon\) (y-axis) as defined above. Joint angle profiles of all observed baboon strides are included, the distribution of residuals is indicated by grey ``violins''. Relatively low numbers of coefficients and components are sufficient to get close to the asymptotic accuracy. The absolute residual is joint-dependent (compare hip and knee, for example), an effect which is primarily determined by \chng{landmark tracking} accuracy and measurement noise. The data point for ``full'' PCA dimension is the reference value with just the FSD.}
 \end{figure}
 \subsection{Multivariate analysis}
-\label{sec:org9c9d78e}
+\label{sec:org645b033}
 Each stride processed in the analysis counts as exactly one data point, and so far, data points were considered independently.
 The conventional next step is to analyze their relation to each other.
 
@@ -489,7 +489,7 @@ Joint angles were calculated and submitted to two transformation procedures: FSD
 All procedures to this point can be performed without loss of information: any of the resultant data rows could be converted back to an animation of moving points.
 Thus, the PCA outcome essentially contains the whole of what was captured by the original kinematic data: the spatiotemporal coordination of the moving body appendages of interest.
 \subsection{Statistics and Modeling}
-\label{sec:org16938ed}
+\label{sec:org8d5c55b}
 Despite the direct link to the raw data, the data table resulting from PCA might seem abstract.
 Nevertheless, those values are useful, because they are much more compact than the original two-dimensional time series of varying length.
 And this compactness is crucial for statistical testing and modeling, for which computational complexity can be restrictive.
@@ -536,7 +536,7 @@ I will return to this data set and extend the explanation of the modeling proced
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/f7_trace_predictions.png}
-\caption{\label{fig:modelprediction}\textbf{Posterior Predictive Sampling.} A probabilistic model which is trained on the kinematic data (dark grey lines) is capable of predicting joint angle profiles (colored, thin lines; 1000 predictions per category). This can be extrapolated, for example to unobserved category combinations (here: adult males, which were not part of the dataset). Model design and training are enabled by transformation of the data to a PCA-space of the frequency domain. Joint angle profiles are centered around their mean for visualization; black bar in the lower left plot indicates angular units.}
+\caption{\label{fig:modelprediction}\textbf{Posterior predictive sampling.} A probabilistic model which is trained on the kinematic data (dark grey lines) is capable of predicting joint angle profiles (colored, thin lines; 1000 predictions per category). This can be extrapolated, for example to unobserved category combinations (here: adult males, which were not part of the dataset). Model design and training are enabled by transformation of the data to a PCA-space of the frequency domain. Joint angle profiles are centered around their mean for visualization; black bar in the lower left plot indicates angular units.}
 \end{figure}
 
 

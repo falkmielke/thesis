@@ -412,11 +412,11 @@ To assess whether out-of-sample prediction is a valid and unbiased method to inf
 An in-depth analysis can be found at the end of this chapter (Ch. \ref{supp:linearmodels}).
 Theoretical considerations identify several criteria which, if not met, can obscure an actual group difference (which consequently does not emerge in the prediction output).
 These criteria are differences in the input parameter distribution, slope magnitude, and low residual variability; in addition, model complexity and a limited sample size can be prohibitive.
-For the age model, our considerations confirm that a predicted difference is robust, and we were able to evaluate which of the model parameters might cause the underestimation of some strides (namely hindlimb clearance and hip angle).
+For the age model, our considerations confirm that a predicted difference is robust, and we were able to evaluate which of the model parameters might cause the underestimation of some strides (primarily hindlimb clearance and hip angle).
 In the models of size and body mass, some of the criteria are not met.
 Model complexity and sample size might restrict clarity of both models' outcomes to an uncertain degree.
 In the body mass model, the residual variability is high, which blurs potential differences in the predictions (Ch. \ref{supp:linearmodels}, Fig. \ref{fig:output_effects}).
-In the size model, there are some positive and some negative effects which seem cancel out (which might be evidence for size-dependent alternative locomotor strategies; Figs. \ref{fig:input_distributions}, \ref{fig:output_effects}).
+In the size model, there are some positive and some negative effects which seem to cancel out (which might be evidence for size-dependent alternative locomotor strategies; Figs. \ref{fig:input_distributions}, \ref{fig:output_effects}).
 We observed few significant effects related to the coordination parameters, indicating that coordination patterns are for the most part indifferent to age, size, and mass.
 
 
@@ -519,7 +519,7 @@ That same model quantifies the potentially energy-deficient animals as younger.
 It might be that energy deficiency coincidentally causes effects which are exactly opposite to the changes that piglet kinematics undergo in normal development.
 However, the more likely explanation is an actual delay or a temporary halt in development.
 Failure of the LBW to compete in the first hours are sufficient to explain reduced intake \citep{Amdi2013}, the absolute size and mass difference alone might be crucial, and an immediate question which we cannot address with the present data set is whether and how (fast, likely) animals would recover from the delay.
-Alternatively, there might be a technical artifact in probabilistic sampling \citep["shrinkage", \textit{cf.}][]{Gelman2013} which caused the underestimation of ``above average age'' individuals.
+Alternatively, there might be a technical artifact in probabilistic sampling \citep[``shrinkage'', \textit{cf.}][]{Gelman2013} which caused the underestimation of ``above average age'' individuals.
 Yet this is an unlikely explanation, given that shrinkage would apply equally to NBWs, and inversely to the opposite, younger subjects.
 Finally, with only eight LBW individuals, we cannot exclude coincidence in which individuals are affected.
 
@@ -577,10 +577,10 @@ The key findings in this chapter are based on an analysis which uses the statist
 \end{itemize}
 Answering these questions requires a rather technical, in-depth analysis of the model outcome.
 
-One important constraint is that the model is linear, i.e. of the form
+One important constraint is that the models herein are linear, i.e. of the form
 \[y = a + b_1 \cdot x_1 + b_2 \cdot x_2 + \ldots + b_m \cdot x_m + \epsilon = a + \sum\limits_k b_k \cdot x_k + \epsilon\]
 
-Herein, \(y\) is one of the outcome variables (observed; age, size, or mass), \(a\) is the intercept, \(b_i\) are the slopes, \(x_i\) are the different input parameters (observed; spatiotemporal gait variables, dynamic posture, and coordination measures), and finally \(\epsilon\) is the model residual (unexplained variation).
+Herein, \(y\) is one of the outcome variables (observed; age, size, or mass), \(a\) is the intercept, \(b_i\) are the slopes, \(x_i\) are the different input parameters (observed; spatiotemporal gait variables, dynamic posture, and coordination measures), and finally \(\epsilon\) is the model residual (unexplained variation, including for example measurement inaccuracy).
 As I have demonstrated \href{http://mielke-bio.info/falk/posts/33.linearmodels}{elsewhere} \citep{Mielke2024lm}, there are some \textbf{criteria} which are necessary (but not sufficient by themselves) for the model to predict a difference.
 Given there is a...
 \begin{enumerate}
@@ -596,10 +596,10 @@ An example where all these conditions are met is the age model, above.
 In case one of these conditions is not met, a difference between the study groups might be obscured (yet note that the criteria are on a continuum, some cases might not be clear-cut).
 From theoretical considerations alone, this situation is biased.
 Differences in out-of-sample prediction must have passed the criteria above, and are therefore robust.
-Yet on the other hand, \textit{"the absence of evidence is not the evidence of absence"}: if for example the sample size is low, or the residual variation is high, the model's prediction might miss an actual effect.
-This situation is somewhat analogous to classical hypothesis testing, where we quantify the chance of falsely rejecting a null hypothesis such as ``groups were sampled from the same distribution''.
+Yet on the other hand, \textit{``the absence of evidence is not the evidence of absence''}: if for example the sample size is low, or the residual variation is high, the model's prediction might miss an actual effect.
+This situation is somewhat analogous to classical hypothesis testing, where we quantify the chance of falsely rejecting a null hypothesis such as ``groups were samples from the same distribution''.
 
-\begin{figure}[p]
+\begin{figure}[b]
   \caption{ \textbf{Observed model parameter input distributions} (\textit{next page}).
 For each model parameter (rows), observations are indicated by tick marks for the two study groups (NBW: gray, LBW: orange). Values were standardized on population level (i.e. mean-centered and scaled by standard deviation). Significance between the distributions (indicated by asterisk) was determined by a two-sample rank sum test. }
 \end{figure}
@@ -619,33 +619,35 @@ For each model parameter (rows), observations are indicated by tick marks for th
 \caption{\label{fig:output_effects}\textbf{Effects of each input parameter on the model output.} \textit{See next page.} }
 \end{figure}
 \addtocounter{figure}{-1}
-\begin{figure}[p]
+\begin{figure}[t]
   \caption{ \textbf{Effects of each input parameter on the model output} (\textit{previous page}).
 Effect size is calculated as the data range (difference between \(2.5\%\) and \(97.5\%\) data quantiles) multiplied by the slope distributions (from model sampling). Effect magnitude and therefore relevance is visualized by red shading, effects which are different from zero (\(95\%\) HDI) are also marked by an asterisk. The residual (last row) is determined as the difference of the actual parameter observations and the model result. }
 \end{figure}
 
 
 
-The available modeling framework enables some extra insights on why the prediction appeared as it did.
-Firstly, we can compare the input distributions (criterion 1, above) of the observational groups (Fig. \ref{fig:input_distributions}), to identify those model parameters which actually influence the predictions.
-Secondly, we can calculate the absolute effect of each parameter onto the predicted outcome (slope magnitude, criterion 2), by multiplying the parameter magnitude with the according slope (Fig. \ref{fig:output_effects}; this works because \(\Delta y \sim b_i \cdot \Delta x_i\)).
-Thirdly, we can quantify the model residual (criterion 4; Fig. \ref{output_effects}).
+The available modeling framework enables some extra insights on why the prediction of piglet subject characteristics appeared as it did.
+Firstly, we can compare the input distributions (criterion 1, above) of the observational groups, to identify those model parameters which actually influence the predictions (Fig. \ref{fig:input_distributions}).
+Secondly, we can calculate the absolute effect of each parameter on the predicted outcome (slope magnitude, criterion 2), by multiplying the parameter magnitude with the according slope (Fig. \ref{fig:output_effects}; this works because \(\Delta y \sim b_i \cdot \Delta x_i\)).
+Thirdly, we can quantify the model residual (criterion 4; Fig. \ref{fig:output_effects}, last row).
 The other criteria (model complexity and sample size) are predetermined in this modeling application, and have an unknown influence on the outcome.
 
 For the \textbf{age model}, we observe a low residual variance, and there are two parameters which are significantly different between NBW / LBW \textit{and} have a high slope (those are hindlimb clearance and hip angle).
 Notably, there is hardly any difference in the observed coordination parameters.
 For the model of \textbf{body mass}, the same parameters seem to have relevant slopes, yet the model residual is much higher and will likely prohibit conclusive differences in the probabilistic prediction.
 Other slopes seem to have significant effect in the NBW group (hip and tarsal eROM), yet the input distributions (i.e. NBW and LBW observations) do not differ, and so their effect is irrelevant for prediction of mass.
-For the \textbf{size model}, we find some slopes with a negative effect on the output (hindlimb clearance, head angle, hip angle), yet others with a positive effect (knee angle, tarsal eROM) possibly cancel this out for the overall prediction.
-This model also contains significant slopes with nonetheless no difference in the input distribution.
-We also compared the relative widths of effect size distributions, and found that "dimensionless (relative) speed" is most variable among trials: all animals use a variety of speeds, and this can not be systematically associated with age, size, or mass.
-It must be re-iterated that "significance" in these analyses merely provides a hint to guide the eye: the combination of a minor (non-significant) difference in an input parameter with a notable, only "almost-significant" effect size might still affect the probabilistic prediction.
+For the \textbf{size model}, we find some slopes with a negative effect on the output (hindlimb clearance, head angle, hip angle).
+However, others with a positive effect (knee angle, tarsal eROM) possibly cancel this out for the overall prediction.
+Like the previous one, this model contains significant slopes with nonetheless no difference in the input distribution.
+We also compared the relative widths of effect size distributions, and found that ``dimensionless (relative) speed'' is most variable among trials: all animals use a variety of speeds, and apparently this can not be systematically associated with age, size, or mass.
+It must be re-iterated that ``significance'' in these analyses merely provides a hint to guide the eye: the combination of a minor (non-significant) difference in an input parameter with a notable, only ``almost-significant'' effect size might still affect the probabilistic prediction.
 Finally, the input distributions (Fig. \ref{fig:input_distributions}) are insightful by themselves for NBW / LBW comparison.
+Some LBW parameters are bimodally distributed, which might be related to the prediction outcome for the age model.
 We observe most differences in spatiotemporals (predominantly hindlimb-related), as well as in measures of dynamic posture and range of motion.
 However, there are few significant effects of coordination parameters, and the remaining ones are cancelled out by a lack of difference in the observed coordination of LBW and NBW.
 
 
-To summarize, we show that a detailed inspection of on the one hand the observed model input parameters, and on the other hand the effect "lever" of each parameter slope, warrants some caution about non-different predictions (as in the models of size and mass).
+To summarize, we show that a detailed inspection of on the one hand the observed model input parameters, and on the other hand the effect ``lever'' of each parameter slope, warrants some caution about non-different predictions (as in the models of size and mass).
 In those models, we cannot rule out that a larger sample size or an adjusted, potentially more selective model design might elucidate quantitative NBW/LBW differences.
 On the other hand, inspection of the predictive age model confirms that finding differences by out-of-sample prediction is possible, and we could even relate those findings to specific model parameters.
 
@@ -661,6 +663,7 @@ On the other hand, inspection of the predictive age model confirms that finding 
 \section{Acknowledgements}
 \label{sec:org2d8bfbc}
 The author would like to thank Miriam Ayuso for organizing and participating in the recording sessions, as well as Laura Buyssens, Georgios Petrellis, Gunther Vrolix, Charlotte Vanden Hole, Denise Vogel and all students who joined for help during recordings.
+Ann Hallemans comment stimulated the extra analysis, from which this chapter benefits a lot; thank you!
 Maja Mielke provided valuable comments on the manuscript text.
 
 

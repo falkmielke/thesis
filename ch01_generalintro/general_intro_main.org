@@ -51,7 +51,7 @@ Does that change your opinion about it?
 
 
 #+CAPTION: \textbf{"A newborn steampunk piglet} galloping on a farm with the sow in the background. (futuristic-biomechanical)", created by [[https://stablediffusionweb.com][the "stable diffusion" AI image generator (https://stablediffusionweb.com)]] on November 3rd, 2023. Impressive as is, this generated image has no deeper meaning or connection to real life, and its only fascinating aspect might be how it was generated.
-#+ATTR_LATEX: :placement [p] :width 16cm
+#+ATTR_LATEX: :placement [b!] :width 16cm
 #+LABEL: fig:steampunk
 [[./figures/stablediffusion_steampunk_piglet.png]]
 
@@ -81,6 +81,7 @@ The core purpose of this thesis is to assemble, extend, and scientifically evalu
 @@latex:\end{change}@@
 
 
+\FloatBarrier
 ** Piglets
 @@latex:\chng{\textit{Any} creature's birth can be fascinating, and studying it can be insightful.}@@
 Why do we study piglets?
