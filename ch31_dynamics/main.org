@@ -33,7 +33,7 @@ It turns out that, whereas most quantities in inverse dynamic calculations can b
 
 
 
-#+CAPTION: A hypothetical, scientific experiment to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup. \(\vec{P}\): hinge point/axis of the door, \(\vec{v}\): velocity of the subject, \(\dot\theta = \frac{d\theta}{dt}\): angular velocity of the door, \(\vec{F}\): force applied to the door by the experimenter.
+#+CAPTION: \textbf{A hypothetical, scientific experiment} to illustrate dynamic modeling (see text). Upper left: experimenter setting a door in motion. Lower right: subject running towards the experimental setup. \(\vec{P}\): hinge point/axis of the door, \(\vec{v}\): velocity of the subject, \(\dot\theta = \frac{d\theta}{dt}\): angular velocity of the door, \(\vec{F}\): force applied to the door by the experimenter.
 #+LABEL: fig:slamming
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_door.pdf]]
@@ -154,7 +154,7 @@ Hence, we get a more or less familiar equation for the Force \(\vec{F}\), which 
 
 ** Moments
 
-#+CAPTION: Force and Moment. A force applied further away from the hinge \(\vec{P}\) (situation A) will generate a larger \chng{moment} than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector. \chng{Furthermore, because the change in angular momentum is related to that moment, the door will gain a higher momentum (and will therefore "hit harder").}
+#+CAPTION: \textbf{Force and Moment.} A force applied further away from the hinge \(\vec{P}\) (situation A) will generate a larger \chng{moment} than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector. \chng{Furthermore, because the change in angular momentum is related to that moment, the door will gain a higher momentum (and will therefore "hit harder").}
 #+LABEL: fig:slamming_moment
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_shift.pdf]]
@@ -173,7 +173,7 @@ From experience, one can tell that lifting a door out of its hinge is a differen
 And so, the series of equations above can be applied analogously to angular momentum \(\vec{L}\) (with angular velocity \(\frac{d\theta}{dt}\)).
 \[\vec{L} = I \frac{d\theta}{dt}\]
 
-#+CAPTION: Derivation of Newton-Euler equation of rotational motion.
+#+CAPTION: \textbf{Derivation of Newton-Euler equation of rotational motion.}
 #+LABEL: fig:miracle
 #+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/miracle_occurs.jpg]]
@@ -194,7 +194,7 @@ The time derivative of angular momentum is called moment (\(\vec{M}\); see also:
 
 
 
-#+CAPTION: The slamming door, isolated sketch.
+#+CAPTION: \textbf{The slamming door, isolated sketch.}
 #+LABEL: fig:slamming_momentum
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_momentum.pdf]]
@@ -245,7 +245,7 @@ The trick is to concatenate the vectors \(\vec{F}\) and \(\vec{M}\) to form a si
 "6D" might seem unhandy, and one may ask "why".
 The pure and simple answer is computational convenience citep:Dumas2004,Mueller2018: the wrench saves us from double computation, by linking the two intrinsically related parts of momentum.
 
-#+CAPTION: A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tip points towards the point of application (they can be moved around, adjusting the moment component; see text). Note that this figure is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
+#+CAPTION: \textbf{Wrench notation.} A Wrench is a combined vector of force and moment, consisting of six elements, and requiring a point of application. Wrench vectors are depicted as arrows, yet in contrast to forces, their tip points towards the point of application (they can be moved around, adjusting the moment component; see text). Note that this figure is actually a 3D sketch, yet the limitations of a printed PhD thesis prohibit illustration beyond the paper plane projection.
 #+LABEL: fig:wrench
 #+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/the_wrench.pdf]]
@@ -255,7 +255,7 @@ Any modern scripting language used to solve inverse dynamic questions can easily
 A mathematical shorthand for writing wrenches are square brackets and a semicolon indicating that the (column vector) components are concatenated (to form a longer column vector):
 \[\vec{W} = \left[ \vec{F}; \vec{M} \right]\]
 
-#+CAPTION: The door slamming experiment in wrench notation (see text). Point \(\vec{P}\) is the origin of the reference frame, \(\vec{r}_{\vec{PD}}\) is the position vector to the attack point \(\vec{D}\) of the wrench \(\vec{W}\).
+#+CAPTION: \textbf{The door slamming experiment in wrench notation (see text).} Point \(\vec{P}\) is the origin of the reference frame, \(\vec{r}_{\vec{PD}}\) is the position vector to the attack point \(\vec{D}\) of the wrench \(\vec{W}\).
 #+LABEL: fig:slamming_wrench
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_wrench.pdf]]
@@ -336,7 +336,7 @@ Interested readers may refer to a practical guide by the author citep:Mielke2020
 
 
 ** Quaternions
-#+CAPTION: @@latex:\chng{Spatial rotation with \textbf{Quaternions}. A point \(\vec{D}\) (blue, with gray dashed position vector) can be rotated by an angle \(\theta\) around an axis \((x; y; z)\) to position \(\vec{D}_{rot}\). The higher the rotation angle value (indicated by the orange area), the further the rotation. A quaternion (large black arrow) can encode both the axis and the angle in a 4D vector, in a manner which conveniently enables the execution of the rotation by simple vector multiplication.}@@
+#+CAPTION: @@latex:\chng{\textbf{Spatial rotation with quaternions}. A point \(\vec{D}\) (blue, with gray dashed position vector) can be rotated by an angle \(\theta\) around an axis \((x; y; z)\) to position \(\vec{D}_{rot}\). The higher the rotation angle value (indicated by the orange area), the further the rotation. A quaternion (large black arrow) can encode both the axis and the angle in a 4D vector, in a manner which conveniently enables the execution of the rotation by simple vector multiplication.}@@
 #+LABEL: fig:quaternion
 #+ATTR_LATEX: :placement [b] :width 17cm
 [[./figures/quaternions.pdf]]
@@ -438,7 +438,7 @@ The proximal joint wrench is shifted to the proximal joint position, its natural
 Inverted in sign (Newton's \(n^{th}\) law), the joint wrench becomes the tip wrench of the proximally adjacent segment and adds to the balance of wrenches of that segment (Fig. \ref{fig:wrenchbalance}).
 There, the procedure is repeated.
 
-#+CAPTION: Wrench balance of a piglet femur (sketch), as it can be computed for each segment from distal to proximal. The tip wrench (\(\vec{W}_{\vec{tip}}\), at the distal joint) is the input from the distal adjacent segment or from ground contact. Dynamic wrench (\(\vec{W}_{dyn}\), at the center of mass/\(\vec{COM}\)) is calculated from kinematics (see above). Gravitational wrench (\(\vec{W}_{\vec{g}}\), at \(\vec{COM}\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(\vec{W}_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate system (\(ICS\), i.e. the inertial reference frame).
+#+CAPTION: \textbf{Wrench balance of a piglet femur (sketch)}, as it can be computed for each segment from distal to proximal. The tip wrench (\(\vec{W}_{\vec{tip}}\), at the distal joint) is the input from the distal adjacent segment or from ground contact. Dynamic wrench (\(\vec{W}_{dyn}\), at the center of mass/\(\vec{COM}\)) is calculated from kinematics (see above). Gravitational wrench (\(\vec{W}_{\vec{g}}\), at \(\vec{COM}\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(\vec{W}_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate system (\(ICS\), i.e. the inertial reference frame).
 #+LABEL: fig:wrenchbalance
 #+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/wrench_balance.pdf]]
@@ -463,7 +463,7 @@ Finally, the classical method to determine mass moment of inertia is by using a 
 The so-retrieved measurements are filled in to the algorithm outlined above.
 
 
-#+CAPTION: Measuring inertial properties of the slamming door: the center of mass.
+#+CAPTION: \textbf{Measuring inertial properties of the slamming door:} the center of mass.
 #+LABEL: fig:door_inertials
 #+ATTR_LATEX: :placement [p] :width 10cm
 [[./figures/door_inertials.pdf]]

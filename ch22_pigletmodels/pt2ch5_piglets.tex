@@ -161,7 +161,7 @@ The network was then applied to \chng{track} the continuous, full \(11\) hours o
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/fig1_landmarks.png}
-\caption{\label{fig:landmarks}Video \chng{landmark tracking} and joint angle definitions. White circles mark points of interest (``landmarks''). Movement was always rightwards. Labels show joint angles, defined as shown in the inset: straight joint (parallel segments) corresponds to zero; counter-clockwise \chng{joint} angles are positive. Forelimb \chng{joint} angle was used as a reference for temporal alignment, but did not enter the analysis.}
+\caption{\label{fig:landmarks}\textbf{Video \chng{landmark tracking} and joint angle definitions.} White circles mark points of interest (``landmarks''). Movement was always rightwards. Labels show joint angles, defined as shown in the inset: straight joint (parallel segments) corresponds to zero; counter-clockwise \chng{joint} angles are positive. Forelimb \chng{joint} angle was used as a reference for temporal alignment, but did not enter the analysis.}
 \end{figure}
 
 
@@ -275,7 +275,7 @@ However, because we follow an ``all in'' strategy, the results have little instr
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/histograms_observed.pdf}
-\caption{\label{fig:observations}Histogram of observations. Trivially, the LBW group measured the lowest body masses in the data set. This correlated with a lower body size, whereas age is rather uniformly sampled for all study groups. Recordings happened opportunistically within the first ten life hours of the animals, repeated measurements were possible. Number of strides per class are indicated in brackets on the legend. Bar heights are scaled by sample size to show relative value distributions.}
+\caption{\label{fig:observations}\textbf{Histogram of observations.} Trivially, the LBW group measured the lowest body masses in the data set. This correlated with a lower body size, whereas age is rather uniformly sampled for all study groups. Recordings happened opportunistically within the first ten life hours of the animals, repeated measurements were possible. Number of strides per class are indicated in brackets on the legend. Bar heights are scaled by sample size to show relative value distributions.}
 \end{figure}
 
 
@@ -306,7 +306,7 @@ The key purpose of the model is posterior predictive sampling of the LBW strides
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/raw_profile_comparison.pdf}
-\caption{\label{fig:raw_data}Joint angle profiles per joint, grouped by birth weight category. A \chng{joint} angle of zero would be a fully extended (i.e. straight) joint. Thick lines represent the average profiles, dashed lines indicate the average of the opposite birth weight group for comparison. Colored, shaded lines show all raw profiles available for the present analysis. Temporal alignment was done based on total forelimb angle (see methods), yet for the shown hindlimb averages (but not for the raw profiles), a separate alignment of the hindlimb was performed.}
+\caption{\label{fig:raw_data}\textbf{Joint angle profiles per joint, grouped by birth weight category.} A \chng{joint} angle of zero would be a fully extended (i.e. straight) joint. Thick lines represent the average profiles, dashed lines indicate the average of the opposite birth weight group for comparison. Colored, shaded lines show all raw profiles available for the present analysis. Temporal alignment was done based on total forelimb angle (see methods), yet for the shown hindlimb averages (but not for the raw profiles), a separate alignment of the hindlimb was performed.}
 \end{figure}
 
 To assess whether there are qualitative differences between the birth weight categories, one can compare the joint angle profiles (i.e. raw, angular kinematics) on which the present analysis was performed (Fig. \ref{fig:raw_data}).
@@ -321,7 +321,7 @@ These findings indicate that LBW kinematics are hardly distinguishable from NBW 
 \bigskip
 
 \begin{table}[p]
-\caption{\label{tab:modelresults}Detailed Modeling Results. Asterisk (*) indicates slopes for which the credible interval did not include zero. FL: forelimb, HL: hindlimb, dyn.p.: dynamic posture, coord.: coordination, diml.: dimensionless, d.s.: dimensionless stride, eROM: effective range of motion.}
+\caption{\label{tab:modelresults}\textbf{Detailed modeling results.} Asterisk (*) indicates slopes for which the credible interval did not include zero. FL: forelimb, HL: hindlimb, dyn.p.: dynamic posture, coord.: coordination, diml.: dimensionless, d.s.: dimensionless stride, eROM: effective range of motion.}
 \linespread{1} % Line spacing - Palatino needs more space between lines
 \centering
 \begin{footnotesize}
@@ -391,7 +391,7 @@ Note that, to capture variance (i.e. uncertainty in the prediction), each stride
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{./figures/histograms_prediction_comparison.pdf}
-\caption{\label{fig:predictions}Predictive sampling of subject characteristics. For all included subject characteristics, models which were trained on NBW strides correctly inferred the training data (gray) and values from the validation set (blue). In contrast, the same models wrongly inferred the characteristics of LBW subjects (orange). The \(x\)-axes show the difference (\(\Delta\)) between actual and predicted values per prediction. To facilitate comparison, histogram heights are again normalized per category.}
+\caption{\label{fig:predictions}\textbf{Predictive sampling of subject characteristics.} For all included subject characteristics, models which were trained on NBW strides correctly inferred the training data (gray) and values from the validation set (blue). In contrast, the same models wrongly inferred the characteristics of LBW subjects (orange). The \(x\)-axes show the difference (\(\Delta\)) between actual and predicted values per prediction. To facilitate comparison, histogram heights are again normalized per category.}
 \end{figure}
 
 
@@ -427,7 +427,7 @@ This lends some support to the outcome of the age model, and points towards the 
 
 
 \begin{table}[p]
-\caption{\label{tab:prediction}Age inference per LBW animal (compared to NBW average, last row). \(\Delta\): ``inferred - actual'' difference. Underestimation is defined as \(\Delta < 0\), ``count'': per stride, ``rate'': per predictive sample. \(h\): hours, \(std\): standard deviation.}
+\caption{\label{tab:prediction}\textbf{Age inference per LBW animal} (compared to NBW average, last row). \(\Delta\): ``inferred - actual'' difference. Underestimation is defined as \(\Delta < 0\), ``count'': per stride, ``rate'': per predictive sample. \(h\): hours, \(std\): standard deviation.}
 \centering
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
@@ -600,7 +600,7 @@ Yet on the other hand, \textit{"the absence of evidence is not the evidence of a
 This situation is somewhat analogous to classical hypothesis testing, where we quantify the chance of falsely rejecting a null hypothesis such as ``groups were sampled from the same distribution''.
 
 \begin{figure}[p]
-  \caption{ Observed model parameter input distributions (\textit{next page}).
+  \caption{ \textbf{Observed model parameter input distributions} (\textit{next page}).
 For each model parameter (rows), observations are indicated by tick marks for the two study groups (NBW: gray, LBW: orange). Values were standardized on population level (i.e. mean-centered and scaled by standard deviation). Significance between the distributions (indicated by asterisk) was determined by a two-sample rank sum test. }
 \end{figure}
 
@@ -608,7 +608,7 @@ For each model parameter (rows), observations are indicated by tick marks for th
 \begin{figure}[p!]
 \centering
 \includegraphics[width=16cm]{./figures/input_distribution_differences.pdf}
-\caption{\label{fig:input_distributions}Observed model parameter input distributions. \textit{See previous page.}}
+\caption{\label{fig:input_distributions}\textbf{Observed model parameter input distributions.} \textit{See previous page.}}
 \end{figure}
 
 
@@ -616,11 +616,11 @@ For each model parameter (rows), observations are indicated by tick marks for th
 \begin{figure}[p!]
 \centering
 \includegraphics[width=16cm]{./figures/output_effectsize.pdf}
-\caption{\label{fig:output_effects}Effects of each input parameter on the model output. \textit{See next page.} }
+\caption{\label{fig:output_effects}\textbf{Effects of each input parameter on the model output.} \textit{See next page.} }
 \end{figure}
 \addtocounter{figure}{-1}
 \begin{figure}[p]
-  \caption{ Effects of each input parameter on the model output (\textit{previous page}).
+  \caption{ \textbf{Effects of each input parameter on the model output} (\textit{previous page}).
 Effect size is calculated as the data range (difference between \(2.5\%\) and \(97.5\%\) data quantiles) multiplied by the slope distributions (from model sampling). Effect magnitude and therefore relevance is visualized by red shading, effects which are different from zero (\(95\%\) HDI) are also marked by an asterisk. The residual (last row) is determined as the difference of the actual parameter observations and the model result. }
 \end{figure}
 

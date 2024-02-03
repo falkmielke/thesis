@@ -50,13 +50,13 @@ But on close read you will find that it is definitely not "art", and [[https://c
 Does that change your opinion about it?
 
 
-#+CAPTION: "A newborn steampunk piglet galloping on a farm with the sow in the background. (futuristic-biomechanical)", created by [[https://stablediffusionweb.com][the "stable diffusion" AI image generator (https://stablediffusionweb.com)]] on November 3rd, 2023. Impressive as is, this generated image has no deeper meaning or connection to real life, and its only fascinating aspect might be how it was generated.
+#+CAPTION: \textbf{"A newborn steampunk piglet} galloping on a farm with the sow in the background. (futuristic-biomechanical)", created by [[https://stablediffusionweb.com][the "stable diffusion" AI image generator (https://stablediffusionweb.com)]] on November 3rd, 2023. Impressive as is, this generated image has no deeper meaning or connection to real life, and its only fascinating aspect might be how it was generated.
 #+ATTR_LATEX: :placement [p] :width 16cm
 #+LABEL: fig:steampunk
 [[./figures/stablediffusion_steampunk_piglet.png]]
 
 
-#+CAPTION: The "bing chat" prompt which lead to the introductory limerick (Nov 3rd, 2023). Besides the use of "DeepLabCut" for landmark tracking, this poem and the steampunk figure above are the only AI contributions to my thesis.
+#+CAPTION: \textbf{The "bing chat" prompt} which lead to the introductory limerick (Nov 3rd, 2023). Besides the use of "DeepLabCut" for landmark tracking, this poem and the steampunk figure above are the only AI contributions to my thesis.
 #+ATTR_LATEX: :placement [p] :width 16cm
 #+LABEL: fig:limerick
 [[./figures/bing_precociality_limerick.png]]
@@ -125,7 +125,7 @@ They are born, and they walk more or less gracefully within eight hours, as my c
 How much trouble it would save us, and how much different trouble it would cause, if our own toddlers could pull that trick!
 
 
-#+CAPTION: "Leihmutter Jolante", by Ernst Kahl (date unknown). \chng{Proof that real art can supersede current AI outcomes.}
+#+CAPTION: \textbf{"Leihmutter Jolante"}, by Ernst Kahl (date unknown). \chng{Proof that real art can supersede current AI outcomes.}
 #+ATTR_LATEX: :placement [p] :width 8cm
 #+LABEL: fig:jolante
 [[./figures/jolante.jpg]]
@@ -144,12 +144,12 @@ For example, highly relevant research about infant gut function was achieved by 
 \chng{One} aspect of newborn piglets is that some individuals are \chng{putatively} born with a deficit.
 Those have received different classification labels: small for gestational age, growth retarded, low vitality; for the majority of this thesis, I will stick to the phenomenological classification of "low birth weight", or LBW, yet the fine nuances in the different classifications deserve further discussion citep:Wootton1983,VanGinneken2022.
 Kids can be troubling.
-Prof. Sangild argued in his Francqui honorary lecture here at the University of Antwerp (April 26, 2022) that having kids during a PhD is detrimental for progress of the project; which teases me to contribute contradicting evidence (this thesis).
+Prof. Sangild argued in his Francqui honorary lecture here at the University of Antwerp (April 26, 2022) that having kids during a PhD is detrimental for progress of the project@@latex:\footnote{\chng{He might have only referred to a parental leave causing delay, which is good practice, and a valid point.}}@@; which teases me to contribute contradicting evidence (this thesis).
 
 But the question remains: *can piglet serve as a model species for the study of human /locomotion/?*
 An obvious "show stopper" might be that, as mentioned above, piglets are precocial, whereas humans are about as altricial as can be.
 On the other hand, suids are the more altricial of the ungulates: feral /Sus scrofa/ females build nests and keep their young in shelter for a couple of weeks citep:Wischner2009.
-Unfortunately, domestication involved restraining sows, and the way we keep them might have favored more mobile young who have reduced mortality from crushing citep:Grandinson2002.
+\chng{Domestication might have involved restraining sows, at least to a certain extent (nests /vs./ group pens /vs./ single pen)}, and the way we keep them might have favored more mobile young who have reduced mortality from crushing citep:Grandinson2002.
 The picture is complex, and certainly the analogy of piglets and humans should not be taken for granted citep:VandenHole2017.
 
 
@@ -168,7 +168,7 @@ However, with so many variables influencing locomotion (multiple testing), it is
 Instead, our attempts must be to *falsify the hypothesis that there are birth-weight dependent differences in piglet locomotion*.
 If we fail, we learned something.
 
-#+CAPTION: Piglets of low and normal birth weight (left/right, respectively) for size comparison. The animals are female siblings.
+#+CAPTION: \textbf{Piglets of low and normal birth weight} (left/right, respectively) for size comparison. The animals are female siblings.
 #+ATTR_LATEX: :placement [p] :width 16cm
 #+LABEL: fig:birth_weight
 [[./figures/bw_comparison.jpg]]
@@ -211,7 +211,7 @@ behavioral and neurological (dys-)function citep:Sullivan2013,Roelofs2019, and g
 
 
 We already know a lot about many aspects of piglet locomotion, yet there are _two major limitations_.
-Firstly, *transferability is limited* @@latex:\citep[\textit{cf.}][]{Gatesy2011}@@: it is not immediately possible to mirror findings in morphologically disparate species (such as humans).
+Firstly, *transferability is limited* @@latex:\citep[\textit{cf.}][]{Gatesy2011,}@@: it is not immediately possible to mirror findings in morphologically disparate species (such as humans)@@latex:\footnote{"Translational medicine" \citep[i.e. the application of more general scientific findings to human clinical medicine,][]{Denayer2014} might be considered a specific type of transfer which in the case of locomotor research is is impeded by morphological disparity.}@@.
 Pigs are precocial quadrupeds, and it might seem far-fetched to apply analogous hypotheses to bipedal humans, let alone to our helpless, immobile infants.
 Secondly, most methods only superficially quantify locomotion: they work on general activity patterns or spatiotemporal gait variables, or remain qualitative in the comparison of kinematic profiles.
 Few studies dig deep into *intra-limb coordination*, i.e. the temporal succession of limb segment movements.
@@ -301,12 +301,12 @@ One would think that our toolbox to study terrestrial locomotion is well-develop
 After all, locomotion has been intriguing people for hundreds, thousands, maybe tens of thousands of years.
 Whenever humans develop a new imaging technique, from cave drawings to digital cameras, they use it (first for pornography, and second) for locomotion (Figs. \ref{fig:muybridge}, \ref{fig:jumpiglet}).
 
-#+CAPTION: "The Horse in Motion", by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
+#+CAPTION: \textbf{"The Horse in Motion"}, by Eadweard Muybridge (1878). It seems like every PhD thesis on locomotion or cinematography has to start with Muybridge.
 #+ATTR_LATEX: :width 16cm :placement [p]
 #+LABEL: fig:muybridge
 [[./figures/muybridge_lq.jpg]]
 
-#+CAPTION: "The Piglet in Motion", by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion, but the idea is the same.
+#+CAPTION: \textbf{"The Piglet in Motion"}, by Falk Mielke (2020). Sophisticated, modern technology exists for studying animal locomotion, but the idea is the same.
 #+ATTR_LATEX: :width 16cm :placement [p]
 #+LABEL: fig:jumpiglet
 [[./figures/piglet_in_motion.jpg]]

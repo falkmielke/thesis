@@ -54,8 +54,8 @@ Familiar examples are the ``t-Test'' or ``ANOVA'' in all their variants.
 To summarize, this branch of statistics is called \textbf{hypothesis testing}; it is a complex field and valuable when it comes to falsifying hypotheses.
 
 
-\begin{table}[p!]
-\caption{\label{tab:statistics}Statistics: An Overview. Probabilistic models are the focus of this chapter.}
+\begin{table}[h!]
+\caption{\label{tab:statistics}\textbf{Statistics: an overview.} Probabilistic models are the focus of this chapter.}
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
@@ -71,14 +71,14 @@ To summarize, this branch of statistics is called \textbf{hypothesis testing}; i
 
 
 \FloatBarrier
-The term ``hypothesis testing'' might be understood to be synonymous with ``Frequentist statistics'', or ``non-Bayesian statistics''.
+The term ``hypothesis testing'' might be understood to be synonymous with ``frequentist statistics'', or ``non-Bayesian statistics''.
 This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called ``Bayes factor'' but are not discussed herein \citep[cf.][]{Shikano2019}.
 Hence, we need to disentangle two categories of distinction (Tab. \ref{tab:statistics}).
 
 Not all researchers are after hypotheses.
 What we usually desire in obtaining experimental data is a quantitative assessment of different effects which exist in the data and influence the outcome of a quantitative measurement.
-There are two main frameworks to tackle these questions, both of which are captured by the term \textbf{modeling}: ``Frequentist'' models (usually least squares optimization), and ``Bayesian'' / probabilistic models (enabled by a technical trick called \emph{MCMC} = ``Markov Chain Monte Carlo'' sampling).
-Hence, we should distinguish the type of question (hypothesis / quantitative estimate) and the methodological school (Frequentist or Bayesian, see Tab. \ref{tab:statistics}).
+There are two main frameworks to tackle these questions, both of which are captured by the term \textbf{modeling}: ``frequentist'' models (usually least squares optimization), and ``Bayesian'' / probabilistic models (enabled by a technical trick called \emph{MCMC} = ``Markov Chain Monte Carlo'' sampling).
+Hence, we should distinguish the type of question (hypothesis / quantitative estimate) and the methodological school (frequentist or Bayesian, see Tab. \ref{tab:statistics}).
 
 
 
@@ -86,7 +86,7 @@ All these ``strains'' of statistics have historically developed different termin
 In particular, there is a lot of confusion and ongoing discussion about the distinction and proper presentation of \emph{confidence intervals} and \emph{credible intervals}.
 \chng{A credible interval is an interval in which the true value of a model parameter is expected to be found, with a given likelihood.}
 \chng{For} the purpose of this chapter, I calculated, but will not always report, credible intervals\footnote{I herein take the $\left[3\ \%,97\ \%\right]\ HDI$, i.e. Highest Density Interval, which is the smallest value range that covers $94\ \%$ of the posterior probability distribution.}.
-I will occasionally explain conventions on the way, but leave it up to the interested reader to dig deeper or ask back.
+I will occasionally explain conventions on the way, but leave it up to the interested reader to dig deeper or ask.
 You might notice that my way of tackling statistics with inclusive models were heavily primed by the book \href{https://xcelab.net/rm/statistical-rethinking/}{``Statistical Rethinking'' by Richard McElreath} \citep{McElreath2018}, and there is an infrequently updated, highly recommendable lecture series by that author available on YouTube.
 
 
@@ -105,7 +105,7 @@ On the other hand, because most models also contain a residual variance, it is t
 I would like to emphasize: all four major segments of statistics are intimately related, best executed in parallel, and should ideally yield consistent results.
 
 Hence, one might validly ask why I focus on probabilistic modeling.
-Firstly, most people are already familiar with the Frequentist side, since academic education on statistics is heavily biased towards these methods.
+Firstly, most people are already familiar with the frequentist side, since academic education on statistics focuses on these methods (or at least, it used to).
 Readers probably know these methods already, and chances are they are more of an expert than I am.
 Secondly, one perspective of the particular data set at hand is prediction, which is challenging for processes which are intrinsically variable (such as locomotion).
 Probabilistic models are ideal for this purpose, as will become clear below.
@@ -183,9 +183,9 @@ Just learn what might be going on in the data, and \textbf{build hypotheses} for
 Although I happen to be an advocate of probabilistic modeling frameworks, I tend to test some basic models with ``conventional'', frequentist statistics toolboxes.
 These are, for example, \texttt{statsmodels} in Python or \texttt{lmer} in R.
 The most general models are easily formulated in formula notation.
-Per default, such frameworks are (i) Frequentist and have (ii) ``high-level'' APIs (Application Programming Interface).
+Per default, such frameworks are (i) frequentist and have (ii) ``high-level'' APIs (Application Programming Interface).
 
-The ``Frequentist'' aspect was mentioned above, compared to ``probabilistic''.
+The ``frequentist'' aspect was mentioned above, compared to ``probabilistic''.
 Probabilistic sampling usually takes more time than a least squares procedure.
 Ideally, models from both worlds should match.
 A ``quick and (more or less) dirty'' model generation can facilitate \textbf{hypothesis refinement or model structure sharpening}.
@@ -260,7 +260,7 @@ There are excellent explanations about this on the web, and I'll restrict the ex
 MCMC sampling is the procedure which adjusts model parameters to match the data.
 It is notoriously time-consuming.
 
-Sampling in probabilistics is analogous to the least squares regression in Frequentist models.
+Sampling in probabilistics is analogous to the least squares regression in frequentist models.
 However, in probabilistics, this step is a random exploration of the model parameter space.
 This exploration is initiated at a random ``point'' (read: distribution), and the hope is that after a certain ``tuning'' period, this ``non-random walk'' will get stuck in a local optimum.
 To make sure the optimum is stable, the repetitive exploration step is run for a sufficiently large number of iterations.
@@ -459,7 +459,7 @@ Highlighted above are the different categories of data (see Tab. \ref{tab:parame
 
 
 \begin{table}[p]
-\caption{\label{tab:parameters}Overview of data parameters.}
+\caption{\label{tab:parameters}\textbf{Overview of data parameters.}}
 \centering
 \begin{footnotesize}
 \begin{tabular}{llll}
@@ -576,7 +576,7 @@ The inverse transformation allows to convert predicted PC values back to the ori
 \bigskip
 
 \begin{table}[p]
-\caption{\label{tab:stridepca}Stride PCA: variance covered (\%) and eigenvector loadings.}
+\caption{\label{tab:stridepca}\textbf{Stride PCA:} variance covered (\%) and eigenvector loadings.}
 \centering
 \begin{tabular}{l|rrr}
  & d.s. distance & d.s. frequency & d.s. speed\\[0pt]
@@ -705,7 +705,7 @@ Therefore, the body parameters presented here were transformed with the natural 
 \subsubsection{Body Mass is Age-Dependent (Surprise!)}
 \label{bodymass:results}
 \begin{table}[p]
-\caption{\label{tab:bodyproportions}Results of the Body Mass Model.}
+\caption{\label{tab:bodyproportions}\textbf{Results of the body mass model.}}
 \centering
 \begin{tabular}{|l|r|c|c|}
 \hline
@@ -814,7 +814,7 @@ Tricky detail: a multivariate predictor block must be initialized with inferred 
 
 
 \begin{table}[p]
-\caption{\label{tab:proportions_empiricalcorrelation}Body proportions: empirical cross correlation. Asterisk indicates parameter pairs in which the Pearson Correlation \(p\)-value is less than \(0.05\).}
+\caption{\label{tab:proportions_empiricalcorrelation}\textbf{Body proportions: empirical cross correlation.} Asterisk indicates parameter pairs in which the Pearson Correlation \(p\)-value is less than \(0.05\).}
 \centering
 \begin{tabular}{l|lll}
  & log( body mass (kg)) & log( leg length (m)) & log (bmi (kg/m))\\[0pt]
@@ -826,7 +826,7 @@ log (bmi (kg/m)) & \(+1.00\) * & \(+0.94\) * & \(1\)\\[0pt]
 \end{table}
 
 \begin{table}[p]
-\caption{\label{tab:proportions_correlation}Body proportions: inferred cross correlation. Asterisk indicates values for which the HDI does not include zero.}
+\caption{\label{tab:proportions_correlation}\textbf{Body proportions: inferred cross correlation.} Asterisk indicates values for which the HDI does not include zero.}
 \centering
 \begin{tabular}{l|lll}
  & log (body mass (kg)) & log (leg length (m)) & log (bmi (kg/m))\\[0pt]
@@ -838,7 +838,7 @@ log (bmi (kg/m)) & \(+0.92\) * & \(+0.18\) & \(1\)\\[0pt]
 \end{table}
 
 \begin{table}[p]
-\caption{\label{tab:proportions_predictors}Body proportions: model results. Note that these values refer to log-transformed body proportions. }
+\caption{\label{tab:proportions_predictors}\textbf{Body proportions: model results.} Note that these values refer to log-transformed body proportions. }
 \centering
 \begin{tabular}{|l|l|l|l|l|l|}
 \hline
@@ -874,7 +874,7 @@ Hence, the question whether or not to include either, both, or none of these two
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/bodyproportions_predictions.pdf}
-\caption{\label{fig:bodyproportions}Subject parameters: raw data (white circles) and model predictions (distributions).}
+\caption{\label{fig:bodyproportions}\textbf{Subject parameters:} raw data (white circles) and model predictions (distributions).}
 \end{figure}
 
 Because the body proportion problem involves still relatively few parameters, a rather complete visualization is possible (Fig. \ref{fig:bodyproportions}).
@@ -916,7 +916,7 @@ With this knowledge about the subject parameters, I will proceed to the next par
 
 
 \begin{table}[p]
-\caption{\label{tab:spatiotemporals}\chng{Observed spatiotemporal gait parameter value ranges. \textit{stdev} = standard deviation.}}
+\caption{\label{tab:spatiotemporals}\chng{\textbf{Observed spatiotemporal gait parameter value ranges.} \textit{stdev} = standard deviation.}}
 \centering
 \begin{tabular}{l|llllll}
 \textbf{gait variable} & \textbf{units}  & \textbf{mean} & \textbf{stdev.} \\[0pt]
@@ -957,7 +957,7 @@ The speed parameter correlation can elucidate how animals reach higher speeds: t
 This, however, implies no consistent change in clearance, nor does it depend on mean trunk angle.
 
 \begin{table}[p]
-\caption{\label{tab:stridecorrelation}Empirical Cross Correlation of Spatiotemporal Gait Variables. Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. \emph{d./d.s.}: ``dimensionless (stride)'' parameter.}
+\caption{\label{tab:stridecorrelation}\textbf{Empirical Cross Correlation of Spatiotemporal Gait Variables.} Significant correlations (as per Pearson's correlation coefficient and test for non-correlation) are marked by asterisks. \emph{d./d.s.}: ``dimensionless (stride)'' parameter.}
 \centering
 \begin{footnotesize}
 \begin{tabular}{l|llllll}
@@ -1033,7 +1033,7 @@ It is high (\(\nu = 54.2\)), indicating that the posterior distribution has hard
 
 
 \begin{table}[p]
-\caption{\label{tab:strideresults}Effects of Subject Characteristics on Spatiotemporal Gait Variables. \chng{Values which do not contain zero in their HDI} are indicated by an asterisk.}
+\caption{\label{tab:strideresults}\textbf{Effects of Subject Characteristics on Spatiotemporal Gait Variables.} \chng{Values which do not contain zero in their HDI} are indicated by an asterisk.}
 \centering
 \begin{small}
 \begin{tabular}{|l|l|l|l|l|l|l|}
@@ -1077,13 +1077,13 @@ The data and predictions are overall consistent with the effects identified by t
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/stride_pt1_predictions.pdf}
-\caption{\label{fig:stride1}Spatiotemporal gait variables: raw data and model predictions. Part 1.}
+\caption{\label{fig:stride1}\textbf{Spatiotemporal gait variables:} raw data and model predictions. Part 1.}
 \end{figure}
 
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/stride_pt2_predictions.pdf}
-\caption{\label{fig:stride2}Spatiotemporal gait variables: raw data and model predictions. Part 2.}
+\caption{\label{fig:stride2}\textbf{Spatiotemporal gait variables:} raw data and model predictions. Part 2.}
 \end{figure}
 
 
@@ -1096,7 +1096,7 @@ In posterior predictive sampling, the same PCA must be used to transform the sam
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/stride_pca_predictions.pdf}
-\caption{\label{fig:stridepca}Spatiotemporal gait variables: raw data and model predictions. PCA conversion.}
+\caption{\label{fig:stridepca}\textbf{Spatiotemporal gait variables: raw data and model predictions.} PCA conversion.}
 \end{figure}
 
 
@@ -1113,7 +1113,7 @@ The centering of body mass was optionally omitted.
 Additionally, the correlation structure of the observables (``empirical'' per default) can be changed to ``inferred''.
 
 \begin{table}[p]
-\caption{\label{tab:stridemodelcomparison}Model Comparison. LOO is the model goodness indicator. For convenience, delta (LOO difference from highest ranking model) and standard error (range of the LOO estimate) are displayed.}
+\caption{\label{tab:stridemodelcomparison}\textbf{Model comparison.} LOO is the model goodness indicator. For convenience, delta (LOO difference from highest ranking model) and standard error (range of the LOO estimate) are displayed.}
 \centering
 \begin{tabular}{rrrrl}
 \textbf{rank} & \textbf{loo} & \textbf{delta} & \textbf{std err} & \textbf{description}\\[0pt]
@@ -1242,7 +1242,7 @@ In contrast, the posture parameters correlate in a characteristic way (Tab. \ref
 Therefore, posture and coordination were handled by two separate models with similar general structure.
 
 \begin{table}[p]
-\caption{\label{tab:posturecorrelation}Sampled Cross Correlation of Posture Parameters. \chng{Values of which the HDI excludes zero} are marked by asterisks. \chng{``Mean''} refers to the temporal mean of the joint angle profile, whereas ``amplitude'' is related to range of motion at that joint.}
+\caption{\label{tab:posturecorrelation}\textbf{Sampled cross correlation of posture parameters.} \chng{Values of which the HDI excludes zero} are marked by asterisks. \chng{``Mean''} refers to the temporal mean of the joint angle profile, whereas ``amplitude'' is related to range of motion at that joint.}
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
@@ -1287,7 +1287,7 @@ Some exceptions are better-ranked models with left-out predictors, which however
 Interesting results are anticipated by the comparison: for example, the trunk angle, which per definition contributes ``half'' of the hip joint angle profiles (adjacent segment), is an integral part of the posture model but not relevant for coordination.
 
 \begin{table}[p]
-\caption{\label{tab:posturemodelcomparison}Model Comparison of Posture models.}
+\caption{\label{tab:posturemodelcomparison}\textbf{Model comparison of posture models.}}
 \centering
 \begin{tabular}{rrrrl}
 \textbf{rank} & \textbf{loo} & \textbf{delta} & \textbf{std err} & \textbf{description}\\[0pt]
@@ -1311,7 +1311,7 @@ Interesting results are anticipated by the comparison: for example, the trunk an
 \end{table}
 
 \begin{table}[p]
-\caption{\label{tab:coordinationmodelcomparison}Model Comparison of Coordination models.}
+\caption{\label{tab:coordinationmodelcomparison}\textbf{Model comparison of coordination models.}}
 \centering
 \begin{tabular}{rrrrl}
 \textbf{rank} & \textbf{loo} & \textbf{delta} & \textbf{std err} & \textbf{description}\\[0pt]
@@ -1358,7 +1358,7 @@ The final cherry on this cake (Fig. \ref{fig:japprediction}) is thus a promising
 
 \begin{landscape}\clearpage
 \begin{table}[t!]
-\caption{\label{tab:postureresults}Results of the Posture Model. \chng{Values different from zero (per HDI)} are indicated by an asterisk.}
+\caption{\label{tab:postureresults}\textbf{Results of the posture model.} \chng{Values different from zero (per HDI)} are indicated by an asterisk.}
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
@@ -1374,7 +1374,7 @@ ankle amplitude & \(+0.68\) & \(-0.07\) & \(-0.04\) & \(+0.05\) & \(+0.10\) & \(
 \end{table}
 
 \begin{table}[b!]
-\caption{\label{tab:coordinationresults}Results of the Coordination Model. \chng{Values which do not contain zero in their HDI} are indicated by an asterisk.}
+\caption{\label{tab:coordinationresults}\textbf{Results of the coordination model.} \chng{Values which do not contain zero in their HDI} are indicated by an asterisk.}
 \centering
 \scriptsize
 \begin{tabular}{llllllllllll}
@@ -1396,32 +1396,32 @@ PC8 & \(-0.01\) & \(+0.03\) & \(+0.01\) & \(+0.01\) & \(-0.06\) & \(+0.01\) & \(
 \begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/posture_means_predictions.pdf}
-\caption{\label{fig:posture1}Posture model predictions. Part 1: mean \chng{joint} angles.}
+\caption{\label{fig:posture1}\textbf{Posture model predictions.} Part 1: mean \chng{joint} angles.}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/posture_amps_predictions.pdf}
-\caption{\label{fig:posture2}Posture model predictions. Part 2: amplitudes (range of motion).}
+\caption{\label{fig:posture2}\textbf{Posture model predictions.} Part 2: amplitudes (range of motion).}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/coordination_pt1_predictions.pdf}
-\caption{\label{fig:coordination1}Coordination model predictions, part 1.}
+\caption{\label{fig:coordination1}\textbf{Coordination model predictions.} Part 1.}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/coordination_pt2_predictions.pdf}
-\caption{\label{fig:coordination2}Coordination model predictions, part 2.}
+\caption{\label{fig:coordination2}\textbf{Coordination model predictions.} Part 2.}
 \end{figure}
 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=.9\linewidth]{figures/trace_predictions.png}
-\caption{\label{fig:japprediction}Joint Angle Profile predictions from combined results of coordination and posture models. Thick lines are actual observations; thin lines in the background are posterior predictive samples. Identical to Fig. \ref{fig:modelprediction} in Ch. \ref{cpt:fourier_review}, yet this time it should be clear how the prediction was performed.}
+\caption{\label{fig:japprediction}\textbf{Joint angle profile predictions} from combined results of coordination and posture models. Thick lines are actual observations; thin lines in the background are posterior predictive samples. Identical to Fig. \ref{fig:modelprediction} in Ch. \ref{cpt:fourier_review}, yet this time it should be clear how the prediction was performed.}
 \end{figure}
 
 
@@ -1447,7 +1447,7 @@ Ideally, the model has learned the concerted influence of these parameters on th
 \begin{figure}[p]
 \centering
 \includegraphics[width=.9\linewidth]{figures/trace_quantiles_dutyfactor_0.png}
-\caption{\label{fig:dutyquantileprediction}Joint angle profile predictions for duty factor quantiles, for adult females. Thick lines: averages; thin lines: individual predictive samples. Caution: to emphasize differences, the range of y-values varies on the three panels.}
+\caption{\label{fig:dutyquantileprediction}\textbf{Joint angle profile predictions} for duty factor quantiles, for adult females. Thick lines: averages; thin lines: individual predictive samples. Caution: to emphasize differences, the range of y-values varies on the three panels.}
 \end{figure}
 
 So let us ask the model what the effect of duty factor is, specifically for adult females!

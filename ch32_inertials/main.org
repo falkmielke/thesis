@@ -79,7 +79,7 @@ If you want to reduce the chance being seen while looking for something in a dar
 @@latex:\end{change}@@
 
 
-#+CAPTION: Spectra. The horizontal axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case the range of visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (units: \(Hz\)) and photon energy (units: \(eV\)). The vertical axis shows photon occurrence probability, or normalized intensity \(I\), or the intensity difference \(\Delta I\) for the absorption spectrum. Black curve: emission spectrum of a white LED \citep{Tanabe2005}. Green curve: the approximate absorption spectrum of chlorophyll A \citep{Zscheile1934}. The chlorophyll will hardly get excited by the LED, yet the plant will look bright and green.
+#+CAPTION: \textbf{Spectra.} The horizontal axis shows all wavelengths \(\lambda\) (\(nm\)) of relevance (in this case the range of visible light, for illustration). Related to wavelength and therefore viable axis label alternatives are frequency (units: \(Hz\)) and photon energy (units: \(eV\)). The vertical axis shows photon occurrence probability, or normalized intensity \(I\), or the intensity difference \(\Delta I\) for the absorption spectrum. Black curve: emission spectrum of a white LED \citep{Tanabe2005}. Green curve: the approximate absorption spectrum of chlorophyll A \citep{Zscheile1934}. The chlorophyll will hardly get excited by the LED, yet the plant will look bright and green.
 #+LABEL: fig:spectrum
 #+ATTR_LATEX: :placement [p] :width 13cm
 [[./figures/spectrum.pdf]]
@@ -98,7 +98,7 @@ Interactions of photons and matter crucially depend on the energy/frequency/wave
 A (differential) spectrum is a way to depict a wavelength dependence.
 
 
-#+CAPTION: X-ray emission spectrum. An x-ray source will emit photons with a variety of energies ("colors"). Bremsstrahlung will cover a wide range of photon energies, whereas discrete peaks are caused by specific emission processes in the target material. \citep[taken from ][creative commons license]{Berger2018fig8}.
+#+CAPTION: \textbf{X-ray emission spectrum.} An x-ray source will emit photons with a variety of energies ("colors"). Bremsstrahlung will cover a wide range of photon energies, whereas discrete peaks are caused by specific emission processes in the target material. \citep[taken from ][creative commons license]{Berger2018fig8}.
 #+LABEL: fig:xray_emission
 #+ATTR_LATEX: :placement [p] :width 10cm
 [[./figures/Berger2018.png]]
@@ -277,7 +277,7 @@ The animal was euthanized after successful completion of the experiment.
 Procedures have been approved /a priori/ by the Ethical Committee of Animal Experimentation, University of Antwerp, Belgium (approval number 2017–25).
 The femur was extracted by carefully dis-articulating the parts of the right hindlimb of the piglet, isolating the femur, and removing surrounding soft tissue.
 
-#+CAPTION: The "flying femur" experiment: an excised piglet femur used in XROMM experiments as an allegory of reductionism. Left: the femur oscillating on a pendulum. Right: installation with a motor capable of moving the femur in a realistic way.
+#+CAPTION: \textbf{The "flying femur" experiment:} an excised piglet femur used in XROMM experiments as an allegory of reductionism. Left: the femur oscillating on a pendulum. Right: installation with a motor capable of moving the femur in a realistic way.
 #+LABEL: fig:flying_femur_fotos
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/flying_femur_fotos.png]]
@@ -316,7 +316,7 @@ For this purpose, the animal was dissected both physically and virtually (segmen
 Segments were weighted individually on a precision scale.
 Virtual segments were processed with the density regression procedure to compute segment-wise mass estimates.
 
-#+CAPTION: Virtual dissection (segmentation) of a piglet CT scan. Example virtual slice.
+#+CAPTION: \textbf{Virtual dissection (segmentation) of a piglet CT scan.} Example virtual slice.
 #+LABEL: fig:piglet_segmentation
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/virtual_dissection.png]]
@@ -326,7 +326,7 @@ Virtual segments were processed with the density regression procedure to compute
 
 #+NAME: tab:ct_settings
 #+ATTR_LATEX: :placement [p] :environment tabular :align |l|c|
-#+CAPTION: CT scan settings for the calibrated femur scan.
+#+CAPTION: \textbf{CT scan settings} for the calibrated femur scan.
 |------------------+--------------------|
 | voltage          | \(150\ kV       \) |
 | power            | \(55\ W         \) |
@@ -362,7 +362,7 @@ Resolution was lower, but exposure settings were comparable to the ones on the f
 
 All code used on this project, including Python implementations of the mathematical formulas below, can be [[https://git.sr.ht/~falk/flying_femur][found online]] (\nolinkurl{https://git.sr.ht/~falk/flying_femur} and \nolinkurl{http://mielke-bio.info/falk/posts/23.ct_density}).
 
-#+CAPTION: Calculation of inertial properties of a limb segment (femur) from CT scans. CT scans are 3D images, consisting of voxels (cubes) each of which is associated with a gray value. If these could be associated with physical density, it would be possible to calculate the mass, center of mass (\(\vec{COM}\)) and mass moment of inertia. In the calculation procedure, voxels are treated as little mass elements \(m_{i}\), which are positioned at a given vector position \(r_{i}\) from an arbitrary CT origin.
+#+CAPTION: \textbf{Calculation of inertial properties of a limb segment (femur) from CT scans.} CT scans are 3D images, consisting of voxels (cubes) each of which is associated with a gray value. If these could be associated with physical density, it would be possible to calculate the mass, center of mass (\(\vec{COM}\)) and mass moment of inertia. In the calculation procedure, voxels are treated as little mass elements \(m_{i}\), which are positioned at a given vector position \(r_{i}\) from an arbitrary CT origin.
 #+LABEL: fig:inertials
 #+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/inertial_properties.pdf]]
@@ -446,7 +446,7 @@ Convergence was supported by setting meaningful parameter start values close to 
 
 #+NAME: tab:regressions
 #+ATTR_LATEX: :placement [p] :environment tabular :align |l|l|l|
-#+CAPTION: Density Regression Functions and regression start values.
+#+CAPTION: \textbf{Density Regression Functions} and regression start values.
 |-------------+---------------+------------------------------|
 |             | function      | start values                 |
 |-------------+---------------+------------------------------|
@@ -493,7 +493,7 @@ Similarly, one can multiply the intensity values of each voxel in the original v
 Depending on the chosen value for \(k\) in that exponential, one can virtually manipulate the amount of beam hardening (Fig. \ref{fig:cupping_methods}).
 
 
-#+CAPTION: Beam hardening artifact simulation. The top view (A) and side view (B) of a PTFE cylinder with beam hardening strength \(k\) virtually set to \(k=0.5\). (C) Line profile of scan gray values along the blue line indicated in panel A shows the typical "cupping". (D) cylinder coordinate transformation of the slice marked by a blue line in panel B gives the gray values along the radial lines \(r\) at angles \(\phi\) indicated in panel A. (E) Top and side view for different simulated beam hardening strengths \(k\).
+#+CAPTION: \textbf{Beam hardening artifact simulation.} The top view (A) and side view (B) of a PTFE cylinder with beam hardening strength \(k\) virtually set to \(k=0.5\). (C) Line profile of scan gray values along the blue line indicated in panel A shows the typical "cupping". (D) cylinder coordinate transformation of the slice marked by a blue line in panel B gives the gray values along the radial lines \(r\) at angles \(\phi\) indicated in panel A. (E) Top and side view for different simulated beam hardening strengths \(k\).
 #+LABEL: fig:cupping_methods
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/cupping_methods.pdf]]
@@ -590,7 +590,7 @@ Subsetting is necessary because the number of observations adds computational lo
 ** Density Calibration Regression
 # /data/04_dynamics/21_flying_femur_revival/02_inertials/02_Regression.py
 
-#+CAPTION: Density calibration of a CT scan. The polymer materials show a linear relation between density \(\rho\) and CT gray value \(\gamma\) (exception: PVC, excluded from regression), whereas the positions of BMD phantoms (ld: low density; hd: high density) implies an exponential relation. Violins illustrate the distribution of gray values, which appears due to stochastic attenuation, yet each object in the scan is associated with exactly one true (average) density.
+#+CAPTION: \textbf{Density calibration of a CT scan.} The polymer materials show a linear relation between density \(\rho\) and CT gray value \(\gamma\) (exception: PVC, excluded from regression), whereas the positions of BMD phantoms (ld: low density; hd: high density) implies an exponential relation. Violins illustrate the distribution of gray values, which appears due to stochastic attenuation, yet each object in the scan is associated with exactly one true (average) density.
 #+LABEL: fig:density_calibration
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/regression.pdf]]
@@ -635,7 +635,7 @@ The contradicting results highlights how erratic the digital density approximati
 
 #+NAME: tab:pigletdissection
 #+ATTR_LATEX: :placement [p] :environment tabular :align |l|c|c|c|
-#+CAPTION: Segment mass verification on an actual piglet specimen. On the lighter segments, measurement accuracy and rounding are limiting. Note that the total mass at euthanasia was measured \(1.125\ kg\), a slight loss is expected due to condensation and preservation.
+#+CAPTION: \textbf{Segment mass verification on an actual piglet specimen.} On the lighter segments, measurement accuracy and rounding are limiting. Note that the total mass at euthanasia was measured \(1.125\ kg\), a slight loss is expected due to condensation and preservation.
 |----------------+-----------------+------------+------------|
 | *segment*        | *CT segmentation* | *dissection* | *difference* |
 | *masses*         |        \([kg]\) |   \([kg]\) |            |
@@ -669,7 +669,7 @@ The contradicting results highlights how erratic the digital density approximati
 ** Issue 1: Beam Hardening
 
 # /data/04_dynamics/21_flying_femur_revival/11_cupping/05_PlotPTFEInertia.py
-#+CAPTION: \chng{Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder.} (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B) Calculated mass moments of inertia, unscaled (blue) and scaled (gray); scaling was optional to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text). In this cylinder, \(I_z\) is always larger than \(I_x = I_y\). Calculated values were normalized by the theoretical inertia of the PTFE cylinder (\(I/I_{true}\); with \(I_z = 4.6\times10^{-7}\) and \(I_x = 3.3\times10^{-7}\)), hence a correct calculation would yield values of \(1.0\). The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the expected values. However, this is only true for the unscaled curves; when scaling, the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening.
+#+CAPTION: \textbf{\chng{Effect of beam hardening on calculated mass moment of inertia of a PTFE cylinder.}} (A) Repeat of radial profiles (as in Fig. \ref{fig:cupping_methods}C) for different beam hardening strengths. (B) Calculated mass moments of inertia, unscaled (blue) and scaled (gray); scaling was optional to make the calculated mass of the cylinder match the actual mass (i.e. normalizing mass, see text). In this cylinder, \(I_z\) is always larger than \(I_x = I_y\). Calculated values were normalized by the theoretical inertia of the PTFE cylinder (\(I/I_{true}\); with \(I_z = 4.6\times10^{-7}\) and \(I_x = 3.3\times10^{-7}\)), hence a correct calculation would yield values of \(1.0\). The more beam hardening \(k\), the lower the (unscaled) mass moment of inertia. Noteworthy, at \(k=0\) the inertia values match the expected values. However, this is only true for the unscaled curves; when scaling, the correct inertia is reached at an arbitrary, non-zero \(k\), and the calculated inertia increases with beam hardening.
 #+LABEL: fig:cupping_results
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/cupping_results.pdf]]
@@ -694,7 +694,7 @@ I conclude that the chance of getting an accurate measurement for mass moment of
 
 ** Issue 2: Metal Bead Artifacts and Chemical Composition
 
-#+CAPTION: Metal bead artifacts, marked with orange arrows. Despite the use of an aluminium filter to harden the x-ray beam, metal beads produce conspicuous, star-shaped streaks on the scan reconstructions. The reason that the center of the metal beads appears black is a clipping setting during image preprocessing (intentional, do ensure they do not contribute to the total mass).
+#+CAPTION: \textbf{Metal bead artifacts,} marked with orange arrows. Despite the use of an aluminium filter to harden the x-ray beam, metal beads produce conspicuous, star-shaped streaks on the scan reconstructions. The reason that the center of the metal beads appears black is a clipping setting during image preprocessing (intentional, do ensure they do not contribute to the total mass).
 #+LABEL: fig:metal_artifacts
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/metal_artifacts.png]]
@@ -720,7 +720,7 @@ They are more numerous in some materials than others (irrespective of density, e
 
 #+NAME: tab:sensitivity
 #+ATTR_LATEX: :placement [p] :environment tabular :align |l|l|c|c|c|c|c|
-#+CAPTION: Sensitivity analysis of the mass moment of inertia calculations of the femur scan. For reference, the actual femur weighed \(5.271\ g\), had a length of \(46\ mm\), volume of \(4.637\times 10^{-6}\ m^{3}\) and an average density of \(\approx 1140\ kg m^{-3}\). Regression \(a\) and \(b\) are fit parameters (see text).
+#+CAPTION: \textbf{Sensitivity analysis of the mass moment of inertia calculations of the femur scan.} For reference, the actual femur weighed \(5.271\ g\), had a length of \(46\ mm\), volume of \(4.637\times 10^{-6}\ m^{3}\) and an average density of \(\approx 1140\ kg m^{-3}\). Regression \(a\) and \(b\) are fit parameters (see text).
 |----------------------+--------------+----------------+-----------+---------------------+---------------------+---------------------|
 | *parameter*            | *input*        | *\(\sum_{i}m_{i}\)* | *\(\Delta \vec{COM}\)* |          *\(I_{xx}\)* |          *\(I_{yy}\)* |          *\(I_{zz}\)* |
 |                      | *change*       |        \([g]\) |  \([px]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) | \([\times 10^{-6} kg m^2]\) |
@@ -756,7 +756,7 @@ Finally, the exponential regression leads to a moderate shift in \(\vec{COM}\) (
 These simulations confirm that moment of inertia crucially depends on the mass and position assigned to each voxel in the CT data set; the relative error in the outcome will exceed the input inaccuracy.
 
 
-#+CAPTION: Probabilistic density regression result. "Traceplot" showing the posterior distributions of model parameters (left) and sampling traces (right). The "uncertainty" (\(\varepsilon\)) quantifies the hierarchical model residual, i.e. the total uncertainty remaining after convergence. The colored distributions for "sigma" are the material-wise uncertainties in the gray values (\(\varepsilon_{i}\)).
+#+CAPTION: \textbf{Probabilistic density regression result.} "Traceplot" showing the posterior distributions of model parameters (left) and sampling traces (right). The "uncertainty" (\(\varepsilon\)) quantifies the hierarchical model residual, i.e. the total uncertainty remaining after convergence. The colored distributions for "sigma" are the material-wise uncertainties in the gray values (\(\varepsilon_{i}\)).
 #+LABEL: fig:probabilistic_density
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/probabilistic_regression.png]]

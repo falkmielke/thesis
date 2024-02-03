@@ -101,7 +101,7 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 * Transferability
 
 @@latex:\begin{change}@@
-#+CAPTION: FCAS facilitates transferability of kinematic data. A hypothetical, non-isometric evolution of morphology must be compensated by changes in (i) posture, (ii) effective range of motion, and (iii) coordination. By separating these effects in kinematic measurements, evolutionary hypotheses can be tested, and the transfer of coordination patterns from one species to another is improved.
+#+CAPTION: \textbf{FCAS facilitates transferability of kinematic data.} A hypothetical, non-isometric evolution of morphology must be compensated by changes in (i) posture, (ii) effective range of motion, and (iii) coordination. By separating these effects in kinematic measurements, evolutionary hypotheses can be tested, and the transfer of coordination patterns from one species to another is improved.
 #+LABEL: fig:transferability
 #+ATTR_LATEX: :placement [p] :width 16cm
 [[./figures/Transferability_Evolution.pdf]]
@@ -196,7 +196,7 @@ Overall, the models provide strong evidence against the existence of fundamental
 
 
 
-#+CAPTION: XROMM using Python and Blender, unpublished. Full video ([[https://ody.sh/fZe3OpgHGN]]) and code ([[https://git.sr.ht/~falk/foss_xromm]]) are available.
+#+CAPTION: \textbf{XROMM using Python and Blender}, unpublished. Full video ([[https://ody.sh/fZe3OpgHGN]]) and code ([[https://git.sr.ht/~falk/foss_xromm]]) are available.
 #+LABEL: fig:piglet_xromm
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/piglet_xromm_t02_0214.png]]

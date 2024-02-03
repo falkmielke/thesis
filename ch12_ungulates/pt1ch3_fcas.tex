@@ -16,6 +16,7 @@ Besides revealing fundamental characteristics of ungulate locomotion, we argue t
 \bigskip
 \textit{This chapter is a slightly modified version of a previously published article \citep{Mielke2019}. The publication preceded the review in Ch. \ref{cpt:fourier_review}, which unfortunately causes some redundancy. The concept of affine components and the analogy to geometric morphometrics are extended and applied to a comprehensive data set. I must apologize that the relevant publication by \citet{Pike2002} had completely slipped my attention prior to this publication, I was unaware of its existence, but added reference ex post.
 \\\chng{Furthermore, it must be noted that this chapter, contrary to the title of the thesis, does not analyze developmental data. the variable ``age'' was not available for the animals shown on 'YouTube', and could not be included.
+No neonate or early juvenile data was incorporated.
 It is not clear whether age plays a role on this precocial group of animals.
 Due to the large sample size, I would expect effects to average out.
 In consequence, the intention of this chapter is explorative: I applied a novel method to a broad data set, inspecting and interpreting the outcome.}}
@@ -101,7 +102,7 @@ This provides hypotheses for future, more controlled experimental tests that can
 \begin{center}
 \includegraphics[width = 16cm]{figures/fig1_flowchart.pdf}
 \end{center}
-\caption{Analysis work flow, schematic.
+\caption{\textbf{Analysis work flow, schematic.}
 \textbf{A} Video material of walking ungulates is digitized by tracking trace marks (shoulder, elbow, carpus and fetlock joints; see supplementary movie \ref{fcas_supplementary_files}) over a stride cycle, and joint angle profiles are computed (\chng{joint} angle defined zero at fully extended limb, positive direction indicated by arrows). Thin black lines are the original measurement, whereas blue lines show the same profile, filtered by FSD with $7$ components.
 \textit{(continues next page)}
   }
@@ -262,7 +263,7 @@ We report the correlation of these affine differences to the PC axes, as well as
 \begin{figure}[p]%[tbhp]
 \centering
 \includegraphics[width=.8\linewidth]{figures/fig2_alignment.pdf}
-\caption{Superimposition can improve joint angle profile averaging.
+\caption{\textbf{Superimposition can improve joint angle profile averaging.}
 Mean joint angle profiles of different forelimb joints ($[e]$: elbow, $[c]$: carpus joint) for the genera \textit{Equus} (brown, $\triangledown$), \textit{Lama} (blue, $\square$), and \textit{Giraffa} (yellow, $\circ$). These examples were chosen for their high sample size (more examples in Fig. \ref*{fig:examples}). See methods and supplementary tutorial \ref{fcas_supplementary_files} for nomenclature and definition of FCAS.
 \textbf{Upper row}: input data (``video aligned''). \textbf{Lower row}: after carpal superimposition using FCAS.
 \textbf{A} Forelimb joint angle profiles ($\alpha$) over time ($t$, stride cycle period $T$), centered around their temporal averages (gray horizontal axes) to emphasize temporal differences. Thick lines are genus averages for elbow (solid line) and carpus (dashed line) \chng{joint} angles. Thin dotted lines indicate $\pm$standard deviation range of individual observations. Scale bar $22.5^{\circ}$, time axis $T$.
@@ -289,7 +290,7 @@ Thus, equids turn out to be more distinct from the other groups than was visible
 
 \begin{figure}[p]
 \includegraphics[width = 16cm]{figures/fig3_pca.pdf}
-\caption{Bivariate plot of the Principal Component Analysis of elbow-carpus coordination visualizes a slice of the ungulate ``coordination space''.
+\caption{\textbf{Bivariate plot of the Principal Component Analysis of elbow-carpus coordination} visualizes a slice of the ungulate ``coordination space''.
 The PCA is based on the genus average Fourier coefficients of relative elbow profiles after carpal superimposition.
 Gray grid lines on the biplot indicate the ($0.1$, $0.9$) quantiles of all observations; reconstructions were done on their intersections.
 Outset line plots on the margins represent these reconstructed angular profiles (black) at the quantile values for each component axis, relative to the reconstructed mean (gray).
@@ -333,7 +334,7 @@ This further supported the observations from PCA reconstruction.
 
 \begin{table}[p]%[tbhp]
 \centering
-\caption{ Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the \chng{joint} angle profiles. }
+\caption{ \textbf{Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates} (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the \chng{joint} angle profiles. }
 \begin{tabular}{l @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc}
 \toprule
 {} & \multicolumn{2}{c}{\underline{\textbf{PC1}}} & \multicolumn{2}{c}{\underline{\textbf{PC2}}} & \multicolumn{2}{c}{\underline{\textbf{PC3}}} & \multicolumn{2}{c}{\underline{\textbf{PC4}}} \\
@@ -629,7 +630,7 @@ Comparing sample genera along the PC axes (Fig. \ref*{fig:examples}) indicated t
 \begin{figure}[h!]
 \centering
 \includegraphics[width = 16cm]{figures/figS1_phylogeny.pdf}
-\caption{Informal phylogeny of terrestrial ungulates. Taxa grouped on genus level, with non-monophyletic genera split. Colors and group labels serve rough orientation. Cetaceans are excluded from our study.
+\caption{\textbf{Informal phylogeny of terrestrial ungulates.} Taxa grouped on genus level, with non-monophyletic genera split. Colors and group labels serve rough orientation. Cetaceans are excluded from our study.
 Based on Zurano et al. (2019), and complemented from various other sources \citep{Zurano2019,ParisiDutra2017,Frantz2015,Ryder2011,Price2009,Gongora2011,Funk2007,Hassanin2012}.
  }
 \label{fig:phylogeny}
@@ -639,7 +640,7 @@ Based on Zurano et al. (2019), and complemented from various other sources \cite
 \begin{figure} [b!]
   \caption{
 \textit{(next page.)}
-Representative joint angle profile examples.
+\textbf{Representative joint angle profile examples.}
 Taxa were selected based on their position in the PCA (Fig. \ref*{fig:pca}) and to inspect cases of geometric or phylogenetic uniformity.
 Display of time domain \chng{joint} angle profiles (left), mean \chng{joint} angle (middle) and frequency domain (right) as before (see Figs. \ref*{fig:workflow}, \ref*{fig:superimposition}).
 \textbf{A} Two genera (\textit{Taurotragus}, \textit{Alces}) that are approximately geometrically similar (size, body mass), but distributed along PC1. % confirm the trend that was shown by the \chng{joint} angle profile reconstructions.textbf{E} (inset) Fourier coefficients of carpus-superimposed elbow joint profiles are available for multivariate analyses, such as PCA.
@@ -653,7 +654,7 @@ Display of time domain \chng{joint} angle profiles (left), mean \chng{joint} ang
 \includegraphics[width = 16cm]{figures/figS2_pc_axes.pdf}
 \caption[Representative Examples]{
 \textit{(contd.)}
-Representative joint angle profile examples.
+\textbf{Representative joint angle profile examples.}
 \textbf{B} Closely related taxa (Cervidae) along PC1.
 \textbf{C, D} Two pairs of closely related taxa (Tylopoda; Rhinoceroidae) that are spread along PC2.
  }
@@ -664,7 +665,7 @@ Representative joint angle profile examples.
 \begin{figure}[pt]
 \centering
 \includegraphics[width = 16cm]{figures/figS3_more_pca.pdf}
-\caption[Further PC Axes]{Principal Component Analysis, further axes. Data as before (Fig. \ref*{fig:pca}), but with additional principal components (lower biplot) and labeling of all taxa.
+\caption[Further PC Axes]{\textbf{Principal Component Analysis, further axes.} Data as before (Fig. \ref*{fig:pca}), but with additional principal components (lower biplot) and labeling of all taxa.
  }
 \label{fig:more_pca}
 \end{figure}

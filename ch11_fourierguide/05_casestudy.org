@@ -11,7 +11,7 @@ I will now outline the typical workflow of the analysis of kinematics with that 
 There is a lot of flexibility in the procedure (see Fig. \ref{fig:procedure} for a coarse guideline), and researchers should feel encouraged to adapt the steps to their needs.
 For illustration, I \chng{applied the method} to a previously analyzed data set of bipedal walking in olive baboons, /Papio anubis/ citep:Druelle2021.
 
-#+CAPTION: *Analysis and Modeling Procedure.* Workflow overview of the preparation, transformation and analysis steps involved in the data analysis on baboon bipedal walking as described in the text, from raw observation (top) to statistical inference and multivariate analysis (bottom). At each point of the procedure, transformation between the domains is possible and quality checks should be performed.
+#+CAPTION: *Analysis and modeling procedure.* Workflow overview of the preparation, transformation and analysis steps involved in the data analysis on baboon bipedal walking as described in the text, from raw observation (top) to statistical inference and multivariate analysis (bottom). At each point of the procedure, transformation between the domains is possible and quality checks should be performed.
 #+ATTR_LATEX: :placement [p]
 #+LABEL: fig:procedure
 [[file:./figures/f8_flowchart.pdf]]
@@ -24,7 +24,7 @@ For illustration, I \chng{applied the method} to a previously analyzed data set 
 After data acquisition is complete and hard drives are filled with videos, the individual stride episodes which were captured on video must be annotated and extracted.
 As a good approximation, one can use the conventional touch down timepoints (though lift off or mid stance would work equally well, and the choice may vary within the dataset).
 
-#+CAPTION: *Raw Data Inspection.* (A) Plotting a series of stride cycles in the camera reference frame can aid the identification of data discontinuities (visible here in the distal limb markers). The animal is moving from left to right. A stick figure displayed for the last frame facilitates landmark attribution (torso, tail, hind- and forelimb are shown, similar to Fig. \ref{fig:endstart}). (B) Plotting one stride in the moving reference frame of the subject (zoomed in on the limbs) can confirm cyclic/steady state movement.
+#+CAPTION: *Raw data inspection.* (A) Plotting a series of stride cycles in the camera reference frame can aid the identification of data discontinuities (visible here in the distal limb markers). The animal is moving from left to right. A stick figure displayed for the last frame facilitates landmark attribution (torso, tail, hind- and forelimb are shown, similar to Fig. \ref{fig:endstart}). (B) Plotting one stride in the moving reference frame of the subject (zoomed in on the limbs) can confirm cyclic/steady state movement.
 #+ATTR_LATEX: :placement [p]
 #+LABEL: fig:raw_inspection
 [[file:./figures/f4_raw_inspection.pdf]]
@@ -63,7 +63,7 @@ The transformation should be inverted, and original and re-transformed joint ang
 #+LABEL: fig:reversibility
 [[file:./figures/f5_reversibility.pdf]]
 
-#+CAPTION: *Retransformation Residuals,* (A) after performing FSD only with a given order (i.e. number of coefficients, x-axis), (B) after FSD (9 coefficients) and PCA with a given number of retained components. Residuals \(\epsilon\) (y-axis) as defined above. Joint angle profiles of all observed baboon strides are included, the distribution of residuals is indicated by grey "violins". Relatively low numbers of coefficients and components are sufficient to get close to the asymptotic accuracy. The absolute residual is joint-dependent (compare hip and knee, for example), an effect which is primarily determined by \chng{landmark tracking} accuracy and measurement noise. The data point for "full" PCA dimension is the reference value with just the FSD.
+#+CAPTION: *Retransformation residuals,* (A) after performing FSD only with a given order (i.e. number of coefficients, x-axis), (B) after FSD (9 coefficients) and PCA with a given number of retained components. Residuals \(\epsilon\) (y-axis) as defined above. Joint angle profiles of all observed baboon strides are included, the distribution of residuals is indicated by grey "violins". Relatively low numbers of coefficients and components are sufficient to get close to the asymptotic accuracy. The absolute residual is joint-dependent (compare hip and knee, for example), an effect which is primarily determined by \chng{landmark tracking} accuracy and measurement noise. The data point for "full" PCA dimension is the reference value with just the FSD.
 #+ATTR_LATEX: :placement [p]
 #+LABEL: fig:residuals
 [[file:./figures/f6_residuals.pdf]]
@@ -138,7 +138,7 @@ All data and documented code for all the steps described above are available onl
 I will return to this data set and extend the explanation of the modeling procedure later in this thesis (Ch. \ref{cpt:statistics}).
 
 
-#+CAPTION: *Posterior Predictive Sampling.* A probabilistic model which is trained on the kinematic data (dark grey lines) is capable of predicting joint angle profiles (colored, thin lines; 1000 predictions per category). This can be extrapolated, for example to unobserved category combinations (here: adult males, which were not part of the dataset). Model design and training are enabled by transformation of the data to a PCA-space of the frequency domain. Joint angle profiles are centered around their mean for visualization; black bar in the lower left plot indicates angular units.
+#+CAPTION: *Posterior predictive sampling.* A probabilistic model which is trained on the kinematic data (dark grey lines) is capable of predicting joint angle profiles (colored, thin lines; 1000 predictions per category). This can be extrapolated, for example to unobserved category combinations (here: adult males, which were not part of the dataset). Model design and training are enabled by transformation of the data to a PCA-space of the frequency domain. Joint angle profiles are centered around their mean for visualization; black bar in the lower left plot indicates angular units.
 #+ATTR_LATEX: :placement [p]
 #+LABEL: fig:modelprediction
 [[file:./figures/f7_trace_predictions.png]]
