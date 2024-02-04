@@ -35,7 +35,7 @@ Data in this case are points of interest, tracked on videos.
 There are many tools for \chng{landmark tracking on video}, which are more or less automatic and accurate citep:MMielke2020,Knoerlein2016,Hedrick2008,Crall2015,Mathis2018,Karashchuk2021,Dunn2021.
 It should be assured that no frames have been involuntarily skipped in the process of tracking, and that there are no discontinuities in the series of point positions.
 This can be easily achieved by plotting the time series of \chng{tracked} points, either in the global reference frame, or in a moving reference associated with the subject (Fig. \ref{fig:raw_inspection}).
-After \chng{landmark tracking}, the aforementioned calculation of Procrustes distances between putative start and end frames (ch. \ref{properties:endstart}) can be used to refine the stride interval and minimize end-start-differences.
+After \chng{landmark tracking}, the aforementioned calculation of Procrustes distances between putative start and end frames (Ch. \ref{properties:endstart}) can be used to refine the stride interval and minimize end-start-differences.
 
 With strides identified and data quality assured, collective variables such as duration, speed, clearance, or gait asymmetry can be stored for each stride observed in the dataset.
 
@@ -46,7 +46,7 @@ Care should be taken that joint angles do not show jumps at any time point of th
 Such jumps would lead to a wrong FSD, because that procedure does not natively consider angular value ranges or interval wrapping and thus treats the jump as if it were an actual discontinuity.
 The joint angle definition chosen herein, with fully extended limb corresponding to a joint angle of zero, and ranging from \(-\pi\) to \(+\pi\), usually avoids such discontinuities.
 
-In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an ==arctan== formula.
+In the case of two-dimensional joint coordinates, calculation of joint angles is relatively straight forward with an =arctan= formula.
 When working in three dimensions, the question is whether sufficient anatomical reference points can be \chng{tracked} to calculate actual anatomical joint angles.
 If not, it must be sufficient to calculate a single \chng{joint} angle between the segment vectors, though that does not necessarily correspond to anatomical degrees of freedom.
 If instead there are sufficient reference points, multiple \chng{joint} rotation axes and angles per joint can be used and integrated just as in a multi-joint analysis.
@@ -73,7 +73,7 @@ Each stride processed in the analysis counts as exactly one data point, and so f
 The conventional next step is to analyze their relation to each other.
 
 For example, it might be apparent that two or more data points are phase shifted relative to each other: all the characteristic maxima and minima of the joint angle profile would consistently appear later or earlier in the time domain plot.
-If one assumed that strides are cyclic, it must be conclude that these phase shifts are due to our arbitrary choice of the start point within the cycle.
+If one assumed that strides are cyclic, it must be concluded that these phase shifts are due to our arbitrary choice of the start point within the cycle.
 Phase differences should therefore be minimized.
 However, different joints, when analyzed together, might theoretically give contradicting information on the relative phase shift of different strides.
 Obvious solutions are to either choose a reference \chng{joint} angle for phase alignment (this might be a \chng{kinematic} angle not otherwise used for analysis: in the baboon test case, I chose the "total limb", i.e. the head-hip-toe angle), or to use an amplitude-weighted average phase shift as calculated from all joint angles of interest together.
@@ -89,7 +89,7 @@ Often, PCA justifies a significant reduction of data dimensionality (i.e. number
 Apart from the residual variance not covered by the retained principal components, PCA is again information preserving and reversible (which should be confirmed, Figs. \ref{fig:reversibility}, \ref{fig:residuals}).
 Most often, PCA is just used to prepare the data for subsequent multivariate methods (e.g. factor analysis).
 
-
+\smallskip
 To summarize: in the procedure drafted above, I have extracted and quality checked kinematic measurements from raw video digitization.
 Joint angles were calculated and submitted to two transformation procedures: FSD and PCA.
 All procedures to this point can be performed without loss of information: any of the resultant data rows could be converted back to an animation of moving points.
@@ -145,6 +145,6 @@ I will return to this data set and extend the explanation of the modeling proced
 
 
 This modeling and prediction is complementary to and consistent with the analysis of citet:Druelle2021.
-A targeted model design could for example serve to infer effects of ageclass, speed, or their interaction, as was done in the original treatment of this data set.
+A targeted model design could for example serve to infer effects of age class, speed, or their interaction, as was done in the original treatment of this data set.
 Such research questions can be addressed without transformation to the frequency domain.
 However, the point highlighted here is that the frequency domain data retains almost the full kinematic information, and thereby enables assessing a broader range of quantitative analysis questions, and predictive modeling of joint angle profiles and coordination.

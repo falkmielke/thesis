@@ -29,7 +29,7 @@ This is especially true in the biological sciences, where variability in a trait
 Statistical models which incorporate variability, though rarely applied in that context to date, are useful in biological applications citep:Roraas2019,DeGroote2021.
 I provided a brief tutorial to outline why and how probabilistic models work in practice (e.g. the MCMC sampling methodology, Ch. \ref{cpt:statistics}).
 In that framework, I applied probabilistic, predictive modeling to a comprehensive data set of piglet kinematics (Ch. \ref{cpt:piglets}).
-Prediction in conventional statistics would be deterministic, i.e. yielding \chng{only averages} which do not reflect the stochastic, variable nature of the phenomenon.
+Prediction in conventional statistics would be deterministic, i.e. yielding \chng{averages, at best with the vague guidance of standard deviations,} which do not adequately reflect the stochastic, variable nature of the phenomenon.
 I demonstrated that probabilistic prediction can be used to generate relevant insights into locomotor maturation of piglets.
 
 \medskip
@@ -41,7 +41,7 @@ They can be derived, but not accurately, yet they might provide the "best educat
 This finding was enabled by a third basic principle commonly applied in physics (which is actually a first principle): the quantification of a measurements inaccuracy citep:Hughes2010.
 
 \medskip
-There are certainly more examples of basic principles in physics which would deserve application in biology in general @@latex:\citep[e.g. Quantum Cognition,][]{Busemeyer2015,Aerts1995}@@, or in biomechanics in particular @@latex:\citep[e.g. wrenches and quaternions,][]{Dumas2004}@@.
+There are certainly more examples of basic principles in physics which would deserve application in biology in general @@latex:\citep[e.g. quantum cognition,][]{Busemeyer2015,Aerts1995}@@, or in biomechanics in particular @@latex:\citep[e.g. wrenches and quaternions,][]{Dumas2004}@@.
 # TODO
 
 
@@ -111,7 +111,7 @@ The latter goal was targeted herein in a comparative study of newborn piglets.
 Explanatory or even predictive considerations require returning to the construct level, and for legged terrestrial locomotion this would be the level of the joints, e.g. measuring the (joint) angles between segments.
 Yet there is a standing problem with that construct: joint angles are constrained by morphology, which has been associated with issues of transferability citep:Gatesy2011.
 This complicates comparison of joint angles between morphologically disparate groups (e.g. between species, or birth weight categories).
-For example, citet:Gatesy2011 assess that motion transfer between a human and flamingo fails@@latex:\footnote{\textit{Cf.} \url{https://www.youtube.com/watch?v=1Wh8d9b2Wrw}}@@, causing "undesirable motion artifacts" due to morphological discrepancy@@latex:\footnote{Another popular example for "motion transfer" is the transfer of measured running kinematic data of chicken, \textit{Gallus domesticus}, to animate a \textit{Tyrannosaurus rex}, \textit{cf.} \url{https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/walk-dont-run }.}\(^,\)\footnote{These considerations must be flanked by discussions on dynamic similarity \citep{Aerts2023}.}@@.
+For example, citet:Gatesy2011 assess that motion transfer between a human and flamingo fails@@latex:\footnote{\textit{Cf.} \url{https://www.youtube.com/watch?v=1Wh8d9b2Wrw}}@@, causing "undesirable motion artifacts" due to morphological discrepancy@@latex:\footnote{Another popular example for ``motion transfer'' is the transfer of measured running kinematic data of chicken, \textit{Gallus domesticus}, to animate a \textit{Tyrannosaurus rex}, \textit{cf.} \url{https://www.amnh.org/exhibitions/dinosaurs-ancient-fossils/theropod-biomechanics/walk-dont-run }.}\(^,\)\footnote{These considerations must be flanked by discussions on dynamic similarity \citep{Aerts2023}.}@@.
 They also speculate that underlying patterns of coordination could be invariant to morphological disparity, yet they expose a lack of methods to directly assess coordination.
 As shown herein, FCAS enables the isolation of affine components of joint angle profiles, and, by partly removing them, the extraction of measures of coordination.
 \chng{I have demonstrated how to generate relative joint angle profiles, which are direct measures of coordination.}

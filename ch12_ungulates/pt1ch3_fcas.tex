@@ -53,7 +53,7 @@ By applying FSD, the signal is decomposed into its harmonics, which describe it 
 The outcome of FSD is usually reported as sine- and cosine coefficients, which through Euler's formula are equivalent to complex exponentials.
 As will be illustrated further, this latter representation has some advantages for our purpose.
 When plotted in the complex plane, Fourier coefficients have characteristic arrangements, which we find are to an extent analogous to landmarks in geometric morphometrics \citep{Bookstein1991,Kendall1989}.
-Furthermore, the \textit{affine} components of a signals become mathematically accessible in the complex plane representation.
+Furthermore, the \textit{affine} components of a signal become mathematically accessible in the complex plane representation.
 Affine components are those that can be scaled linearly without altering the shape of the signal.
 In the case of complex Fourier coefficients, those are (i) the mean profile value (i.e. ``y-value'') over time, captured as the zero'th Fourier coefficient, (ii) the amplitude of the harmonics, visible as the distance from the origin of the complex plane, and (iii) the phase, which is related to a (non-trivial) rotation in the complex plane (\textit{cf.} methods, Fig. \ref{fig:workflow}).
 These terms are analogous to the parameters of a harmonic oscillation of frequency $f$ over time $t$ of the form ``$y = c_0 + A\cdot sin(2\pi f\cdot t + \phi)$''.
@@ -136,7 +136,7 @@ In total, 388 videos contained candidate episodes and were annotated and cut (i.
 Episodes were selected to have sufficient temporal and spatial quality and correct perspective (movement perpendicular to the view axis).
 Videos of juvenile individuals were rarely included, i.e. only in cases where few recordings were available for a genus.
 Video cutting was performed in the free video manipulation software ``ffmpeg'' (\nolinkurl{http://ffmpeg.org}).
-\\\chng{Tracking} of the animal movement (Fig. \ref{fig:workflow}A) was done in a custom-written tool using the Open Source Computer Vision Library (``OpenCV'', \nolinkurl{https://opencv.org}) interface for the Python programming language (Python Software Foundation, \nolinkurl{https://www.python.org}).
+\\\chng{Tracking} of the animal movement (Fig. \ref{fig:workflow}A) was done in a custom-written tool \citep{MMielke2020} using the Open Source Computer Vision Library (``OpenCV'', \nolinkurl{https://opencv.org}) interface for the Python programming language (Python Software Foundation, \nolinkurl{https://www.python.org}).
 We manually tracked joint center pixel positions over time, \chng{tracking} four joints along the forelimb which was ipsilateral to the camera.
 From this data, \chng{joint} angles were calculated, various quality checks applied, and it was ensured that the \chng{joint} angle profiles (i.e. joint angles over time) were cyclical (for a detailed procedure, see supplement \ref*{apdx:digitization}).
 The videos with episodes that passed quality criteria were reviewed to register species, sex, speed, duty factor, and degree of obstruction.
@@ -164,7 +164,7 @@ The transformation has an interesting effect on the temporal sampling.
 Take, for example, a signal composed of 20 measurement samples over the cycle.
 To phase shift, one could ``roll'' the vector of samples, e.g. appending the first sample at the end.
 Intermediate phase-shifts are inaccurate because they require interpolation.
-In the frequency domain, the signal becomes independent of temporal samples (\textit{cf.} supplement \ref*{apdx:fourier}), except that sampling gives an upper limit to the number of harmonics that can be extracted.
+In the frequency domain, the signal becomes independent of temporal samples (\textit{cf.} supplement \ref*{apdx:fourier}), except that sampling gives an upper limit to the number of harmonics which can be extracted.
 In consequence, phase information becomes continuous, phase shifting is not restricted to the temporal raster defined by sampling, but no interpolation is required.
 Conversely, series decomposition with a finite number of harmonics leads to low pass filtering, hence FSD removes high frequency components from the original signal.
 \\An overview of how affine changes affect the signal in time and frequency domain can be found in the online supplements, together with an implementation of FSD (supplementary data \ref{fcas_supplementary_files}).
@@ -178,7 +178,7 @@ We also recommend to reconstruct test signals from coefficient values for visual
 
 \subsubsection{Fourier Coefficient Affine Superimposition (FCAS) Reveals Signal Shape}
 Taking all coefficients derived from the FSD of a signal together is data that is structurally analogous to two-dimensional landmarks.
-Hence, methods of geometric morphometrics can be applied \citep{Bookstein1991,Kendall1989,Gower1975,Dryden2016}, in particular Procrustes superimposition, which is a method \chng{which standardizes} affine components of the form of an object to reveal its shape.
+Hence, methods of geometric morphometrics can be applied \citep{Bookstein1991,Kendall1989,Gower1975,Dryden2016}, in particular Procrustes superimposition, a method \chng{which standardizes} affine components of the form of an object to reveal its shape.
 For the complex Fourier coefficients, it is possible to define standard values for the affine components (i.e. mean of zero, amplitude of one, phase zero) and operators that shift or scale the signal to achieve standardization.
 Similarly, it is possible to find, extract, and apply operators that superimpose two signals by \chng{standardizing affine components} (Fig. \ref{fig:workflow}C), which we term FCAS.
 In contrast to geometric morphometrics, the rotation is not uniform, but depends on the harmonic number.
@@ -331,8 +331,17 @@ This further supported the observations from PCA reconstruction.
 
 
 \subsection{Covariates of Intralimb Coordination}
+To evaluate possible explanations for the variation along principal component axes, we computed Pearson correlation of the components with various morphological, kinematic, and ecological factors, considering effects with $p<0.01$ to be relevant (Tab. \ref{tab:correlations}).
+We also split the joint profile shape after superimposition into (non-)affine components, and quantified which of these affine changes were associated with the PCs or whether the shape (``residual'', i.e. coordination \textit{sensu stricto}) was affected (Tab. \ref{tab:correlations}, ``[A]'' category).
+These values quantitatively characterized the profile reconstructions from the PCA (Fig. \ref{fig:pca}) and were consistent with the findings reported above.
+\\Of the first four component axes, PC1 showed the strongest correlation with clearance ($r = 0.49,\ p < 10^{-5}$) and degree of obstruction ($r = 0.33,\ p < 10^{-2}$).
+Comparatively smaller taxa (i.e. lower body mass) tended to appear on higher PC1 values ($r = -0.34,\ p < 10^{-2}$).
+PC2 was associated with limb morphology, particularly lever relations (ratio of meta- to zeugopodial length, $r = -0.51,\ p < 10^{-6}$; normalized elbow-wrist segment length, $r = -0.46,\ p < 10^{-4}$), and with duty factor ($r = 0.4,\ p < 10^{-3}$).
+PC3 scales with habitat and multiple aspects of size, whereas PC4 captured non-affine shape differences (visible in that it correlated to ``residual'').
+\\Hence, by the use of simple correlation, it is possible to associate the variational components identified by PCA with meaningful extrinsic (e.g. ecology) and intrinsic (e.g. morphology) covariates.
 
-\begin{table}[p]%[tbhp]
+
+\begin{table}[h]%[tbhp]
 \centering
 \caption{ \textbf{Correlations of [M]orphological, [K]inematic, [E]cological and [A]ffine covariates} (see methods) with the major axes of the PCA (Figs. \ref{fig:pca}, \ref*{fig:more_pca}). Note that affine covariates are components of the \chng{joint} angle profiles. }
 \begin{tabular}{l @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc @{$\quad$} cc}
@@ -363,16 +372,6 @@ $r_{xy}$: Pearson correlation coefficient, \nolinebreak{``$p < \cdot$'':} p-valu
 
 
 
-To evaluate possible explanations for the variation along principal component axes, we computed Pearson correlation of the components with various morphological, kinematic, and ecological factors, considering effects with $p<0.01$ to be relevant (Tab. \ref{tab:correlations}).
-We also split the joint profile shape after superimposition into (non-)affine components, and quantified which of these affine changes were associated with the PCs or whether the shape (``residual'') was affected (Tab. \ref{tab:correlations}, ``[A]'' category).
-These values quantitatively characterized the profile reconstructions from the PCA (Fig. \ref{fig:pca}) and were consistent with the findings reported above.
-\\Of the first four component axes, PC1 showed the strongest correlation with clearance ($r = 0.49,\ p < 10^{-5}$) and degree of obstruction ($r = 0.33,\ p < 10^{-2}$).
-Comparatively smaller taxa (i.e. lower body mass) tended to appear on higher PC1 values ($r = -0.34,\ p < 10^{-2}$).
-PC2 was associated with limb morphology, particularly lever relations (ratio of meta- to zeugopodial length, $r = -0.51,\ p < 10^{-6}$; normalized elbow-wrist segment length, $r = -0.46,\ p < 10^{-4}$), and with duty factor ($r = 0.4,\ p < 10^{-3}$).
-PC3 scales with habitat and multiple aspects of size, whereas PC4 captured non-affine shape differences (visible in that it correlated to ``residual'').
-\\Hence, by the use of simple correlation, it is possible to associate the variational components identified by PCA with meaningful extrinsic (e.g. ecology) and intrinsic (e.g. morphology) covariates.
-
-
 
 \FloatBarrier\clearpage
 %________________________________________________________________________________________
@@ -394,7 +393,7 @@ Timemarks are reference points of putative biological meaning, and it is possibl
 However, the number and choice of timemarks involves some critical design decisions.
 When for example superimposing only based on limb touch down, the alignment is insensitive to differences in hoof placement trajectories before and after that time point.
 The hoof can reach the ground at a flat \chng{impact} angle with smooth horizontal deceleration.
-But the impact can also be vertical, following a more or less brief period where the hoof hovers above the substrate before being placed.
+But the impact could instead be vertical, preceded by a more or less brief period where the hoof hovers above the substrate before being placed.
 The end of hoof forward movement might provide a more homologous timemark, but it might still be that the two cases differ fundamentally in the underlying dynamics at that particular episode of the stride cycle.
 FCAS represents a mathematically optimal superimposition that equally incorporates all the information contained in the profiles.
 The advantage of this strategy is its independence of selected points, and instead the sensitivity to the joint angle trajectory over the whole stride cycle.
@@ -503,9 +502,9 @@ A relation of speed and other locomotor parameters is often among the most promi
 However, we did not find a noticeable speed effect (Tab. \ref{tab:correlations}).
 This can be explained by the character of the data.
 Firstly, speed had do be normalized due to data limitations (no absolute spatial scale available), hence the measure available is relative speed.
-In consequence, we compare /dynamically/ similar observations.
+In consequence, we compare \textit{dynamically} similar observations.
 Secondly, we look at relative elbow profiles at voluntarily walking animals.
-The elbow \chng{joint} angle might not be the driver of speed change, and maybe more generally intralimb coordination might be unaffected by speed (as opposed to range of motion).
+The elbow joint angle might not be the driver of speed change, and maybe more generally intralimb coordination might be unaffected by speed (as opposed to range of motion).
 FCAS is flexible and allows for dedicated tests of any such effects.
 \end{change}
 
@@ -522,7 +521,7 @@ It has long been appreciated that this behavioural class and associated traits m
 One reason that optimization is so efficient in locomotion is its high degree of recurrence, which amplifies the effect of ontogenetic and evolutionary adjustments.
 Many of the processes involved in locomotion are periodic, and Fourier methods become applicable.
 This opens up a variety of analysis paths and can even link kinematics and geometric morphometrics, as we explored in this study.
-Our findings on terrestrial ungulates reiterate the requirement to consider habitat structure and substrate as confounding factors \citep[\textit{cf.}][]{Johnson2002,Lejeune1998,Shepard2013}, although it remains to be explored to what degree animals adapt or react to it.
+Our findings on terrestrial ungulates re-iterate the requirement to consider habitat structure and substrate as confounding factors \citep[\textit{cf.}][]{Johnson2002,Lejeune1998,Shepard2013}, although it remains to be explored to what degree animals adapt or react to it.
 The data presented herein confirms that habitat features and morphology are the dominant determinants of elbow-carpus coordination in terrestrial ungulates.
 The moderate magnitude of this variation emphasizes how strongly conserved and optimized ungulate coordination actually is at the joints we investigated, despite the enormous variety of habitats and substrates that these animals encounter.
 Our findings from a broad overview of the clade form the basis for hypotheses that can stimulate future research.
@@ -696,8 +695,8 @@ The following supplementary files of the original publication can be found here:
 
 
 
-\FloatBarrier\clearpage
-
+% \FloatBarrier\clearpage
+\vspace{3cm}
 \subsection{Acknowledgements}
 The authors would like to thank all involved video providers for sharing material for this study on ``YouTube''.
 We also thank Jamie MacLaren for providing a Tapir video, and the owners (Jo Leroy, Kathleen Vercauteren) and caretakers of the Lamas and horse from which direct video material was obtained. 

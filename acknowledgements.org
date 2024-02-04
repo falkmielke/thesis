@@ -13,10 +13,13 @@ Max Prosa (2018): "Erinnerungen", Heimkehr
 I am grateful for my time at Campus Drie Eiken, and wholeheartedly enjoyed being around for so long.
 In all the groups which accomodated me, I was welcomed with a supportive, friendly, collaborative, and creative atmosphere, which is all due to the great people I met there.
 
-from "arkdienst" to "z..."
+from "arkdienst" to "sci-hub"
 
 
 "office roommates": Miriam Ayuso Hernando, Lieselotte Van Bockstal, Sara Prims, Joaquim Sanctorum, Simon Baeckens, and of course Maja.
 A special shoutout to the phenomenal technical and administrative support for who I caused a lot of work: Katty Huybrechts, Gunther Vrolix, Steve Van Bienst, Josie Meaney-Ward, and Jan Scholliers.
 
 Not to forget my supervisors
+
+
+sci-hub, yt-dlp

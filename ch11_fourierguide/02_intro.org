@@ -14,7 +14,8 @@ One reason for the hesitant adoption of the method are certainly terminological 
 These become apparent when assembling an overview of past attempts to apply related methods to locomotor kinematics.
 
 
-In this study, I review the history of the application of Fourier Series in terrestrial vertebrate locomotion.
+\smallskip
+In this chapter, I review the history of the application of Fourier Series in terrestrial vertebrate locomotion.
 
 Some properties and practical misunderstandings are highlighted, before applying the method to a previously analyzed data set on bipedal locomotion in baboons citep:Druelle2021 to once more demonstrate the enormous potential of Fourier analysis.
 
@@ -38,10 +39,10 @@ Our example joint of interest, the hip, would then usually be highly flexed.
 During stance phase, i.e. while the limb is in contact with the ground, the hip gradually extends, maybe reaching the lowest angle around the initiation of the swing phase.
 While the limb swings forward to reach another touchdown, the hip joint flexes again.
 Because the limb is a system of rigid bodies with a given mass (/cf./ Ch. \ref{cpt:dynamics_workflow}), accelerations would never be abrupt, and the hip angle plotted over time might be described as a "smooth saw-tooth curve", or even resemble a sine wave (Fig. \ref{fig:jointangle} C).
-The change of a joint angle over time is called a "joint angle profile".
+The change of a joint angle over time is called a *joint angle profile*.
 
 
-#+CAPTION: *\chng{The frequency domain.}* (Upper Left) Hip joint angle profiles of bipedal locomotion in baboons, as conventionally displayed (gray traces: repeated observation; black trace: average profile; dotted line: mean angle). The joint angle profile shows the measured angles over the course of a stride cycle. (Lower Left) The very same information can be stored in an excel list, here shown as a screenshot, consisting of an indefinite number of value pairs of time and angle. (Lower Right) By using Fourier methods, traces can be converted to a list of relatively few coefficients, without loss of information. (Upper Right) These coefficients have a real and imaginary part, which could be plotted in the complex plane. (All) All these displays capture identical data. A visual representation (upper panels) contains exactly the same information as a numeric representation (tables / lower panels). Similarly, the information contained in frequency domain representation (right panels) is identical to that in the time domain (left panels). With the methods described below, one can transform from the time- to the frequency domain representation or back without loss of information. The frequency domain, which is accessible through Fourier Analysis formulas, is just a different representation of the data, and the transformation procedure is analogous to "plotting" (i.e. deterministic, reversible, favorable in some circumstances).
+#+CAPTION: *\chng{The frequency domain.}* (Upper Left) Hip joint angle profiles of bipedal locomotion in baboons, as conventionally displayed (gray traces: repeated observation; black trace: average profile; dotted line: mean angle). The joint angle profile shows the measured angles over the course of a stride cycle. (Lower Left) The very same information can be stored in an excel list, here shown as a screenshot, consisting of an indefinite number of value pairs of time and angle. (Lower Right) By using Fourier methods, traces can be converted to a list of relatively few coefficients, without loss of information. (Upper Right) These coefficients have a real and imaginary part, which could be plotted in the complex plane. (All) All these displays capture identical data. A visual representation (upper panels) contains exactly the same information as a numeric representation (tables / lower panels). Similarly, the information contained in frequency domain representation (right panels) is identical to that in the time domain (left panels). With the methods described herein, one can transform from the time- to the frequency domain representation or back without loss of information. The frequency domain, which is accessible through Fourier Analysis formulas, is just a different representation of the data, and the transformation procedure is analogous to "plotting" (i.e. deterministic, reversible, favorable in some circumstances).
 #+ATTR_LATEX: :placement [pb]
 #+LABEL: fig:domains
 [[./figures/f2_domains.pdf]]
@@ -54,15 +55,15 @@ The outcome are two columns of numbers: a "time", capturing the seconds at which
 The more temporal sampling points, the better the temporal resolution, but the higher the \chng{landmark tracking} workload and storage requirement.
 
 
-One assumption above is that the stride was recurrent, or cyclical, i.e. periodic.
+A key assumption above is that the stride was recurrent, or cyclical, i.e. periodic.
 This means that an almost (but not perfectly) identical stride will precede and follow the one of interest.
 This is also called the "steady state assumption", i.e. the requirement that the observed behavior is regular (and thereby comparable to other observations).
 If (and only if) that assumption is met, the joint angle profile will start and end at approximately the same value, i.e. the hip angle at each limb touchdown will be almost the same.
-Plotting this as angle against time will show a line with ends fixed on the left and right y-axes.
+Plotting this as angle against time will show a line with ends fixed at the same heights of the left and right y-axes.
 This is metaphorically the same situation as in a guitar string, which is fixed at both ends and performs some excursions from the zero line at positions in between.
 To further stress this analogy, the hip joint angle profile can be described as the combination of a "base tone" and a number of "harmonics" (or "overtones").
-Knowing the base and the relative contribution of the harmonics is sufficient to reproduce the "sound", or in other words to fully know the exact position of each element of the string or signal.
-This is called the *"frequency domain"*, i.e. the representation of a cyclical signal by the relative contribution of its harmonics (Fig. \ref{fig:domains}, right column).
+Knowing the base and the relative contribution of the harmonics is sufficient to reproduce the "sound", or in other words to fully know the exact position of each element of the string or signal, or each instantaneous joint angle of a stride cycle.
+Base and harmonics are called the *"frequency domain"*, i.e. the representation of a cyclical signal by the relative contribution of its frequency components (Fig. \ref{fig:domains}, right column).
 Any periodic, continuous signal, and thus also any cyclical joint angle profile, can be described like this, just as any tone the guitar string makes can be described as a sum of harmonics.
 It might theoretically take infinitely many harmonics to exactly represent the signal (e.g. in case of non-smooth signals).
 However, in practice, the effects which would cause this are usually considered to be measurement noise.
@@ -89,6 +90,7 @@ coefficients = FourierSeriesDecomposition(time, signal, order)
 \end{lstlisting}
 #+END_EXPORT
 
+\vspace*{-1.0cm}
 It can be inverted (just as the analytical formula):
 #+BEGIN_EXPORT latex
 \begin{lstlisting}
@@ -96,7 +98,8 @@ signal = FourierSeriesRecomposition(coefficients, time)
 \end{lstlisting}
 #+END_EXPORT
 
-Knowing the assumptions and limitations, and paying attention to the data types and formats, these functions can be simply applied to transform between the time- and frequency domain.
+\vspace*{-0.5cm}
+Knowing the assumptions and limitations, and paying attention to the data types and formats, these functions can be simply applied to transform back and forth between the time- and frequency domain.
 
 
 \bigskip

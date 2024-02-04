@@ -31,8 +31,8 @@ Thereby, the article has outstanding educational value for those attempting to f
 
 
 With the rise of computational approaches, inverse dynamic modelling of human gait was facilitated by transforming to the frequency domain citep:Ren2007; pattern recognition and classification methods were applied @@latex:\citep[e.g.][]{Mostayed2008}@@.
-Along these lines, Fourier Series was used to get a frequency spectrum and compute development- and pathology related change in overall locomotor frequency @@latex:\citep[e.g.][]{Kurz2011}@@.
-Multi-Dimensional variants of Fourier analysis for two \chng{joint} angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D \chng{joint} angles using quaternions citep:Kenwright2015 point at promising future directions.
+Along these lines, Fourier Series was used to get a frequency spectrum and compute development- and pathology-related change in overall locomotor frequency @@latex:\citep[e.g.][]{Kurz2011}@@.
+Multi-dimensional variants of Fourier analysis for two \chng{joint} angles in phase plots or "cyclograms" citep:DiBerardinoIII2010 or for 3D \chng{joint} angles using quaternions citep:Kenwright2015 point at promising future directions.
 
 
 Finally, recent work by the author (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}) has expanded on the aspect of multi-variate analysis and favorable data properties in the frequency domain citep:Mielke2019,Mielke2023.
@@ -42,7 +42,7 @@ Finally, recent work by the author (Ch. \ref{cpt:fcas} and \ref{cpt:piglets}) ha
 Overall, although some references exist, the studies using Fourier Analysis are sparse among locomotion literature.
 Authors who apply the technique tend to emphasize its usefulness, but often seem to be unaware of previous implementations.
 Few studies have explored downstream analysis of the Fourier coefficients.
-Confusions about mathematical terminology (e.g. "series" or "transform", "transformation" or "regression) complicate the situation.
+Confusions about mathematical terminology (e.g. "series" or "transform", "transformation" or "regression") complicate the situation.
 To summarize, variability in the use of Fourier Series arises from the following questions:
 + Which signals to use? (joint/segment angles)
 + How to apply the transformation? (no regression required)

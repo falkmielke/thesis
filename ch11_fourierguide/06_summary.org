@@ -16,11 +16,11 @@ Some properties of joint angle profiles become directly accessible by FSD (affin
 
 Yet, as demonstrated above, I would argue that the biggest advantage of transforming the data to the frequency domain is that it enables the quantitative analysis of coordination.
 Though joint angle profiles could theoretically be resampled and submitted to multivariate analysis directly, this approach would face major technical challenges if sample size is limited, or data points are structurally different, misaligned, or undersampled (all of which is practically always the case in comparative kinematics).
-FSD circumvents these problems by providing an elegant, concise representation of the data: a set of relatively few, partially meaningful complex coefficients which can be converted back to the original data.
+FSD circumvents these problems by providing an elegant, concise representation of the data: a set of relatively few, meaningful complex coefficients which can be converted back to the original data.
 
 
-This availability for quantitative analysis has far reaching potential.
-I demonstrated it on a relatively small, but well studied data set of bipedal walking in baboons, and were able to predict stride cycles for a coincidentally unobserved combination of subject attributes.
+This availability for quantitative analysis has far-reaching potential.
+I demonstrated it on a relatively small, but well studied data set of bipedal walking in baboons, and was able to predict stride cycles for a co-incidentally unobserved combination of subject attributes.
 Using phylogenetic and morphometric bracketing, the same procedure could be applied to infer the locomotion of extinct species, e.g. hominids.
 Another potential purpose of this quantitative method is its combination with dynamics, i.e. force and moment measurements:
 consider a perturbation analysis, where normal locomotion is interrupted, and a subject can succeed or not in maintaining dynamic balance.
@@ -33,5 +33,5 @@ None of these analysis components are novel.
 Fourier Analysis is a standard tool in physics and engineering.
 I see equally great potential for the biological sciences, where cyclic phenomena are abundant (genetics, physiology, behavior, ...).
 I suspect that the reason for the limited use of these tools to date is limited accessibility, caused by terminological confusion and the lack of attention for example studies.
-I referenced some excellent work that made use of the Fourier theorem citep:Bernstein1935,Pike2002,Webb2007, as well as our own attempts to extend the capability of the technique in the context of kinematics citep:Mielke2019,Mielke2023.
+I referenced some excellent work that made use of the Fourier theorem citep:Bernstein1935,Pike2002,Webb2007, as well as my own attempts to extend the capability of the technique in the context of kinematics citep:Mielke2019,Mielke2023.
 Thereby, I hope that this review can increase availability of the Fourier method to biological sciences, potentially even beyond the study of locomotor kinematics.

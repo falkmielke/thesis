@@ -7,7 +7,7 @@ For this study, piglets (\textit{Sus domesticus}) were filmed from lateral persp
 We apply deep learning methods for \chng{landmark tracking} (DeepLabCut), calculate joint angle profiles, and apply information-preserving transformations (Fourier Series and PCA) to retrieve a multivariate kinematic data set.
 We train a probabilistic model to predict subject characteristics from kinematics.
 The model infers subject characteristics accurately for strides from piglets of normal birth weight (i.e. the category it was trained on), but surprisingly predicts the body mass and size of low birth weight piglets (which were left out of training, out-of-sample prediction) to be ``normal''.
-The discrepancies between prediction and observation confirm that dynamic posture and coordination are unaffected by lower birth weight and lower size, which is evidence that low birth weight does not imply locomotor deficits.
+The discrepancies between prediction and observation confirm that dynamic posture and coordination are unaffected by lower birth weight and lower size, which might indicate that low birth weight does not imply locomotor deficits.
 However, the age of some (but not all) low birth weight individuals is underestimated, supporting the hypothesis that these piglets can experience a delay in locomotor maturation.
 
 \textit{This chapter was submitted to the Journal of Experimental Biology in February 2022. Rejection led to the revision of the use of Fourier methods in locomotor biomechanics (Ch. \ref{cpt:fourier_review}). An alternative version of this chapter was finally published in 2023 \citep{Mielke2023}; that text targets a veterinary audience, but results are identical to the version herein. The history of the document can be followed on BioRXiv (\url{https://www.biorxiv.org/content/10.1101/2022.02.04.479126v3}) and git (\url{https://git.sr.ht/~falk/piglet_fcas}). }
@@ -41,7 +41,7 @@ A second field of technological advance are probabilistic models, which build on
 Such models can naturally incorporate hierarchical parameter interrelations and intrinsic variability.
 The main reason for this is that probabilistic models work on data distributions, and their outcome are distributions and ``effect likelihoods'', rather than point estimates.
 This can be informative on an intrinsically varying process such as locomotion \citep{Mielke2018}. % DeGroote2021
-Machine Learning methods for video \chng{point tracking} are validly advancing to be the standard in kinematic analysis, whereas probabilistic models still lack recognition in the field, despite their potential.
+Machine Learning methods for video \chng{point tracking} are validly advancing to be the standard in kinematic analysis, whereas probabilistic models still lack wide recognition in the field, despite their potential.
 
 
 Piglets are a well-studied model system in which scientific interest joins the economic interest of commercial breeding.
@@ -175,7 +175,7 @@ To further assess \chng{tracking data} quality, gait variables were automaticall
 Definition of these variables was chosen to simplify the automatic procedure, as follows.
 Stride distance, frequency, and speed are trivial measures of the animal movement.
 Duty factor is available for fore- and hindlimb, and measures the fraction of stride time in which the respective hoof is in ground contact.
-Clearance is approximated by quantifying the ratio of flexion of each limb (one minus the quotient of minimum and maximum absolute hip-toe-distance during the stride).
+Clearance is approximated by quantifying the ratio of flexion of each limb (one minus the quotient of minimum and maximum absolute hip-hoof-distance during the stride).
 Head and torso angle are the stride-average angles of the snout-ear or withers-croup lines with respect to the coordinate system.
 Hindlimb phase measures the time between hind- and forehoof touchdown, divided by the stride cycle duration.
 Where applicable, spatiotemporal gait variables were prepared for analysis by converting them to dimensionless values \citep{Hof1996,Alexander1983} using the accumulated distance of landmarks along the snout-to-tailbase line of the animal as reference, extracted as stride average from the \chng{tracked} landmarks.
@@ -189,7 +189,7 @@ Finally, \(368\) of the remaining strides from \(58\) animals were in the younge
 \label{sec:orgcb0a26c}
 
 The landmark data provided by DLC was further processed for analysis.
-Python code for the whole procedure is available (\nolinkurl{https://git.sr.ht/~falk/piglet_fcas}, Python version 3.10.8 at time of model calculation, \nolinkurl{https://www.python.org}).
+Python code for the whole procedure is available (\nolinkurl{https://git.sr.ht/~falk/piglet_fcas}, Python version 3.11 at time of model calculation, \nolinkurl{https://www.python.org}).
 First, joint angle profiles (i.e. joint angle values over time) were extracted for all relevant joints and for the total forelimb angle (croup-withers-hoof).
 Shoulder, elbow, carpal, hip, stifle, and tarsal were the six joints sufficiently well \chng{tracked} and therefore considered relevant for analysis.
 We then applied Fourier Series decomposition in the framework we previously termed Fourier Coefficient Affine Superimposition \citep[FCAS,][and Ch. \ref{cpt:fourier_review}]{Mielke2019}, a flexible procedure which subsumes the following steps.
@@ -244,7 +244,7 @@ To summarize, four categories of variables were used for analysis:
 \item subject characteristics: age, sex, mass, birth weight category, size
 \item spatiotemporal gait variables: distance, frequency, speed, clearance (fore-/hindlimb), duty factor (fore-/hindlimb), head angle, hindlimb phase
 \item dynamic posture: mean joint angles and eROM for six joints
-\item coordination: the residual after extraction of dynamic posture (see above)
+\item coordination: the residual after extraction of dynamic posture
 \end{itemize}
 
 Our guiding question for model design is whether a probabilistic, linear model is able to infer subject characteristics (specifically: age, mass, and size) from raw kinematics (expressed as dynamic posture and coordination) and spatiotemporal gait variables (collective variables).
@@ -259,7 +259,7 @@ Herein, \(\theta\) is either of the outcome subject characteristics, \(\beta\) a
 The models have a total number of 36 degrees of freedom.
 Priors (i.e. \emph{a priori} assigned distributions) for all slopes were Normal distributions with mean and standard deviation corresponding to the mean and two times standard deviation of all observed values of each parameter; logarithmic transform was applied where necessary.
 The observable (``likelihood'') prior for \(\theta\) was a Student's T distribution (allows for wider-than-normal tails and robust regression) with a Gamma distributed \(\nu\) (degrees of freedom); \(\epsilon\) was modeled to be a Half Cauchy distribution.
-The model was implemented using the Python library ``PyMC'' \citep[version 4.2.2,][]{Salvatier2016}.
+The model was implemented using the Python library ``PyMC'' \citep[different versions up to 5.10.2;][]{Salvatier2016}.
 
 
 To re-emphasize, dynamic posture and coordination together effectively capture all the kinematic information of the stride.
@@ -290,7 +290,7 @@ The number of predictions usually matches the number of training samples, which 
 We would thus retrieve mass, size, and age predictions (i.e. probabilistic inference) for each stride in the data set, which were then compared to the known, actual mass, size, and age.
 
 
-All procedures, code, data, and this manuscript are available online (\url{https://git.sr.ht/\~falk/piglet\_fcas}).
+All procedures, code, data, and this manuscript are available online \newline (\url{https://git.sr.ht/\~falk/piglet\_fcas}).
 
 \FloatBarrier
 \clearpage
@@ -373,18 +373,19 @@ These findings indicate that LBW kinematics are hardly distinguishable from NBW 
 
 A quantitative comparison of variable kinematic measurements can be achieved with probabilistic linear models.
 For the purpose of predictive sampling, we train models to describe the interrelations of kinematic parameters and subject characteristics in NBW piglets.
-The outcome of MCMC sampling of a linear model are value distributions for slopes, which in our case indicated how certain kinematic parameters are associated with a change in mass, size, and age (Tab. \ref{tab:modelresults}).
+The outcome of MCMC sampling of a linear model are value distributions for slopes, which in our case indicated how certain kinematic parameters are associated with a change in mass, size, and age (Tab. \ref{tab:modelresults}; Fig. \ref{fig:output_effects}).
 Of the gait- or coordination parameters, only hindlimb clearance was correlated with differences in animal mass.
 Mass was also associated with changes in the dynamic posture of the hip and tarsal.
 For size, the model inferred associations with head angle, hindlimb duty factor and clearance, and one coordination component (CC3), as well as changes in the fore- and hindlimb posture and an effect of sex.
 Finally, age was associated with an increase in forelimb clearance, potential changes at the stifle and carpal, and several coordination components (CC9, CC11).
 Some eROM slope distributions for age were high in average magnitude, but variable (the ``credible interval'' contained zero).
+\chng{More details on the model input and output are discussed in a supplementary analysis to this chapter (Ch. \ref{supp:linearmodels}).}
 These model results provide detailed insight into parameter interrelations in the present data set and indicate which of the parameters are the relevant ones to infer a given subject attribute in predictive sampling.
 
 
 
-\bigskip
-
+%\bigskip
+\FloatBarrier
 Performing in-sample and out-of-sample predictive inference with the models trained on NBW strides elucidated if and how left-out strides differed from NBW model expectation (Fig. \ref{fig:predictions}).
 Note that, to capture variance (i.e. uncertainty in the prediction), each stride was sampled repeatedly.
 
@@ -516,12 +517,12 @@ This is consistent with prior evidence that energy reserves are depleted after b
 Assuming that this is the case, i.e. energy reserves are depleted, we would expect two effects: (i) the animal might succeed in the locomotor task less frequently (not quantified, see above), and (ii) the kinematics might be altered, which we observed.
 The present model was trained from NBW data and thereby tuned to kinematic development from animals with normal energy levels (therefore it can correctly infer age from kinematics in NBW).
 That same model quantifies the potentially energy-deficient animals as younger.
-It might be that energy deficiency coincidentally causes effects which are exactly opposite to the changes that piglet kinematics undergo in normal development.
+It might be that energy deficiency co-incidentally causes effects which are exactly opposite to the changes that piglet kinematics undergo in normal development.
 However, the more likely explanation is an actual delay or a temporary halt in development.
 Failure of the LBW to compete in the first hours are sufficient to explain reduced intake \citep{Amdi2013}, the absolute size and mass difference alone might be crucial, and an immediate question which we cannot address with the present data set is whether and how (fast, likely) animals would recover from the delay.
 Alternatively, there might be a technical artifact in probabilistic sampling \citep[``shrinkage'', \textit{cf.}][]{Gelman2013} which caused the underestimation of ``above average age'' individuals.
 Yet this is an unlikely explanation, given that shrinkage would apply equally to NBWs, and inversely to the opposite, younger subjects.
-Finally, with only eight LBW individuals, we cannot exclude coincidence in which individuals are affected.
+Finally, with only eight LBW individuals, we cannot exclude co-incidence in which individuals are affected.
 
 Neither of these technical explanations puts doubt on the clarity of the initial finding: a subset of the low birth weight individuals produced locomotor behavior which is quantitatively similar to that of younger individuals.
 
@@ -531,7 +532,7 @@ We report high magnitude (but also highly variable, i.e. ``non-significant'') sl
 Note that these slopes solely reflect effects within the NBW data subset.
 We also observed slight differences in the average hindlimb dynamic posture (Fig. \ref{fig:raw_data}).
 In fact, a more flexed hindlimb is typical for the youngest animals of both birth weight categories.
-\chng{This is further supported by the observation that hindlimb clearance and mean hip angle have a significant effect in the age model (Fig. \ref{fig:output_effects}).}
+\chng{This is further supported by the observation that hindlimb clearance and mean hip angle have a pronounced effect in the age model (Fig. \ref{fig:output_effects}).}
 We emphasized potential differences in group composition to explain that (e.g. sex effect in the ``size'' model), and different age per group might be a proximal explanation for the non-normal age inference in LBW.
 However, the average age of LBW animals (\(5.3 h\)) in our data set is nominally above that of NBW (\(3.8 h\)), which is a discrepancy with the age underestimation.
 Yet if we assume that the hypothesis of delayed locomotor development is correct, the nominal age would be misleading, and LBW effectively behave similar to younger animals.
@@ -544,7 +545,7 @@ Though many other parameters also entered the probabilistic model and influenced
 The findings discussed above are enabled by ``inverse'' modeling of subject characteristics as a function of kinematic parameters, using probabilistic models.
 The models do reveal various parameter associations, yet the top down (repeated) testing with the chosen model structure complicates drawing definite conclusions \citep[e.g. we observed a sex effect on size, but opposite of what other studies have reported,][we conclude males in our study were just smaller by chance]{Baxter2012}.
 Instead, the demonstrated predictive modeling strategy \citep{Shmueli2010} leverages the potential of probabilistic models to perform out-of-sample prediction (via separation of the LBW test group).
-\chng{However, this strategy is limited by a major asymmetry: in case the prediction shows differences, they are most likely robust, yet ``non-effects'' could be caused by unfavorable dataset characteristics (Ch. \ref{supp:linearmodels}).}
+\chng{This strategy is limited by a major asymmetry: in case the prediction shows differences, they are most likely robust, yet ``non-effects'' could be caused by unfavorable dataset characteristics (Ch. \ref{supp:linearmodels}).}
 Non-probabilistic modeling could equally serve to predict values, but it cannot generate parameter distributions (as in the bimodal age predictions, Fig. \ref{fig:predictions}).
 Our probabilistic models implicitly regard ``non-significant'' parameter slopes \chng{(Fig. \ref{fig:output_effects})}, which are usually neglected in standard hypothesis testing (such as the high magnitude, highly variable joint ROM quantities, which might nevertheless have relevance for age prediction in case they are correlated and add up).
 The data transformations and predictive modeling strategy we applied herein hold further potential for inferring kinematics, for example by morphometric bracketing of extinct taxa.
@@ -634,7 +635,7 @@ The other criteria (model complexity and sample size) are predetermined in this 
 
 For the \textbf{age model}, we observe a low residual variance, and there are two parameters which are significantly different between NBW / LBW \textit{and} have a high slope (those are hindlimb clearance and hip angle).
 Notably, there is hardly any difference in the observed coordination parameters.
-For the model of \textbf{body mass}, the same parameters seem to have relevant slopes, yet the model residual is much higher and will likely prohibit conclusive differences in the probabilistic prediction.
+For the model of \textbf{body mass}, the same parameters seem to have relevant slopes, yet the model residual is much higher and likely prohibits conclusive differences in the probabilistic prediction.
 Other slopes seem to have significant effect in the NBW group (hip and tarsal eROM), yet the input distributions (i.e. NBW and LBW observations) do not differ, and so their effect is irrelevant for prediction of mass.
 For the \textbf{size model}, we find some slopes with a negative effect on the output (hindlimb clearance, head angle, hip angle).
 However, others with a positive effect (knee angle, tarsal eROM) possibly cancel this out for the overall prediction.
@@ -663,8 +664,8 @@ On the other hand, inspection of the predictive age model confirms that finding 
 \section{Acknowledgements}
 \label{sec:org2d8bfbc}
 The author would like to thank Miriam Ayuso for organizing and participating in the recording sessions, as well as Laura Buyssens, Georgios Petrellis, Gunther Vrolix, Charlotte Vanden Hole, Denise Vogel and all students who joined for help during recordings.
-Ann Hallemans comment stimulated the extra analysis, from which this chapter benefits a lot; thank you!
-Maja Mielke provided valuable comments on the manuscript text.
+A comment by Ann Hallemans stimulated the extra analysis, from which this chapter benefits a lot; thank you!
+Maja Mielke provided valuable comments on the manuscript text, in fact for all three major versions of it, and I am very glad she did.
 
 
 \FloatBarrier

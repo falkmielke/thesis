@@ -54,6 +54,11 @@ Familiar examples are the ``t-Test'' or ``ANOVA'' in all their variants.
 To summarize, this branch of statistics is called \textbf{hypothesis testing}; it is a complex field and valuable when it comes to falsifying hypotheses.
 
 
+\FloatBarrier
+The term ``hypothesis testing'' might be understood to be synonymous with ``frequentist statistics'', or ``non-Bayesian statistics''.
+This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called ``Bayes factor'' but are not discussed herein \citep[cf.][]{Shikano2019}.
+Hence, we need to disentangle two categories of distinction (Tab. \ref{tab:statistics}).
+
 \begin{table}[h!]
 \caption{\label{tab:statistics}\textbf{Statistics: an overview.} Probabilistic models are the focus of this chapter.}
 \centering
@@ -70,11 +75,6 @@ To summarize, this branch of statistics is called \textbf{hypothesis testing}; i
 
 
 
-\FloatBarrier
-The term ``hypothesis testing'' might be understood to be synonymous with ``frequentist statistics'', or ``non-Bayesian statistics''.
-This conception would be inexact, because there are also Bayesian hypothesis tests, which rely on a concept called ``Bayes factor'' but are not discussed herein \citep[cf.][]{Shikano2019}.
-Hence, we need to disentangle two categories of distinction (Tab. \ref{tab:statistics}).
-
 Not all researchers are after hypotheses.
 What we usually desire in obtaining experimental data is a quantitative assessment of different effects which exist in the data and influence the outcome of a quantitative measurement.
 There are two main frameworks to tackle these questions, both of which are captured by the term \textbf{modeling}: ``frequentist'' models (usually least squares optimization), and ``Bayesian'' / probabilistic models (enabled by a technical trick called \emph{MCMC} = ``Markov Chain Monte Carlo'' sampling).
@@ -82,6 +82,7 @@ Hence, we should distinguish the type of question (hypothesis / quantitative est
 
 
 
+\FloatBarrier
 All these ``strains'' of statistics have historically developed different terminologies, sometimes even different meaning to the same terminologies, which can be confusing and even misleading (e.g. try to find out about the term ``likelihood'', cf. ``Bayesian Statistics without Frequentist Language'' by Richard McElreath, 2017, \url{https://www.youtube.com/watch?v=yakg94HyWdE}).
 In particular, there is a lot of confusion and ongoing discussion about the distinction and proper presentation of \emph{confidence intervals} and \emph{credible intervals}.
 \chng{A credible interval is an interval in which the true value of a model parameter is expected to be found, with a given likelihood.}
@@ -93,7 +94,7 @@ You might notice that my way of tackling statistics with inclusive models were h
 The main approach presented in this document is \textbf{probabilistic modeling}.
 For simplicity, models will all be \emph{linear models}, which means that all outcome variables are modeled as a combination of linear predictors (i.e. just linear slopes / no multiplications, exponents etc.).
 This subclass of models is often summarized as ``Generalized Linear (Mixed) Models'', or GLMs.
-It is a special subset of thinkable models, nevertheless the most frequently used one.
+It is a special subset of thinkable models, probably the most frequently used one.
 Despite this practical restriction, most concepts introduced below should equally apply to non-linear models.
 In fact, good modeling frameworks are sufficiently flexible to enable any model design, not only linear equations.
 \bigskip
@@ -123,7 +124,7 @@ In fact, they are often repeated iteratively.
 
 \subsubsection{Data Simulation}
 \label{sec:org2c774e4}
-Before going to the actual data, I prepare a simulated data set which roughly incorporates parameters and parameter relations.
+Before going to the actual data, I prepare a simulated data set which roughly incorporates parameters and parameter relations \citep[for an example, see][]{Mielke2024lm}.
 These relations are comparable to those I intend to model later.
 For example, imagine I hope to find an age-dependent body mass slope, i.e. I expect that one of my variables (``\texttt{obs1}'') depends on body mass (\texttt{bm}), but the strength of this dependence is different for each age class.
 Then I will generate a fake data set which follows exactly this desired relation: starting with a white noise data column for \texttt{obs1}, I add a known \texttt{intercept}.
@@ -251,6 +252,10 @@ Logical arguments, on the other hand, are soft criteria which exclude some impla
 There is no general advice on those, yet oftentimes, the inability to MCMC-sample a particular probabilistic model can hint at overlooked logical errors.
 An advantage is that logical exclusion criteria restrict the model search space \emph{a priori} and save us from sampling all too many design choice combinations.
 
+Note that, in some fields, it is an ethical requirement to pre-register your statistical models and tests.
+If your work in such a field, make sure to get advice about it from a senior colleague.
+Most certainly, pre-registration enforces more diligence in the simulation step.
+
 
 \subsubsection{MCMC Sampling}
 \label{workflow:sampling}
@@ -261,11 +266,11 @@ MCMC sampling is the procedure which adjusts model parameters to match the data.
 It is notoriously time-consuming.
 
 Sampling in probabilistics is analogous to the least squares regression in frequentist models.
-However, in probabilistics, this step is a random exploration of the model parameter space.
+However, in probabilistics, this step is a semi-random exploration of the model parameter space (``semi'' because of heuristics which avoid errors and facilitate convergence).
 This exploration is initiated at a random ``point'' (read: distribution), and the hope is that after a certain ``tuning'' period, this ``non-random walk'' will get stuck in a local optimum.
 To make sure the optimum is stable, the repetitive exploration step is run for a sufficiently large number of iterations.
 Also, such an optimum should be characterized by the best match of the model values (``posterior distribution'') and the data.
-There are technical tricks to increase the chance that the most attractive local optimum is the global one (e.g. run several independent ``chains'' with random starting points; using an adaptive algorithm).
+The mentioned heuristics are technical tricks to increase the chance that the most attractive local optimum is the global one (e.g. run several independent ``chains'' with random starting points; using an adaptive algorithm).
 There are many different update rules and algorithms (``Metropolis'', ``NUTS'', ``Hamiltonian Monte Carlo'', \ldots{}) all well explained on Wikipedia.
 
 A defining difference to conventional regression is that the matter and outcome of parameter optimization are distributions of model parameter values (as opposed to point estimates).
@@ -295,7 +300,7 @@ Scripting can handle many data tables at once, easily.
 But then, one might be tempted to write long scripts which perform the whole analysis procedure in one go, in a \emph{serial} fashion.
 This temptation is fostered by notebook-like programming interfaces, such as RStudio/RMarkdown, Jupyter, or the Matlab interface.
 I call this extreme strategy \emph{``serialization''}.
-The problem is that complex scripts are hard to generalize and maintain.
+The problem is that complex, serial scripts are hard to generalize and maintain.
 Complexity should be avoided; good documentation is indispensable.
 
 \textbf{Is there an intermediate way?}
@@ -400,10 +405,10 @@ Prediction is the ultimate test to every model: when probing an unobserved or in
 With this capability, the model is able to generate informed hypotheses which stimulate future research.
 Even if a subsequent observation is impossible (thinking of inferring palaeontological data), the model can yield a distribution of values for a given phenomenon which is most plausible with the actual data.
 Another use case is to test evolutionary hypotheses, for example by relating hypothetical traits (e.g. extreme morphology) to limited physical or ecological parameter spaces (e.g. contact forces).
+\end{enumerate}
 
 I conclude that ``out of sample prediction'' is where the fun starts.
 As I put it above, this feature is one of the biggest advantages of probabilistic models.
-\end{enumerate}
 
 
 \subsubsection{Model Hygiene}
@@ -519,6 +524,7 @@ The reason is the ``fixed knee'' constraint introduced here for illustration; th
 
 
 \textbf{Joint angles} measure the difference of two segment angles, which is equal to the angle between two segments.
+\chng{Imagine an action cam with a wide angle lens attached parallel to your upper arm, pointing in direction of the elbow: you could see and quantify the movement of your lower arm on the videos, independent of shoulder angle.}
 Joint angles are also interdependent through musculoskeletal coupling and the influence of gravity.
 Imagine an animal holds its trunk always perfectly vertical for some reason.
 As in the scenario above, a change of the hip angle profile will be visible as compensation in the more distal joints and segments.
@@ -606,7 +612,7 @@ Note that, in principle, age class and sex can be interrelated, e.g. if there is
 This is indeed the case in our data set: in the ``adult'' class, only females were measured.
 However, this bias is neither coincidental nor intentional, but owes to the group structure and social habits of baboons.
 It forces us to assume that locomotion of adult \emph{Papio anubis} is indifferent to sex, or that the sex difference in adults can be inferred from the observed difference in subadults.
-More on this case below.
+More on this to follow.
 
 
 The \emph{body mass} of the animals was determined for each recording (averages for infant/adolescent/adult individuals: \(3.0/10.2/13.1\ kg\)).
@@ -623,6 +629,7 @@ To prepare the decision on how to include body mass, leg length and BMI in the s
 It is a rather simple one, modeling body mass as a function of age class and sex.
 I will use it to settle some fundamentals about how I apply the modeling procedure herein.
 
+\clearpage
 \subsubsection{The Body Mass Model}
 \label{sec:orge4d1e9b}
 Take the following linear model for body mass, with body mass \(\theta\), intercept \(\alpha\), data vectors \(v\), slopes \(\beta\) and residuals \(\epsilon\):
@@ -1022,7 +1029,7 @@ The model of spatiotemporal gait variables quantifies how stride (or gait) chara
 Clearance is highest in adult males of low body mass (though we did not actually observe those; the effects are separately determined for age class, sex, and body mass).
 Females and subadults lift their feet less during the swing, as do animals of comparatively higher body mass.
 Duty factor is higher in infants: they are in ground contact for a longer portion of the stride.
-All of the three speed-related parameters (i.e. distance, frequency, speed; all dimensionless) are affected by body mass, though the effect is \chng{clearly different from zero} only for frequency.
+All of the three speed-related parameters (i.e. distance, frequency, speed; all dimensionless) are affected by body mass, though only for frequency the effect is \chng{clearly different from zero}.
 Animals of higher body mass tend to take shorter steps of higher frequency, which seems to overcompensate in terms of speed.
 Infants cover lower relative distance at lower frequency, which adds up in terms of relative speed.
 The results on trunk angle show that males hold their upper body less upright than females (i.e. at a higher trunk angle; though as with any sex effect this might be due to few, influential observations).

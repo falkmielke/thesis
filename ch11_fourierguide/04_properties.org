@@ -15,10 +15,10 @@ As pointed out above, some researchers have applied regression algorithms to ext
 A regression is an iterative procedure which attempts to match a known, parametrized function (the model) to a target signal (the measurement) by adjusting the parameters on each iteration with clever update rules.
 An intuitive example is linear regression, in which the parameters `a` and `b` of a function \(y=a+b\cdot x\) are found so that the formula best describes the observed data relation of `y` and `x`.
 Typical optimization algorithms are the Nelder-Mead simplex citep:Nelder1965 or variants of the BFGS algorithm citep:Broyden1970,Fletcher1970,Goldfrab1970,Shanno1970,Zhu1997.
-Though it is immensely useful, regression has several technical disadvantages: convergence is not guaranteed, start values are required and might affect the result, the algorithm might get stuck in local optima, accuracy is finite, the iterative procedure is computationally expensive, and reversibility requires the inverse function and another regression.
-Some of these disadvantages are emphasized when working with trigonometric functions.
+Though it is immensely useful, regression has several technical disadvantages: convergence is not guaranteed, start values are required and might affect the result, the algorithm might get stuck in local optima, accuracy is finite, the iterative procedure is computationally expensive, and reversibility requires the inverse function or another regression.
+Some of these disadvantages are especially hindering when working with trigonometric functions (e.g. inversion).
 
-
+\smallskip
 *Fourier Series Decomposition is not a regression.*
 Determining the "parameters", i.e. Fourier coefficients, works by eqn. \eqref{eqn:fourier_coefficients1}, which can be directly translated to computer code (see above and supplement \ref{appendix:code}).
 The procedure is deterministic, exact, and reversible; no start values are required.
@@ -83,7 +83,7 @@ This would lead to an abrupt change, which demands high order harmonics, which w
 However, abrupt changes from discontinuities are not physiological, so those values can be considered an artifact.
 
 
-As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and concatenate it to the end of the original signal.
+As a second option, it is common practice to generate an inverted version of the signal (of the form \(g(t) = -f(-t)\) ) and append it to the end of the original signal.
 This could be visualized as a rotation of a duplicate of the signal about its last measurement point, which results in the values progressing first in forward and then inverted in backward measurement order, all changes accumulating to zero, and the "double" signal ending where it started.
 This method is common in the Fourier analysis of ground reaction force measurements citep:Schneider1983,Alexander1980, where data usually starts and ends at zero.
 # It annihilates the signal mean (zero'th coefficient) and
@@ -134,7 +134,7 @@ Moving from an earth-bound reference frame to the coordinates defined by the obj
 Another common, invertible coordinate transformation is the Principal Component Analysis, which transforms data into the space spanned by the orthogonal eigenvectors of a data covariance matrix.
 Because these transformations retain all information, and because an inverse mathematical operation exists, one can move the given data forth and back between the different spaces or domains.
 Even more, one can transform or untransform unrelated, new data between spaces, although that data was not involved in defining those spaces.
-This feature is useful and common for averages and extrapolations.
+This feature is useful and commonly applied to averages and extrapolations.
 
 
 Fourier Series Decomposition is invertible.
@@ -157,7 +157,7 @@ The existence of this inverse formula means that just as exchanging a coordinate
 However, one limiting factor is the order of the Fourier Series.
 Some signals (i.e. those with sharp turns or quick changes) require a high number of harmonics to be accurately represented in frequency space.
 Conversely, when operating with a finite order, some signals might be filtered on the first transformation to the (pruned) frequency domain.
-Real measurements are usually subject to measurement noise, such noise involves changes as quick as measurement sampling, and thus it is lost in FSD.
+Real measurements are usually subject to measurement noise, such noise involves changes as quick as measurement sampling, which are thus lost in FSD.
 This *filtering property of FSD* can represent a loss of information (if the noise is considered informative, but note that in that case the residual after re-transformation might be even more informative).
 
 However, in cases where this filtering effect is negligible or even favorable, FSD and its inversion can be applied.
@@ -165,7 +165,7 @@ Repeated back- and forward transformation does not discard further information.
 When implementing a version of the equations above in computer code, a good check is whether values are unchanged after applying FSD and its inversion in series.
 And because of the relatively few coefficients needed for accurate representation of physical processes, compared to sampled timelines, it is often *efficient to store* kinematic data in the form of FSD coefficients.
 
-* Choice of Order
+* Choice of Order\label{cpt:order}
 How to decide how many coefficients should be retained?
 That number is the "order" of the Fourier Series.
 It can be easily determined by exploiting the reversibility of a method.
@@ -174,7 +174,7 @@ The (root-mean-square) difference of the original signal and the re-transformed 
 Additionally, original and re-transformed signals should be plotted on top of each other for visual inspection.
 
 
-This strategy is of general use, and we will demonstrate it on the test case (Ch. \ref{casestudy:dataprep}).
+This strategy is of general use, and I will demonstrate it on the test case (Ch. \ref{casestudy:dataprep}).
 In the particular case of joint angle kinematics, it has often been concluded that relatively few coefficients are sufficient to capture the essence of the phenomenon.
 This is physically plausible, because the elements of limbs are rigid bodies with a certain inertia.
 Such elements cannot perform too abrupt accelerations, and in consequence, the profiles are smooth.
@@ -215,7 +215,7 @@ In the case of joint angle profiles, this remainder can be considered coordinati
 * Multivariate Analysis
 The numeric representation in the frequency domain is usually shorter, and as mentioned above, storage might be efficient.
 Nevertheless, an FSD of the order \(N\) will yield \(N+1\) coefficients, which are \(2N+1\) numbers when splitting up their real and imaginary parts.
-Although we usually find an \(N<10\) appropriate (see above), this would still leave a considerable amount of variables for analysis.
+Although we usually find an order of \(N<10\) appropriate (Ch. \ref{cpt:order}), this would still leave a considerable amount of variables for analysis.
 
 This raises the question of the effect of multivariate analysis methods, such as Principal Component Analysis (PCA).
 PCA is a coordinate transformation which finds orthogonal coordinate axes in the data set that are oriented towards the largest variability within the data citep:MacLeod2007.
@@ -237,4 +237,4 @@ Such a standardization would disrupt the temporal structure of the signal, and e
 A better strategy for multi-joint analyses is the standardization by \chng{extraction and isolation} of affine FSD components.
 As mentioned above, mean joint angle and joint amplitude can be standardized, and phase differences of all observations can be minimized by temporal alignment.
 With such preprocessing, the outcome of a PCA will equally represent each joint of interest, without disrupting the temporal structure of the joint angle profiles, and benefiting from intrinsic correlations of movements of the limb elements.
-PCA is invertible, and any downstream modeling outcomes can be related back to the original joint angle profiles.
+PCA is invertible, just as FSD, and so any downstream modeling outcomes can be related back to the original joint angle profiles.
