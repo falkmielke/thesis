@@ -1,7 +1,7 @@
 #+title: List of Publications
 
 #+SETUPFILE: latex_header.org
-#+EXPORT_FILE_NAME: publications
+#+EXPORT_FILE_NAME: publications_obsolete
 
 #+BIBLIOGRAPHY: literature.bib apalike
 #+BEGIN_SRC elisp :results none :exports none :tangle no
@@ -9,6 +9,8 @@
       '("literature.bib"))
 #+END_SRC
 
+@@latex:\let\section\subsection@@
+@@latex:\let\subsection\subsubsection@@
 @@latex:\begin{change}@@
 The following resources with contributions by the author are publicly available.
 Updated information can be found [[https://orcid.org/0000-0003-3229-0981][on the author's "orcid" profile]].
@@ -68,6 +70,10 @@ All listed posts are self-published and can be found on the website [[http://mie
 + automatic stride cycle extraction\newline http://mielke-bio.info/falk/posts/27.cycle_extraction
 + image segmentation\newline http://mielke-bio.info/falk/posts/30.difflineseg
 
+*** Statistics
++ probabilistic statistical modeling\newline http://mielke-bio.info/falk/posts/06.patella
++ linear model prediction capability\newline http://mielke-bio.info/falk/posts/33.linearmodels
+
 *** Inverse Dynamics
 + wrenches\newline http://mielke-bio.info/falk/posts/10.id_lmx0a_wrenches
 + fictitious forces - overview\newline http://mielke-bio.info/falk/posts/11.id_lmx0b_fforces
@@ -81,8 +87,6 @@ All listed posts are self-published and can be found on the website [[http://mie
 + density approximation from CT data\newline http://mielke-bio.info/falk/posts/23.ct_density
 
 *** Miscellaneous
-+ linear model prediction capability\newline http://mielke-bio.info/falk/posts/33.linearmodels
-+ probabilistic statistical modeling\newline http://mielke-bio.info/falk/posts/06.patella
 + Procrustes superimposition\newline http://mielke-bio.info/falk/posts/18.procrustes
 + quaternions\newline http://mielke-bio.info/falk/posts/21.quaternions
 + photogrammetry\newline http://mielke-bio.info/falk/posts/22.photogrammetry
@@ -90,3 +94,6 @@ All listed posts are self-published and can be found on the website [[http://mie
 + academic writing software use\newline http://mielke-bio.info/falk/posts/32.scird2023
 
 @@latex:\end{change}@@
+
+@@latex:\let\subsection\section@@
+@@latex:\let\subsubsection\subsection@@

@@ -73,7 +73,7 @@ This is a complete quantification of /how/ limb segments of animals change their
 Segments could be axial or peripheral parts of the animal which move as a unit (rigid- or pseudo-rigid bodies, hence the general term "rigid body dynamics"), which is to a large extent analogous to a door on a hinge.
 
 Having cleared the /how/ in previous chapters, the other relevant aspect of locomotion is /why/ segments move.
-This opens up a rabbit hole of elementary physics @@latex:\citep["Erhaltungssätze", \textit{sensu}][]{Noether1918}@@:
+This opens up a rabbit hole of elementary physics @@latex:\citep[``Erhaltungssätze'', \textit{sensu}][]{Noether1918}@@:
 #+begin_quote
 A rigid body will not change its linear or angular momentum if there are no external forces or external torques applied to it.
 #+end_quote
@@ -154,7 +154,7 @@ Hence, we get a more or less familiar equation for the Force \(\vec{F}\), which 
 
 ** Moments
 
-#+CAPTION: \textbf{Force and Moment.} A force applied further away from the hinge \(\vec{P}\) (situation A) will generate a larger \chng{moment} than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector. \chng{Furthermore, because the change in angular momentum is related to that moment, the door will gain a higher momentum (and will therefore "hit harder").}
+#+CAPTION: \textbf{Force and Moment.} A force applied further away from the hinge \(\vec{P}\) (situation A) will generate a larger \chng{moment} than a force similar in magnitude, but applied more proximal to the hinge (situation B). The reason is that the moment is defined as the cross product of the position vector of the force application point (in a hinge-centered reference frame) and the force vector. \chng{Furthermore, because the change in angular momentum is related to that moment, the door will gain a higher momentum (and will therefore ``hit harder'').}
 #+LABEL: fig:slamming_moment
 #+ATTR_LATEX: :placement [p] :width 12cm
 [[./figures/slamming_shift.pdf]]
@@ -230,7 +230,7 @@ But the general idea is that one needs to keep track of a reference point for an
 The formulas for force and moment above resemble each other.
 In fact, a common trick to help novice physicists remember the angular formulas is to replace position \(\vec{x}\) by \(\theta\) (and derivatives accordingly), and mass \(m\) by mass moment of inertia \(I\) citep:Tipler2007.
 
-The force-moment-analogy is no coincidence.
+The force-moment-analogy is no co-incidence.
 Force is a 3D vector, acting at a point.
 Moment is a 3D vector with a reference point.
 The moment is in fact just the corresponding force acting at a lever.
@@ -339,7 +339,7 @@ Interested readers may refer to a practical guide by the author citep:Mielke2020
 ** Quaternions
 #+CAPTION: @@latex:\chng{\textbf{Spatial rotation with quaternions}. A point \(\vec{D}\) (blue, with gray dashed position vector) can be rotated by an angle \(\theta\) around an axis \((x; y; z)\) to position \(\vec{D}_{rot}\). The higher the rotation angle value (indicated by the orange area), the further the rotation. A quaternion (large black arrow) can encode both the axis and the angle in a 4D vector, in a manner which conveniently enables the execution of the rotation by simple vector multiplication.}@@
 #+LABEL: fig:quaternion
-#+ATTR_LATEX: :placement [b] :width 17cm
+#+ATTR_LATEX: :placement [b] :width 16cm
 [[./figures/quaternions.pdf]]
 
 On top of the force/moment complexity comes the issue of quantifying rotation in space.
@@ -429,17 +429,17 @@ Force plates usually generate electronic read-outs from directional, pressure se
 By calibrating the plate, one can convert a voltage profile to forces, moments, and a contact point, all of which are changing over time.
 
 
-Hence, the practical strategy citep:Robertson2013,Lynch2017,Dumas2004 is to start at the most distal limb segment (e.g. the foot-toe complex), and measure its movement and ground contact wrench.
+Hence, the practical strategy citep:Robertson2013,Lynch2017,Dumas2004 is to start at the most distal limb segment (e.g. the foot-toe or hoof complex), and measure its movement and ground contact wrench.
 In that situation, all wrenches in the balance are known, except the wrench at the proximal joint (human foot example: the ankle wrench).
 The external wrench at the ground contact point, in the balance calculation of the segment which is in ground contact, is also called the tip wrench; trivially, it is zero if the distal segment is lifted off the ground.
 Note that the read-out of a force plate gives a contact point, which is not the \(\vec{COM}\), so the wrench can be taken at contact point and must then be shifted.
 One can calculate the balance of wrenches by subtracting all external wrenches (ground contact wrench, gravitational wrench, proximal joint wrench, ...; all shifted to the \(\vec{COM}\) as the common reference point) from the dynamic wrench of the segment (measured linear and angular movement, also with respect to the \(\vec{COM}\)).
-Exactly one of the external wrenches is unknown, the one on the proximal joint; one can solve for it (careful with reference points: the calculation comes out at the \(\vec{COM}\)).
+Exactly one of the external wrenches is unknown, the one on the proximal joint; we can solve for it (careful with reference points: the calculation comes out at the \(\vec{COM}\)).
 The proximal joint wrench is shifted to the proximal joint position, its natural "point of attack"@@latex:\footnote{This series of shifts should have illustrated why the wrench is a useful construct: computational rigor can make sure that the reference points are respected.}@@.
 Inverted in sign (Newton's \(n^{th}\) law), the joint wrench becomes the tip wrench of the proximally adjacent segment and adds to the balance of wrenches of that segment (Fig. \ref{fig:wrenchbalance}).
 There, the procedure is repeated.
 
-#+CAPTION: \textbf{Wrench balance of a piglet femur (sketch)}, as it can be computed for each segment from distal to proximal. The tip wrench (\(\vec{W}_{\vec{tip}}\), at the distal joint) is the input from the distal adjacent segment or from ground contact. Dynamic wrench (\(\vec{W}_{dyn}\), at the center of mass/\(\vec{COM}\)) is calculated from kinematics (see above). Gravitational wrench (\(\vec{W}_{\vec{g}}\), at \(\vec{COM}\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(\vec{W}_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate system (\(ICS\), i.e. the inertial reference frame).
+#+CAPTION: \textbf{Wrench balance of a piglet femur (sketch)}, as it can be computed for each segment from distal to proximal. The tip wrench (\(\vec{W}_{\vec{tip}}\), at the distal joint) is the input from the distal adjacent segment or from ground contact. Dynamic wrench (\(\vec{W}_{dyn}\), at the center of mass/\(\vec{COM}\)) is calculated from kinematics. Gravitational wrench (\(\vec{W}_{\vec{g}}\), at \(\vec{COM}\)) is known by the mass of the segment. These wrenches allow to calculate the joint wrench (\(\vec{W}_{joint}\), at the proximal joint), which is the tip wrench input for the proximal adjacent segment. All calculations can be performed in the inertial coordinate system (\(ICS\), i.e. the inertial reference frame).
 #+LABEL: fig:wrenchbalance
 #+ATTR_LATEX: :placement [p] :width 8cm
 [[./figures/wrench_balance.pdf]]

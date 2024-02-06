@@ -1,5 +1,5 @@
 \section{First Principles}
-\label{sec:orgb5a85bb}
+\label{sec:orgb2dd2c1}
 The three parts of this thesis each had a slightly different focus, spanning the range of methodologies which is characteristic for biomechanical research (kinematics, dynamics, statistics).
 They follow a common scheme:
 each of the parts took a basic principle of physics research and applied it to the study of biomechanics.
@@ -19,7 +19,7 @@ This is especially true in the biological sciences, where variability in a trait
 Statistical models which incorporate variability, though rarely applied in that context to date, are useful in biological applications \citep{Roraas2019,DeGroote2021}.
 I provided a brief tutorial to outline why and how probabilistic models work in practice (e.g. the MCMC sampling methodology, Ch. \ref{cpt:statistics}).
 In that framework, I applied probabilistic, predictive modeling to a comprehensive data set of piglet kinematics (Ch. \ref{cpt:piglets}).
-Prediction in conventional statistics would be deterministic, i.e. yielding \chng{averages, at best with the vague guidance of standard deviations,} which do not adequately reflect the stochastic, variable nature of the phenomenon.
+Prediction in conventional statistics would be deterministic, i.e. yielding \chng{averages, at best with the vague guidance of standard deviations,} which only superficially capture the stochastic, variable nature of the phenomenon.
 I demonstrated that probabilistic prediction can be used to generate relevant insights into locomotor maturation of piglets.
 
 \medskip
@@ -33,7 +33,7 @@ This finding was enabled by a third basic principle commonly applied in physics 
 \medskip
 There are certainly more examples of basic principles in physics which would deserve application in biology in general \citep[e.g. quantum cognition,][]{Busemeyer2015,Aerts1995}, or in biomechanics in particular \citep[e.g. wrenches and quaternions,][]{Dumas2004}.
 \section{\chng{Predictive Power}}
-\label{sec:org3d4ec9b}
+\label{sec:orgecf1b9e}
 Yet are these adaptations from the physical sciences inevitable?
 Why/when should conventional methods be questioned and compared to the yet uncommon methods suggested in this thesis?
 
@@ -85,7 +85,7 @@ These two examples illustrate how the methodological advances presented herein c
 There are multiple potential goals of predictive approaches \citep{Shmueli2010}, such as hypothesis generation, measurement comparison, improvement of explanatory models, and assessing predictive accuracy of a model.
 The latter goal was targeted herein in a comparative study of newborn piglets.
 \section{Transferability}
-\label{sec:org9bb214d}
+\label{sec:org50cbd15}
 
 \begin{change}
 \begin{figure}[p]
@@ -125,7 +125,7 @@ There is neural organization: brain circuits are known to exhibit oscillations a
 Furthermore, the evolution-like optimization of behavioral tasks: there is little use to gain efficiency in a one-time control unit, yet repeated modules of a task are worth adjustment; this situation might have favored recurrent locomotor modes (but note that those are not omnipresent: think of cephalopod benthic crawling).
 In the many cases which show repetitive or recurrent behavior, Fourier analysis is the natural first choice for transformation.
 \section{\chng{Methodological Advances}}
-\label{sec:org63a5d94}
+\label{sec:orgfa24faa}
 \begin{change}
 To summarize: the Fourier method presented herein complements existing analysis strategies for locomotor kinematics by transforming the data to the frequency domain.
 This enables the isolation of affine components, which quantify the dynamic posture, effective range of motion, and the coordination of segments.
@@ -146,7 +146,7 @@ Joint angle profiles must be cyclic, i.e. end at the angle where they started.
 Another limitation is that rather complex profiles might theoretically require a rather high number of coefficients, as do situations with multiple joints and 3D angles (which were not exhaustively explored in this work).
 
 On the other hand, the nature of locomotion is that there are oscillating limb elements which often move in cyclical patterns.
-There are non-invasive tricks to achieve cyclicity, some of which I demonstrated herein (e.g. end-start matching, \ref{properties:endstart}).
+There are non-invasive tricks to achieve cyclicity, some of which I discussed herein (e.g. end-start matching, \ref{properties:endstart}).
 
 
 This connects the first two parts of this thesis to the third one.
@@ -161,7 +161,7 @@ The motor output of biological systems is intrinsically variable, and an animal 
 Working with likelihoods and probabilities of kinematic patterns seems to better reflect the nature of the process.
 \end{change}
 \section{How and Why Piglets Move}
-\label{sec:orgf524826}
+\label{sec:orga738ee9}
 The primary goal of this thesis was to falsify the hypothesis that there are differences in locomotion of low- and normal birth weight piglets (LBW and NBW, Ch. \ref{cpt:generalintro}).
 There are two main aspects in which the study groups could differ: in kinematics (\emph{how} animal limb segments move) and dynamics (\emph{why} animal limb segments move as observed).
 And there are putatively confounding effects: locomotor maturation (i.e. age), size and weight of the animals \citep[i.e. physical appearance, cf.][]{Aerts2023}, and the variability of locomotor behavior.
@@ -170,9 +170,10 @@ And there are putatively confounding effects: locomotor maturation (i.e. age), s
 Previous studies from our group have compared kinematics on the level of spatiotemporal characteristics of newborn piglet gait \citep{VandenHole2018}.
 They discussed delayed locomotor maturation as a proximal explanation of the observed difference.
 I herein extended their analysis and confirmed maturational delay by training probabilistic models on the FCAS data of a large number of NBW piglet strides, applied to LBW observations (Ch. \ref{cpt:piglets}).
-The FCAS data entering the model contains literally all kinematic information which could be used to distinguish the study groups.
+The FCAS data entering the model contains practically all kinematic information which could be used to distinguish the study groups.
 The predictive models accurately incorporate the variability of the phenomenon.
 The models predict size and weight of the LBW piglets as if they were ``normal'', i.e. there are no apparent kinematic differences which would lead the model to infer non-normal subject characteristics.
+\chng{This finding must be taken with the discussed grain of salt: conceptually, indifference is hard to prove with the predictive modeling strategy chosen herein, and of course more data would be desirable to settle the case.}
 The only differences found are related to the age of LBW piglets.
 This indicates that, if models would not consider age or maturation as a model factor, low- and normal birth weight piglet locomotion would be indistinguishable.
 The ``age'' model provided evidence that maturation of LBW locomotion halts approximately four hours \emph{post partum} (developmental delay).
@@ -181,7 +182,7 @@ We suspect competition within litters and limited metabolic reserves as the reas
 Note that these observations are restricted to walking gait at voluntary speed; we cannot exclude more obvious LBW/NBW differences emerging in more challenging motor tasks.
 However, the apparent developmental delay in even this basic motor skill indicates the high sensitivity of the method.
 Also, the relevance of any hypothetical, ``more challenging'' stair, treadmill, or wind tunnel experiment for animals whose major priority is to find and access their mother's teats is questionable.
-Overall, the models provide strong evidence against the existence of fundamental differences in \emph{how} LBW and NBW piglets move: their coordination seems innate.
+Overall, the models provide \chng{at least some} evidence against the existence of fundamental differences in \emph{how} LBW and NBW piglets move: their coordination seems innate.
 
 
 
@@ -234,7 +235,7 @@ Thus, with most other study settings and subjects, mechanistic evaluations of si
 To summarize: this project provided evidence that there is little difference in \emph{how} LBW and NBW piglets move.
 Though differences in \emph{why} segments move in a particular way are unlikely in the light of this first finding, methodological limitations prohibited definitive conclusions on dynamic differences in the study groups.
 \section{Piglets, Baboons, and Humans}
-\label{sec:org430d921}
+\label{sec:org4d198b9}
 An important premise of this project was that piglets are a valid model species for humans, in terms of locomotion.
 This premise demands constant revision.
 
@@ -288,8 +289,11 @@ All this of course demands ethical assessment of, amongst more, proportionate ra
 The main limiting factor for such studies is the availability of non-human primates and their offspring, even more of IUGR-like conditions, which, as is often argued, is one of the benefits of using domestic piglets as a model.
 
 Yet in the light of the present thesis, it seems more worthwhile to strive for appropriate conditions and experimental circumstances to study species which are more closely related to humans.
+
+
+\clearpage
 \section{Conclusion}
-\label{sec:org50f6f29}
+\label{sec:org844c155}
 Independent of the choice of model species, this thesis presented a number of advances in developmental or general studies of locomotor behavior.
 
 \bigskip

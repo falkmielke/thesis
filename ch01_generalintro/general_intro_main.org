@@ -91,12 +91,6 @@ The core purpose of this thesis is to assemble, extend, and scientifically evalu
 #+LABEL: fig:jolante
 [[./figures/jolante.jpg]]
 
-
-#+CAPTION: \textbf{Piglets of low and normal birth weight} (left/right, respectively) for size comparison. The animals are female siblings.
-#+ATTR_LATEX: :placement [b] :width 16cm
-#+LABEL: fig:birth_weight
-[[./figures/bw_comparison.jpg]]
-
 @@latex:\chng{\textit{Any} creature's birth can be fascinating, and studying it can be insightful.}@@
 Why do we study piglets?
 
@@ -162,6 +156,11 @@ An obvious "show stopper" might be that, as mentioned above, piglets are precoci
 On the other hand, suids are the more altricial of the ungulates: feral /Sus scrofa/ females build nests and keep their young in shelter for a couple of weeks citep:Wischner2009.
 @@latex:\chng{Domestication might have involved restraining sows, at least to a certain extent (nests \textit{vs.} group pens \textit{vs.} single pen)}@@, and the way we keep them might have favored more mobile young who have reduced mortality from crushing citep:Grandinson2002.
 The picture is complex, and certainly the analogy of piglets and humans should not be taken for granted citep:VandenHole2017.
+
+#+CAPTION: \textbf{Piglets of low and normal birth weight} (left/right, respectively) for size comparison. The animals are female siblings.
+#+ATTR_LATEX: :placement [b!] :width 16cm
+#+LABEL: fig:birth_weight
+[[./figures/bw_comparison.jpg]]
 
 
 \FloatBarrier

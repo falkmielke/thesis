@@ -22,7 +22,7 @@ In random field theory, the interdependence of measurement samples can be quanti
 Randomness and smoothness are on two sides of a continuum, and the less random the changes between samples are, the "wider" the range of dependent data points can be considered.
 This concept has found its way into the framework of "Statistical Parametric Mapping" (SPM), which originates in neuroscience and functional imaging of the brain citep:Friston1994,Friston2003,Friston2008,Worsley2004, and was adapted for biomechanic research citep:Pataky2008,Pataky2010,Pataky2013.
 
-With some limitations, one can say that SPM enables the hypothesis-bases statistical comparison of joint angle profiles.
+With some limitations, one can say that SPM enables the hypothesis-based statistical comparison of joint angle profiles.
 Some of the limitations are the sensitivity to registration (especially non-linear registration techniques), to processing (e.g. smoothing), and the test assumptions.
 In fact, the method retains all the limitations of the chosen hypothesis tests (e.g. normality assumption often not confirmed).
 It must be added that SPM does not generally account for the cyclicity of joint angle profiles (edge effects), though this can certainly be overcome.
