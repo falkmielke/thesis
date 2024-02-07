@@ -1,0 +1,378 @@
+% Created 2023-02-08 Wed 09:39
+% Falk Mielke
+\documentclass[12pt,twoside]{report}
+
+\usepackage[utf8]{inputenc}
+%\usepackage{carlito} %% https://tug.org/FontCatalogue/dejavusans/
+%\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+
+\usepackage[american]{babel} % document language
+\usepackage[sort]{natbib} % citations
+\usepackage{apalike} % citations
+\usepackage[nottoc,numbib]{tocbibind}
+
+\usepackage{graphicx} % images
+\usepackage[hang,labelfont=bf,up,textfont=it,up]{caption}	% figure and table captions
+\usepackage[paperheight=26cm,paperwidth=18cm,top=2.5cm, bottom=2.5cm, left=2.8cm, right=1.7cm, columnsep=0.5cm]{geometry} % Document margins % hmarginratio=1:1
+\usepackage{amsmath}		% basic maths stuff
+\usepackage{amssymb}		% maths symbols
+\usepackage{amsfonts}		% maths fonts
+\usepackage{cancel} 		% mathematical canceling
+\usepackage{upgreek}		% non-italic greek letters
+\usepackage{enumerate}
+\usepackage{wasysym} % lightning and other symbols
+\usepackage{placeins}  	% for float barrier
+
+%\usepackage[margin={1cm,1cm}]{geometry} 		% page margins
+\usepackage{color}			% colors
+\usepackage{hyperref}		% automatic linkt for any references
+\usepackage{caption}
+\DeclareCaptionLabelFormat{adja-page}{\hrulefill\\#1 #2 \emph{(prev. page)}}
+\DeclareCaptionLabelFormat{continue-page}{\hrulefill\\#1 #2 \emph{(cont.)}}
+\DeclareCaptionLabelFormat{supplementary}{\\#1 #2 }
+\usepackage{array}		% cell heights
+\usepackage{pdflscape}		% landscape pages for big tables or figures, rotated in pdf export
+\usepackage[]{lineno} 		% line numbers
+\usepackage{listings} % code blocks
+\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{pdflscape}
+\makeatletter
+\renewcommand\PLS@Rotate[1]{}
+\makeatother % https://tex.stackexchange.com/questions/267595/what-causes-rotation-of-landscape-page-while-lscape-in-use
+
+
+
+\usepackage{listings} % code blocks
+% \usepackage{minted} % code highlighting
+
+ \usepackage{booktabs} % Horizontal rules in tables
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+\captionsetup{margin=0.2cm, font=normal, labelfont=bf, textfont=sl} %
+
+\setlength{\parindent}{0pt}
+\usepackage{lmodern} % Headers and footers
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyfoot{}                            % Delete current footer settings
+\fancyhf{}
+
+\fancyfoot[LE,RO]{\scshape\footnotesize{\thepage}}    % Page number (boldface) in left on even
+% pages and right on odd pages
+% \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter.\ #1}}{}}
+
+\fancyhead[RO]{\color{gray}\scshape{\footnotesize{\leftmark}}}      % Chapter in the right on even pages
+%\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\rightmark}}}     % Section in the left on odd pages
+\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\ }}}
+
+\let\headruleORIG\headrule
+\renewcommand{\headrule}{\color{gray} \headruleORIG}
+\renewcommand{\headrulewidth}{0.5pt}
+\let\footruleORIG\footrule
+\renewcommand{\footrule}{\color{gray} \footruleORIG}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\usepackage{colortbl}
+\arrayrulecolor{black}
+
+\usepackage{setspace}
+\linespread{1.0} % Line spacing - Palatino needs more space between lines
+
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\tiny,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  firstnumber=1000,                % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=4,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%_____________________________________________________________
+% avoid hyphenation in block text
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+%_____________________________________________________________
+% page layout
+%\setlength{\parindent}{0pt} %default identation
+%\geometry{hmargin=2cm,top=2.5cm,bottom=3.5cm} % page borders
+
+
+
+\hypersetup{
+ pdfauthor={Falk Mielke},
+ pdftitle={PhD Thesis},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 28.2 (Org mode 9.6)},
+ pdflang={English}}
+
+
+%%% Library
+% https://tex.stackexchange.com/questions/87414/per-chapter-bibliographies-in-biblatex
+%\usepackage[style=apalike]{biblatex}
+%\addbibresource{ch01_generalintro/literature.bib}
+
+\title{Methodological Advances \linebreak in \linebreak Studying Postnatal Locomotor Development}
+\author{Falk Mielke}
+\date{2024-02-05}
+
+% https://tex.stackexchange.com/questions/11707/how-to-force-output-to-a-left-or-right-page
+\newcommand\cleartoleftpage{%
+\clearpage
+  %\ifodd\value{page}\else\hbox{}\cleardoublepage\fi
+}
+\newcommand\cleartorightpage{%
+\clearpage
+	%\ifodd\value{page}\hbox{}\clearpage\else\hbox{}\cleardoublepage\fi
+\hbox{}
+}
+
+\definecolor{darkgreen}{rgb}{0,0.4,0}
+% \newenvironment{change}[1]{
+  % {\color{darkgreen}
+    % #1
+  % }
+% }
+\newenvironment{change}{
+  \bgroup\color{darkgreen}
+\ignorespaces
+}{
+\egroup
+}
+\newcommand\chng[1]{{\color{darkgreen}#1}}
+
+
+%Commands definitions
+\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.10,0.10,0.10}}  
+\newcommand{\settextcolour}{\color[rgb]{1.0,1.0,1.0}}    
+\newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}  
+
+
+%Commands definitions
+\newcommand{\resetbackgroundcolour}{\pagecolor[rgb]{1.0, 1.0, 1.0}}  
+\newcommand{\resettextcolour}{\color[rgb]{0.0, 0.0, 0.0}}    
+\newcommand{\uninvertbackgroundtext}{\resetbackgroundcolour\resettextcolour}  
+
+%%% Document
+\begin{document}
+\doublespacing
+\makeatletter
+    \begin{titlepage}  
+    \invertbackgroundtext
+    \begin{spacing}{2}
+        \begin{center}
+            {\includegraphics[width=4cm]{UA-ned-hor-1-NEG-RGB.pdf}\\[4ex]}
+            {\vspace*{-1.0cm} Faculty of Science \\ \vspace*{-0.4cm} Department of Biology}
+            \ \vspace{1.5cm}\\
+            {\LARGE \bfseries  \@title }\\[6ex]
+            \ \vspace{1cm}\\
+            Thesis submitted for the degree of 
+            \\ doctor of science 
+            \\ at the University of Anwerp, to be defended by
+            {\\\large  \@author}\\[8ex]
+        \end{center}
+        \vspace*{\fill}
+        \begin{flushleft}
+            \begin{tabular}{ l}
+              \textit{supervisors:}
+               \\\(\quad\) Chris Van Ginneken
+               \\\(\quad\) Peter Aerts
+            \end{tabular}
+        \end{flushleft}
+        \vspace*{-1.55cm}
+        \begin{flushright}
+          Antwerp, 2024
+        \end{flushright}
+        \end{spacing}
+    \end{titlepage}
+\makeatother
+\thispagestyle{empty}
+\newpage
+
+\uninvertbackgroundtext
+\doublespacing
+\makeatletter
+    \begin{spacing}{2}
+        \vspace*{\fill}
+            Methodological Advances in Studying Postnatal Locomotor Development \medskip
+            \\ Methodologische vooruitgang bij het bestuderen \vspace*{-0.3cm}\\ van postnatale bewegingsontwikkeling
+            \vspace{1cm}\\
+            {\renewcommand{\arraystretch}{0.6}% for the vertical padding
+            \begin{tabular}{ r  l  l}
+              \ \hspace{3cm} & &
+               \\ Institute: & University of Antwerp & Universiteit Antwerpen
+               \\ Faculty: & Faculty of Science & Faculteit Wetenschappen
+               \\ Degree: & Doctor of Science & Doctor in de Wetenschappen
+            \end{tabular}}
+            {\renewcommand{\arraystretch}{0.6}% for the vertical padding
+            \begin{tabular}{ r   l }
+              \ \hspace{3cm} &
+               \\ Author:      & \@author
+               \\
+               \\ Supervisors: & Chris Van Ginneken, University of Antwerp
+               \\             & Peter Aerts, University of Antwerp
+               \\
+               \\ Jury: & Joris Dirckx \textit{(chair)}, University of Antwerp
+               \\       & Ann Hallemans, University of Antwerp
+               \\       & Veerle Segers, Ghent University
+               \\       & Stefan Van Dongen, University of Antwerp
+               \\       & Sam Van Wassenbergh, University of Antwerp
+               \\
+               \\ Cover Art: & Maja Mielke
+               \\
+               \\ Pre-Defence: & October \(13^{th}\), 2023
+               \\ Defence: & March \(1^{st}\), 2024
+            \end{tabular}}
+        \end{spacing}
+\makeatother
+\thispagestyle{empty}
+
+\onehalfspacing
+\newpage
+\setcounter{tocdepth}{1}
+\begin{spacing}{1.05}
+\tableofcontents
+\end{spacing}
+
+\cleartorightpage
+\chapter{General Introduction}\label{cpt:generalintro}
+\clearpage
+%\input{ch01_generalintro/general_intro_main.tex}
+
+
+
+\cleartorightpage
+\part{Kinematic Analysis}\label{pt:1}
+\chapter{Fourier Methods in Locomotor Biomechanics}\label{cpt:fourier_review}
+%\input{ch11_fourierguide/pt1ch2_fourieranalysis.tex}
+
+\cleartoleftpage
+\chapter{Fourier Coefficient Affine Superimposition}\label{cpt:fcas}
+%\input{ch12_ungulates/pt1ch3_fcas.tex}
+
+
+
+\cleartorightpage
+\part{Probabilistic Modeling}\label{pt:2}
+
+\chapter{Probabilistic Modeling Workflow}\label{cpt:statistics}
+%\input{ch21_statistics/pt2ch4_statistics.tex}
+
+\cleartoleftpage
+\chapter{Predictive Modeling of Piglet Locomotor Kinematics}\label{cpt:piglets}
+%\input{ch22_pigletmodels/pt2ch5_piglets.tex}
+
+
+
+\cleartorightpage
+\part{Inverse Dynamics}\label{pt:3}
+
+\chapter{Inverse Dynamics Workflow}\label{cpt:dynamics_workflow}
+%\input{ch31_dynamics/pt3ch6_dynamics.tex}
+
+\cleartoleftpage
+\chapter[Inertial Properties]{Approximating Inertial Properties of Biological Specimens using CT Data, or Not}\label{cpt:inertials}
+%\input{ch32_inertials/pt3ch7_inertials.tex}
+
+
+
+\cleartorightpage
+\part{Epilogue}
+\chapter{General Discussion}\label{cpt:generaldiscussion}
+\clearpage
+%\input{ch02_generaldiscussion/general_discussion_main.tex}
+
+
+%\chapter{Acknowledgements}\label{acknowledgements}
+%tbd.
+
+\cleartorightpage
+\part{Appendix}\label{acknowledgements}
+
+\addtocounter{chapter}{+1}
+\setcounter{section}{0}
+
+% %\addcontentsline{toc}{section}{Bibliography}
+% \singlespacing
+% \section{Bibliography}
+% \renewcommand{\bibname}{}
+% \makeatletter
+% \renewcommand{\chapter}{\@gobbletwo}
+% \makeatother
+% \bibliographystyle{apalike}
+% \bibliography{library.bib}
+% %\printbibliography[heading=bibnumbered, title={References}]{library.bib}
+
+\clearpage
+\section{Video Digitization}\label{cpt:digitization}
+%\input{ch91_digitization/digitization.tex}
+
+\clearpage
+\section{Statistical Parametric Mapping}\label{cpt:spm1d}
+%\input{ch94_misc/spm_summary.tex}
+
+\clearpage
+\section{\chng{List of Publications}}\label{cpt:publications}
+%\input{ch93_publications/publications.tex}
+
+
+\clearpage
+\section{List of Abbreviations}\label{abbreviations}
+\begin{spacing}{1.5}
+%\input{ch92_abbreviations/abbreviations.tex}
+\end{spacing}
+
+
+\cleartorightpage\clearpage
+\makeatletter
+\invertbackgroundtext
+\vspace{\fill}
+\includegraphics[width=13.5cm]{steampunkpiglet_cover.png}
+\vspace{\fill}
+\makeatother
+\thispagestyle{empty}
+
+\end{document}
