@@ -1,6 +1,6 @@
 % Created 2023-02-08 Wed 09:39
 % Falk Mielke
-\documentclass[12pt,twoside]{report}
+\documentclass[12pt,a4paper,twoside]{report}
 
 \usepackage[utf8]{inputenc}
 %\usepackage{carlito} %% https://tug.org/FontCatalogue/dejavusans/
@@ -23,7 +23,8 @@
 
 \usepackage{graphicx} % images
 \usepackage[hang,labelfont=bf,up,textfont=it,up]{caption}	% figure and table captions
-\usepackage[paperheight=26cm,paperwidth=18cm,top=2.5cm, bottom=2.5cm, left=2.8cm, right=1.7cm, columnsep=0.5cm]{geometry} % Document margins % hmarginratio=1:1
+% \usepackage[paperheight=26cm,paperwidth=18cm,top=2.5cm, bottom=2.5cm, left=2.8cm, right=1.7cm, columnsep=0.5cm]{geometry} % Document margins % hmarginratio=1:1
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.8cm, right=1.7cm, columnsep=0.5cm]{geometry} % Document margins % hmarginratio=1:1
 \usepackage{amsmath}		% basic maths stuff
 \usepackage{amssymb}		% maths symbols
 \usepackage{amsfonts}		% maths fonts
@@ -206,7 +207,7 @@
         \begin{center}
             {\includegraphics[width=4cm]{UA-ned-hor-1-NEG-RGB.pdf}\\[4ex]}
             {\vspace*{-1.0cm} Faculty of Science \\ \vspace*{-0.4cm} Department of Biology}
-            \ \vspace{1.5cm}\\
+            \ \vspace{\fill}\\
             {\LARGE \bfseries  \@title }\\[6ex]
             \ \vspace{1cm}\\
             Thesis submitted for the degree of 
@@ -236,9 +237,10 @@
 \doublespacing
 \makeatletter
     \begin{spacing}{2}
+    \begin{footnotesize}
         \vspace*{\fill}
             Methodological Advances in Studying Postnatal Locomotor Development \medskip
-            \\ Methodologische vooruitgang bij het bestuderen \vspace*{-0.3cm}\\ van postnatale bewegingsontwikkeling
+            \\ Methodologische vooruitgang bij het bestuderen van postnatale bewegingsontwikkeling % \vspace*{-0.3cm}\\ 
             \vspace{1cm}\\
             {\renewcommand{\arraystretch}{0.6}% for the vertical padding
             \begin{tabular}{ r  l  l}
@@ -266,6 +268,7 @@
                \\ Pre-Defence: & October \(13^{th}\), 2023
                \\ Defence: & March \(1^{st}\), 2024
             \end{tabular}}
+            \end{footnotesize}
         \end{spacing}
 \makeatother
 \thispagestyle{empty}
@@ -326,14 +329,15 @@
 %\input{ch02_generaldiscussion/general_discussion_main.tex}
 
 
-%\chapter{Acknowledgements}\label{acknowledgements}
-%tbd.
 
 \cleartorightpage
-\part{Appendix}\label{acknowledgements}
+\part{Appendix}\label{appendix}
 
 \addtocounter{chapter}{+1}
 \setcounter{section}{0}
+
+\chapter{Acknowledgements}\label{acknowledgements}
+\input{ch94_misc/acknowledgements.tex}
 
 % %\addcontentsline{toc}{section}{Bibliography}
 % \singlespacing
@@ -366,11 +370,12 @@
 \end{spacing}
 
 
-\cleartorightpage\clearpage
+
+\cleartorightpage\pagebreak
 \makeatletter
 \invertbackgroundtext
 \vspace{\fill}
-\includegraphics[width=13.5cm]{steampunkpiglet_cover.png}
+\includegraphics[width=16.0cm]{steampunkpiglet_cover.png}
 \vspace{\fill}
 \makeatother
 \thispagestyle{empty}
