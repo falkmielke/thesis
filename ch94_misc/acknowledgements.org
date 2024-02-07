@@ -1,25 +1,100 @@
 #+title: Acknowledgements
 
-"""
-#+begin_quote
-Sie war'n alle immer da für mich
-bis wir uns nicht mehr so oft sah'n.
-Ich trug ihr Bild von dieser Welt im Kopf
-als ich begann, meines zu mal'n.
-#+end_quote
-Max Prosa (2018): "Erinnerungen", Heimkehr
+# #+begin_quote
+# Sie war'n alle immer da für mich
+# bis wir uns nicht mehr so oft sah'n.
+# Ich trug ihr Bild von dieser Welt im Kopf
+# als ich begann, meines zu mal'n.
+# #+end_quote
+# Max Prosa (2018): "Erinnerungen", Heimkehr
 
 
 I am grateful for my time at Campus Drie Eiken, and wholeheartedly enjoyed being around for so long.
 In all the groups which accomodated me, I was welcomed with a supportive, friendly, collaborative, and creative atmosphere, which is all due to the great people I met there.
 
-from "arkdienst" to "sci-hub"
+As is the nature of things, my project took a bit longer, and so I saw many fellow students and researchers leave and others join.
+I am glad to have met all of you, got a lot of inspiration from you young and creative people, and I wish you all the best!
+I will not attempt to list all of you PhD students and postdocs, nor will I pick individuals.
+The reasons are your shere number (three different departments!), an approaching print deadline, and the fear of missing any important person.
+And I am humbled by those of you who did take or will take the time to write individual acknowledgements, how cool is that?
+
+Kudos, my friends! Keep on the great research!
 
 
-"office roommates": Miriam Ayuso Hernando, Lieselotte Van Bockstal, Sara Prims, Joaquim Sanctorum, Simon Baeckens, and of course Maja.
-A special shoutout to the phenomenal technical and administrative support for who I caused a lot of work: Katty Huybrechts, Gunther Vrolix, Steve Van Bienst, Josie Meaney-Ward, and Jan Scholliers.
-
-Not to forget my supervisors
+I must point out my "office roommates": Miriam Ayuso Hernando, Lieselotte Van Bockstal, Sara Prims, Joaquim Sanctorum, Simon Baeckens, and of course Maja.
+Thank you for being mild (or at least pretending to not care about) my chaotic desks and loud keyboards.
 
 
-sci-hub, yt-dlp
+A special shoutout to the phenomenal technical and administrative support staff for whom I caused a lot of work: Katty Huybrechts, Gunther Vrolix, Steve Van Bienst, Josie Meaney-Ward, Jan Scholliers and Jorrit Mertens.
+I appreciate your great efforts and your open ear to my problems and frustrations.
+As opposed to some other "supportive" and "administrative" departments, you were actually and personally there, and I would have been lost without you.
+You are who keeps the labs running, modern pastoral care in a world full of compliance bullshit and supply chain crackdowns.
+Thank you!
+
+Also a technical staff by now, and a great support, I am very glad for the brief period I teamed up with Joaquim to operate the "DynXLab".
+I am glad that you took it into your able hands, and wish you all the best, there or elsewhere!
+
+
+I wave my virtual hand and bow to the participants of our virtual Covid Coffee Club, the "UA Code Clinic", the 2019 research day committee, and regular TGIF guests; we should do all that again!
+And I am glad that the "Vrienden van de Ark", the caretakers (mainly Denise, An, Ellen), and Harlee were there to teach me various cool skills such as handling cows, taking a Lama's temperature, or how to operate a "potstall".
+Matter of fact, I enjoyed "arkdienst", and occasionally have to force me to think about that monstrous dung heap to counteract a wistful memory creeping in.
+
+
+None of my studies and research, as meaningless as they might be, would not have been possible without the inspiring work of Alexandra Elbakyan (sci-hub) and the developers of "yt-dlp".
+There are a tremendous number of people who depend on your enormous efforts, and think that you deserve all our thanks and praises for your courage.
+
+
+A warm "Thank You" to all the reviewers who took time to read and improve my cryptic, technical texts.
+And an equally one to those reviewers who didn't care and just let me pass.
+I appreciate the efforts of all my jury members: I was struggling in my pre-defence, yet in a good way, and the reason is that all of you took the time to carefully assess my research.
+I know that I am not the most concise writer, and I much appreciate your efforts and feedback, thank you!
+
+
+
+There is one very special person to fit many of the above categories.
+Of course, I mean Sam Van Wassenbergh, who, besides other roles, is a professor and still has at least half a foot in D-1.39.
+#+begin_quote
+Do not be too sad, Sam.
+You cannot always be torn in two.
+You will have to be one and whole, for many years.
+You have so much to enjoy and to be, and to do.
+#+end_quote
+It was not quite "Mount Doom", but I remember us standing in the fully prepared recording room, a foot deep in water, between a high-voltage closet, a self-soldered "trogger"@@latex:Shorthand for "Trigger-Logger", an addon device necessary because the force plate recordings would require all of my computer's capacity.@@, and a unique piece of Jan's phenomenal balsa wood craftsmanship.
+It must have been a nightmare come true.
+Yet we focused. We cleaned up. And we made it.
+Thank you so much!
+
+
+I should not forget my supervisors!
+
+Chris.
+You supported me when I was threatened with administrative punishment (e.g. "no show arbeidsarts") or diseaster (e.g. "gelijkstelling FELASA").
+I thank you for the more memorable (computer-free) days of my PhD, involving unforgettable trips to remote farms full of farrowing sows, or the scanning of a giraffe skeleton.
+By far the most memorable event was a trip to the zoo, I am so glad that I was allowed to join.
+You were always there with sharp wits; you showed an incredible stamina to read texts which were full of jargon from other fields, and still you saved me from many misformulations and mistakes.
+You are a great person, and a role model, and I wish you all thinkable luck and succes for the possible new role as vice rector, or any other challenge you take beside or beyond it!
+
+Peter.
+For some reason, we had a bumpy start, which involved several occasions where we would exchange page-long mails (sorry!) or intense discussions for hours ("referentierooster"!).
+Then we would clarify some basic terminology to find out that we are actually on the same page.
+I must take those on me, because by now I got to know you as a generous and patient supervisor; I enjoy our scientific discussions and hope we have many more chances.
+I am sorry for the one or the other night which you might have been awake contemplating one or the other dead end of this project.
+...or my incapability to obey univeristy rules and authorities.
+And I admire your attitude to climb the attic to convince me that ficticious forces don't exist (or, do they?), to write very useful code (though personally I would never choose Matlab), and to keep on pursuing the flamingo project.
+I sincerely hope that we do not "loose" you to pension, but "win" you for the fun research projects which have been lingering in the back of your head.
+All the best for it!
+
+Both of you have found a great way to manage the more Don-Quichote-like aspects of my personality, supportive when it was adequate, always fair and reasonable; for that I am glad.
+I could not have wished for better supervisors.
+
+
+
+Finally, I am full of love and thankfulness for the support of my family.
+Maja, Mona, Ronja, my parents, grandparents, (grand)parents in law; all my direct and acquired siblings and their family, with special mention for Alex, Andreza, and Leonardo.
+I think that the more personal appreciation is best shared in person (another good reason to meet more often).
+Thank you!
+I hope to see you all, soon.
+
+Nevertheless, the final words must be dedicated to Maja, who, besides being my wife and friend and lover and the best possible mother for our kids and everything I could ever wish to find in a partner, also jumps in with professional advice, with an ear for my swearing, or just some of her time to keep the little troubles of life at distance.
+Your contribution to this project is most invaluable, my dear.
+Danke, dass Du bei mir bist!
