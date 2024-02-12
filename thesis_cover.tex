@@ -48,6 +48,10 @@
 \usepackage{color}
 \usepackage{xcolor}
 
+\usepackage{flipbook} % flip book footer
+
+\usepackage{afterpage}
+
 \usepackage{pdflscape}
 \makeatletter
 \renewcommand\PLS@Rotate[1]{}
@@ -78,13 +82,27 @@
 \fancyfoot{}                            % Delete current footer settings
 \fancyhf{}
 
+
+\fancyhead[RO]{ 
+\vspace{-1.cm}
+ \raisebox{0.5cm}[0cm][0cm]{\fbImageF{./flipbook/frames/p}{pdf}{height=1cm}}
+
+                        % Flipbook at right foot in odd pages
+%\setlength\unitlength{1cm}                % Specify the units
+%  \begin{picture}(0,0)                    % New picture
+%    \put(-0.2,-4){                        % Position of the picture
+%		\fbImageF{./flipbook/frames/p}{pdf}{width=4cm} % Insert numbered picture in increasing order. Directory: ./Fig/Flipbook. Prefix of all pictures: image_ (in fact image_1, image_2, ...). Extension of the pictures: png. 
+%     }
+% \end{picture}
+}
 \fancyfoot[LE,RO]{\scshape\footnotesize{\thepage}}    % Page number (boldface) in left on even
+%\fancyfoot[cf]{\scshape\footnotesize{\thepage}}    % Page number (boldface) in left on even
 % pages and right on odd pages
 % \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter.\ #1}}{}}
 
-\fancyhead[RO]{\color{gray}\scshape{\footnotesize{\leftmark}}}      % Chapter in the right on even pages
+\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\leftmark}}}      % Chapter in the right on even pages
 %\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\rightmark}}}     % Section in the left on odd pages
-\fancyhead[LE]{\color{gray}\scshape{\footnotesize{\ }}}
+%\fancyhead[RO]{\color{gray}\scshape{\footnotesize{\ }}}
 
 \let\headruleORIG\headrule
 \renewcommand{\headrule}{\color{gray} \headruleORIG}
@@ -158,7 +176,7 @@
 
 \title{Methodological Advances \linebreak in \linebreak Studying Postnatal Locomotor Development}
 \author{Falk Mielke}
-\date{2024-02-05}
+\date{2024-03-01}
 
 % https://tex.stackexchange.com/questions/11707/how-to-force-output-to-a-left-or-right-page
 \newcommand\cleartoleftpage{%
@@ -199,186 +217,53 @@
 
 %%% Document
 \begin{document}
-\doublespacing
-\makeatletter
-    \begin{titlepage}  
-    \invertbackgroundtext
-    \begin{spacing}{2}
-        \begin{center}
-            {\includegraphics[width=4cm]{UA-ned-hor-1-NEG-RGB.pdf}\\[4ex]}
-            {\vspace*{-1.0cm} Faculty of Science \\ \vspace*{-0.4cm} Department of Biology}
-            \ \vspace{\fill}\\
-            {\LARGE \bfseries  \@title }\\[6ex]
-            \ \vspace{1cm}\\
-            Thesis submitted for the degree of 
-            \\ doctor of science 
-            \\ at the University of Anwerp, to be defended by
-            {\\\large  \@author}\\[8ex]
-        \end{center}
-        \vspace*{\fill}
-        \begin{flushleft}
-            \begin{tabular}{ l}
-              \textit{supervisors:}
-               \\\(\quad\) Chris Van Ginneken
-               \\\(\quad\) Peter Aerts
-            \end{tabular}
-        \end{flushleft}
-        \vspace*{-1.55cm}
-        \begin{flushright}
-          Antwerp, 2024
-        \end{flushright}
-        \end{spacing}
-    \end{titlepage}
-\makeatother
-\thispagestyle{empty}
-\newpage
-
-\uninvertbackgroundtext
-\doublespacing
-\makeatletter
-    \begin{spacing}{2}
-    \begin{footnotesize}
-        \vspace*{\fill}
-            Methodological Advances in Studying Postnatal Locomotor Development \medskip
-            \\ Methodologische vooruitgang bij het bestuderen van postnatale bewegingsontwikkeling % \vspace*{-0.3cm}\\ 
-            \vspace{1cm}\\
-            {\renewcommand{\arraystretch}{0.6}% for the vertical padding
-            \begin{tabular}{ r  l  l}
-              \ \hspace{3cm} & &
-               \\ Institute: & University of Antwerp & Universiteit Antwerpen
-               \\ Faculty: & Faculty of Science & Faculteit Wetenschappen
-               \\ Degree: & Doctor of Science & Doctor in de Wetenschappen
-            \end{tabular}}
-            {\renewcommand{\arraystretch}{0.6}% for the vertical padding
-            \begin{tabular}{ r   l }
-              \ \hspace{3cm} &
-               \\ Author:      & \@author
-               \\
-               \\ Supervisors: & Chris Van Ginneken, University of Antwerp
-               \\             & Peter Aerts, University of Antwerp
-               \\
-               \\ Jury: & Joris Dirckx \textit{(chair)}, University of Antwerp
-               \\       & Ann Hallemans, University of Antwerp
-               \\       & Veerle Segers, Ghent University
-               \\       & Stefan Van Dongen, University of Antwerp
-               \\       & Sam Van Wassenbergh, University of Antwerp
-               \\
-               \\ Cover Art: & Maja Mielke
-               \\
-               \\ Pre-Defence: & October \(13^{th}\), 2023
-               \\ Defence: & March \(1^{st}\), 2024
-            \end{tabular}}
-            \end{footnotesize}
-        \end{spacing}
-\makeatother
-\thispagestyle{empty}
-
-\onehalfspacing
-\newpage
-\setcounter{tocdepth}{1}
-\begin{spacing}{1.05}
-\tableofcontents
-\end{spacing}
-
-\cleartorightpage
-\chapter{General Introduction}\label{cpt:generalintro}
-\clearpage
-%\input{ch01_generalintro/general_intro_main.tex}
-
-
-
-\cleartorightpage
-\part{Kinematic Analysis}\label{pt:1}
-\chapter{Fourier Methods in Locomotor Biomechanics}\label{cpt:fourier_review}
-%\input{ch11_fourierguide/pt1ch2_fourieranalysis.tex}
-
-\cleartoleftpage
-\chapter{Fourier Coefficient Affine Superimposition}\label{cpt:fcas}
-%\input{ch12_ungulates/pt1ch3_fcas.tex}
-
-
-
-\cleartorightpage
-\part{Probabilistic Modeling}\label{pt:2}
-
-\chapter{Probabilistic Modeling Workflow}\label{cpt:statistics}
-%\input{ch21_statistics/pt2ch4_statistics.tex}
-
-\cleartoleftpage
-\chapter{Predictive Modeling of Piglet Locomotor Kinematics}\label{cpt:piglets}
-%\input{ch22_pigletmodels/pt2ch5_piglets.tex}
-
-
-
-\cleartorightpage
-\part{Inverse Dynamics}\label{pt:3}
-
-\chapter{Inverse Dynamics Workflow}\label{cpt:dynamics_workflow}
-%\input{ch31_dynamics/pt3ch6_dynamics.tex}
-
-\cleartoleftpage
-\chapter[Inertial Properties]{Approximating Inertial Properties of Biological Specimens using CT Data, or Not}\label{cpt:inertials}
-%\input{ch32_inertials/pt3ch7_inertials.tex}
-
-
-
-\cleartorightpage
-\part{Epilogue}
-\chapter{General Discussion}\label{cpt:generaldiscussion}
-\clearpage
-%\input{ch02_generaldiscussion/general_discussion_main.tex}
-
-
-
-\cleartorightpage
-\part{Appendix}\label{appendix}
-
-\addtocounter{chapter}{+1}
-\setcounter{section}{0}
-
-% %\addcontentsline{toc}{section}{Bibliography}
-% \singlespacing
-% \section{Bibliography}
-% \renewcommand{\bibname}{}
-% \makeatletter
-% \renewcommand{\chapter}{\@gobbletwo}
-% \makeatother
-% \bibliographystyle{apalike}
-% \bibliography{library.bib}
-% %\printbibliography[heading=bibnumbered, title={References}]{library.bib}
-
-\clearpage
-\section{Video Digitization}\label{cpt:digitization}
-%\input{ch91_digitization/digitization.tex}
-
-\clearpage
-\section{Statistical Parametric Mapping}\label{cpt:spm1d}
-%\input{ch94_misc/spm_summary.tex}
-
-\clearpage
-\section{\chng{List of Publications}}\label{cpt:publications}
-%\input{ch93_publications/publications.tex}
-
-
-\clearpage
-\section{List of Abbreviations}\label{abbreviations}
-\begin{spacing}{1.5}
-%\input{ch92_abbreviations/abbreviations.tex}
-\end{spacing}
-
-
-\clearpage
-\chapter{Acknowledgements}\label{acknowledgements}
-\input{ch94_misc/acknowledgements.tex}
-
-
-\cleartorightpage\pagebreak
 \makeatletter
 \invertbackgroundtext
 \vspace{\fill}
-\includegraphics[width=16.0cm]{steampunkpiglet_cover.png}
+\includegraphics[width=16.0cm]{figures/steampunkpiglet_cover.jpg}
 \vspace{\fill}
+
+        \begin{center}
+        \vspace{3cm}
+        \hspace*{-1.0cm}\includegraphics[width=18cm]{figures/Gang_des_Schweines_back.pdf}
+        \vspace{-3cm}
+        \end{center}
 \makeatother
+\hbox{}
 \thispagestyle{empty}
 
+\newpage
+\afterpage{%
+\newgeometry{top=1.5cm, bottom=1.5cm, left=0cm, right=0cm}
+% material for this page
+\large{\textbf{Falk Mielke}}
+\\\large{\textbf{PhD Thesis}}
+\\\large{\textbf{2024}}
+\clearpage
+\restoregeometry
+} % end of \afterpage{...} material
+
+
+\clearpage
+\doublespacing
+\makeatletter
+    \invertbackgroundtext
+    \begin{spacing}{2}
+        \begin{center}
+            \ \vspace{\fill}\\
+            {\LARGE \bfseries  \@title }\\[12ex]
+            {\large  \@author \\ PhD Thesis, 2024}\\[8ex]
+        \end{center}
+        \vspace*{\fill}
+        
+    \end{spacing}
+        \begin{center}
+        \vspace{2cm}
+        \hspace*{-1.0cm}\includegraphics[width=18cm]{figures/Gang_des_Schweines_front.pdf}
+        \vspace{-1.6cm}
+        \end{center}
+\hbox{}
+\makeatother
+\thispagestyle{empty}
+\clearpage\hbox{}
 \end{document}

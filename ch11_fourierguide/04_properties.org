@@ -185,6 +185,8 @@ The stride cycle is the defining time interval, and normally all elements move i
 * Affine Components
 Some attributes of a signal are emphasized by Fourier methods.
 Those can be summarized intuitively as those attributes of the signal which can be changed without altering the "perceived shape" of the signal when plotted.
+\flipbookexplain
+
 
 The most obvious one is the average of the signal over time, i.e. its *mean value*.
 When changing the mean of a signal in the time domain by adding the same scalar value to every sample, the signal shifts "up and down", but retains its temporal structure.

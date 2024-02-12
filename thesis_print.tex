@@ -81,18 +81,10 @@
 \fancyhf{}
 
 
-\fancyhead[RO]{ 
-\vspace{-1.cm}
- \raisebox{0.5cm}[0cm][0cm]{\fbImageF{./flipbook/frames/p}{pdf}{height=1cm}}
-
-                        % Flipbook at right foot in odd pages
-%\setlength\unitlength{1cm}                % Specify the units
-%  \begin{picture}(0,0)                    % New picture
-%    \put(-0.2,-4){                        % Position of the picture
-%		\fbImageF{./flipbook/frames/p}{pdf}{width=4cm} % Insert numbered picture in increasing order. Directory: ./Fig/Flipbook. Prefix of all pictures: image_ (in fact image_1, image_2, ...). Extension of the pictures: png. 
-%     }
-% \end{picture}
+\fancyhead[RO]{ \vspace{-1.cm}
+ \raisebox{1.0cm}[0cm][0cm]{\fbImageF{./flipbook/frames/p}{pdf}{height=1cm}}
 }
+
 \fancyfoot[LE,RO]{\scshape\footnotesize{\thepage}}    % Page number (boldface) in left on even
 %\fancyfoot[cf]{\scshape\footnotesize{\thepage}}    % Page number (boldface) in left on even
 % pages and right on odd pages
@@ -177,13 +169,11 @@
 \date{2024-03-01}
 
 % https://tex.stackexchange.com/questions/11707/how-to-force-output-to-a-left-or-right-page
-\newcommand\cleartoleftpage{%
-\clearpage
-  %\ifodd\value{page}\else\hbox{}\cleardoublepage\fi
+\newcommand\cleartoleftpage{
+\ifodd\value{page}\hbox{}\clearpage\else\hbox{}\fi
 }
-\newcommand\cleartorightpage{%
-\clearpage
-	%\ifodd\value{page}\hbox{}\clearpage\else\hbox{}\cleardoublepage\fi
+\newcommand\cleartorightpage{
+\ifodd\value{page}\hbox{}\clearpage\else\hbox{}\cleardoublepage\fi
 \hbox{}
 }
 
@@ -193,14 +183,9 @@
     % #1
   % }
 % }
-\newenvironment{change}{
-  \bgroup\color{darkgreen}
-\ignorespaces
-}{
-\egroup
-}
-\newcommand\chng[1]{{\color{darkgreen}#1}}
-
+\newenvironment{change}{}{}
+\newcommand\chng[1]{#1}
+\newcommand\flipbookexplain{For illustration, the "flipbook" on the upper right header of this thesis will show an average carpus joint angle profile, changing in phase, mean, and amplitude. }
 
 %Commands definitions
 \newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.10,0.10,0.10}}  
@@ -216,29 +201,6 @@
 %%% Document
 \begin{document}
 \doublespacing
-\makeatletter
-    \invertbackgroundtext
-    \begin{spacing}{2}
-        \begin{center}
-            \ \vspace{\fill}\\
-            {\LARGE \bfseries  \@title }\\[12ex]
-            {\large  \@author \\ PhD Thesis, 2024}\\[8ex]
-        \end{center}
-        \vspace*{\fill}
-        
-        \begin{center}
-        \vspace{3cm}
-        \hspace*{-1.0cm}\includegraphics[width=18cm]{figures/Gang_des_Schweines_front.pdf}
-        \vspace{-3cm}
-        \end{center}
-    \end{spacing}
-\makeatother
-\thispagestyle{empty}
-
-
-\newpage
-\uninvertbackgroundtext
-\newpage
 \makeatletter
     \begin{titlepage}  
     \begin{spacing}{2}
@@ -291,7 +253,7 @@
             \begin{tabular}{ r   l }
               \ \hspace{3cm} &
                \\ DOI: & 10.31237/osf.io/dejkg
-               \\
+               \\               
                \\ Author:      & \@author
                \\
                \\ Supervisors: & Chris Van Ginneken, University of Antwerp
@@ -320,13 +282,12 @@
 \thispagestyle{empty}
 
 \onehalfspacing
-\newpage
+\cleartorightpage
 \setcounter{tocdepth}{1}
-\begin{spacing}{1.05}
+\begin{spacing}{1.0}
 \tableofcontents
 \end{spacing}
 
-\cleartorightpage
 \chapter{General Introduction}\label{cpt:generalintro}
 \clearpage
 \input{ch01_generalintro/general_intro_main.tex}
@@ -335,44 +296,49 @@
 
 \cleartorightpage
 \part{Kinematic Analysis}\label{pt:1}
+\cleartoleftpage
 \chapter{Fourier Methods in Locomotor Biomechanics}\label{cpt:fourier_review}
-%\input{ch11_fourierguide/pt1ch2_fourieranalysis.tex}
+\input{ch11_fourierguide/pt1ch2_fourieranalysis.tex}
 
 \cleartoleftpage
 \chapter{Fourier Coefficient Affine Superimposition}\label{cpt:fcas}
-%\input{ch12_ungulates/pt1ch3_fcas.tex}
+\input{ch12_ungulates/pt1ch3_fcas.tex}
 
 
 
 \cleartorightpage
 \part{Probabilistic Modeling}\label{pt:2}
 
+\cleartoleftpage
 \chapter{Probabilistic Modeling Workflow}\label{cpt:statistics}
-%\input{ch21_statistics/pt2ch4_statistics.tex}
+\input{ch21_statistics/pt2ch4_statistics.tex}
 
 \cleartoleftpage
 \chapter{Predictive Modeling of Piglet Locomotor Kinematics}\label{cpt:piglets}
-%\input{ch22_pigletmodels/pt2ch5_piglets.tex}
+\input{ch22_pigletmodels/pt2ch5_piglets.tex}
 
 
 
 \cleartorightpage
 \part{Inverse Dynamics}\label{pt:3}
 
+\cleartoleftpage
 \chapter{Inverse Dynamics Workflow}\label{cpt:dynamics_workflow}
-%\input{ch31_dynamics/pt3ch6_dynamics.tex}
+\input{ch31_dynamics/pt3ch6_dynamics.tex}
 
 \cleartoleftpage
 \chapter[Inertial Properties]{Approximating Inertial Properties of Biological Specimens using CT Data, or Not}\label{cpt:inertials}
-%\input{ch32_inertials/pt3ch7_inertials.tex}
+\input{ch32_inertials/pt3ch7_inertials.tex}
 
 
 
-\cleartorightpage
+\clearpage
 \part{Epilogue}
+
+\cleartoleftpage
 \chapter{General Discussion}\label{cpt:generaldiscussion}
 \clearpage
-%\input{ch02_generaldiscussion/general_discussion_main.tex}
+\input{ch02_generaldiscussion/general_discussion_main.tex}
 
 
 
@@ -382,55 +348,47 @@
 \addtocounter{chapter}{+1}
 \setcounter{section}{0}
 
-% %\addcontentsline{toc}{section}{Bibliography}
-% \singlespacing
-% \section{Bibliography}
-% \renewcommand{\bibname}{}
-% \makeatletter
-% \renewcommand{\chapter}{\@gobbletwo}
-% \makeatother
-% \bibliographystyle{apalike}
-% \bibliography{library.bib}
-% %\printbibliography[heading=bibnumbered, title={References}]{library.bib}
+ %\addcontentsline{toc}{section}{Bibliography}
+ \singlespacing
+ \section{Bibliography}
+ \renewcommand{\bibname}{}
+ \makeatletter
+ \renewcommand{\chapter}{\@gobbletwo}
+ \makeatother
+ \bibliographystyle{apalike}
+ \bibliography{library.bib}
+ %\printbibliography[heading=bibnumbered, title={References}]{library.bib}
 
 \clearpage
 \section{Video Digitization}\label{cpt:digitization}
-%\input{ch91_digitization/digitization.tex}
+\input{ch91_digitization/digitization.tex}
 
 \clearpage
 \section{Statistical Parametric Mapping}\label{cpt:spm1d}
-%\input{ch94_misc/spm_summary.tex}
+\input{ch94_misc/spm_summary.tex}
 
 \clearpage
 \section{\chng{List of Publications}}\label{cpt:publications}
-%\input{ch93_publications/publications.tex}
+\input{ch93_publications/publications.tex}
 
 
 \clearpage
 \section{List of Abbreviations}\label{abbreviations}
 \begin{spacing}{1.5}
-%\input{ch92_abbreviations/abbreviations.tex}
+\input{ch92_abbreviations/abbreviations.tex}
 \end{spacing}
 
 
 \clearpage
-\chapter{Acknowledgements}\label{acknowledgements}
-% \input{ch94_misc/acknowledgements.tex}
+\section{Acknowledgements}\label{acknowledgements}
+\input{ch94_misc/acknowledgements.tex}
 
-
-\cleartorightpage\pagebreak
-\makeatletter
-\invertbackgroundtext
-\vspace{\fill}
-\includegraphics[width=16.0cm]{figures/steampunkpiglet_cover.png}
-\vspace{\fill}
-        
-        \begin{center}
-        \vspace{3cm}
-        \hspace*{-1.0cm}\includegraphics[width=18cm]{figures/Gang_des_Schweines_back.pdf}
-        \vspace{-3cm}
-        \end{center}
-\makeatother
-\thispagestyle{empty}
+%\clearpage
+%\makeatletter
+%\vspace{\fill}
+%\includegraphics[width=16.0cm]{figures/steampunkpiglet_cover.jpg}
+%\vspace{\fill}
+%\makeatother
+%\thispagestyle{empty}
 
 \end{document}

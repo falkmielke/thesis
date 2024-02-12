@@ -31,3 +31,6 @@ ch*/*.bbl
 /ch94_misc/test.py
 /ch94_misc/slopes_comparison.svg
 /steampunkpiglet_cover.png
+/flipbook/animations/averages/*.png
+/flipbook/animations/averages/*.svg
+/flipbook/animations/toolboxes

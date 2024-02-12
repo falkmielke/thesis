@@ -1,0 +1,18 @@
+#+title: Todos
+
+
++ finalize jury version
+  + [X] check pages
+
++ finalize online version
+  + [X] remove green
+  + [X] add back art
+  + [X] re-read and add acknowledgements
+  + [X] check
+
++ finalize print verison
+  + [X] add sentence about flipbook
+  + [X] check impressum
+  + [X] extract cover
+
++ send versions out
