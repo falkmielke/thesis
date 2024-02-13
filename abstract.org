@@ -1,0 +1,24 @@
+#+title: Abstract
+
+
+(400w)
+
+One crucial characteristic which sets animals apart from most other forms of life is the capability of quick locomotion.
+Yet moving around does not always come easy: some animals are better at it than others, and common research tools in the field of locomotor biomechanics occasionally fail to quantify subtle differences.
+For example, during early development, variability in locomotor patterns is high, faults and instabilities are common, but maturation is quick, which is a challenging context for comparative biomechanics.
+In this project, I set out to expand our methodological capabilities for developmental, comparative biomechanics.
+The thesis covers kinematics (how animals move) and kinetics (why they move).
+Based on the observation that locomotor patterns are often repetitive, and applying probabilistic, predictive models which incorporate variability, I spotlight the most fragile of newborn animals: those who are born with particularly low weight.
+My primary model system are piglets, where low birth weight is common due to increasing litter sizes in commercial breeding.
+The applied methods (Fourier analysis, probabilistic statistics) are exapted from other fields, thus not novel, but rarely applied to quantitative biomechanics to date.
+I also highlight limitations and quantify commonly accepted inaccuracies of existing inverse dynamic methods.
+The case of piglet locomotion can demonstrate how the exapted tools enable unprecedented detail in the analysis of locomotor biomechanics.
+In particular, I can confirm that low birth weight piglets are fully capable of normal locomotion, and I precisely quantify how their development is halted shortly after birth.
+This provides some important constraints for the evaluation of coping strategies in commercial farming.
+Besides, the methodological advances which I present in detail enable a whole new set of research questions for different contexts, within the field of locomotor biomechanics and beyond.
+
+
+(50w)
+In this thesis, I present adapted mathematical methods and models to analyze locomotor development in unprecedented detail.
+Piglets are used as the main study animal, along with other ungulates and baboons.
+The methods are generally applicable and open up new study directions in several areas of locomotor biomechanics.
